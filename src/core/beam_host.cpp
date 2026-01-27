@@ -56,12 +56,9 @@ bool BeamHost::init() {
     
     m_audioEngine->setPlaying(true);
 
-    // --- BUILD UI HIERARCHY ---
-    // 1. Workspace (Bottom layer)
     m_workspace = std::make_shared<Workspace>();
     m_uiHandler->addComponent(m_workspace);
 
-    // 2. Top Bar (Overlay)
     auto topBar = std::make_shared<TopBar>(m_width);
     m_uiHandler->addComponent(topBar);
 
@@ -103,8 +100,7 @@ void BeamHost::handleEvents() {
     }
 }
 
-void BeamHost::update() {
-}
+void BeamHost::update() {}
 
 void BeamHost::render() {
     glViewport(0, 0, m_width, m_height);
@@ -123,10 +119,6 @@ void BeamHost::render() {
     m_uiShader->setMat4("projection", projection);
 
     m_batcher->begin();
-    
-    // Safety check: draw a fixed white quad in the corner to verify renderer
-    m_batcher->drawQuad(0, 0, 10, 10, 1.0f, 1.0f, 1.0f, 1.0f);
-
     m_uiHandler->render(*m_batcher);
     m_batcher->end();
 

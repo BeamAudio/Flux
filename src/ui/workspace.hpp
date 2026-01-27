@@ -3,10 +3,13 @@
 
 #include "component.hpp"
 #include "tape_reel.hpp"
+#include "cable.hpp"
 #include "../dsp/track_node.hpp"
 #include "../dsp/audio_engine.hpp"
 #include <vector>
 #include <iostream>
+
+#include "json.hpp"
 
 namespace Beam {
 
@@ -14,6 +17,24 @@ class Workspace : public Component {
 public:
     Workspace() {
         setBounds(0, 0, 10000, 10000); 
+    }
+
+    nlohmann::json serialize() const {
+        nlohmann::json data;
+        data["panX"] = m_panX;
+        data["panY"] = m_panY;
+        
+        nlohmann::json modules = nlohmann::json::array();
+        // Here we would iterate modules and call their serialize()
+        data["modules"] = modules;
+        
+        return data;
+    }
+
+    void deserialize(const nlohmann::json& data) {
+        if (data.contains("panX")) m_panX = data["panX"];
+        if (data.contains("panY")) m_panY = data["panY"];
+        // In a real implementation, we'd reconstruct modules here
     }
 
     void render(QuadBatcher& batcher) override {
@@ -24,6 +45,17 @@ public:
         }
         for (float y = 0; y < 2000; y += spacing) {
             batcher.drawQuad(0, y + m_panY, 2000, 1, 0.2f, 0.2f, 0.2f, 1.0f);
+        }
+
+        // Draw Cables
+        for (auto& cable : m_cables) {
+            cable.render(batcher);
+        }
+
+        // Draw Dragging Cable
+        if (m_isDraggingCable && m_activePort) {
+            Rect pos = m_activePort->getBounds();
+            batcher.drawQuad(pos.x + 6, pos.y + 6, 4, 4, 1.0f, 1.0f, 1.0f, 0.5f);
         }
 
         for (auto& module : m_modules) {
@@ -37,11 +69,24 @@ public:
             track->setState(TrackState::Playing);
             engine.addNode(track);
             auto reel = std::make_shared<TapeReel>(filePath, x, y, track);
+            
+            reel->getInputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+            reel->getOutputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+
             m_modules.push_back(reel);
-            std::cout << "Success: Added track from " << filePath << std::endl;
-        } else {
-            std::cerr << "Error: Failed to load " << filePath << std::endl;
         }
+    }
+
+    void startCableDrag(Port* p) {
+        m_isDraggingCable = true;
+        m_activePort = p;
+    }
+
+    void connectPorts(Port* p1, Port* p2) {
+        if (!p1 || !p2 || p1->getType() == p2->getType()) return;
+        Port* out = (p1->getType() == PortType::Output) ? p1 : p2;
+        Port* in = (p1->getType() == PortType::Input) ? p1 : p2;
+        m_cables.push_back({out, in});
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -60,6 +105,26 @@ public:
         return false;
     }
 
+    bool onMouseUp(float x, float y, int button) override {
+        if (m_isDraggingCable) {
+            for (auto& mod : m_modules) {
+                auto audioMod = std::dynamic_pointer_cast<AudioModule>(mod);
+                if (audioMod) {
+                    if (audioMod->getInputPort()->getBounds().contains(x, y)) {
+                        connectPorts(m_activePort, audioMod->getInputPort().get());
+                    } else if (audioMod->getOutputPort()->getBounds().contains(x, y)) {
+                        connectPorts(m_activePort, audioMod->getOutputPort().get());
+                    }
+                }
+            }
+            m_isDraggingCable = false;
+            m_activePort = nullptr;
+        }
+        m_isPanning = false;
+        for (auto& mod : m_modules) mod->onMouseUp(x, y, button);
+        return true;
+    }
+
     bool onMouseMove(float x, float y) override {
         if (m_isPanning) {
             m_panX += (x - m_lastMouseX);
@@ -68,24 +133,20 @@ public:
             m_lastMouseY = y;
             return true;
         }
-
         for (auto& mod : m_modules) {
             if (mod->onMouseMove(x, y)) return true;
         }
         return false;
     }
 
-    bool onMouseUp(float x, float y, int button) override {
-        m_isPanning = false;
-        for (auto& mod : m_modules) mod->onMouseUp(x, y, button);
-        return true;
-    }
-
 private:
     std::vector<std::shared_ptr<Component>> m_modules;
+    std::vector<Cable> m_cables;
     float m_panX = 0, m_panY = 0;
     bool m_isPanning = false;
     float m_lastMouseX = 0, m_lastMouseY = 0;
+    bool m_isDraggingCable = false;
+    Port* m_activePort = nullptr;
 };
 
 } // namespace Beam

@@ -198,6 +198,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{86938C99-B8C5-373D-A0D5-F255D574DF84}</Project>
       <Name>test_integration</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_persistence.vcxproj">
+      <Project>{E18EDBB8-E2D9-3742-8302-B2A5433F73AE}</Project>
+      <Name>test_persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_ui.vcxproj">
       <Project>{24357FE0-CFF0-3BC4-99B5-3FB44BD08C7D}</Project>
       <Name>test_ui</Name>
