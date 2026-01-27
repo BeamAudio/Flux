@@ -15,7 +15,7 @@ BeamHost::BeamHost(const std::string& title, int width, int height)
 }
 
 BeamHost::~BeamHost() {
-    if (m_glContext) SDL_GL_DeleteContext(m_glContext);
+    if (m_glContext) SDL_GL_DestroyContext(m_glContext);
     if (m_window) SDL_DestroyWindow(m_window);
     SDL_Quit();
 }
@@ -34,6 +34,11 @@ bool BeamHost::init() {
     if (!m_window) return false;
 
     m_glContext = SDL_GL_CreateContext(m_window);
+    
+    if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) {
+        std::cerr << "Failed to initialize GLAD" << std::endl;
+        return false;
+    }
     
     m_batcher = std::make_unique<QuadBatcher>(5000);
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
@@ -70,6 +75,10 @@ void BeamHost::handleEvents() {
     }
 }
 
+void BeamHost::update() {
+    // Logic updates go here
+}
+
 void BeamHost::render() {
     glClearColor(0.1f, 0.11f, 0.12f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -95,24 +104,6 @@ void BeamHost::render() {
     m_uiHandler->render(*m_batcher);
 
     m_batcher->end();
-    SDL_GL_SwapWindow(m_window);
-}
-
-void BeamHost::handleEvents() {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_EVENT_QUIT) {
-            m_isRunning = false;
-        }
-    }
-}
-
-void BeamHost::update() {
-    // Logic updates go here
-}
-
-void BeamHost::render() {
-    // Render commands go here
     SDL_GL_SwapWindow(m_window);
 }
 

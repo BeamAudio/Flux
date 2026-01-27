@@ -1,0 +1,9 @@
+C:\Users\Alexi\Documents\Beam Audio Flux\src\main.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\main.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\core\beam_host.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\beam_host.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\audio_engine.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\audio_engine.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\disk_streamer.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\disk_streamer.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\ui\input_handler.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\input_handler.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\quad_batcher.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\quad_batcher.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\shader.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\shader.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\third_party\glad.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\glad.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\third_party\miniaudio_impl.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Debug\miniaudio_impl.obj

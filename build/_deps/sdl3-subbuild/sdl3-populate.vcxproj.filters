@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\d9b1911be166713f30e3e8cef5fb760c\sdl3-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\3ea23d946aa8c3c9dbb8b74ea8a0f2e5\sdl3-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\0d84a34beea4177fdd53fdbb06dc183a\sdl3-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-subbuild\CMakeFiles\sdl3-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{455015B1-1F48-372D-A103-F0EE62D99ABF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

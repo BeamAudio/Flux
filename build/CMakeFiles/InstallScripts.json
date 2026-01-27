@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Alexi/Documents/Beam Audio Flux/build/cmake_install.cmake",
+		"C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

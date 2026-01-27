@@ -2,7 +2,7 @@
 #define QUAD_BATCHER_HPP
 
 #include <vector>
-#include <GL/glew.h>
+#include "../../third_party/glad.h"
 
 namespace Beam {
 

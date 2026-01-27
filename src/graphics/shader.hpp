@@ -2,7 +2,7 @@
 #define SHADER_HPP
 
 #include <string>
-#include <GL/glew.h> // Assuming GLEW or similar for now, will adjust if using GLAD
+#include "../../third_party/glad.h"
 
 namespace Beam {
 

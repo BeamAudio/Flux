@@ -1,0 +1,14 @@
+# Target labels
+ sdl3-populate
+# Source files and their labels
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/sdl3-populate
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/0d84a34beea4177fdd53fdbb06dc183a/sdl3-populate.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/3ea23d946aa8c3c9dbb8b74ea8a0f2e5/sdl3-populate-complete.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-build.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-configure.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-download.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-install.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-mkdir.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-patch.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-test.rule
+C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-subbuild/CMakeFiles/d9b1911be166713f30e3e8cef5fb760c/sdl3-populate-update.rule
