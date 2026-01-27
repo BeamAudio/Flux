@@ -301,12 +301,6 @@ LibUSB_LINK_FLAGS:STRING=
 //Extra link libraries of LibUSB
 LibUSB_LINK_LIBRARIES:STRING=
 
-//OpenGL library for win32
-OPENGL_gl_LIBRARY:STRING=opengl32
-
-//GLU library for win32
-OPENGL_glu_LIBRARY:STRING=glu32
-
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
 
@@ -315,9 +309,6 @@ PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
 
 //Value Computed by CMake
 SDL3_BINARY_DIR:STATIC=C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build
-
-//The directory containing a CMake configuration file for SDL3.
-SDL3_DIR:PATH=SDL3_DIR-NOTFOUND
 
 //Value Computed by CMake
 SDL3_IS_TOP_LEVEL:STATIC=OFF
@@ -533,6 +524,9 @@ SDL_RPATH:BOOL=OFF
 //Enable the Sensor subsystem
 SDL_SENSOR:BOOL=ON
 
+//Build a shared version of the library
+SDL_SHARED:BOOL=OFF
+
 //Support the sndio audio API
 SDL_SNDIO:BOOL=OFF
 
@@ -551,8 +545,13 @@ SDL_SSE4_1:BOOL=ON
 //Use SSE4.2 assembly routines
 SDL_SSE4_2:BOOL=ON
 
+//Build a static version of the library
+SDL_STATIC:BOOL=ON
+
 //Use iconv() from system-installed libraries
 SDL_SYSTEM_ICONV:BOOL=OFF
+
+SDL_TEST:BOOL=OFF
 
 //Build the test directory
 SDL_TESTS:BOOL=OFF
@@ -1097,10 +1096,6 @@ LIBC_ISINF_HANDLES_FLOAT:INTERNAL=1
 LIBC_ISNAN_HANDLES_FLOAT:INTERNAL=1
 //Have symbol __GLIBC__
 LIBC_IS_GLIBC:INTERNAL=
-//ADVANCED property for variable: OPENGL_gl_LIBRARY
-OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENGL_glu_LIBRARY
-OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_ARGN
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE

@@ -18,7 +18,7 @@ bool AudioEngine::init(int sampleRate, int channels) {
     spec.channels = channels;
     spec.freq = sampleRate;
 
-    m_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, &spec, NULL, NULL);
+    m_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &spec, NULL, NULL);
     if (!m_stream) {
         std::cerr << "SDL_OpenAudioDeviceStream Error: " << SDL_GetError() << std::endl;
         return false;

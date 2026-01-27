@@ -2,11 +2,21 @@
 #include "../dsp/track_node.hpp"
 #include "../ui/workspace.hpp"
 #include "../ui/tape_reel.hpp"
-#include "../ui/knob.hpp"
+#include "../ui/top_bar.hpp"
 #include "../graphics/ui_shaders.hpp"
 #include <iostream>
+#include <SDL3/SDL_dialog.h>
 
 namespace Beam {
+
+void BeamHost::onFileSelected(void* userdata, const char* const* filelist, int filter) {
+    if (filelist && filelist[0]) {
+        BeamHost* host = static_cast<BeamHost*>(userdata);
+        if (host && host->m_workspace) {
+            host->m_workspace->addTrack(filelist[0], 400, 300, *host->m_audioEngine);
+        }
+    }
+}
 
 BeamHost::BeamHost(const std::string& title, int width, int height)
     : m_title(title), m_width(width), m_height(height), m_isRunning(false), 
@@ -22,7 +32,7 @@ BeamHost::~BeamHost() {
 }
 
 bool BeamHost::init() {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) return false;
+    if (!SDL_Init(SDL_INIT_VIDEO)) return false;
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -31,39 +41,29 @@ bool BeamHost::init() {
     m_window = SDL_CreateWindow(m_title.c_str(), m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     if (!m_window) return false;
 
+    SDL_ShowWindow(m_window);
+
     m_glContext = SDL_GL_CreateContext(m_window);
-    gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress);
+    if (!m_glContext) return false;
+
+    if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) return false;
     
     m_batcher = std::make_unique<QuadBatcher>(10000);
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
 
-    m_audioEngine->init(44100, 2);
+    if (!SDL_Init(SDL_INIT_AUDIO)) return false;
+    if (!m_audioEngine->init(44100, 2)) return false;
+    
     m_audioEngine->setPlaying(true);
 
-    // --- SETUP MEGA-TAPE MIXER ---
-    auto workspace = std::make_shared<Workspace>();
-    
-    // Track 1: Drums
-    auto track1 = std::make_shared<TrackNode>("Drums");
-    track1->load("drums.wav");
-    track1->setState(TrackState::Playing);
-    m_audioEngine->addNode(track1);
-    workspace->addModule(std::make_shared<TapeReel>("DRUMS", 100, 100, track1));
+    // --- BUILD UI HIERARCHY ---
+    // 1. Workspace (Bottom layer)
+    m_workspace = std::make_shared<Workspace>();
+    m_uiHandler->addComponent(m_workspace);
 
-    // Track 2: Bass
-    auto track2 = std::make_shared<TrackNode>("Bass");
-    track2->load("bass.wav");
-    track2->setState(TrackState::Playing);
-    m_audioEngine->addNode(track2);
-    workspace->addModule(std::make_shared<TapeReel>("BASS", 100, 250, track2));
-
-    // Track 3: Vocals
-    auto track3 = std::make_shared<TrackNode>("Vocals");
-    track3->setState(TrackState::Recording);
-    m_audioEngine->addNode(track3);
-    workspace->addModule(std::make_shared<TapeReel>("VOCALS", 100, 400, track3));
-
-    m_uiHandler->addComponent(workspace);
+    // 2. Top Bar (Overlay)
+    auto topBar = std::make_shared<TopBar>(m_width);
+    m_uiHandler->addComponent(topBar);
 
     m_isRunning = true;
     return true;
@@ -74,22 +74,41 @@ void BeamHost::handleEvents() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {
             m_isRunning = false;
-        } else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+        } 
+        else if (event.type == SDL_EVENT_DROP_FILE) {
+            if (m_workspace) {
+                float mx, my;
+                SDL_GetMouseState(&mx, &my);
+                m_workspace->addTrack(event.drop.data, mx, my, *m_audioEngine);
+            }
+        }
+        else if (event.type == SDL_EVENT_KEY_DOWN) {
+            if (event.key.key == SDLK_O && (event.key.mod & SDL_KMOD_CTRL)) {
+                SDL_ShowOpenFileDialog(onFileSelected, this, m_window, NULL, 0, NULL, false);
+            }
+        }
+        else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
             m_uiHandler->handleMouseDown(event.button.x, event.button.y, event.button.button);
-        } else if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+        } 
+        else if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
             m_uiHandler->handleMouseUp(event.button.x, event.button.y, event.button.button);
-        } else if (event.type == SDL_EVENT_MOUSE_MOTION) {
+        } 
+        else if (event.type == SDL_EVENT_MOUSE_MOTION) {
             m_uiHandler->handleMouseMove(event.motion.x, event.motion.y);
+        }
+        else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
+            m_width = event.window.data1;
+            m_height = event.window.data2;
         }
     }
 }
 
 void BeamHost::update() {
-    // Logic updates go here
 }
 
 void BeamHost::render() {
-    glClearColor(0.1f, 0.11f, 0.12f, 1.0f);
+    glViewport(0, 0, m_width, m_height);
+    glClearColor(0.08f, 0.09f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     m_uiShader->use();
@@ -105,22 +124,21 @@ void BeamHost::render() {
 
     m_batcher->begin();
     
-    // Render UI Components (Workspace contains TapeReels)
-    m_uiHandler->render(*m_batcher);
+    // Safety check: draw a fixed white quad in the corner to verify renderer
+    m_batcher->drawQuad(0, 0, 10, 10, 1.0f, 1.0f, 1.0f, 1.0f);
 
+    m_uiHandler->render(*m_batcher);
     m_batcher->end();
+
     SDL_GL_SwapWindow(m_window);
 }
 
 void BeamHost::run() {
-    float audioBuffer[1024 * 2]; // Stereo buffer
+    float audioBuffer[1024 * 2];
     while (m_isRunning) {
         handleEvents();
         update();
-        
-        // Process Audio
         m_audioEngine->process(audioBuffer, 1024);
-
         render();
     }
 }

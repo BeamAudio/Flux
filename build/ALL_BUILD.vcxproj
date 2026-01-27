@@ -178,17 +178,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{264DF2F0-32D5-36D8-9491-831B6E6C9E2C}</Project>
       <Name>BeamAudioFlux</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-shared.vcxproj">
-      <Project>{60474E68-C584-3676-8AC1-597091DCE0F3}</Project>
-      <Name>SDL3-shared</Name>
+    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.vcxproj">
+      <Project>{25A97956-FB50-306C-8AEC-B5E2D0D1648E}</Project>
+      <Name>SDL3-static</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3_test.vcxproj">
       <Project>{F1DC531D-B3E8-3414-BC63-2CC34B8432AC}</Project>
       <Name>SDL3_test</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL_uclibc.vcxproj">
-      <Project>{9E6D7F21-9DC9-3D0E-9250-3D7E8DE8464C}</Project>
-      <Name>SDL_uclibc</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_audio_engine.vcxproj">
       <Project>{F00BEDCF-6B55-3336-8DB9-AE486E931570}</Project>

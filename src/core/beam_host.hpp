@@ -17,6 +17,8 @@ public:
     void run();
     void stop();
 
+    static void onFileSelected(void* userdata, const char* const* filelist, int filter);
+
 private:
     void handleEvents();
     void update();
@@ -33,6 +35,7 @@ private:
     std::unique_ptr<QuadBatcher> m_batcher;
     std::unique_ptr<Shader> m_uiShader;
     std::unique_ptr<InputHandler> m_uiHandler;
+    std::shared_ptr<class Workspace> m_workspace;
 };
 
 } // namespace Beam

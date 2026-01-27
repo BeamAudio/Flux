@@ -2,18 +2,22 @@
 #define WORKSPACE_HPP
 
 #include "component.hpp"
+#include "tape_reel.hpp"
+#include "../dsp/track_node.hpp"
+#include "../dsp/audio_engine.hpp"
 #include <vector>
+#include <iostream>
 
 namespace Beam {
 
 class Workspace : public Component {
 public:
     Workspace() {
-        setBounds(0, 0, 10000, 10000); // Massive canvas
+        setBounds(0, 0, 10000, 10000); 
     }
 
     void render(QuadBatcher& batcher) override {
-        // Draw Grid (The "Infinite Floor")
+        // Draw Grid
         float spacing = 50.0f;
         for (float x = 0; x < 2000; x += spacing) {
             batcher.drawQuad(x + m_panX, 0, 1, 2000, 0.2f, 0.2f, 0.2f, 1.0f);
@@ -27,8 +31,17 @@ public:
         }
     }
 
-    void addModule(std::shared_ptr<Component> module) {
-        m_modules.push_back(module);
+    void addTrack(const std::string& filePath, float x, float y, AudioEngine& engine) {
+        auto track = std::make_shared<TrackNode>("Loaded Track");
+        if (track->load(filePath)) {
+            track->setState(TrackState::Playing);
+            engine.addNode(track);
+            auto reel = std::make_shared<TapeReel>(filePath, x, y, track);
+            m_modules.push_back(reel);
+            std::cout << "Success: Added track from " << filePath << std::endl;
+        } else {
+            std::cerr << "Error: Failed to load " << filePath << std::endl;
+        }
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -38,7 +51,7 @@ public:
             }
         }
         
-        if (button == 2) { // Middle click pan
+        if (button == 2) { 
             m_isPanning = true;
             m_lastMouseX = x;
             m_lastMouseY = y;

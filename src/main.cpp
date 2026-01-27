@@ -1,3 +1,4 @@
+#define SDL_MAIN_HANDLED
 #include "core/beam_host.hpp"
 
 int main(int argc, char* argv[]) {
