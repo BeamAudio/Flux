@@ -37,7 +37,10 @@ public:
         // In a real implementation, we'd reconstruct modules here
     }
 
+    void setVisible(bool visible) { m_isVisible = visible; }
+
     void render(QuadBatcher& batcher) override {
+        if (!m_isVisible) return;
         // Draw Grid
         float spacing = 50.0f;
         for (float x = 0; x < 2000; x += spacing) {

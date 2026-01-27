@@ -1,39 +1,40 @@
-# Beam Audio Flux: UI/UX & Architecture Proposal v3.0
+# Beam Audio Flux: UI/UX & Architecture Proposal v3.0 (Revised)
 
 ## 1. Executive Vision
-Beam Audio Flux will bridge the gap between the **tactile, console-centric workflow of Harrison Mixbus** and the **unlimited routing flexibility of REAPER**. It maintains its proprietary, no-framework C++20 core for ultra-low latency and high-refresh-rate visuals.
+Beam Audio Flux bridges the gap between **Harrison Mixbus** (analog feel) and **REAPER** (routing power). 
+**Status:** [CORE ARCHITECTURE DONE]
 
-## 2. Core UI Components
+## 2. Core UI Modes
 
-### A. The Infinite Floor (Main Workspace)
-*   **Modular Canvas:** A 2D spatialized area where modules live.
-*   **Auto-Strip Mode:** Toggle to align floating modules into vertical console strips.
-*   **Bezier Routing:** Physical cable simulation with color-coding for signal paths.
+### A. Splicing Mode (Editing View) [NEW CONCEPT]
+*   **Timeline View:** The Workspace transforms into a multi-track linear timeline.
+*   **Tape Splices:** Visual representations of audio data that can be cut, moved, and cross-faded.
+*   **Alignment Tools:** Snapping to grid, nudge controls, and time-stretching (Elastic Tape).
+*   **Interaction:** Focus on "Cutting and Pasting" the actual signal.
 
-### B. The Command Center (Top Bar)
-*   **Transport:** Large, reactive buttons for Play/Stop/Rec.
-*   **Persistence:** Quick icons for "New Project", "Open", and "Save".
-*   **DSP Monitor:** Real-time feedback on audio thread performance.
+### B. Flux Mode (Mixing View)
+*   **Modular Canvas:** The current 2D spatialized area for routing. [DONE]
+*   **Bezier Routing:** Visualizing audio flow with physical cables. [IN PROGRESS]
+*   **Interaction:** Focus on FX chains and master output.
 
-### C. The Flux Browser (Left Sidebar)
-*   **Drag-and-Drop Library:** FX modules and Audio assets ready to be pulled into the workspace.
-*   **Search/Filter:** Quickly find high-pass filters or tape delays.
+## 3. Core UI Components
 
-### D. The Master Tape (Right Sidebar)
-*   **Fixed Output Strip:** Inspired by Mixbus master saturation.
-*   **Analog Metering:** High-refresh-rate VU meters using the Game-Loop pattern.
+### A. The Command Center (Top Bar)
+*   **Mode Switcher:** A prominent toggle between "SPLICING" and "FLUX" modes.
+*   **Transport:** Global Play/Stop/Rec linked to the timeline.
+*   **Persistence:** JSON-based Save/Load. [DONE]
 
-## 3. System Features
+### B. The Flux Browser (Left Sidebar)
+*   **Asset/FX Library:** Drag modules into Flux mode, or Audio into Splicing mode.
 
-### A. Project Persistence (.flux)
-*   **Serialization:** Every module and connection is saved into a JSON structure.
-*   **Asset Management:** Links to external WAV files with relative path support.
+### C. The Master Tape (Right Sidebar)
+*   **Master Strip:** Fixed output with Saturation/VU Meters. [DONE UI]
 
-### B. Dynamic Routing Engine
-*   **Graph Traversal:** The AudioEngine will now sort nodes topologically based on cable connections.
-*   **Live Injection:** Interactively add/remove FX without stopping the audio stream.
+## 4. System Features
 
-## 4. Design Principles
-*   **Tactile Feedback:** Every knob and slider must feel "heavy" and responsive.
-*   **Zero Latency UI:** UI interactions must never block the audio thread (Lock-free queues).
-*   **Modern Aesthetic:** Dark mode by default, with high-contrast "Flux Blue" accents.
+### A. Dynamic Routing & Sync
+*   **Timeline Logic:** Every TrackNode has a `timePosition` property used in Splicing Mode.
+*   **Graph Traversal:** Kahn's Algorithm for processing order. [PENDING]
+
+### B. Design Principles
+*   **Tactile Transition:** Switching modes should feel like "opening up" the tape machine to see the reels inside.

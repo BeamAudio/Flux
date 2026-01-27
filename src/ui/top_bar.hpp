@@ -18,8 +18,8 @@ public:
         // Accent line at bottom
         batcher.drawQuad(m_bounds.x, m_bounds.y + m_bounds.h - 2, m_bounds.w, 2, 0.25f, 0.5f, 1.0f, 1.0f);
         
-        // Logo Placeholder
-        batcher.drawQuad(10, 10, 20, 20, 1.0f, 1.0f, 1.0f, 1.0f);
+        // Mode Indicator (Left side)
+        batcher.drawQuad(10, 10, 80, 20, 0.2f, 0.2f, 0.25f, 1.0f);
     }
 };
 

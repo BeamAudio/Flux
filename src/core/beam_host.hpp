@@ -8,6 +8,8 @@
 
 namespace Beam {
 
+enum class DAWMode { Splicing, Flux };
+
 class BeamHost {
 public:
     BeamHost(const std::string& title, int width, int height);
@@ -16,6 +18,9 @@ public:
     bool init();
     void run();
     void stop();
+
+    void setMode(DAWMode mode);
+    DAWMode getMode() const { return m_mode; }
 
     static void onFileSelected(void* userdata, const char* const* filelist, int filter);
 
@@ -29,6 +34,7 @@ private:
     int m_width;
     int m_height;
     bool m_isRunning;
+    DAWMode m_mode = DAWMode::Flux;
     SDL_Window* m_window;
     SDL_GLContext m_glContext;
     
@@ -38,6 +44,7 @@ private:
     std::unique_ptr<InputHandler> m_uiHandler;
     
     std::shared_ptr<class Workspace> m_workspace;
+    std::shared_ptr<class Timeline> m_timeline;
     std::shared_ptr<class TopBar> m_topBar;
     std::shared_ptr<class Sidebar> m_browser;
     std::shared_ptr<class MasterStrip> m_masterStrip;
