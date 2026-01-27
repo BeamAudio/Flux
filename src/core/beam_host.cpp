@@ -113,9 +113,14 @@ void BeamHost::render() {
 }
 
 void BeamHost::run() {
+    float audioBuffer[1024 * 2]; // Stereo buffer
     while (m_isRunning) {
         handleEvents();
         update();
+        
+        // Process Audio
+        m_audioEngine->process(audioBuffer, 1024);
+
         render();
     }
 }
