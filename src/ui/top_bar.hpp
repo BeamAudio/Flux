@@ -22,22 +22,29 @@ public:
         // Mode Buttons
         // Flux Button
         batcher.drawQuad(10, 8, 70, 24, 0.2f, 0.2f, 0.25f, 1.0f);
+        batcher.drawText("FLUX", 25, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Slice Button
         batcher.drawQuad(85, 8, 70, 24, 0.2f, 0.2f, 0.25f, 1.0f);
+        batcher.drawText("SLICE", 95, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
         // Transport Controls (Center)
         float cx = m_bounds.w * 0.5f - 100;
         // Rewind
         batcher.drawQuad(cx, 8, 40, 24, 0.3f, 0.3f, 0.3f, 1.0f);
+        batcher.drawText("<<", cx + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Play
         batcher.drawQuad(cx + 45, 8, 40, 24, m_isPlaying ? 0.3f : 0.2f, m_isPlaying ? 0.8f : 0.4f, 0.3f, 1.0f);
+        batcher.drawText(">", cx + 60, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Pause
         batcher.drawQuad(cx + 90, 8, 40, 24, !m_isPlaying ? 0.3f : 0.2f, !m_isPlaying ? 0.8f : 0.4f, 0.3f, 1.0f);
+        batcher.drawText("||", cx + 102, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
         // Save/Load Buttons (Right side)
         float rx = m_bounds.w - 160;
         batcher.drawQuad(rx, 8, 70, 24, 0.2f, 0.3f, 0.2f, 1.0f); // Save
+        batcher.drawText("SAVE", rx + 18, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         batcher.drawQuad(rx + 75, 8, 70, 24, 0.2f, 0.2f, 0.3f, 1.0f); // Load
+        batcher.drawText("LOAD", rx + 93, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     bool onMouseDown(float x, float y, int button) override {

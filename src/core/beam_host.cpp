@@ -54,6 +54,7 @@ bool BeamHost::init() {
     
     m_batcher = std::make_unique<QuadBatcher>(10000);
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
+    m_batcher->setShader(m_uiShader.get());
 
     if (!SDL_Init(SDL_INIT_AUDIO)) return false;
     if (!m_audioEngine->init(44100, 2)) return false;

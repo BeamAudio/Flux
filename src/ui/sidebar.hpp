@@ -28,12 +28,15 @@ public:
             float yOff = m_bounds.y + 50;
             // Gain FX
             batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            batcher.drawText("GAIN", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
             yOff += 40;
             // Filter FX
             batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            batcher.drawText("FILTER", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
             yOff += 40;
             // Delay FX
             batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            batcher.drawText("DELAY", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
         }
     }
 

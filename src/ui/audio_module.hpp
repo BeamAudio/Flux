@@ -69,6 +69,7 @@ public:
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.22f, 0.23f, 0.24f, 1.0f);
         // Header
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, 25, 0.3f, 0.35f, 0.4f, 1.0f);
+        batcher.drawText(m_name, m_bounds.x + 5, m_bounds.y + 5, 14, 0.9f, 0.9f, 0.9f, 1.0f);
         
         m_inputPort->render(batcher);
         m_outputPort->render(batcher);
