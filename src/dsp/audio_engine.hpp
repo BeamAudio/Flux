@@ -2,7 +2,7 @@
 #define AUDIO_ENGINE_HPP
 
 #include "audio_node.hpp"
-#include "third_party/miniaudio.h"
+#include "miniaudio.h"
 #include <vector>
 #include <memory>
 #include <mutex>
