@@ -1,10 +1,10 @@
 #ifndef BEAM_HOST_HPP
 #define BEAM_HOST_HPP
 
-#include <SDL3/SDL.h>
-#include <string>
-#include <memory>
 #include "../dsp/audio_engine.hpp"
+#include "../graphics/quad_batcher.hpp"
+#include "../graphics/shader.hpp"
+#include "../ui/input_handler.hpp"
 
 namespace Beam {
 
@@ -28,7 +28,11 @@ private:
     bool m_isRunning;
     SDL_Window* m_window;
     SDL_GLContext m_glContext;
+    
     std::unique_ptr<AudioEngine> m_audioEngine;
+    std::unique_ptr<QuadBatcher> m_batcher;
+    std::unique_ptr<Shader> m_uiShader;
+    std::unique_ptr<InputHandler> m_uiHandler;
 };
 
 } // namespace Beam

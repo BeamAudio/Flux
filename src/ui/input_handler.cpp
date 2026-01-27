@@ -8,7 +8,6 @@ void InputHandler::addComponent(std::shared_ptr<Component> component) {
 }
 
 void InputHandler::handleMouseDown(float x, float y, int button) {
-    // Top-most first (reverse order)
     for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
         if ((*it)->getBounds().contains(x, y)) {
             if ((*it)->onMouseDown(x, y, button)) {
@@ -35,6 +34,12 @@ void InputHandler::handleMouseMove(float x, float y) {
                 if ((*it)->onMouseMove(x, y)) break;
             }
         }
+    }
+}
+
+void InputHandler::render(QuadBatcher& batcher) {
+    for (auto& comp : m_components) {
+        comp->render(batcher);
     }
 }
 

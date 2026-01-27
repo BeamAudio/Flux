@@ -7,6 +7,8 @@
 
 namespace Beam {
 
+class QuadBatcher; // Forward declaration
+
 struct Rect {
     float x, y, w, h;
     bool contains(float px, float py) const {
@@ -19,7 +21,7 @@ public:
     virtual ~Component() = default;
 
     virtual void update(float dt) {}
-    virtual void render() = 0;
+    virtual void render(QuadBatcher& batcher) = 0;
 
     virtual bool onMouseDown(float x, float y, int button) { return false; }
     virtual bool onMouseUp(float x, float y, int button) { return false; }

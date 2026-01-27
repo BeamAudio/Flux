@@ -2,6 +2,7 @@
 #define KNOB_HPP
 
 #include "component.hpp"
+#include "../graphics/quad_batcher.hpp"
 #include <functional>
 #include <algorithm>
 
@@ -12,9 +13,14 @@ public:
     Knob(const std::string& label, float minVal, float maxVal, float initialVal)
         : m_label(label), m_min(minVal), m_max(maxVal), m_value(initialVal) {}
 
-    void render() override {
-        // In a real implementation, this would use QuadBatcher to draw
-        // For now, we'll just track the state.
+    void render(QuadBatcher& batcher) override {
+        // Background track
+        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.15f, 0.15f, 0.15f, 1.0f);
+        
+        // Value "Fill" (Blue bar)
+        float normalized = (m_value - m_min) / (m_max - m_min);
+        float fillHeight = m_bounds.h * normalized;
+        batcher.drawQuad(m_bounds.x, m_bounds.y + (m_bounds.h - fillHeight), m_bounds.w, fillHeight, 0.25f, 0.5f, 1.0f, 1.0f);
     }
 
     bool onMouseDown(float x, float y, int button) override {

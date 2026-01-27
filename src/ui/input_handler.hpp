@@ -13,6 +13,7 @@ public:
     void handleMouseDown(float x, float y, int button);
     void handleMouseUp(float x, float y, int button);
     void handleMouseMove(float x, float y);
+    void render(QuadBatcher& batcher);
 
 private:
     std::vector<std::shared_ptr<Component>> m_components;
