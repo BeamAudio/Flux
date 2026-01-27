@@ -3,6 +3,8 @@
 #include "../ui/workspace.hpp"
 #include "../ui/tape_reel.hpp"
 #include "../ui/top_bar.hpp"
+#include "../ui/sidebar.hpp"
+#include "../ui/master_strip.hpp"
 #include "../graphics/ui_shaders.hpp"
 #include <iostream>
 #include <SDL3/SDL_dialog.h>
@@ -56,14 +58,42 @@ bool BeamHost::init() {
     
     m_audioEngine->setPlaying(true);
 
+    // Instantiate Components
     m_workspace = std::make_shared<Workspace>();
-    m_uiHandler->addComponent(m_workspace);
+    m_topBar = std::make_shared<TopBar>(m_width);
+    m_browser = std::make_shared<Sidebar>(Sidebar::Side::Left);
+    m_masterStrip = std::make_shared<MasterStrip>();
 
-    auto topBar = std::make_shared<TopBar>(m_width);
-    m_uiHandler->addComponent(topBar);
+    // Add to UI Handler (Order matters for hit testing, but Workspace is bottom)
+    m_uiHandler->addComponent(m_workspace);
+    m_uiHandler->addComponent(m_browser);
+    m_uiHandler->addComponent(m_masterStrip);
+    m_uiHandler->addComponent(m_topBar);
+
+    performLayout();
 
     m_isRunning = true;
     return true;
+}
+
+void BeamHost::performLayout() {
+    float topBarHeight = 40.0f;
+    float sidebarWidth = 200.0f;
+    float masterStripWidth = 120.0f;
+
+    // Top Bar spans full width
+    if (m_topBar) m_topBar->setBounds(0, 0, (float)m_width, topBarHeight);
+
+    // Browser Sidebar (Left)
+    if (m_browser) m_browser->setBounds(0, topBarHeight, sidebarWidth, (float)m_height - topBarHeight);
+
+    // Master Machine (Right)
+    if (m_masterStrip) m_masterStrip->setBounds((float)m_width - masterStripWidth, topBarHeight, masterStripWidth, (float)m_height - topBarHeight);
+
+    // Workspace occupies the center
+    if (m_workspace) {
+        m_workspace->setBounds(sidebarWidth, topBarHeight, (float)m_width - sidebarWidth - masterStripWidth, (float)m_height - topBarHeight);
+    }
 }
 
 void BeamHost::handleEvents() {
@@ -96,6 +126,7 @@ void BeamHost::handleEvents() {
         else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
             m_width = event.window.data1;
             m_height = event.window.data2;
+            performLayout();
         }
     }
 }

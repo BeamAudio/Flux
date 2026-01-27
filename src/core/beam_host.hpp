@@ -23,6 +23,7 @@ private:
     void handleEvents();
     void update();
     void render();
+    void performLayout();
 
     std::string m_title;
     int m_width;
@@ -35,7 +36,11 @@ private:
     std::unique_ptr<QuadBatcher> m_batcher;
     std::unique_ptr<Shader> m_uiShader;
     std::unique_ptr<InputHandler> m_uiHandler;
+    
     std::shared_ptr<class Workspace> m_workspace;
+    std::shared_ptr<class TopBar> m_topBar;
+    std::shared_ptr<class Sidebar> m_browser;
+    std::shared_ptr<class MasterStrip> m_masterStrip;
 };
 
 } // namespace Beam
