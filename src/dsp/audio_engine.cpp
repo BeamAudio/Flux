@@ -41,6 +41,11 @@ bool AudioEngine::init(int sampleRate, int channels) {
 }
 
 void AudioEngine::process(float* output, float* input, int frames) {
+    if (!m_isPlaying) {
+        for (int i = 0; i < frames * m_channels; ++i) output[i] = 0.0f;
+        return;
+    }
+
     std::lock_guard<std::mutex> lock(m_nodeMutex);
     
     // Clear output buffer

@@ -19,6 +19,9 @@ public:
 
     void addNode(std::shared_ptr<AudioNode> node);
 
+    void setPlaying(bool playing) { m_isPlaying = playing; }
+    bool isPlaying() const { return m_isPlaying; }
+
     static void dataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
 
 private:
@@ -27,6 +30,7 @@ private:
     std::vector<std::shared_ptr<AudioNode>> m_nodes;
     std::mutex m_nodeMutex;
     ma_device m_device;
+    std::atomic<bool> m_isPlaying{false};
 };
 
 } // namespace Beam

@@ -1,6 +1,7 @@
 #include "beam_host.hpp"
-#include "../dsp/sine_oscillator.hpp"
-#include "../dsp/gain_node.hpp"
+#include "../dsp/track_node.hpp"
+#include "../ui/workspace.hpp"
+#include "../ui/tape_reel.hpp"
 #include "../ui/knob.hpp"
 #include "../graphics/ui_shaders.hpp"
 #include <iostream>
@@ -21,10 +22,7 @@ BeamHost::~BeamHost() {
 }
 
 bool BeamHost::init() {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-        std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
-        return false;
-    }
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) return false;
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -34,27 +32,38 @@ bool BeamHost::init() {
     if (!m_window) return false;
 
     m_glContext = SDL_GL_CreateContext(m_window);
+    gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress);
     
-    if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD" << std::endl;
-        return false;
-    }
-    
-    m_batcher = std::make_unique<QuadBatcher>(5000);
+    m_batcher = std::make_unique<QuadBatcher>(10000);
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
 
-    if (!m_audioEngine->init(44100, 2)) return false;
+    m_audioEngine->init(44100, 2);
+    m_audioEngine->setPlaying(true);
 
-    // --- SETUP TEST SPLICING DECK ---
-    auto gain = std::make_shared<GainNode>(0.5f);
-    m_audioEngine->addNode(std::make_shared<SineOscillator>(440.0f, 44100.0f));
-    m_audioEngine->addNode(gain);
-
-    auto volumeKnob = std::make_shared<Knob>("Volume", 0.0f, 1.0f, 0.5f);
-    volumeKnob->setBounds(100, 100, 40, 100);
-    volumeKnob->onValueChanged = [gain](float v) { gain->setGain(v); };
+    // --- SETUP MEGA-TAPE MIXER ---
+    auto workspace = std::make_shared<Workspace>();
     
-    m_uiHandler->addComponent(volumeKnob);
+    // Track 1: Drums
+    auto track1 = std::make_shared<TrackNode>("Drums");
+    track1->load("drums.wav");
+    track1->setState(TrackState::Playing);
+    m_audioEngine->addNode(track1);
+    workspace->addModule(std::make_shared<TapeReel>("DRUMS", 100, 100, track1));
+
+    // Track 2: Bass
+    auto track2 = std::make_shared<TrackNode>("Bass");
+    track2->load("bass.wav");
+    track2->setState(TrackState::Playing);
+    m_audioEngine->addNode(track2);
+    workspace->addModule(std::make_shared<TapeReel>("BASS", 100, 250, track2));
+
+    // Track 3: Vocals
+    auto track3 = std::make_shared<TrackNode>("Vocals");
+    track3->setState(TrackState::Recording);
+    m_audioEngine->addNode(track3);
+    workspace->addModule(std::make_shared<TapeReel>("VOCALS", 100, 400, track3));
+
+    m_uiHandler->addComponent(workspace);
 
     m_isRunning = true;
     return true;
@@ -96,11 +105,7 @@ void BeamHost::render() {
 
     m_batcher->begin();
     
-    // Draw Splicing Deck Background
-    m_batcher->drawQuad(50, 50, 300, 400, 0.18f, 0.19f, 0.20f, 1.0f);
-    m_batcher->drawQuad(50, 50, 300, 30, 0.25f, 0.5f, 1.0f, 1.0f);
-
-    // Render UI Components (Knobs, etc.)
+    // Render UI Components (Workspace contains TapeReels)
     m_uiHandler->render(*m_batcher);
 
     m_batcher->end();

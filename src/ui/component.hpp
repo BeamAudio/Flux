@@ -24,16 +24,38 @@ public:
     virtual void render(QuadBatcher& batcher) = 0;
 
     virtual bool onMouseDown(float x, float y, int button) { return false; }
-    virtual bool onMouseUp(float x, float y, int button) { return false; }
-    virtual bool onMouseMove(float x, float y) { return false; }
+    virtual bool onMouseUp(float x, float y, int button) { 
+        m_isDragging = false; 
+        return false; 
+    }
+    virtual bool onMouseMove(float x, float y) { 
+        if (m_isDragging && m_isDraggable) {
+            m_bounds.x += (x - m_lastMouseX);
+            m_bounds.y += (y - m_lastMouseY);
+            m_lastMouseX = x;
+            m_lastMouseY = y;
+            return true;
+        }
+        return false; 
+    }
 
     void setBounds(float x, float y, float w, float h) { m_bounds = {x, y, w, h}; }
     const Rect& getBounds() const { return m_bounds; }
+    
+    void setDraggable(bool draggable) { m_isDraggable = draggable; }
+    void startDragging(float x, float y) { 
+        m_isDragging = true; 
+        m_lastMouseX = x; 
+        m_lastMouseY = y; 
+    }
 
 protected:
     Rect m_bounds{0, 0, 0, 0};
     bool m_isVisible = true;
     bool m_isEnabled = true;
+    bool m_isDraggable = false;
+    bool m_isDragging = false;
+    float m_lastMouseX = 0, m_lastMouseY = 0;
 };
 
 } // namespace Beam
