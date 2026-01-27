@@ -21,7 +21,8 @@ public:
     void close();
 
     // To be called by Audio Thread
-    size_t read(float* output, size_t frames);
+    size_t read(float* output, size_t frames, int channels);
+    void seek(size_t frame);
 
 private:
     void streamLoop();

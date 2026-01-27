@@ -8,7 +8,7 @@ namespace Beam {
 class TestComponent : public Component {
 public:
     bool clicked = false;
-    void render() override {}
+    void render(QuadBatcher& batcher) override {}
     bool onMouseDown(float x, float y, int button) override {
         clicked = true;
         return true;

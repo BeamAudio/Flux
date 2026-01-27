@@ -25,7 +25,7 @@ public:
 
     void process(float* buffer, int frames, int channels) override {
         if (m_state == TrackState::Playing && m_streamer) {
-            m_streamer->read(buffer, frames);
+            m_streamer->read(buffer, frames, channels);
         } else if (m_state == TrackState::Recording) {
             // In a real scenario, we'd capture from pInput and write to disk
             // For now, we'll just clear the buffer to represent monitoring
@@ -34,6 +34,11 @@ public:
 
     void setState(TrackState state) { m_state = state; }
     TrackState getState() const { return m_state; }
+    
+    void seek(size_t frame) {
+        if (m_streamer) m_streamer->seek(frame);
+    }
+
     std::string getName() const override { return m_name; }
 
 private:

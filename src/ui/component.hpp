@@ -39,7 +39,7 @@ public:
         return false; 
     }
 
-    void setBounds(float x, float y, float w, float h) { m_bounds = {x, y, w, h}; }
+    virtual void setBounds(float x, float y, float w, float h) { m_bounds = {x, y, w, h}; }
     const Rect& getBounds() const { return m_bounds; }
     
     void setDraggable(bool draggable) { m_isDraggable = draggable; }

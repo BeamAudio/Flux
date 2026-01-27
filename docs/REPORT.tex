@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{margin=1in}
+
+\title{Beam Audio Flux: Project Development Report}
+\author{Beam Audio Flux Development Team}
+\date{January 27, 2026}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+Beam Audio Flux is a modern Digital Audio Workstation (DAW) prototype focused on seamless integration between creative audio flux and precise splicing. This report documents the technical architecture, implemented features, and the roadmap for the system's evolution into a production-grade audio environment.
+
+\section{System Architecture}
+The project is built on three core pillars: a high-performance OpenGL rendering engine, a modular DSP graph, and a robust UI component system.
+
+\subsection{DSP Graph (FluxGraph)}
+The backend transition from a flat list of nodes to a Directed Acyclic Graph (DAG) allows for complex audio routing. Each node within the \texttt{FluxGraph} encapsulates its own DSP logic, isolated from the routing management. This ensures that features like serial FX chains and parallel processing are possible without modifying the core audio engine.
+
+\subsection{Rendering (QuadBatcher)}
+To handle the high refresh rates required for smooth audio visualization and responsive UI, a batch-rendering approach was chosen. The \texttt{QuadBatcher} reduces the overhead of the CPU-GPU communication by grouping hundreds of UI elements into single draw calls.
+
+\section{Implemented Components}
+\begin{itemize}
+    \item \textbf{AudioEngine}: SDL3-powered audio streaming with support for dynamic graphs.
+    \item \textbf{Workspace}: A 2D canvas for modular audio manipulation.
+    \item \textbf{TapeReel}: A visual representation of audio tracks, mimicking analog tape physics.
+    \item \textbf{ProjectManager}: JSON-based persistence for DAW sessions.
+\end{itemize}
+
+\section{Future Development}
+The next phase of development will focus on the following:
+\begin{enumerate}
+    \item \textbf{Waveform Splicing}: Implementing a specialized rendering mode for sample-accurate audio editing.
+    \item \textbf{Real-time FX Refinement}: Adding more complex DSP nodes such as compressors, reverbs, and EQ.
+    \item \textbf{User Interaction}: Enhancing the reactivity of UI components to allow for intuitive cable-based routing and parameter automation.
+\end{enumerate}
+
+\section{Conclusion}
+The current version of Beam Audio Flux establishes a solid foundation for a next-generation DAW. The abstraction layers implemented provide the necessary flexibility for future scaling and feature expansion.
+
+\end{document}

@@ -2,6 +2,8 @@
 #define AUDIO_ENGINE_HPP
 
 #include "audio_node.hpp"
+#include "flux_graph.hpp"
+#include "master_node.hpp"
 #include <SDL3/SDL.h>
 #include <vector>
 #include <memory>
@@ -18,16 +20,23 @@ public:
     bool init(int sampleRate, int channels);
     void process(float* output, int frames);
 
-    void addNode(std::shared_ptr<AudioNode> node);
+    void setGraph(std::shared_ptr<FluxGraph> graph);
+    std::shared_ptr<FluxGraph> getGraph() { return m_graph; }
+    std::shared_ptr<MasterNode> getMasterNode() { return m_masterNode; }
 
     void setPlaying(bool playing) { m_isPlaying = playing; }
     bool isPlaying() const { return m_isPlaying; }
+    void rewind();
 
 private:
     int m_sampleRate;
     int m_channels;
-    std::vector<std::shared_ptr<AudioNode>> m_nodes;
-    std::mutex m_nodeMutex;
+    
+    std::shared_ptr<FluxGraph> m_graph;
+    size_t m_masterNodeId;
+    std::shared_ptr<MasterNode> m_masterNode;
+
+    std::mutex m_engineMutex;
     
     SDL_AudioStream* m_stream;
     std::atomic<bool> m_isPlaying{false};

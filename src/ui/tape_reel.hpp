@@ -2,14 +2,14 @@
 #define TAPE_REEL_HPP
 
 #include "audio_module.hpp"
-#include "../dsp/track_node.hpp"
+#include "../dsp/flux_track_node.hpp"
 
 namespace Beam {
 
 class TapeReel : public AudioModule {
 public:
-    TapeReel(const std::string& name, float x, float y, std::shared_ptr<TrackNode> track) 
-        : AudioModule(name, x, y), m_track(track) {
+    TapeReel(std::shared_ptr<FluxTrackNode> track, float x, float y) 
+        : AudioModule(track, x, y), m_trackNode(track) {
         setBounds(x, y, 200, 120);
     }
 
@@ -17,17 +17,18 @@ public:
         // Base Module
         AudioModule::render(batcher);
 
+        auto track = m_trackNode->getInternalNode();
         // Reel Graphics (Two circles/quads)
         float reelSize = 40.0f;
         float reelY = m_bounds.y + 40;
         
         // Spinning reel effect if playing
-        float color = (m_track->getState() == TrackState::Playing) ? 0.6f : 0.4f;
+        float color = (track->getState() == TrackState::Playing) ? 0.6f : 0.4f;
         batcher.drawQuad(m_bounds.x + 30, reelY, reelSize, reelSize, color, color, color, 1.0f);
         batcher.drawQuad(m_bounds.x + 130, reelY, reelSize, reelSize, color, color, color, 1.0f);
 
         // Status Indicator
-        if (m_track->getState() == TrackState::Recording) {
+        if (track->getState() == TrackState::Recording) {
             batcher.drawQuad(m_bounds.x + 10, m_bounds.y + 10, 10, 10, 1.0f, 0.0f, 0.0f, 1.0f); // Red REC
         }
     }
@@ -35,12 +36,13 @@ public:
     bool onMouseDown(float x, float y, int button) override {
         if (AudioModule::onMouseDown(x, y, button)) return true;
 
+        auto track = m_trackNode->getInternalNode();
         // Toggle playback on click
         if (m_bounds.contains(x, y)) {
-            if (m_track->getState() == TrackState::Idle) {
-                m_track->setState(TrackState::Playing);
+            if (track->getState() == TrackState::Idle) {
+                track->setState(TrackState::Playing);
             } else {
-                m_track->setState(TrackState::Idle);
+                track->setState(TrackState::Idle);
             }
             return true;
         }
@@ -48,7 +50,7 @@ public:
     }
 
 private:
-    std::shared_ptr<TrackNode> m_track;
+    std::shared_ptr<FluxTrackNode> m_trackNode;
 };
 
 } // namespace Beam

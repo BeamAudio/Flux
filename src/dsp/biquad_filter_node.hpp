@@ -37,6 +37,16 @@ public:
 
     std::string getName() const override { return "Biquad Filter"; }
 
+    void setCutoff(float freq) {
+        m_frequency = freq;
+        calculateCoefficients();
+    }
+
+    void setQ(float q) {
+        m_q = q;
+        calculateCoefficients();
+    }
+
 private:
     void calculateCoefficients() {
         float omega = 2.0f * 3.1415926535f * m_frequency / m_sampleRate;

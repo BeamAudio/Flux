@@ -1,4 +1,5 @@
 #include "audio_engine.hpp"
+#include "flux_track_node.hpp"
 #include <iostream>
 
 namespace Beam {
@@ -13,6 +14,8 @@ bool AudioEngine::init(int sampleRate, int channels) {
     m_sampleRate = sampleRate;
     m_channels = channels;
 
+    m_masterNode = std::make_shared<MasterNode>(1024 * 4);
+    
     SDL_AudioSpec spec;
     spec.format = SDL_AUDIO_F32;
     spec.channels = channels;
@@ -20,7 +23,8 @@ bool AudioEngine::init(int sampleRate, int channels) {
 
     m_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &spec, NULL, NULL);
     if (!m_stream) {
-        std::cerr << "SDL_OpenAudioDeviceStream Error: " << SDL_GetError() << std::endl;
+        const char* err = SDL_GetError();
+        std::cerr << "CRITICAL: SDL_OpenAudioDeviceStream failed: " << err << std::endl;
         return false;
     }
 
@@ -28,30 +32,48 @@ bool AudioEngine::init(int sampleRate, int channels) {
     return true;
 }
 
-void AudioEngine::process(float* output, int frames) {
-    if (!m_isPlaying) {
-        for (int i = 0; i < frames * m_channels; ++i) output[i] = 0.0f;
-        return;
+void AudioEngine::setGraph(std::shared_ptr<FluxGraph> graph) {
+    std::lock_guard<std::mutex> lock(m_engineMutex);
+    m_graph = graph;
+    if (m_graph) {
+        m_masterNodeId = m_graph->addNode(m_masterNode);
     }
+}
 
-    std::lock_guard<std::mutex> lock(m_nodeMutex);
+void AudioEngine::rewind() {
+    std::lock_guard<std::mutex> lock(m_engineMutex);
+    if (!m_graph) return;
     
-    // Clear buffer
-    for (int i = 0; i < frames * m_channels; ++i) output[i] = 0.0f;
-
-    for (auto& node : m_nodes) {
-        if (!node->isBypassed()) {
-            node->process(output, frames, m_channels);
+    // Iterate through all nodes and seek to 0 if they are FluxTrackNodes
+    // This is a bit of a hacky way since we don't have a generic "seekable" interface yet
+    // but works for now.
+        for (auto const& [id, node] : m_graph->getNodes()) {
+            auto trackNode = std::dynamic_pointer_cast<FluxTrackNode>(node);
+            if (trackNode) {
+                trackNode->seek(0);
+            }
         }
     }
-
-    // Push to SDL Stream
-    SDL_PutAudioStreamData(m_stream, output, frames * m_channels * sizeof(float));
-}
-
-void AudioEngine::addNode(std::shared_ptr<AudioNode> node) {
-    std::lock_guard<std::mutex> lock(m_nodeMutex);
-    m_nodes.push_back(node);
-}
-
-} // namespace Beam
+    
+    void AudioEngine::process(float* output, int frames) {
+        if (!m_isPlaying || !m_stream || !m_graph) {
+            for (int i = 0; i < frames * m_channels; ++i) output[i] = 0.0f;
+            return;
+        }
+    
+        std::lock_guard<std::mutex> lock(m_engineMutex);
+        
+        m_graph->process(frames);
+    
+        // Copy from MasterNode input to output
+        float* masterIn = m_masterNode->getInputBuffer(0);
+        for (int i = 0; i < frames * m_channels; ++i) {
+            output[i] = masterIn[i];
+        }
+    
+        // Push to SDL Stream
+        SDL_PutAudioStreamData(m_stream, output, frames * m_channels * sizeof(float));
+    }
+    
+    } // namespace Beam
+    

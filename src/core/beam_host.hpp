@@ -5,6 +5,7 @@
 #include "../graphics/quad_batcher.hpp"
 #include "../graphics/shader.hpp"
 #include "../ui/input_handler.hpp"
+#include "flux_project.hpp"
 
 namespace Beam {
 
@@ -38,6 +39,7 @@ private:
     SDL_Window* m_window;
     SDL_GLContext m_glContext;
     
+    std::shared_ptr<FluxProject> m_project;
     std::unique_ptr<AudioEngine> m_audioEngine;
     std::unique_ptr<QuadBatcher> m_batcher;
     std::unique_ptr<Shader> m_uiShader;

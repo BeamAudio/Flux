@@ -7,10 +7,6 @@
 #include <iostream>
 #include <vector>
 
-ma_result ma_device_init(void* pContext, const ma_device_config* pConfig, ma_device* pDevice) { return MA_SUCCESS; }
-ma_result ma_device_start(ma_device* pDevice) { return MA_SUCCESS; }
-void ma_device_uninit(ma_device* pDevice) {}
-
 int main() {
     const int sampleRate = 44100;
     const int channels = 2;
@@ -19,6 +15,7 @@ int main() {
 
     Beam::AudioEngine engine;
     engine.init(sampleRate, channels);
+    engine.setPlaying(true);
 
     // Create Chain: Osc -> Filter -> Delay -> Gain
     auto osc = std::make_shared<Beam::SineOscillator>(220.0f, sampleRate); // A3
@@ -37,7 +34,7 @@ int main() {
     const int blockSize = 1024;
     for (int i = 0; i < totalFrames; i += blockSize) {
         int framesToProcess = std::min(blockSize, totalFrames - i);
-        engine.process(outputBuffer.data() + (i * channels), nullptr, framesToProcess);
+        engine.process(outputBuffer.data() + (i * channels), framesToProcess);
     }
 
     if (Beam::WavWriter::write("output.wav", outputBuffer.data(), outputBuffer.size(), sampleRate, channels)) {

@@ -1,4 +1,5 @@
 #include "beam_host.hpp"
+#include "project_manager.hpp"
 #include "../dsp/track_node.hpp"
 #include "../ui/workspace.hpp"
 #include "../ui/timeline.hpp"
@@ -57,14 +58,20 @@ bool BeamHost::init() {
     if (!SDL_Init(SDL_INIT_AUDIO)) return false;
     if (!m_audioEngine->init(44100, 2)) return false;
     
+    m_project = std::make_shared<FluxProject>();
+    m_audioEngine->setGraph(m_project->getGraph());
     m_audioEngine->setPlaying(true);
 
     // Instantiate Components
-    m_workspace = std::make_shared<Workspace>();
+    m_workspace = std::make_shared<Workspace>(m_project);
     m_timeline = std::make_shared<Timeline>();
     m_topBar = std::make_shared<TopBar>(m_width);
     m_browser = std::make_shared<Sidebar>(Sidebar::Side::Left);
-    m_masterStrip = std::make_shared<MasterStrip>();
+    m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine->getMasterNode());
+
+    m_browser->onAddFX = [this](std::string type) {
+        if (m_workspace) m_workspace->addFX(type, 300, 300);
+    };
 
     // Add to UI Handler
     m_uiHandler->addComponent(m_workspace);
@@ -72,6 +79,38 @@ bool BeamHost::init() {
     m_uiHandler->addComponent(m_browser);
     m_uiHandler->addComponent(m_masterStrip);
     m_uiHandler->addComponent(m_topBar);
+
+    m_topBar->onModeChanged = [this](int mode) {
+        setMode(mode == 0 ? DAWMode::Flux : DAWMode::Splicing);
+    };
+
+    m_topBar->onPlayRequested = [this]() {
+        m_audioEngine->setPlaying(true);
+    };
+
+    m_topBar->onPauseRequested = [this]() {
+        m_audioEngine->setPlaying(false);
+    };
+
+    m_topBar->onRewindRequested = [this]() {
+        m_audioEngine->rewind();
+    };
+
+    m_topBar->onSaveRequested = [this]() {
+        if (m_project) {
+            ProjectManager::saveProject("project.flux", m_project->serialize());
+            std::cout << "Project Saved." << std::endl;
+        }
+    };
+
+    m_topBar->onLoadRequested = [this]() {
+        // Simple direct load for now, could use SDL_ShowOpenFileDialog
+        auto data = ProjectManager::loadProject("project.flux");
+        if (!data.empty() && m_project) {
+            m_project->deserialize(data);
+            std::cout << "Project Loaded." << std::endl;
+        }
+    };
 
     setMode(DAWMode::Flux);
     performLayout();
@@ -117,7 +156,6 @@ void BeamHost::handleEvents() {
                 SDL_GetMouseState(&mx, &my);
                 m_workspace->addTrack(event.drop.data, mx, my, *m_audioEngine);
             }
-            SDL_free((void*)event.drop.data);
         }
         else if (event.type == SDL_EVENT_KEY_DOWN) {
             if (event.key.key == SDLK_TAB) {
@@ -165,18 +203,26 @@ void BeamHost::render() {
 
     m_batcher->begin();
     m_uiHandler->render(*m_batcher);
-    m_batcher->end();
+    // std::cout << "Rendering..." << std::endl;
+    m_batcher->flush();
 
     SDL_GL_SwapWindow(m_window);
 }
 
 void BeamHost::run() {
+    std::cout << "Starting Main Loop..." << std::endl;
     float audioBuffer[1024 * 2];
+    uint64_t lastTime = SDL_GetTicks();
     while (m_isRunning) {
         handleEvents();
         update();
         m_audioEngine->process(audioBuffer, 1024);
         render();
+
+        if (SDL_GetTicks() - lastTime > 1000) {
+            std::cout << "Heartbeat: " << m_width << "x" << m_height << std::endl;
+            lastTime = SDL_GetTicks();
+        }
     }
 }
 

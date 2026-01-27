@@ -2,6 +2,8 @@
 #define SIDEBAR_HPP
 
 #include "component.hpp"
+#include <functional>
+#include <string>
 
 namespace Beam {
 
@@ -21,12 +23,33 @@ public:
         float borderX = (m_side == Side::Left) ? m_bounds.x + m_bounds.w - 1 : m_bounds.x;
         batcher.drawQuad(borderX, m_bounds.y, 1, m_bounds.h, 0.2f, 0.2f, 0.2f, 1.0f);
 
-        // Tab placeholders
+        // FX List
         if (m_side == Side::Left) {
-            batcher.drawQuad(m_bounds.x + 10, m_bounds.y + 50, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f); // FX TAB
-            batcher.drawQuad(m_bounds.x + 10, m_bounds.y + 90, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f); // ASSETS TAB
+            float yOff = m_bounds.y + 50;
+            // Gain FX
+            batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            yOff += 40;
+            // Filter FX
+            batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            yOff += 40;
+            // Delay FX
+            batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
         }
     }
+
+    bool onMouseDown(float x, float y, int button) override {
+        if (m_side == Side::Left) {
+            float yOff = m_bounds.y + 50;
+            if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Gain"); return true; }
+            yOff += 40;
+            if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Filter"); return true; }
+            yOff += 40;
+            if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Delay"); return true; }
+        }
+        return false;
+    }
+
+    std::function<void(std::string)> onAddFX;
 
 private:
     Side m_side;

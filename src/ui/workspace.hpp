@@ -4,8 +4,10 @@
 #include "component.hpp"
 #include "tape_reel.hpp"
 #include "cable.hpp"
-#include "../dsp/track_node.hpp"
+#include "../dsp/flux_track_node.hpp"
+#include "../dsp/flux_fx_nodes.hpp"
 #include "../dsp/audio_engine.hpp"
+#include "../core/flux_project.hpp"
 #include <vector>
 #include <iostream>
 
@@ -15,7 +17,7 @@ namespace Beam {
 
 class Workspace : public Component {
 public:
-    Workspace() {
+    Workspace(std::shared_ptr<FluxProject> project) : m_project(project) {
         setBounds(0, 0, 10000, 10000); 
     }
 
@@ -67,16 +69,37 @@ public:
     }
 
     void addTrack(const std::string& filePath, float x, float y, AudioEngine& engine) {
-        auto track = std::make_shared<TrackNode>("Loaded Track");
-        if (track->load(filePath)) {
-            track->setState(TrackState::Playing);
-            engine.addNode(track);
-            auto reel = std::make_shared<TapeReel>(filePath, x, y, track);
+        auto graph = m_project->getGraph();
+        auto fluxTrack = std::make_shared<FluxTrackNode>("Loaded Track", 1024 * 4);
+        
+        if (fluxTrack->load(filePath)) {
+            fluxTrack->getInternalNode()->setState(TrackState::Playing);
+            size_t nodeId = graph->addNode(fluxTrack);
+            
+            // Auto-connect to Master for now (Master is node 0 in this simplified update)
+            graph->connect(nodeId, 0, 0, 0); 
+
+            auto reel = std::make_shared<TapeReel>(fluxTrack, x, y);
             
             reel->getInputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
             reel->getOutputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
 
             m_modules.push_back(reel);
+        }
+    }
+
+    void addFX(const std::string& type, float x, float y) {
+        auto graph = m_project->getGraph();
+        std::shared_ptr<FluxNode> fxNode;
+        
+        if (type == "Gain") fxNode = std::make_shared<FluxGainNode>(1024 * 4);
+        else if (type == "Filter") fxNode = std::make_shared<FluxFilterNode>(1024 * 4, 44100.0f);
+        else if (type == "Delay") fxNode = std::make_shared<FluxDelayNode>(1024 * 4, 44100.0f);
+        
+        if (fxNode) {
+            graph->addNode(fxNode);
+            auto mod = std::make_shared<AudioModule>(fxNode, x, y);
+            m_modules.push_back(mod);
         }
     }
 
@@ -143,6 +166,7 @@ public:
     }
 
 private:
+    std::shared_ptr<FluxProject> m_project;
     std::vector<std::shared_ptr<Component>> m_modules;
     std::vector<Cable> m_cables;
     float m_panX = 0, m_panY = 0;

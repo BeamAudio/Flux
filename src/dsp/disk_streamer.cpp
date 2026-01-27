@@ -27,9 +27,15 @@ void DiskStreamer::close() {
     m_reader.reset();
 }
 
-size_t DiskStreamer::read(float* output, size_t frames) {
+size_t DiskStreamer::read(float* output, size_t frames, int channels) {
     if (!m_reader) return 0;
-    return m_reader->readFrames(output, frames);
+    return m_reader->readFrames(output, frames, channels);
+}
+
+void DiskStreamer::seek(size_t frame) {
+    if (m_reader) {
+        m_reader->seek(frame);
+    }
 }
 
 void DiskStreamer::streamLoop() {

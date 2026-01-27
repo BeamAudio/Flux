@@ -1,4 +1,5 @@
 #include "quad_batcher.hpp"
+#include <iostream>
 
 namespace Beam {
 
@@ -56,7 +57,8 @@ void QuadBatcher::begin() {
 void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g, float b, float a) {
     if (m_quadCount >= m_maxQuads) {
         flush();
-        begin();
+        m_quadCount = 0;
+        m_vertices.clear();
     }
 
     m_vertices.push_back({{x, y}, {0, 0}, {r, g, b, a}});
@@ -67,12 +69,28 @@ void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g,
     m_quadCount++;
 }
 
-void QuadBatcher::end() {
-    flush();
+void QuadBatcher::drawLine(float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a) {
+    // Simple vertical/horizontal line support for now, or just a quad
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    if (std::abs(dx) > std::abs(dy)) {
+        drawQuad(x1, y1 - thickness * 0.5f, dx, thickness, r, g, b, a);
+    } else {
+        drawQuad(x1 - thickness * 0.5f, y1, thickness, dy, r, g, b, a);
+    }
+}
+
+void QuadBatcher::drawRect(float x, float y, float w, float h, float thickness, float r, float g, float b, float a) {
+    drawQuad(x, y, w, thickness, r, g, b, a); // Top
+    drawQuad(x, y + h - thickness, w, thickness, r, g, b, a); // Bottom
+    drawQuad(x, y, thickness, h, r, g, b, a); // Left
+    drawQuad(x + w - thickness, y, thickness, h, r, g, b, a); // Right
 }
 
 void QuadBatcher::flush() {
     if (m_quadCount == 0) return;
+
+    std::cout << "Flushing " << m_quadCount << " quads." << std::endl;
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(Vertex), m_vertices.data());
