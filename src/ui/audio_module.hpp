@@ -12,11 +12,11 @@ namespace Beam {
 class AudioModule : public Component {
 public:
     AudioModule(const std::string& name, float x, float y) : m_name(name) {
-        setBounds(x, y, 150, 200);
-        setDraggable(true);
-
         m_inputPort = std::make_shared<Port>(PortType::Input, this);
         m_outputPort = std::make_shared<Port>(PortType::Output, this);
+        
+        setBounds(x, y, 150, 200);
+        setDraggable(true);
     }
 
     void setBounds(float x, float y, float w, float h) {

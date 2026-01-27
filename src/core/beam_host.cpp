@@ -117,6 +117,7 @@ void BeamHost::handleEvents() {
                 SDL_GetMouseState(&mx, &my);
                 m_workspace->addTrack(event.drop.data, mx, my, *m_audioEngine);
             }
+            SDL_free((void*)event.drop.data);
         }
         else if (event.type == SDL_EVENT_KEY_DOWN) {
             if (event.key.key == SDLK_TAB) {
