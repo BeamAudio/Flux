@@ -1,0 +1,31 @@
+\doxysection{audio\+\_\+node.\+hpp}
+\hypertarget{audio__node_8hpp_source}{}\label{audio__node_8hpp_source}\index{src/dsp/audio\_node.hpp@{src/dsp/audio\_node.hpp}}
+\doxymbox{\hyperlink{audio__node_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUDIO\_NODE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUDIO\_NODE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_afbea31954b50918131d31fc0d1f6de8c}{\string~AudioNode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00012\ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels)\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{getName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_a3fcc68eab5b1adf547a4205f258b212c}{setBypass}}(\textcolor{keywordtype}{bool}\ bypass)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f06219b09f}{m\_isBypassed}}\ =\ bypass;\ \}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6ba1724cff34b5bc0f811ee2537caae5}{isBypassed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f06219b09f}{m\_isBypassed}};\ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f06219b09f}{m\_isBypassed}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUDIO\_NODE\_HPP}}
+
+\end{DoxyCode}

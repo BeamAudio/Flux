@@ -1,0 +1,188 @@
+\doxysection{Beam::\+Flux\+Plugin Class Reference}
+\hypertarget{class_beam_1_1_flux_plugin}{}\label{class_beam_1_1_flux_plugin}\index{Beam::FluxPlugin@{Beam::FluxPlugin}}
+
+
+{\ttfamily \+\#include $<$flux\+\_\+plugin.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Flux\+Plugin:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_beam_1_1_flux_plugin}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{Flux\+Plugin}} (const std::\+string \&name, int buffer\+Size, float sample\+Rate)
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912}{process\+Block}} (const float \texorpdfstring{$\ast$}{*}input, float \texorpdfstring{$\ast$}{*}output, int total\+Samples)=0
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process}} (int frames) override
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a450563af4d65a25b8a8e896dab77a3c6}{get\+Name}} () const override
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ad231db67f900e8e7dd853936ad2e866a}{get\+Input\+Ports}} () const override
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a4ea312de74047e127e818a26e715d8bb}{get\+Output\+Ports}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_flux_node_a708c135cdb61e8838469998cd8a84e65}{\texorpdfstring{$\sim$}{\string~}\+Flux\+Node}} ()=default
+\item 
+float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac90bd1a05b5bed3d68978f532386ed29}{get\+Input\+Buffer}} (int port\+Idx)
+\item 
+float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_abf11cfd4f2346ee0cd46d4345f1ed7d4}{get\+Output\+Buffer}} (int port\+Idx)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_af37f8c1b6b825da2ce7e35011d6f8253}{set\+Bypass}} (bool bypass)
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_flux_node_a4bd30f3c8d311afdcd5c0d208e3bbf0f}{is\+Bypassed}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ param)
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a59a32442eec144010741b9f2086c516e}{get\+Parameter}} (const std::\+string \&name)
+\item 
+const std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \& \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6296c79b1ba77aa8b9526ace4a109529}{get\+Parameters}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{add\+Param}} (const std::\+string \&name, float min, float max, float initial)
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{get\+Param}} (const std::\+string \&name)
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a967cf5eb3}{get\+Sample\+Rate}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae3bafc1c5a1aa545167256172b3d3688}{setup\+Buffers}} (int num\+Inputs, int num\+Outputs, int buffer\+Size, int channels)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_abfb4e9e64c4e94f54001247d7de58011}{m\+\_\+plugin\+Name}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a7818db9fafa231a3525e4d4004bdaea9}{m\+\_\+sample\+Rate}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a8edab1c9ebd83e73bbfd92af29d6e92c}{m\+\_\+inputs}}
+\item 
+std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a496905f0ff42c432eb38e19bd6135383}{m\+\_\+outputs}}
+\item 
+std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\+\_\+parameters}}
+\item 
+std::\+atomic$<$ bool $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\+\_\+bypassed}} \{false\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{namespace_beam}{Beam} Flux SDK:\+ \doxylink{class_beam_1_1_flux_plugin}{Flux\+Plugin} A high-\/level abstraction for creating custom DSP effects. Inherit from this class to design your own filters and processors. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_flux_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!FluxPlugin@{FluxPlugin}}
+\index{FluxPlugin@{FluxPlugin}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{FluxPlugin()}{FluxPlugin()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689} 
+Beam::\+\+Flux\+Plugin::\+\+Flux\+Plugin (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{buffer\+Size}{, }\item[{float}]{sample\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_flux_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!addParam@{addParam}}
+\index{addParam@{addParam}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{addParam()}{addParam()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f} 
+void Beam::\+\+Flux\+Plugin::\+add\+Param (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{min}{, }\item[{float}]{max}{, }\item[{float}]{initial}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_flux_plugin_ad231db67f900e8e7dd853936ad2e866a}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!getInputPorts@{getInputPorts}}
+\index{getInputPorts@{getInputPorts}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{getInputPorts()}{getInputPorts()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_ad231db67f900e8e7dd853936ad2e866a} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ Beam::\+\+Flux\+Plugin::\+get\+Input\+Ports (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a17eb02187925b52bf8e53fa3ebe3da66}{Beam::\+\+Flux\+Node}}.
+
+\Hypertarget{class_beam_1_1_flux_plugin_a450563af4d65a25b8a8e896dab77a3c6}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!getName@{getName}}
+\index{getName@{getName}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a450563af4d65a25b8a8e896dab77a3c6} 
+std::\+string Beam::\+\+Flux\+Plugin::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac638d3d9bb1050d658294bc5470abeba}{Beam::\+\+Flux\+Node}}.
+
+\Hypertarget{class_beam_1_1_flux_plugin_a4ea312de74047e127e818a26e715d8bb}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!getOutputPorts@{getOutputPorts}}
+\index{getOutputPorts@{getOutputPorts}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{getOutputPorts()}{getOutputPorts()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a4ea312de74047e127e818a26e715d8bb} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ Beam::\+\+Flux\+Plugin::\+get\+Output\+Ports (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a034f59d236afd7901ed84090422e3279}{Beam::\+\+Flux\+Node}}.
+
+\Hypertarget{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!getParam@{getParam}}
+\index{getParam@{getParam}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{getParam()}{getParam()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b} 
+float Beam::\+\+Flux\+Plugin::\+get\+Param (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a967cf5eb3}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!getSampleRate@{getSampleRate}}
+\index{getSampleRate@{getSampleRate}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{getSampleRate()}{getSampleRate()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a967cf5eb3} 
+float Beam::\+\+Flux\+Plugin::\+get\+Sample\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!process@{process}}
+\index{process@{process}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61} 
+void Beam::\+\+Flux\+Plugin::\+process (\begin{DoxyParamCaption}\item[{int}]{frames}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a3c263446753fa7ae5ff6928ee57bcd4d}{Beam::\+\+Flux\+Node}}.
+
+\Hypertarget{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!processBlock@{processBlock}}
+\index{processBlock@{processBlock}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{processBlock()}{processBlock()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912} 
+virtual void Beam::\+\+Flux\+Plugin::\+process\+Block (\begin{DoxyParamCaption}\item[{const float \texorpdfstring{$\ast$}{*}}]{input}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{output}{, }\item[{int}]{total\+Samples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_custom_filter_ae561b7a4fb99126dda6d9adb7c12c80a}{Beam::\+\+Custom\+Filter}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_flux_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_flux_plugin_abfb4e9e64c4e94f54001247d7de58011}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!m\_pluginName@{m\_pluginName}}
+\index{m\_pluginName@{m\_pluginName}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{m\_pluginName}{m\_pluginName}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_abfb4e9e64c4e94f54001247d7de58011} 
+std::\+string Beam::\+\+Flux\+Plugin::\+m\+\_\+plugin\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_flux_plugin_a7818db9fafa231a3525e4d4004bdaea9}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a7818db9fafa231a3525e4d4004bdaea9} 
+float Beam::\+\+Flux\+Plugin::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+dsp/\+\doxymbox{\hyperlink{flux__plugin_8hpp}{flux\+\_\+plugin.\+hpp}}\end{DoxyCompactItemize}

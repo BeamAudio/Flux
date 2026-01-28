@@ -1,0 +1,70 @@
+\doxysection{component.\+hpp}
+\hypertarget{component_8hpp_source}{}\label{component_8hpp_source}\index{src/ui/component.hpp@{src/ui/component.hpp}}
+\doxymbox{\hyperlink{component_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COMPONENT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COMPONENT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}};\ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}},\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}},\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a69b99db01aa296ad7964be8fc0365a10}{w}},\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a4b5a429163e8d87425b54e12ff6a1a80}{contains}}(\textcolor{keywordtype}{float}\ px,\ \textcolor{keywordtype}{float}\ py)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ px\ >=\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ \&\&\ px\ <=\ x\ +\ w\ \&\&\ py\ >=\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ \&\&\ py\ <=\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ \doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}};}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\string~Component}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}}(\textcolor{keywordtype}{float}\ dt)\ \{\}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\ =\ 0;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{onMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\ \{\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\_isDragging}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \{\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\_isDragging}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\_isDraggable}})\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dx\ =\ x\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\_lastMouseX}};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dy\ =\ y\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\_lastMouseY}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{setBounds}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ dx,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ dy,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\_lastMouseX}}\ =\ x;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\_lastMouseY}}\ =\ y;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{setBounds}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}\ =\ \{x,\ y,\ w,\ h\};\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\&\ \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{getBounds}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}};\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{setDraggable}}(\textcolor{keywordtype}{bool}\ draggable)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\_isDraggable}}\ =\ draggable;\ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{startDragging}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \{\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\_isDragging}}\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\_lastMouseX}}\ =\ x;\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\_lastMouseY}}\ =\ y;\ }
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00054\ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}\{0,\ 0,\ 0,\ 0\};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\_isVisible}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_a0bf77b204ae374a14b5a6d7e5a3c13c6}{m\_isEnabled}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\_isDraggable}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\_isDragging}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\_lastMouseX}}\ =\ 0,\ \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\_lastMouseY}}\ =\ 0;}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ COMPONENT\_HPP}}
+
+\end{DoxyCode}

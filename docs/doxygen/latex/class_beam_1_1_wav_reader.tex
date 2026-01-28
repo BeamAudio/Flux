@@ -1,0 +1,136 @@
+\doxysection{Beam::\+Wav\+Reader Class Reference}
+\hypertarget{class_beam_1_1_wav_reader}{}\label{class_beam_1_1_wav_reader}\index{Beam::WavReader@{Beam::WavReader}}
+
+
+{\ttfamily \+\#include $<$wav\+\_\+reader.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_wav_reader_a495edcb749c0ed8d9337adea76f3f3ff}{Wav\+Reader}} ()
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a54dc2bfd8c1b1773df1f444211da7f6e}{open}} (const std::\+string \&file\+Path)
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a48fbbce631692e26e952393c21a379bd}{read\+Frames}} (float \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t frames, int dest\+Channels)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a86c1c481afc06a74ee5e24613b420e7d}{seek}} (size\+\_\+t frame)
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a4e25dd9b2efd3e0a047ede3e7a5ae980}{get\+Sample\+Rate}} () const
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f25dd728103ef8c}{get\+Channels}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+ifstream \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a907cb2f0a02cb35404b64c83bc255af1}{m\+\_\+file}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ad6b1bf507beb872bc88d8653f5e97fc7}{m\+\_\+sample\+Rate}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a9d338f1e92fd6deff4ba9001dfe36e6f}{m\+\_\+channels}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a6a8e0388b157c1e105decfeb68bd21c2}{m\+\_\+bits\+Per\+Sample}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a1ef1515c74e66c5a9ff543639f9ed11e}{m\+\_\+format\+Tag}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ab412037c65d5e7c1a28cd5c195d3b87a}{m\+\_\+data\+Size}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ae11c806f1f18bb1b151294d158124596}{m\+\_\+data\+Offset}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_wav_reader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_wav_reader_a495edcb749c0ed8d9337adea76f3f3ff}\index{Beam::WavReader@{Beam::WavReader}!WavReader@{WavReader}}
+\index{WavReader@{WavReader}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{WavReader()}{WavReader()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a495edcb749c0ed8d9337adea76f3f3ff} 
+Beam::\+\+Wav\+Reader::\+\+Wav\+Reader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_wav_reader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f25dd728103ef8c}\index{Beam::WavReader@{Beam::WavReader}!getChannels@{getChannels}}
+\index{getChannels@{getChannels}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{getChannels()}{getChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f25dd728103ef8c} 
+uint16\+\_\+t Beam::\+\+Wav\+Reader::\+get\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a4e25dd9b2efd3e0a047ede3e7a5ae980}\index{Beam::WavReader@{Beam::WavReader}!getSampleRate@{getSampleRate}}
+\index{getSampleRate@{getSampleRate}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{getSampleRate()}{getSampleRate()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a4e25dd9b2efd3e0a047ede3e7a5ae980} 
+uint32\+\_\+t Beam::\+\+Wav\+Reader::\+get\+Sample\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a54dc2bfd8c1b1773df1f444211da7f6e}\index{Beam::WavReader@{Beam::WavReader}!open@{open}}
+\index{open@{open}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a54dc2bfd8c1b1773df1f444211da7f6e} 
+bool Beam::\+\+Wav\+Reader::\+open (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a48fbbce631692e26e952393c21a379bd}\index{Beam::WavReader@{Beam::WavReader}!readFrames@{readFrames}}
+\index{readFrames@{readFrames}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{readFrames()}{readFrames()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a48fbbce631692e26e952393c21a379bd} 
+size\+\_\+t Beam::\+\+Wav\+Reader::\+read\+Frames (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{frames}{, }\item[{int}]{dest\+Channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a86c1c481afc06a74ee5e24613b420e7d}\index{Beam::WavReader@{Beam::WavReader}!seek@{seek}}
+\index{seek@{seek}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a86c1c481afc06a74ee5e24613b420e7d} 
+void Beam::\+\+Wav\+Reader::\+seek (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{frame}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_wav_reader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_wav_reader_a6a8e0388b157c1e105decfeb68bd21c2}\index{Beam::WavReader@{Beam::WavReader}!m\_bitsPerSample@{m\_bitsPerSample}}
+\index{m\_bitsPerSample@{m\_bitsPerSample}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_bitsPerSample}{m\_bitsPerSample}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a6a8e0388b157c1e105decfeb68bd21c2} 
+uint16\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+bits\+Per\+Sample\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a9d338f1e92fd6deff4ba9001dfe36e6f}\index{Beam::WavReader@{Beam::WavReader}!m\_channels@{m\_channels}}
+\index{m\_channels@{m\_channels}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_channels}{m\_channels}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a9d338f1e92fd6deff4ba9001dfe36e6f} 
+uint16\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+channels\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_ae11c806f1f18bb1b151294d158124596}\index{Beam::WavReader@{Beam::WavReader}!m\_dataOffset@{m\_dataOffset}}
+\index{m\_dataOffset@{m\_dataOffset}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_dataOffset}{m\_dataOffset}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_ae11c806f1f18bb1b151294d158124596} 
+uint32\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+data\+Offset\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_ab412037c65d5e7c1a28cd5c195d3b87a}\index{Beam::WavReader@{Beam::WavReader}!m\_dataSize@{m\_dataSize}}
+\index{m\_dataSize@{m\_dataSize}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_dataSize}{m\_dataSize}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_ab412037c65d5e7c1a28cd5c195d3b87a} 
+uint32\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+data\+Size\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a907cb2f0a02cb35404b64c83bc255af1}\index{Beam::WavReader@{Beam::WavReader}!m\_file@{m\_file}}
+\index{m\_file@{m\_file}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_file}{m\_file}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a907cb2f0a02cb35404b64c83bc255af1} 
+std::\+ifstream Beam::\+\+Wav\+Reader::\+m\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a1ef1515c74e66c5a9ff543639f9ed11e}\index{Beam::WavReader@{Beam::WavReader}!m\_formatTag@{m\_formatTag}}
+\index{m\_formatTag@{m\_formatTag}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_formatTag}{m\_formatTag}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a1ef1515c74e66c5a9ff543639f9ed11e} 
+uint16\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+format\+Tag\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_ad6b1bf507beb872bc88d8653f5e97fc7}\index{Beam::WavReader@{Beam::WavReader}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_ad6b1bf507beb872bc88d8653f5e97fc7} 
+uint32\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+dsp/\+\doxymbox{\hyperlink{wav__reader_8hpp}{wav\+\_\+reader.\+hpp}}\end{DoxyCompactItemize}

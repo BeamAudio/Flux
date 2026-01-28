@@ -1,0 +1,113 @@
+\doxysection{Beam::\+Timeline Class Reference}
+\hypertarget{class_beam_1_1_timeline}{}\label{class_beam_1_1_timeline}\index{Beam::Timeline@{Beam::Timeline}}
+
+
+{\ttfamily \+\#include $<$timeline.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Timeline:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_timeline}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}{Timeline}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4}{set\+Visible}} (bool visible)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\texorpdfstring{$\sim$}{\string~}\+Component}} ()=default
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
+\item 
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{on\+Mouse\+Down}} (float x, float y, int button)
+\item 
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{on\+Mouse\+Up}} (float x, float y, int button)
+\item 
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{on\+Mouse\+Move}} (float x, float y)
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{set\+Bounds}} (float x, float y, float w, float h)
+\item 
+const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{set\+Draggable}} (bool draggable)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\+\_\+is\+Visible}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\+\_\+bounds}} \{0, 0, 0, 0\}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\+\_\+is\+Visible}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a0bf77b204ae374a14b5a6d7e5a3c13c6}{m\+\_\+is\+Enabled}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\+\_\+is\+Draggable}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\+\_\+is\+Dragging}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\+\_\+last\+MouseY}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_timeline_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}\index{Beam::Timeline@{Beam::Timeline}!Timeline@{Timeline}}
+\index{Timeline@{Timeline}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{Timeline()}{Timeline()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6} 
+Beam::\+\+Timeline::\+\+Timeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_timeline_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a}\index{Beam::Timeline@{Beam::Timeline}!render@{render}}
+\index{render@{render}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a} 
+void Beam::\+\+Timeline::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4}\index{Beam::Timeline@{Beam::Timeline}!setVisible@{setVisible}}
+\index{setVisible@{setVisible}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{setVisible()}{setVisible()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4} 
+void Beam::\+\+Timeline::\+set\+Visible (\begin{DoxyParamCaption}\item[{bool}]{visible}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_timeline_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}\index{Beam::Timeline@{Beam::Timeline}!m\_isVisible@{m\_isVisible}}
+\index{m\_isVisible@{m\_isVisible}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_isVisible}{m\_isVisible}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09} 
+bool Beam::\+\+Timeline::\+m\+\_\+is\+Visible = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+ui/\+\doxymbox{\hyperlink{timeline_8hpp}{timeline.\+hpp}}\end{DoxyCompactItemize}

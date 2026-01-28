@@ -1,0 +1,42 @@
+\doxysection{sine\+\_\+oscillator.\+hpp}
+\hypertarget{sine__oscillator_8hpp_source}{}\label{sine__oscillator_8hpp_source}\index{src/dsp/sine\_oscillator.hpp@{src/dsp/sine\_oscillator.hpp}}
+\doxymbox{\hyperlink{sine__oscillator_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SINE\_OSCILLATOR\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SINE\_OSCILLATOR\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__node_8hpp}{audio\_node.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a8f8c6912f290f7fb243b4432c84a6c28}{SineOscillator}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a8f8c6912f290f7fb243b4432c84a6c28}{SineOscillator}}(\textcolor{keywordtype}{float}\ frequency,\ \textcolor{keywordtype}{float}\ sampleRate)\ }
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_abf48cee75b7b6674131237550846636b}{m\_frequency}}(frequency),\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a00d2361f6577ad130a1a025419fd04d6}{m\_sampleRate}}(sampleRate),\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}}(0.0f)\ \{\}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a3ee669cf30b4b71304975dd6c953dadd}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ phaseIncrement\ =\ (2.0f\ *\ 3.1415926535f\ *\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_abf48cee75b7b6674131237550846636b}{m\_frequency}})\ /\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a00d2361f6577ad130a1a025419fd04d6}{m\_sampleRate}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frames;\ ++i)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sample\ =\ std::sin(\doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}})\ *\ 0.2f;\ \textcolor{comment}{//\ Low\ volume\ for\ safety}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ 0;\ c\ <\ channels;\ ++c)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[i\ *\ channels\ +\ c]\ +=\ sample;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}}\ +=\ phaseIncrement;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}}\ >=\ 2.0f\ *\ 3.1415926535f)\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}}\ -\/=\ 2.0f\ *\ 3.1415926535f;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a716e3f51751e07ed0718d4d786e3da12}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Sine\ Oscillator"{}};\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_abf48cee75b7b6674131237550846636b}{m\_frequency}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a00d2361f6577ad130a1a025419fd04d6}{m\_sampleRate}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a154fdf3a94745d9cd4ad6a163c0eb6d9}{m\_phase}};}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SINE\_OSCILLATOR\_HPP}}
+
+\end{DoxyCode}

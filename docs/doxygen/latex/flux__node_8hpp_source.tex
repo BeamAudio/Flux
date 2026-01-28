@@ -1,0 +1,67 @@
+\doxysection{flux\+\_\+node.\+hpp}
+\hypertarget{flux__node_8hpp_source}{}\label{flux__node_8hpp_source}\index{src/dsp/flux\_node.hpp@{src/dsp/flux\_node.hpp}}
+\doxymbox{\hyperlink{flux__node_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FLUX\_NODE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FLUX\_NODE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{parameter_8hpp}{../core/parameter.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_flux_node}{FluxNode}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a708c135cdb61e8838469998cd8a84e65}{\string~FluxNode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::string\ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port_a12305258fc537605704c363c82066950}{name}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port_abd4bf86ac483a7ef33991aa1e402dc29}{channels}};}
+\DoxyCodeLine{00020\ \ \ \ \ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a3c263446753fa7ae5ff6928ee57bcd4d}{process}}(\textcolor{keywordtype}{int}\ frames)\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac638d3d9bb1050d658294bc5470abeba}{getName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<Port>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a17eb02187925b52bf8e53fa3ebe3da66}{getInputPorts}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<Port>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a034f59d236afd7901ed84090422e3279}{getOutputPorts}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}*\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac90bd1a05b5bed3d68978f532386ed29}{getInputBuffer}}(\textcolor{keywordtype}{int}\ portIdx)\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a8edab1c9ebd83e73bbfd92af29d6e92c}{m\_inputs}}[portIdx].data();\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}*\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_abf11cfd4f2346ee0cd46d4345f1ed7d4}{getOutputBuffer}}(\textcolor{keywordtype}{int}\ portIdx)\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a496905f0ff42c432eb38e19bd6135383}{m\_outputs}}[portIdx].data();\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_af37f8c1b6b825da2ce7e35011d6f8253}{setBypass}}(\textcolor{keywordtype}{bool}\ bypass)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\_bypassed}}\ =\ bypass;\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a4bd30f3c8d311afdcd5c0d208e3bbf0f}{isBypassed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\_bypassed}};\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{addParameter}}(std::shared\_ptr<Parameter>\ param)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\_parameters}}[param-\/>getName()]\ =\ param;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a59a32442eec144010741b9f2086c516e}{getParameter}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\_parameters}}.find(name);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (it\ !=\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\_parameters}}.end())\ ?\ it-\/>second\ :\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::string,\ std::shared\_ptr<Parameter>>\&\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6296c79b1ba77aa8b9526ace4a109529}{getParameters}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\_parameters}};}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae3bafc1c5a1aa545167256172b3d3688}{setupBuffers}}(\textcolor{keywordtype}{int}\ numInputs,\ \textcolor{keywordtype}{int}\ numOutputs,\ \textcolor{keywordtype}{int}\ bufferSize,\ \textcolor{keywordtype}{int}\ channels)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a8edab1c9ebd83e73bbfd92af29d6e92c}{m\_inputs}}.assign(numInputs,\ std::vector<float>(bufferSize\ *\ channels,\ 0.0f));}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a496905f0ff42c432eb38e19bd6135383}{m\_outputs}}.assign(numOutputs,\ std::vector<float>(bufferSize\ *\ channels,\ 0.0f));}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ std::vector<std::vector<float>>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a8edab1c9ebd83e73bbfd92af29d6e92c}{m\_inputs}};}
+\DoxyCodeLine{00054\ \ \ \ \ std::vector<std::vector<float>>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a496905f0ff42c432eb38e19bd6135383}{m\_outputs}};}
+\DoxyCodeLine{00055\ \ \ \ \ std::map<std::string,\ std::shared\_ptr<Parameter>>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\_parameters}};}
+\DoxyCodeLine{00056\ \ \ \ \ std::atomic<bool>\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\_bypassed}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FLUX\_NODE\_HPP}}
+
+\end{DoxyCode}

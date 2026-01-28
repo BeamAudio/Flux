@@ -1,0 +1,189 @@
+\doxysection{workspace.\+hpp}
+\hypertarget{workspace_8hpp_source}{}\label{workspace_8hpp_source}\index{src/ui/workspace.hpp@{src/ui/workspace.hpp}}
+\doxymbox{\hyperlink{workspace_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WORKSPACE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WORKSPACE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{component.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tape__reel_8hpp}{tape\_reel.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cable_8hpp}{cable.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__track__node_8hpp}{../dsp/flux\_track\_node.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__fx__nodes_8hpp}{../dsp/flux\_fx\_nodes.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{custom__filter_8hpp}{../dsp/custom\_filter.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__engine_8hpp}{../dsp/audio\_engine.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__project_8hpp}{../core/flux\_project.hpp}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}json.hpp"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_workspace_a1cb1b67c1754b9082dde84b7db95729e}{Workspace}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a1cb1b67c1754b9082dde84b7db95729e}{Workspace}}(std::shared\_ptr<FluxProject>\ project)\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}{m\_project}}(project)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{setBounds}}(0,\ 0,\ 10000,\ 10000);\ }
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ nlohmann::json\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a5f75e8e118db827ac6e2b132ce3c511d}{serialize}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ nlohmann::json\ data;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}panX"{}}]\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\_panX}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}panY"{}}]\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\_panY}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ nlohmann::json\ modules\ =\ nlohmann::json::array();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Here\ we\ would\ iterate\ modules\ and\ call\ their\ serialize()}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}modules"{}}]\ =\ modules;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a8959768175035442b92bda55f7ba1c2d}{deserialize}}(\textcolor{keyword}{const}\ nlohmann::json\&\ data)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.contains(\textcolor{stringliteral}{"{}panX"{}}))\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\_panX}}\ =\ data[\textcolor{stringliteral}{"{}panX"{}}];}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.contains(\textcolor{stringliteral}{"{}panY"{}}))\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\_panY}}\ =\ data[\textcolor{stringliteral}{"{}panY"{}}];}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ a\ real\ implementation,\ we'd\ reconstruct\ modules\ here}}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a021920fd8b910cadf5286ce92b75ac79}{setVisible}}(\textcolor{keywordtype}{bool}\ visible)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\_isVisible}}\ =\ visible;\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a6be84daa0a4def0d2adfc162c45d9331}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\_isVisible}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ Grid}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ spacing\ =\ 50.0f;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{float}\ x\ =\ 0;\ x\ <\ 2000;\ x\ +=\ spacing)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(x\ +\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\_panX}},\ 0,\ 1,\ 2000,\ 0.2f,\ 0.2f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{float}\ y\ =\ 0;\ y\ <\ 2000;\ y\ +=\ spacing)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(0,\ y\ +\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\_panY}},\ 2000,\ 1,\ 0.2f,\ 0.2f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ Cables}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ cable\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415}{m\_cables}})\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ cable.render(batcher);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ Dragging\ Cable}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\_isDraggingCable}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}})\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ pos\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}}-\/>getBounds();}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(pos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ +\ 6,\ pos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ 6,\ 4,\ 4,\ 1.0f,\ 1.0f,\ 1.0f,\ 0.5f);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ module\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}})\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{module}-\/>render(batcher);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_acca5d578980d2463c579161ab6e52b29}{addTrack}}(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \doxymbox{\hyperlink{class_beam_1_1_audio_engine}{AudioEngine}}\&\ engine)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ graph\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}{m\_project}}-\/>getGraph();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ fluxTrack\ =\ std::make\_shared<FluxTrackNode>(\textcolor{stringliteral}{"{}Loaded\ Track"{}},\ 1024\ *\ 4);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fluxTrack-\/>load(filePath))\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ fluxTrack-\/>getInternalNode()-\/>setState(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ nodeId\ =\ graph-\/>addNode(fluxTrack);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Auto-\/connect\ to\ Master\ for\ now\ (Master\ is\ node\ 0\ in\ this\ simplified\ update)}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ graph-\/>connect(nodeId,\ 0,\ 0,\ 0);\ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ reel\ =\ std::make\_shared<TapeReel>(fluxTrack,\ x,\ y);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ reel-\/>getInputPort()-\/>onConnectStarted\ =\ [\textcolor{keyword}{this}](\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ p)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461}{startCableDrag}}(p);\ \};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ reel-\/>getOutputPort()-\/>onConnectStarted\ =\ [\textcolor{keyword}{this}](\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ p)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461}{startCableDrag}}(p);\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}}.push\_back(reel);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a02d36df76f94244013d15221d195f5a2}{addFX}}(\textcolor{keyword}{const}\ std::string\&\ type,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ graph\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}{m\_project}}-\/>getGraph();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ std::shared\_ptr<FluxNode>\ fxNode;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}Gain"{}})\ fxNode\ =\ std::make\_shared<FluxGainNode>(1024\ *\ 4);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}Filter"{}})\ fxNode\ =\ std::make\_shared<FluxFilterNode>(1024\ *\ 4,\ 44100.0f);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}Delay"{}})\ fxNode\ =\ std::make\_shared<FluxDelayNode>(1024\ *\ 4,\ 44100.0f);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (type\ ==\ \textcolor{stringliteral}{"{}Custom"{}})\ fxNode\ =\ std::make\_shared<CustomFilter>(1024\ *\ 4,\ 44100.0f);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fxNode)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ graph-\/>addNode(fxNode);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ mod\ =\ std::make\_shared<AudioModule>(fxNode,\ x,\ y);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}}.push\_back(mod);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461}{startCableDrag}}(\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ p)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\_isDraggingCable}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}}\ =\ p;}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c}{connectPorts}}(\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ p1,\ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ p2)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!p1\ ||\ !p2\ ||\ p1-\/>\doxymbox{\hyperlink{class_beam_1_1_port_a275b6f61ad0282299769b94e98c70e95}{getType}}()\ ==\ p2-\/>\doxymbox{\hyperlink{class_beam_1_1_port_a275b6f61ad0282299769b94e98c70e95}{getType}}())\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ out\ =\ (p1-\/>\doxymbox{\hyperlink{class_beam_1_1_port_a275b6f61ad0282299769b94e98c70e95}{getType}}()\ ==\ \doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a29c2c02a361c9d7028472e5d92cd4a54}{PortType::Output}})\ ?\ p1\ :\ p2;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ in\ =\ (p1-\/>\doxymbox{\hyperlink{class_beam_1_1_port_a275b6f61ad0282299769b94e98c70e95}{getType}}()\ ==\ \doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a324118a6721dd6b8a9b9f4e327df2bf5}{PortType::Input}})\ ?\ p1\ :\ p2;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415}{m\_cables}}.push\_back(\{out,\ in\});}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2d287ac679c39e3bb74a6806c627c610}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ it\ =\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}}.rbegin();\ it\ !=\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}}.rend();\ ++it)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((*it)-\/>getBounds().contains(x,\ y))\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (*it)-\/>onMouseDown(x,\ y,\ button);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (button\ ==\ 2)\ \{\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}{m\_isPanning}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}{m\_lastMouseX}}\ =\ x;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}{m\_lastMouseY}}\ =\ y;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aa04ebe3cc67dbd9675a6a6eca5506547}{onMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\_isDraggingCable}})\ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mod\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}})\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ audioMod\ =\ std::dynamic\_pointer\_cast<AudioModule>(mod);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (audioMod)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (audioMod-\/>getInputPort()-\/>getBounds().contains(x,\ y))\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c}{connectPorts}}(\doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}},\ audioMod-\/>getInputPort().get());}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (audioMod-\/>getOutputPort()-\/>getBounds().contains(x,\ y))\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c}{connectPorts}}(\doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}},\ audioMod-\/>getOutputPort().get());}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\_isDraggingCable}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}{m\_isPanning}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mod\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}})\ mod-\/>onMouseUp(x,\ y,\ button);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_ae030281b49f7c11a28517b4deaf69b99}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}{m\_isPanning}})\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\_panX}}\ +=\ (x\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}{m\_lastMouseX}});}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\_panY}}\ +=\ (y\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}{m\_lastMouseY}});}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}{m\_lastMouseX}}\ =\ x;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}{m\_lastMouseY}}\ =\ y;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mod\ :\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}})\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mod-\/>onMouseMove(x,\ y))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00171\ \ \ \ \ std::shared\_ptr<FluxProject>\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}{m\_project}};}
+\DoxyCodeLine{00172\ \ \ \ \ std::vector<std::shared\_ptr<Component>>\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\_modules}};}
+\DoxyCodeLine{00173\ \ \ \ \ std::vector<Cable>\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415}{m\_cables}};}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\_panX}}\ =\ 0,\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\_panY}}\ =\ 0;}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}{m\_isPanning}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}{m\_lastMouseX}}\ =\ 0,\ \doxymbox{\hyperlink{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}{m\_lastMouseY}}\ =\ 0;}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\_isDraggingCable}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00178\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\_activePort}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00179\ \};}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WORKSPACE\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,63 @@
+\doxysection{beam\+\_\+host.\+hpp}
+\hypertarget{beam__host_8hpp_source}{}\label{beam__host_8hpp_source}\index{src/core/beam\_host.hpp@{src/core/beam\_host.hpp}}
+\doxymbox{\hyperlink{beam__host_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BEAM\_HOST\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BEAM\_HOST\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__engine_8hpp}{../dsp/audio\_engine.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{quad__batcher_8hpp}{../graphics/quad\_batcher.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{shader_8hpp}{../graphics/shader.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{input__handler_8hpp}{../ui/input\_handler.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__project_8hpp}{flux\_project.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}}\ \{\ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88a79cf326cd40869983c7c685989e6dde6}{Splicing}},\ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88a1c30b35b12895df175ccd44dbb6f5ace}{Flux}}\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_beam_host_a144a92978b5e61326146a3a8f29d761e}{BeamHost}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a144a92978b5e61326146a3a8f29d761e}{BeamHost}}(\textcolor{keyword}{const}\ std::string\&\ title,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a69049b6b6862a23f94223d4f596ee594}{\string~BeamHost}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a624244ab7bcf572b1b931aa41608b168}{init}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a10355c107fb7450b2a0640232bbeb81e}{run}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_affc3b3fb2b16eaea708a8b07a1438c2a}{stop}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_aaeeaebd43fe7b6bdff057c5cf13e293c}{setMode}}(\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}}\ mode);}
+\DoxyCodeLine{00024\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_abe5013f58a2048c6f6d344ff5a04cf7c}{getMode}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a2aaeeb49d79e64d1b5bbe6844b67ee7a}{m\_mode}};\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a34046f705ed8e44849fa27838d64af16}{onFileSelected}}(\textcolor{keywordtype}{void}*\ userdata,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}*\ filelist,\ \textcolor{keywordtype}{int}\ filter);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_ab14ad5484149d76f707b81af188eede5}{handleEvents}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a4c1ebd2058246d175889db7de8513a8b}{update}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_ad50fda584536cc7aef0cdc27a1170e38}{render}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_af7bba52e0b33db552233c3197a8b39c7}{performLayout}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a96e1bd8f9a31b93da7ad3401b1dc778f}{m\_title}};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8588100db6dadbf9f3d3bb5faff93a61}{m\_width}};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8a402533c41936ec6b0554a03716fd1a}{m\_height}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_ac7abda34255ce3126887a0fe44df7a65}{m\_isRunning}};}
+\DoxyCodeLine{00038\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}}\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a2aaeeb49d79e64d1b5bbe6844b67ee7a}{m\_mode}}\ =\ \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88a1c30b35b12895df175ccd44dbb6f5ace}{DAWMode::Flux}};}
+\DoxyCodeLine{00039\ \ \ \ \ SDL\_Window*\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_afea4f3dffefd6d2e09e30d3e0744d82e}{m\_window}};}
+\DoxyCodeLine{00040\ \ \ \ \ SDL\_GLContext\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a25a31d24eb87a8254522491ad671b1d4}{m\_glContext}};}
+\DoxyCodeLine{00041\ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ std::shared\_ptr<FluxProject>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8c40df6cc8ed1c3fa6e3751526dea8d5}{m\_project}};}
+\DoxyCodeLine{00043\ \ \ \ \ std::unique\_ptr<AudioEngine>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_aefb093db282894cda12f36206a7ded34}{m\_audioEngine}};}
+\DoxyCodeLine{00044\ \ \ \ \ std::unique\_ptr<QuadBatcher>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a5a7952cd0cecc2865975a796ba2a5523}{m\_batcher}};}
+\DoxyCodeLine{00045\ \ \ \ \ std::unique\_ptr<Shader>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_aeed02c8e1d960b2b0dbdee48c62c671a}{m\_uiShader}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::unique\_ptr<InputHandler>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a5bd4a6f62b57908f5607e0fe7ef8166d}{m\_uiHandler}};}
+\DoxyCodeLine{00047\ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ std::shared\_ptr<class\ Workspace>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_acb133910e5fa3a9f78e4b9f13625d0c9}{m\_workspace}};}
+\DoxyCodeLine{00049\ \ \ \ \ std::shared\_ptr<class\ Timeline>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_ad49d80c9ee8b743f20073756f1805ec3}{m\_timeline}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::shared\_ptr<class\ TopBar>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a9d7779bbadd94af671a40877e0118b8b}{m\_topBar}};}
+\DoxyCodeLine{00051\ \ \ \ \ std::shared\_ptr<class\ Sidebar>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a29b3d9b64a195b17b3bb4d854e2854e8}{m\_browser}};}
+\DoxyCodeLine{00052\ \ \ \ \ std::shared\_ptr<class\ MasterStrip>\ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a4c6405471172009a7ee7509e93152ff8}{m\_masterStrip}};}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BEAM\_HOST\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,271 @@
+\doxysection{Beam::\+Beam\+Host Class Reference}
+\hypertarget{class_beam_1_1_beam_host}{}\label{class_beam_1_1_beam_host}\index{Beam::BeamHost@{Beam::BeamHost}}
+
+
+{\ttfamily \+\#include $<$beam\+\_\+host.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_beam_host_a144a92978b5e61326146a3a8f29d761e}{Beam\+Host}} (const std::\+string \&title, int width, int height)
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_beam_host_a69049b6b6862a23f94223d4f596ee594}{\texorpdfstring{$\sim$}{\string~}\+Beam\+Host}} ()
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_beam_host_a624244ab7bcf572b1b931aa41608b168}{init}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_a10355c107fb7450b2a0640232bbeb81e}{run}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_affc3b3fb2b16eaea708a8b07a1438c2a}{stop}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_aaeeaebd43fe7b6bdff057c5cf13e293c}{set\+Mode}} (\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}} mode)
+\item 
+\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}} \doxymbox{\hyperlink{class_beam_1_1_beam_host_abe5013f58a2048c6f6d344ff5a04cf7c}{get\+Mode}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{class_beam_1_1_beam_host_a34046f705ed8e44849fa27838d64af16}{on\+File\+Selected}} (void \texorpdfstring{$\ast$}{*}userdata, const char \texorpdfstring{$\ast$}{*}const \texorpdfstring{$\ast$}{*}filelist, int filter)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_ab14ad5484149d76f707b81af188eede5}{handle\+Events}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_a4c1ebd2058246d175889db7de8513a8b}{update}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_ad50fda584536cc7aef0cdc27a1170e38}{render}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_beam_host_af7bba52e0b33db552233c3197a8b39c7}{perform\+Layout}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_beam_host_a96e1bd8f9a31b93da7ad3401b1dc778f}{m\+\_\+title}}
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8588100db6dadbf9f3d3bb5faff93a61}{m\+\_\+width}}
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8a402533c41936ec6b0554a03716fd1a}{m\+\_\+height}}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_beam_host_ac7abda34255ce3126887a0fe44df7a65}{m\+\_\+is\+Running}}
+\item 
+\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}} \doxymbox{\hyperlink{class_beam_1_1_beam_host_a2aaeeb49d79e64d1b5bbe6844b67ee7a}{m\+\_\+mode}} = \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88a1c30b35b12895df175ccd44dbb6f5ace}{DAWMode::\+\+Flux}}
+\item 
+SDL\+\_\+\+Window \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_beam_host_afea4f3dffefd6d2e09e30d3e0744d82e}{m\+\_\+window}}
+\item 
+SDL\+\_\+\+GLContext \doxymbox{\hyperlink{class_beam_1_1_beam_host_a25a31d24eb87a8254522491ad671b1d4}{m\+\_\+gl\+Context}}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a8c40df6cc8ed1c3fa6e3751526dea8d5}{m\+\_\+project}}
+\item 
+std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_aefb093db282894cda12f36206a7ded34}{m\+\_\+audio\+Engine}}
+\item 
+std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a5a7952cd0cecc2865975a796ba2a5523}{m\+\_\+batcher}}
+\item 
+std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_aeed02c8e1d960b2b0dbdee48c62c671a}{m\+\_\+ui\+Shader}}
+\item 
+std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_input_handler}{Input\+Handler}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a5bd4a6f62b57908f5607e0fe7ef8166d}{m\+\_\+ui\+Handler}}
+\item 
+std::\+shared\+\_\+ptr$<$ class \doxymbox{\hyperlink{class_beam_1_1_workspace}{Workspace}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_acb133910e5fa3a9f78e4b9f13625d0c9}{m\+\_\+workspace}}
+\item 
+std::\+shared\+\_\+ptr$<$ class \doxymbox{\hyperlink{class_beam_1_1_timeline}{Timeline}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_ad49d80c9ee8b743f20073756f1805ec3}{m\+\_\+timeline}}
+\item 
+std::\+shared\+\_\+ptr$<$ class \doxymbox{\hyperlink{class_beam_1_1_top_bar}{Top\+Bar}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a9d7779bbadd94af671a40877e0118b8b}{m\+\_\+top\+Bar}}
+\item 
+std::\+shared\+\_\+ptr$<$ class \doxymbox{\hyperlink{class_beam_1_1_sidebar}{Sidebar}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a29b3d9b64a195b17b3bb4d854e2854e8}{m\+\_\+browser}}
+\item 
+std::\+shared\+\_\+ptr$<$ class \doxymbox{\hyperlink{class_beam_1_1_master_strip}{Master\+Strip}} $>$ \doxymbox{\hyperlink{class_beam_1_1_beam_host_a4c6405471172009a7ee7509e93152ff8}{m\+\_\+master\+Strip}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_beam_host_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_beam_host_a144a92978b5e61326146a3a8f29d761e}\index{Beam::BeamHost@{Beam::BeamHost}!BeamHost@{BeamHost}}
+\index{BeamHost@{BeamHost}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{BeamHost()}{BeamHost()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a144a92978b5e61326146a3a8f29d761e} 
+Beam::\+\+Beam\+Host::\+\+Beam\+Host (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{title}{, }\item[{int}]{width}{, }\item[{int}]{height}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_beam_host_a69049b6b6862a23f94223d4f596ee594}\index{Beam::BeamHost@{Beam::BeamHost}!````~BeamHost@{\texorpdfstring{$\sim$}{\string~}BeamHost}}
+\index{````~BeamHost@{\texorpdfstring{$\sim$}{\string~}BeamHost}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BeamHost()}{\string~BeamHost()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a69049b6b6862a23f94223d4f596ee594} 
+Beam::\+\+Beam\+Host::\+\texorpdfstring{$\sim$}{\string~}\+Beam\+Host (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_beam_host_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_beam_host_abe5013f58a2048c6f6d344ff5a04cf7c}\index{Beam::BeamHost@{Beam::BeamHost}!getMode@{getMode}}
+\index{getMode@{getMode}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{getMode()}{getMode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_abe5013f58a2048c6f6d344ff5a04cf7c} 
+\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}} Beam::\+\+Beam\+Host::\+get\+Mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_beam_host_ab14ad5484149d76f707b81af188eede5}\index{Beam::BeamHost@{Beam::BeamHost}!handleEvents@{handleEvents}}
+\index{handleEvents@{handleEvents}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{handleEvents()}{handleEvents()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_ab14ad5484149d76f707b81af188eede5} 
+void Beam::\+\+Beam\+Host::\+handle\+Events (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a624244ab7bcf572b1b931aa41608b168}\index{Beam::BeamHost@{Beam::BeamHost}!init@{init}}
+\index{init@{init}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a624244ab7bcf572b1b931aa41608b168} 
+bool Beam::\+\+Beam\+Host::\+init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_beam_host_a34046f705ed8e44849fa27838d64af16}\index{Beam::BeamHost@{Beam::BeamHost}!onFileSelected@{onFileSelected}}
+\index{onFileSelected@{onFileSelected}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{onFileSelected()}{onFileSelected()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a34046f705ed8e44849fa27838d64af16} 
+void Beam::\+\+Beam\+Host::\+on\+File\+Selected (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{userdata}{, }\item[{const char \texorpdfstring{$\ast$}{*}const \texorpdfstring{$\ast$}{*}}]{filelist}{, }\item[{int}]{filter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_beam_1_1_beam_host_af7bba52e0b33db552233c3197a8b39c7}\index{Beam::BeamHost@{Beam::BeamHost}!performLayout@{performLayout}}
+\index{performLayout@{performLayout}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{performLayout()}{performLayout()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_af7bba52e0b33db552233c3197a8b39c7} 
+void Beam::\+\+Beam\+Host::\+perform\+Layout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_ad50fda584536cc7aef0cdc27a1170e38}\index{Beam::BeamHost@{Beam::BeamHost}!render@{render}}
+\index{render@{render}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_ad50fda584536cc7aef0cdc27a1170e38} 
+void Beam::\+\+Beam\+Host::\+render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a10355c107fb7450b2a0640232bbeb81e}\index{Beam::BeamHost@{Beam::BeamHost}!run@{run}}
+\index{run@{run}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a10355c107fb7450b2a0640232bbeb81e} 
+void Beam::\+\+Beam\+Host::\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_beam_host_aaeeaebd43fe7b6bdff057c5cf13e293c}\index{Beam::BeamHost@{Beam::BeamHost}!setMode@{setMode}}
+\index{setMode@{setMode}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{setMode()}{setMode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_aaeeaebd43fe7b6bdff057c5cf13e293c} 
+void Beam::\+\+Beam\+Host::\+set\+Mode (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}}}]{mode}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_beam_host_affc3b3fb2b16eaea708a8b07a1438c2a}\index{Beam::BeamHost@{Beam::BeamHost}!stop@{stop}}
+\index{stop@{stop}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_affc3b3fb2b16eaea708a8b07a1438c2a} 
+void Beam::\+\+Beam\+Host::\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_beam_host_a4c1ebd2058246d175889db7de8513a8b}\index{Beam::BeamHost@{Beam::BeamHost}!update@{update}}
+\index{update@{update}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a4c1ebd2058246d175889db7de8513a8b} 
+void Beam::\+\+Beam\+Host::\+update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_beam_host_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_beam_host_aefb093db282894cda12f36206a7ded34}\index{Beam::BeamHost@{Beam::BeamHost}!m\_audioEngine@{m\_audioEngine}}
+\index{m\_audioEngine@{m\_audioEngine}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_audioEngine}{m\_audioEngine}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_aefb093db282894cda12f36206a7ded34} 
+std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+audio\+Engine\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a5a7952cd0cecc2865975a796ba2a5523}\index{Beam::BeamHost@{Beam::BeamHost}!m\_batcher@{m\_batcher}}
+\index{m\_batcher@{m\_batcher}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_batcher}{m\_batcher}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a5a7952cd0cecc2865975a796ba2a5523} 
+std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+batcher\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a29b3d9b64a195b17b3bb4d854e2854e8}\index{Beam::BeamHost@{Beam::BeamHost}!m\_browser@{m\_browser}}
+\index{m\_browser@{m\_browser}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_browser}{m\_browser}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a29b3d9b64a195b17b3bb4d854e2854e8} 
+std::\+shared\+\_\+ptr$<$class \doxymbox{\hyperlink{class_beam_1_1_sidebar}{Sidebar}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+browser\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a25a31d24eb87a8254522491ad671b1d4}\index{Beam::BeamHost@{Beam::BeamHost}!m\_glContext@{m\_glContext}}
+\index{m\_glContext@{m\_glContext}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_glContext}{m\_glContext}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a25a31d24eb87a8254522491ad671b1d4} 
+SDL\+\_\+\+GLContext Beam::\+\+Beam\+Host::\+m\+\_\+gl\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a8a402533c41936ec6b0554a03716fd1a}\index{Beam::BeamHost@{Beam::BeamHost}!m\_height@{m\_height}}
+\index{m\_height@{m\_height}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_height}{m\_height}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a8a402533c41936ec6b0554a03716fd1a} 
+int Beam::\+\+Beam\+Host::\+m\+\_\+height\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_ac7abda34255ce3126887a0fe44df7a65}\index{Beam::BeamHost@{Beam::BeamHost}!m\_isRunning@{m\_isRunning}}
+\index{m\_isRunning@{m\_isRunning}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_isRunning}{m\_isRunning}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_ac7abda34255ce3126887a0fe44df7a65} 
+bool Beam::\+\+Beam\+Host::\+m\+\_\+is\+Running\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a4c6405471172009a7ee7509e93152ff8}\index{Beam::BeamHost@{Beam::BeamHost}!m\_masterStrip@{m\_masterStrip}}
+\index{m\_masterStrip@{m\_masterStrip}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_masterStrip}{m\_masterStrip}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a4c6405471172009a7ee7509e93152ff8} 
+std::\+shared\+\_\+ptr$<$class \doxymbox{\hyperlink{class_beam_1_1_master_strip}{Master\+Strip}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+master\+Strip\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a2aaeeb49d79e64d1b5bbe6844b67ee7a}\index{Beam::BeamHost@{Beam::BeamHost}!m\_mode@{m\_mode}}
+\index{m\_mode@{m\_mode}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_mode}{m\_mode}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a2aaeeb49d79e64d1b5bbe6844b67ee7a} 
+\doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88}{DAWMode}} Beam::\+\+Beam\+Host::\+m\+\_\+mode = \doxymbox{\hyperlink{namespace_beam_a857abf9a9358b461e5e0b3a25b0c3d88a1c30b35b12895df175ccd44dbb6f5ace}{DAWMode::\+\+Flux}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a8c40df6cc8ed1c3fa6e3751526dea8d5}\index{Beam::BeamHost@{Beam::BeamHost}!m\_project@{m\_project}}
+\index{m\_project@{m\_project}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_project}{m\_project}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a8c40df6cc8ed1c3fa6e3751526dea8d5} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+project\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_ad49d80c9ee8b743f20073756f1805ec3}\index{Beam::BeamHost@{Beam::BeamHost}!m\_timeline@{m\_timeline}}
+\index{m\_timeline@{m\_timeline}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_timeline}{m\_timeline}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_ad49d80c9ee8b743f20073756f1805ec3} 
+std::\+shared\+\_\+ptr$<$class \doxymbox{\hyperlink{class_beam_1_1_timeline}{Timeline}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+timeline\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a96e1bd8f9a31b93da7ad3401b1dc778f}\index{Beam::BeamHost@{Beam::BeamHost}!m\_title@{m\_title}}
+\index{m\_title@{m\_title}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_title}{m\_title}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a96e1bd8f9a31b93da7ad3401b1dc778f} 
+std::\+string Beam::\+\+Beam\+Host::\+m\+\_\+title\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a9d7779bbadd94af671a40877e0118b8b}\index{Beam::BeamHost@{Beam::BeamHost}!m\_topBar@{m\_topBar}}
+\index{m\_topBar@{m\_topBar}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_topBar}{m\_topBar}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a9d7779bbadd94af671a40877e0118b8b} 
+std::\+shared\+\_\+ptr$<$class \doxymbox{\hyperlink{class_beam_1_1_top_bar}{Top\+Bar}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+top\+Bar\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a5bd4a6f62b57908f5607e0fe7ef8166d}\index{Beam::BeamHost@{Beam::BeamHost}!m\_uiHandler@{m\_uiHandler}}
+\index{m\_uiHandler@{m\_uiHandler}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_uiHandler}{m\_uiHandler}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a5bd4a6f62b57908f5607e0fe7ef8166d} 
+std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_input_handler}{Input\+Handler}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+ui\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_aeed02c8e1d960b2b0dbdee48c62c671a}\index{Beam::BeamHost@{Beam::BeamHost}!m\_uiShader@{m\_uiShader}}
+\index{m\_uiShader@{m\_uiShader}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_uiShader}{m\_uiShader}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_aeed02c8e1d960b2b0dbdee48c62c671a} 
+std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+ui\+Shader\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_a8588100db6dadbf9f3d3bb5faff93a61}\index{Beam::BeamHost@{Beam::BeamHost}!m\_width@{m\_width}}
+\index{m\_width@{m\_width}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_width}{m\_width}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_a8588100db6dadbf9f3d3bb5faff93a61} 
+int Beam::\+\+Beam\+Host::\+m\+\_\+width\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_afea4f3dffefd6d2e09e30d3e0744d82e}\index{Beam::BeamHost@{Beam::BeamHost}!m\_window@{m\_window}}
+\index{m\_window@{m\_window}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_window}{m\_window}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_afea4f3dffefd6d2e09e30d3e0744d82e} 
+SDL\+\_\+\+Window\texorpdfstring{$\ast$}{*} Beam::\+\+Beam\+Host::\+m\+\_\+window\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_beam_host_acb133910e5fa3a9f78e4b9f13625d0c9}\index{Beam::BeamHost@{Beam::BeamHost}!m\_workspace@{m\_workspace}}
+\index{m\_workspace@{m\_workspace}!Beam::BeamHost@{Beam::BeamHost}}
+\doxysubsubsection{\texorpdfstring{m\_workspace}{m\_workspace}}
+{\footnotesize\ttfamily \label{class_beam_1_1_beam_host_acb133910e5fa3a9f78e4b9f13625d0c9} 
+std::\+shared\+\_\+ptr$<$class \doxymbox{\hyperlink{class_beam_1_1_workspace}{Workspace}}$>$ Beam::\+\+Beam\+Host::\+m\+\_\+workspace\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+core/\+\doxymbox{\hyperlink{beam__host_8hpp}{beam\+\_\+host.\+hpp}}\item 
+src/\+core/\+\doxymbox{\hyperlink{beam__host_8cpp}{beam\+\_\+host.\+cpp}}\end{DoxyCompactItemize}

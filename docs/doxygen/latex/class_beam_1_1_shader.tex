@@ -1,0 +1,100 @@
+\doxysection{Beam::\+Shader Class Reference}
+\hypertarget{class_beam_1_1_shader}{}\label{class_beam_1_1_shader}\index{Beam::Shader@{Beam::Shader}}
+
+
+{\ttfamily \+\#include $<$shader.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_shader_acbabc393a8a2ae8eafaa62bcbc354af3}{Shader}} (const char \texorpdfstring{$\ast$}{*}vertex\+Source, const char \texorpdfstring{$\ast$}{*}fragment\+Source)
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_shader_aeacb90a56be515de05b7733e7a123735}{\texorpdfstring{$\sim$}{\string~}\+Shader}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_shader_ace7ec7da00788442736ffc592f3acb49}{use}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_shader_ac32398d37191130501c1c2c4892bc98c}{set\+Int}} (const std::\+string \&name, int value) const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_shader_a9f35b32e3dd725dc6d2048586fe6f78a}{set\+Float}} (const std::\+string \&name, float value) const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_shader_aebd0a7cd99c1aadff3e1c4b43cec8c15}{set\+Mat4}} (const std::\+string \&name, const float \texorpdfstring{$\ast$}{*}matrix) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_shader_a79baeb63a856ed225042a9cced169b96}{check\+Compile\+Errors}} (unsigned int shader, std::\+string type)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \doxymbox{\hyperlink{class_beam_1_1_shader_a98fd87c26ac672d65aa674b9bfbc9c5f}{m\+\_\+id}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_shader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_shader_acbabc393a8a2ae8eafaa62bcbc354af3}\index{Beam::Shader@{Beam::Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{Shader()}{Shader()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_acbabc393a8a2ae8eafaa62bcbc354af3} 
+Beam::\+\+Shader::\+\+Shader (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{vertex\+Source}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{fragment\+Source}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_shader_aeacb90a56be515de05b7733e7a123735}\index{Beam::Shader@{Beam::Shader}!````~Shader@{\texorpdfstring{$\sim$}{\string~}Shader}}
+\index{````~Shader@{\texorpdfstring{$\sim$}{\string~}Shader}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Shader()}{\string~Shader()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_aeacb90a56be515de05b7733e7a123735} 
+Beam::\+\+Shader::\+\texorpdfstring{$\sim$}{\string~}\+Shader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_shader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_shader_a79baeb63a856ed225042a9cced169b96}\index{Beam::Shader@{Beam::Shader}!checkCompileErrors@{checkCompileErrors}}
+\index{checkCompileErrors@{checkCompileErrors}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{checkCompileErrors()}{checkCompileErrors()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_a79baeb63a856ed225042a9cced169b96} 
+void Beam::\+\+Shader::\+check\+Compile\+Errors (\begin{DoxyParamCaption}\item[{unsigned int}]{shader}{, }\item[{std::\+string}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_shader_a9f35b32e3dd725dc6d2048586fe6f78a}\index{Beam::Shader@{Beam::Shader}!setFloat@{setFloat}}
+\index{setFloat@{setFloat}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{setFloat()}{setFloat()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_a9f35b32e3dd725dc6d2048586fe6f78a} 
+void Beam::\+\+Shader::\+set\+Float (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{value}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_beam_1_1_shader_ac32398d37191130501c1c2c4892bc98c}\index{Beam::Shader@{Beam::Shader}!setInt@{setInt}}
+\index{setInt@{setInt}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{setInt()}{setInt()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_ac32398d37191130501c1c2c4892bc98c} 
+void Beam::\+\+Shader::\+set\+Int (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{value}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_beam_1_1_shader_aebd0a7cd99c1aadff3e1c4b43cec8c15}\index{Beam::Shader@{Beam::Shader}!setMat4@{setMat4}}
+\index{setMat4@{setMat4}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{setMat4()}{setMat4()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_aebd0a7cd99c1aadff3e1c4b43cec8c15} 
+void Beam::\+\+Shader::\+set\+Mat4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{const float \texorpdfstring{$\ast$}{*}}]{matrix}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_beam_1_1_shader_ace7ec7da00788442736ffc592f3acb49}\index{Beam::Shader@{Beam::Shader}!use@{use}}
+\index{use@{use}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_ace7ec7da00788442736ffc592f3acb49} 
+void Beam::\+\+Shader::\+use (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_shader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_shader_a98fd87c26ac672d65aa674b9bfbc9c5f}\index{Beam::Shader@{Beam::Shader}!m\_id@{m\_id}}
+\index{m\_id@{m\_id}!Beam::Shader@{Beam::Shader}}
+\doxysubsubsection{\texorpdfstring{m\_id}{m\_id}}
+{\footnotesize\ttfamily \label{class_beam_1_1_shader_a98fd87c26ac672d65aa674b9bfbc9c5f} 
+unsigned int Beam::\+\+Shader::\+m\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+graphics/\+\doxymbox{\hyperlink{shader_8hpp}{shader.\+hpp}}\item 
+src/\+graphics/\+\doxymbox{\hyperlink{shader_8cpp}{shader.\+cpp}}\end{DoxyCompactItemize}

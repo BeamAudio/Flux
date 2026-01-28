@@ -1,0 +1,44 @@
+\doxysection{disk\+\_\+streamer.\+hpp}
+\hypertarget{disk__streamer_8hpp_source}{}\label{disk__streamer_8hpp_source}\index{src/dsp/disk\_streamer.hpp@{src/dsp/disk\_streamer.hpp}}
+\doxymbox{\hyperlink{disk__streamer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DISK\_STREAMER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DISK\_STREAMER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_wav_reader}{WavReader}};\ \textcolor{comment}{//\ Forward\ decl}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a93d68a5758f8220ce8c7da332493d6db}{DiskStreamer}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a93d68a5758f8220ce8c7da332493d6db}{DiskStreamer}}(\textcolor{keywordtype}{size\_t}\ bufferSize\ =\ 4096\ *\ 4);}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a93a8d7b377c73d317edac3a4d6f1b32b}{\string~DiskStreamer}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a71d0fbf4718a1e5aad5053ce758581e2}{open}}(\textcolor{keyword}{const}\ std::string\&\ filePath);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a122892dcfb53b85476db17ed3b5b1682}{close}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ To\ be\ called\ by\ Audio\ Thread}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_aafe6893c5cc132d4f09a298c6b833b0e}{read}}(\textcolor{keywordtype}{float}*\ output,\ \textcolor{keywordtype}{size\_t}\ frames,\ \textcolor{keywordtype}{int}\ channels);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a27a3c695476c10762819099d858aba0a}{seek}}(\textcolor{keywordtype}{size\_t}\ frame);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_aa0ee671fa3e819b9cf4a85a76a0e3af7}{streamLoop}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a5e2c3ec0da0e5b6559309cb10c23c2b6}{m\_filePath}};}
+\DoxyCodeLine{00031\ \ \ \ \ std::atomic<bool>\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a0449260006d5de515f80bbf5fef28354}{m\_keepStreaming}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00032\ \ \ \ \ std::unique\_ptr<WavReader>\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_aaefa6abf914cceb4efe0859a4ea462c2}{m\_reader}};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer_a2bfdd24e98745a5b8cc74863d2c04d38}{m\_bufferSize}};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DISK\_STREAMER\_HPP}}
+
+\end{DoxyCode}

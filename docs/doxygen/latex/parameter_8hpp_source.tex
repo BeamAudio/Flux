@@ -1,0 +1,57 @@
+\doxysection{parameter.\+hpp}
+\hypertarget{parameter_8hpp_source}{}\label{parameter_8hpp_source}\index{src/core/parameter.hpp@{src/core/parameter.hpp}}
+\doxymbox{\hyperlink{parameter_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PARAMETER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PARAMETER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_parameter_a87627221006382b93ff04ebee9ff2f07}{Parameter}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_parameter_a87627221006382b93ff04ebee9ff2f07}{Parameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ min,\ \textcolor{keywordtype}{float}\ max,\ \textcolor{keywordtype}{float}\ initialValue)}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_parameter_aedf631d8dea7d9f52477112f1dc500d7}{m\_name}}(name),\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}}(min),\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}}(max),\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad54f0df2c3d8e655c2e3d164adc11c2e}{m\_value}}(initialValue)\ \{\}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_adda03f7957d39bc1be4af61d762bb29c}{getValue}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad54f0df2c3d8e655c2e3d164adc11c2e}{m\_value}}.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a7a2812018fe946fe8b3655351ce0a596}{setValue}}(\textcolor{keywordtype}{float}\ newValue)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ clamped\ =\ std::clamp(newValue,\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}});}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad54f0df2c3d8e655c2e3d164adc11c2e}{m\_value}}.store(clamped,\ std::memory\_order\_relaxed);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_parameter_a71877343120cac766e22a56c58171148}{onChanged}})\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_parameter_a71877343120cac766e22a56c58171148}{onChanged}}(clamped);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad090e7765271fbdafe4d56e687ab2f42}{getNormalizedValue}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\doxymbox{\hyperlink{class_beam_1_1_parameter_adda03f7957d39bc1be4af61d762bb29c}{getValue}}()\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}})\ /\ (\doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}});}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a85f9218e178dc71186ead961bc42a8ca}{setNormalizedValue}}(\textcolor{keywordtype}{float}\ norm)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_parameter_a7a2812018fe946fe8b3655351ce0a596}{setValue}}(\doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}}\ +\ norm\ *\ (\doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}}));}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a03eededba269a2e9bbf25d51e0d2f9ab}{getName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_aedf631d8dea7d9f52477112f1dc500d7}{m\_name}};\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a0f96da5bd70a75e70163d9caa56c67f2}{getMin}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}};\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_adb12778f9ec3ed858bfcf04a8dfe86b7}{getMax}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}};\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::function<void(\textcolor{keywordtype}{float})>\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a71877343120cac766e22a56c58171148}{onChanged}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_parameter_aedf631d8dea7d9f52477112f1dc500d7}{m\_name}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_a9214b7e40765ab530376cf972d3c554d}{m\_min}};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad03d943caa393bf44e8862ee7827a983}{m\_max}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::atomic<float>\ \doxymbox{\hyperlink{class_beam_1_1_parameter_ad54f0df2c3d8e655c2e3d164adc11c2e}{m\_value}};}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PARAMETER\_HPP}}
+
+\end{DoxyCode}

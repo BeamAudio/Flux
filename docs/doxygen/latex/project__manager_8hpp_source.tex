@@ -1,0 +1,37 @@
+\doxysection{project\+\_\+manager.\+hpp}
+\hypertarget{project__manager_8hpp_source}{}\label{project__manager_8hpp_source}\index{src/core/project\_manager.hpp@{src/core/project\_manager.hpp}}
+\doxymbox{\hyperlink{project__manager_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJECT\_MANAGER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJECT\_MANAGER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}json.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_project_manager}{ProjectManager}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_project_manager_ae52fa9c9c84c5f7219792acf4622ec59}{saveProject}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ nlohmann::json\&\ projectData)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::ofstream\ file(filename);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ file\ <<\ projectData.dump(4);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \doxymbox{\hyperlink{class_beam_1_1_project_manager_a18a6ab5b5e7f725aaed19ddc652b9206}{loadProject}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::ifstream\ file(filename);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \textcolor{keywordflow}{return}\ nlohmann::json();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ nlohmann::json\ data;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ file\ >>\ data;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PROJECT\_MANAGER\_HPP}}
+
+\end{DoxyCode}

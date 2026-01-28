@@ -1,0 +1,32 @@
+\doxysection{input\+\_\+handler.\+hpp}
+\hypertarget{input__handler_8hpp_source}{}\label{input__handler_8hpp_source}\index{src/ui/input\_handler.hpp@{src/ui/input\_handler.hpp}}
+\doxymbox{\hyperlink{input__handler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INPUT\_HANDLER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INPUT\_HANDLER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{component.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_input_handler}{InputHandler}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a1d3cb50866d2f151e5b9ddffdd1f0c01}{addComponent}}(std::shared\_ptr<Component>\ component);}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a89d5254f25fa9d103a8b1a05332d5a5f}{handleMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button);}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f02872e86}{handleMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_ab6ae366e86174358931c66a97f002f96}{handleMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a}{update}}(\textcolor{keywordtype}{float}\ dt);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ std::vector<std::shared\_ptr<Component>>\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a28f180063d61a104843c23ac24baadc3}{m\_components}};}
+\DoxyCodeLine{00021\ \ \ \ \ std::shared\_ptr<Component>\ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a78adda91495720c5f10106ce98cad1aa}{m\_focusedComponent}};}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INPUT\_HANDLER\_HPP}}
+
+\end{DoxyCode}

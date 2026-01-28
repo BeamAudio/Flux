@@ -1,0 +1,51 @@
+\doxysection{timeline.\+hpp}
+\hypertarget{timeline_8hpp_source}{}\label{timeline_8hpp_source}\index{src/ui/timeline.hpp@{src/ui/timeline.hpp}}
+\doxymbox{\hyperlink{timeline_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TIMELINE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WORKSPACE\_HPP\ }\textcolor{comment}{//\ Wait,\ guard\ should\ be\ unique}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ TIMELINE\_HPP}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{component.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}{Timeline}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}{Timeline}}()\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\_isVisible}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ Hidden\ by\ default\ (start\ in\ Flux\ mode)}}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\_isVisible}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ Timeline\ Background\ (Darker)}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 0.05f,\ 0.05f,\ 0.06f,\ 1.0f);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ horizontal\ lanes\ for\ tracks}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ trackHeight\ =\ 100.0f;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ (i\ *\ trackHeight);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Lane\ separator}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ y\ +\ trackHeight\ -\/\ 1,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ 1,\ 0.2f,\ 0.2f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Placeholder\ Waveform\ Clip}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 50,\ y\ +\ 10,\ 400,\ trackHeight\ -\/\ 20,\ 0.3f,\ 0.4f,\ 0.6f,\ 1.0f);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Playhead}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 200,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ 2,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 1.0f,\ 0.0f,\ 0.0f,\ 1.0f);}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4}{setVisible}}(\textcolor{keywordtype}{bool}\ visible)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\_isVisible}}\ =\ visible;\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\_isVisible}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TIMELINE\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,43 @@
+\doxysection{flux\+\_\+project.\+hpp}
+\hypertarget{flux__project_8hpp_source}{}\label{flux__project_8hpp_source}\index{src/core/flux\_project.hpp@{src/core/flux\_project.hpp}}
+\doxymbox{\hyperlink{flux__project_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FLUX\_PROJECT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FLUX\_PROJECT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__graph_8hpp}{../dsp/flux\_graph.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}json.hpp"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_flux_project_ab062e3ebed4944516b8e31d547d2241b}{FluxProject}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_project_ab062e3ebed4944516b8e31d547d2241b}{FluxProject}}()\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a24511ed71344a5e3028b204376aab334}{m\_graph}}\ =\ std::make\_shared<FluxGraph>();}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ std::shared\_ptr<FluxGraph>\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a0b32e6b040ba09486e7a5a5110866186}{getGraph}}()\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a24511ed71344a5e3028b204376aab334}{m\_graph}};\ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ nlohmann::json\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_af0a110ba7c7ce45506fb9e243b6784b5}{serialize}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ nlohmann::json\ data;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}name"{}}]\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a8ce6b8f232de62bb34f903f04acc8506}{m\_name}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialize\ graph,\ modules,\ etc.}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_aa4a811a39323d92c97654ccc34c09379}{deserialize}}(\textcolor{keyword}{const}\ nlohmann::json\&\ data)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.contains(\textcolor{stringliteral}{"{}name"{}}))\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a8ce6b8f232de62bb34f903f04acc8506}{m\_name}}\ =\ data[\textcolor{stringliteral}{"{}name"{}}];}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a8ce6b8f232de62bb34f903f04acc8506}{m\_name}}\ =\ \textcolor{stringliteral}{"{}Untitled\ Flux"{}};}
+\DoxyCodeLine{00032\ \ \ \ \ std::shared\_ptr<FluxGraph>\ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a24511ed71344a5e3028b204376aab334}{m\_graph}};}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FLUX\_PROJECT\_HPP}}
+
+\end{DoxyCode}

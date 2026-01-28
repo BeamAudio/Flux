@@ -1,0 +1,207 @@
+\doxysection{Beam::\+Audio\+Module Class Reference}
+\hypertarget{class_beam_1_1_audio_module}{}\label{class_beam_1_1_audio_module}\index{Beam::AudioModule@{Beam::AudioModule}}
+
+
+{\ttfamily \+\#include $<$audio\+\_\+module.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Audio\+Module:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_beam_1_1_audio_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{Audio\+Module}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ node, float x, float y)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{auto\+Generate\+UI}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{set\+Bounds}} (float x, float y, float w, float h) override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_module_ad135753a43c33ae78c1d60980e208868}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499}{on\+Mouse\+Down}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2}{on\+Mouse\+Move}} (float x, float y) override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}{add\+Child}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ child)
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0d0da8bdbfb3a2355994bba086e0e721}{get\+Input\+Port}} ()
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75e91aa2e7da1c9a6d31f4c90915403a}{get\+Output\+Port}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\texorpdfstring{$\sim$}{\string~}\+Component}} ()=default
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
+\item 
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{on\+Mouse\+Up}} (float x, float y, int button)
+\item 
+const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{set\+Draggable}} (bool draggable)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\+\_\+node}}
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\+\_\+name}}
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\+\_\+children}}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\+\_\+input\+Port}}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\+\_\+output\+Port}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\+\_\+bounds}} \{0, 0, 0, 0\}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\+\_\+is\+Visible}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a0bf77b204ae374a14b5a6d7e5a3c13c6}{m\+\_\+is\+Enabled}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\+\_\+is\+Draggable}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\+\_\+is\+Dragging}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\+\_\+last\+MouseY}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_audio_module_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}\index{Beam::AudioModule@{Beam::AudioModule}!AudioModule@{AudioModule}}
+\index{AudioModule@{AudioModule}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{AudioModule()}{AudioModule()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa} 
+Beam::\+\+Audio\+Module::\+\+Audio\+Module (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$}]{node}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_audio_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}\index{Beam::AudioModule@{Beam::AudioModule}!addChild@{addChild}}
+\index{addChild@{addChild}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{addChild()}{addChild()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925} 
+void Beam::\+\+Audio\+Module::\+add\+Child (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$}]{child}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}\index{Beam::AudioModule@{Beam::AudioModule}!autoGenerateUI@{autoGenerateUI}}
+\index{autoGenerateUI@{autoGenerateUI}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{autoGenerateUI()}{autoGenerateUI()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879} 
+void Beam::\+\+Audio\+Module::\+auto\+Generate\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_module_a0d0da8bdbfb3a2355994bba086e0e721}\index{Beam::AudioModule@{Beam::AudioModule}!getInputPort@{getInputPort}}
+\index{getInputPort@{getInputPort}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{getInputPort()}{getInputPort()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a0d0da8bdbfb3a2355994bba086e0e721} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ Beam::\+\+Audio\+Module::\+get\+Input\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_module_a75e91aa2e7da1c9a6d31f4c90915403a}\index{Beam::AudioModule@{Beam::AudioModule}!getOutputPort@{getOutputPort}}
+\index{getOutputPort@{getOutputPort}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{getOutputPort()}{getOutputPort()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a75e91aa2e7da1c9a6d31f4c90915403a} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ Beam::\+\+Audio\+Module::\+get\+Output\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499}\index{Beam::AudioModule@{Beam::AudioModule}!onMouseDown@{onMouseDown}}
+\index{onMouseDown@{onMouseDown}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{onMouseDown()}{onMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499} 
+bool Beam::\+\+Audio\+Module::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ad2fe7a4986075d4a3c6047f2e745460e}{Beam::\+\+Tape\+Reel}}.
+
+\Hypertarget{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2}\index{Beam::AudioModule@{Beam::AudioModule}!onMouseMove@{onMouseMove}}
+\index{onMouseMove@{onMouseMove}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{onMouseMove()}{onMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2} 
+bool Beam::\+\+Audio\+Module::\+on\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_audio_module_ad135753a43c33ae78c1d60980e208868}\index{Beam::AudioModule@{Beam::AudioModule}!render@{render}}
+\index{render@{render}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_ad135753a43c33ae78c1d60980e208868} 
+void Beam::\+\+Audio\+Module::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_beam_1_1_tape_reel_aec8dbeac4cb29052b8c9306a3cc408e0}{Beam::\+\+Tape\+Reel}}.
+
+\Hypertarget{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}\index{Beam::AudioModule@{Beam::AudioModule}!setBounds@{setBounds}}
+\index{setBounds@{setBounds}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{setBounds()}{setBounds()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135} 
+void Beam::\+\+Audio\+Module::\+set\+Bounds (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{w}{, }\item[{float}]{h}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{Beam::\+\+Component}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_audio_module_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}\index{Beam::AudioModule@{Beam::AudioModule}!m\_children@{m\_children}}
+\index{m\_children@{m\_children}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{m\_children}{m\_children}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560} 
+std::\+vector$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_component}{Component}}$>$ $>$ Beam::\+\+Audio\+Module::\+m\+\_\+children\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}\index{Beam::AudioModule@{Beam::AudioModule}!m\_inputPort@{m\_inputPort}}
+\index{m\_inputPort@{m\_inputPort}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{m\_inputPort}{m\_inputPort}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}$>$ Beam::\+\+Audio\+Module::\+m\+\_\+input\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}\index{Beam::AudioModule@{Beam::AudioModule}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6} 
+std::\+string Beam::\+\+Audio\+Module::\+m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}\index{Beam::AudioModule@{Beam::AudioModule}!m\_node@{m\_node}}
+\index{m\_node@{m\_node}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{m\_node}{m\_node}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}}$>$ Beam::\+\+Audio\+Module::\+m\+\_\+node\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}\index{Beam::AudioModule@{Beam::AudioModule}!m\_outputPort@{m\_outputPort}}
+\index{m\_outputPort@{m\_outputPort}!Beam::AudioModule@{Beam::AudioModule}}
+\doxysubsubsection{\texorpdfstring{m\_outputPort}{m\_outputPort}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}$>$ Beam::\+\+Audio\+Module::\+m\+\_\+output\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+ui/\+\doxymbox{\hyperlink{audio__module_8hpp}{audio\+\_\+module.\+hpp}}\end{DoxyCompactItemize}

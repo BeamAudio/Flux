@@ -1,0 +1,218 @@
+\doxysection{Beam::\+Knob Class Reference}
+\hypertarget{class_beam_1_1_knob}{}\label{class_beam_1_1_knob}\index{Beam::Knob@{Beam::Knob}}
+
+
+{\ttfamily \+\#include $<$knob.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Knob:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_knob}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}{Knob}} (const std::\+string \&label, float min\+Val, float max\+Val, float initial\+Val)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_knob_af53ea4ce8f7892c67225eb37955149d1}{bind\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ param)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_knob_a67bf95ba1b02ad84e9a080530aa2e090}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_knob_a85b8ee99461b9e8c1a86c5f2d9eba4e2}{on\+Mouse\+Down}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_knob_a266e448c4403e85f68a581fb81922fdd}{on\+Mouse\+Up}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_knob_a6e918f86ad28e14eb470e00938d1b212}{on\+Mouse\+Move}} (float x, float y) override
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_knob_a9f4c4eb1be070db3e89e3c3c7f6eba94}{get\+Value}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_knob_abd452cb9e12d4ade468f1f989c7cb173}{set\+Value}} (float v)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\texorpdfstring{$\sim$}{\string~}\+Component}} ()=default
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{set\+Bounds}} (float x, float y, float w, float h)
+\item 
+const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{set\+Draggable}} (bool draggable)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+function$<$ void(float)$>$ \doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{on\+Value\+Changed}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\+\_\+label}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\+\_\+min}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\+\_\+max}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\+\_\+value}}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\+\_\+is\+Dragging}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\+\_\+lastY}} = 0
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\+\_\+parameter}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\+\_\+bounds}} \{0, 0, 0, 0\}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\+\_\+is\+Visible}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a0bf77b204ae374a14b5a6d7e5a3c13c6}{m\+\_\+is\+Enabled}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\+\_\+is\+Draggable}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\+\_\+is\+Dragging}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\+\_\+last\+MouseY}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_knob_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}\index{Beam::Knob@{Beam::Knob}!Knob@{Knob}}
+\index{Knob@{Knob}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{Knob()}{Knob()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512} 
+Beam::\+\+Knob::\+\+Knob (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{label}{, }\item[{float}]{min\+Val}{, }\item[{float}]{max\+Val}{, }\item[{float}]{initial\+Val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_knob_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_knob_af53ea4ce8f7892c67225eb37955149d1}\index{Beam::Knob@{Beam::Knob}!bindParameter@{bindParameter}}
+\index{bindParameter@{bindParameter}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{bindParameter()}{bindParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_af53ea4ce8f7892c67225eb37955149d1} 
+void Beam::\+\+Knob::\+bind\+Parameter (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$}]{param}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_knob_a9f4c4eb1be070db3e89e3c3c7f6eba94}\index{Beam::Knob@{Beam::Knob}!getValue@{getValue}}
+\index{getValue@{getValue}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a9f4c4eb1be070db3e89e3c3c7f6eba94} 
+float Beam::\+\+Knob::\+get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_knob_a85b8ee99461b9e8c1a86c5f2d9eba4e2}\index{Beam::Knob@{Beam::Knob}!onMouseDown@{onMouseDown}}
+\index{onMouseDown@{onMouseDown}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{onMouseDown()}{onMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a85b8ee99461b9e8c1a86c5f2d9eba4e2} 
+bool Beam::\+\+Knob::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_knob_a6e918f86ad28e14eb470e00938d1b212}\index{Beam::Knob@{Beam::Knob}!onMouseMove@{onMouseMove}}
+\index{onMouseMove@{onMouseMove}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{onMouseMove()}{onMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a6e918f86ad28e14eb470e00938d1b212} 
+bool Beam::\+\+Knob::\+on\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_knob_a266e448c4403e85f68a581fb81922fdd}\index{Beam::Knob@{Beam::Knob}!onMouseUp@{onMouseUp}}
+\index{onMouseUp@{onMouseUp}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{onMouseUp()}{onMouseUp()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a266e448c4403e85f68a581fb81922fdd} 
+bool Beam::\+\+Knob::\+on\+Mouse\+Up (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_knob_a67bf95ba1b02ad84e9a080530aa2e090}\index{Beam::Knob@{Beam::Knob}!render@{render}}
+\index{render@{render}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a67bf95ba1b02ad84e9a080530aa2e090} 
+void Beam::\+\+Knob::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_knob_abd452cb9e12d4ade468f1f989c7cb173}\index{Beam::Knob@{Beam::Knob}!setValue@{setValue}}
+\index{setValue@{setValue}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_abd452cb9e12d4ade468f1f989c7cb173} 
+void Beam::\+\+Knob::\+set\+Value (\begin{DoxyParamCaption}\item[{float}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_knob_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}\index{Beam::Knob@{Beam::Knob}!m\_isDragging@{m\_isDragging}}
+\index{m\_isDragging@{m\_isDragging}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_isDragging}{m\_isDragging}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9} 
+bool Beam::\+\+Knob::\+m\+\_\+is\+Dragging = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}\index{Beam::Knob@{Beam::Knob}!m\_label@{m\_label}}
+\index{m\_label@{m\_label}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_label}{m\_label}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c} 
+std::\+string Beam::\+\+Knob::\+m\+\_\+label\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}\index{Beam::Knob@{Beam::Knob}!m\_lastY@{m\_lastY}}
+\index{m\_lastY@{m\_lastY}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_lastY}{m\_lastY}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83} 
+float Beam::\+\+Knob::\+m\+\_\+lastY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}\index{Beam::Knob@{Beam::Knob}!m\_max@{m\_max}}
+\index{m\_max@{m\_max}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_max}{m\_max}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00} 
+float Beam::\+\+Knob::\+m\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}\index{Beam::Knob@{Beam::Knob}!m\_min@{m\_min}}
+\index{m\_min@{m\_min}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_min}{m\_min}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8} 
+float Beam::\+\+Knob::\+m\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}\index{Beam::Knob@{Beam::Knob}!m\_parameter@{m\_parameter}}
+\index{m\_parameter@{m\_parameter}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_parameter}{m\_parameter}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}}$>$ Beam::\+\+Knob::\+m\+\_\+parameter\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}\index{Beam::Knob@{Beam::Knob}!m\_value@{m\_value}}
+\index{m\_value@{m\_value}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{m\_value}{m\_value}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600} 
+float Beam::\+\+Knob::\+m\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}\index{Beam::Knob@{Beam::Knob}!onValueChanged@{onValueChanged}}
+\index{onValueChanged@{onValueChanged}!Beam::Knob@{Beam::Knob}}
+\doxysubsubsection{\texorpdfstring{onValueChanged}{onValueChanged}}
+{\footnotesize\ttfamily \label{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4} 
+std::\+function$<$void(float)$>$ Beam::\+\+Knob::\+on\+Value\+Changed}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+ui/\+\doxymbox{\hyperlink{knob_8hpp}{knob.\+hpp}}\end{DoxyCompactItemize}

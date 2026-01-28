@@ -1,0 +1,117 @@
+\doxysection{Beam::\+Delay\+Node Class Reference}
+\hypertarget{class_beam_1_1_delay_node}{}\label{class_beam_1_1_delay_node}\index{Beam::DelayNode@{Beam::DelayNode}}
+
+
+{\ttfamily \+\#include $<$delay\+\_\+node.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Delay\+Node:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_delay_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_delay_node_af4f9dc6cc6e26c7bb963f17c85c3858c}{Delay\+Node}} (float delay\+Seconds, float feedback, float sample\+Rate)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels) override
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e}{get\+Name}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_audio_node_afbea31954b50918131d31fc0d1f6de8c}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Node}} ()=default
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_node_a3fcc68eab5b1adf547a4205f258b212c}{set\+Bypass}} (bool bypass)
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6ba1724cff34b5bc0f811ee2537caae5}{is\+Bypassed}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_delay_node_a5b84198373b6956ed0a207cff4bbe89e}{m\+\_\+buffer}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_delay_node_aea926261f1f2685e8e626cad0eff131b}{m\+\_\+feedback}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_delay_node_a00520ac5853ff38e3f68cd5c64d635b2}{m\+\_\+sample\+Rate}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_delay_node_a418ca0782552901f5dc8b8910ea9e809}{m\+\_\+write\+Ptr}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f06219b09f}{m\+\_\+is\+Bypassed}} = false
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_delay_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_delay_node_af4f9dc6cc6e26c7bb963f17c85c3858c}\index{Beam::DelayNode@{Beam::DelayNode}!DelayNode@{DelayNode}}
+\index{DelayNode@{DelayNode}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{DelayNode()}{DelayNode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_af4f9dc6cc6e26c7bb963f17c85c3858c} 
+Beam::\+\+Delay\+Node::\+\+Delay\+Node (\begin{DoxyParamCaption}\item[{float}]{delay\+Seconds}{, }\item[{float}]{feedback}{, }\item[{float}]{sample\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_delay_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e}\index{Beam::DelayNode@{Beam::DelayNode}!getName@{getName}}
+\index{getName@{getName}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e} 
+std::\+string Beam::\+\+Delay\+Node::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{Beam::\+\+Audio\+Node}}.
+
+\Hypertarget{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858}\index{Beam::DelayNode@{Beam::DelayNode}!process@{process}}
+\index{process@{process}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858} 
+void Beam::\+\+Delay\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{Beam::\+\+Audio\+Node}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_delay_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_delay_node_a5b84198373b6956ed0a207cff4bbe89e}\index{Beam::DelayNode@{Beam::DelayNode}!m\_buffer@{m\_buffer}}
+\index{m\_buffer@{m\_buffer}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{m\_buffer}{m\_buffer}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a5b84198373b6956ed0a207cff4bbe89e} 
+std::\+vector$<$float$>$ Beam::\+\+Delay\+Node::\+m\+\_\+buffer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_delay_node_aea926261f1f2685e8e626cad0eff131b}\index{Beam::DelayNode@{Beam::DelayNode}!m\_feedback@{m\_feedback}}
+\index{m\_feedback@{m\_feedback}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{m\_feedback}{m\_feedback}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_aea926261f1f2685e8e626cad0eff131b} 
+float Beam::\+\+Delay\+Node::\+m\+\_\+feedback\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_delay_node_a00520ac5853ff38e3f68cd5c64d635b2}\index{Beam::DelayNode@{Beam::DelayNode}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a00520ac5853ff38e3f68cd5c64d635b2} 
+float Beam::\+\+Delay\+Node::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_delay_node_a418ca0782552901f5dc8b8910ea9e809}\index{Beam::DelayNode@{Beam::DelayNode}!m\_writePtr@{m\_writePtr}}
+\index{m\_writePtr@{m\_writePtr}!Beam::DelayNode@{Beam::DelayNode}}
+\doxysubsubsection{\texorpdfstring{m\_writePtr}{m\_writePtr}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a418ca0782552901f5dc8b8910ea9e809} 
+size\+\_\+t Beam::\+\+Delay\+Node::\+m\+\_\+write\+Ptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+dsp/\+\doxymbox{\hyperlink{delay__node_8hpp}{delay\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\doxysection{track\+\_\+node.\+hpp}
+\hypertarget{track__node_8hpp_source}{}\label{track__node_8hpp_source}\index{src/dsp/track\_node.hpp@{src/dsp/track\_node.hpp}}
+\doxymbox{\hyperlink{track__node_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TRACK\_NODE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TRACK\_NODE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__node_8hpp}{audio\_node.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{disk__streamer_8hpp}{disk\_streamer.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}},}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{Playing}},}
+\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{Recording}}}
+\DoxyCodeLine{00015\ \};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}(\textcolor{keyword}{const}\ std::string\&\ name)\ :\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}}(name),\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}::\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}})\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95}{load}}(\textcolor{keyword}{const}\ std::string\&\ filePath)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}\ =\ std::make\_unique<DiskStreamer>();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>open(filePath);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>read(buffer,\ frames,\ channels);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{TrackState::Recording}})\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ a\ real\ scenario,\ we'd\ capture\ from\ pInput\ and\ write\ to\ disk}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ we'll\ just\ clear\ the\ buffer\ to\ represent\ monitoring}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a973d30146b430d0680b526740364a45c}{setState}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ state)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ =\ state;\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8}{getState}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_acdff1b83754ab94892dc1c1d6ffe5255}{seek}}(\textcolor{keywordtype}{size\_t}\ frame)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>seek(frame);}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::unique\_ptr<DiskStreamer>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}};}
+\DoxyCodeLine{00047\ \ \ \ \ std::atomic<TrackState>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRACK\_NODE\_HPP}}
+
+\end{DoxyCode}

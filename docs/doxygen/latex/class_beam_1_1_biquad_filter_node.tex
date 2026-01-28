@@ -1,0 +1,224 @@
+\doxysection{Beam::\+Biquad\+Filter\+Node Class Reference}
+\hypertarget{class_beam_1_1_biquad_filter_node}{}\label{class_beam_1_1_biquad_filter_node}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+
+
+{\ttfamily \+\#include $<$biquad\+\_\+filter\+\_\+node.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Biquad\+Filter\+Node:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_biquad_filter_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{Biquad\+Filter\+Node}} (\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} type, float frequency, float q, float sample\+Rate)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels) override
+\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{get\+Name}} () const override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}{set\+Cutoff}} (float freq)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94}{setQ}} (float q)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_audio_node_afbea31954b50918131d31fc0d1f6de8c}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Node}} ()=default
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_node_a3fcc68eab5b1adf547a4205f258b212c}{set\+Bypass}} (bool bypass)
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6ba1724cff34b5bc0f811ee2537caae5}{is\+Bypassed}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculate\+Coefficients}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\+\_\+type}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\+\_\+frequency}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\+\_\+q}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\+\_\+sample\+Rate}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\+\_\+b0}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\+\_\+b1}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\+\_\+b2}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\+\_\+a0}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\+\_\+a1}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\+\_\+a2}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\+\_\+x1}} \+[2]\+ = \{0,0\}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}{m\+\_\+x2}} \+[2]\+ = \{0,0\}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\+\_\+y1}} \+[2]\+ = \{0,0\}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}{m\+\_\+y2}} \+[2]\+ = \{0,0\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f06219b09f}{m\+\_\+is\+Bypassed}} = false
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_biquad_filter_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!BiquadFilterNode@{BiquadFilterNode}}
+\index{BiquadFilterNode@{BiquadFilterNode}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{BiquadFilterNode()}{BiquadFilterNode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26} 
+Beam::\+\+Biquad\+Filter\+Node::\+\+Biquad\+Filter\+Node (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}}}]{type}{, }\item[{float}]{frequency}{, }\item[{float}]{q}{, }\item[{float}]{sample\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_biquad_filter_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!calculateCoefficients@{calculateCoefficients}}
+\index{calculateCoefficients@{calculateCoefficients}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{calculateCoefficients()}{calculateCoefficients()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99} 
+void Beam::\+\+Biquad\+Filter\+Node::\+calculate\+Coefficients (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!getName@{getName}}
+\index{getName@{getName}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181} 
+std::\+string Beam::\+\+Biquad\+Filter\+Node::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{Beam::\+\+Audio\+Node}}.
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!process@{process}}
+\index{process@{process}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f} 
+void Beam::\+\+Biquad\+Filter\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{Beam::\+\+Audio\+Node}}.
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!setCutoff@{setCutoff}}
+\index{setCutoff@{setCutoff}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{setCutoff()}{setCutoff()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8} 
+void Beam::\+\+Biquad\+Filter\+Node::\+set\+Cutoff (\begin{DoxyParamCaption}\item[{float}]{freq}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!setQ@{setQ}}
+\index{setQ@{setQ}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{setQ()}{setQ()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94} 
+void Beam::\+\+Biquad\+Filter\+Node::\+setQ (\begin{DoxyParamCaption}\item[{float}]{q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_biquad_filter_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_a0@{m\_a0}}
+\index{m\_a0@{m\_a0}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_a0}{m\_a0}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+a0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_a1@{m\_a1}}
+\index{m\_a1@{m\_a1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_a1}{m\_a1}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+a1\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_a2@{m\_a2}}
+\index{m\_a2@{m\_a2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_a2}{m\_a2}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+a2\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_b0@{m\_b0}}
+\index{m\_b0@{m\_b0}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_b0}{m\_b0}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+b0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_b1@{m\_b1}}
+\index{m\_b1@{m\_b1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_b1}{m\_b1}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+b1\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_b2@{m\_b2}}
+\index{m\_b2@{m\_b2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_b2}{m\_b2}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+b2\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_frequency@{m\_frequency}}
+\index{m\_frequency@{m\_frequency}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_frequency}{m\_frequency}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+frequency\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_q@{m\_q}}
+\index{m\_q@{m\_q}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_q}{m\_q}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+q\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_type@{m\_type}}
+\index{m\_type@{m\_type}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_type}{m\_type}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd} 
+\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x1@{m\_x1}}
+\index{m\_x1@{m\_x1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_x1}{m\_x1}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x1\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x2@{m\_x2}}
+\index{m\_x2@{m\_x2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_x2}{m\_x2}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x2\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y1@{m\_y1}}
+\index{m\_y1@{m\_y1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_y1}{m\_y1}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y1\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y2@{m\_y2}}
+\index{m\_y2@{m\_y2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{m\_y2}{m\_y2}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34} 
+float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y2\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+dsp/\+\doxymbox{\hyperlink{biquad__filter__node_8hpp}{biquad\+\_\+filter\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

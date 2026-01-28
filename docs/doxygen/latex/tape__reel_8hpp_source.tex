@@ -1,0 +1,90 @@
+\doxysection{tape\+\_\+reel.\+hpp}
+\hypertarget{tape__reel_8hpp_source}{}\label{tape__reel_8hpp_source}\index{src/ui/tape\_reel.hpp@{src/ui/tape\_reel.hpp}}
+\doxymbox{\hyperlink{tape__reel_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TAPE\_REEL\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TAPE\_REEL\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__module_8hpp}{audio\_module.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__track__node_8hpp}{../dsp/flux\_track\_node.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_tape_reel_a4ea5518ea0278a59e5a8ba9b9010805f}{TapeReel}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{AudioModule}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a4ea5518ea0278a59e5a8ba9b9010805f}{TapeReel}}(std::shared\_ptr<FluxTrackNode>\ track,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ }
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{AudioModule}}(track,\ x,\ y),\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}}(track)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(x,\ y,\ 200,\ 120);}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a92ce3fb77345df4a6a2a0aebf04d8bd8}{update}}(\textcolor{keywordtype}{float}\ dt)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ track\ =\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}}-\/>getInternalNode();}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (track-\/>getState()\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}})\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a9a6d8ed12ec3daa3d6470f74064a2fc5}{m\_rotation}}\ +=\ 2.0f\ *\ dt;\ \textcolor{comment}{//\ approx\ 2\ radians\ per\ second}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_aec8dbeac4cb29052b8c9306a3cc408e0}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Base\ Module\ (Metal\ panel)}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 12.0f,\ 1.0f,\ 0.22f,\ 0.22f,\ 0.23f,\ 1.0f);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ track\ =\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}}-\/>getInternalNode();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reels}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ reelSize\ =\ 65.0f;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ reelY\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 35;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ drawReel\ =\ [\&](\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Main\ reel\ plate\ (Brushed\ aluminum\ look)}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(x,\ y,\ reelSize,\ reelSize,\ reelSize\ *\ 0.5f,\ 1.0f,\ 0.6f,\ 0.61f,\ 0.63f,\ 1.0f);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Three\ spokes}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ ++i)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a9a6d8ed12ec3daa3d6470f74064a2fc5}{m\_rotation}}\ +\ (i\ *\ 2.094f);\ \textcolor{comment}{//\ 120\ degrees}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sx\ =\ x\ +\ reelSize\ *\ 0.5f\ +\ std::sin(angle)\ *\ reelSize\ *\ 0.35f;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sy\ =\ y\ +\ reelSize\ *\ 0.5f\ -\/\ std::cos(angle)\ *\ reelSize\ *\ 0.35f;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(sx\ -\/\ 4,\ sy\ -\/\ 4,\ 8,\ 8,\ 4.0f,\ 0.5f,\ 0.1f,\ 0.1f,\ 0.1f,\ 1.0f);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Center\ spindle}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(x\ +\ reelSize\ *\ 0.5f\ -\/\ 5,\ y\ +\ reelSize\ *\ 0.5f\ -\/\ 5,\ 10,\ 10,\ 5.0f,\ 0.5f,\ 0.15f,\ 0.15f,\ 0.16f,\ 1.0f);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ drawReel(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 20,\ reelY);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ drawReel(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 115,\ reelY);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Track\ Name}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}}-\/>getName(),\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 15,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 10,\ 12,\ 0.9f,\ 0.9f,\ 0.9f,\ 1.0f);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Status\ Indicator\ Lamp}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (track-\/>getState()\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{TrackState::Recording}})\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 25,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 10,\ 12,\ 12,\ 6.0f,\ 2.0f,\ 1.0f,\ 0.0f,\ 0.0f,\ 1.0f);\ \textcolor{comment}{//\ Glowing\ REC}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 25,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 10,\ 12,\ 12,\ 6.0f,\ 0.5f,\ 0.1f,\ 0.0f,\ 0.0f,\ 1.0f);\ \textcolor{comment}{//\ Dim\ REC}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ad2fe7a4986075d4a3c6047f2e745460e}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499}{AudioModule::onMouseDown}}(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ track\ =\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}}-\/>getInternalNode();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Toggle\ playback\ on\ click}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.contains(x,\ y))\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (track-\/>getState()\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{TrackState::Idle}})\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ track-\/>setState(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}});}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ track-\/>setState(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{TrackState::Idle}});}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00078\ \ \ \ \ std::shared\_ptr<FluxTrackNode>\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\_trackNode}};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a9a6d8ed12ec3daa3d6470f74064a2fc5}{m\_rotation}}\ =\ 0.0f;}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TAPE\_REEL\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,263 @@
+\doxysection{Beam::\+Workspace Class Reference}
+\hypertarget{class_beam_1_1_workspace}{}\label{class_beam_1_1_workspace}\index{Beam::Workspace@{Beam::Workspace}}
+
+
+{\ttfamily \+\#include $<$workspace.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Workspace:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_workspace}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_workspace_a1cb1b67c1754b9082dde84b7db95729e}{Workspace}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$ project)
+\item 
+nlohmann::\+json \doxymbox{\hyperlink{class_beam_1_1_workspace_a5f75e8e118db827ac6e2b132ce3c511d}{serialize}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a8959768175035442b92bda55f7ba1c2d}{deserialize}} (const nlohmann::\+json \&data)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a021920fd8b910cadf5286ce92b75ac79}{set\+Visible}} (bool visible)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a6be84daa0a4def0d2adfc162c45d9331}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_acca5d578980d2463c579161ab6e52b29}{add\+Track}} (const std::\+string \&file\+Path, float x, float y, \doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} \&engine)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a02d36df76f94244013d15221d195f5a2}{add\+FX}} (const std::\+string \&type, float x, float y)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461}{start\+Cable\+Drag}} (\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}p)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c}{connect\+Ports}} (\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}p1, \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}p2)
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_workspace_a2d287ac679c39e3bb74a6806c627c610}{on\+Mouse\+Down}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_workspace_aa04ebe3cc67dbd9675a6a6eca5506547}{on\+Mouse\+Up}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_workspace_ae030281b49f7c11a28517b4deaf69b99}{on\+Mouse\+Move}} (float x, float y) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\texorpdfstring{$\sim$}{\string~}\+Component}} ()=default
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{set\+Bounds}} (float x, float y, float w, float h)
+\item 
+const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{set\+Draggable}} (bool draggable)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$ \doxymbox{\hyperlink{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}{m\+\_\+project}}
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}{m\+\_\+modules}}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_cable}{Cable}} $>$ \doxymbox{\hyperlink{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415}{m\+\_\+cables}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}{m\+\_\+panX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}{m\+\_\+panY}} = 0
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}{m\+\_\+is\+Panning}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}{m\+\_\+last\+MouseY}} = 0
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}{m\+\_\+is\+Dragging\+Cable}} = false
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}{m\+\_\+active\+Port}} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\+\_\+bounds}} \{0, 0, 0, 0\}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_adc07913aed6ddadf1c730e7b3bb599cf}{m\+\_\+is\+Visible}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a0bf77b204ae374a14b5a6d7e5a3c13c6}{m\+\_\+is\+Enabled}} = true
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_a9646efcaa9540a26a387f5da9aae4bde}{m\+\_\+is\+Draggable}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_component_ab03af9a9743acf040f38e3fb11f8dc14}{m\+\_\+is\+Dragging}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a7110b2b9dc235f724bf4689569266a63}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed2efe9}{m\+\_\+last\+MouseY}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_workspace_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_workspace_a1cb1b67c1754b9082dde84b7db95729e}\index{Beam::Workspace@{Beam::Workspace}!Workspace@{Workspace}}
+\index{Workspace@{Workspace}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{Workspace()}{Workspace()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a1cb1b67c1754b9082dde84b7db95729e} 
+Beam::\+\+Workspace::\+\+Workspace (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$}]{project}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_workspace_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_workspace_a02d36df76f94244013d15221d195f5a2}\index{Beam::Workspace@{Beam::Workspace}!addFX@{addFX}}
+\index{addFX@{addFX}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{addFX()}{addFX()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a02d36df76f94244013d15221d195f5a2} 
+void Beam::\+\+Workspace::\+add\+FX (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{type}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_acca5d578980d2463c579161ab6e52b29}\index{Beam::Workspace@{Beam::Workspace}!addTrack@{addTrack}}
+\index{addTrack@{addTrack}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{addTrack()}{addTrack()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_acca5d578980d2463c579161ab6e52b29} 
+void Beam::\+\+Workspace::\+add\+Track (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+Path}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{\doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c}\index{Beam::Workspace@{Beam::Workspace}!connectPorts@{connectPorts}}
+\index{connectPorts@{connectPorts}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{connectPorts()}{connectPorts()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a4ac39a74b5b2b887a520ff7eb0fdec0c} 
+void Beam::\+\+Workspace::\+connect\+Ports (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}}]{p1}{, }\item[{\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}}]{p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_a8959768175035442b92bda55f7ba1c2d}\index{Beam::Workspace@{Beam::Workspace}!deserialize@{deserialize}}
+\index{deserialize@{deserialize}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{deserialize()}{deserialize()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a8959768175035442b92bda55f7ba1c2d} 
+void Beam::\+\+Workspace::\+deserialize (\begin{DoxyParamCaption}\item[{const nlohmann::\+json \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_a2d287ac679c39e3bb74a6806c627c610}\index{Beam::Workspace@{Beam::Workspace}!onMouseDown@{onMouseDown}}
+\index{onMouseDown@{onMouseDown}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{onMouseDown()}{onMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a2d287ac679c39e3bb74a6806c627c610} 
+bool Beam::\+\+Workspace::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_workspace_ae030281b49f7c11a28517b4deaf69b99}\index{Beam::Workspace@{Beam::Workspace}!onMouseMove@{onMouseMove}}
+\index{onMouseMove@{onMouseMove}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{onMouseMove()}{onMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_ae030281b49f7c11a28517b4deaf69b99} 
+bool Beam::\+\+Workspace::\+on\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_workspace_aa04ebe3cc67dbd9675a6a6eca5506547}\index{Beam::Workspace@{Beam::Workspace}!onMouseUp@{onMouseUp}}
+\index{onMouseUp@{onMouseUp}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{onMouseUp()}{onMouseUp()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_aa04ebe3cc67dbd9675a6a6eca5506547} 
+bool Beam::\+\+Workspace::\+on\+Mouse\+Up (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_workspace_a6be84daa0a4def0d2adfc162c45d9331}\index{Beam::Workspace@{Beam::Workspace}!render@{render}}
+\index{render@{render}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a6be84daa0a4def0d2adfc162c45d9331} 
+void Beam::\+\+Workspace::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_workspace_a5f75e8e118db827ac6e2b132ce3c511d}\index{Beam::Workspace@{Beam::Workspace}!serialize@{serialize}}
+\index{serialize@{serialize}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a5f75e8e118db827ac6e2b132ce3c511d} 
+nlohmann::\+json Beam::\+\+Workspace::\+serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_a021920fd8b910cadf5286ce92b75ac79}\index{Beam::Workspace@{Beam::Workspace}!setVisible@{setVisible}}
+\index{setVisible@{setVisible}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{setVisible()}{setVisible()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a021920fd8b910cadf5286ce92b75ac79} 
+void Beam::\+\+Workspace::\+set\+Visible (\begin{DoxyParamCaption}\item[{bool}]{visible}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461}\index{Beam::Workspace@{Beam::Workspace}!startCableDrag@{startCableDrag}}
+\index{startCableDrag@{startCableDrag}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{startCableDrag()}{startCableDrag()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a45597a1c3ca82eb3848628fb36cdd461} 
+void Beam::\+\+Workspace::\+start\+Cable\+Drag (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_port}{Port}} \texorpdfstring{$\ast$}{*}}]{p}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_workspace_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f}\index{Beam::Workspace@{Beam::Workspace}!m\_activePort@{m\_activePort}}
+\index{m\_activePort@{m\_activePort}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_activePort}{m\_activePort}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a038f69a869c9cfaf59a882a960aa812f} 
+\doxymbox{\hyperlink{class_beam_1_1_port}{Port}}\texorpdfstring{$\ast$}{*} Beam::\+\+Workspace::\+m\+\_\+active\+Port = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415}\index{Beam::Workspace@{Beam::Workspace}!m\_cables@{m\_cables}}
+\index{m\_cables@{m\_cables}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_cables}{m\_cables}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a9f2831c5c89695ea1f4805d39c777415} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_beam_1_1_cable}{Cable}}$>$ Beam::\+\+Workspace::\+m\+\_\+cables\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1}\index{Beam::Workspace@{Beam::Workspace}!m\_isDraggingCable@{m\_isDraggingCable}}
+\index{m\_isDraggingCable@{m\_isDraggingCable}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_isDraggingCable}{m\_isDraggingCable}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_aa0d7f1088677837479f81fb8a84af8a1} 
+bool Beam::\+\+Workspace::\+m\+\_\+is\+Dragging\+Cable = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796}\index{Beam::Workspace@{Beam::Workspace}!m\_isPanning@{m\_isPanning}}
+\index{m\_isPanning@{m\_isPanning}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_isPanning}{m\_isPanning}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_ab41c4919edcced005a0a399ee1e89796} 
+bool Beam::\+\+Workspace::\+m\+\_\+is\+Panning = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6}\index{Beam::Workspace@{Beam::Workspace}!m\_lastMouseX@{m\_lastMouseX}}
+\index{m\_lastMouseX@{m\_lastMouseX}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_lastMouseX}{m\_lastMouseX}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a28711dedfa0ddea4f3286b1c8ca026c6} 
+float Beam::\+\+Workspace::\+m\+\_\+last\+MouseX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140}\index{Beam::Workspace@{Beam::Workspace}!m\_lastMouseY@{m\_lastMouseY}}
+\index{m\_lastMouseY@{m\_lastMouseY}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_lastMouseY}{m\_lastMouseY}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_af5e49785a110e6bbf05c74f8ee859140} 
+float Beam::\+\+Workspace::\+m\+\_\+last\+MouseY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8}\index{Beam::Workspace@{Beam::Workspace}!m\_modules@{m\_modules}}
+\index{m\_modules@{m\_modules}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_modules}{m\_modules}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_aab79b91f836a67545e1432d3f77af9e8} 
+std::\+vector$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_component}{Component}}$>$ $>$ Beam::\+\+Workspace::\+m\+\_\+modules\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb}\index{Beam::Workspace@{Beam::Workspace}!m\_panX@{m\_panX}}
+\index{m\_panX@{m\_panX}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_panX}{m\_panX}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a3003006c89fd162e8649d664f1347edb} 
+float Beam::\+\+Workspace::\+m\+\_\+panX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70}\index{Beam::Workspace@{Beam::Workspace}!m\_panY@{m\_panY}}
+\index{m\_panY@{m\_panY}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_panY}{m\_panY}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_a2b0b9919abb15280141142e9bbf2ec70} 
+float Beam::\+\+Workspace::\+m\+\_\+panY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c}\index{Beam::Workspace@{Beam::Workspace}!m\_project@{m\_project}}
+\index{m\_project@{m\_project}!Beam::Workspace@{Beam::Workspace}}
+\doxysubsubsection{\texorpdfstring{m\_project}{m\_project}}
+{\footnotesize\ttfamily \label{class_beam_1_1_workspace_aaad17331a0dbbe3ce854b2bac8d97f2c} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}}$>$ Beam::\+\+Workspace::\+m\+\_\+project\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+ui/\+\doxymbox{\hyperlink{workspace_8hpp}{workspace.\+hpp}}\end{DoxyCompactItemize}

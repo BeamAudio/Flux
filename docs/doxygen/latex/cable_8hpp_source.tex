@@ -1,0 +1,43 @@
+\doxysection{cable.\+hpp}
+\hypertarget{cable_8hpp_source}{}\label{cable_8hpp_source}\index{src/ui/cable.hpp@{src/ui/cable.hpp}}
+\doxymbox{\hyperlink{cable_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CABLE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CABLE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{port_8hpp}{port.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_beam_1_1_cable}{Cable}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ \doxymbox{\hyperlink{struct_beam_1_1_cable_a053fa9bcaca869bbe55a6e969a5d191f}{output}};}
+\DoxyCodeLine{00010\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}}*\ \doxymbox{\hyperlink{struct_beam_1_1_cable_a1d97b8c95a75addc1ec772f6328fdc43}{input}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struct_beam_1_1_cable_a84adeb1426f567be118fbcfec2cf73f5}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ outPos\ =\ \doxymbox{\hyperlink{struct_beam_1_1_cable_a053fa9bcaca869bbe55a6e969a5d191f}{output}}-\/>getBounds();}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ inPos\ =\ \doxymbox{\hyperlink{struct_beam_1_1_cable_a1d97b8c95a75addc1ec772f6328fdc43}{input}}-\/>getBounds();}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x1\ =\ outPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ +\ outPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a69b99db01aa296ad7964be8fc0365a10}{w}}\ /\ 2;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y1\ =\ outPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ outPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}}\ /\ 2;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x2\ =\ inPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ +\ inPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a69b99db01aa296ad7964be8fc0365a10}{w}}\ /\ 2;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y2\ =\ inPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ inPos.\doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}}\ /\ 2;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ segments\ to\ simulate\ a\ curve\ (Proper\ Bezier\ shader\ coming\ next)}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ segments\ =\ 10;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ segments;\ ++i)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t\ =\ (float)i\ /\ segments;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ nt\ =\ (float)(i\ +\ 1)\ /\ segments;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ px\ =\ x1\ +\ (x2\ -\/\ x1)\ *\ t;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ py\ =\ y1\ +\ (y2\ -\/\ y1)\ *\ t;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(px,\ py,\ 4,\ 4,\ 0.25f,\ 0.5f,\ 1.0f,\ 0.8f);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CABLE\_HPP}}
+
+\end{DoxyCode}

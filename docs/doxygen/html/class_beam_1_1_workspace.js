@@ -1,0 +1,25 @@
+var class_beam_1_1_workspace =
+[
+    [ "Workspace", "class_beam_1_1_workspace.html#a1cb1b67c1754b9082dde84b7db95729e", null ],
+    [ "addFX", "class_beam_1_1_workspace.html#a02d36df76f94244013d15221d195f5a2", null ],
+    [ "addTrack", "class_beam_1_1_workspace.html#acca5d578980d2463c579161ab6e52b29", null ],
+    [ "connectPorts", "class_beam_1_1_workspace.html#a4ac39a74b5b2b887a520ff7eb0fdec0c", null ],
+    [ "deserialize", "class_beam_1_1_workspace.html#a8959768175035442b92bda55f7ba1c2d", null ],
+    [ "onMouseDown", "class_beam_1_1_workspace.html#a2d287ac679c39e3bb74a6806c627c610", null ],
+    [ "onMouseMove", "class_beam_1_1_workspace.html#ae030281b49f7c11a28517b4deaf69b99", null ],
+    [ "onMouseUp", "class_beam_1_1_workspace.html#aa04ebe3cc67dbd9675a6a6eca5506547", null ],
+    [ "render", "class_beam_1_1_workspace.html#a6be84daa0a4def0d2adfc162c45d9331", null ],
+    [ "serialize", "class_beam_1_1_workspace.html#a5f75e8e118db827ac6e2b132ce3c511d", null ],
+    [ "setVisible", "class_beam_1_1_workspace.html#a021920fd8b910cadf5286ce92b75ac79", null ],
+    [ "startCableDrag", "class_beam_1_1_workspace.html#a45597a1c3ca82eb3848628fb36cdd461", null ],
+    [ "m_activePort", "class_beam_1_1_workspace.html#a038f69a869c9cfaf59a882a960aa812f", null ],
+    [ "m_cables", "class_beam_1_1_workspace.html#a9f2831c5c89695ea1f4805d39c777415", null ],
+    [ "m_isDraggingCable", "class_beam_1_1_workspace.html#aa0d7f1088677837479f81fb8a84af8a1", null ],
+    [ "m_isPanning", "class_beam_1_1_workspace.html#ab41c4919edcced005a0a399ee1e89796", null ],
+    [ "m_lastMouseX", "class_beam_1_1_workspace.html#a28711dedfa0ddea4f3286b1c8ca026c6", null ],
+    [ "m_lastMouseY", "class_beam_1_1_workspace.html#af5e49785a110e6bbf05c74f8ee859140", null ],
+    [ "m_modules", "class_beam_1_1_workspace.html#aab79b91f836a67545e1432d3f77af9e8", null ],
+    [ "m_panX", "class_beam_1_1_workspace.html#a3003006c89fd162e8649d664f1347edb", null ],
+    [ "m_panY", "class_beam_1_1_workspace.html#a2b0b9919abb15280141142e9bbf2ec70", null ],
+    [ "m_project", "class_beam_1_1_workspace.html#aaad17331a0dbbe3ce854b2bac8d97f2c", null ]
+];

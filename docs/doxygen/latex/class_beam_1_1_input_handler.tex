@@ -1,0 +1,92 @@
+\doxysection{Beam::\+Input\+Handler Class Reference}
+\hypertarget{class_beam_1_1_input_handler}{}\label{class_beam_1_1_input_handler}\index{Beam::InputHandler@{Beam::InputHandler}}
+
+
+{\ttfamily \+\#include $<$input\+\_\+handler.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a1d3cb50866d2f151e5b9ddffdd1f0c01}{add\+Component}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ component)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a89d5254f25fa9d103a8b1a05332d5a5f}{handle\+Mouse\+Down}} (float x, float y, int button)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f02872e86}{handle\+Mouse\+Up}} (float x, float y, int button)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_ab6ae366e86174358931c66a97f002f96}{handle\+Mouse\+Move}} (float x, float y)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a}{update}} (float dt)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a28f180063d61a104843c23ac24baadc3}{m\+\_\+components}}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ \doxymbox{\hyperlink{class_beam_1_1_input_handler_a78adda91495720c5f10106ce98cad1aa}{m\+\_\+focused\+Component}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_input_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_input_handler_a1d3cb50866d2f151e5b9ddffdd1f0c01}\index{Beam::InputHandler@{Beam::InputHandler}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a1d3cb50866d2f151e5b9ddffdd1f0c01} 
+void Beam::\+\+Input\+Handler::\+add\+Component (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$}]{component}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_a89d5254f25fa9d103a8b1a05332d5a5f}\index{Beam::InputHandler@{Beam::InputHandler}!handleMouseDown@{handleMouseDown}}
+\index{handleMouseDown@{handleMouseDown}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{handleMouseDown()}{handleMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a89d5254f25fa9d103a8b1a05332d5a5f} 
+void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_ab6ae366e86174358931c66a97f002f96}\index{Beam::InputHandler@{Beam::InputHandler}!handleMouseMove@{handleMouseMove}}
+\index{handleMouseMove@{handleMouseMove}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{handleMouseMove()}{handleMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_ab6ae366e86174358931c66a97f002f96} 
+void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f02872e86}\index{Beam::InputHandler@{Beam::InputHandler}!handleMouseUp@{handleMouseUp}}
+\index{handleMouseUp@{handleMouseUp}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{handleMouseUp()}{handleMouseUp()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f02872e86} 
+void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Up (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef}\index{Beam::InputHandler@{Beam::InputHandler}!render@{render}}
+\index{render@{render}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef} 
+void Beam::\+\+Input\+Handler::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a}\index{Beam::InputHandler@{Beam::InputHandler}!update@{update}}
+\index{update@{update}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a} 
+void Beam::\+\+Input\+Handler::\+update (\begin{DoxyParamCaption}\item[{float}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_input_handler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_input_handler_a28f180063d61a104843c23ac24baadc3}\index{Beam::InputHandler@{Beam::InputHandler}!m\_components@{m\_components}}
+\index{m\_components@{m\_components}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{m\_components}{m\_components}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a28f180063d61a104843c23ac24baadc3} 
+std::\+vector$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_component}{Component}}$>$ $>$ Beam::\+\+Input\+Handler::\+m\+\_\+components\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_input_handler_a78adda91495720c5f10106ce98cad1aa}\index{Beam::InputHandler@{Beam::InputHandler}!m\_focusedComponent@{m\_focusedComponent}}
+\index{m\_focusedComponent@{m\_focusedComponent}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{m\_focusedComponent}{m\_focusedComponent}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a78adda91495720c5f10106ce98cad1aa} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_component}{Component}}$>$ Beam::\+\+Input\+Handler::\+m\+\_\+focused\+Component\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+ui/\+\doxymbox{\hyperlink{input__handler_8hpp}{input\+\_\+handler.\+hpp}}\item 
+src/\+ui/\+\doxymbox{\hyperlink{input__handler_8cpp}{input\+\_\+handler.\+cpp}}\end{DoxyCompactItemize}
