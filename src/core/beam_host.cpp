@@ -74,7 +74,10 @@ bool BeamHost::init() {
     m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine->getMasterNode());
 
     m_browser->onAddFX = [this](std::string type) {
-        if (m_workspace) m_workspace->addFX(type, 300, 300);
+        if (m_workspace) {
+            m_workspace->addFX(type, 300, 300);
+            m_audioEngine->updatePlan();
+        }
     };
 
     // Add to UI Handler

@@ -2,9 +2,11 @@
 #define FLUX_GRAPH_HPP
 
 #include "flux_node.hpp"
+#include "render_plan.hpp"
 #include <map>
 #include <set>
 #include <algorithm>
+#include <iostream>
 
 namespace Beam {
 
@@ -54,54 +56,13 @@ public:
         m_needsRebuild = true;
     }
 
-    void process(int frames) {
-        if (m_needsRebuild) rebuildSchedule();
-
-        // 1. Clear input buffers of all nodes
-        for (auto& pair : m_nodes) {
-            auto node = pair.second;
-            for (int i = 0; i < node->getInputPorts().size(); ++i) {
-                float* buf = node->getInputBuffer(i);
-                std::fill(buf, buf + frames * 2, 0.0f); // Assuming stereo for now
-            }
-        }
-
-        // 2. Process nodes in topological order
-        for (size_t nodeId : m_schedule) {
-            auto node = m_nodes[nodeId];
-            if (!node->isBypassed()) {
-                node->process(frames);
-            } else {
-                // If bypassed, we might want to pass through if it's an FX node
-                // For now, just clear outputs
-                for (int i = 0; i < node->getOutputPorts().size(); ++i) {
-                    float* buf = node->getOutputBuffer(i);
-                    std::fill(buf, buf + frames * 2, 0.0f);
-                }
-            }
-
-            // 3. Propagate outputs to connected inputs
-            for (const auto& conn : m_connections) {
-                if (conn.srcNodeId == nodeId) {
-                    auto srcNode = m_nodes[conn.srcNodeId];
-                    auto dstNode = m_nodes[conn.dstNodeId];
-                    float* srcBuf = srcNode->getOutputBuffer(conn.srcPortIdx);
-                    float* dstBuf = dstNode->getInputBuffer(conn.dstPortIdx);
-                    
-                    for (int i = 0; i < frames * 2; ++i) {
-                        dstBuf[i] += srcBuf[i];
-                    }
-                }
-            }
-        }
-    }
-
-    std::shared_ptr<FluxNode> getNode(size_t id) { return m_nodes[id]; }
-    const std::map<size_t, std::shared_ptr<FluxNode>>& getNodes() const { return m_nodes; }
-
-private:
-    void rebuildSchedule() {
-        m_schedule.clear();
+    // Compiles the current graph topology into an optimized, flat execution plan.
+    // This method is O(N + C) and should be called from the UI thread when the graph changes.
+    std::shared_ptr<RenderPlan> compile(int bufferSizeFrames, int channels = 2) {
+        auto plan = std::make_shared<RenderPlan>();
+        
+        // 1. Topological Sort
+        std::vector<size_t> schedule;
         std::map<size_t, int> inDegree;
         for (auto const& [id, node] : m_nodes) inDegree[id] = 0;
 
@@ -117,7 +78,7 @@ private:
         while (!queue.empty()) {
             size_t u = queue.back();
             queue.pop_back();
-            m_schedule.push_back(u);
+            schedule.push_back(u);
 
             for (const auto& conn : m_connections) {
                 if (conn.srcNodeId == u) {
@@ -128,12 +89,57 @@ private:
                 }
             }
         }
+
+        // 2. Build Execution Plan
+        size_t bufSizeFloats = bufferSizeFrames * channels;
+
+        // Identify all input buffers that need clearing
+        for (const auto& [id, node] : m_nodes) {
+            for (int i = 0; i < node->getInputPorts().size(); ++i) {
+                plan->clearOps.push_back({ node->getInputBuffer(i), bufSizeFloats });
+            }
+        }
+
+        // Map ID to Node Ptr for quick lookup
+        std::map<size_t, std::shared_ptr<FluxNode>> nodeLookup = m_nodes;
+
+        for (size_t nodeId : schedule) {
+            auto node = nodeLookup[nodeId];
+            NodeExecution exec;
+            exec.node = node;
+
+            // Pre-calculate routing for this node's outputs
+            for (const auto& conn : m_connections) {
+                if (conn.srcNodeId == nodeId) {
+                    auto dstNode = nodeLookup[conn.dstNodeId];
+                    if (dstNode) {
+                        exec.outgoingRoutes.push_back({
+                            node->getOutputBuffer(conn.srcPortIdx),
+                            dstNode->getInputBuffer(conn.dstPortIdx)
+                        });
+                    }
+                }
+            }
+            plan->sequence.push_back(exec);
+        }
+
         m_needsRebuild = false;
+        return plan;
     }
 
+    void setTransportState(bool playing) {
+        for (auto& pair : m_nodes) {
+            pair.second->onTransportStateChanged(playing);
+        }
+    }
+
+    std::shared_ptr<FluxNode> getNode(size_t id) { return m_nodes[id]; }
+    const std::map<size_t, std::shared_ptr<FluxNode>>& getNodes() const { return m_nodes; }
+    const std::set<FluxConnection>& getConnections() const { return m_connections; }
+
+private:
     std::map<size_t, std::shared_ptr<FluxNode>> m_nodes;
     std::set<FluxConnection> m_connections;
-    std::vector<size_t> m_schedule;
     size_t m_nextId = 0;
     bool m_needsRebuild = true;
 };

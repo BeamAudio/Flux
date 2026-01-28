@@ -42,6 +42,12 @@ public:
 
     void setVisible(bool visible) { m_isVisible = visible; }
 
+    void update(float dt) override {
+        for (auto& module : m_modules) {
+            module->update(dt);
+        }
+    }
+
     void render(QuadBatcher& batcher) override {
         if (!m_isVisible) return;
         // Draw Grid
@@ -74,11 +80,13 @@ public:
         auto fluxTrack = std::make_shared<FluxTrackNode>("Loaded Track", 1024 * 4);
         
         if (fluxTrack->load(filePath)) {
-            fluxTrack->getInternalNode()->setState(TrackState::Playing);
+            fluxTrack->getInternalNode()->setState(engine.isPlaying() ? TrackState::Playing : TrackState::Idle);
             size_t nodeId = graph->addNode(fluxTrack);
             
             // Auto-connect to Master for now (Master is node 0 in this simplified update)
             graph->connect(nodeId, 0, 0, 0); 
+
+            engine.updatePlan();
 
             auto reel = std::make_shared<TapeReel>(fluxTrack, x, y);
             
