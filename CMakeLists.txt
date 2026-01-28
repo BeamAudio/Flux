@@ -45,24 +45,33 @@ else()
 endif()
 
 # Standalone Tests
+
 # set(TEST_LIBS SDL3::SDL3-static)
+
 # if(WIN32)
+
 #     list(APPEND TEST_LIBS opengl32 user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 setupapi)
+
 # else()
+
 #     list(APPEND TEST_LIBS OpenGL::GL)
+
 # endif()
+
 # 
-# add_executable(test_audio_engine tests/test_audio_engine.cpp ${DSP_SOURCES})
-# target_link_libraries(test_audio_engine PRIVATE ${TEST_LIBS})
-# 
+
 # add_executable(test_ui tests/test_ui.cpp ${UI_SOURCES} ${GRAPHICS_SOURCES} third_party/glad.c)
+
 # target_link_libraries(test_ui PRIVATE ${TEST_LIBS})
+
 # 
-# add_executable(test_complex_dsp tests/test_complex_dsp.cpp ${DSP_SOURCES})
-# target_link_libraries(test_complex_dsp PRIVATE ${TEST_LIBS})
-# 
+
 # add_executable(test_integration tests/test_integration.cpp ${DSP_SOURCES} ${UI_SOURCES} ${GRAPHICS_SOURCES} third_party/glad.c)
+
 # target_link_libraries(test_integration PRIVATE ${TEST_LIBS})
 
+
+
 add_executable(test_persistence tests/test_persistence.cpp)
+
 # target_link_libraries(test_persistence PRIVATE ${TEST_LIBS})

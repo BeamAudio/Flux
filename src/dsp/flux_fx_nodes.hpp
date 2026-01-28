@@ -1,100 +1,75 @@
 #ifndef FLUX_FX_NODES_HPP
 #define FLUX_FX_NODES_HPP
 
-#include "flux_node.hpp"
-#include "gain_node.hpp"
+#include "flux_plugin.hpp"
 #include "biquad_filter_node.hpp"
 #include "delay_node.hpp"
 
 namespace Beam {
 
-class FluxGainNode : public FluxNode {
+// --- Standard Gain Plugin ---
+class FluxGainNode : public FluxPlugin {
 public:
-    FluxGainNode(int bufferSize) {
-        auto gainParam = std::make_shared<Parameter>("Gain", 0.0f, 2.0f, 1.0f);
-        addParameter(gainParam);
-        m_gain = std::make_shared<GainNode>(1.0f);
-        setupBuffers(1, 1, bufferSize, 2);
+    FluxGainNode(int bufferSize) : FluxPlugin("Gain", bufferSize, 44100.0f) {
+        addParam("Gain", 0.0f, 2.0f, 1.0f);
     }
     
-    void process(int frames) override {
-        float gainValue = getParameter("Gain")->getValue();
-        m_gain->setGain(gainValue);
-
-        float* in = getInputBuffer(0);
-        float* out = getOutputBuffer(0);
-        std::copy(in, in + frames * 2, out);
-        m_gain->process(out, frames, 2);
+    void processBlock(const float* input, float* output, int totalSamples) override {
+        float gain = getParam("Gain");
+        for (int i = 0; i < totalSamples; ++i) {
+            output[i] = input[i] * gain;
+        }
     }
-
-    std::string getName() const override { return "Gain"; }
-    std::vector<Port> getInputPorts() const override { return { {"In", 2} }; }
-    std::vector<Port> getOutputPorts() const override { return { {"Out", 2} }; }
-
-private:
-    std::shared_ptr<GainNode> m_gain;
 };
 
-class FluxFilterNode : public FluxNode {
+// --- Standard Filter Plugin ---
+class FluxFilterNode : public FluxPlugin {
 public:
-    FluxFilterNode(int bufferSize, float sampleRate) {
-        auto cutoffParam = std::make_shared<Parameter>("Cutoff", 20.0f, 20000.0f, 1000.0f);
-        auto qParam = std::make_shared<Parameter>("Resonance", 0.1f, 10.0f, 0.707f);
-        addParameter(cutoffParam);
-        addParameter(qParam);
-
-        m_filter = std::make_shared<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, sampleRate);
-        setupBuffers(1, 1, bufferSize, 2);
+    FluxFilterNode(int bufferSize, float sampleRate) 
+        : FluxPlugin("Filter", bufferSize, sampleRate) 
+    {
+        addParam("Cutoff", 20.0f, 20000.0f, 1000.0f);
+        addParam("Reso", 0.1f, 10.0f, 0.707f);
+        m_filter = std::make_unique<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, sampleRate);
     }
     
-    void process(int frames) override {
-        m_filter->setCutoff(getParameter("Cutoff")->getValue());
-        m_filter->setQ(getParameter("Resonance")->getValue());
-
-        float* in = getInputBuffer(0);
-        float* out = getOutputBuffer(0);
-        std::copy(in, in + frames * 2, out);
-        m_filter->process(out, frames, 2);
+    void processBlock(const float* input, float* output, int totalSamples) override {
+        m_filter->setCutoff(getParam("Cutoff"));
+        m_filter->setQ(getParam("Reso"));
+        
+        // We need to adapt the BiquadNode which processes in place or via buffer
+        // For simplicity in this refactor, we'll assume it handles the block
+        // Actually, BiquadFilterNode::process takes a single buffer.
+        // Let's optimize: copy input to output, then process in-place.
+        std::copy(input, input + totalSamples, output);
+        m_filter->process(output, totalSamples / 2, 2); // Frames, Channels
     }
 
-    std::string getName() const override { return "Filter"; }
-    std::vector<Port> getInputPorts() const override { return { {"In", 2} }; }
-    std::vector<Port> getOutputPorts() const override { return { {"Out", 2} }; }
-
 private:
-    std::shared_ptr<BiquadFilterNode> m_filter;
+    std::unique_ptr<BiquadFilterNode> m_filter;
 };
 
-class FluxDelayNode : public FluxNode {
+// --- Standard Delay Plugin ---
+class FluxDelayNode : public FluxPlugin {
 public:
-    FluxDelayNode(int bufferSize, float sampleRate) {
-        auto timeParam = std::make_shared<Parameter>("Time", 0.0f, 2.0f, 0.5f);
-        auto feedbackParam = std::make_shared<Parameter>("Feedback", 0.0f, 1.0f, 0.3f);
-        addParameter(timeParam);
-        addParameter(feedbackParam);
-
-        m_delay = std::make_shared<DelayNode>(2.0f, 0.3f, sampleRate); // Max 2s delay
-        setupBuffers(1, 1, bufferSize, 2);
+    FluxDelayNode(int bufferSize, float sampleRate) 
+        : FluxPlugin("Delay", bufferSize, sampleRate) 
+    {
+        addParam("Time", 0.0f, 2.0f, 0.5f);
+        addParam("Feedback", 0.0f, 0.95f, 0.3f);
+        m_delay = std::make_unique<DelayNode>(2.0f, 0.3f, sampleRate);
     }
     
-    void process(int frames) override {
-        // Note: DelayNode's buffer size is fixed at creation in this simple implementation
-        // so we only update feedback here. Delay time would need a circular buffer resize.
-        // For this abstraction demo, we'll just update feedback.
-        // m_delay->setFeedback(getParameter("Feedback")->getValue()); 
-
-        float* in = getInputBuffer(0);
-        float* out = getOutputBuffer(0);
-        std::copy(in, in + frames * 2, out);
-        m_delay->process(out, frames, 2);
+    void processBlock(const float* input, float* output, int totalSamples) override {
+        // Update feedback from param. Time resizing is complex, skipping for now.
+        // m_delay->setFeedback(getParam("Feedback")); 
+        
+        std::copy(input, input + totalSamples, output);
+        m_delay->process(output, totalSamples / 2, 2);
     }
 
-    std::string getName() const override { return "Delay"; }
-    std::vector<Port> getInputPorts() const override { return { {"In", 2} }; }
-    std::vector<Port> getOutputPorts() const override { return { {"Out", 2} }; }
-
 private:
-    std::shared_ptr<DelayNode> m_delay;
+    std::unique_ptr<DelayNode> m_delay;
 };
 
 } // namespace Beam
