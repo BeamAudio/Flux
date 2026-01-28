@@ -5,6 +5,7 @@
 #include "flux_graph.hpp"
 #include "render_plan.hpp"
 #include "master_node.hpp"
+#include "input_node.hpp"
 #include "../session/automation.hpp"
 #include <SDL3/SDL.h>
 #include <vector>

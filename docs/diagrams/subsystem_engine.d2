@@ -1,0 +1,31 @@
+direction: right
+
+title: Engine Subsystem (Multichannel & Thread-Safe)
+
+AudioReader: {
+  shape: cylinder
+  label: "Universal Audio Reader\n(miniaudio)"
+  description: "Supports MP3, WAV, FLAC\nAuto-converts to 32-bit Float"
+}
+
+DiskStreamer: {
+  label: "Disk Streamer"
+  description: "Buffered reading\nSeek-aware synchronization"
+}
+
+FluxGraph: {
+  label: "Flux Graph (Thread-Safe)"
+  description: "std::mutex protected\nAtomic RenderPlan swaps"
+}
+
+Nodes: {
+  InputNode: "Hardware Capture"
+  FluxTrackNode: "Timeline Playback/Rec"
+  FXNodes: "BiquadFilter (Vectorized)"
+}
+
+AudioReader -> DiskStreamer: "PCM Data"
+DiskStreamer -> FluxTrackNode: "Frame-accurate stream"
+FluxGraph -> Nodes: "Manages Topology"
+Nodes -> FluxGraph: "In-place processing"
+

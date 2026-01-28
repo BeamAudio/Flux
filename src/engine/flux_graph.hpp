@@ -7,6 +7,7 @@
 #include <set>
 #include <algorithm>
 #include <iostream>
+#include <mutex>
 
 namespace Beam {
 
@@ -27,6 +28,7 @@ struct FluxConnection {
 class FluxGraph {
 public:
     size_t addNode(std::shared_ptr<FluxNode> node) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         size_t id = m_nextId++;
         m_nodes[id] = node;
         m_needsRebuild = true;
@@ -34,6 +36,7 @@ public:
     }
 
     void removeNode(size_t id) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         m_nodes.erase(id);
         // Remove associated connections
         for (auto it = m_connections.begin(); it != m_connections.end(); ) {
@@ -47,11 +50,13 @@ public:
     }
 
     void connect(size_t srcNodeId, int srcPort, size_t dstNodeId, int dstPort) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         m_connections.insert({srcNodeId, srcPort, dstNodeId, dstPort});
         m_needsRebuild = true;
     }
 
     void disconnect(size_t srcNodeId, int srcPort, size_t dstNodeId, int dstPort) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         m_connections.erase({srcNodeId, srcPort, dstNodeId, dstPort});
         m_needsRebuild = true;
     }
@@ -59,6 +64,7 @@ public:
     // Compiles the current graph topology into an optimized, flat execution plan.
     // This method is O(N + C) and should be called from the UI thread when the graph changes.
     std::shared_ptr<RenderPlan> compile(int bufferSizeFrames, int channels = 2) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         auto plan = std::make_shared<RenderPlan>();
         
         // 1. Topological Sort
@@ -95,7 +101,7 @@ public:
 
         // Identify all input buffers that need clearing
         for (const auto& [id, node] : m_nodes) {
-            for (int i = 0; i < node->getInputPorts().size(); ++i) {
+            for (int i = 0; i < (int)node->getInputPorts().size(); ++i) {
                 plan->clearOps.push_back({ node->getInputBuffer(i), bufSizeFloats });
             }
         }
@@ -128,20 +134,32 @@ public:
     }
 
     void setTransportState(bool playing) {
+        std::lock_guard<std::mutex> lock(m_mutex);
         for (auto& pair : m_nodes) {
             pair.second->onTransportStateChanged(playing);
         }
     }
 
-    std::shared_ptr<FluxNode> getNode(size_t id) { return m_nodes[id]; }
-    const std::map<size_t, std::shared_ptr<FluxNode>>& getNodes() const { return m_nodes; }
-    const std::set<FluxConnection>& getConnections() const { return m_connections; }
+    std::shared_ptr<FluxNode> getNode(size_t id) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        auto it = m_nodes.find(id);
+        return (it != m_nodes.end()) ? it->second : nullptr;
+    }
+
+    const std::map<size_t, std::shared_ptr<FluxNode>>& getNodes() const {
+        return m_nodes;
+    }
+
+    const std::set<FluxConnection>& getConnections() const {
+        return m_connections;
+    }
 
 private:
     std::map<size_t, std::shared_ptr<FluxNode>> m_nodes;
     std::set<FluxConnection> m_connections;
     size_t m_nextId = 0;
     bool m_needsRebuild = true;
+    std::mutex m_mutex;
 };
 
 } // namespace Beam

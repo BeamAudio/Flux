@@ -53,7 +53,7 @@ public:
         m_state = TrackState::Idle;
     }
 
-    void process(float* buffer, int frames, int channels) override {
+    void process(float* buffer, int frames, int channels, size_t startFrame = 0) override {
         // If Recording, the buffer contains the input to be recorded
         if (m_state == TrackState::Recording && m_isWriterOpen) {
             // Write to disk
@@ -68,18 +68,28 @@ public:
         } 
         // If Playing, read from disk into buffer
         else if (m_state == TrackState::Playing && m_streamer) {
+            // Check for jumps in timeline (essential for DAW sync)
+            if (startFrame != m_lastProcessedFrame) {
+                m_streamer->seek(startFrame);
+            }
+            
             m_streamer->read(buffer, frames, channels);
+            m_lastProcessedFrame = startFrame + frames;
         }
     }
 
-    void setState(TrackState state) { m_state = state; }
+    void setState(TrackState state) { 
+        m_state = state; 
+        if (state == TrackState::Idle) m_lastProcessedFrame = 0;
+    }
     TrackState getState() const { return m_state; }
     
     void seek(size_t frame) {
+        m_lastProcessedFrame = frame;
         if (m_streamer) m_streamer->seek(frame);
     }
 
-    std::vector<float> getPeakData(int numPoints) {
+    std::vector<std::vector<float>> getPeakData(int numPoints) {
         if (m_streamer) return m_streamer->getPeakData(numPoints);
         return {};
     }
@@ -90,6 +100,7 @@ private:
     std::string m_name;
     std::unique_ptr<DiskStreamer> m_streamer;
     std::atomic<TrackState> m_state;
+    size_t m_lastProcessedFrame = 0;
     
     drwav m_wavWriter;
     bool m_isWriterOpen;

@@ -31,12 +31,12 @@ public:
 
         if (m_track->getState() == TrackState::Recording) {
             // Process recording: write 'in' to disk, and pass through to 'out' for monitoring
-            m_track->process(in, frames, 2);
+            m_track->process(in, frames, 2, m_currentFrame);
             std::copy(in, in + frames * 2, out);
         } else {
             // Process playback: read from disk into 'out'
             std::fill(out, out + frames * 2, 0.0f);
-            m_track->process(out, frames, 2);
+            m_track->process(out, frames, 2, m_currentFrame);
         }
     }
 
@@ -62,7 +62,7 @@ public:
         return m_track->getState();
     }
 
-    std::vector<float> getPeakData(int numPoints) {
+    std::vector<std::vector<float>> getPeakData(int numPoints) {
         return m_track->getPeakData(numPoints);
     }
 

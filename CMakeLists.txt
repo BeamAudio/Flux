@@ -23,6 +23,7 @@ file(GLOB_RECURSE ENGINE_SOURCES "src/engine/*.cpp")
 file(GLOB_RECURSE INTERFACE_SOURCES "src/interface/*.cpp")
 file(GLOB_RECURSE RENDER_SOURCES "src/render/*.cpp")
 file(GLOB_RECURSE APPLICATION_SOURCES "src/application/*.cpp")
+file(GLOB_RECURSE UTILITIES_SOURCES "src/utilities/*.cpp")
 set(THIRD_PARTY_SOURCES "third_party/glad.c")
 
 # Include Directories
@@ -30,7 +31,7 @@ include_directories(src)
 include_directories(third_party)
 
 # Main Executable
-add_executable(${PROJECT_NAME} src/main.cpp ${SESSION_SOURCES} ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${RENDER_SOURCES} ${APPLICATION_SOURCES} ${THIRD_PARTY_SOURCES})
+add_executable(${PROJECT_NAME} src/main.cpp ${SESSION_SOURCES} ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${RENDER_SOURCES} ${APPLICATION_SOURCES} ${UTILITIES_SOURCES} ${THIRD_PARTY_SOURCES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
     WIN32_EXECUTABLE FALSE
@@ -47,7 +48,7 @@ endif()
 
 # Standalone Tests
 add_executable(test_persistence tests/test_persistence.cpp)
-add_executable(test_juce_like_api tests/test_juce_like_api.cpp ${ENGINE_SOURCES} ${APPLICATION_SOURCES})
+add_executable(test_juce_like_api tests/test_juce_like_api.cpp ${ENGINE_SOURCES} ${APPLICATION_SOURCES} ${UTILITIES_SOURCES})
 
 target_include_directories(test_juce_like_api PRIVATE src)
 

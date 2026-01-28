@@ -16,7 +16,7 @@ struct Region {
     size_t duration;    ///< Length in frames
     size_t sourceOffset; ///< Offset into the source audio file
     int trackIndex;     ///< Vertical lane index
-    std::vector<float> peaks; ///< Cached waveform data
+    std::vector<std::vector<float>> channelPeaks; ///< Cached waveform data per channel
 };
 
 } // namespace Beam

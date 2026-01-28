@@ -1,7 +1,7 @@
-#include "../src/dsp/audio_engine.hpp"
-#include "../src/dsp/flux_fx_nodes.hpp"
-#include "../src/ui/input_handler.hpp"
-#include "../src/ui/knob.hpp"
+#include "../src/engine/audio_engine.hpp"
+#include "../src/engine/flux_fx_nodes.hpp"
+#include "../src/interface/input_handler.hpp"
+#include "../src/interface/knob.hpp"
 #include <iostream>
 #include <cassert>
 
@@ -43,3 +43,4 @@ int main() {
 
     return 0;
 }
+

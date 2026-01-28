@@ -47,7 +47,12 @@ public:
     /**
      * @brief Responds to timeline seeking.
      */
-    virtual void onTransportSeek(size_t frame) {}
+    virtual void onTransportSeek(size_t frame) { m_currentFrame = frame; }
+
+    /**
+     * @brief Sets the current playhead position for this block.
+     */
+    void setCurrentFrame(size_t frame) { m_currentFrame = frame; }
 
     virtual std::string getName() const = 0;
     virtual std::vector<Port> getInputPorts() const = 0;
@@ -85,6 +90,7 @@ protected:
     std::vector<std::vector<float>> m_outputs;
     std::map<std::string, std::shared_ptr<Parameter>> m_parameters;
     std::atomic<bool> m_bypassed{false};
+    size_t m_currentFrame = 0;
 };
 
 } // namespace Beam

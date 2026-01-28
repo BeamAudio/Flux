@@ -1,0 +1,42 @@
+direction: down
+
+title: Audio Engine Signal & Control Flow
+
+Hardware_In: {shape: parallelogram; label: "Hardware Input (SDL3 Capture)"}
+Hardware_Out: {shape: parallelogram; label: "Hardware Output (SDL3 Playback)"}
+
+subgraph AudioThread {
+  label: "High Priority Audio Thread"
+  
+  ProcessLoop: {
+    Step1: Capture Input Data -> InputNode.pushData()
+    Step2: Apply AutomationLanes
+    Step3: Execute RenderPlan (Topological Order)
+    Step4: InputNode -> TrackNodes (if recording)
+    Step5: TrackNodes -> FX -> MasterNode
+    Step6: MasterNode -> SDL3_Buffer
+  }
+}
+
+subgraph UIThread {
+  label: "UI / Management Thread"
+  
+  GraphEdit: {
+    label: "User modifies Workspace (Cables/Nodes)"
+  }
+  
+  Compile: {
+    label: "FluxGraph::compile()"
+    description: "Kahn's Algorithm generated new RenderPlan"
+  }
+  
+  Swap: {
+    label: "Atomic Swap"
+    description: "AudioEngine::m_activePlan.store(newPlan)"
+  }
+}
+
+Hardware_In -> ProcessLoop.Step1
+ProcessLoop.Step6 -> Hardware_Out
+GraphEdit -> Compile -> Swap
+Swap -> ProcessLoop: "Update active sequence"

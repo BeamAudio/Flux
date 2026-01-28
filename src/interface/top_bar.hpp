@@ -27,6 +27,10 @@ public:
         batcher.drawRoundedRect(85, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
         batcher.drawText("SLICE", 95, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
+        // Config Button
+        batcher.drawRoundedRect(160, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
+        batcher.drawText("CONFIG", 175, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+
         // Transport Controls (Center)
         float cx = m_bounds.w * 0.5f - 100;
         // Rewind
@@ -51,6 +55,7 @@ public:
         if (y > 8 && y < 32) {
             if (x > 10 && x < 80) { if (onModeChanged) onModeChanged(0); return true; }
             if (x > 85 && x < 155) { if (onModeChanged) onModeChanged(1); return true; }
+            if (x > 160 && x < 230) { if (onConfigRequested) onConfigRequested(); return true; }
             
             float cx = m_bounds.w * 0.5f - 100;
             if (x > cx && x < cx + 40) { if (onRewindRequested) onRewindRequested(); return true; }
@@ -67,6 +72,7 @@ public:
     void setPlaying(bool playing) { m_isPlaying = playing; }
 
     std::function<void(int)> onModeChanged;
+    std::function<void()> onConfigRequested;
     std::function<void()> onSaveRequested;
     std::function<void()> onLoadRequested;
     std::function<void()> onPlayRequested;

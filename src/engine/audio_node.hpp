@@ -10,7 +10,7 @@ class AudioNode {
 public:
     virtual ~AudioNode() = default;
     
-    virtual void process(float* buffer, int frames, int channels) = 0;
+    virtual void process(float* buffer, int frames, int channels, size_t startFrame = 0) = 0;
     virtual std::string getName() const = 0;
 
     void setBypass(bool bypass) { m_isBypassed = bypass; }

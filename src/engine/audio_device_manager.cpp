@@ -40,16 +40,27 @@ void AudioDeviceManager::setAudioCallback(std::function<void(float**, float**, i
 std::vector<AudioDeviceInfo> AudioDeviceManager::getAvailableOutputDevices() const {
     std::vector<AudioDeviceInfo> devices;
     
-    // For now, return a default device - in a real implementation, enumerate actual devices
-    AudioDeviceInfo defaultDevice;
-    defaultDevice.name = "Default Audio Device";
-    defaultDevice.deviceId = "default";
-    defaultDevice.maxOutputChannels = 32; // Arbitrary high number
-    defaultDevice.maxInputChannels = 32;
-    defaultDevice.sampleRates = {44100.0, 48000.0, 96000.0};
-    defaultDevice.bufferSizes = {128, 256, 512, 1024};
+    int count = 0;
+    SDL_AudioDeviceID* sdlDevices = SDL_GetAudioPlaybackDevices(&count);
     
-    devices.push_back(defaultDevice);
+    if (sdlDevices) {
+        for (int i = 0; i < count; ++i) {
+            AudioDeviceInfo info;
+            const char* name = SDL_GetAudioDeviceName(sdlDevices[i]);
+            info.name = name ? name : "Unknown Device";
+            info.deviceId = std::to_string(sdlDevices[i]);
+            
+            SDL_AudioSpec spec;
+            if (SDL_GetAudioDeviceFormat(sdlDevices[i], &spec, NULL)) {
+                info.maxOutputChannels = spec.channels;
+                info.sampleRates = {(double)spec.freq};
+            }
+            
+            info.bufferSizes = {128, 256, 512, 1024, 2048};
+            devices.push_back(info);
+        }
+        SDL_free(sdlDevices);
+    }
     
     return devices;
 }
@@ -57,16 +68,27 @@ std::vector<AudioDeviceInfo> AudioDeviceManager::getAvailableOutputDevices() con
 std::vector<AudioDeviceInfo> AudioDeviceManager::getAvailableInputDevices() const {
     std::vector<AudioDeviceInfo> devices;
     
-    // For now, return a default device - in a real implementation, enumerate actual devices
-    AudioDeviceInfo defaultDevice;
-    defaultDevice.name = "Default Audio Device";
-    defaultDevice.deviceId = "default";
-    defaultDevice.maxOutputChannels = 32;
-    defaultDevice.maxInputChannels = 32;
-    defaultDevice.sampleRates = {44100.0, 48000.0, 96000.0};
-    defaultDevice.bufferSizes = {128, 256, 512, 1024};
+    int count = 0;
+    SDL_AudioDeviceID* sdlDevices = SDL_GetAudioRecordingDevices(&count);
     
-    devices.push_back(defaultDevice);
+    if (sdlDevices) {
+        for (int i = 0; i < count; ++i) {
+            AudioDeviceInfo info;
+            const char* name = SDL_GetAudioDeviceName(sdlDevices[i]);
+            info.name = name ? name : "Unknown Device";
+            info.deviceId = std::to_string(sdlDevices[i]);
+            
+            SDL_AudioSpec spec;
+            if (SDL_GetAudioDeviceFormat(sdlDevices[i], &spec, NULL)) {
+                info.maxInputChannels = spec.channels;
+                info.sampleRates = {(double)spec.freq};
+            }
+            
+            info.bufferSizes = {128, 256, 512, 1024, 2048};
+            devices.push_back(info);
+        }
+        SDL_free(sdlDevices);
+    }
     
     return devices;
 }

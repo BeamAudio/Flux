@@ -19,7 +19,14 @@ public:
         calculateCoefficients();
     }
 
-    void process(float* buffer, int frames, int channels) override {
+    void process(float* buffer, int frames, int channels, size_t startFrame = 0) override {
+        if (m_x1.size() != (size_t)channels) {
+            m_x1.assign(channels, 0.0f);
+            m_x2.assign(channels, 0.0f);
+            m_y1.assign(channels, 0.0f);
+            m_y2.assign(channels, 0.0f);
+        }
+
         for (int i = 0; i < frames; ++i) {
             for (int c = 0; c < channels; ++c) {
                 float x = buffer[i * channels + c];
@@ -76,7 +83,7 @@ private:
     FilterType m_type;
     float m_frequency, m_q, m_sampleRate;
     float m_b0, m_b1, m_b2, m_a0, m_a1, m_a2;
-    float m_x1[2] = {0,0}, m_x2[2] = {0,0}, m_y1[2] = {0,0}, m_y2[2] = {0,0};
+    std::vector<float> m_x1, m_x2, m_y1, m_y2;
 };
 
 } // namespace Beam

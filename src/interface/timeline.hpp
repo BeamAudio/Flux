@@ -51,19 +51,31 @@ public:
 
                     batcher.drawRoundedRect(rx, ry, rw, rh, 4.0f, 0.5f, 0.2f, 0.35f, 0.5f, 1.0f);
                     
-                    if (!reg.peaks.empty()) {
-                        std::vector<std::pair<float, float>> topPoints;
-                        std::vector<std::pair<float, float>> bottomPoints;
-                        float midY = ry + rh * 0.5f;
-                        float step = rw / (float)reg.peaks.size();
-                        for (size_t p = 0; p < reg.peaks.size(); ++p) {
-                            float px = rx + p * step;
-                            float ph = reg.peaks[p] * (rh * 0.45f);
-                            topPoints.push_back({px, midY - ph});
-                            bottomPoints.push_back({px, midY + ph});
+                    if (!reg.channelPeaks.empty()) {
+                        float channelHeight = rh / (float)reg.channelPeaks.size();
+                        
+                        for (size_t c = 0; c < reg.channelPeaks.size(); ++c) {
+                            auto const& peaks = reg.channelPeaks[c];
+                            std::vector<std::pair<float, float>> topPoints;
+                            std::vector<std::pair<float, float>> bottomPoints;
+                            
+                            float midY = ry + (c * channelHeight) + channelHeight * 0.5f;
+                            float step = rw / (float)peaks.size();
+                            
+                            for (size_t p = 0; p < peaks.size(); ++p) {
+                                float px = rx + p * step;
+                                float ph = peaks[p] * (channelHeight * 0.45f);
+                                topPoints.push_back({px, midY - ph});
+                                bottomPoints.push_back({px, midY + ph});
+                            }
+                            batcher.drawCurve(topPoints, 1.2f, 0.6f, 0.9f, 1.0f, 1.0f);
+                            batcher.drawCurve(bottomPoints, 1.2f, 0.6f, 0.9f, 1.0f, 1.0f);
+                            
+                            // Divider between channels
+                            if (c < reg.channelPeaks.size() - 1) {
+                                batcher.drawQuad(rx, ry + (c + 1) * channelHeight, rw, 1, 0.3f, 0.3f, 0.3f, 0.5f);
+                            }
                         }
-                        batcher.drawCurve(topPoints, 1.5f, 0.5f, 0.8f, 1.0f, 1.0f);
-                        batcher.drawCurve(bottomPoints, 1.5f, 0.5f, 0.8f, 1.0f, 1.0f);
                     }
                     batcher.drawText(reg.name, rx + 5, ry + 5, 10, 0.9f, 0.9f, 0.9f, 1.0f);
                 }
@@ -155,11 +167,16 @@ private:
         Region original = track.regions[index];
         track.regions[index].duration = offsetInFrames;
         float ratio = (float)offsetInFrames / original.duration;
-        size_t peakSplit = (size_t)(original.peaks.size() * ratio);
-        std::vector<float> p1(original.peaks.begin(), original.peaks.begin() + peakSplit);
-        std::vector<float> p2(original.peaks.begin() + peakSplit, original.peaks.end());
-        track.regions[index].peaks = p1;
-        Region secondHalf = {original.name + " (Slice)", original.startFrame + offsetInFrames, original.duration - offsetInFrames, original.sourceOffset + offsetInFrames, original.trackIndex, p2};
+        
+        std::vector<std::vector<float>> peaks1, peaks2;
+        for (auto const& channel : original.channelPeaks) {
+            size_t peakSplit = (size_t)(channel.size() * ratio);
+            peaks1.push_back(std::vector<float>(channel.begin(), channel.begin() + peakSplit));
+            peaks2.push_back(std::vector<float>(channel.begin() + peakSplit, channel.end()));
+        }
+        
+        track.regions[index].channelPeaks = peaks1;
+        Region secondHalf = {original.name + " (Slice)", original.startFrame + offsetInFrames, original.duration - offsetInFrames, original.sourceOffset + offsetInFrames, original.trackIndex, peaks2};
         track.regions.push_back(secondHalf);
     }
 

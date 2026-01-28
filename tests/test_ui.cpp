@@ -1,4 +1,4 @@
-#include "../src/ui/input_handler.hpp"
+#include "../src/interface/input_handler.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
@@ -35,4 +35,5 @@ int main() {
 
     return 0;
 }
+
 

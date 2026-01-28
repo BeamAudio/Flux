@@ -2,12 +2,14 @@
 #include "project_manager.hpp"
 #include "../engine/track_node.hpp"
 #include "../engine/midi_event.hpp"
+#include "../engine/audio_device_manager.hpp"
 #include "../interface/workspace.hpp"
 #include "../interface/timeline.hpp"
 #include "../interface/tape_reel.hpp"
 #include "../interface/top_bar.hpp"
 #include "../interface/sidebar.hpp"
 #include "../interface/master_strip.hpp"
+#include "../interface/audio_config_view.hpp"
 #include "../render/ui_shaders.hpp"
 #include <iostream>
 #include <SDL3/SDL_dialog.h>
@@ -27,6 +29,7 @@ BeamHost::BeamHost(const std::string& title, int width, int height)
     : m_title(title), m_width(width), m_height(height), m_isRunning(false), 
       m_window(nullptr), m_glContext(nullptr) {
     m_audioEngine = std::make_unique<AudioEngine>();
+    m_audioDeviceManager = std::make_unique<AudioDeviceManager>();
     m_uiHandler = std::make_unique<InputHandler>();
 }
 
@@ -61,6 +64,7 @@ bool BeamHost::init() {
     m_batcher->setShader(m_uiShader.get());
 
     if (!SDL_Init(SDL_INIT_AUDIO)) return false;
+    m_audioDeviceManager->initialise(2, 2);
     if (!m_audioEngine->init(44100, 2)) return false;
     
     m_project = std::make_shared<FluxProject>();
@@ -78,6 +82,7 @@ bool BeamHost::init() {
     m_topBar = std::make_shared<TopBar>(m_width);
     m_browser = std::make_shared<Sidebar>(Sidebar::Side::Left);
     m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine->getMasterNode());
+    m_configView = std::make_shared<AudioConfigView>(m_audioDeviceManager.get());
 
     m_browser->onAddFX = [this](std::string type) {
         if (m_workspace) {
@@ -91,9 +96,19 @@ bool BeamHost::init() {
     m_uiHandler->addComponent(m_browser);
     m_uiHandler->addComponent(m_masterStrip);
     m_uiHandler->addComponent(m_topBar);
+    m_uiHandler->addComponent(m_configView);
 
     m_topBar->onModeChanged = [this](int mode) {
         setMode(mode == 0 ? DAWMode::Flux : DAWMode::Splicing);
+    };
+    m_topBar->onConfigRequested = [this]() {
+        m_configView->setVisible(!m_configView->isVisible());
+    };
+    m_configView->onConfigChanged = [this]() {
+        auto setup = m_audioDeviceManager->getCurrentDeviceSetup();
+        std::cout << "Audio Config Changed: " << setup.outputDeviceName << " @ " << setup.sampleRate << std::endl;
+        // In a full implementation, we'd restart the AudioEngine stream with new params
+        m_audioEngine->init((int)setup.sampleRate, setup.outputChannels);
     };
     m_topBar->onPlayRequested = [this]() { m_audioEngine->setPlaying(true); };
     m_topBar->onPauseRequested = [this]() { m_audioEngine->setPlaying(false); };
@@ -133,6 +148,7 @@ void BeamHost::performLayout() {
     if (m_masterStrip) m_masterStrip->setBounds((float)m_width - masterStripWidth, topBarHeight, masterStripWidth, (float)m_height - topBarHeight);
     if (m_workspace) m_workspace->setBounds(sidebarWidth, topBarHeight, (float)m_width - sidebarWidth - masterStripWidth, (float)m_height - topBarHeight);
     if (m_timeline) m_timeline->setBounds(sidebarWidth, topBarHeight, (float)m_width - sidebarWidth - masterStripWidth, (float)m_height - topBarHeight);
+    if (m_configView) m_configView->setBounds(0, 0, (float)m_width, (float)m_height);
 }
 
 void BeamHost::handleEvents() {

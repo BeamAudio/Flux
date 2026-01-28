@@ -1,5 +1,5 @@
-#include "../src/dsp/simple_gain_processor.hpp"
-#include "../src/audio/audio_buffer.hpp"
+#include "../src/engine/simple_gain_processor.hpp"
+#include "../src/engine/audio_buffer.hpp"
 #include "../src/utilities/flux_audio_utils.hpp"
 #include <iostream>
 #include <memory>
@@ -37,3 +37,4 @@ int main() {
 
     return 0;
 }
+

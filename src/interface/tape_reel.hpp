@@ -65,7 +65,7 @@ public:
             if (track->getState() == TrackState::Recording) {
                 m_trackNode->stopRecording();
             } else {
-                std::string path = "recording_" + std::to_string(m_nodeId) + ".wav";
+                std::string path = "recording_" + std::to_string(getNodeId()) + ".wav";
                 m_trackNode->startRecording(path, 44100);
             }
             return true;

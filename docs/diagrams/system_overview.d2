@@ -1,0 +1,47 @@
+direction: right
+
+# System Layers
+Session: {
+  BeamHost: {
+    shape: person
+    label: "Main Controller\n(Event Loop)"
+  }
+  FluxProject: {
+    description: "Multi-track State\nStereo Peak Cache"
+  }
+}
+
+Engine: {
+  AudioEngine: {
+    description: "SDL3 IO & Global Clock"
+  }
+  UniversalEngine: {
+    label: "Universal Reader (MP3/WAV)"
+    description: "miniaudio backend"
+  }
+  FluxGraph: {
+    label: "Thread-Safe Graph"
+    description: "Mutex-protected routing"
+  }
+}
+
+Interface: {
+  Workspace: {
+    description: "Immediate UI Sync\nBezier Cables"
+  }
+  Timeline: {
+    description: "Stereo Waveform Rendering\nSplicing Engine"
+  }
+}
+
+Render: {
+  QuadBatcher: "High-speed GL Batching"
+  SDF_Shaders: "Anti-aliased primitives"
+}
+
+# Relationships
+Session.BeamHost -> Engine.AudioEngine: "Drives Playhead"
+Engine.AudioEngine -> Engine.FluxGraph: "Executes Plan"
+Interface.Workspace -> Engine.FluxGraph: "Safe Concurrent Editing"
+Interface.Timeline -> Session.FluxProject: "Visualizes Multi-channel Peaks"
+Render.QuadBatcher -> Render.SDF_Shaders: "Uses"

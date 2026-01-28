@@ -116,6 +116,8 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
         }
 
         for (const auto& exec : plan->sequence) {
+            exec.node->setCurrentFrame(m_currentFrame);
+            
             if (!midi.getEvents().empty()) {
                 exec.node->processMIDI(midi);
             }

@@ -1,23 +1,22 @@
 #include "disk_streamer.hpp"
-#include "wav_reader.hpp"
 #include <iostream>
 
 namespace Beam {
 
 DiskStreamer::DiskStreamer(size_t bufferSize) 
-    : m_bufferSize(bufferSize), m_reader(std::make_unique<WavReader>()) {}
+    : m_bufferSize(bufferSize), m_reader(std::make_unique<AudioReader>()) {}
 
 DiskStreamer::~DiskStreamer() {
     close();
 }
 
-bool DiskStreamer::open(const std::string& filePath) {
+bool DiskStreamer::open(const std::string& filePath, int channels) {
     m_filePath = filePath;
-    return m_reader->open(filePath);
+    return m_reader->open(filePath, channels);
 }
 
 void DiskStreamer::close() {
-    m_keepStreaming = false;
+    if (m_reader) m_reader->close();
 }
 
 size_t DiskStreamer::read(float* output, size_t frames, int channels) {
@@ -29,14 +28,9 @@ void DiskStreamer::seek(size_t frame) {
     if (m_reader) m_reader->seek(frame);
 }
 
-std::vector<float> DiskStreamer::getPeakData(int numPoints) {
+std::vector<std::vector<float>> DiskStreamer::getPeakData(int numPoints) {
     if (m_reader) return m_reader->getPeakData(numPoints);
     return {};
 }
 
-void DiskStreamer::streamLoop() {
-    // Background streaming logic would go here if we were using a circular buffer
-}
-
 } // namespace Beam
-

@@ -98,10 +98,11 @@ public:
             td.trackIndex = (int)m_project->getTracks().size();
             
             Region r = {"Audio Clip", 0, 44100 * 10, 0, td.trackIndex};
-            r.peaks = fluxTrack->getPeakData(200);
+            r.channelPeaks = fluxTrack->getPeakData(200);
             td.regions.push_back(r);
             
             m_project->addTrack(td);
+            syncReels(); // Immediate UI update
             std::cout << "Track added. syncReels will create UI." << std::endl;
         }
     }
@@ -115,6 +116,7 @@ public:
             size_t id = m_project->getGraph()->addNode(fxNode);
             auto mod = std::make_shared<AudioModule>(fxNode, id, x, y);
             setupModule(mod);
+            syncReels(); // Immediate UI update
             if (m_engine) m_engine->updatePlan();
         }
     }

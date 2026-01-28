@@ -15,9 +15,7 @@ public:
         m_buffer.resize(delaySamples * 2, 0.0f); // Stereo buffer
     }
 
-    void process(float* buffer, int frames, int channels) override {
-        if (channels != 2) return; // Simple stereo implementation
-
+    void process(float* buffer, int frames, int channels, size_t startFrame = 0) override {
         for (int i = 0; i < frames; ++i) {
             for (int c = 0; c < channels; ++c) {
                 size_t idx = i * channels + c;

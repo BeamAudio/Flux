@@ -3,35 +3,38 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include <atomic>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
+#include "audio_reader.hpp"
 
 namespace Beam {
 
-class WavReader; // Forward decl
-
+/**
+ * @class DiskStreamer
+ * @brief Manages audio data retrieval from disk using AudioReader.
+ */
 class DiskStreamer {
 public:
-    DiskStreamer(size_t bufferSize = 4096 * 4);
+    DiskStreamer(size_t bufferSize = 44100 * 2);
     ~DiskStreamer();
 
-    bool open(const std::string& filePath);
+    bool open(const std::string& filePath, int channels = 2);
     void close();
 
-    // To be called by Audio Thread
     size_t read(float* output, size_t frames, int channels);
+    
+    /**
+     * @brief Seeks to an absolute frame position in the source file.
+     */
     void seek(size_t frame);
 
-    std::vector<float> getPeakData(int numPoints);
+    std::vector<std::vector<float>> getPeakData(int numPoints);
+
+    uint64_t getTotalFrames() const { return m_reader ? m_reader->getTotalFrames() : 0; }
 
 private:
-    void streamLoop();
-
     std::string m_filePath;
-    std::atomic<bool> m_keepStreaming{false};
-    std::unique_ptr<WavReader> m_reader;
+    std::unique_ptr<AudioReader> m_reader;
     size_t m_bufferSize;
 };
 

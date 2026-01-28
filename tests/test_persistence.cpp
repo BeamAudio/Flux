@@ -1,4 +1,4 @@
-#include "../src/core/project_manager.hpp"
+#include "../src/session/project_manager.hpp"
 #include <iostream>
 #include <cassert>
 
@@ -23,4 +23,5 @@ int main() {
 
     return 0;
 }
+
 

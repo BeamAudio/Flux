@@ -42,6 +42,7 @@ private:
     
     std::shared_ptr<FluxProject> m_project;
     std::unique_ptr<AudioEngine> m_audioEngine;
+    std::unique_ptr<class AudioDeviceManager> m_audioDeviceManager;
     std::unique_ptr<QuadBatcher> m_batcher;
     std::unique_ptr<Shader> m_uiShader;
     std::unique_ptr<InputHandler> m_uiHandler;
@@ -51,6 +52,7 @@ private:
     std::shared_ptr<class TopBar> m_topBar;
     std::shared_ptr<class Sidebar> m_browser;
     std::shared_ptr<class MasterStrip> m_masterStrip;
+    std::shared_ptr<class AudioConfigView> m_configView;
 };
 
 } // namespace Beam
