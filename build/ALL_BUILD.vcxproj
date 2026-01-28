@@ -186,25 +186,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{F1DC531D-B3E8-3414-BC63-2CC34B8432AC}</Project>
       <Name>SDL3_test</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_audio_engine.vcxproj">
-      <Project>{F00BEDCF-6B55-3336-8DB9-AE486E931570}</Project>
-      <Name>test_audio_engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_complex_dsp.vcxproj">
-      <Project>{0B0EBA1C-88F6-310A-B1E7-65D21B2D77C0}</Project>
-      <Name>test_complex_dsp</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.vcxproj">
-      <Project>{86938C99-B8C5-373D-A0D5-F255D574DF84}</Project>
-      <Name>test_integration</Name>
+    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.vcxproj">
+      <Project>{670FEC70-C72C-3DF9-812F-9FDA313EEBA4}</Project>
+      <Name>test_juce_like_api</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_persistence.vcxproj">
       <Project>{E18EDBB8-E2D9-3742-8302-B2A5433F73AE}</Project>
       <Name>test_persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_ui.vcxproj">
-      <Project>{24357FE0-CFF0-3BC4-99B5-3FB44BD08C7D}</Project>
-      <Name>test_ui</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

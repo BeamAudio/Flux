@@ -1,9 +1,6 @@
 C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/BeamAudioFlux.dir
-C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_audio_engine.dir
-C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_ui.dir
-C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_complex_dsp.dir
-C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_integration.dir
 C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_persistence.dir
+C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/test_juce_like_api.dir
 C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/ALL_BUILD.dir
 C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/ZERO_CHECK.dir
 C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir

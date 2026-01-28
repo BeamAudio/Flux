@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -111,10 +111,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -122,7 +122,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>_deps\sdl3-build\Debug\SDL3-static.lib;opengl32.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;dinput8.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -167,10 +167,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -178,7 +178,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>_deps\sdl3-build\Release\SDL3-static.lib;opengl32.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;dinput8.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -223,10 +223,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -234,7 +234,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>_deps\sdl3-build\MinSizeRel\SDL3-static.lib;opengl32.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;dinput8.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -253,7 +253,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -278,10 +278,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Alexi\Documents\Beam Audio Flux\src;C:\Users\Alexi\Documents\Beam Audio Flux\third_party;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\include-revision;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -289,7 +289,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>_deps\sdl3-build\RelWithDebInfo\SDL3-static.lib;opengl32.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;dinput8.lib;user32.lib;gdi32.lib;winmm.lib;imm32.lib;ole32.lib;oleaut32.lib;version.lib;uuid.lib;advapi32.lib;shell32.lib;setupapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -366,6 +366,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\tests\test_ui.cpp" />
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\ui\input_handler.cpp" />
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\quad_batcher.cpp" />
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\shader.cpp" />
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\third_party\glad.c" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -374,6 +377,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.vcxproj">
+      <Project>{25A97956-FB50-306C-8AEC-B5E2D0D1648E}</Project>
+      <Name>SDL3-static</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

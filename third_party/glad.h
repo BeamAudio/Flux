@@ -35,7 +35,6 @@ typedef size_t GLsizeiptr;
 extern "C" {
 #endif
 
-// Corrected Function pointer types with explicit char* to avoid confusion
 typedef void (APIENTRY * PFNGLGENVERTEXARRAYSPROC) (GLsizei n, GLuint *arrays);
 typedef void (APIENTRY * PFNGLBINDVERTEXARRAYPROC) (GLuint array);
 typedef void (APIENTRY * PFNGLGENBUFFERSPROC) (GLsizei n, GLuint *buffers);
@@ -63,8 +62,8 @@ typedef void (APIENTRY * PFNGLUNIFORM1FPROC) (GLint location, GLfloat v0);
 typedef void (APIENTRY * PFNGLUNIFORMMATRIX4FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 typedef void (APIENTRY * PFNGLDELETEVERTEXARRAYSPROC) (GLsizei n, const GLuint *arrays);
 typedef void (APIENTRY * PFNGLDELETEBUFFERSPROC) (GLsizei n, const GLuint *buffers);
+typedef void (APIENTRY * PFNGLACTIVETEXTUREPROC) (GLenum texture);
 
-// Extern declarations
 extern PFNGLGENVERTEXARRAYSPROC glGenVertexArrays;
 extern PFNGLBINDVERTEXARRAYPROC glBindVertexArray;
 extern PFNGLGENBUFFERSPROC glGenBuffers;
@@ -92,6 +91,7 @@ extern PFNGLUNIFORM1FPROC glUniform1f;
 extern PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
 extern PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays;
 extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 int gladLoadGLLoader(void* (*load)(const char* name));
 

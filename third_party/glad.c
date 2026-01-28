@@ -31,6 +31,7 @@ PFNGLUNIFORM1FPROC glUniform1f = NULL;
 PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv = NULL;
 PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays = NULL;
 PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
+PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
 int gladLoadGLLoader(void* (*load)(const char* name)) {
     glGenVertexArrays = (PFNGLGENVERTEXARRAYSPROC)load("glGenVertexArrays");
@@ -60,6 +61,7 @@ int gladLoadGLLoader(void* (*load)(const char* name)) {
     glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)load("glUniformMatrix4fv");
     glDeleteVertexArrays = (PFNGLDELETEVERTEXARRAYSPROC)load("glDeleteVertexArrays");
     glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)load("glDeleteBuffers");
+    glActiveTexture = (PFNGLACTIVETEXTUREPROC)load("glActiveTexture");
 
     return 1;
 }

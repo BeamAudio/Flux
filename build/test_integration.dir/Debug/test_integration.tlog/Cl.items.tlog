@@ -1,0 +1,7 @@
+C:\Users\Alexi\Documents\Beam Audio Flux\tests\test_integration.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\test_integration.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\audio_engine.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\audio_engine.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\disk_streamer.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\disk_streamer.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\ui\input_handler.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\input_handler.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\quad_batcher.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\quad_batcher.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\graphics\shader.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\shader.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\third_party\glad.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_integration.dir\Debug\glad.obj
