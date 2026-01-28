@@ -112,7 +112,8 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
 
     if (plan) {
         for (const auto& op : plan->clearOps) {
-            std::fill(op.buffer, op.buffer + op.size, 0.0f);
+            float* buf = op.node->getInputBuffer(op.portIdx);
+            std::fill(buf, buf + frames * m_channels, 0.0f);
         }
 
         for (const auto& exec : plan->sequence) {
@@ -127,12 +128,14 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
             } else {
                 for (int i = 0; i < (int)exec.node->getOutputPorts().size(); ++i) {
                     float* buf = exec.node->getOutputBuffer(i);
-                    std::fill(buf, buf + frames * 2, 0.0f);
+                    std::fill(buf, buf + frames * m_channels, 0.0f);
                 }
             }
 
             for (const auto& route : exec.outgoingRoutes) {
-                SIMD::add(route.sourceBuffer, route.destBuffer, frames * m_channels);
+                float* src = route.sourceNode->getOutputBuffer(route.sourcePort);
+                float* dst = route.destNode->getInputBuffer(route.destPort);
+                SIMD::add(src, dst, frames * m_channels);
             }
         }
     }

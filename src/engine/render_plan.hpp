@@ -10,14 +10,15 @@ namespace Beam {
 
 // Represents a single point-to-point signal copy operation
 struct SignalRoute {
-    float* sourceBuffer;
-    float* destBuffer;
-    // We assume buffer size is constant per block (e.g. 1024 frames * 2 channels)
+    std::shared_ptr<FluxNode> sourceNode;
+    int sourcePort;
+    std::shared_ptr<FluxNode> destNode;
+    int destPort;
 };
 
 // Represents the execution of a single node and its subsequent data routing
 struct NodeExecution {
-    std::shared_ptr<FluxNode> node; // Keep alive while plan exists
+    std::shared_ptr<FluxNode> node; 
     std::vector<SignalRoute> outgoingRoutes;
 };
 
@@ -27,8 +28,8 @@ struct RenderPlan {
     
     // Cached clear operations (inputs that need to be zeroed before processing)
     struct BufferClearOp {
-        float* buffer;
-        size_t size;
+        std::shared_ptr<FluxNode> node;
+        int portIdx;
     };
     std::vector<BufferClearOp> clearOps;
 };

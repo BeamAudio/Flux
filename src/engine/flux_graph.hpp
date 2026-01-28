@@ -102,7 +102,7 @@ public:
         // Identify all input buffers that need clearing
         for (const auto& [id, node] : m_nodes) {
             for (int i = 0; i < (int)node->getInputPorts().size(); ++i) {
-                plan->clearOps.push_back({ node->getInputBuffer(i), bufSizeFloats });
+                plan->clearOps.push_back({ node, i });
             }
         }
 
@@ -120,8 +120,10 @@ public:
                     auto dstNode = nodeLookup[conn.dstNodeId];
                     if (dstNode) {
                         exec.outgoingRoutes.push_back({
-                            node->getOutputBuffer(conn.srcPortIdx),
-                            dstNode->getInputBuffer(conn.dstPortIdx)
+                            node,
+                            conn.srcPortIdx,
+                            dstNode,
+                            conn.dstPortIdx
                         });
                     }
                 }

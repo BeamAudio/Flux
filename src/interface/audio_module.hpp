@@ -89,7 +89,9 @@ public:
         if (m_inputPort && m_inputPort->onMouseDown(x, y, button)) return true;
         if (m_outputPort && m_outputPort->onMouseDown(x, y, button)) return true;
         for (auto& child : m_children) {
-            if (child->getBounds().contains(x, y)) return child->onMouseDown(x, y, button);
+            if (child->getBounds().contains(x, y)) {
+                if (child->onMouseDown(x, y, button)) return true;
+            }
         }
         if (y < m_bounds.y + 25) { 
             startDragging(x, y);
@@ -98,7 +100,20 @@ public:
         return false;
     }
 
+    bool onMouseUp(float x, float y, int button) override {
+        bool handled = false;
+        for (auto& child : m_children) {
+            if (child->onMouseUp(x, y, button)) handled = true;
+        }
+        Component::onMouseUp(x, y, button);
+        return handled;
+    }
+
     bool onMouseMove(float x, float y) override {
+        for (auto& child : m_children) {
+            if (child->onMouseMove(x, y)) return true;
+        }
+
         bool changed = Component::onMouseMove(x, y);
         if (changed) {
             if (m_inputPort) m_inputPort->setBounds(m_bounds.x - 6, m_bounds.y + 50, 12, 12);
