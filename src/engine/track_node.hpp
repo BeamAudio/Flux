@@ -94,6 +94,11 @@ public:
         return {};
     }
 
+    size_t getTotalFrames() const {
+        if (m_streamer) return m_streamer->getTotalFrames();
+        return 0;
+    }
+
     std::string getName() const override { return m_name; }
 
 private:

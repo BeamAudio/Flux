@@ -71,11 +71,7 @@ public:
             return true;
         }
 
-        if (m_bounds.contains(x, y)) {
-            if (track->getState() == TrackState::Idle) track->setState(TrackState::Playing);
-            else track->setState(TrackState::Idle);
-            return true;
-        }
+        // Removed the play/pause toggle here to maintain global sync
         return false;
     }
 

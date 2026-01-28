@@ -86,7 +86,13 @@ public:
 
     void addTrack(const std::string& filePath, float x, float y, AudioEngine& engine) {
         std::cout << "Loading file: " << filePath << std::endl;
-        auto fluxTrack = std::make_shared<FluxTrackNode>("Track", 1024 * 4);
+        
+        // Extract file name from path
+        std::string fileName = filePath;
+        size_t lastSlash = filePath.find_last_of("/\\");
+        if (lastSlash != std::string::npos) fileName = filePath.substr(lastSlash + 1);
+
+        auto fluxTrack = std::make_shared<FluxTrackNode>(fileName, 1024 * 4);
         if (fluxTrack->load(filePath)) {
             size_t nodeId = m_project->getGraph()->addNode(fluxTrack);
             m_project->getGraph()->connect(nodeId, 0, 0, 0); 
@@ -97,13 +103,14 @@ public:
             td.nodeId = nodeId;
             td.trackIndex = (int)m_project->getTracks().size();
             
-            Region r = {"Audio Clip", 0, 44100 * 10, 0, td.trackIndex};
-            r.channelPeaks = fluxTrack->getPeakData(200);
+            size_t totalFrames = fluxTrack->getInternalNode()->getTotalFrames();
+            Region r = {fileName, 0, totalFrames, 0, td.trackIndex};
+            r.channelPeaks = fluxTrack->getPeakData(400); // More points for better resolution
             td.regions.push_back(r);
             
             m_project->addTrack(td);
             syncReels(); // Immediate UI update
-            std::cout << "Track added. syncReels will create UI." << std::endl;
+            std::cout << "Track added: " << fileName << " (" << totalFrames << " frames)" << std::endl;
         }
     }
 
@@ -163,10 +170,11 @@ public:
             for (auto& mod : m_modules) {
                 auto audioMod = std::dynamic_pointer_cast<AudioModule>(mod);
                 if (audioMod) {
-                    // Fuzzy hit detection for ports
+                    // Fuzzy hit detection for ports (with safety checks)
                     auto checkPort = [&](std::shared_ptr<Port> p) {
+                        if (!p) return false;
                         Rect b = p->getBounds();
-                        float padding = 15.0f; // More forgiving target area
+                        float padding = 15.0f; 
                         return (x >= b.x - padding && x <= b.x + b.w + padding && y >= b.y - padding && y <= b.y + b.h + padding);
                     };
 
