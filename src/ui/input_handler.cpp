@@ -37,6 +37,12 @@ void InputHandler::handleMouseMove(float x, float y) {
     }
 }
 
+void InputHandler::update(float dt) {
+    for (auto& comp : m_components) {
+        comp->update(dt);
+    }
+}
+
 void InputHandler::render(QuadBatcher& batcher) {
     for (auto& comp : m_components) {
         comp->render(batcher);

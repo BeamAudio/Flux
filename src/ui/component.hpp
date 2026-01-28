@@ -30,8 +30,9 @@ public:
     }
     virtual bool onMouseMove(float x, float y) { 
         if (m_isDragging && m_isDraggable) {
-            m_bounds.x += (x - m_lastMouseX);
-            m_bounds.y += (y - m_lastMouseY);
+            float dx = x - m_lastMouseX;
+            float dy = y - m_lastMouseY;
+            setBounds(m_bounds.x + dx, m_bounds.y + dy, m_bounds.w, m_bounds.h);
             m_lastMouseX = x;
             m_lastMouseY = y;
             return true;

@@ -1,4 +1,5 @@
 #include "shader.hpp"
+#include "../../third_party/glad.h"
 #include <iostream>
 #include <vector>
 

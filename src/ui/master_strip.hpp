@@ -2,45 +2,47 @@
 #define MASTER_STRIP_HPP
 
 #include "component.hpp"
+#include "vu_meter.hpp"
 #include "../dsp/master_node.hpp"
 
 namespace Beam {
 
 class MasterStrip : public Component {
 public:
-    MasterStrip(std::shared_ptr<MasterNode> masterNode) : m_masterNode(masterNode) {}
+    MasterStrip(std::shared_ptr<MasterNode> masterNode) : m_masterNode(masterNode) {
+        m_vuMeter = std::make_shared<VUMeter>();
+    }
+
+    void setBounds(float x, float y, float w, float h) override {
+        Component::setBounds(x, y, w, h);
+        m_vuMeter->setBounds(x + 10, y + 20, w - 20, 80);
+    }
 
     void render(QuadBatcher& batcher) override {
-        // Background
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.12f, 0.12f, 0.13f, 1.0f);
-        
-        // VU Meter area
-        float meterX = m_bounds.x + 10;
-        float meterY = m_bounds.y + 20;
-        float meterW = m_bounds.w - 20;
-        float meterH = 150;
-        batcher.drawQuad(meterX, meterY, meterW, meterH, 0.05f, 0.05f, 0.05f, 1.0f);
+        // Console Metal Background
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 5.0f, 1.0f, 0.15f, 0.15f, 0.16f, 1.0f);
         
         if (m_masterNode) {
-            float peak = m_masterNode->getPeakLevel();
-            float levelH = peak * meterH;
-            if (levelH > meterH) levelH = meterH;
-            
-            // Draw meter level (Green to Red gradient-ish)
-            float r = (peak > 0.8f) ? 1.0f : 0.2f;
-            float g = (peak > 0.8f) ? 0.2f : 0.8f;
-            batcher.drawQuad(meterX + 2, meterY + meterH - levelH, meterW - 4, levelH, r, g, 0.2f, 1.0f);
+            m_vuMeter->setLevel(m_masterNode->getPeakLevel());
         }
+        m_vuMeter->render(batcher);
         
-        // Master Fader track
-        batcher.drawQuad(m_bounds.x + m_bounds.w/2 - 2, m_bounds.y + 200, 4, m_bounds.h - 250, 0.0f, 0.0f, 0.0f, 1.0f);
+        // Master Fader track (Etched look)
+        float trackX = m_bounds.x + m_bounds.w * 0.5f - 2;
+        float trackY = m_bounds.y + 120;
+        float trackH = m_bounds.h - 160;
+        batcher.drawRoundedRect(trackX, trackY, 4, trackH, 2.0f, 0.5f, 0.05f, 0.05f, 0.05f, 1.0f);
         
-        // Master Fader Cap (Red for Master)
-        batcher.drawQuad(m_bounds.x + 15, m_bounds.y + 400, m_bounds.w - 30, 15, 0.8f, 0.2f, 0.2f, 1.0f);
+        // Master Fader Cap (Red plastic look)
+        batcher.drawRoundedRect(m_bounds.x + 15, m_bounds.y + 350, m_bounds.w - 30, 25, 4.0f, 1.0f, 0.8f, 0.15f, 0.15f, 1.0f);
+        batcher.drawQuad(m_bounds.x + 15, m_bounds.y + 361, m_bounds.w - 30, 3, 1.0f, 1.0f, 1.0f, 0.4f); // White line on cap
+
+        batcher.drawText("MASTER", m_bounds.x + 20, m_bounds.y + m_bounds.h - 30, 12, 0.6f, 0.6f, 0.6f, 1.0f);
     }
 
 private:
     std::shared_ptr<MasterNode> m_masterNode;
+    std::shared_ptr<VUMeter> m_vuMeter;
 };
 
 } // namespace Beam

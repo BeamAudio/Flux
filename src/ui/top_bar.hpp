@@ -15,35 +15,35 @@ public:
 
     void render(QuadBatcher& batcher) override {
         // Dark background for top bar
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.12f, 0.13f, 0.14f, 1.0f);
-        // Accent line at bottom
-        batcher.drawQuad(m_bounds.x, m_bounds.y + m_bounds.h - 2, m_bounds.w, 2, 0.25f, 0.5f, 1.0f, 1.0f);
+        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.1f, 0.1f, 0.11f, 1.0f);
+        // Soft accent line at bottom
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y + m_bounds.h - 3, m_bounds.w, 3, 1.5f, 0.5f, 0.2f, 0.4f, 0.8f, 1.0f);
         
         // Mode Buttons
         // Flux Button
-        batcher.drawQuad(10, 8, 70, 24, 0.2f, 0.2f, 0.25f, 1.0f);
+        batcher.drawRoundedRect(10, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
         batcher.drawText("FLUX", 25, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Slice Button
-        batcher.drawQuad(85, 8, 70, 24, 0.2f, 0.2f, 0.25f, 1.0f);
+        batcher.drawRoundedRect(85, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
         batcher.drawText("SLICE", 95, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
         // Transport Controls (Center)
         float cx = m_bounds.w * 0.5f - 100;
         // Rewind
-        batcher.drawQuad(cx, 8, 40, 24, 0.3f, 0.3f, 0.3f, 1.0f);
+        batcher.drawRoundedRect(cx, 8, 40, 24, 4.0f, 0.5f, 0.25f, 0.25f, 0.25f, 1.0f);
         batcher.drawText("<<", cx + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Play
-        batcher.drawQuad(cx + 45, 8, 40, 24, m_isPlaying ? 0.3f : 0.2f, m_isPlaying ? 0.8f : 0.4f, 0.3f, 1.0f);
+        batcher.drawRoundedRect(cx + 45, 8, 40, 24, 4.0f, 0.5f, m_isPlaying ? 0.25f : 0.18f, m_isPlaying ? 0.7f : 0.35f, 0.25f, 1.0f);
         batcher.drawText(">", cx + 60, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         // Pause
-        batcher.drawQuad(cx + 90, 8, 40, 24, !m_isPlaying ? 0.3f : 0.2f, !m_isPlaying ? 0.8f : 0.4f, 0.3f, 1.0f);
+        batcher.drawRoundedRect(cx + 90, 8, 40, 24, 4.0f, 0.5f, !m_isPlaying ? 0.25f : 0.18f, !m_isPlaying ? 0.7f : 0.35f, 0.25f, 1.0f);
         batcher.drawText("||", cx + 102, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
         // Save/Load Buttons (Right side)
         float rx = m_bounds.w - 160;
-        batcher.drawQuad(rx, 8, 70, 24, 0.2f, 0.3f, 0.2f, 1.0f); // Save
+        batcher.drawRoundedRect(rx, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.25f, 0.18f, 1.0f); // Save
         batcher.drawText("SAVE", rx + 18, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-        batcher.drawQuad(rx + 75, 8, 70, 24, 0.2f, 0.2f, 0.3f, 1.0f); // Load
+        batcher.drawRoundedRect(rx + 75, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.25f, 1.0f); // Load
         batcher.drawText("LOAD", rx + 93, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 

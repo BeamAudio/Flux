@@ -37,6 +37,10 @@ public:
             // Delay FX
             batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
             batcher.drawText("DELAY", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
+            yOff += 40;
+            // Custom FX
+            batcher.drawQuad(m_bounds.x + 10, yOff, m_bounds.w - 20, 30, 0.15f, 0.16f, 0.17f, 1.0f);
+            batcher.drawText("CUSTOM", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
         }
     }
 
@@ -48,6 +52,8 @@ public:
             if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Filter"); return true; }
             yOff += 40;
             if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Delay"); return true; }
+            yOff += 40;
+            if (y > yOff && y < yOff + 30) { if (onAddFX) onAddFX("Custom"); return true; }
         }
         return false;
     }

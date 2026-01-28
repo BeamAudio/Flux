@@ -6,6 +6,7 @@
 #include "cable.hpp"
 #include "../dsp/flux_track_node.hpp"
 #include "../dsp/flux_fx_nodes.hpp"
+#include "../dsp/custom_filter.hpp"
 #include "../dsp/audio_engine.hpp"
 #include "../core/flux_project.hpp"
 #include <vector>
@@ -95,6 +96,7 @@ public:
         if (type == "Gain") fxNode = std::make_shared<FluxGainNode>(1024 * 4);
         else if (type == "Filter") fxNode = std::make_shared<FluxFilterNode>(1024 * 4, 44100.0f);
         else if (type == "Delay") fxNode = std::make_shared<FluxDelayNode>(1024 * 4, 44100.0f);
+        else if (type == "Custom") fxNode = std::make_shared<CustomFilter>(1024 * 4, 44100.0f);
         
         if (fxNode) {
             graph->addNode(fxNode);

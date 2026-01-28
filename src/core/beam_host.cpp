@@ -52,6 +52,9 @@ bool BeamHost::init() {
 
     if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) return false;
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     m_batcher = std::make_unique<QuadBatcher>(10000);
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
     m_batcher->setShader(m_uiShader.get());
@@ -184,7 +187,9 @@ void BeamHost::handleEvents() {
     }
 }
 
-void BeamHost::update() {}
+void BeamHost::update() {
+    // We'll move dt calculation to run()
+}
 
 void BeamHost::render() {
     glViewport(0, 0, m_width, m_height);
@@ -214,15 +219,22 @@ void BeamHost::run() {
     std::cout << "Starting Main Loop..." << std::endl;
     float audioBuffer[1024 * 2];
     uint64_t lastTime = SDL_GetTicks();
+    
     while (m_isRunning) {
+        uint64_t currentTime = SDL_GetTicks();
+        float dt = (currentTime - lastTime) / 1000.0f;
+        lastTime = currentTime;
+
         handleEvents();
-        update();
+        
+        // Update UI Logic
+        if (m_uiHandler) m_uiHandler->update(dt);
+
         m_audioEngine->process(audioBuffer, 1024);
         render();
 
         if (SDL_GetTicks() - lastTime > 1000) {
-            std::cout << "Heartbeat: " << m_width << "x" << m_height << std::endl;
-            lastTime = SDL_GetTicks();
+            // std::cout << "Heartbeat: " << m_width << "x" << m_height << std::endl;
         }
     }
 }

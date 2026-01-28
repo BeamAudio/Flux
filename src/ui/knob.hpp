@@ -29,20 +29,32 @@ public:
             m_value = m_parameter->getValue();
         }
 
-        // Background track
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.15f, 0.15f, 0.15f, 1.0f);
-        
-        // Value "Fill" (Blue bar)
-        float normalized = (m_value - m_min) / (m_max - m_min);
-        float fillHeight = m_bounds.h * normalized;
-        batcher.drawQuad(m_bounds.x, m_bounds.y + (m_bounds.h - fillHeight), m_bounds.w, fillHeight, 0.25f, 0.5f, 1.0f, 1.0f);
+        float cx = m_bounds.x + m_bounds.w * 0.5f;
+        float cy = m_bounds.y + m_bounds.h * 0.5f;
+        float radius = (std::min)(m_bounds.w, m_bounds.h) * 0.4f;
 
-        // Label and Value Text
-        batcher.drawText(m_label, m_bounds.x, m_bounds.y - 12, 10, 0.8f, 0.8f, 0.8f, 1.0f);
+        // Label
+        batcher.drawText(m_label, m_bounds.x, m_bounds.y - 12, 10, 0.7f, 0.7f, 0.7f, 1.0f);
+
+        // Knob Outer Circle (Body)
+        batcher.drawRoundedRect(m_bounds.x + 5, m_bounds.y + 5, m_bounds.w - 10, m_bounds.h - 10, radius, 1.5f, 0.1f, 0.1f, 0.11f, 1.0f);
         
+        // Value Indicator Line
+        float normalized = (m_value - m_min) / (m_max - m_min);
+        float angle = -2.356f + normalized * 4.712f; // -135 to +135 degrees
+        
+        float lx = cx + std::sin(angle) * radius;
+        float ly = cy - std::cos(angle) * radius;
+        
+        batcher.drawLine(cx, cy, lx, ly, 3.0f, 1.0f, 0.5f, 0.0f, 1.0f); // Orange needle
+
+        // Center Cap
+        batcher.drawRoundedRect(cx - 4, cy - 4, 8, 8, 4.0f, 0.5f, 0.2f, 0.2f, 0.22f, 1.0f);
+
+        // Value text
         char valStr[16];
         snprintf(valStr, 16, "%.2f", m_value);
-        batcher.drawText(valStr, m_bounds.x + 2, m_bounds.y + m_bounds.h - 12, 10, 1.0f, 1.0f, 1.0f, 1.0f);
+        batcher.drawText(valStr, m_bounds.x + 5, m_bounds.y + m_bounds.h + 2, 9, 0.5f, 0.5f, 0.5f, 1.0f);
     }
 
     bool onMouseDown(float x, float y, int button) override {

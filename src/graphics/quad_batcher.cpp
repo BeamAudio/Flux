@@ -188,10 +188,9 @@ void QuadBatcher::begin() {
 void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g, float b, float a) {
     if (m_quadCount >= m_maxQuads) {
         flush();
-        m_quadCount = 0;
-        m_vertices.clear();
     }
 
+    // Default mode 0 (Solid)
     m_vertices.push_back({{x, y}, {0, 0}, {r, g, b, a}});
     m_vertices.push_back({{x + w, y}, {1, 0}, {r, g, b, a}});
     m_vertices.push_back({{x + w, y + h}, {1, 1}, {r, g, b, a}});
@@ -200,10 +199,31 @@ void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g,
     m_quadCount++;
 }
 
+void QuadBatcher::drawRoundedRect(float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a) {
+    flush();
+    if (m_shader) {
+        m_shader->setInt("mode", 2);
+        m_shader->setFloat("uRadius", radius);
+        m_shader->setFloat("uEdgeSoftness", softness);
+        m_shader->setFloat("uSizeX", w);
+        m_shader->setFloat("uSizeY", h);
+    }
+
+    // Reuse vertex coords for local space 0..1 in shader
+    m_vertices.push_back({{x, y}, {0, 0}, {r, g, b, a}});
+    m_vertices.push_back({{x + w, y}, {1, 0}, {r, g, b, a}});
+    m_vertices.push_back({{x + w, y + h}, {1, 1}, {r, g, b, a}});
+    m_vertices.push_back({{x, y + h}, {0, 1}, {r, g, b, a}});
+    m_quadCount++;
+
+    flush();
+    if (m_shader) m_shader->setInt("mode", 0);
+}
+
 void QuadBatcher::drawText(const std::string& text, float x, float y, float size, float r, float g, float b, float a) {
     flush();
     if (m_shader) {
-        m_shader->setInt("useTexture", 1);
+        m_shader->setInt("mode", 1);
         glBindTexture(GL_TEXTURE_2D, m_fontTexture);
     }
 

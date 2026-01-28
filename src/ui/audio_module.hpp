@@ -65,12 +65,16 @@ public:
     }
 
     void render(QuadBatcher& batcher) override {
-        // Module Body
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.22f, 0.23f, 0.24f, 1.0f);
-        // Header
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, 25, 0.3f, 0.35f, 0.4f, 1.0f);
-        batcher.drawText(m_name, m_bounds.x + 5, m_bounds.y + 5, 14, 0.9f, 0.9f, 0.9f, 1.0f);
+        // Module Body (Slightly metallic/brushed dark look)
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 10.0f, 1.0f, 0.18f, 0.19f, 0.2f, 1.0f);
         
+        // Header (Highlighted strip)
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, 30, 10.0f, 0.5f, 0.25f, 0.26f, 0.28f, 1.0f);
+        batcher.drawText(m_name, m_bounds.x + 10, m_bounds.y + 8, 14, 0.9f, 0.9f, 0.9f, 1.0f);
+        
+        // Internal panel shadow
+        batcher.drawRoundedRect(m_bounds.x + 10, m_bounds.y + 40, m_bounds.w - 20, m_bounds.h - 50, 5.0f, 2.0f, 0.12f, 0.13f, 0.14f, 1.0f);
+
         m_inputPort->render(batcher);
         m_outputPort->render(batcher);
 

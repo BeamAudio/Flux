@@ -1,0 +1,15 @@
+PROJECT_NAME           = "Beam Audio Flux"
+PROJECT_NUMBER         = 0.1.0
+PROJECT_BRIEF          = "High-performance C++20 DAW and Audio Engine"
+OUTPUT_DIRECTORY       = docs/doxygen
+INPUT                  = src
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+Generate_HTML          = YES
+Generate_LATEX         = NO
+HAVE_DOT               = NO
+UML_LOOK               = NO
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO

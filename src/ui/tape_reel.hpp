@@ -13,23 +13,48 @@ public:
         setBounds(x, y, 200, 120);
     }
 
+    void update(float dt) override {
+        auto track = m_trackNode->getInternalNode();
+        if (track->getState() == TrackState::Playing) {
+            m_rotation += 2.0f * dt; // approx 2 radians per second
+        }
+    }
+
     void render(QuadBatcher& batcher) override {
-        // Base Module
-        AudioModule::render(batcher);
+        // Base Module (Metal panel)
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 12.0f, 1.0f, 0.22f, 0.22f, 0.23f, 1.0f);
 
         auto track = m_trackNode->getInternalNode();
-        // Reel Graphics (Two circles/quads)
-        float reelSize = 40.0f;
-        float reelY = m_bounds.y + 40;
         
-        // Spinning reel effect if playing
-        float color = (track->getState() == TrackState::Playing) ? 0.6f : 0.4f;
-        batcher.drawQuad(m_bounds.x + 30, reelY, reelSize, reelSize, color, color, color, 1.0f);
-        batcher.drawQuad(m_bounds.x + 130, reelY, reelSize, reelSize, color, color, color, 1.0f);
+        // Reels
+        float reelSize = 65.0f;
+        float reelY = m_bounds.y + 35;
+        
+        auto drawReel = [&](float x, float y) {
+            // Main reel plate (Brushed aluminum look)
+            batcher.drawRoundedRect(x, y, reelSize, reelSize, reelSize * 0.5f, 1.0f, 0.6f, 0.61f, 0.63f, 1.0f);
+            // Three spokes
+            for (int i = 0; i < 3; ++i) {
+                float angle = m_rotation + (i * 2.094f); // 120 degrees
+                float sx = x + reelSize * 0.5f + std::sin(angle) * reelSize * 0.35f;
+                float sy = y + reelSize * 0.5f - std::cos(angle) * reelSize * 0.35f;
+                batcher.drawRoundedRect(sx - 4, sy - 4, 8, 8, 4.0f, 0.5f, 0.1f, 0.1f, 0.1f, 1.0f);
+            }
+            // Center spindle
+            batcher.drawRoundedRect(x + reelSize * 0.5f - 5, y + reelSize * 0.5f - 5, 10, 10, 5.0f, 0.5f, 0.15f, 0.15f, 0.16f, 1.0f);
+        };
 
-        // Status Indicator
+        drawReel(m_bounds.x + 20, reelY);
+        drawReel(m_bounds.x + 115, reelY);
+
+        // Track Name
+        batcher.drawText(m_trackNode->getName(), m_bounds.x + 15, m_bounds.y + 10, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+
+        // Status Indicator Lamp
         if (track->getState() == TrackState::Recording) {
-            batcher.drawQuad(m_bounds.x + 10, m_bounds.y + 10, 10, 10, 1.0f, 0.0f, 0.0f, 1.0f); // Red REC
+            batcher.drawRoundedRect(m_bounds.x + m_bounds.w - 25, m_bounds.y + 10, 12, 12, 6.0f, 2.0f, 1.0f, 0.0f, 0.0f, 1.0f); // Glowing REC
+        } else {
+            batcher.drawRoundedRect(m_bounds.x + m_bounds.w - 25, m_bounds.y + 10, 12, 12, 6.0f, 0.5f, 0.1f, 0.0f, 0.0f, 1.0f); // Dim REC
         }
     }
 
@@ -51,6 +76,7 @@ public:
 
 private:
     std::shared_ptr<FluxTrackNode> m_trackNode;
+    float m_rotation = 0.0f;
 };
 
 } // namespace Beam
