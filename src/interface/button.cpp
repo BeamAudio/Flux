@@ -1,4 +1,5 @@
 #include "button.hpp"
+#include "../utilities/flux_audio_utils.hpp"
 
 namespace Beam {
 
