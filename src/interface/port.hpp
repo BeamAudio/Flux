@@ -21,7 +21,8 @@ public:
     }
 
     bool onMouseDown(float x, float y, int button) override {
-        if (m_bounds.contains(x, y)) {
+        Rect hitArea = { m_bounds.x - 10, m_bounds.y - 10, m_bounds.w + 20, m_bounds.h + 20 };
+        if (hitArea.contains(x, y)) {
             if (onConnectStarted) onConnectStarted(this);
             return true;
         }

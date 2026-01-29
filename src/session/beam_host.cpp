@@ -222,6 +222,11 @@ bool BeamHost::init() {
         static const SDL_DialogFileFilter filters[] = { { "WAV Audio", "wav" } };
         SDL_ShowSaveFileDialog(onRenderDialogCallback, this, m_window, filters, 1, "output.wav");
     };
+    m_topBar->onToolSelected = [this](int toolIdx) {
+        if (m_timeline) {
+            m_timeline->setTool((TimelineTool)toolIdx);
+        }
+    };
 
     setMode(DAWMode::Flux);
     performLayout();

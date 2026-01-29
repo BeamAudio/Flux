@@ -58,13 +58,33 @@ public:
         float rBtnX = m_bounds.w - 80;
         batcher.drawRoundedRect(rBtnX, 8, 70, 24, 4.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
         batcher.drawText("RENDER", rBtnX + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+
+        // Timeline Tools (Only if in Slice mode)
+        if (m_mode == 1) { // Slice
+            float tx = 240;
+            auto drawTool = [&](const std::string& lbl, int toolIdx) {
+                bool active = (m_activeTool == toolIdx);
+                batcher.drawRoundedRect(tx, 8, 30, 24, 4.0f, 0.5f, active ? 0.3f : 0.15f, active ? 0.6f : 0.16f, active ? 1.0f : 0.17f, 1.0f);
+                batcher.drawText(lbl, tx + 8, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+                tx += 35;
+            };
+            drawTool("P", 0); // Pointer
+            drawTool("S", 1); // Scissors
+            drawTool("G", 2); // Glue
+        }
     }
 
     bool onMouseDown(float x, float y, int button) override {
         if (y > 8 && y < 32) {
-            if (x > 10 && x < 80) { if (onModeChanged) onModeChanged(0); return true; }
-            if (x > 85 && x < 155) { if (onModeChanged) onModeChanged(1); return true; }
+            if (x > 10 && x < 80) { m_mode = 0; if (onModeChanged) onModeChanged(0); return true; }
+            if (x > 85 && x < 155) { m_mode = 1; if (onModeChanged) onModeChanged(1); return true; }
             if (x > 160 && x < 230) { if (onConfigRequested) onConfigRequested(); return true; }
+            
+            if (m_mode == 1) {
+                if (x > 240 && x < 270) { m_activeTool = 0; if (onToolSelected) onToolSelected(0); return true; }
+                if (x > 275 && x < 305) { m_activeTool = 1; if (onToolSelected) onToolSelected(1); return true; }
+                if (x > 310 && x < 340) { m_activeTool = 2; if (onToolSelected) onToolSelected(2); return true; }
+            }
             
             float cx = m_bounds.w * 0.5f - 100;
             if (x > cx && x < cx + 40) { if (onRewindRequested) onRewindRequested(); return true; }
@@ -98,10 +118,13 @@ public:
     std::function<void()> onRewindRequested;
     std::function<void(bool)> onRecordRequested;
     std::function<void()> onRenderRequested;
+    std::function<void(int)> onToolSelected;
 
 private:
     bool m_isPlaying = false;
     bool m_isRecording = false;
+    int m_mode = 0; // 0: Flux, 1: Slice
+    int m_activeTool = 0; // 0: Pointer, 1: Scissors, 2: Glue
 };
 
 } // namespace Beam

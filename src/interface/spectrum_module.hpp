@@ -17,7 +17,14 @@ public:
         if (!m_inputPort) m_inputPort = std::make_shared<Port>(PortType::Input, this);
         if (!m_outputPort) m_outputPort = std::make_shared<Port>(PortType::Output, this);
         
-        setBounds(x, y, 220, 160); 
+        setBounds(x, y, 240, 180); 
+    }
+
+    void setBounds(float x, float y, float w, float h) override {
+        AudioModule::setBounds(x, y, w, h);
+        // Position ports inside the module header for visibility
+        if (m_inputPort) m_inputPort->setBounds(x + 10, y + 10, 12, 12);
+        if (m_outputPort) m_outputPort->setBounds(x + w - 22, y + 10, 12, 12);
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
