@@ -12,7 +12,12 @@ class SpectrumModule : public AudioModule {
 public:
     SpectrumModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y)
         : AudioModule(node, nodeId, x, y) {
-        setBounds(x, y, 220, 160); // Bigger than standard module
+        
+        // Force ensure ports exist for SA
+        if (!m_inputPort) m_inputPort = std::make_shared<Port>(PortType::Input, this);
+        if (!m_outputPort) m_outputPort = std::make_shared<Port>(PortType::Output, this);
+        
+        setBounds(x, y, 220, 160); 
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
