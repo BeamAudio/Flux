@@ -233,6 +233,8 @@ public:
 
         else if (type == "Gain") fxNode = std::make_shared<FluxGainNode>(buf);
         else if (type == "Delay") fxNode = std::make_shared<FluxDelayNode>(buf, sr);
+        else if (type == "Spectrum") fxNode = std::make_shared<FluxSpectrumAnalyzer>(buf, sr);
+        else if (type == "Loudness") fxNode = std::make_shared<FluxLoudnessMeter>(buf, sr);
         else if (type == "Empty Tape") {
             auto fluxTrack = std::make_shared<FluxTrackNode>("Empty Tape", buf);
             size_t nodeId = m_project->getGraph()->addNode(fluxTrack);

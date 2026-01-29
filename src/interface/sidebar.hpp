@@ -66,6 +66,8 @@ public:
                 drawBtn("Gain");
                 drawBtn("Filter");
                 drawBtn("Empty Tape");
+                drawBtn("Spectrum");
+                drawBtn("Loudness");
             }
         }
     }
@@ -97,7 +99,7 @@ public:
             else if (m_category == "DYNAMICS") items = {"Opto-2A", "FET-76", "VCA-Bus", "Vari-Mu", "Tube Limiter"};
             else if (m_category == "SPACE") items = {"Steel Plate", "Golden Hall", "Copper Spring", "Cathedral", "Grain Verb"};
             else if (m_category == "TIME") items = {"Echo-Plex", "BBD-Bucket", "Reverse", "Ping-Pong", "Space Shift"};
-            else if (m_category == "UTILITY") items = {"Gain", "Filter", "Empty Tape"};
+            else if (m_category == "UTILITY") items = {"Gain", "Filter", "Empty Tape", "Spectrum", "Loudness"};
 
             for (auto const& item : items) {
                 if (checkBtn(item)) {

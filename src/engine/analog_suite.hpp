@@ -529,6 +529,73 @@ private:
     float m_gr = 0.0f;
 };
 
+// ============================================================================
+// 6. UTILITY / METERING
+// ============================================================================
+
+class FluxSpectrumAnalyzer : public FluxPlugin {
+public:
+    FluxSpectrumAnalyzer(int buf, float sr) : FluxPlugin("Spectrum", buf, sr) {
+        m_freqs = {31, 63, 125, 250, 500, 1000, 2000, 4000, 8000, 16000};
+        for(float f : m_freqs) {
+            std::string name = std::to_string((int)f) + "Hz";
+            addParam(name, -60.0f, 0.0f, -60.0f);
+            m_filters.push_back(std::make_unique<BiquadFilterNode>(FilterType::Peaking, f, 4.0f, sr)); 
+        }
+    }
+    void processBlock(const float* in, float* out, int total) override {
+        std::copy(in, in + total, out);
+        for(size_t b=0; b<m_filters.size(); ++b) {
+            float peak = 0.0f;
+            // Use strided processing for performance (check every 4th sample?)
+            // Or full processing. Let's do full for accuracy.
+            // Note: Single Biquad state is shared across interleaved channels here (mono sum analysis effectively due to state pollution if we don't reset or separate).
+            // For a visualizer, mono sum is acceptable.
+            for(int i=0; i<total; ++i) {
+                float s = in[i];
+                float band = m_filters[b]->process(s); 
+                if (std::abs(band) > peak) peak = std::abs(band);
+            }
+            float currentDb = getParameter(std::to_string((int)m_freqs[b]) + "Hz")->getValue();
+            float targetDb = (peak > 0.0001f) ? 20.0f * std::log10(peak) : -60.0f;
+            float smooth = (targetDb > currentDb) ? 0.2f : 0.05f; // Fast attack, slow release
+            getParameter(std::to_string((int)m_freqs[b]) + "Hz")->setValue(currentDb * (1.0f - smooth) + targetDb * smooth);
+        }
+    }
+private:
+    std::vector<std::unique_ptr<BiquadFilterNode>> m_filters;
+    std::vector<float> m_freqs;
+};
+
+class FluxLoudnessMeter : public FluxPlugin {
+public:
+    FluxLoudnessMeter(int buf, float sr) : FluxPlugin("Loudness", buf, sr) {
+        addParam("Momentary", -60.0f, 0.0f, -60.0f);
+        addParam("ShortTerm", -60.0f, 0.0f, -60.0f);
+        addParam("True Peak", -60.0f, 0.0f, -60.0f);
+    }
+    void processBlock(const float* in, float* out, int total) override {
+        std::copy(in, in + total, out);
+        float sumSq = 0.0f;
+        float peak = 0.0f;
+        for(int i=0; i<total; ++i) {
+            float s = in[i];
+            sumSq += s*s;
+            peak = std::max(peak, std::abs(s));
+        }
+        float rms = std::sqrt(sumSq / (total + 1));
+        float db = (rms > 0.0001f) ? 20.0f * std::log10(rms) : -60.0f;
+        float peakDb = (peak > 0.0001f) ? 20.0f * std::log10(peak) : -60.0f;
+        
+        auto pM = getParameter("Momentary");
+        if(pM) pM->setValue(pM->getValue() * 0.9f + db * 0.1f);
+        auto pS = getParameter("ShortTerm");
+        if(pS) pS->setValue(pS->getValue() * 0.995f + db * 0.005f);
+        auto pT = getParameter("True Peak");
+        if(pT) pT->setValue(std::max(pT->getValue() - 0.5f, peakDb)); // Slow decay peak
+    }
+};
+
 } // namespace Beam
 
 #endif // ANALOG_SUITE_HPP
