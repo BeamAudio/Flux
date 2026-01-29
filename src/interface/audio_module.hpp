@@ -5,6 +5,7 @@
 #include "knob.hpp"
 #include "port.hpp"
 #include "../engine/flux_node.hpp"
+#include "../engine/input_node.hpp"
 #include "../utilities/flux_audio_utils.hpp"
 #include <string>
 #include <vector>
@@ -74,20 +75,37 @@ public:
         
         AudioUtils::drawScrollingText(batcher, m_name, m_bounds.x + 10, m_bounds.y + 8, m_bounds.w - 40, 15, 14, dt, m_scrollTimer, screenH);
         
-        // Delete Button (X)
-        batcher.drawRoundedRect(m_deleteBtnBounds.x, m_deleteBtnBounds.y, m_deleteBtnBounds.w, m_deleteBtnBounds.h, 2.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
-        batcher.drawText("x", m_deleteBtnBounds.x + 4, m_deleteBtnBounds.y + 2, 10, 1.0f, 1.0f, 1.0f, 1.0f);
+        // Delete Button (X) - Hidden for Master
+        if (m_name != "Master") {
+            batcher.drawRoundedRect(m_deleteBtnBounds.x, m_deleteBtnBounds.y, m_deleteBtnBounds.w, m_deleteBtnBounds.h, 2.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
+            batcher.drawText("x", m_deleteBtnBounds.x + 4, m_deleteBtnBounds.y + 2, 10, 1.0f, 1.0f, 1.0f, 1.0f);
+        }
 
         // Internal panel
         batcher.drawRoundedRect(m_bounds.x + 10, m_bounds.y + 40, m_bounds.w - 20, m_bounds.h - 50, 5.0f, 2.0f, 0.12f, 0.13f, 0.14f, 1.0f);
         
+        // Specialized meters for Input
+        if (m_name == "Audio Input") {
+            auto inputNode = std::dynamic_pointer_cast<InputNode>(m_node);
+            if (inputNode) {
+                float peak = inputNode->getPeakLevel();
+                float meterW = m_bounds.w - 40;
+                float meterH = 10.0f;
+                float mx = m_bounds.x + 20;
+                float my = m_bounds.y + 45;
+                batcher.drawQuad(mx, my, meterW, meterH, 0.05f, 0.05f, 0.05f, 1.0f);
+                batcher.drawQuad(mx, my, meterW * peak, meterH, 0.2f, 0.8f, 0.2f, 1.0f);
+                batcher.drawText("INPUT Lvl", mx, my + 15, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+            }
+        }
+
         if (m_inputPort) m_inputPort->render(batcher, dt, screenW, screenH);
         if (m_outputPort) m_outputPort->render(batcher, dt, screenW, screenH);
         for (auto& child : m_children) child->render(batcher, dt, screenW, screenH);
     }
 
     bool onMouseDown(float x, float y, int button) override {
-        if (m_deleteBtnBounds.contains(x, y)) {
+        if (m_name != "Master" && m_deleteBtnBounds.contains(x, y)) {
             if (onDeleteRequested) onDeleteRequested(this);
             return true;
         }
