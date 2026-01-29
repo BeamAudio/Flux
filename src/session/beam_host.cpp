@@ -46,7 +46,7 @@ bool BeamHost::init() {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    m_window = SDL_CreateWindow(m_title.c_str(), m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    m_window = SDL_CreateWindow(m_title.c_str(), m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
     if (!m_window) return false;
 
     SDL_ShowWindow(m_window);
@@ -82,7 +82,7 @@ bool BeamHost::init() {
     m_topBar = std::make_shared<TopBar>(m_width);
     m_browser = std::make_shared<Sidebar>(Sidebar::Side::Left);
     m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine->getMasterNode());
-    m_configView = std::make_shared<AudioConfigView>(m_audioDeviceManager.get());
+    m_configView = std::make_shared<AudioConfigView>(m_audioDeviceManager.get(), m_audioEngine.get());
 
     m_browser->onAddFX = [this](std::string type) {
         if (m_workspace) {

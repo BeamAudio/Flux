@@ -41,6 +41,21 @@ public:
         }
 
         for (auto& module : m_modules) module->render(batcher, dt);
+
+        if (m_isLoading) {
+            m_loadingTimer += dt;
+            float cx = m_bounds.x + m_bounds.w * 0.5f;
+            float cy = m_bounds.y + m_bounds.h * 0.5f;
+            
+            // Draw a spinning reel icon as loading indicator
+            for (int i = 0; i < 4; ++i) {
+                float angle = m_loadingTimer * 5.0f + (i * 1.57f);
+                float rx = cx + std::cos(angle) * 20.0f;
+                float ry = cy + std::sin(angle) * 20.0f;
+                batcher.drawRoundedRect(rx - 5, ry - 5, 10, 10, 5.0f, 0.5f, 0.2f, 0.5f, 1.0f, 1.0f);
+            }
+            batcher.drawText("LOADING TAPE...", cx - 40, cy + 40, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+        }
     }
 
     void syncReels() {
@@ -96,6 +111,8 @@ public:
     }
 
     void addTrack(const std::string& filePath, float x, float y, AudioEngine& engine) {
+        m_isLoading = true;
+        m_loadingTimer = 0.0f;
         std::cout << "Loading file: " << filePath << std::endl;
         
         // Extract file name from path
@@ -106,8 +123,7 @@ public:
         auto fluxTrack = std::make_shared<FluxTrackNode>(fileName, 1024 * 4);
         if (fluxTrack->load(filePath)) {
             size_t nodeId = m_project->getGraph()->addNode(fluxTrack);
-            m_project->getGraph()->connect(nodeId, 0, 0, 0); 
-            engine.updatePlan();
+            // engine.updatePlan(); // Redundant if addTrack doesn't auto-connect now
             
             TrackData td;
             td.node = fluxTrack;
@@ -123,6 +139,7 @@ public:
             syncReels(); // Immediate UI update
             std::cout << "Track added: " << fileName << " (" << totalFrames << " frames)" << std::endl;
         }
+        m_isLoading = false;
     }
 
     void addFX(const std::string& type, float x, float y) {
@@ -225,6 +242,8 @@ private:
     float m_lastMouseX = 0, m_lastMouseY = 0;
     bool m_isDraggingCable = false;
     Port* m_activePort = nullptr;
+    bool m_isLoading = false;
+    float m_loadingTimer = 0.0f;
 };
 
 } // namespace Beam

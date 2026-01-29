@@ -10,7 +10,8 @@ namespace Beam {
 
 class AudioConfigView : public Component {
 public:
-    AudioConfigView(AudioDeviceManager* manager) : m_manager(manager) {
+    AudioConfigView(AudioDeviceManager* manager, class AudioEngine* engine) 
+        : m_manager(manager), m_engine(engine) {
         m_isVisible = false;
         refreshDevices();
     }
@@ -32,6 +33,11 @@ public:
         float yOff = m_bounds.y + 50;
 
         batcher.drawText("AUDIO CONFIGURATION", xOff, yOff, 20, 1.0f, 1.0f, 1.0f, 1.0f);
+        
+        if (m_engine && m_engine->isPlaying()) {
+            batcher.drawText("!! PAUSE PLAYBACK TO CHANGE SETTINGS !!", xOff + 250, yOff, 14, 1.0f, 0.2f, 0.2f, 1.0f);
+        }
+
         yOff += 40;
 
         // Output Devices
@@ -89,10 +95,14 @@ public:
     bool onMouseDown(float x, float y, int button) override {
         if (!m_isVisible) return false;
 
-        // Close button
+        // Close button (always allowed)
         if (x > m_bounds.x + m_bounds.w - 100 && x < m_bounds.x + m_bounds.w - 50 && y > m_bounds.y + 50 && y < m_bounds.y + 80) {
             m_isVisible = false;
             return true;
+        }
+
+        if (m_engine && m_engine->isPlaying()) {
+            return true; // Ignore setting changes but eat click
         }
 
         float xOff = m_bounds.x + 50;
@@ -166,6 +176,7 @@ public:
 
 private:
     AudioDeviceManager* m_manager;
+    class AudioEngine* m_engine;
     std::vector<AudioDeviceInfo> m_outputDevices;
     std::vector<AudioDeviceInfo> m_inputDevices;
     AudioDeviceSetup m_currentSetup;
