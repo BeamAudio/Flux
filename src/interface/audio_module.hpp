@@ -2,8 +2,9 @@
 #define AUDIO_MODULE_HPP
 
 #include "component.hpp"
-#include "knob.hpp"
 #include "port.hpp"
+#include "meter.hpp"
+#include "slider_modular.hpp"
 #include "../engine/flux_node.hpp"
 #include "../engine/input_node.hpp"
 #include "../utilities/flux_audio_utils.hpp"
@@ -13,6 +14,11 @@
 
 namespace Beam {
 
+/**
+ * @class AudioModule
+ * @brief Base UI component for any FluxNode (FX, Instrument, Input, etc.)
+ * Features dynamic layout and auto-sizing to prevent overlapping controls.
+ */
 class AudioModule : public Component {
 public:
     AudioModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y) 
@@ -24,81 +30,112 @@ public:
         if (node->getOutputPorts().size() > 0)
             m_outputPort = std::make_shared<Port>(PortType::Output, this);
         
-        // Dynamic sizing based on name
-        float tw = AudioUtils::calculateTextWidth(m_name, 14.0f);
-        float width = (std::max)(150.0f, tw + 60.0f); // 30px padding each side
-        setBounds(x, y, width, 200);
         setDraggable(true);
-        
         autoGenerateUI();
+        updateLayout();
+        
+        // Initial positioning
+        setBounds(x, y, m_bounds.w, m_bounds.h);
     }
 
     size_t getNodeId() const { return m_nodeId; }
 
-    void autoGenerateUI() {
+    /**
+     * @brief Populates the module with controls based on the node's parameters.
+     */
+    virtual void autoGenerateUI() {
         if (!m_node) return;
-        float startY = 40;
-        float spacing = 60;
-        int count = 0;
+        m_children.clear();
+
+        // 1. Special case for Audio Input (Meter)
+        if (m_name == "Audio Input") {
+            auto meter = std::make_shared<LuminousMeter>(LuminousMeter::Orientation::Horizontal);
+            meter->setName("LevelMeter");
+            m_children.push_back(meter);
+        }
+
+        // 2. Add Sliders for all parameters
         for (auto const& [name, param] : m_node->getParameters()) {
-            if (name == "Master Gain") continue; // Skip master gain in module auto-ui
-            auto knob = std::make_shared<Knob>(name, param->getMin(), param->getMax(), param->getValue());
-            knob->bindParameter(param);
-            knob->setBounds(m_bounds.x + 25, m_bounds.y + startY + (count * spacing), 100, 40);
-            addChild(knob);
-            count++;
+            if (name == "Master Gain" || name == "Capture Mode") continue;
+            
+            auto slider = std::make_shared<ModularSlider>(name, ModularSlider::Style::Horizontal);
+            slider->bindParameter(param);
+            m_children.push_back(slider);
         }
-        if (count > 0) {
-            float newHeight = startY + (count * spacing) + 20;
-            if (newHeight > m_bounds.h) setBounds(m_bounds.x, m_bounds.y, m_bounds.w, newHeight);
+    }
+
+    /**
+     * @brief Calculates dimensions and positions of internal elements.
+     */
+    void updateLayout() {
+        float curY = 40.0f; // Header padding
+        float width = 160.0f;
+        
+        // Ensure width is sufficient for name
+        float tw = AudioUtils::calculateTextWidth(m_name, 12.0f);
+        width = (std::max)(width, tw + 60.0f);
+
+        for (auto& child : m_children) {
+            float h = 30.0f;
+            if (child->getName() == "LevelMeter") h = 15.0f;
+            
+            child->setBounds(m_bounds.x + 10, m_bounds.y + curY, width - 20, h);
+            curY += h + 10.0f;
         }
+
+        m_bounds.w = width;
+        m_bounds.h = (std::max)(100.0f, curY + 10.0f);
     }
 
     void setBounds(float x, float y, float w, float h) override {
         float dx = x - m_bounds.x;
         float dy = y - m_bounds.y;
+        
         Component::setBounds(x, y, w, h);
+        
         if (m_inputPort) m_inputPort->setBounds(x - 6, y + 50, 12, 12);
         if (m_outputPort) m_outputPort->setBounds(x + w - 6, y + 50, 12, 12);
+        
         m_deleteBtnBounds = {x + w - 20, y + 5, 15, 15};
-        for (auto& child : m_children) {
+        
+        // Position children relative to the new top-left
+        float curY = 40.0f;
+        for(auto& child : m_children) {
             Rect b = child->getBounds();
-            child->setBounds(b.x + dx, b.y + dy, b.w, b.h);
+            child->setBounds(x + 10, y + curY, w - 20, b.h);
+            curY += b.h + 10.0f;
         }
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        // Module Body
+        // Render Frame
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 10.0f, 1.0f, 0.18f, 0.19f, 0.2f, 1.0f);
-        // Header
+        
+        // Header Bar
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, 30, 10.0f, 0.5f, 0.25f, 0.26f, 0.28f, 1.0f);
+        batcher.drawText(m_name, m_bounds.x + 10, m_bounds.y + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
         
-        AudioUtils::drawScrollingText(batcher, m_name, m_bounds.x + 10, m_bounds.y + 8, m_bounds.w - 40, 15, 14, dt, m_scrollTimer, screenH);
-        
-        // Delete Button (X) - Hidden for Master
+        // Close Button (Hidden for Master)
         if (m_name != "Master") {
             batcher.drawRoundedRect(m_deleteBtnBounds.x, m_deleteBtnBounds.y, m_deleteBtnBounds.w, m_deleteBtnBounds.h, 2.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
             batcher.drawText("x", m_deleteBtnBounds.x + 4, m_deleteBtnBounds.y + 2, 10, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
-        // Internal panel
-        batcher.drawRoundedRect(m_bounds.x + 10, m_bounds.y + 40, m_bounds.w - 20, m_bounds.h - 50, 5.0f, 2.0f, 0.12f, 0.13f, 0.14f, 1.0f);
-        
-        // Specialized meters for Input
+        // Inner Content Area
+        batcher.drawRoundedRect(m_bounds.x + 6, m_bounds.y + 35, m_bounds.w - 12, m_bounds.h - 41, 5.0f, 1.0f, 0.12f, 0.12f, 0.13f, 1.0f);
+
+        // Update Dynamic Components (like Meters)
         if (m_name == "Audio Input") {
             auto inputNode = std::dynamic_pointer_cast<InputNode>(m_node);
-            if (inputNode) {
-                float peak = inputNode->getPeakLevel();
-                float meterW = m_bounds.w - 40;
-                float meterH = 10.0f;
-                float mx = m_bounds.x + 20;
-                float my = m_bounds.y + 45;
-                batcher.drawQuad(mx, my, meterW, meterH, 0.05f, 0.05f, 0.05f, 1.0f);
-                batcher.drawQuad(mx, my, meterW * peak, meterH, 0.2f, 0.8f, 0.2f, 1.0f);
-                batcher.drawText("INPUT Lvl", mx, my + 15, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+            for(auto& child : m_children) {
+                if (child->getName() == "LevelMeter") {
+                    auto meter = std::dynamic_pointer_cast<LuminousMeter>(child);
+                    if (meter && inputNode) meter->setLevel(inputNode->getPeakLevel());
+                }
             }
         }
 
+        // Render Ports and Children
         if (m_inputPort) m_inputPort->render(batcher, dt, screenW, screenH);
         if (m_outputPort) m_outputPort->render(batcher, dt, screenW, screenH);
         for (auto& child : m_children) child->render(batcher, dt, screenW, screenH);
@@ -109,41 +146,35 @@ public:
             if (onDeleteRequested) onDeleteRequested(this);
             return true;
         }
+        
         if (m_inputPort && m_inputPort->onMouseDown(x, y, button)) return true;
         if (m_outputPort && m_outputPort->onMouseDown(x, y, button)) return true;
+        
         for (auto& child : m_children) {
             if (child->getBounds().contains(x, y)) {
                 if (child->onMouseDown(x, y, button)) return true;
             }
         }
+        
         if (y < m_bounds.y + 25) { 
             startDragging(x, y);
             return true;
         }
+        
         return false;
     }
 
     bool onMouseUp(float x, float y, int button) override {
-        bool handled = false;
-        for (auto& child : m_children) {
-            if (child->onMouseUp(x, y, button)) handled = true;
-        }
+        for (auto& child : m_children) child->onMouseUp(x, y, button);
         Component::onMouseUp(x, y, button);
-        return handled;
+        return true;
     }
 
     bool onMouseMove(float x, float y) override {
         for (auto& child : m_children) {
             if (child->onMouseMove(x, y)) return true;
         }
-
-        bool changed = Component::onMouseMove(x, y);
-        if (changed) {
-            if (m_inputPort) m_inputPort->setBounds(m_bounds.x - 6, m_bounds.y + 50, 12, 12);
-            if (m_outputPort) m_outputPort->setBounds(m_bounds.x + m_bounds.w - 6, m_bounds.y + 50, 12, 12);
-            m_deleteBtnBounds = {m_bounds.x + m_bounds.w - 20, m_bounds.y + 5, 15, 15};
-        }
-        return changed;
+        return Component::onMouseMove(x, y);
     }
 
     void addChild(std::shared_ptr<Component> child) { m_children.push_back(child); }
@@ -162,15 +193,8 @@ private:
     size_t m_nodeId;
     std::string m_name;
     Rect m_deleteBtnBounds;
-    float m_scrollTimer = 0.0f;
 };
 
 } // namespace Beam
 
-#endif // AUDIO_MODULE_HPP
-
-
-
-
-
-
+#endif

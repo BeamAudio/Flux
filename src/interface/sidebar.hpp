@@ -80,8 +80,13 @@ public:
                 drawBtn("Gain");
                 drawBtn("Filter");
                 drawBtn("Empty Tape");
-                drawBtn("Spectrum");
-                drawBtn("Loudness");
+            yOff += 20;
+            batcher.drawText("UTILITY", m_bounds.x + 10, yOff, 12, 0.4f, 0.4f, 0.45f, 1.0f);
+            yOff += 20;
+            drawBtn("Audio Input");
+            drawBtn("MIDI Input");
+            drawBtn("Spectrum");
+            drawBtn("Loudness");
                 drawBtn("Script");
             }
         }

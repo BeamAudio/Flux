@@ -13,23 +13,24 @@ public:
     }
 
     void setLevel(float level) { 
-        if (level > m_level) m_level = level; 
+        m_targetLevel = level;
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        // Smooth decay
-        m_level -= 1.5f * dt;
-        if (m_level < 0.0f) m_level = 0.0f;
-
-        // Outer case (Rounded plastic look)
-        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 8.0f, 1.0f, 0.1f, 0.1f, 0.1f, 1.0f);
+        // Analog Ballistics (Physics)
+        float attack = 15.0f;
+        float release = 3.5f;
+        float coeff = (m_targetLevel > m_level) ? attack : release;
+        m_level += (m_targetLevel - m_level) * coeff * dt;
+        m_level = std::clamp(m_level, 0.0f, 1.2f);
         
-        // Face plate (Cream color)
-        batcher.drawRoundedRect(m_bounds.x + 4, m_bounds.y + 4, m_bounds.w - 8, m_bounds.h - 8, 4.0f, 0.5f, 0.9f, 0.88f, 0.8f, 1.0f);
-
-        // Scale markings
+        // Face plate...
         float cx = m_bounds.x + m_bounds.w * 0.5f;
-        float cy = m_bounds.y + m_bounds.h + 10; // Pivot point below meter
+        float cy = m_bounds.y + m_bounds.h + 20; // Pivot point below meter
+        float pivotY = cy - 30;
+
+        // Scale markings... (keep existing logic)
+
         
         // Ticks: -20, -10, -5, 0, +3
         float dbValues[] = {-20.0f, -10.0f, -5.0f, 0.0f, 3.0f};
