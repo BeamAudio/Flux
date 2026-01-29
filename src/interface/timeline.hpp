@@ -128,6 +128,24 @@ public:
         }
     }
 
+    void handleKeyDown(int key) {
+        if (!m_isVisible) return;
+        if (m_selectedTrackPtr && m_selectedRegionIndex != -1) {
+            float framesPerPixel = 44100.0f / (50.0f * m_zoom);
+            size_t nudge = (size_t)(framesPerPixel * 10.0f);
+            if (key == 1073741904) { // LEFT
+                if (m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame > nudge)
+                    m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame -= nudge;
+                else m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame = 0;
+            } else if (key == 1073741903) { // RIGHT
+                m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame += nudge;
+            }
+        } else {
+            if (key == 1073741904) m_offsetX = (std::max)(0.0f, m_offsetX - 50.0f);
+            if (key == 1073741903) m_offsetX += 50.0f;
+        }
+    }
+
     bool onMouseDown(float x, float y, int button) override {
         if (!m_isVisible) return false;
         float pixelsPerSecond = 50.0f * m_zoom;
