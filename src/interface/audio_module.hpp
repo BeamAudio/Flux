@@ -23,7 +23,10 @@ public:
         if (node->getOutputPorts().size() > 0)
             m_outputPort = std::make_shared<Port>(PortType::Output, this);
         
-        setBounds(x, y, 150, 200);
+        // Dynamic sizing based on name
+        float tw = AudioUtils::calculateTextWidth(m_name, 14.0f);
+        float width = (std::max)(150.0f, tw + 60.0f); // 30px padding each side
+        setBounds(x, y, width, 200);
         setDraggable(true);
         
         autoGenerateUI();

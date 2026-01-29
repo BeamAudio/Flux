@@ -27,8 +27,22 @@ public:
             yOff += 30;
 
             auto drawBtn = [&](const std::string& label, bool isSelected = false) {
-                batcher.drawRoundedRect(m_bounds.x + 10, yOff, m_bounds.w - 20, 28, 4.0f, 0.5f, isSelected ? 0.2f : 0.15f, isSelected ? 0.4f : 0.16f, isSelected ? 0.8f : 0.17f, 1.0f);
-                batcher.drawText(label, m_bounds.x + 20, yOff + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+                float tw = AudioUtils::calculateTextWidth(label, 12.0f);
+                float btnW = m_bounds.w - 20;
+                // If text is too wide, we'll draw it but warn developer here
+                // For now, let's just make sure the box is at least wide enough for the text if it overflows
+                if (tw + 20 > btnW) {
+                    // Possible future: expand sidebar?
+                }
+                batcher.drawRoundedRect(m_bounds.x + 10, yOff, btnW, 28, 4.0f, 0.5f, isSelected ? 0.2f : 0.15f, isSelected ? 0.4f : 0.16f, isSelected ? 0.8f : 0.17f, 1.0f);
+                
+                // Use scissoring or clipping if text is too long
+                if (tw > btnW - 10) {
+                    // Scissor to btn width
+                    batcher.drawText(label.substr(0, (int)((btnW - 20) / 12.0f)) + "..", m_bounds.x + 20, yOff + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+                } else {
+                    batcher.drawText(label, m_bounds.x + 20, yOff + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+                }
                 yOff += 32;
             };
 

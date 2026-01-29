@@ -15,6 +15,12 @@ Button::~Button() {
 
 void Button::setButtonText(const std::string& newText) {
     m_text = newText;
+    // Auto-size based on text
+    float tw = AudioUtils::calculateTextWidth(m_text, 14.0f);
+    auto b = getBounds();
+    if (b.w < tw + 20.0f) {
+        setBounds(b.x, b.y, tw + 20.0f, b.h);
+    }
 }
 
 void Button::setEnabled(bool shouldBeEnabled) {
@@ -42,15 +48,12 @@ void Button::paint(QuadBatcher& g) {
     }
     
     // Draw button background
-    g.drawQuad(bounds.x, bounds.y, bounds.w, bounds.h, r, g_color, b, 1.0f);
+    g.drawRoundedRect(bounds.x, bounds.y, bounds.w, bounds.h, 4.0f, 0.5f, r, g_color, b, 1.0f);
 
-    // Draw button border
-    g.drawRect(bounds.x, bounds.y, bounds.w, bounds.h, 2.0f, 0.1f, 0.1f, 0.1f, 1.0f);
-    
-    // Draw text (simplified - in a real implementation, we'd use proper text rendering)
-    // For now, we'll just draw a small indicator in the center
-    float textX = bounds.x + bounds.w/2 - 15;
-    float textY = bounds.y + bounds.h/2 + 5;
+    // Draw text centered
+    float tw = AudioUtils::calculateTextWidth(m_text, 14.0f);
+    float textX = bounds.x + (bounds.w - tw) / 2.0f;
+    float textY = bounds.y + (bounds.h - 14.0f) / 2.0f;
     g.drawText(m_text, textX, textY, 14.0f, 1.0f, 1.0f, 1.0f, 1.0f);
     
     // Call base paint method if there's a callback

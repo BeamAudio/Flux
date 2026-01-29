@@ -47,8 +47,8 @@ public:
 
     std::string getName() const override { return "Sine Synth"; }
     
-    std::vector<Port> getInputPorts() const override { return {}; }
-    std::vector<Port> getOutputPorts() const override {
+    std::vector<FluxNode::Port> getInputPorts() const override { return {}; }
+    std::vector<FluxNode::Port> getOutputPorts() const override {
         return { {"Stereo Out", 2} };
     }
 

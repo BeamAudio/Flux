@@ -42,8 +42,8 @@ public:
     }
 
     std::string getName() const override { return "Audio Input"; }
-    std::vector<Port> getInputPorts() const override { return {}; }
-    std::vector<Port> getOutputPorts() const override { return {{"Stereo Out", 2}}; }
+    std::vector<FluxNode::Port> getInputPorts() const override { return {}; }
+    std::vector<FluxNode::Port> getOutputPorts() const override { return {{"Stereo Out", 2}}; }
 
 private:
     std::mutex m_bufferMutex;

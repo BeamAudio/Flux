@@ -2,8 +2,10 @@
 #define TOP_BAR_HPP
 
 #include "component.hpp"
+#include "../utilities/flux_audio_utils.hpp"
 #include <string>
 #include <functional>
+#include <vector>
 
 namespace Beam {
 
@@ -14,95 +16,91 @@ public:
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        // Dark background for top bar
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.1f, 0.1f, 0.11f, 1.0f);
-        // Soft accent line at bottom
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y + m_bounds.h - 3, m_bounds.w, 3, 1.5f, 0.5f, 0.2f, 0.4f, 0.8f, 1.0f);
         
-        // Mode Buttons
-        // Flux Button
-        batcher.drawRoundedRect(10, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
-        batcher.drawText("FLUX", 25, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-        // Slice Button
-        batcher.drawRoundedRect(85, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
-        batcher.drawText("SLICE", 95, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+        float curX = 10.0f;
+        float btnY = 8.0f;
 
-        // Config Button
-        batcher.drawRoundedRect(160, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.22f, 1.0f);
-        batcher.drawText("CONFIG", 175, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+        auto drawBtn = [&](const std::string& text, bool active) {
+            float tw = AudioUtils::calculateTextWidth(text, 12.0f);
+            float bw = tw + 20.0f;
+            batcher.drawRoundedRect(curX, btnY, bw, 24, 4.0f, 0.5f, active ? 0.3f : 0.18f, active ? 0.5f : 0.18f, active ? 0.8f : 0.22f, 1.0f);
+            batcher.drawText(text, curX + 10, btnY + 4, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+            float startX = curX;
+            curX += bw + 10.0f;
+            return Rect{startX, btnY, bw, 24};
+        };
 
-        // Transport Controls (Center)
-        float cx = m_bounds.w * 0.5f - 100;
-        // Rewind
-        batcher.drawRoundedRect(cx, 8, 40, 24, 4.0f, 0.5f, 0.25f, 0.25f, 0.25f, 1.0f);
-        batcher.drawText("<<", cx + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-        // Play
-        batcher.drawRoundedRect(cx + 45, 8, 40, 24, 4.0f, 0.5f, m_isPlaying ? 0.25f : 0.18f, m_isPlaying ? 0.7f : 0.35f, 0.25f, 1.0f);
-        batcher.drawText(">", cx + 60, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-        // Pause
-        batcher.drawRoundedRect(cx + 90, 8, 40, 24, 4.0f, 0.5f, !m_isPlaying ? 0.25f : 0.18f, !m_isPlaying ? 0.7f : 0.35f, 0.25f, 1.0f);
-        batcher.drawText("||", cx + 102, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+        m_btnFlux = drawBtn("FLUX", m_mode == 0);
+        m_btnSlice = drawBtn("SLICE", m_mode == 1);
+        m_btnConfig = drawBtn("CONFIG", false);
 
-        // Record
-        batcher.drawRoundedRect(cx + 135, 8, 40, 24, 4.0f, 0.5f, m_isRecording ? 0.9f : 0.3f, 0.1f, 0.1f, 1.0f);
-        batcher.drawText("O", cx + 150, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-
-        // Save/Load Buttons (Right side)
-        float rx = m_bounds.w - 240;
-        batcher.drawRoundedRect(rx, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.25f, 0.18f, 1.0f); // Save
-        batcher.drawText("SAVE", rx + 18, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-        batcher.drawRoundedRect(rx + 75, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.25f, 1.0f); // Load
-        batcher.drawText("LOAD", rx + 93, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-
-        // Render Button
-        float rBtnX = m_bounds.w - 80;
-        batcher.drawRoundedRect(rBtnX, 8, 70, 24, 4.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
-        batcher.drawText("RENDER", rBtnX + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-
-        // Timeline Tools (Only if in Slice mode)
-        if (m_mode == 1) { // Slice
-            float tx = 240;
-            auto drawTool = [&](const std::string& lbl, int toolIdx) {
-                bool active = (m_activeTool == toolIdx);
-                batcher.drawRoundedRect(tx, 8, 30, 24, 4.0f, 0.5f, active ? 0.3f : 0.15f, active ? 0.6f : 0.16f, active ? 1.0f : 0.17f, 1.0f);
-                batcher.drawText(lbl, tx + 8, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
-                tx += 35;
-            };
-            drawTool("P", 0); // Pointer
-            drawTool("S", 1); // Scissors
-            drawTool("G", 2); // Glue
+        // Tools (if in slice)
+        if (m_mode == 1) {
+            curX += 20.0f; // Gap
+            m_btnP = drawBtn("P", m_activeTool == 0);
+            m_btnS = drawBtn("S", m_activeTool == 1);
+            m_btnG = drawBtn("G", m_activeTool == 2);
         }
+
+        // Transport (Center)
+        float transportW = 200.0f;
+        float tx = m_bounds.w * 0.5f - transportW * 0.5f;
+        auto drawTransport = [&](const std::string& text, float x, float w, bool active) {
+            batcher.drawRoundedRect(x, btnY, w, 24, 4.0f, 0.5f, active ? 0.4f : 0.25f, active ? 0.4f : 0.25f, active ? 0.4f : 0.25f, 1.0f);
+            batcher.drawText(text, x + (w - text.length()*12)/2, btnY + 4, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+            return Rect{x, btnY, w, 24};
+        };
+
+        m_btnRewind = drawTransport("<<", tx, 40, false);
+        m_btnPlay = drawTransport(">", tx + 45, 40, m_isPlaying);
+        m_btnPause = drawTransport("||", tx + 90, 40, !m_isPlaying);
+        
+        // Record (Red)
+        float rCol = m_isRecording ? 0.9f : 0.3f;
+        batcher.drawRoundedRect(tx + 135, btnY, 40, 24, 4.0f, 0.5f, rCol, 0.1f, 0.1f, 1.0f);
+        batcher.drawText("O", tx + 135 + (40 - 12)/2, btnY + 4, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+        m_btnRecord = {tx + 135, btnY, 40, 24};
+
+        // Right Side (Save/Load/Render) - Reverse order
+        float rx = m_bounds.w - 10.0f;
+        auto drawBtnRight = [&](const std::string& text, float& xRef) {
+            float tw = AudioUtils::calculateTextWidth(text, 12.0f);
+            float bw = tw + 20.0f;
+            xRef -= bw;
+            batcher.drawRoundedRect(xRef, btnY, bw, 24, 4.0f, 0.5f, 0.18f, 0.22f, 0.18f, 1.0f);
+            batcher.drawText(text, xRef + 10, btnY + 4, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+            Rect r = {xRef, btnY, bw, 24};
+            xRef -= 10.0f;
+            return r;
+        };
+
+        m_btnRender = drawBtnRight("RENDER", rx);
+        m_btnLoad = drawBtnRight("LOAD", rx);
+        m_btnSave = drawBtnRight("SAVE", rx);
     }
 
     bool onMouseDown(float x, float y, int button) override {
-        if (y > 8 && y < 32) {
-            if (x > 10 && x < 80) { m_mode = 0; if (onModeChanged) onModeChanged(0); return true; }
-            if (x > 85 && x < 155) { m_mode = 1; if (onModeChanged) onModeChanged(1); return true; }
-            if (x > 160 && x < 230) { if (onConfigRequested) onConfigRequested(); return true; }
-            
-            if (m_mode == 1) {
-                if (x > 240 && x < 270) { m_activeTool = 0; if (onToolSelected) onToolSelected(0); return true; }
-                if (x > 275 && x < 305) { m_activeTool = 1; if (onToolSelected) onToolSelected(1); return true; }
-                if (x > 310 && x < 340) { m_activeTool = 2; if (onToolSelected) onToolSelected(2); return true; }
-            }
-            
-            float cx = m_bounds.w * 0.5f - 100;
-            if (x > cx && x < cx + 40) { if (onRewindRequested) onRewindRequested(); return true; }
-            if (x > cx + 45 && x < cx + 85) { setPlaying(true); if (onPlayRequested) onPlayRequested(); return true; }
-            if (x > cx + 90 && x < cx + 130) { setPlaying(false); if (onPauseRequested) onPauseRequested(); return true; }
-            if (x > cx + 135 && x < cx + 175) { 
-                setRecording(!m_isRecording); 
-                if (onRecordRequested) onRecordRequested(m_isRecording); 
-                return true; 
-            }
-
-            float rx = m_bounds.w - 240;
-            if (x > rx && x < rx + 70) { if (onSaveRequested) onSaveRequested(); return true; }
-            if (x > rx + 75 && x < rx + 145) { if (onLoadRequested) onLoadRequested(); return true; }
-            
-            float rBtnX = m_bounds.w - 80;
-            if (x > rBtnX && x < rBtnX + 70) { if (onRenderRequested) onRenderRequested(); return true; }
+        if (m_btnFlux.contains(x, y)) { m_mode = 0; if (onModeChanged) onModeChanged(0); return true; }
+        if (m_btnSlice.contains(x, y)) { m_mode = 1; if (onModeChanged) onModeChanged(1); return true; }
+        if (m_btnConfig.contains(x, y)) { if (onConfigRequested) onConfigRequested(); return true; }
+        
+        if (m_mode == 1) {
+            if (m_btnP.contains(x, y)) { m_activeTool = 0; if (onToolSelected) onToolSelected(0); return true; }
+            if (m_btnS.contains(x, y)) { m_activeTool = 1; if (onToolSelected) onToolSelected(1); return true; }
+            if (m_btnG.contains(x, y)) { m_activeTool = 2; if (onToolSelected) onToolSelected(2); return true; }
         }
+
+        if (m_btnRewind.contains(x, y)) { if (onRewindRequested) onRewindRequested(); return true; }
+        if (m_btnPlay.contains(x, y)) { setPlaying(true); if (onPlayRequested) onPlayRequested(); return true; }
+        if (m_btnPause.contains(x, y)) { setPlaying(false); if (onPauseRequested) onPauseRequested(); return true; }
+        if (m_btnRecord.contains(x, y)) { setRecording(!m_isRecording); if (onRecordRequested) onRecordRequested(m_isRecording); return true; }
+
+        if (m_btnSave.contains(x, y)) { if (onSaveRequested) onSaveRequested(); return true; }
+        if (m_btnLoad.contains(x, y)) { if (onLoadRequested) onLoadRequested(); return true; }
+        if (m_btnRender.contains(x, y)) { if (onRenderRequested) onRenderRequested(); return true; }
+
         return false;
     }
 
@@ -123,16 +121,15 @@ public:
 private:
     bool m_isPlaying = false;
     bool m_isRecording = false;
-    int m_mode = 0; // 0: Flux, 1: Slice
-    int m_activeTool = 0; // 0: Pointer, 1: Scissors, 2: Glue
+    int m_mode = 0;
+    int m_activeTool = 0;
+    
+    Rect m_btnFlux, m_btnSlice, m_btnConfig;
+    Rect m_btnP, m_btnS, m_btnG;
+    Rect m_btnRewind, m_btnPlay, m_btnPause, m_btnRecord;
+    Rect m_btnSave, m_btnLoad, m_btnRender;
 };
 
 } // namespace Beam
 
-#endif // TOP_BAR_HPP
-
-
-
-
-
-
+#endif

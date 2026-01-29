@@ -58,11 +58,11 @@ public:
 
     std::string getName() const override { return "Master"; }
 
-    std::vector<Port> getInputPorts() const override {
+    std::vector<FluxNode::Port> getInputPorts() const override {
         return { {"Stereo In", 2} };
     }
 
-    std::vector<Port> getOutputPorts() const override {
+    std::vector<FluxNode::Port> getOutputPorts() const override {
         return {};
     }
 

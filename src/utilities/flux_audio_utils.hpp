@@ -134,6 +134,14 @@ public:
     }
 
     /**
+     * @brief Calculates the width of a string given a font size.
+     * Note: This assumes a fixed-width bitmapped font where each char is 'size' wide.
+     */
+    static float calculateTextWidth(const std::string& text, float size) {
+        return (float)text.length() * size;
+    }
+
+    /**
      * @brief Draws text that scrolls horizontally if it exceeds the available width.
      */
     static void drawScrollingText(QuadBatcher& batcher, const std::string& text, float x, float y, float w, float h, float size, float dt, float& timer, float screenHeight) {
