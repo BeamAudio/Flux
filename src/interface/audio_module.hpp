@@ -133,13 +133,13 @@ public:
 
 protected:
     std::vector<std::shared_ptr<Component>> m_children;
-
-private:
     std::shared_ptr<FluxNode> m_node;
-    size_t m_nodeId;
-    std::string m_name;
     std::shared_ptr<Port> m_inputPort;
     std::shared_ptr<Port> m_outputPort;
+
+private:
+    size_t m_nodeId;
+    std::string m_name;
     Rect m_deleteBtnBounds;
     float m_scrollTimer = 0.0f;
 };

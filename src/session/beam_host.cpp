@@ -74,6 +74,16 @@ void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelis
     }
 }
 
+void BeamHost::onScriptLoadCallback(void* userdata, const char* const* filelist, int filter) {
+    if (filelist && filelist[0]) {
+        BeamHost* host = static_cast<BeamHost*>(userdata);
+        if (host && host->m_workspace) {
+            host->m_workspace->addScriptFX(filelist[0], 300, 300);
+            host->m_audioEngine->updatePlan();
+        }
+    }
+}
+
 BeamHost::BeamHost(const std::string& title, int width, int height)
     : m_title(title), m_width(width), m_height(height), m_isRunning(false), 
       m_window(nullptr), m_glContext(nullptr) {
@@ -102,6 +112,15 @@ bool BeamHost::init() {
 
     m_glContext = SDL_GL_CreateContext(m_window);
     if (!m_glContext) return false;
+
+    // Load Icon
+    SDL_Surface* icon = SDL_LoadBMP("assets/images/FLUX_LOGO.bmp");
+    if (icon) {
+        SDL_SetWindowIcon(m_window, icon);
+        SDL_DestroySurface(icon);
+    } else {
+        std::cout << "Warning: FLUX_LOGO.bmp not found for window icon." << std::endl;
+    }
 
     if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) return false;
     
@@ -135,6 +154,11 @@ bool BeamHost::init() {
     m_configView = std::make_shared<AudioConfigView>(m_audioDeviceManager.get(), m_audioEngine.get());
 
     m_browser->onAddFX = [this](std::string type) {
+        if (type == "Script") {
+            static const SDL_DialogFileFilter filters[] = { { "FluxScript", "fluxscript" } };
+            SDL_ShowOpenFileDialog(onScriptLoadCallback, this, m_window, filters, 1, NULL, false);
+            return;
+        }
         if (m_workspace) {
             m_workspace->addFX(type, 300, 300);
             m_audioEngine->updatePlan();

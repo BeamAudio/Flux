@@ -80,7 +80,7 @@ events:
       The output was:
       0
       Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-      Compilaci├│n iniciada a las 29/01/2026 17:42:51.
+      Compilaci├│n iniciada a las 29/01/2026 18:15:31.
       
       Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\4.2.0-rc2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" en nodo 1 (destinos predeterminados).
       PrepareForBuild:
@@ -109,7 +109,7 @@ events:
           0 Advertencia(s)
           0 Errores
       
-      Tiempo transcurrido 00:00:01.56
+      Tiempo transcurrido 00:00:01.60
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -956,8 +956,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-zgqz20"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-zgqz20"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h4nrid"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h4nrid"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -967,39 +967,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-zgqz20'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h4nrid'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ca228.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_60cce.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:42:53.
+        Compilaci├│n iniciada a las 29/01/2026 18:15:34.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgqz20\\cmTC_ca228.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h4nrid\\cmTC_60cce.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgqz20\\Debug\\".
-          Creando directorio "cmTC_ca228.dir\\Debug\\cmTC_ca228.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h4nrid\\Debug\\".
+          Creando directorio "cmTC_60cce.dir\\Debug\\cmTC_60cce.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_ca228.dir\\Debug\\cmTC_ca228.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_ca228.dir\\Debug\\cmTC_ca228.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_60cce.dir\\Debug\\cmTC_60cce.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_60cce.dir\\Debug\\cmTC_60cce.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_ca228.dir\\Debug\\\\" /Fd"cmTC_ca228.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_60cce.dir\\Debug\\\\" /Fd"cmTC_60cce.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_ca228.dir\\Debug\\\\" /Fd"cmTC_ca228.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_60cce.dir\\Debug\\\\" /Fd"cmTC_60cce.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgqz20\\Debug\\cmTC_ca228.exe" /INCREMENTAL /ILK:"cmTC_ca228.dir\\Debug\\cmTC_ca228.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-zgqz20/Debug/cmTC_ca228.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-zgqz20/Debug/cmTC_ca228.lib" /MACHINE:X64  /machine:x64 cmTC_ca228.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_ca228.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgqz20\\Debug\\cmTC_ca228.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h4nrid\\Debug\\cmTC_60cce.exe" /INCREMENTAL /ILK:"cmTC_60cce.dir\\Debug\\cmTC_60cce.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h4nrid/Debug/cmTC_60cce.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h4nrid/Debug/cmTC_60cce.lib" /MACHINE:X64  /machine:x64 cmTC_60cce.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_60cce.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h4nrid\\Debug\\cmTC_60cce.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_ca228.dir\\Debug\\cmTC_ca228.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_ca228.dir\\Debug\\cmTC_ca228.tlog\\cmTC_ca228.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zgqz20\\cmTC_ca228.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_60cce.dir\\Debug\\cmTC_60cce.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_60cce.dir\\Debug\\cmTC_60cce.tlog\\cmTC_60cce.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h4nrid\\cmTC_60cce.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.53
+        Tiempo transcurrido 00:00:01.56
         
       exitCode: 0
   -
@@ -1368,7 +1368,7 @@ events:
       The output was:
       0
       Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-      Compilaci├│n iniciada a las 29/01/2026 17:44:24.
+      Compilaci├│n iniciada a las 29/01/2026 18:17:09.
       
       Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\4.2.0-rc2\\CompilerIdC\\CompilerIdC.vcxproj" en nodo 1 (destinos predeterminados).
       PrepareForBuild:
@@ -1397,7 +1397,7 @@ events:
           0 Advertencia(s)
           0 Errores
       
-      Tiempo transcurrido 00:00:01.68
+      Tiempo transcurrido 00:00:01.64
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -1645,8 +1645,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4abur2"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4abur2"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dzytsl"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dzytsl"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1655,39 +1655,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4abur2'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dzytsl'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_35466.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cc2b4.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:27.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:11.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4abur2\\cmTC_35466.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dzytsl\\cmTC_cc2b4.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4abur2\\Debug\\".
-          Creando directorio "cmTC_35466.dir\\Debug\\cmTC_35466.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dzytsl\\Debug\\".
+          Creando directorio "cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_35466.dir\\Debug\\cmTC_35466.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_35466.dir\\Debug\\cmTC_35466.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_35466.dir\\Debug\\\\" /Fd"cmTC_35466.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cc2b4.dir\\Debug\\\\" /Fd"cmTC_cc2b4.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_35466.dir\\Debug\\\\" /Fd"cmTC_35466.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cc2b4.dir\\Debug\\\\" /Fd"cmTC_cc2b4.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4abur2\\Debug\\cmTC_35466.exe" /INCREMENTAL /ILK:"cmTC_35466.dir\\Debug\\cmTC_35466.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4abur2/Debug/cmTC_35466.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4abur2/Debug/cmTC_35466.lib" /MACHINE:X64  /machine:x64 cmTC_35466.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_35466.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4abur2\\Debug\\cmTC_35466.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dzytsl\\Debug\\cmTC_cc2b4.exe" /INCREMENTAL /ILK:"cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dzytsl/Debug/cmTC_cc2b4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dzytsl/Debug/cmTC_cc2b4.lib" /MACHINE:X64  /machine:x64 cmTC_cc2b4.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_cc2b4.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dzytsl\\Debug\\cmTC_cc2b4.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_35466.dir\\Debug\\cmTC_35466.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_35466.dir\\Debug\\cmTC_35466.tlog\\cmTC_35466.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4abur2\\cmTC_35466.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_cc2b4.dir\\Debug\\cmTC_cc2b4.tlog\\cmTC_cc2b4.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dzytsl\\cmTC_cc2b4.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.62
+        Tiempo transcurrido 00:00:01.58
         
       exitCode: 0
   -
@@ -2207,37 +2207,37 @@ events:
       stdout: |
         Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9fb66.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_60f46.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:30.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:14.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_9fb66.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_60f46.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
           Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\".
-          Creando directorio "cmTC_9fb66.dir\\Debug\\cmTC_9fb66.tlog\\".
+          Creando directorio "cmTC_60f46.dir\\Debug\\cmTC_60f46.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_9fb66.dir\\Debug\\cmTC_9fb66.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_9fb66.dir\\Debug\\cmTC_9fb66.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_60f46.dir\\Debug\\cmTC_60f46.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_60f46.dir\\Debug\\cmTC_60f46.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_9fb66.dir\\Debug\\\\" /Fd"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_9fb66.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_60f46.dir\\Debug\\\\" /Fd"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60f46.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_9fb66.dir\\Debug\\\\" /Fd"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_9fb66.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_60f46.dir\\Debug\\\\" /Fd"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60f46.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
           SDL_detect_arch.c
         Lib:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_9fb66.lib" /NOLOGO /MACHINE:X64  /machine:x64 cmTC_9fb66.dir\\Debug\\SDL_detect_arch.obj
-          cmTC_9fb66.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_9fb66.lib
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60f46.lib" /NOLOGO /MACHINE:X64  /machine:x64 cmTC_60f46.dir\\Debug\\SDL_detect_arch.obj
+          cmTC_60f46.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60f46.lib
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_9fb66.dir\\Debug\\cmTC_9fb66.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_9fb66.dir\\Debug\\cmTC_9fb66.tlog\\cmTC_9fb66.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_9fb66.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_60f46.dir\\Debug\\cmTC_60f46.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_60f46.dir\\Debug\\cmTC_60f46.tlog\\cmTC_60f46.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\_deps\\sdl3-build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_60f46.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.27
+        Tiempo transcurrido 00:00:01.37
         
       exitCode: 0
   -
@@ -2250,8 +2250,8 @@ events:
     checks:
       - "Performing Test CAN_PRESEED"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tgj93w"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tgj93w"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4d7hw3"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4d7hw3"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2261,39 +2261,39 @@ events:
       variable: "CAN_PRESEED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tgj93w'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4d7hw3'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_136f7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_40502.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:32.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:16.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\cmTC_136f7.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\cmTC_40502.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\Debug\\".
-          Creando directorio "cmTC_136f7.dir\\Debug\\cmTC_136f7.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\Debug\\".
+          Creando directorio "cmTC_40502.dir\\Debug\\cmTC_40502.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_136f7.dir\\Debug\\cmTC_136f7.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_136f7.dir\\Debug\\cmTC_136f7.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_40502.dir\\Debug\\cmTC_40502.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_40502.dir\\Debug\\cmTC_40502.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_136f7.dir\\Debug\\\\" /Fd"cmTC_136f7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_40502.dir\\Debug\\\\" /Fd"cmTC_40502.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_136f7.dir\\Debug\\\\" /Fd"cmTC_136f7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_40502.dir\\Debug\\\\" /Fd"cmTC_40502.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\Debug\\cmTC_136f7.exe" /INCREMENTAL /ILK:"cmTC_136f7.dir\\Debug\\cmTC_136f7.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tgj93w/Debug/cmTC_136f7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tgj93w/Debug/cmTC_136f7.lib" /MACHINE:X64  /machine:x64 cmTC_136f7.dir\\Debug\\src.obj
-          cmTC_136f7.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\Debug\\cmTC_136f7.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\Debug\\cmTC_40502.exe" /INCREMENTAL /ILK:"cmTC_40502.dir\\Debug\\cmTC_40502.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4d7hw3/Debug/cmTC_40502.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4d7hw3/Debug/cmTC_40502.lib" /MACHINE:X64  /machine:x64 cmTC_40502.dir\\Debug\\src.obj
+          cmTC_40502.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\Debug\\cmTC_40502.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_136f7.dir\\Debug\\cmTC_136f7.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_136f7.dir\\Debug\\cmTC_136f7.tlog\\cmTC_136f7.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tgj93w\\cmTC_136f7.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_40502.dir\\Debug\\cmTC_40502.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_40502.dir\\Debug\\cmTC_40502.tlog\\cmTC_40502.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4d7hw3\\cmTC_40502.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.51
+        Tiempo transcurrido 00:00:01.56
         
       exitCode: 0
   -
@@ -2306,8 +2306,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_MMX"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-fuicbv"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-fuicbv"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vlklyi"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vlklyi"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2317,39 +2317,39 @@ events:
       variable: "COMPILER_SUPPORTS_MMX"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-fuicbv'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vlklyi'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e1894.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5e4f2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:35.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:18.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\cmTC_e1894.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\cmTC_5e4f2.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\Debug\\".
-          Creando directorio "cmTC_e1894.dir\\Debug\\cmTC_e1894.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\Debug\\".
+          Creando directorio "cmTC_5e4f2.dir\\Debug\\cmTC_5e4f2.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_e1894.dir\\Debug\\cmTC_e1894.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_e1894.dir\\Debug\\cmTC_e1894.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_5e4f2.dir\\Debug\\cmTC_5e4f2.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_5e4f2.dir\\Debug\\cmTC_5e4f2.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_e1894.dir\\Debug\\\\" /Fd"cmTC_e1894.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5e4f2.dir\\Debug\\\\" /Fd"cmTC_5e4f2.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_e1894.dir\\Debug\\\\" /Fd"cmTC_e1894.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5e4f2.dir\\Debug\\\\" /Fd"cmTC_5e4f2.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\src.c"
           src.c
-        C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\src.c(15,25): error C2440: '=': no se puede realizar la conversi├│n de 'int' a '__m64' [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\cmTC_e1894.vcxproj]
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\cmTC_e1894.vcxproj" (destinos predeterminados) -- ERROR.
+        C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\src.c(15,25): error C2440: '=': no se puede realizar la conversi├│n de 'int' a '__m64' [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\cmTC_5e4f2.vcxproj]
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\cmTC_5e4f2.vcxproj" (destinos predeterminados) -- ERROR.
         
         ERROR al compilar.
         
-        "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\cmTC_e1894.vcxproj" (destino predeterminado) (1) ->
+        "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\cmTC_5e4f2.vcxproj" (destino predeterminado) (1) ->
         (ClCompile destino) -> 
-          C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\src.c(15,25): error C2440: '=': no se puede realizar la conversi├│n de 'int' a '__m64' [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fuicbv\\cmTC_e1894.vcxproj]
+          C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\src.c(15,25): error C2440: '=': no se puede realizar la conversi├│n de 'int' a '__m64' [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vlklyi\\cmTC_5e4f2.vcxproj]
         
             0 Advertencia(s)
             1 Errores
         
-        Tiempo transcurrido 00:00:01.02
+        Tiempo transcurrido 00:00:01.07
         
       exitCode: 1
   -
@@ -2362,8 +2362,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-ry1bu0"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-ry1bu0"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-99js9w"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-99js9w"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2373,39 +2373,39 @@ events:
       variable: "COMPILER_SUPPORTS_SSE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-ry1bu0'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-99js9w'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_616a0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_79bd7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:36.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:20.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\cmTC_616a0.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\cmTC_79bd7.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\Debug\\".
-          Creando directorio "cmTC_616a0.dir\\Debug\\cmTC_616a0.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\Debug\\".
+          Creando directorio "cmTC_79bd7.dir\\Debug\\cmTC_79bd7.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_616a0.dir\\Debug\\cmTC_616a0.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_616a0.dir\\Debug\\cmTC_616a0.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_79bd7.dir\\Debug\\cmTC_79bd7.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_79bd7.dir\\Debug\\cmTC_79bd7.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_616a0.dir\\Debug\\\\" /Fd"cmTC_616a0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_79bd7.dir\\Debug\\\\" /Fd"cmTC_79bd7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_616a0.dir\\Debug\\\\" /Fd"cmTC_616a0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_79bd7.dir\\Debug\\\\" /Fd"cmTC_79bd7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\Debug\\cmTC_616a0.exe" /INCREMENTAL /ILK:"cmTC_616a0.dir\\Debug\\cmTC_616a0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-ry1bu0/Debug/cmTC_616a0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-ry1bu0/Debug/cmTC_616a0.lib" /MACHINE:X64  /machine:x64 cmTC_616a0.dir\\Debug\\src.obj
-          cmTC_616a0.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\Debug\\cmTC_616a0.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\Debug\\cmTC_79bd7.exe" /INCREMENTAL /ILK:"cmTC_79bd7.dir\\Debug\\cmTC_79bd7.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-99js9w/Debug/cmTC_79bd7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-99js9w/Debug/cmTC_79bd7.lib" /MACHINE:X64  /machine:x64 cmTC_79bd7.dir\\Debug\\src.obj
+          cmTC_79bd7.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\Debug\\cmTC_79bd7.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_616a0.dir\\Debug\\cmTC_616a0.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_616a0.dir\\Debug\\cmTC_616a0.tlog\\cmTC_616a0.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ry1bu0\\cmTC_616a0.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_79bd7.dir\\Debug\\cmTC_79bd7.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_79bd7.dir\\Debug\\cmTC_79bd7.tlog\\cmTC_79bd7.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-99js9w\\cmTC_79bd7.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.60
+        Tiempo transcurrido 00:00:01.61
         
       exitCode: 0
   -
@@ -2418,8 +2418,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE2"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-nc6kro"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-nc6kro"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5lle8"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5lle8"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2429,39 +2429,39 @@ events:
       variable: "COMPILER_SUPPORTS_SSE2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-nc6kro'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5lle8'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e5663.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_474b0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:39.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:22.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\cmTC_e5663.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\cmTC_474b0.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\Debug\\".
-          Creando directorio "cmTC_e5663.dir\\Debug\\cmTC_e5663.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\Debug\\".
+          Creando directorio "cmTC_474b0.dir\\Debug\\cmTC_474b0.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_e5663.dir\\Debug\\cmTC_e5663.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_e5663.dir\\Debug\\cmTC_e5663.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_474b0.dir\\Debug\\cmTC_474b0.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_474b0.dir\\Debug\\cmTC_474b0.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_e5663.dir\\Debug\\\\" /Fd"cmTC_e5663.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_474b0.dir\\Debug\\\\" /Fd"cmTC_474b0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_e5663.dir\\Debug\\\\" /Fd"cmTC_e5663.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_474b0.dir\\Debug\\\\" /Fd"cmTC_474b0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\Debug\\cmTC_e5663.exe" /INCREMENTAL /ILK:"cmTC_e5663.dir\\Debug\\cmTC_e5663.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-nc6kro/Debug/cmTC_e5663.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-nc6kro/Debug/cmTC_e5663.lib" /MACHINE:X64  /machine:x64 cmTC_e5663.dir\\Debug\\src.obj
-          cmTC_e5663.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\Debug\\cmTC_e5663.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\Debug\\cmTC_474b0.exe" /INCREMENTAL /ILK:"cmTC_474b0.dir\\Debug\\cmTC_474b0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5lle8/Debug/cmTC_474b0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5lle8/Debug/cmTC_474b0.lib" /MACHINE:X64  /machine:x64 cmTC_474b0.dir\\Debug\\src.obj
+          cmTC_474b0.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\Debug\\cmTC_474b0.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_e5663.dir\\Debug\\cmTC_e5663.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_e5663.dir\\Debug\\cmTC_e5663.tlog\\cmTC_e5663.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nc6kro\\cmTC_e5663.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_474b0.dir\\Debug\\cmTC_474b0.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_474b0.dir\\Debug\\cmTC_474b0.tlog\\cmTC_474b0.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5lle8\\cmTC_474b0.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.63
+        Tiempo transcurrido 00:00:01.68
         
       exitCode: 0
   -
@@ -2474,8 +2474,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE3"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-i30s4n"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-i30s4n"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dxokbj"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dxokbj"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2485,39 +2485,39 @@ events:
       variable: "COMPILER_SUPPORTS_SSE3"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-i30s4n'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dxokbj'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_24e94.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f84eb.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:41.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:25.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\cmTC_24e94.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\cmTC_f84eb.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\Debug\\".
-          Creando directorio "cmTC_24e94.dir\\Debug\\cmTC_24e94.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\Debug\\".
+          Creando directorio "cmTC_f84eb.dir\\Debug\\cmTC_f84eb.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_24e94.dir\\Debug\\cmTC_24e94.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_24e94.dir\\Debug\\cmTC_24e94.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_f84eb.dir\\Debug\\cmTC_f84eb.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_f84eb.dir\\Debug\\cmTC_f84eb.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_24e94.dir\\Debug\\\\" /Fd"cmTC_24e94.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_f84eb.dir\\Debug\\\\" /Fd"cmTC_f84eb.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_24e94.dir\\Debug\\\\" /Fd"cmTC_24e94.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_f84eb.dir\\Debug\\\\" /Fd"cmTC_f84eb.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\Debug\\cmTC_24e94.exe" /INCREMENTAL /ILK:"cmTC_24e94.dir\\Debug\\cmTC_24e94.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-i30s4n/Debug/cmTC_24e94.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-i30s4n/Debug/cmTC_24e94.lib" /MACHINE:X64  /machine:x64 cmTC_24e94.dir\\Debug\\src.obj
-          cmTC_24e94.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\Debug\\cmTC_24e94.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\Debug\\cmTC_f84eb.exe" /INCREMENTAL /ILK:"cmTC_f84eb.dir\\Debug\\cmTC_f84eb.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dxokbj/Debug/cmTC_f84eb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-dxokbj/Debug/cmTC_f84eb.lib" /MACHINE:X64  /machine:x64 cmTC_f84eb.dir\\Debug\\src.obj
+          cmTC_f84eb.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\Debug\\cmTC_f84eb.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_24e94.dir\\Debug\\cmTC_24e94.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_24e94.dir\\Debug\\cmTC_24e94.tlog\\cmTC_24e94.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i30s4n\\cmTC_24e94.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_f84eb.dir\\Debug\\cmTC_f84eb.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_f84eb.dir\\Debug\\cmTC_f84eb.tlog\\cmTC_f84eb.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dxokbj\\cmTC_f84eb.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.51
+        Tiempo transcurrido 00:00:01.62
         
       exitCode: 0
   -
@@ -2530,8 +2530,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE4_1"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-a9xr0t"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-a9xr0t"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-mwleu3"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-mwleu3"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2541,33 +2541,33 @@ events:
       variable: "COMPILER_SUPPORTS_SSE4_1"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-a9xr0t'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-mwleu3'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7540e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_45349.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:43.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:27.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\cmTC_7540e.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\cmTC_45349.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\Debug\\".
-          Creando directorio "cmTC_7540e.dir\\Debug\\cmTC_7540e.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\Debug\\".
+          Creando directorio "cmTC_45349.dir\\Debug\\cmTC_45349.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_7540e.dir\\Debug\\cmTC_7540e.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_7540e.dir\\Debug\\cmTC_7540e.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_45349.dir\\Debug\\cmTC_45349.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_45349.dir\\Debug\\cmTC_45349.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_7540e.dir\\Debug\\\\" /Fd"cmTC_7540e.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_45349.dir\\Debug\\\\" /Fd"cmTC_45349.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_7540e.dir\\Debug\\\\" /Fd"cmTC_7540e.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_45349.dir\\Debug\\\\" /Fd"cmTC_45349.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\Debug\\cmTC_7540e.exe" /INCREMENTAL /ILK:"cmTC_7540e.dir\\Debug\\cmTC_7540e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-a9xr0t/Debug/cmTC_7540e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-a9xr0t/Debug/cmTC_7540e.lib" /MACHINE:X64  /machine:x64 cmTC_7540e.dir\\Debug\\src.obj
-          cmTC_7540e.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\Debug\\cmTC_7540e.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\Debug\\cmTC_45349.exe" /INCREMENTAL /ILK:"cmTC_45349.dir\\Debug\\cmTC_45349.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-mwleu3/Debug/cmTC_45349.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-mwleu3/Debug/cmTC_45349.lib" /MACHINE:X64  /machine:x64 cmTC_45349.dir\\Debug\\src.obj
+          cmTC_45349.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\Debug\\cmTC_45349.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_7540e.dir\\Debug\\cmTC_7540e.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_7540e.dir\\Debug\\cmTC_7540e.tlog\\cmTC_7540e.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9xr0t\\cmTC_7540e.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_45349.dir\\Debug\\cmTC_45349.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_45349.dir\\Debug\\cmTC_45349.tlog\\cmTC_45349.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mwleu3\\cmTC_45349.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
@@ -2586,8 +2586,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE4_2"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vpu9uy"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vpu9uy"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-z8cvaa"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-z8cvaa"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2597,39 +2597,39 @@ events:
       variable: "COMPILER_SUPPORTS_SSE4_2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vpu9uy'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-z8cvaa'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f065c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2e4e0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:45.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:29.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\cmTC_f065c.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\cmTC_2e4e0.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\Debug\\".
-          Creando directorio "cmTC_f065c.dir\\Debug\\cmTC_f065c.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\Debug\\".
+          Creando directorio "cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_f065c.dir\\Debug\\cmTC_f065c.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_f065c.dir\\Debug\\cmTC_f065c.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_f065c.dir\\Debug\\\\" /Fd"cmTC_f065c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_2e4e0.dir\\Debug\\\\" /Fd"cmTC_2e4e0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_f065c.dir\\Debug\\\\" /Fd"cmTC_f065c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_2e4e0.dir\\Debug\\\\" /Fd"cmTC_2e4e0.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\Debug\\cmTC_f065c.exe" /INCREMENTAL /ILK:"cmTC_f065c.dir\\Debug\\cmTC_f065c.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vpu9uy/Debug/cmTC_f065c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-vpu9uy/Debug/cmTC_f065c.lib" /MACHINE:X64  /machine:x64 cmTC_f065c.dir\\Debug\\src.obj
-          cmTC_f065c.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\Debug\\cmTC_f065c.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\Debug\\cmTC_2e4e0.exe" /INCREMENTAL /ILK:"cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-z8cvaa/Debug/cmTC_2e4e0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-z8cvaa/Debug/cmTC_2e4e0.lib" /MACHINE:X64  /machine:x64 cmTC_2e4e0.dir\\Debug\\src.obj
+          cmTC_2e4e0.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\Debug\\cmTC_2e4e0.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_f065c.dir\\Debug\\cmTC_f065c.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_f065c.dir\\Debug\\cmTC_f065c.tlog\\cmTC_f065c.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vpu9uy\\cmTC_f065c.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_2e4e0.dir\\Debug\\cmTC_2e4e0.tlog\\cmTC_2e4e0.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z8cvaa\\cmTC_2e4e0.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.59
+        Tiempo transcurrido 00:00:01.79
         
       exitCode: 0
   -
@@ -2642,8 +2642,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-0txe9r"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-0txe9r"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-oo6lz3"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-oo6lz3"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2653,39 +2653,39 @@ events:
       variable: "COMPILER_SUPPORTS_AVX"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-0txe9r'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-oo6lz3'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_81c8f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ad4f1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:48.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:32.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\cmTC_81c8f.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\cmTC_ad4f1.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\Debug\\".
-          Creando directorio "cmTC_81c8f.dir\\Debug\\cmTC_81c8f.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\Debug\\".
+          Creando directorio "cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_81c8f.dir\\Debug\\cmTC_81c8f.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_81c8f.dir\\Debug\\cmTC_81c8f.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_81c8f.dir\\Debug\\\\" /Fd"cmTC_81c8f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ad4f1.dir\\Debug\\\\" /Fd"cmTC_ad4f1.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_81c8f.dir\\Debug\\\\" /Fd"cmTC_81c8f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ad4f1.dir\\Debug\\\\" /Fd"cmTC_ad4f1.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\Debug\\cmTC_81c8f.exe" /INCREMENTAL /ILK:"cmTC_81c8f.dir\\Debug\\cmTC_81c8f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-0txe9r/Debug/cmTC_81c8f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-0txe9r/Debug/cmTC_81c8f.lib" /MACHINE:X64  /machine:x64 cmTC_81c8f.dir\\Debug\\src.obj
-          cmTC_81c8f.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\Debug\\cmTC_81c8f.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\Debug\\cmTC_ad4f1.exe" /INCREMENTAL /ILK:"cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-oo6lz3/Debug/cmTC_ad4f1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-oo6lz3/Debug/cmTC_ad4f1.lib" /MACHINE:X64  /machine:x64 cmTC_ad4f1.dir\\Debug\\src.obj
+          cmTC_ad4f1.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\Debug\\cmTC_ad4f1.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_81c8f.dir\\Debug\\cmTC_81c8f.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_81c8f.dir\\Debug\\cmTC_81c8f.tlog\\cmTC_81c8f.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0txe9r\\cmTC_81c8f.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_ad4f1.dir\\Debug\\cmTC_ad4f1.tlog\\cmTC_ad4f1.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oo6lz3\\cmTC_ad4f1.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.58
+        Tiempo transcurrido 00:00:01.98
         
       exitCode: 0
   -
@@ -2698,8 +2698,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX2"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-shuv7d"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-shuv7d"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-j4d03b"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-j4d03b"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2709,39 +2709,39 @@ events:
       variable: "COMPILER_SUPPORTS_AVX2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-shuv7d'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-j4d03b'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7445a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_62fbd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:50.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:35.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\cmTC_7445a.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\cmTC_62fbd.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\Debug\\".
-          Creando directorio "cmTC_7445a.dir\\Debug\\cmTC_7445a.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\Debug\\".
+          Creando directorio "cmTC_62fbd.dir\\Debug\\cmTC_62fbd.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_7445a.dir\\Debug\\cmTC_7445a.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_7445a.dir\\Debug\\cmTC_7445a.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_62fbd.dir\\Debug\\cmTC_62fbd.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_62fbd.dir\\Debug\\cmTC_62fbd.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_7445a.dir\\Debug\\\\" /Fd"cmTC_7445a.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_62fbd.dir\\Debug\\\\" /Fd"cmTC_62fbd.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_7445a.dir\\Debug\\\\" /Fd"cmTC_7445a.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_62fbd.dir\\Debug\\\\" /Fd"cmTC_62fbd.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\Debug\\cmTC_7445a.exe" /INCREMENTAL /ILK:"cmTC_7445a.dir\\Debug\\cmTC_7445a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-shuv7d/Debug/cmTC_7445a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-shuv7d/Debug/cmTC_7445a.lib" /MACHINE:X64  /machine:x64 cmTC_7445a.dir\\Debug\\src.obj
-          cmTC_7445a.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\Debug\\cmTC_7445a.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\Debug\\cmTC_62fbd.exe" /INCREMENTAL /ILK:"cmTC_62fbd.dir\\Debug\\cmTC_62fbd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-j4d03b/Debug/cmTC_62fbd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-j4d03b/Debug/cmTC_62fbd.lib" /MACHINE:X64  /machine:x64 cmTC_62fbd.dir\\Debug\\src.obj
+          cmTC_62fbd.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\Debug\\cmTC_62fbd.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_7445a.dir\\Debug\\cmTC_7445a.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_7445a.dir\\Debug\\cmTC_7445a.tlog\\cmTC_7445a.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-shuv7d\\cmTC_7445a.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_62fbd.dir\\Debug\\cmTC_62fbd.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_62fbd.dir\\Debug\\cmTC_62fbd.tlog\\cmTC_62fbd.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j4d03b\\cmTC_62fbd.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.63
+        Tiempo transcurrido 00:00:02.05
         
       exitCode: 0
   -
@@ -2754,8 +2754,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX512F"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-67c0nt"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-67c0nt"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-idzx85"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-idzx85"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2765,39 +2765,39 @@ events:
       variable: "COMPILER_SUPPORTS_AVX512F"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-67c0nt'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-idzx85'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_dae2d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_25b16.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:52.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:38.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\cmTC_dae2d.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\cmTC_25b16.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\Debug\\".
-          Creando directorio "cmTC_dae2d.dir\\Debug\\cmTC_dae2d.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\Debug\\".
+          Creando directorio "cmTC_25b16.dir\\Debug\\cmTC_25b16.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_dae2d.dir\\Debug\\cmTC_dae2d.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_dae2d.dir\\Debug\\cmTC_dae2d.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_25b16.dir\\Debug\\cmTC_25b16.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_25b16.dir\\Debug\\cmTC_25b16.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_dae2d.dir\\Debug\\\\" /Fd"cmTC_dae2d.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_25b16.dir\\Debug\\\\" /Fd"cmTC_25b16.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_dae2d.dir\\Debug\\\\" /Fd"cmTC_dae2d.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_25b16.dir\\Debug\\\\" /Fd"cmTC_25b16.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\Debug\\cmTC_dae2d.exe" /INCREMENTAL /ILK:"cmTC_dae2d.dir\\Debug\\cmTC_dae2d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-67c0nt/Debug/cmTC_dae2d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-67c0nt/Debug/cmTC_dae2d.lib" /MACHINE:X64  /machine:x64 cmTC_dae2d.dir\\Debug\\src.obj
-          cmTC_dae2d.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\Debug\\cmTC_dae2d.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\Debug\\cmTC_25b16.exe" /INCREMENTAL /ILK:"cmTC_25b16.dir\\Debug\\cmTC_25b16.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-idzx85/Debug/cmTC_25b16.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-idzx85/Debug/cmTC_25b16.lib" /MACHINE:X64  /machine:x64 cmTC_25b16.dir\\Debug\\src.obj
+          cmTC_25b16.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\Debug\\cmTC_25b16.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_dae2d.dir\\Debug\\cmTC_dae2d.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_dae2d.dir\\Debug\\cmTC_dae2d.tlog\\cmTC_dae2d.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-67c0nt\\cmTC_dae2d.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_25b16.dir\\Debug\\cmTC_25b16.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_25b16.dir\\Debug\\cmTC_25b16.tlog\\cmTC_25b16.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-idzx85\\cmTC_25b16.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.61
+        Tiempo transcurrido 00:00:02.04
         
       exitCode: 0
   -
@@ -2809,8 +2809,8 @@ events:
     checks:
       - "Looking for _copysign"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-yq1dzn"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-yq1dzn"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-awmp47"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-awmp47"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2820,39 +2820,39 @@ events:
       variable: "LIBC_HAS__COPYSIGN"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-yq1dzn'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-awmp47'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2de8f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_3e1f8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:55.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:41.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\cmTC_2de8f.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\cmTC_3e1f8.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\Debug\\".
-          Creando directorio "cmTC_2de8f.dir\\Debug\\cmTC_2de8f.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\Debug\\".
+          Creando directorio "cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_2de8f.dir\\Debug\\cmTC_2de8f.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_2de8f.dir\\Debug\\cmTC_2de8f.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_2de8f.dir\\Debug\\\\" /Fd"cmTC_2de8f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\CheckSymbolExists.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_3e1f8.dir\\Debug\\\\" /Fd"cmTC_3e1f8.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\CheckSymbolExists.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_2de8f.dir\\Debug\\\\" /Fd"cmTC_2de8f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\CheckSymbolExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_3e1f8.dir\\Debug\\\\" /Fd"cmTC_3e1f8.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\CheckSymbolExists.c"
           CheckSymbolExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\Debug\\cmTC_2de8f.exe" /INCREMENTAL /ILK:"cmTC_2de8f.dir\\Debug\\cmTC_2de8f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-yq1dzn/Debug/cmTC_2de8f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-yq1dzn/Debug/cmTC_2de8f.lib" /MACHINE:X64  /machine:x64 cmTC_2de8f.dir\\Debug\\CheckSymbolExists.obj
-          cmTC_2de8f.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\Debug\\cmTC_2de8f.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\Debug\\cmTC_3e1f8.exe" /INCREMENTAL /ILK:"cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-awmp47/Debug/cmTC_3e1f8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-awmp47/Debug/cmTC_3e1f8.lib" /MACHINE:X64  /machine:x64 cmTC_3e1f8.dir\\Debug\\CheckSymbolExists.obj
+          cmTC_3e1f8.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\Debug\\cmTC_3e1f8.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_2de8f.dir\\Debug\\cmTC_2de8f.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_2de8f.dir\\Debug\\cmTC_2de8f.tlog\\cmTC_2de8f.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-yq1dzn\\cmTC_2de8f.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_3e1f8.dir\\Debug\\cmTC_3e1f8.tlog\\cmTC_3e1f8.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-awmp47\\cmTC_3e1f8.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.61
+        Tiempo transcurrido 00:00:02.07
         
       exitCode: 0
   -
@@ -2864,8 +2864,8 @@ events:
     checks:
       - "Looking for _fseeki64"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5tg85"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5tg85"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-y2lf6z"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-y2lf6z"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2875,39 +2875,39 @@ events:
       variable: "LIBC_HAS__FSEEKI64"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5tg85'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-y2lf6z'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a4dd9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_277f4.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:57.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:44.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\cmTC_a4dd9.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\cmTC_277f4.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\Debug\\".
-          Creando directorio "cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\Debug\\".
+          Creando directorio "cmTC_277f4.dir\\Debug\\cmTC_277f4.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_277f4.dir\\Debug\\cmTC_277f4.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_277f4.dir\\Debug\\cmTC_277f4.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_a4dd9.dir\\Debug\\\\" /Fd"cmTC_a4dd9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\CheckSymbolExists.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_277f4.dir\\Debug\\\\" /Fd"cmTC_277f4.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\CheckSymbolExists.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_a4dd9.dir\\Debug\\\\" /Fd"cmTC_a4dd9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\CheckSymbolExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_277f4.dir\\Debug\\\\" /Fd"cmTC_277f4.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\CheckSymbolExists.c"
           CheckSymbolExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\Debug\\cmTC_a4dd9.exe" /INCREMENTAL /ILK:"cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5tg85/Debug/cmTC_a4dd9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t5tg85/Debug/cmTC_a4dd9.lib" /MACHINE:X64  /machine:x64 cmTC_a4dd9.dir\\Debug\\CheckSymbolExists.obj
-          cmTC_a4dd9.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\Debug\\cmTC_a4dd9.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\Debug\\cmTC_277f4.exe" /INCREMENTAL /ILK:"cmTC_277f4.dir\\Debug\\cmTC_277f4.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-y2lf6z/Debug/cmTC_277f4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-y2lf6z/Debug/cmTC_277f4.lib" /MACHINE:X64  /machine:x64 cmTC_277f4.dir\\Debug\\CheckSymbolExists.obj
+          cmTC_277f4.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\Debug\\cmTC_277f4.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_a4dd9.dir\\Debug\\cmTC_a4dd9.tlog\\cmTC_a4dd9.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5tg85\\cmTC_a4dd9.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_277f4.dir\\Debug\\cmTC_277f4.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_277f4.dir\\Debug\\cmTC_277f4.tlog\\cmTC_277f4.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y2lf6z\\cmTC_277f4.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.70
+        Tiempo transcurrido 00:00:02.00
         
       exitCode: 0
   -
@@ -2919,8 +2919,8 @@ events:
     checks:
       - "Performing Test HAVE_GAMEINPUT_H"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tji24a"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tji24a"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h6nv23"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h6nv23"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2930,39 +2930,39 @@ events:
       variable: "HAVE_GAMEINPUT_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-tji24a'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-h6nv23'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_408a8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ab3d7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:44:59.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:46.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\cmTC_408a8.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\cmTC_ab3d7.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\Debug\\".
-          Creando directorio "cmTC_408a8.dir\\Debug\\cmTC_408a8.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\Debug\\".
+          Creando directorio "cmTC_ab3d7.dir\\Debug\\cmTC_ab3d7.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_408a8.dir\\Debug\\cmTC_408a8.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_408a8.dir\\Debug\\cmTC_408a8.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_ab3d7.dir\\Debug\\cmTC_ab3d7.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_ab3d7.dir\\Debug\\cmTC_ab3d7.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_408a8.dir\\Debug\\\\" /Fd"cmTC_408a8.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ab3d7.dir\\Debug\\\\" /Fd"cmTC_ab3d7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_408a8.dir\\Debug\\\\" /Fd"cmTC_408a8.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ab3d7.dir\\Debug\\\\" /Fd"cmTC_ab3d7.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\src.c"
           src.c
-        C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\src.c(4,14): error C1083: No se puede abrir el archivo incluir: 'gameinput.h': No such file or directory [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\cmTC_408a8.vcxproj]
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\cmTC_408a8.vcxproj" (destinos predeterminados) -- ERROR.
+        C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\src.c(4,14): error C1083: No se puede abrir el archivo incluir: 'gameinput.h': No such file or directory [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\cmTC_ab3d7.vcxproj]
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\cmTC_ab3d7.vcxproj" (destinos predeterminados) -- ERROR.
         
         ERROR al compilar.
         
-        "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\cmTC_408a8.vcxproj" (destino predeterminado) (1) ->
+        "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\cmTC_ab3d7.vcxproj" (destino predeterminado) (1) ->
         (ClCompile destino) -> 
-          C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\src.c(4,14): error C1083: No se puede abrir el archivo incluir: 'gameinput.h': No such file or directory [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tji24a\\cmTC_408a8.vcxproj]
+          C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\src.c(4,14): error C1083: No se puede abrir el archivo incluir: 'gameinput.h': No such file or directory [C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-h6nv23\\cmTC_ab3d7.vcxproj]
         
             0 Advertencia(s)
             1 Errores
         
-        Tiempo transcurrido 00:00:01.15
+        Tiempo transcurrido 00:00:01.28
         
       exitCode: 1
   -
@@ -2973,8 +2973,8 @@ events:
     checks:
       - "Looking for dxgi1_5.h"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-qea1wt"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-qea1wt"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-e655f4"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-e655f4"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -2984,39 +2984,39 @@ events:
       variable: "HAVE_DXGI1_5_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-qea1wt'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-e655f4'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_55d26.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_da534.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:45:01.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:48.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\cmTC_55d26.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\cmTC_da534.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\Debug\\".
-          Creando directorio "cmTC_55d26.dir\\Debug\\cmTC_55d26.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\Debug\\".
+          Creando directorio "cmTC_da534.dir\\Debug\\cmTC_da534.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_55d26.dir\\Debug\\cmTC_55d26.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_55d26.dir\\Debug\\cmTC_55d26.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_da534.dir\\Debug\\cmTC_da534.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_da534.dir\\Debug\\cmTC_da534.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_55d26.dir\\Debug\\\\" /Fd"cmTC_55d26.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\CheckIncludeFile.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_da534.dir\\Debug\\\\" /Fd"cmTC_da534.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\CheckIncludeFile.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_55d26.dir\\Debug\\\\" /Fd"cmTC_55d26.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\CheckIncludeFile.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_da534.dir\\Debug\\\\" /Fd"cmTC_da534.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\CheckIncludeFile.c"
           CheckIncludeFile.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\Debug\\cmTC_55d26.exe" /INCREMENTAL /ILK:"cmTC_55d26.dir\\Debug\\cmTC_55d26.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-qea1wt/Debug/cmTC_55d26.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-qea1wt/Debug/cmTC_55d26.lib" /MACHINE:X64  /machine:x64 cmTC_55d26.dir\\Debug\\CheckIncludeFile.obj
-          cmTC_55d26.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\Debug\\cmTC_55d26.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\Debug\\cmTC_da534.exe" /INCREMENTAL /ILK:"cmTC_da534.dir\\Debug\\cmTC_da534.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-e655f4/Debug/cmTC_da534.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-e655f4/Debug/cmTC_da534.lib" /MACHINE:X64  /machine:x64 cmTC_da534.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_da534.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\Debug\\cmTC_da534.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_55d26.dir\\Debug\\cmTC_55d26.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_55d26.dir\\Debug\\cmTC_55d26.tlog\\cmTC_55d26.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-qea1wt\\cmTC_55d26.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_da534.dir\\Debug\\cmTC_da534.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_da534.dir\\Debug\\cmTC_da534.tlog\\cmTC_da534.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e655f4\\cmTC_da534.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:02.26
+        Tiempo transcurrido 00:00:02.65
         
       exitCode: 0
   -
@@ -3027,8 +3027,8 @@ events:
     checks:
       - "Looking for dxgi1_6.h"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t435a1"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t435a1"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-bf37qo"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-bf37qo"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -3038,39 +3038,39 @@ events:
       variable: "HAVE_DXGI1_6_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t435a1'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-bf37qo'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_adf20.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_4095b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:45:04.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:52.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\cmTC_adf20.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\cmTC_4095b.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\Debug\\".
-          Creando directorio "cmTC_adf20.dir\\Debug\\cmTC_adf20.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\Debug\\".
+          Creando directorio "cmTC_4095b.dir\\Debug\\cmTC_4095b.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_adf20.dir\\Debug\\cmTC_adf20.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_adf20.dir\\Debug\\cmTC_adf20.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_4095b.dir\\Debug\\cmTC_4095b.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_4095b.dir\\Debug\\cmTC_4095b.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_adf20.dir\\Debug\\\\" /Fd"cmTC_adf20.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\CheckIncludeFile.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_4095b.dir\\Debug\\\\" /Fd"cmTC_4095b.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\CheckIncludeFile.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_adf20.dir\\Debug\\\\" /Fd"cmTC_adf20.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\CheckIncludeFile.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_4095b.dir\\Debug\\\\" /Fd"cmTC_4095b.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\CheckIncludeFile.c"
           CheckIncludeFile.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\Debug\\cmTC_adf20.exe" /INCREMENTAL /ILK:"cmTC_adf20.dir\\Debug\\cmTC_adf20.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t435a1/Debug/cmTC_adf20.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-t435a1/Debug/cmTC_adf20.lib" /MACHINE:X64  /machine:x64 cmTC_adf20.dir\\Debug\\CheckIncludeFile.obj
-          cmTC_adf20.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\Debug\\cmTC_adf20.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\Debug\\cmTC_4095b.exe" /INCREMENTAL /ILK:"cmTC_4095b.dir\\Debug\\cmTC_4095b.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-bf37qo/Debug/cmTC_4095b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-bf37qo/Debug/cmTC_4095b.lib" /MACHINE:X64  /machine:x64 cmTC_4095b.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_4095b.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\Debug\\cmTC_4095b.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_adf20.dir\\Debug\\cmTC_adf20.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_adf20.dir\\Debug\\cmTC_adf20.tlog\\cmTC_adf20.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t435a1\\cmTC_adf20.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_4095b.dir\\Debug\\cmTC_4095b.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_4095b.dir\\Debug\\cmTC_4095b.tlog\\cmTC_4095b.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bf37qo\\cmTC_4095b.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:02.23
+        Tiempo transcurrido 00:00:02.57
         
       exitCode: 0
   -
@@ -3082,8 +3082,8 @@ events:
     checks:
       - "Performing Test HAVE_MFAPI_H"
     directories:
-      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-pemiam"
-      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-pemiam"
+      source: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4ua4nl"
+      binary: "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4ua4nl"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -3093,39 +3093,39 @@ events:
       variable: "HAVE_MFAPI_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-pemiam'
+        Change Dir: 'C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4ua4nl'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b2919.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_1722c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
-        Compilaci├│n iniciada a las 29/01/2026 17:45:07.
+        Compilaci├│n iniciada a las 29/01/2026 18:17:55.
         
-        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\cmTC_b2919.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\cmTC_1722c.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
           La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
-          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\Debug\\".
-          Creando directorio "cmTC_b2919.dir\\Debug\\cmTC_b2919.tlog\\".
+          Creando directorio "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\Debug\\".
+          Creando directorio "cmTC_1722c.dir\\Debug\\cmTC_1722c.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_b2919.dir\\Debug\\cmTC_b2919.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_b2919.dir\\Debug\\cmTC_b2919.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_1722c.dir\\Debug\\cmTC_1722c.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_1722c.dir\\Debug\\cmTC_1722c.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_b2919.dir\\Debug\\\\" /Fd"cmTC_b2919.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_1722c.dir\\Debug\\\\" /Fd"cmTC_1722c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\src.c"
           Compilador de optimizaci├│n de C/C++ de Microsoft (R) versi├│n 19.42.34435 para x64
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_b2919.dir\\Debug\\\\" /Fd"cmTC_b2919.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_1722c.dir\\Debug\\\\" /Fd"cmTC_1722c.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\Debug\\cmTC_b2919.exe" /INCREMENTAL /ILK:"cmTC_b2919.dir\\Debug\\cmTC_b2919.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-pemiam/Debug/cmTC_b2919.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-pemiam/Debug/cmTC_b2919.lib" /MACHINE:X64  /machine:x64 cmTC_b2919.dir\\Debug\\src.obj
-          cmTC_b2919.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\Debug\\cmTC_b2919.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\Debug\\cmTC_1722c.exe" /INCREMENTAL /ILK:"cmTC_1722c.dir\\Debug\\cmTC_1722c.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4ua4nl/Debug/cmTC_1722c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/CMakeScratch/TryCompile-4ua4nl/Debug/cmTC_1722c.lib" /MACHINE:X64  /machine:x64 cmTC_1722c.dir\\Debug\\src.obj
+          cmTC_1722c.vcxproj -> C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\Debug\\cmTC_1722c.exe
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_b2919.dir\\Debug\\cmTC_b2919.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_b2919.dir\\Debug\\cmTC_b2919.tlog\\cmTC_b2919.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pemiam\\cmTC_b2919.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_1722c.dir\\Debug\\cmTC_1722c.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_1722c.dir\\Debug\\cmTC_1722c.tlog\\cmTC_1722c.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\Alexi\\Documents\\Beam Audio Flux\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4ua4nl\\cmTC_1722c.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:02.28
+        Tiempo transcurrido 00:00:02.51
         
       exitCode: 0
   -

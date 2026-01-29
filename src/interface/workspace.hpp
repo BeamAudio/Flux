@@ -8,6 +8,7 @@
 #include "dynamics_module.hpp"
 #include "spectrum_module.hpp"
 #include "../engine/flux_track_node.hpp"
+#include "../engine/flux_script_node.hpp"
 #include "../engine/analog_suite.hpp"
 #include "../engine/flux_fx_nodes.hpp"
 #include "../engine/audio_engine.hpp"
@@ -263,6 +264,19 @@ public:
             syncReels();
             if (m_engine) m_engine->updatePlan();
         }
+    }
+
+    void addScriptFX(const std::string& path, float x, float y) {
+        float sr = 44100.0f;
+        int buf = 1024 * 4;
+        auto node = std::make_shared<FluxScriptNode>(path, buf, sr);
+        size_t id = m_project->getGraph()->addNode(node);
+        float vx = (x - m_panX) / m_zoom;
+        float vy = (y - m_panY) / m_zoom;
+        auto mod = std::make_shared<AudioModule>(node, id, vx, vy);
+        setupModule(mod);
+        syncReels();
+        if (m_engine) m_engine->updatePlan();
     }
 
     void removeModule(AudioModule* mod) {

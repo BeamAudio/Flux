@@ -69,12 +69,13 @@ public:
         }
 
         // Needle
+        float pivotY = cy - 20;
         float angle = -0.8f + m_level * 1.6f; // Map 0..1 to arc
-        float needleLen = m_bounds.h * 0.8f;
+        float needleLen = m_bounds.h * 0.85f;
         float nx = cx + std::sin(angle) * needleLen;
-        float ny = cy - std::cos(angle) * needleLen;
+        float ny = pivotY - std::cos(angle) * needleLen;
         
-        batcher.drawLine(cx, cy - 20, nx, ny, 2.0f, 0.8f, 0.1f, 0.1f, 1.0f);
+        batcher.drawLine(cx, pivotY, nx, ny, 2.0f, 0.8f, 0.1f, 0.1f, 1.0f);
         
         // VU Text
         batcher.drawText("VU", cx - 10, m_bounds.y + m_bounds.h - 20, 12, 0.2f, 0.2f, 0.2f, 0.6f);

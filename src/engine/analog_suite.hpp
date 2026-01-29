@@ -562,6 +562,10 @@ public:
             getParameter(std::to_string((int)m_freqs[b]) + "Hz")->setValue(currentDb * (1.0f - smooth) + targetDb * smooth);
         }
     }
+
+    std::vector<Port> getInputPorts() const override { return { {"In", 2} }; }
+    std::vector<Port> getOutputPorts() const override { return { {"Out", 2} }; }
+
 private:
     std::vector<std::unique_ptr<BiquadFilterNode>> m_filters;
     std::vector<float> m_freqs;
