@@ -1,5 +1,5 @@
 \doxysection{vu\+\_\+meter.\+hpp}
-\hypertarget{vu__meter_8hpp_source}{}\label{vu__meter_8hpp_source}\index{src/ui/vu\_meter.hpp@{src/ui/vu\_meter.hpp}}
+\hypertarget{vu__meter_8hpp_source}{}\label{vu__meter_8hpp_source}\index{src/interface/vu\_meter.hpp@{src/interface/vu\_meter.hpp}}
 \doxymbox{\hyperlink{vu__meter_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VU\_METER\_HPP}}
@@ -16,37 +16,49 @@
 \DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{setBounds}}(0,\ 0,\ 100,\ 60);}
 \DoxyCodeLine{00013\ \ \ \ \ \}}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_ae9e38024ab79334ead7cdd4f642f9336}{setLevel}}(\textcolor{keywordtype}{float}\ level)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ =\ level;\ \}}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a8a49ae9ac8be0f1f148dfa6020c92fd5}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Outer\ case\ (Rounded\ plastic\ look)}}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 8.0f,\ 1.0f,\ 0.1f,\ 0.1f,\ 0.1f,\ 1.0f);}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ plate\ (Cream\ color)}}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 4,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 4,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 8,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 8,\ 4.0f,\ 0.5f,\ 0.9f,\ 0.88f,\ 0.8f,\ 1.0f);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_ae9e38024ab79334ead7cdd4f642f9336}{setLevel}}(\textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143}{level}})\ \{\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143}{level}}\ >\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}})\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ =\ \doxymbox{\hyperlink{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143}{level}};\ }
+\DoxyCodeLine{00017\ \ \ \ \ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_ac8eccd498a096225826a9a219f7816ed}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher,\ \textcolor{keywordtype}{float}\ dt,\ \textcolor{keywordtype}{float}\ screenW,\ \textcolor{keywordtype}{float}\ screenH)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Smooth\ decay}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ -\/=\ 1.5f\ *\ dt;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ <\ 0.0f)\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ =\ 0.0f;}
 \DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Scale\ markings}}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ *\ 0.5f;}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ +\ 10;\ \textcolor{comment}{//\ Pivot\ point\ below\ meter}}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Needle}}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ -\/0.8f\ +\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ *\ 1.6f;\ \textcolor{comment}{//\ Map\ 0..1\ to\ arc}}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ needleLen\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ *\ 0.8f;}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ nx\ =\ cx\ +\ std::sin(angle)\ *\ needleLen;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ny\ =\ cy\ -\/\ std::cos(angle)\ *\ needleLen;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Outer\ case\ (Rounded\ plastic\ look)}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 8.0f,\ 1.0f,\ 0.1f,\ 0.1f,\ 0.1f,\ 1.0f);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ plate\ (Cream\ color)}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 4,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 4,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 8,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 8,\ 4.0f,\ 0.5f,\ 0.9f,\ 0.88f,\ 0.8f,\ 1.0f);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Scale\ markings}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ *\ 0.5f;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ +\ 10;\ \textcolor{comment}{//\ Pivot\ point\ below\ meter}}
 \DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(cx,\ cy\ -\/\ 20,\ nx,\ ny,\ 2.0f,\ 0.8f,\ 0.1f,\ 0.1f,\ 1.0f);}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ VU\ Text}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{stringliteral}{"{}VU"{}},\ cx\ -\/\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 20,\ 12,\ 0.2f,\ 0.2f,\ 0.2f,\ 0.6f);}
-\DoxyCodeLine{00038\ \ \ \ \ \}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}};}
-\DoxyCodeLine{00042\ \};}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Needle}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ -\/0.8f\ +\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}}\ *\ 1.6f;\ \textcolor{comment}{//\ Map\ 0..1\ to\ arc}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ needleLen\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ *\ 0.8f;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ nx\ =\ cx\ +\ std::sin(angle)\ *\ needleLen;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ny\ =\ cy\ -\/\ std::cos(angle)\ *\ needleLen;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(cx,\ cy\ -\/\ 20,\ nx,\ ny,\ 2.0f,\ 0.8f,\ 0.1f,\ 0.1f,\ 1.0f);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ VU\ Text}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{stringliteral}{"{}VU"{}},\ cx\ -\/\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 20,\ 12,\ 0.2f,\ 0.2f,\ 0.2f,\ 0.6f);}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
 \DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VU\_METER\_HPP}}
+\DoxyCodeLine{00046\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_v_u_meter_a90cbe34e19c343b57b5256d7186fbf1c}{m\_level}};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VU\_METER\_HPP}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
 
 \end{DoxyCode}

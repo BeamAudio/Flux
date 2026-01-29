@@ -5,6 +5,7 @@
 #include "knob.hpp"
 #include "port.hpp"
 #include "../engine/flux_node.hpp"
+#include "../utilities/flux_audio_utils.hpp"
 #include <string>
 #include <vector>
 #include <functional>
@@ -62,12 +63,13 @@ public:
         }
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         // Module Body
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 10.0f, 1.0f, 0.18f, 0.19f, 0.2f, 1.0f);
         // Header
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, 30, 10.0f, 0.5f, 0.25f, 0.26f, 0.28f, 1.0f);
-        batcher.drawText(m_name, m_bounds.x + 10, m_bounds.y + 8, 14, 0.9f, 0.9f, 0.9f, 1.0f);
+        
+        AudioUtils::drawScrollingText(batcher, m_name, m_bounds.x + 10, m_bounds.y + 8, m_bounds.w - 40, 15, 14, dt, m_scrollTimer, screenH);
         
         // Delete Button (X)
         batcher.drawRoundedRect(m_deleteBtnBounds.x, m_deleteBtnBounds.y, m_deleteBtnBounds.w, m_deleteBtnBounds.h, 2.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
@@ -76,9 +78,9 @@ public:
         // Internal panel
         batcher.drawRoundedRect(m_bounds.x + 10, m_bounds.y + 40, m_bounds.w - 20, m_bounds.h - 50, 5.0f, 2.0f, 0.12f, 0.13f, 0.14f, 1.0f);
         
-        if (m_inputPort) m_inputPort->render(batcher, dt);
-        if (m_outputPort) m_outputPort->render(batcher, dt);
-        for (auto& child : m_children) child->render(batcher, dt);
+        if (m_inputPort) m_inputPort->render(batcher, dt, screenW, screenH);
+        if (m_outputPort) m_outputPort->render(batcher, dt, screenW, screenH);
+        for (auto& child : m_children) child->render(batcher, dt, screenW, screenH);
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -129,19 +131,25 @@ public:
 
     std::function<void(AudioModule*)> onDeleteRequested;
 
+protected:
+    std::vector<std::shared_ptr<Component>> m_children;
+
 private:
     std::shared_ptr<FluxNode> m_node;
     size_t m_nodeId;
     std::string m_name;
-    std::vector<std::shared_ptr<Component>> m_children;
     std::shared_ptr<Port> m_inputPort;
     std::shared_ptr<Port> m_outputPort;
     Rect m_deleteBtnBounds;
+    float m_scrollTimer = 0.0f;
 };
 
 } // namespace Beam
 
 #endif // AUDIO_MODULE_HPP
+
+
+
 
 
 

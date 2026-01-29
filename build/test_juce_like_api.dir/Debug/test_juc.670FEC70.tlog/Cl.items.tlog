@@ -1,8 +1,9 @@
 C:\Users\Alexi\Documents\Beam Audio Flux\tests\test_juce_like_api.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\test_juce_like_api.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\audio_engine.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_engine.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\disk_streamer.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\disk_streamer.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\dsp\simple_gain_processor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\simple_gain_processor.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\audio\audio_device_manager.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_device_manager.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\audio\audio_processor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_processor.obj
-C:\Users\Alexi\Documents\Beam Audio Flux\src\audio\audio_processor_value_tree_state.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_processor_value_tree_state.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\audio_device_manager.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_device_manager.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\audio_engine.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_engine.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\audio_processor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_processor.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\audio_processor_value_tree_state.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\audio_processor_value_tree_state.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\disk_streamer.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\disk_streamer.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\simple_gain_processor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\simple_gain_processor.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\application\application_base.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\application_base.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\utilities\third_party_impl.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\test_juce_like_api.dir\Debug\third_party_impl.obj

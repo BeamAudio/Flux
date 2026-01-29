@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['parameter_0',['Parameter',['../class_beam_1_1_parameter.html',1,'Beam']]],
-  ['port_1',['Port',['../struct_beam_1_1_flux_node_1_1_port.html',1,'Beam::FluxNode::Port'],['../class_beam_1_1_port.html',1,'Beam::Port']]],
-  ['projectmanager_2',['ProjectManager',['../class_beam_1_1_project_manager.html',1,'Beam']]]
+  ['masternode_0',['MasterNode',['../class_beam_1_1_master_node.html',1,'Beam']]],
+  ['masterstrip_1',['MasterStrip',['../class_beam_1_1_master_strip.html',1,'Beam']]],
+  ['midibuffer_2',['MIDIBuffer',['../class_beam_1_1_m_i_d_i_buffer.html',1,'Beam']]],
+  ['midievent_3',['MIDIEvent',['../struct_beam_1_1_m_i_d_i_event.html',1,'Beam']]],
+  ['mouseevent_4',['MouseEvent',['../class_beam_1_1_mouse_event.html',1,'Beam']]]
 ];

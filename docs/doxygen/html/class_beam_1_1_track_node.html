@@ -107,11 +107,17 @@ Inheritance diagram for Beam::TrackNode:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a300b73669c49d022a1dd10f7bedb546c" id="r_a300b73669c49d022a1dd10f7bedb546c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a300b73669c49d022a1dd10f7bedb546c">TrackNode</a> (const std::string &amp;name)</td></tr>
+<tr class="memitem:af9665ab17e5551b617a4cb4bd1d9b43e" id="r_af9665ab17e5551b617a4cb4bd1d9b43e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af9665ab17e5551b617a4cb4bd1d9b43e">~TrackNode</a> ()</td></tr>
+<tr class="memitem:a4c490876e9e00d85530178fa22571397" id="r_a4c490876e9e00d85530178fa22571397"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4c490876e9e00d85530178fa22571397">setTapeParams</a> (float drive, float age)</td></tr>
 <tr class="memitem:aacfc7312076b50be2cf6d4403df4ca95" id="r_aacfc7312076b50be2cf6d4403df4ca95"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aacfc7312076b50be2cf6d4403df4ca95">load</a> (const std::string &amp;filePath)</td></tr>
-<tr class="memitem:a2e2bffa8b286946f8e32db31e672727e" id="r_a2e2bffa8b286946f8e32db31e672727e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2e2bffa8b286946f8e32db31e672727e">process</a> (float *buffer, int frames, int channels) override</td></tr>
+<tr class="memitem:a0df2b32330877bad5608e7d0b93877e6" id="r_a0df2b32330877bad5608e7d0b93877e6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0df2b32330877bad5608e7d0b93877e6">startRecording</a> (const std::string &amp;filePath, int sampleRate, int channels)</td></tr>
+<tr class="memitem:a087918f50fcde846beb63a77a6632da3" id="r_a087918f50fcde846beb63a77a6632da3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a087918f50fcde846beb63a77a6632da3">stopRecording</a> ()</td></tr>
+<tr class="memitem:a41898cb4d3b6b3f09c5c144a66dc4a5d" id="r_a41898cb4d3b6b3f09c5c144a66dc4a5d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a41898cb4d3b6b3f09c5c144a66dc4a5d">process</a> (float *buffer, int frames, int channels, size_t startFrame=0) override</td></tr>
 <tr class="memitem:a973d30146b430d0680b526740364a45c" id="r_a973d30146b430d0680b526740364a45c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a973d30146b430d0680b526740364a45c">setState</a> (<a class="el" href="namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9f">TrackState</a> state)</td></tr>
 <tr class="memitem:a8bc557d0c5fe519e79fa335c695b1cf8" id="r_a8bc557d0c5fe519e79fa335c695b1cf8"><td class="memItemLeft"><a class="el" href="namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9f">TrackState</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8bc557d0c5fe519e79fa335c695b1cf8">getState</a> () const</td></tr>
 <tr class="memitem:acdff1b83754ab94892dc1c1d6ffe5255" id="r_acdff1b83754ab94892dc1c1d6ffe5255"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acdff1b83754ab94892dc1c1d6ffe5255">seek</a> (size_t frame)</td></tr>
+<tr class="memitem:abe7c47ca6cf089ac71e97969c6d9e7f5" id="r_abe7c47ca6cf089ac71e97969c6d9e7f5"><td class="memItemLeft">std::vector&lt; std::vector&lt; float &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abe7c47ca6cf089ac71e97969c6d9e7f5">getPeakData</a> (int numPoints)</td></tr>
+<tr class="memitem:ae7e6189008664fe997e33a5b6042095e" id="r_ae7e6189008664fe997e33a5b6042095e"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ae7e6189008664fe997e33a5b6042095e">getTotalFrames</a> () const</td></tr>
 <tr class="memitem:a8c233bb481da69fd335c86c286ae9606" id="r_a8c233bb481da69fd335c86c286ae9606"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a8c233bb481da69fd335c86c286ae9606">getName</a> () const override</td></tr>
 <tr class="inherit_header pub_methods_class_beam_1_1_audio_node"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_beam_1_1_audio_node')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_beam_1_1_audio_node.html">Beam::AudioNode</a></td></tr>
 <tr class="memitem:afbea31954b50918131d31fc0d1f6de8c inherit pub_methods_class_beam_1_1_audio_node" id="r_afbea31954b50918131d31fc0d1f6de8c"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_audio_node.html#afbea31954b50918131d31fc0d1f6de8c">~AudioNode</a> ()=default</td></tr>
@@ -123,6 +129,13 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a6ac8f5d6a13f367ac52c01b8c933679f" id="r_a6ac8f5d6a13f367ac52c01b8c933679f"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a6ac8f5d6a13f367ac52c01b8c933679f">m_name</a></td></tr>
 <tr class="memitem:abb11e4728816724f604713a672ad841d" id="r_abb11e4728816724f604713a672ad841d"><td class="memItemLeft">std::unique_ptr&lt; <a class="el" href="class_beam_1_1_disk_streamer.html">DiskStreamer</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abb11e4728816724f604713a672ad841d">m_streamer</a></td></tr>
 <tr class="memitem:a2d4f72820d3d3d7dc00f1ec2320613a3" id="r_a2d4f72820d3d3d7dc00f1ec2320613a3"><td class="memItemLeft">std::atomic&lt; <a class="el" href="namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9f">TrackState</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2d4f72820d3d3d7dc00f1ec2320613a3">m_state</a></td></tr>
+<tr class="memitem:a085e6353ffd49a048809587ddc919e7c" id="r_a085e6353ffd49a048809587ddc919e7c"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a085e6353ffd49a048809587ddc919e7c">m_lastProcessedFrame</a> = (size_t)-1</td></tr>
+<tr class="memitem:a4ce5423d613e322ed2ddaaa6430a4d16" id="r_a4ce5423d613e322ed2ddaaa6430a4d16"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a4ce5423d613e322ed2ddaaa6430a4d16">m_tapeDrive</a> = 0.0f</td></tr>
+<tr class="memitem:a66f963a00fd9b980ca2599a5b71f1826" id="r_a66f963a00fd9b980ca2599a5b71f1826"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a66f963a00fd9b980ca2599a5b71f1826">m_tapeAge</a> = 0.0f</td></tr>
+<tr class="memitem:a042dc47115529f92e8e89cf548161353" id="r_a042dc47115529f92e8e89cf548161353"><td class="memItemLeft"><a class="el" href="class_beam_1_1_analog_base_1_1_wow_flutter_generator.html">AnalogBase::WowFlutterGenerator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a042dc47115529f92e8e89cf548161353">m_wowFlutter</a></td></tr>
+<tr class="memitem:a69f6c2aec093b6e84d84d3e3fd2c6c30" id="r_a69f6c2aec093b6e84d84d3e3fd2c6c30"><td class="memItemLeft"><a class="el" href="class_beam_1_1_analog_base_1_1_one_pole_filter.html">AnalogBase::OnePoleFilter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a69f6c2aec093b6e84d84d3e3fd2c6c30">m_ageFilters</a> [2]</td></tr>
+<tr class="memitem:ad3a9406a86daaa3935f920e6dcac3c5f" id="r_ad3a9406a86daaa3935f920e6dcac3c5f"><td class="memItemLeft">drwav&#160;</td><td class="memItemRight"><a class="el" href="#ad3a9406a86daaa3935f920e6dcac3c5f">m_wavWriter</a></td></tr>
+<tr class="memitem:a40e6d50a007d435c90d0a10b2443e183" id="r_a40e6d50a007d435c90d0a10b2443e183"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a40e6d50a007d435c90d0a10b2443e183">m_isWriterOpen</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -143,6 +156,31 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">Beam::TrackNode::TrackNode </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9665ab17e5551b617a4cb4bd1d9b43e" name="af9665ab17e5551b617a4cb4bd1d9b43e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9665ab17e5551b617a4cb4bd1d9b43e">&#9670;&#160;</a></span>~TrackNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Beam::TrackNode::~TrackNode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -183,6 +221,31 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="abe7c47ca6cf089ac71e97969c6d9e7f5" name="abe7c47ca6cf089ac71e97969c6d9e7f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7c47ca6cf089ac71e97969c6d9e7f5">&#9670;&#160;</a></span>getPeakData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; float &gt; &gt; Beam::TrackNode::getPeakData </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numPoints</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8bc557d0c5fe519e79fa335c695b1cf8" name="a8bc557d0c5fe519e79fa335c695b1cf8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bc557d0c5fe519e79fa335c695b1cf8">&#9670;&#160;</a></span>getState()</h2>
 
@@ -194,6 +257,31 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9f">TrackState</a> Beam::TrackNode::getState </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7e6189008664fe997e33a5b6042095e" name="ae7e6189008664fe997e33a5b6042095e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7e6189008664fe997e33a5b6042095e">&#9670;&#160;</a></span>getTotalFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Beam::TrackNode::getTotalFrames </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -233,8 +321,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a2e2bffa8b286946f8e32db31e672727e" name="a2e2bffa8b286946f8e32db31e672727e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e2bffa8b286946f8e32db31e672727e">&#9670;&#160;</a></span>process()</h2>
+<a id="a41898cb4d3b6b3f09c5c144a66dc4a5d" name="a41898cb4d3b6b3f09c5c144a66dc4a5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41898cb4d3b6b3f09c5c144a66dc4a5d">&#9670;&#160;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +343,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>startFrame</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -265,7 +358,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_beam_1_1_audio_node.html#a6954940f3822298db5c2224e921432f6">Beam::AudioNode</a>.</p>
+<p>Implements <a class="el" href="class_beam_1_1_audio_node.html#ab0cb6fa1aba031e703be16be26e0d6b7">Beam::AudioNode</a>.</p>
 
 </div>
 </div>
@@ -319,7 +412,161 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a4c490876e9e00d85530178fa22571397" name="a4c490876e9e00d85530178fa22571397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c490876e9e00d85530178fa22571397">&#9670;&#160;</a></span>setTapeParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::TrackNode::setTapeParams </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>drive</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>age</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0df2b32330877bad5608e7d0b93877e6" name="a0df2b32330877bad5608e7d0b93877e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0df2b32330877bad5608e7d0b93877e6">&#9670;&#160;</a></span>startRecording()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::TrackNode::startRecording </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filePath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sampleRate</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a087918f50fcde846beb63a77a6632da3" name="a087918f50fcde846beb63a77a6632da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087918f50fcde846beb63a77a6632da3">&#9670;&#160;</a></span>stopRecording()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::TrackNode::stopRecording </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a69f6c2aec093b6e84d84d3e3fd2c6c30" name="a69f6c2aec093b6e84d84d3e3fd2c6c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f6c2aec093b6e84d84d3e3fd2c6c30">&#9670;&#160;</a></span>m_ageFilters</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_beam_1_1_analog_base_1_1_one_pole_filter.html">AnalogBase::OnePoleFilter</a> Beam::TrackNode::m_ageFilters[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40e6d50a007d435c90d0a10b2443e183" name="a40e6d50a007d435c90d0a10b2443e183"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e6d50a007d435c90d0a10b2443e183">&#9670;&#160;</a></span>m_isWriterOpen</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::TrackNode::m_isWriterOpen</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a085e6353ffd49a048809587ddc919e7c" name="a085e6353ffd49a048809587ddc919e7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a085e6353ffd49a048809587ddc919e7c">&#9670;&#160;</a></span>m_lastProcessedFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Beam::TrackNode::m_lastProcessedFrame = (size_t)-1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6ac8f5d6a13f367ac52c01b8c933679f" name="a6ac8f5d6a13f367ac52c01b8c933679f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ac8f5d6a13f367ac52c01b8c933679f">&#9670;&#160;</a></span>m_name</h2>
 
@@ -386,8 +633,96 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a66f963a00fd9b980ca2599a5b71f1826" name="a66f963a00fd9b980ca2599a5b71f1826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66f963a00fd9b980ca2599a5b71f1826">&#9670;&#160;</a></span>m_tapeAge</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::TrackNode::m_tapeAge = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ce5423d613e322ed2ddaaa6430a4d16" name="a4ce5423d613e322ed2ddaaa6430a4d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ce5423d613e322ed2ddaaa6430a4d16">&#9670;&#160;</a></span>m_tapeDrive</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::TrackNode::m_tapeDrive = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3a9406a86daaa3935f920e6dcac3c5f" name="ad3a9406a86daaa3935f920e6dcac3c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a9406a86daaa3935f920e6dcac3c5f">&#9670;&#160;</a></span>m_wavWriter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">drwav Beam::TrackNode::m_wavWriter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a042dc47115529f92e8e89cf548161353" name="a042dc47115529f92e8e89cf548161353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042dc47115529f92e8e89cf548161353">&#9670;&#160;</a></span>m_wowFlutter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_beam_1_1_analog_base_1_1_wow_flutter_generator.html">AnalogBase::WowFlutterGenerator</a> Beam::TrackNode::m_wowFlutter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/dsp/<a class="el" href="track__node_8hpp_source.html">track_node.hpp</a></li>
+<li>src/engine/<a class="el" href="track__node_8hpp_source.html">track_node.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

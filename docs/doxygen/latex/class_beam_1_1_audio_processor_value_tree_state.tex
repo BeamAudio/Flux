@@ -1,0 +1,177 @@
+\doxysection{Beam::\+Audio\+Processor\+Value\+Tree\+State Class Reference}
+\hypertarget{class_beam_1_1_audio_processor_value_tree_state}{}\label{class_beam_1_1_audio_processor_value_tree_state}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+
+
+Manages parameters for an audio processor, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_processor_value_tree_state}{Audio\+Processor\+Value\+Tree\+State}.  
+
+
+
+
+{\ttfamily \+\#include $<$audio\+\_\+processor\+\_\+value\+\_\+tree\+\_\+state.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a89af59fc9dce810673b152f01f20d46d}{Audio\+Processor\+Value\+Tree\+State}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a488f6f94f2e597cd12e28755ffca7610}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Processor\+Value\+Tree\+State}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a31631bce42f2e551e522a4ad2a157b6f}{create\+And\+Add\+Parameter}} (const std::\+string \&parameter\+ID, const std::\+string \&parameter\+Name, const std::\+string \&parameter\+Label, float min\+Value, float max\+Value, float default\+Value)
+\begin{DoxyCompactList}\small\item\em Creates a parameter and adds it to the state. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a8a5de1df5fa2357ad7a3a91935bbb544}{get\+Parameter}} (const std::\+string \&parameter\+ID) const
+\begin{DoxyCompactList}\small\item\em Gets a parameter by ID. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a879cc7a0234ecb1bef47f35d647318e2}{get\+Parameter\+As\+Float}} (const std::\+string \&parameter\+ID) const
+\begin{DoxyCompactList}\small\item\em Gets the value of a parameter as a float. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_ab7baf7ad6dff25ac215bae830afcadee}{set\+Parameter\+As\+Float}} (const std::\+string \&parameter\+ID, float new\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a parameter. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a2c650ebb150473f29e716f086ced90d1}{add\+Parameter\+Listener}} (const std::\+string \&parameter\+ID, std::\+function$<$ void(float)$>$ listener)
+\begin{DoxyCompactList}\small\item\em Adds a parameter listener. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a4245a0a626551851646a1680f6ab4437}{remove\+Parameter\+Listener}} (const std::\+string \&parameter\+ID, std::\+function$<$ void(float)$>$ listener)
+\begin{DoxyCompactList}\small\item\em Removes a parameter listener. \end{DoxyCompactList}\item 
+const std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \& \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_af22fa436bc83c00011ab6f0757ed9aac}{get\+Parameters}} () const
+\begin{DoxyCompactList}\small\item\em Gets all parameters. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_ab2b9936e83868de2541ea9c092e3aa19}{reset\+To\+Default}} ()
+\begin{DoxyCompactList}\small\item\em Resets all parameters to their default values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a9058146e725431e074007e89ed76ded5}{m\+\_\+parameters}}
+\item 
+std::\+map$<$ std::\+string, std::\+function$<$ void(float)$>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_value_tree_state_a0cee656b3be3f606cc2f530327b7432f}{m\+\_\+listeners}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages parameters for an audio processor, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_processor_value_tree_state}{Audio\+Processor\+Value\+Tree\+State}. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a89af59fc9dce810673b152f01f20d46d}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!AudioProcessorValueTreeState@{AudioProcessorValueTreeState}}
+\index{AudioProcessorValueTreeState@{AudioProcessorValueTreeState}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{AudioProcessorValueTreeState()}{AudioProcessorValueTreeState()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a89af59fc9dce810673b152f01f20d46d} 
+Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+\+Audio\+Processor\+Value\+Tree\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a488f6f94f2e597cd12e28755ffca7610}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!````~AudioProcessorValueTreeState@{\texorpdfstring{$\sim$}{\string~}AudioProcessorValueTreeState}}
+\index{````~AudioProcessorValueTreeState@{\texorpdfstring{$\sim$}{\string~}AudioProcessorValueTreeState}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AudioProcessorValueTreeState()}{\string~AudioProcessorValueTreeState()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a488f6f94f2e597cd12e28755ffca7610} 
+Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+\texorpdfstring{$\sim$}{\string~}\+Audio\+Processor\+Value\+Tree\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a2c650ebb150473f29e716f086ced90d1}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!addParameterListener@{addParameterListener}}
+\index{addParameterListener@{addParameterListener}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{addParameterListener()}{addParameterListener()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a2c650ebb150473f29e716f086ced90d1} 
+void Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+add\+Parameter\+Listener (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{, }\item[{std::\+function$<$ void(float)$>$}]{listener}{}\end{DoxyParamCaption})}
+
+
+
+Adds a parameter listener. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a31631bce42f2e551e522a4ad2a157b6f}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!createAndAddParameter@{createAndAddParameter}}
+\index{createAndAddParameter@{createAndAddParameter}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{createAndAddParameter()}{createAndAddParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a31631bce42f2e551e522a4ad2a157b6f} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+create\+And\+Add\+Parameter (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{, }\item[{const std::\+string \&}]{parameter\+Name}{, }\item[{const std::\+string \&}]{parameter\+Label}{, }\item[{float}]{min\+Value}{, }\item[{float}]{max\+Value}{, }\item[{float}]{default\+Value}{}\end{DoxyParamCaption})}
+
+
+
+Creates a parameter and adds it to the state. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a8a5de1df5fa2357ad7a3a91935bbb544}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!getParameter@{getParameter}}
+\index{getParameter@{getParameter}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{getParameter()}{getParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a8a5de1df5fa2357ad7a3a91935bbb544} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+get\+Parameter (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a parameter by ID. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a879cc7a0234ecb1bef47f35d647318e2}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!getParameterAsFloat@{getParameterAsFloat}}
+\index{getParameterAsFloat@{getParameterAsFloat}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{getParameterAsFloat()}{getParameterAsFloat()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a879cc7a0234ecb1bef47f35d647318e2} 
+float Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+get\+Parameter\+As\+Float (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the value of a parameter as a float. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_af22fa436bc83c00011ab6f0757ed9aac}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!getParameters@{getParameters}}
+\index{getParameters@{getParameters}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{getParameters()}{getParameters()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_af22fa436bc83c00011ab6f0757ed9aac} 
+const std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \& Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+get\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets all parameters. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a4245a0a626551851646a1680f6ab4437}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!removeParameterListener@{removeParameterListener}}
+\index{removeParameterListener@{removeParameterListener}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{removeParameterListener()}{removeParameterListener()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a4245a0a626551851646a1680f6ab4437} 
+void Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+remove\+Parameter\+Listener (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{, }\item[{std::\+function$<$ void(float)$>$}]{listener}{}\end{DoxyParamCaption})}
+
+
+
+Removes a parameter listener. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_ab2b9936e83868de2541ea9c092e3aa19}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!resetToDefault@{resetToDefault}}
+\index{resetToDefault@{resetToDefault}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{resetToDefault()}{resetToDefault()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_ab2b9936e83868de2541ea9c092e3aa19} 
+void Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+reset\+To\+Default (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Resets all parameters to their default values. 
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_ab7baf7ad6dff25ac215bae830afcadee}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!setParameterAsFloat@{setParameterAsFloat}}
+\index{setParameterAsFloat@{setParameterAsFloat}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{setParameterAsFloat()}{setParameterAsFloat()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_ab7baf7ad6dff25ac215bae830afcadee} 
+void Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+set\+Parameter\+As\+Float (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{parameter\+ID}{, }\item[{float}]{new\+Value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value of a parameter. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a0cee656b3be3f606cc2f530327b7432f}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!m\_listeners@{m\_listeners}}
+\index{m\_listeners@{m\_listeners}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{m\_listeners}{m\_listeners}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a0cee656b3be3f606cc2f530327b7432f} 
+std::\+map$<$std::\+string, std::\+function$<$void(float)$>$ $>$ Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+m\+\_\+listeners\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_processor_value_tree_state_a9058146e725431e074007e89ed76ded5}\index{Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}!m\_parameters@{m\_parameters}}
+\index{m\_parameters@{m\_parameters}!Beam::AudioProcessorValueTreeState@{Beam::AudioProcessorValueTreeState}}
+\doxysubsubsection{\texorpdfstring{m\_parameters}{m\_parameters}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_value_tree_state_a9058146e725431e074007e89ed76ded5} 
+std::\+map$<$std::\+string, std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}}$>$ $>$ Beam::\+\+Audio\+Processor\+Value\+Tree\+State::\+m\+\_\+parameters\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__processor__value__tree__state_8hpp}{audio\+\_\+processor\+\_\+value\+\_\+tree\+\_\+state.\+hpp}}\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__processor__value__tree__state_8cpp}{audio\+\_\+processor\+\_\+value\+\_\+tree\+\_\+state.\+cpp}}\end{DoxyCompactItemize}

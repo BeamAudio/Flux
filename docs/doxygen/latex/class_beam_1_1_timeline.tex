@@ -13,9 +13,17 @@ Inheritance diagram for Beam::\+Timeline:\+\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}{Timeline}} ()
+\doxymbox{\hyperlink{class_beam_1_1_timeline_aa67b2440349a3c70f22b7959cd463332}{Timeline}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$ project, \doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} \texorpdfstring{$\ast$}{*}engine)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+void \doxymbox{\hyperlink{class_beam_1_1_timeline_a09b6cbbbe5b464156d1eccf34ddf69fc}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher, float dt, float screenW, float screenH) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a8a354eb52071e540c36bb5ce5ca8c1c9}{on\+Mouse\+Down}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_ae384bac3ed2b187b58caae88b8a2c35d}{on\+Mouse\+Move}} (float x, float y) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a16723f90295b79d5e37d7758ec722acd}{on\+Mouse\+Up}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a57167d59b6907f773bdcde23e845c8a8}{on\+Mouse\+Wheel}} (float x, float y, float delta) override
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4}{set\+Visible}} (bool visible)
 \end{DoxyCompactItemize}
@@ -26,12 +34,6 @@ virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc
 \item 
 virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
 \item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{on\+Mouse\+Down}} (float x, float y, int button)
-\item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{on\+Mouse\+Up}} (float x, float y, int button)
-\item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{on\+Mouse\+Move}} (float x, float y)
-\item 
 virtual void \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{set\+Bounds}} (float x, float y, float w, float h)
 \item 
 const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
@@ -40,10 +42,41 @@ void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321d
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_timeline_a8027a4a90c56651c9bde0e5315bb71e3}{slice\+Region}} (\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} \&track, size\+\_\+t index, size\+\_\+t offset\+In\+Frames)
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$ \doxymbox{\hyperlink{class_beam_1_1_timeline_af8a3307bf582dd1b1b7d22d2b8a9b14b}{m\+\_\+project}}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_timeline_aaabfcef9ca41f31fc70009405dafb67f}{m\+\_\+engine}}
+\item 
 bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}{m\+\_\+is\+Visible}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a7fc4a961b6399ffc0514f9c47c6bab5b}{m\+\_\+is\+Dragging\+Region}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_a38bdec7cfb1b81f532295955efbc6dec}{m\+\_\+is\+Scrubbing}} = false
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_timeline_aad53cb5c7b902b1592e1cadfd09a0064}{m\+\_\+is\+Panning}} = false
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_a11eed32b492417dfac0e2986208de78f}{m\+\_\+offsetX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_aa5d464919a125da894c1d6dfeb0989e7}{m\+\_\+offsetY}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_a09d327486c2182e805e9a9afb2896340}{m\+\_\+zoom}} = 1.\+0f
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_timeline_a19789a38965cb80642dc87c4e248e334}{m\+\_\+drag\+Track\+Ptr}} = nullptr
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_timeline_ac162bb2a26665fbfabdbc0d0cc8900d2}{m\+\_\+drag\+Region\+Index}} = -\/1
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_ae93899c6ea7c8b36f53688ee0ebe028f}{m\+\_\+drag\+OffsetX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_a69dd37c73f893cf949b52f814598d5df}{m\+\_\+last\+MouseX}} = 0
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_timeline_a46aaa4386fa2c74b3a97880a18a570e8}{m\+\_\+last\+MouseY}} = 0
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
@@ -68,26 +101,66 @@ float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed
 \label{doc-constructors}
 \Hypertarget{class_beam_1_1_timeline_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6}\index{Beam::Timeline@{Beam::Timeline}!Timeline@{Timeline}}
+\Hypertarget{class_beam_1_1_timeline_aa67b2440349a3c70f22b7959cd463332}\index{Beam::Timeline@{Beam::Timeline}!Timeline@{Timeline}}
 \index{Timeline@{Timeline}!Beam::Timeline@{Beam::Timeline}}
 \doxysubsubsection{\texorpdfstring{Timeline()}{Timeline()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ab24201fb4781455aa0496eea0f173aa6} 
-Beam::\+\+Timeline::\+\+Timeline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_aa67b2440349a3c70f22b7959cd463332} 
+Beam::\+\+Timeline::\+\+Timeline (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}} $>$}]{project}{, }\item[{\doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}} \texorpdfstring{$\ast$}{*}}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \label{doc-func-members}
 \Hypertarget{class_beam_1_1_timeline_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a}\index{Beam::Timeline@{Beam::Timeline}!render@{render}}
+\Hypertarget{class_beam_1_1_timeline_a8a354eb52071e540c36bb5ce5ca8c1c9}\index{Beam::Timeline@{Beam::Timeline}!onMouseDown@{onMouseDown}}
+\index{onMouseDown@{onMouseDown}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{onMouseDown()}{onMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a8a354eb52071e540c36bb5ce5ca8c1c9} 
+bool Beam::\+\+Timeline::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_timeline_ae384bac3ed2b187b58caae88b8a2c35d}\index{Beam::Timeline@{Beam::Timeline}!onMouseMove@{onMouseMove}}
+\index{onMouseMove@{onMouseMove}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{onMouseMove()}{onMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ae384bac3ed2b187b58caae88b8a2c35d} 
+bool Beam::\+\+Timeline::\+on\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_timeline_a16723f90295b79d5e37d7758ec722acd}\index{Beam::Timeline@{Beam::Timeline}!onMouseUp@{onMouseUp}}
+\index{onMouseUp@{onMouseUp}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{onMouseUp()}{onMouseUp()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a16723f90295b79d5e37d7758ec722acd} 
+bool Beam::\+\+Timeline::\+on\+Mouse\+Up (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_timeline_a57167d59b6907f773bdcde23e845c8a8}\index{Beam::Timeline@{Beam::Timeline}!onMouseWheel@{onMouseWheel}}
+\index{onMouseWheel@{onMouseWheel}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{onMouseWheel()}{onMouseWheel()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a57167d59b6907f773bdcde23e845c8a8} 
+bool Beam::\+\+Timeline::\+on\+Mouse\+Wheel (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{delta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_ab92e884903f8a621fcd57bc00a24b041}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_timeline_a09b6cbbbe5b464156d1eccf34ddf69fc}\index{Beam::Timeline@{Beam::Timeline}!render@{render}}
 \index{render@{render}!Beam::Timeline@{Beam::Timeline}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a10a7b70340a61dcfb1ebead1a02d6b5a} 
-void Beam::\+\+Timeline::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a09b6cbbbe5b464156d1eccf34ddf69fc} 
+void Beam::\+\+Timeline::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{, }\item[{float}]{dt}{, }\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_acef3496a55f0d94c8678f6049dbaa7cd}{Beam::\+\+Component}}.
 
 \Hypertarget{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4}\index{Beam::Timeline@{Beam::Timeline}!setVisible@{setVisible}}
 \index{setVisible@{setVisible}!Beam::Timeline@{Beam::Timeline}}
@@ -95,19 +168,103 @@ Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b
 {\footnotesize\ttfamily \label{class_beam_1_1_timeline_ad21aa847e01f197a5b6eecdc4cb7f2f4} 
 void Beam::\+\+Timeline::\+set\+Visible (\begin{DoxyParamCaption}\item[{bool}]{visible}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\Hypertarget{class_beam_1_1_timeline_a8027a4a90c56651c9bde0e5315bb71e3}\index{Beam::Timeline@{Beam::Timeline}!sliceRegion@{sliceRegion}}
+\index{sliceRegion@{sliceRegion}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{sliceRegion()}{sliceRegion()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a8027a4a90c56651c9bde0e5315bb71e3} 
+void Beam::\+\+Timeline::\+slice\+Region (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} \&}]{track}{, }\item[{size\+\_\+t}]{index}{, }\item[{size\+\_\+t}]{offset\+In\+Frames}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
 
 
 \label{doc-variable-members}
 \Hypertarget{class_beam_1_1_timeline_doc-variable-members}
 \doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_timeline_ae93899c6ea7c8b36f53688ee0ebe028f}\index{Beam::Timeline@{Beam::Timeline}!m\_dragOffsetX@{m\_dragOffsetX}}
+\index{m\_dragOffsetX@{m\_dragOffsetX}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_dragOffsetX}{m\_dragOffsetX}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ae93899c6ea7c8b36f53688ee0ebe028f} 
+float Beam::\+\+Timeline::\+m\+\_\+drag\+OffsetX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_ac162bb2a26665fbfabdbc0d0cc8900d2}\index{Beam::Timeline@{Beam::Timeline}!m\_dragRegionIndex@{m\_dragRegionIndex}}
+\index{m\_dragRegionIndex@{m\_dragRegionIndex}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_dragRegionIndex}{m\_dragRegionIndex}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_ac162bb2a26665fbfabdbc0d0cc8900d2} 
+int Beam::\+\+Timeline::\+m\+\_\+drag\+Region\+Index = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a19789a38965cb80642dc87c4e248e334}\index{Beam::Timeline@{Beam::Timeline}!m\_dragTrackPtr@{m\_dragTrackPtr}}
+\index{m\_dragTrackPtr@{m\_dragTrackPtr}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_dragTrackPtr}{m\_dragTrackPtr}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a19789a38965cb80642dc87c4e248e334} 
+\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}}\texorpdfstring{$\ast$}{*} Beam::\+\+Timeline::\+m\+\_\+drag\+Track\+Ptr = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_aaabfcef9ca41f31fc70009405dafb67f}\index{Beam::Timeline@{Beam::Timeline}!m\_engine@{m\_engine}}
+\index{m\_engine@{m\_engine}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_engine}{m\_engine}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_aaabfcef9ca41f31fc70009405dafb67f} 
+\doxymbox{\hyperlink{class_beam_1_1_audio_engine}{Audio\+Engine}}\texorpdfstring{$\ast$}{*} Beam::\+\+Timeline::\+m\+\_\+engine\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a7fc4a961b6399ffc0514f9c47c6bab5b}\index{Beam::Timeline@{Beam::Timeline}!m\_isDraggingRegion@{m\_isDraggingRegion}}
+\index{m\_isDraggingRegion@{m\_isDraggingRegion}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_isDraggingRegion}{m\_isDraggingRegion}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a7fc4a961b6399ffc0514f9c47c6bab5b} 
+bool Beam::\+\+Timeline::\+m\+\_\+is\+Dragging\+Region = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_aad53cb5c7b902b1592e1cadfd09a0064}\index{Beam::Timeline@{Beam::Timeline}!m\_isPanning@{m\_isPanning}}
+\index{m\_isPanning@{m\_isPanning}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_isPanning}{m\_isPanning}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_aad53cb5c7b902b1592e1cadfd09a0064} 
+bool Beam::\+\+Timeline::\+m\+\_\+is\+Panning = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a38bdec7cfb1b81f532295955efbc6dec}\index{Beam::Timeline@{Beam::Timeline}!m\_isScrubbing@{m\_isScrubbing}}
+\index{m\_isScrubbing@{m\_isScrubbing}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_isScrubbing}{m\_isScrubbing}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a38bdec7cfb1b81f532295955efbc6dec} 
+bool Beam::\+\+Timeline::\+m\+\_\+is\+Scrubbing = false\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09}\index{Beam::Timeline@{Beam::Timeline}!m\_isVisible@{m\_isVisible}}
 \index{m\_isVisible@{m\_isVisible}!Beam::Timeline@{Beam::Timeline}}
 \doxysubsubsection{\texorpdfstring{m\_isVisible}{m\_isVisible}}
 {\footnotesize\ttfamily \label{class_beam_1_1_timeline_a0021e8c656305015e2ad30a791338c09} 
 bool Beam::\+\+Timeline::\+m\+\_\+is\+Visible = false\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_timeline_a69dd37c73f893cf949b52f814598d5df}\index{Beam::Timeline@{Beam::Timeline}!m\_lastMouseX@{m\_lastMouseX}}
+\index{m\_lastMouseX@{m\_lastMouseX}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_lastMouseX}{m\_lastMouseX}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a69dd37c73f893cf949b52f814598d5df} 
+float Beam::\+\+Timeline::\+m\+\_\+last\+MouseX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a46aaa4386fa2c74b3a97880a18a570e8}\index{Beam::Timeline@{Beam::Timeline}!m\_lastMouseY@{m\_lastMouseY}}
+\index{m\_lastMouseY@{m\_lastMouseY}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_lastMouseY}{m\_lastMouseY}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a46aaa4386fa2c74b3a97880a18a570e8} 
+float Beam::\+\+Timeline::\+m\+\_\+last\+MouseY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a11eed32b492417dfac0e2986208de78f}\index{Beam::Timeline@{Beam::Timeline}!m\_offsetX@{m\_offsetX}}
+\index{m\_offsetX@{m\_offsetX}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_offsetX}{m\_offsetX}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a11eed32b492417dfac0e2986208de78f} 
+float Beam::\+\+Timeline::\+m\+\_\+offsetX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_aa5d464919a125da894c1d6dfeb0989e7}\index{Beam::Timeline@{Beam::Timeline}!m\_offsetY@{m\_offsetY}}
+\index{m\_offsetY@{m\_offsetY}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_offsetY}{m\_offsetY}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_aa5d464919a125da894c1d6dfeb0989e7} 
+float Beam::\+\+Timeline::\+m\+\_\+offsetY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_af8a3307bf582dd1b1b7d22d2b8a9b14b}\index{Beam::Timeline@{Beam::Timeline}!m\_project@{m\_project}}
+\index{m\_project@{m\_project}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_project}{m\_project}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_af8a3307bf582dd1b1b7d22d2b8a9b14b} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_project}{Flux\+Project}}$>$ Beam::\+\+Timeline::\+m\+\_\+project\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_timeline_a09d327486c2182e805e9a9afb2896340}\index{Beam::Timeline@{Beam::Timeline}!m\_zoom@{m\_zoom}}
+\index{m\_zoom@{m\_zoom}!Beam::Timeline@{Beam::Timeline}}
+\doxysubsubsection{\texorpdfstring{m\_zoom}{m\_zoom}}
+{\footnotesize\ttfamily \label{class_beam_1_1_timeline_a09d327486c2182e805e9a9afb2896340} 
+float Beam::\+\+Timeline::\+m\+\_\+zoom = 1.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+ui/\+\doxymbox{\hyperlink{timeline_8hpp}{timeline.\+hpp}}\end{DoxyCompactItemize}
+src/\+interface/\+\doxymbox{\hyperlink{timeline_8hpp}{timeline.\+hpp}}\end{DoxyCompactItemize}

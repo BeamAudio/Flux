@@ -25,6 +25,8 @@ public:
     DAWMode getMode() const { return m_mode; }
 
     static void onFileSelected(void* userdata, const char* const* filelist, int filter);
+    static void onSaveDialogCallback(void* userdata, const char* const* filelist, int filter);
+    static void onLoadDialogCallback(void* userdata, const char* const* filelist, int filter);
 
 private:
     void handleEvents();
@@ -58,5 +60,8 @@ private:
 } // namespace Beam
 
 #endif // BEAM_HOST_HPP
+
+
+
 
 

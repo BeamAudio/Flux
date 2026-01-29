@@ -1,0 +1,43 @@
+\doxysection{Beam::\+SIMD Namespace Reference}
+\hypertarget{namespace_beam_1_1_s_i_m_d}{}\label{namespace_beam_1_1_s_i_m_d}\index{Beam::SIMD@{Beam::SIMD}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{namespace_beam_1_1_s_i_m_d_ade8c1c6b1b45abf8d66ee11c8fb936a1}{add}} (const float \texorpdfstring{$\ast$}{*}src, float \texorpdfstring{$\ast$}{*}dst, int count)
+\begin{DoxyCompactList}\small\item\em Adds two buffers using SSE (4 floats at a time). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{namespace_beam_1_1_s_i_m_d_acda0a1ac1a531cf8e16b2d9b4f3b77df}{copy}} (const float \texorpdfstring{$\ast$}{*}src, float \texorpdfstring{$\ast$}{*}dst, int count)
+\begin{DoxyCompactList}\small\item\em Copies a buffer using SSE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespace_beam_1_1_s_i_m_d_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_beam_1_1_s_i_m_d_ade8c1c6b1b45abf8d66ee11c8fb936a1}\index{Beam::SIMD@{Beam::SIMD}!add@{add}}
+\index{add@{add}!Beam::SIMD@{Beam::SIMD}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily \label{namespace_beam_1_1_s_i_m_d_ade8c1c6b1b45abf8d66ee11c8fb936a1} 
+void Beam::\+\+SIMD::\+add (\begin{DoxyParamCaption}\item[{const float \texorpdfstring{$\ast$}{*}}]{src}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{dst}{, }\item[{int}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds two buffers using SSE (4 floats at a time). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Source buffer. \\
+\hline
+{\em dst} & Destination buffer (result is summed into this). \\
+\hline
+{\em count} & Total number of samples (must be multiple of 4 for full optimization). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespace_beam_1_1_s_i_m_d_acda0a1ac1a531cf8e16b2d9b4f3b77df}\index{Beam::SIMD@{Beam::SIMD}!copy@{copy}}
+\index{copy@{copy}!Beam::SIMD@{Beam::SIMD}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily \label{namespace_beam_1_1_s_i_m_d_acda0a1ac1a531cf8e16b2d9b4f3b77df} 
+void Beam::\+\+SIMD::\+copy (\begin{DoxyParamCaption}\item[{const float \texorpdfstring{$\ast$}{*}}]{src}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{dst}{, }\item[{int}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copies a buffer using SSE. 
+

@@ -1,7 +1,25 @@
 var class_beam_1_1_timeline =
 [
-    [ "Timeline", "class_beam_1_1_timeline.html#ab24201fb4781455aa0496eea0f173aa6", null ],
-    [ "render", "class_beam_1_1_timeline.html#a10a7b70340a61dcfb1ebead1a02d6b5a", null ],
+    [ "Timeline", "class_beam_1_1_timeline.html#aa67b2440349a3c70f22b7959cd463332", null ],
+    [ "onMouseDown", "class_beam_1_1_timeline.html#a8a354eb52071e540c36bb5ce5ca8c1c9", null ],
+    [ "onMouseMove", "class_beam_1_1_timeline.html#ae384bac3ed2b187b58caae88b8a2c35d", null ],
+    [ "onMouseUp", "class_beam_1_1_timeline.html#a16723f90295b79d5e37d7758ec722acd", null ],
+    [ "onMouseWheel", "class_beam_1_1_timeline.html#a57167d59b6907f773bdcde23e845c8a8", null ],
+    [ "render", "class_beam_1_1_timeline.html#a09b6cbbbe5b464156d1eccf34ddf69fc", null ],
     [ "setVisible", "class_beam_1_1_timeline.html#ad21aa847e01f197a5b6eecdc4cb7f2f4", null ],
-    [ "m_isVisible", "class_beam_1_1_timeline.html#a0021e8c656305015e2ad30a791338c09", null ]
+    [ "sliceRegion", "class_beam_1_1_timeline.html#a8027a4a90c56651c9bde0e5315bb71e3", null ],
+    [ "m_dragOffsetX", "class_beam_1_1_timeline.html#ae93899c6ea7c8b36f53688ee0ebe028f", null ],
+    [ "m_dragRegionIndex", "class_beam_1_1_timeline.html#ac162bb2a26665fbfabdbc0d0cc8900d2", null ],
+    [ "m_dragTrackPtr", "class_beam_1_1_timeline.html#a19789a38965cb80642dc87c4e248e334", null ],
+    [ "m_engine", "class_beam_1_1_timeline.html#aaabfcef9ca41f31fc70009405dafb67f", null ],
+    [ "m_isDraggingRegion", "class_beam_1_1_timeline.html#a7fc4a961b6399ffc0514f9c47c6bab5b", null ],
+    [ "m_isPanning", "class_beam_1_1_timeline.html#aad53cb5c7b902b1592e1cadfd09a0064", null ],
+    [ "m_isScrubbing", "class_beam_1_1_timeline.html#a38bdec7cfb1b81f532295955efbc6dec", null ],
+    [ "m_isVisible", "class_beam_1_1_timeline.html#a0021e8c656305015e2ad30a791338c09", null ],
+    [ "m_lastMouseX", "class_beam_1_1_timeline.html#a69dd37c73f893cf949b52f814598d5df", null ],
+    [ "m_lastMouseY", "class_beam_1_1_timeline.html#a46aaa4386fa2c74b3a97880a18a570e8", null ],
+    [ "m_offsetX", "class_beam_1_1_timeline.html#a11eed32b492417dfac0e2986208de78f", null ],
+    [ "m_offsetY", "class_beam_1_1_timeline.html#aa5d464919a125da894c1d6dfeb0989e7", null ],
+    [ "m_project", "class_beam_1_1_timeline.html#af8a3307bf582dd1b1b7d22d2b8a9b14b", null ],
+    [ "m_zoom", "class_beam_1_1_timeline.html#a09d327486c2182e805e9a9afb2896340", null ]
 ];

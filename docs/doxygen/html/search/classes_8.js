@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['masternode_0',['MasterNode',['../class_beam_1_1_master_node.html',1,'Beam']]],
-  ['masterstrip_1',['MasterStrip',['../class_beam_1_1_master_strip.html',1,'Beam']]]
+  ['keypress_0',['KeyPress',['../class_beam_1_1_key_press.html',1,'Beam']]],
+  ['knob_1',['Knob',['../class_beam_1_1_knob.html',1,'Beam']]]
 ];

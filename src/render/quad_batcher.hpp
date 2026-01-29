@@ -63,6 +63,12 @@ public:
     void drawRect(float x, float y, float w, float h, float thickness, float r, float g, float b, float a);
     void flush();
 
+    void setScissor(float x, float y, float w, float h, float screenHeight);
+    void clearScissor();
+
+    void setViewTransform(float tx, float ty, float zoom);
+    void resetViewTransform(float screenW, float screenH);
+
     void setShader(class Shader* shader) { m_shader = shader; }
 
 private:
@@ -73,10 +79,14 @@ private:
     unsigned int m_fontTexture;
     std::vector<Vertex> m_vertices;
     class Shader* m_shader = nullptr;
+    float m_viewTx = 0.0f, m_viewTy = 0.0f, m_viewZoom = 1.0f;
 };
 
 } // namespace Beam
 
 #endif // QUAD_BATCHER_HPP
+
+
+
 
 

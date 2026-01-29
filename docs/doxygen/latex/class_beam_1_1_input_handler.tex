@@ -15,9 +15,11 @@ void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_input_handler_ab6ae366e86174358931c66a97f002f96}{handle\+Mouse\+Move}} (float x, float y)
 \item 
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a13cc6aa32a46b209a89f12db76236200}{handle\+Mouse\+Wheel}} (float x, float y, float delta)
+\item 
 void \doxymbox{\hyperlink{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a}{update}} (float dt)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher)
+void \doxymbox{\hyperlink{class_beam_1_1_input_handler_a59aa6d328f5c20ab523d5201302007b0}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher, float dt, float screenW, float screenH)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -55,11 +57,17 @@ void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Move (\begin{DoxyParamCaption}\i
 {\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a200720149cc210bc1b2fae9f02872e86} 
 void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Up (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef}\index{Beam::InputHandler@{Beam::InputHandler}!render@{render}}
+\Hypertarget{class_beam_1_1_input_handler_a13cc6aa32a46b209a89f12db76236200}\index{Beam::InputHandler@{Beam::InputHandler}!handleMouseWheel@{handleMouseWheel}}
+\index{handleMouseWheel@{handleMouseWheel}!Beam::InputHandler@{Beam::InputHandler}}
+\doxysubsubsection{\texorpdfstring{handleMouseWheel()}{handleMouseWheel()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a13cc6aa32a46b209a89f12db76236200} 
+void Beam::\+\+Input\+Handler::\+handle\+Mouse\+Wheel (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{delta}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_input_handler_a59aa6d328f5c20ab523d5201302007b0}\index{Beam::InputHandler@{Beam::InputHandler}!render@{render}}
 \index{render@{render}!Beam::InputHandler@{Beam::InputHandler}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a2d82861b1db962c08f7bf011fe6bc8ef} 
-void Beam::\+\+Input\+Handler::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_beam_1_1_input_handler_a59aa6d328f5c20ab523d5201302007b0} 
+void Beam::\+\+Input\+Handler::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{, }\item[{float}]{dt}{, }\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_beam_1_1_input_handler_acd93a9973f465ad5a6d9f0ccdc72636a}\index{Beam::InputHandler@{Beam::InputHandler}!update@{update}}
 \index{update@{update}!Beam::InputHandler@{Beam::InputHandler}}
@@ -88,5 +96,5 @@ std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_component}{Componen
 
 The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
 \item 
-src/\+ui/\+\doxymbox{\hyperlink{input__handler_8hpp}{input\+\_\+handler.\+hpp}}\item 
-src/\+ui/\+\doxymbox{\hyperlink{input__handler_8cpp}{input\+\_\+handler.\+cpp}}\end{DoxyCompactItemize}
+src/\+interface/\+\doxymbox{\hyperlink{input__handler_8hpp}{input\+\_\+handler.\+hpp}}\item 
+src/\+interface/\+\doxymbox{\hyperlink{input__handler_8cpp}{input\+\_\+handler.\+cpp}}\end{DoxyCompactItemize}

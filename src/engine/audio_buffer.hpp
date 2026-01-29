@@ -137,8 +137,8 @@ void AudioBuffer<T>::setSize(int numChannels, int numSamples, bool keepExistingC
         // Keep existing content - this is a simplified implementation
         std::vector<std::vector<T>> newData(numChannels, std::vector<T>(numSamples, static_cast<T>(0)));
         
-        int channelsToCopy = std::min(numChannels, m_numChannels);
-        int samplesToCopy = std::min(numSamples, m_numSamples);
+        int channelsToCopy = (std::min)(numChannels, m_numChannels);
+        int samplesToCopy = (std::min)(numSamples, m_numSamples);
         
         for (int ch = 0; ch < channelsToCopy; ++ch) {
             for (int i = 0; i < samplesToCopy; ++i) {
@@ -162,7 +162,7 @@ void AudioBuffer<T>::clear() {
 
 template<typename T>
 void AudioBuffer<T>::clear(int startSample, int numSamples) {
-    int endSample = std::min(startSample + numSamples, m_numSamples);
+    int endSample = (std::min)(startSample + numSamples, m_numSamples);
     
     for (auto& channel : m_data) {
         std::fill(channel.begin() + startSample, channel.begin() + endSample, static_cast<T>(0));
@@ -179,7 +179,7 @@ void AudioBuffer<T>::addFrom(int destChannel, int destStartSample, const AudioBu
 
     int maxDestSamples = m_numSamples - destStartSample;
     int maxSourceSamples = source.m_numSamples - sourceStartSample;
-    int samplesToDo = std::min({numSamples, maxDestSamples, maxSourceSamples});
+    int samplesToDo = (std::min)({numSamples, maxDestSamples, maxSourceSamples});
 
     T* dest = m_data[destChannel].data() + destStartSample;
     const T* src = source.m_data[sourceChannel].data() + sourceStartSample;
@@ -199,7 +199,7 @@ void AudioBuffer<T>::copyFrom(int destChannel, int destStartSample, const AudioB
 
     int maxDestSamples = m_numSamples - destStartSample;
     int maxSourceSamples = source.m_numSamples - sourceStartSample;
-    int samplesToDo = std::min({numSamples, maxDestSamples, maxSourceSamples});
+    int samplesToDo = (std::min)({numSamples, maxDestSamples, maxSourceSamples});
 
     T* dest = m_data[destChannel].data() + destStartSample;
     const T* src = source.m_data[sourceChannel].data() + sourceStartSample;
@@ -214,7 +214,7 @@ void AudioBuffer<T>::applyGain(int channel, int startSample, int numSamples, T g
     }
 
     int maxSamples = m_numSamples - startSample;
-    int samplesToDo = std::min(numSamples, maxSamples);
+    int samplesToDo = (std::min)(numSamples, maxSamples);
 
     T* data = m_data[channel].data() + startSample;
     for (int i = 0; i < samplesToDo; ++i) {
@@ -241,7 +241,7 @@ T AudioBuffer<T>::getMagnitude(int channel, int startSample, int numSamples) con
     }
 
     int maxSamples = m_numSamples - startSample;
-    int samplesToDo = std::min(numSamples, maxSamples);
+    int samplesToDo = (std::min)(numSamples, maxSamples);
 
     const T* data = m_data[channel].data() + startSample;
     T maxVal = static_cast<T>(0);
@@ -271,5 +271,8 @@ T AudioBuffer<T>::getMagnitude() const {
 } // namespace Beam
 
 #endif // AUDIO_BUFFER_HPP
+
+
+
 
 

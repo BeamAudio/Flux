@@ -1,0 +1,45 @@
+\doxysection{asset\+\_\+manager.\+hpp}
+\hypertarget{asset__manager_8hpp_source}{}\label{asset__manager_8hpp_source}\index{src/session/asset\_manager.hpp@{src/session/asset\_manager.hpp}}
+\doxymbox{\hyperlink{asset__manager_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ASSET\_MANAGER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ASSET\_MANAGER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{texture_8hpp}{../render/texture.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{AssetManager}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{AssetManager}}\&\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a0f695c5457caab2dc9ae9e605e16cacb}{instance}}()\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{AssetManager}}\ inst;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ inst;}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ std::shared\_ptr<Texture>\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_aaf454d89d7fcbc66b3cc17fb88a255df}{getTexture}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a58e74758db894a4e67e9dcab535141c8}{purgeUnused}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a2617c12bc85f81dc36713b8392982042}{clear}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{AssetManager}}()\ =\ \textcolor{keywordflow}{default};\ \textcolor{comment}{//\ Private\ constructor\ for\ singleton}}
+\DoxyCodeLine{00045\ \ \ \ \ std::map<std::string,\ std::shared\_ptr<Texture>>\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_af30e6eb2be3d4f729dd496f5032eed3d}{m\_textures}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a4d8ecae42f01c83beba10a088f1faeef}{m\_mutex}};}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ASSET\_MANAGER\_HPP}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+
+\end{DoxyCode}

@@ -1,13 +1,26 @@
 var class_beam_1_1_track_node =
 [
     [ "TrackNode", "class_beam_1_1_track_node.html#a300b73669c49d022a1dd10f7bedb546c", null ],
+    [ "~TrackNode", "class_beam_1_1_track_node.html#af9665ab17e5551b617a4cb4bd1d9b43e", null ],
     [ "getName", "class_beam_1_1_track_node.html#a8c233bb481da69fd335c86c286ae9606", null ],
+    [ "getPeakData", "class_beam_1_1_track_node.html#abe7c47ca6cf089ac71e97969c6d9e7f5", null ],
     [ "getState", "class_beam_1_1_track_node.html#a8bc557d0c5fe519e79fa335c695b1cf8", null ],
+    [ "getTotalFrames", "class_beam_1_1_track_node.html#ae7e6189008664fe997e33a5b6042095e", null ],
     [ "load", "class_beam_1_1_track_node.html#aacfc7312076b50be2cf6d4403df4ca95", null ],
-    [ "process", "class_beam_1_1_track_node.html#a2e2bffa8b286946f8e32db31e672727e", null ],
+    [ "process", "class_beam_1_1_track_node.html#a41898cb4d3b6b3f09c5c144a66dc4a5d", null ],
     [ "seek", "class_beam_1_1_track_node.html#acdff1b83754ab94892dc1c1d6ffe5255", null ],
     [ "setState", "class_beam_1_1_track_node.html#a973d30146b430d0680b526740364a45c", null ],
+    [ "setTapeParams", "class_beam_1_1_track_node.html#a4c490876e9e00d85530178fa22571397", null ],
+    [ "startRecording", "class_beam_1_1_track_node.html#a0df2b32330877bad5608e7d0b93877e6", null ],
+    [ "stopRecording", "class_beam_1_1_track_node.html#a087918f50fcde846beb63a77a6632da3", null ],
+    [ "m_ageFilters", "class_beam_1_1_track_node.html#a69f6c2aec093b6e84d84d3e3fd2c6c30", null ],
+    [ "m_isWriterOpen", "class_beam_1_1_track_node.html#a40e6d50a007d435c90d0a10b2443e183", null ],
+    [ "m_lastProcessedFrame", "class_beam_1_1_track_node.html#a085e6353ffd49a048809587ddc919e7c", null ],
     [ "m_name", "class_beam_1_1_track_node.html#a6ac8f5d6a13f367ac52c01b8c933679f", null ],
     [ "m_state", "class_beam_1_1_track_node.html#a2d4f72820d3d3d7dc00f1ec2320613a3", null ],
-    [ "m_streamer", "class_beam_1_1_track_node.html#abb11e4728816724f604713a672ad841d", null ]
+    [ "m_streamer", "class_beam_1_1_track_node.html#abb11e4728816724f604713a672ad841d", null ],
+    [ "m_tapeAge", "class_beam_1_1_track_node.html#a66f963a00fd9b980ca2599a5b71f1826", null ],
+    [ "m_tapeDrive", "class_beam_1_1_track_node.html#a4ce5423d613e322ed2ddaaa6430a4d16", null ],
+    [ "m_wavWriter", "class_beam_1_1_track_node.html#ad3a9406a86daaa3935f920e6dcac3c5f", null ],
+    [ "m_wowFlutter", "class_beam_1_1_track_node.html#a042dc47115529f92e8e89cf548161353", null ]
 ];

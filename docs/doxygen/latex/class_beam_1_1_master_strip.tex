@@ -17,7 +17,11 @@ Inheritance diagram for Beam::\+Master\+Strip:\+\begin{figure}[H]
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_master_strip_a021372e32a0033a9ed5f3224f136c893}{set\+Bounds}} (float x, float y, float w, float h) override
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_master_strip_afd7b0818c5ecb610f6fd3882b8a8ad71}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+bool \doxymbox{\hyperlink{class_beam_1_1_master_strip_a81ac423990bbd8e9e726c9915fa8b3c6}{on\+Mouse\+Down}} (float x, float y, int button) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_master_strip_a6cf43dd82f1ea4b9d5e0114f949cecb3}{on\+Mouse\+Move}} (float x, float y) override
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_master_strip_a7d46628ba541556ea94e8345633d813e}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher, float dt, float screenW, float screenH) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
 \begin{DoxyCompactItemize}
@@ -26,17 +30,20 @@ virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc
 \item 
 virtual void \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b4371d07620567970a158}{update}} (float dt)
 \item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{on\+Mouse\+Down}} (float x, float y, int button)
-\item 
 virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{on\+Mouse\+Up}} (float x, float y, int button)
 \item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{on\+Mouse\+Move}} (float x, float y)
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ab92e884903f8a621fcd57bc00a24b041}{on\+Mouse\+Wheel}} (float x, float y, float delta)
 \item 
 const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{set\+Draggable}} (bool draggable)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{start\+Dragging}} (float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_master_strip_a31e45bb02d409d44ed432337d0596ad9}{get\+FaderY}} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -79,15 +86,41 @@ Beam::\+\+Master\+Strip::\+\+Master\+Strip (\begin{DoxyParamCaption}\item[{std::
 \label{doc-func-members}
 \Hypertarget{class_beam_1_1_master_strip_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_beam_1_1_master_strip_afd7b0818c5ecb610f6fd3882b8a8ad71}\index{Beam::MasterStrip@{Beam::MasterStrip}!render@{render}}
+\Hypertarget{class_beam_1_1_master_strip_a31e45bb02d409d44ed432337d0596ad9}\index{Beam::MasterStrip@{Beam::MasterStrip}!getFaderY@{getFaderY}}
+\index{getFaderY@{getFaderY}!Beam::MasterStrip@{Beam::MasterStrip}}
+\doxysubsubsection{\texorpdfstring{getFaderY()}{getFaderY()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_master_strip_a31e45bb02d409d44ed432337d0596ad9} 
+float Beam::\+\+Master\+Strip::\+get\+FaderY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_master_strip_a81ac423990bbd8e9e726c9915fa8b3c6}\index{Beam::MasterStrip@{Beam::MasterStrip}!onMouseDown@{onMouseDown}}
+\index{onMouseDown@{onMouseDown}!Beam::MasterStrip@{Beam::MasterStrip}}
+\doxysubsubsection{\texorpdfstring{onMouseDown()}{onMouseDown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_master_strip_a81ac423990bbd8e9e726c9915fa8b3c6} 
+bool Beam::\+\+Master\+Strip::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{int}]{button}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_master_strip_a6cf43dd82f1ea4b9d5e0114f949cecb3}\index{Beam::MasterStrip@{Beam::MasterStrip}!onMouseMove@{onMouseMove}}
+\index{onMouseMove@{onMouseMove}!Beam::MasterStrip@{Beam::MasterStrip}}
+\doxysubsubsection{\texorpdfstring{onMouseMove()}{onMouseMove()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_master_strip_a6cf43dd82f1ea4b9d5e0114f949cecb3} 
+bool Beam::\+\+Master\+Strip::\+on\+Mouse\+Move (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Beam::\+\+Component}}.
+
+\Hypertarget{class_beam_1_1_master_strip_a7d46628ba541556ea94e8345633d813e}\index{Beam::MasterStrip@{Beam::MasterStrip}!render@{render}}
 \index{render@{render}!Beam::MasterStrip@{Beam::MasterStrip}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_master_strip_afd7b0818c5ecb610f6fd3882b8a8ad71} 
-void Beam::\+\+Master\+Strip::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_master_strip_a7d46628ba541556ea94e8345633d813e} 
+void Beam::\+\+Master\+Strip::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{, }\item[{float}]{dt}{, }\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_acef3496a55f0d94c8678f6049dbaa7cd}{Beam::\+\+Component}}.
 
 \Hypertarget{class_beam_1_1_master_strip_a021372e32a0033a9ed5f3224f136c893}\index{Beam::MasterStrip@{Beam::MasterStrip}!setBounds@{setBounds}}
 \index{setBounds@{setBounds}!Beam::MasterStrip@{Beam::MasterStrip}}
@@ -120,4 +153,4 @@ std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_v_u_meter}{VUMeter}
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+ui/\+\doxymbox{\hyperlink{master__strip_8hpp}{master\+\_\+strip.\+hpp}}\end{DoxyCompactItemize}
+src/\+interface/\+\doxymbox{\hyperlink{master__strip_8hpp}{master\+\_\+strip.\+hpp}}\end{DoxyCompactItemize}

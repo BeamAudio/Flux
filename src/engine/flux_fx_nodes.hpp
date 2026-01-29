@@ -45,6 +45,8 @@ public:
         m_filter->process(output, totalSamples / 2, 2); // Frames, Channels
     }
 
+    BiquadFilterNode* getInternalFilter() { return m_filter.get(); }
+
 private:
     std::unique_ptr<BiquadFilterNode> m_filter;
 };
@@ -61,8 +63,9 @@ public:
     }
     
     void processBlock(const float* input, float* output, int totalSamples) override {
-        // Update feedback from param. Time resizing is complex, skipping for now.
-        // m_delay->setFeedback(getParam("Feedback")); 
+        // Update params
+        m_delay->setFeedback(getParam("Feedback"));
+        m_delay->setDelayTime(getParam("Time"));
         
         std::copy(input, input + totalSamples, output);
         m_delay->process(output, totalSamples / 2, 2);
@@ -75,6 +78,9 @@ private:
 } // namespace Beam
 
 #endif // FLUX_FX_NODES_HPP
+
+
+
 
 
 

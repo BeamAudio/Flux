@@ -1,0 +1,95 @@
+\doxysection{Beam::\+Region Struct Reference}
+\hypertarget{struct_beam_1_1_region}{}\label{struct_beam_1_1_region}\index{Beam::Region@{Beam::Region}}
+
+
+Represents a clip of audio on the timeline.  
+
+
+
+
+{\ttfamily \+\#include $<$region.\+hpp$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{struct_beam_1_1_region_a4f363f9d4f297363dc9a00932f01b191}{name}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_beam_1_1_region_a600e281a408fb3c8942fbd9b3e19bdf0}{start\+Frame}}
+\begin{DoxyCompactList}\small\item\em Position on the timeline. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_beam_1_1_region_a15154609c7c8a247b70b9831347f5a17}{duration}}
+\begin{DoxyCompactList}\small\item\em Length in frames. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_beam_1_1_region_aa8c0cd8326bdc79150b057c179af2663}{source\+Offset}}
+\begin{DoxyCompactList}\small\item\em Offset into the source audio file. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{struct_beam_1_1_region_a1e3980ad314e3f5779ce6de4331f5b4c}{track\+Index}}
+\begin{DoxyCompactList}\small\item\em Vertical lane index. \end{DoxyCompactList}\item 
+std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{struct_beam_1_1_region_a632fe1c9b80b4f1a5e33b371a269086c}{channel\+Peaks}}
+\begin{DoxyCompactList}\small\item\em Cached waveform data per channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a clip of audio on the timeline. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_beam_1_1_region_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_beam_1_1_region_a632fe1c9b80b4f1a5e33b371a269086c}\index{Beam::Region@{Beam::Region}!channelPeaks@{channelPeaks}}
+\index{channelPeaks@{channelPeaks}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{channelPeaks}{channelPeaks}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_a632fe1c9b80b4f1a5e33b371a269086c} 
+std::\+vector$<$std::\+vector$<$float$>$ $>$ Beam::\+\+Region::\+channel\+Peaks}
+
+
+
+Cached waveform data per channel. 
+
+\Hypertarget{struct_beam_1_1_region_a15154609c7c8a247b70b9831347f5a17}\index{Beam::Region@{Beam::Region}!duration@{duration}}
+\index{duration@{duration}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_a15154609c7c8a247b70b9831347f5a17} 
+size\+\_\+t Beam::\+\+Region::\+duration}
+
+
+
+Length in frames. 
+
+\Hypertarget{struct_beam_1_1_region_a4f363f9d4f297363dc9a00932f01b191}\index{Beam::Region@{Beam::Region}!name@{name}}
+\index{name@{name}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_a4f363f9d4f297363dc9a00932f01b191} 
+std::\+string Beam::\+\+Region::\+name}
+
+\Hypertarget{struct_beam_1_1_region_aa8c0cd8326bdc79150b057c179af2663}\index{Beam::Region@{Beam::Region}!sourceOffset@{sourceOffset}}
+\index{sourceOffset@{sourceOffset}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{sourceOffset}{sourceOffset}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_aa8c0cd8326bdc79150b057c179af2663} 
+size\+\_\+t Beam::\+\+Region::\+source\+Offset}
+
+
+
+Offset into the source audio file. 
+
+\Hypertarget{struct_beam_1_1_region_a600e281a408fb3c8942fbd9b3e19bdf0}\index{Beam::Region@{Beam::Region}!startFrame@{startFrame}}
+\index{startFrame@{startFrame}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{startFrame}{startFrame}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_a600e281a408fb3c8942fbd9b3e19bdf0} 
+size\+\_\+t Beam::\+\+Region::\+start\+Frame}
+
+
+
+Position on the timeline. 
+
+\Hypertarget{struct_beam_1_1_region_a1e3980ad314e3f5779ce6de4331f5b4c}\index{Beam::Region@{Beam::Region}!trackIndex@{trackIndex}}
+\index{trackIndex@{trackIndex}!Beam::Region@{Beam::Region}}
+\doxysubsubsection{\texorpdfstring{trackIndex}{trackIndex}}
+{\footnotesize\ttfamily \label{struct_beam_1_1_region_a1e3980ad314e3f5779ce6de4331f5b4c} 
+int Beam::\+\+Region::\+track\+Index}
+
+
+
+Vertical lane index. 
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+session/\+\doxymbox{\hyperlink{region_8hpp}{region.\+hpp}}\end{DoxyCompactItemize}

@@ -15,16 +15,15 @@ void \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a601ea426ce872ae69a21211ff0e
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a200b5ac788ec3afa6fbce38cadf9a6d7}{disconnect}} (size\+\_\+t src\+Node\+Id, int src\+Port, size\+\_\+t dst\+Node\+Id, int dst\+Port)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a4370ffd95810ee9eb325149a0fd604bb}{process}} (int frames)
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{struct_beam_1_1_render_plan}{Render\+Plan}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph_acbad93d7181338801a24e7093e82459e}{compile}} (int buffer\+Size\+Frames, int channels=2)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a4ac5823a2afb44ce639d3be71a5bfc98}{set\+Transport\+State}} (bool playing)
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a1dae717bfb05d9167d1cfe79954807b1}{get\+Node}} (size\+\_\+t id)
 \item 
 const std::\+map$<$ size\+\_\+t, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ $>$ \& \doxymbox{\hyperlink{class_beam_1_1_flux_graph_ab450ac7e6e4218b5f72c5ad8ad17577c}{get\+Nodes}} () const
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_flux_graph_ae205fddd379db73ddef15e652d3f72f3}{rebuild\+Schedule}} ()
+const std::\+set$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_connection}{Flux\+Connection}} $>$ \& \doxymbox{\hyperlink{class_beam_1_1_flux_graph_abecdeddaec45c42957802cab02aa0711}{get\+Connections}} () const
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -33,11 +32,11 @@ std::\+map$<$ size\+\_\+t, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_
 \item 
 std::\+set$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_connection}{Flux\+Connection}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a8aa7b00e51cb7a4cc9123f327d2a3831}{m\+\_\+connections}}
 \item 
-std::\+vector$<$ size\+\_\+t $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a54c4db2cbdfb9c2e7399c506592388f3}{m\+\_\+schedule}}
-\item 
 size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a02661747af83751ced185ae9b858f626}{m\+\_\+next\+Id}} = 0
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_flux_graph_adc3a3d43995a4f8450e5e40afcc27905}{m\+\_\+needs\+Rebuild}} = true
+\item 
+std::\+mutex \doxymbox{\hyperlink{class_beam_1_1_flux_graph_a254ba77bf37f2de61b7863f42b84c93c}{m\+\_\+mutex}}
 \end{DoxyCompactItemize}
 
 
@@ -49,6 +48,12 @@ bool \doxymbox{\hyperlink{class_beam_1_1_flux_graph_adc3a3d43995a4f8450e5e40afcc
 \doxysubsubsection{\texorpdfstring{addNode()}{addNode()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a265eecf57dcd7ba6f58436a91d0624c7} 
 size\+\_\+t Beam::\+\+Flux\+Graph::\+add\+Node (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_flux_graph_acbad93d7181338801a24e7093e82459e}\index{Beam::FluxGraph@{Beam::FluxGraph}!compile@{compile}}
+\index{compile@{compile}!Beam::FluxGraph@{Beam::FluxGraph}}
+\doxysubsubsection{\texorpdfstring{compile()}{compile()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_acbad93d7181338801a24e7093e82459e} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{struct_beam_1_1_render_plan}{Render\+Plan}} $>$ Beam::\+\+Flux\+Graph::\+compile (\begin{DoxyParamCaption}\item[{int}]{buffer\+Size\+Frames}{, }\item[{int}]{channels}{ = {\ttfamily 2}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_beam_1_1_flux_graph_a601ea426ce872ae69a21211ff0ea7303}\index{Beam::FluxGraph@{Beam::FluxGraph}!connect@{connect}}
 \index{connect@{connect}!Beam::FluxGraph@{Beam::FluxGraph}}
@@ -62,6 +67,12 @@ void Beam::\+\+Flux\+Graph::\+connect (\begin{DoxyParamCaption}\item[{size\+\_\+
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a200b5ac788ec3afa6fbce38cadf9a6d7} 
 void Beam::\+\+Flux\+Graph::\+disconnect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{src\+Node\+Id}{, }\item[{int}]{src\+Port}{, }\item[{size\+\_\+t}]{dst\+Node\+Id}{, }\item[{int}]{dst\+Port}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\Hypertarget{class_beam_1_1_flux_graph_abecdeddaec45c42957802cab02aa0711}\index{Beam::FluxGraph@{Beam::FluxGraph}!getConnections@{getConnections}}
+\index{getConnections@{getConnections}!Beam::FluxGraph@{Beam::FluxGraph}}
+\doxysubsubsection{\texorpdfstring{getConnections()}{getConnections()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_abecdeddaec45c42957802cab02aa0711} 
+const std::\+set$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_connection}{Flux\+Connection}} $>$ \& Beam::\+\+Flux\+Graph::\+get\+Connections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{class_beam_1_1_flux_graph_a1dae717bfb05d9167d1cfe79954807b1}\index{Beam::FluxGraph@{Beam::FluxGraph}!getNode@{getNode}}
 \index{getNode@{getNode}!Beam::FluxGraph@{Beam::FluxGraph}}
 \doxysubsubsection{\texorpdfstring{getNode()}{getNode()}}
@@ -74,23 +85,17 @@ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+N
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_ab450ac7e6e4218b5f72c5ad8ad17577c} 
 const std::\+map$<$ size\+\_\+t, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ $>$ \& Beam::\+\+Flux\+Graph::\+get\+Nodes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_beam_1_1_flux_graph_a4370ffd95810ee9eb325149a0fd604bb}\index{Beam::FluxGraph@{Beam::FluxGraph}!process@{process}}
-\index{process@{process}!Beam::FluxGraph@{Beam::FluxGraph}}
-\doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a4370ffd95810ee9eb325149a0fd604bb} 
-void Beam::\+\+Flux\+Graph::\+process (\begin{DoxyParamCaption}\item[{int}]{frames}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-\Hypertarget{class_beam_1_1_flux_graph_ae205fddd379db73ddef15e652d3f72f3}\index{Beam::FluxGraph@{Beam::FluxGraph}!rebuildSchedule@{rebuildSchedule}}
-\index{rebuildSchedule@{rebuildSchedule}!Beam::FluxGraph@{Beam::FluxGraph}}
-\doxysubsubsection{\texorpdfstring{rebuildSchedule()}{rebuildSchedule()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_ae205fddd379db73ddef15e652d3f72f3} 
-void Beam::\+\+Flux\+Graph::\+rebuild\+Schedule (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
 \Hypertarget{class_beam_1_1_flux_graph_ab0a9ab8d7c11ea0a40585c6ffe3961ef}\index{Beam::FluxGraph@{Beam::FluxGraph}!removeNode@{removeNode}}
 \index{removeNode@{removeNode}!Beam::FluxGraph@{Beam::FluxGraph}}
 \doxysubsubsection{\texorpdfstring{removeNode()}{removeNode()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_ab0a9ab8d7c11ea0a40585c6ffe3961ef} 
 void Beam::\+\+Flux\+Graph::\+remove\+Node (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_flux_graph_a4ac5823a2afb44ce639d3be71a5bfc98}\index{Beam::FluxGraph@{Beam::FluxGraph}!setTransportState@{setTransportState}}
+\index{setTransportState@{setTransportState}!Beam::FluxGraph@{Beam::FluxGraph}}
+\doxysubsubsection{\texorpdfstring{setTransportState()}{setTransportState()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a4ac5823a2afb44ce639d3be71a5bfc98} 
+void Beam::\+\+Flux\+Graph::\+set\+Transport\+State (\begin{DoxyParamCaption}\item[{bool}]{playing}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -102,6 +107,12 @@ void Beam::\+\+Flux\+Graph::\+remove\+Node (\begin{DoxyParamCaption}\item[{size\
 \doxysubsubsection{\texorpdfstring{m\_connections}{m\_connections}}
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a8aa7b00e51cb7a4cc9123f327d2a3831} 
 std::\+set$<$\doxymbox{\hyperlink{struct_beam_1_1_flux_connection}{Flux\+Connection}}$>$ Beam::\+\+Flux\+Graph::\+m\+\_\+connections\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_flux_graph_a254ba77bf37f2de61b7863f42b84c93c}\index{Beam::FluxGraph@{Beam::FluxGraph}!m\_mutex@{m\_mutex}}
+\index{m\_mutex@{m\_mutex}!Beam::FluxGraph@{Beam::FluxGraph}}
+\doxysubsubsection{\texorpdfstring{m\_mutex}{m\_mutex}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a254ba77bf37f2de61b7863f42b84c93c} 
+std::\+mutex Beam::\+\+Flux\+Graph::\+m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{class_beam_1_1_flux_graph_adc3a3d43995a4f8450e5e40afcc27905}\index{Beam::FluxGraph@{Beam::FluxGraph}!m\_needsRebuild@{m\_needsRebuild}}
 \index{m\_needsRebuild@{m\_needsRebuild}!Beam::FluxGraph@{Beam::FluxGraph}}
@@ -121,14 +132,8 @@ size\+\_\+t Beam::\+\+Flux\+Graph::\+m\+\_\+next\+Id = 0\hspace{0.3cm}{\ttfamily
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a8bc2b841557ded5a4d18bef70addc9ac} 
 std::\+map$<$size\+\_\+t, std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}}$>$ $>$ Beam::\+\+Flux\+Graph::\+m\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_flux_graph_a54c4db2cbdfb9c2e7399c506592388f3}\index{Beam::FluxGraph@{Beam::FluxGraph}!m\_schedule@{m\_schedule}}
-\index{m\_schedule@{m\_schedule}!Beam::FluxGraph@{Beam::FluxGraph}}
-\doxysubsubsection{\texorpdfstring{m\_schedule}{m\_schedule}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_graph_a54c4db2cbdfb9c2e7399c506592388f3} 
-std::\+vector$<$size\+\_\+t$>$ Beam::\+\+Flux\+Graph::\+m\+\_\+schedule\hspace{0.3cm}{\ttfamily [private]}}
-
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{flux__graph_8hpp}{flux\+\_\+graph.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{flux__graph_8hpp}{flux\+\_\+graph.\+hpp}}\end{DoxyCompactItemize}

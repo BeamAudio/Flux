@@ -1,0 +1,197 @@
+\doxysection{analog\+\_\+suite.\+hpp}
+\hypertarget{analog__suite_8hpp_source}{}\label{analog__suite_8hpp_source}\index{src/engine/analog\_suite.hpp@{src/engine/analog\_suite.hpp}}
+\doxymbox{\hyperlink{analog__suite_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ANALOG\_SUITE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ANALOG\_SUITE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__plugin_8hpp}{flux\_plugin.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{analog__base_8hpp}{analog\_base.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{biquad__filter__node_8hpp}{biquad\_filter\_node.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ EQUALIZERS}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a239f8e2a80c086c53e3eb91c9f313279}{TubeP\_EQ}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a239f8e2a80c086c53e3eb91c9f313279}{TubeP\_EQ}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Tube-\/P\ EQ"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Low\ Boost"{}},\ 0.0f,\ 12.0f,\ 0.0f);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Low\ Freq"{}},\ 20.0f,\ 100.0f,\ 60.0f);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}High\ Boost"{}},\ 0.0f,\ 12.0f,\ 0.0f);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}High\ Freq"{}},\ 3000.0f,\ 16000.0f,\ 10000.0f);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Tube\ Drive"{}},\ 0.0f,\ 1.0f,\ 0.2f);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a4113048e0e83e047a6d2a18f6eaeb652}{m\_lowShelf}}\ =\ std::make\_unique<BiquadFilterNode>(\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63}{FilterType::LowPass}},\ 60.0f,\ 0.707f,\ sr);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_ae061fada18372aed95aa5dbedc2be291}{m\_highShelf}}\ =\ std::make\_unique<BiquadFilterNode>(\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6ae9456dc865a19e434997ea20bb5373f6}{FilterType::HighPass}},\ 10000.0f,\ 0.707f,\ sr);}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a8adbb2e60d4a51d203a942d722643b4b}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a4113048e0e83e047a6d2a18f6eaeb652}{m\_lowShelf}}-\/>setCutoff(\doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Low\ Freq"{}}));}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_ae061fada18372aed95aa5dbedc2be291}{m\_highShelf}}-\/>setCutoff(\doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}High\ Freq"{}}));}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ drive\ =\ 1.0f\ +\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Tube\ Drive"{}});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ in[i];}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ s\ =\ \doxymbox{\hyperlink{class_beam_1_1_analog_base_a8eed4bd2205e1ff9dd9ab036ea7cfe95}{AnalogBase::saturateLangevin}}(s,\ drive);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ s;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ std::unique\_ptr<BiquadFilterNode>\ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a4113048e0e83e047a6d2a18f6eaeb652}{m\_lowShelf}},\ \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_ae061fada18372aed95aa5dbedc2be291}{m\_highShelf}};}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_console_e___e_q_a5d5eba473f0987818112706308ecec41}{ConsoleE\_EQ}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00042\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_console_e___e_q_a5d5eba473f0987818112706308ecec41}{ConsoleE\_EQ}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Console-\/E"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}B1\ Gain"{}},\ -\/15.0f,\ 15.0f,\ 0.0f);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}B1\ Freq"{}},\ 100.0f,\ 1000.0f,\ 200.0f);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}B2\ Gain"{}},\ -\/15.0f,\ 15.0f,\ 0.0f);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}B2\ Freq"{}},\ 1000.0f,\ 8000.0f,\ 3000.0f);}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_console_e___e_q_a957a65f7ecdbe08cd5f6ae9c5c8796da}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ out[i]\ =\ in[i];\ \textcolor{comment}{//\ Surgical\ linear\ phase\ placeholder}}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ 2.\ DYNAMICS}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_opto2_a_aff22ef279b90f9b410c46551cc7d19f2}{Opto2A}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00059\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_aff22ef279b90f9b410c46551cc7d19f2}{Opto2A}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Opto-\/2A"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Peak\ Redux"{}},\ 0.0f,\ 100.0f,\ 0.0f);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Gain"{}},\ 0.0f,\ 40.0f,\ 30.0f);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}}\ =\ 0.0f;}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_a6b73dd169be22f140859578aa0f7ed40}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ redux\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Peak\ Redux"{}})\ *\ 0.01f;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ makeup\ =\ std::pow(10.0f,\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Gain"{}})\ /\ 20.0f);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ absIn\ =\ std::abs(in[i]);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}}\ =\ 0.9995f\ *\ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}}\ +\ 0.0005f\ *\ absIn;\ \textcolor{comment}{//\ Slow\ opto\ response}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ gr\ =\ 1.0f\ /\ (1.0f\ +\ (\doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}}\ *\ redux\ *\ 10.0f));}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ std::tanh(in[i]\ *\ gr\ *\ makeup);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_a2a7175ede4e16355d82f825505b763cb}{getLatestGR}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}};\ \}\ \textcolor{comment}{//\ approximation\ for\ UI}}
+\DoxyCodeLine{00076\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_opto2_a_ab7f949b8bef3be98a57206b66d9d1ae3}{m\_envelope}};}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a2d58a0266c55b0c99afd18d38ea52abf}{FET76}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00081\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a2d58a0266c55b0c99afd18d38ea52abf}{FET76}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}FET-\/76"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Input"{}},\ -\/20.0f,\ 20.0f,\ 0.0f);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Ratio"{}},\ 4.0f,\ 20.0f,\ 4.0f);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Attack"{}},\ 0.02f,\ 1.0f,\ 0.1f);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}}\ =\ 0.0f;}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a592f2490ae49223add9dbdd1d7ce23d5}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ inputGain\ =\ std::pow(10.0f,\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Input"{}})\ /\ 20.0f);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ absIn\ =\ std::abs(in[i]\ *\ inputGain);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}}\ =\ 0.95f\ *\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}}\ +\ 0.05f\ *\ absIn;\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ gr\ =\ 1.0f\ /\ (1.0f\ +\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ in[i]\ *\ inputGain\ *\ gr;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a9911a5d434ef90cbfe6e4630ef443883}{getLatestGR}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}};\ \}}
+\DoxyCodeLine{00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a5a84ba4199ec0119f70dd7564200cc92}{m\_envelope}};}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ 3.\ SPACE\ (REVERB)}}
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_steel_plate_afe9788e76bde1d9435e49453bc19572d}{SteelPlate}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00107\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00108\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_afe9788e76bde1d9435e49453bc19572d}{SteelPlate}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Steel\ Plate"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Decay"{}},\ 0.1f,\ 5.0f,\ 2.0f);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Mix"{}},\ 0.0f,\ 1.0f,\ 0.3f);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_acf32dd866735856811b3dd68769ef4b4}{m\_buffer}}.assign((\textcolor{keywordtype}{size\_t})(sr\ *\ 2.0f),\ 0.0f);}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_a5b1b681074dbcb4f3307c235fdbe914d}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ decay\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Decay"{}})\ *\ 0.9f;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ mix\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Mix"{}});}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ val\ =\ in[i]\ +\ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_acf32dd866735856811b3dd68769ef4b4}{m\_buffer}}[\doxymbox{\hyperlink{class_beam_1_1_steel_plate_ac43876cc85cb4d90e86cb39ad162d2b0}{m\_pos}}]\ *\ decay;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_acf32dd866735856811b3dd68769ef4b4}{m\_buffer}}[\doxymbox{\hyperlink{class_beam_1_1_steel_plate_ac43876cc85cb4d90e86cb39ad162d2b0}{m\_pos}}]\ =\ val;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ in[i]\ *\ (1.0f\ -\/\ mix)\ +\ val\ *\ mix;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_ac43876cc85cb4d90e86cb39ad162d2b0}{m\_pos}}\ =\ (\doxymbox{\hyperlink{class_beam_1_1_steel_plate_ac43876cc85cb4d90e86cb39ad162d2b0}{m\_pos}}\ +\ 1)\ \%\ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_acf32dd866735856811b3dd68769ef4b4}{m\_buffer}}.size();}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00124\ \ \ \ \ std::vector<float>\ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_acf32dd866735856811b3dd68769ef4b4}{m\_buffer}};}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_steel_plate_ac43876cc85cb4d90e86cb39ad162d2b0}{m\_pos}}\ =\ 0;}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ 4.\ TIME\ (DELAY)}}
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_echo_plex_ae58bd4f92e13a4aadaa591423ff2b0bb}{EchoPlex}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00133\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00134\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_ae58bd4f92e13a4aadaa591423ff2b0bb}{EchoPlex}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Echo-\/Plex"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Time"{}},\ 0.1f,\ 2.0f,\ 0.5f);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Feedback"{}},\ 0.0f,\ 0.95f,\ 0.4f);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Wow"{}},\ 0.0f,\ 1.0f,\ 0.2f);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}.assign((\textcolor{keywordtype}{size\_t})(sr\ *\ 2.0f),\ 0.0f);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7375a64da87d05d8b4660f8e127e007c}{m\_wf}}\ =\ std::make\_unique<AnalogBase::WowFlutterGenerator>(sr);}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a26d16b6feed01873e169f83083873c61}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ fb\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Feedback"{}});}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7375a64da87d05d8b4660f8e127e007c}{m\_wf}}-\/>setIntensity(\doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Wow"{}})\ *\ 0.01f,\ 0.0f);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ speedMod\ =\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7375a64da87d05d8b4660f8e127e007c}{m\_wf}}-\/>next();}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ delaySamps\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Time"{}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a967cf5eb3}{getSampleRate}}()\ *\ (1.0f\ +\ speedMod);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ readPos\ =\ (\doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7f4427735451334850832919c197106c}{m\_pos}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}.size()\ -\/\ (\textcolor{keywordtype}{size\_t})delaySamps)\ \%\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}.size();}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ delayOut\ =\ std::tanh(\doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}[readPos]);\ \textcolor{comment}{//\ Tape\ saturation\ in\ loop}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}[\doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7f4427735451334850832919c197106c}{m\_pos}}]\ =\ in[i]\ +\ delayOut\ *\ fb;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ in[i]\ +\ delayOut;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7f4427735451334850832919c197106c}{m\_pos}}\ =\ (\doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7f4427735451334850832919c197106c}{m\_pos}}\ +\ 1)\ \%\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}}.size();}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00155\ \ \ \ \ std::vector<float>\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a010a781d2849a816b4e73419373f515c}{m\_buffer}};}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7f4427735451334850832919c197106c}{m\_pos}}\ =\ 0;}
+\DoxyCodeLine{00157\ \ \ \ \ std::unique\_ptr<AnalogBase::WowFlutterGenerator>\ \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a7375a64da87d05d8b4660f8e127e007c}{m\_wf}};}
+\DoxyCodeLine{00158\ \};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00161\ \textcolor{comment}{//\ 5.\ LIMITER}}
+\DoxyCodeLine{00162\ \textcolor{comment}{//\ ============================================================================}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a663418903dd3141e92ae6ef733897c28}{TubeLimiter}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}\ \{}
+\DoxyCodeLine{00165\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00166\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a663418903dd3141e92ae6ef733897c28}{TubeLimiter}}(\textcolor{keywordtype}{int}\ buf,\ \textcolor{keywordtype}{float}\ sr)\ :\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{FluxPlugin}}(\textcolor{stringliteral}{"{}Tube\ Limiter"{}},\ buf,\ sr)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Threshold"{}},\ -\/20.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{addParam}}(\textcolor{stringliteral}{"{}Output"{}},\ -\/10.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a3e25de329299557cdeb25a7d03a2afdc}{processBlock}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ in,\ \textcolor{keywordtype}{float}*\ out,\ \textcolor{keywordtype}{int}\ total)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ thresh\ =\ std::pow(10.0f,\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Threshold"{}})\ /\ 20.0f);}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ceiling\ =\ std::pow(10.0f,\ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{getParam}}(\textcolor{stringliteral}{"{}Output"{}})\ /\ 20.0f);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ peak\ =\ 0.0f;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ total;\ ++i)\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ in[i];}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ absS\ =\ std::abs(s);}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (absS\ >\ peak)\ peak\ =\ absS;}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (absS\ >\ thresh)\ s\ =\ std::tanh(s\ /\ thresh)\ *\ thresh;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ s\ *\ ceiling;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a2c00272d809f27587204f3bf6ed18a2a}{m\_gr}}\ =\ (peak\ >\ thresh)\ ?\ (peak\ -\/\ thresh)\ :\ 0.0f;}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a23ecb2ebda7fd7136ad4cfed73e7cd82}{getLatestGR}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a2c00272d809f27587204f3bf6ed18a2a}{m\_gr}};\ \}}
+\DoxyCodeLine{00184\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a2c00272d809f27587204f3bf6ed18a2a}{m\_gr}}\ =\ 0.0f;}
+\DoxyCodeLine{00186\ \};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ANALOG\_SUITE\_HPP}}
+\DoxyCodeLine{00191\ }
+
+\end{DoxyCode}

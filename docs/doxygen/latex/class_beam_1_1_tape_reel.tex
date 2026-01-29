@@ -13,22 +13,26 @@ Inheritance diagram for Beam::\+Tape\+Reel:\+\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{class_beam_1_1_tape_reel_a4ea5518ea0278a59e5a8ba9b9010805f}{Tape\+Reel}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Flux\+Track\+Node}} $>$ track, float x, float y)
+\doxymbox{\hyperlink{class_beam_1_1_tape_reel_a5d72930147553615cde3a6357ad77f37}{Tape\+Reel}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Flux\+Track\+Node}} $>$ track, size\+\_\+t node\+Id, float x, float y)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a92ce3fb77345df4a6a2a0aebf04d8bd8}{update}} (float dt) override
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_tape_reel_aec8dbeac4cb29052b8c9306a3cc408e0}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+void \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a3c7a82b43aed2a8f48528bf64c2cde8e}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher, float dt, float screenW, float screenH) override
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ad2fe7a4986075d4a3c6047f2e745460e}{on\+Mouse\+Down}} (float x, float y, int button) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_module}{Beam::\+\+Audio\+Module}}}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{Audio\+Module}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ node, float x, float y)
+\doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{Audio\+Module}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ node, size\+\_\+t node\+Id, float x, float y)
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_audio_module_a7fc32b3bfadec2badbfd067d2f37da96}{get\+Node\+Id}} () const
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{auto\+Generate\+UI}} ()
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{set\+Bounds}} (float x, float y, float w, float h) override
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_module_a4ac204a52c61e603ae6a51daa610bc19}{on\+Mouse\+Up}} (float x, float y, int button) override
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2}{on\+Mouse\+Move}} (float x, float y) override
 \item 
@@ -43,7 +47,7 @@ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_port}{Port}} $>$ \
 \item 
 virtual \doxymbox{\hyperlink{class_beam_1_1_component_af9d734d649978e027412a87bc54362cd}{\texorpdfstring{$\sim$}{\string~}\+Component}} ()=default
 \item 
-virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{on\+Mouse\+Up}} (float x, float y, int button)
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ab92e884903f8a621fcd57bc00a24b041}{on\+Mouse\+Wheel}} (float x, float y, float delta)
 \item 
 const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
 \item 
@@ -57,8 +61,20 @@ void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Flux\+Track\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}{m\+\_\+track\+Node}}
 \item 
 float \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a9a6d8ed12ec3daa3d6470f74064a2fc5}{m\+\_\+rotation}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_tape_reel_a095f4ba7d1f97b8e89619f6b4bd6e38c}{m\+\_\+scroll\+Timer}} = 0.\+0f
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_module}{Beam::\+\+Audio\+Module}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+function$<$ void(\doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{Audio\+Module}} \texorpdfstring{$\ast$}{*})$>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_af95229e9824037c0c9916cc04bf67e90}{on\+Delete\+Requested}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_module}{Beam::\+\+Audio\+Module}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\+\_\+children}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_component}{Beam::\+\+Component}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -81,11 +97,11 @@ float \doxymbox{\hyperlink{class_beam_1_1_component_a768931a0f51394bf011f821f6ed
 \label{doc-constructors}
 \Hypertarget{class_beam_1_1_tape_reel_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_beam_1_1_tape_reel_a4ea5518ea0278a59e5a8ba9b9010805f}\index{Beam::TapeReel@{Beam::TapeReel}!TapeReel@{TapeReel}}
+\Hypertarget{class_beam_1_1_tape_reel_a5d72930147553615cde3a6357ad77f37}\index{Beam::TapeReel@{Beam::TapeReel}!TapeReel@{TapeReel}}
 \index{TapeReel@{TapeReel}!Beam::TapeReel@{Beam::TapeReel}}
 \doxysubsubsection{\texorpdfstring{TapeReel()}{TapeReel()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_a4ea5518ea0278a59e5a8ba9b9010805f} 
-Beam::\+\+Tape\+Reel::\+\+Tape\+Reel (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Flux\+Track\+Node}} $>$}]{track}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_a5d72930147553615cde3a6357ad77f37} 
+Beam::\+\+Tape\+Reel::\+\+Tape\+Reel (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Flux\+Track\+Node}} $>$}]{track}{, }\item[{size\+\_\+t}]{node\+Id}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -102,15 +118,15 @@ bool Beam::\+\+Tape\+Reel::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{flo
 
 Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499}{Beam::\+\+Audio\+Module}}.
 
-\Hypertarget{class_beam_1_1_tape_reel_aec8dbeac4cb29052b8c9306a3cc408e0}\index{Beam::TapeReel@{Beam::TapeReel}!render@{render}}
+\Hypertarget{class_beam_1_1_tape_reel_a3c7a82b43aed2a8f48528bf64c2cde8e}\index{Beam::TapeReel@{Beam::TapeReel}!render@{render}}
 \index{render@{render}!Beam::TapeReel@{Beam::TapeReel}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_aec8dbeac4cb29052b8c9306a3cc408e0} 
-void Beam::\+\+Tape\+Reel::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_a3c7a82b43aed2a8f48528bf64c2cde8e} 
+void Beam::\+\+Tape\+Reel::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{, }\item[{float}]{dt}{, }\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_audio_module_ad135753a43c33ae78c1d60980e208868}{Beam::\+\+Audio\+Module}}.
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0e43bace4dcd9eb159ff2237b0c7c3fd}{Beam::\+\+Audio\+Module}}.
 
 \Hypertarget{class_beam_1_1_tape_reel_a92ce3fb77345df4a6a2a0aebf04d8bd8}\index{Beam::TapeReel@{Beam::TapeReel}!update@{update}}
 \index{update@{update}!Beam::TapeReel@{Beam::TapeReel}}
@@ -133,6 +149,12 @@ Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_ad3d3fb19d25b43
 {\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_a9a6d8ed12ec3daa3d6470f74064a2fc5} 
 float Beam::\+\+Tape\+Reel::\+m\+\_\+rotation = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_tape_reel_a095f4ba7d1f97b8e89619f6b4bd6e38c}\index{Beam::TapeReel@{Beam::TapeReel}!m\_scrollTimer@{m\_scrollTimer}}
+\index{m\_scrollTimer@{m\_scrollTimer}!Beam::TapeReel@{Beam::TapeReel}}
+\doxysubsubsection{\texorpdfstring{m\_scrollTimer}{m\_scrollTimer}}
+{\footnotesize\ttfamily \label{class_beam_1_1_tape_reel_a095f4ba7d1f97b8e89619f6b4bd6e38c} 
+float Beam::\+\+Tape\+Reel::\+m\+\_\+scroll\+Timer = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{class_beam_1_1_tape_reel_ab1b3f8dc62427ee16843f9c65fb687da}\index{Beam::TapeReel@{Beam::TapeReel}!m\_trackNode@{m\_trackNode}}
 \index{m\_trackNode@{m\_trackNode}!Beam::TapeReel@{Beam::TapeReel}}
 \doxysubsubsection{\texorpdfstring{m\_trackNode}{m\_trackNode}}
@@ -143,4 +165,4 @@ std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_track_node}{Fl
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+ui/\+\doxymbox{\hyperlink{tape__reel_8hpp}{tape\+\_\+reel.\+hpp}}\end{DoxyCompactItemize}
+src/\+interface/\+\doxymbox{\hyperlink{tape__reel_8hpp}{tape\+\_\+reel.\+hpp}}\end{DoxyCompactItemize}

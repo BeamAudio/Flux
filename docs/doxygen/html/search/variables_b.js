@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['ui_5ffragment_5fshader_0',['UI_FRAGMENT_SHADER',['../namespace_beam.html#a4f7be035693c2c29ba4dfa3150e8fc20',1,'Beam']]],
-  ['ui_5fvertex_5fshader_1',['UI_VERTEX_SHADER',['../namespace_beam.html#a7373b74547a3122b4d22d2969b46c6eb',1,'Beam']]]
+  ['onaddfx_0',['onAddFX',['../class_beam_1_1_sidebar.html#a90fb5915e2a42d282734c8ca1b0da207',1,'Beam::Sidebar']]],
+  ['onchanged_1',['onChanged',['../class_beam_1_1_parameter.html#a71877343120cac766e22a56c58171148',1,'Beam::Parameter']]],
+  ['onconfigchanged_2',['onConfigChanged',['../class_beam_1_1_audio_config_view.html#a0911e1d5228c4e9378dbedd6776c0a13',1,'Beam::AudioConfigView']]],
+  ['onconfigrequested_3',['onConfigRequested',['../class_beam_1_1_top_bar.html#a72107ce678efdd73c6fd326b5e881ae0',1,'Beam::TopBar']]],
+  ['onconnectstarted_4',['onConnectStarted',['../class_beam_1_1_port.html#a8430d28d08e047868d1a09520b866c71',1,'Beam::Port']]],
+  ['ondeleterequested_5',['onDeleteRequested',['../class_beam_1_1_audio_module.html#af95229e9824037c0c9916cc04bf67e90',1,'Beam::AudioModule']]],
+  ['onloadrequested_6',['onLoadRequested',['../class_beam_1_1_top_bar.html#aaa84af8dc8b326e0460006cf8364e41c',1,'Beam::TopBar']]],
+  ['onmodechanged_7',['onModeChanged',['../class_beam_1_1_top_bar.html#a49378791fe51f2dff50e1124024ca73d',1,'Beam::TopBar']]],
+  ['onpauserequested_8',['onPauseRequested',['../class_beam_1_1_top_bar.html#a6b7d5c0b5d176965a0c1b99fb4b61b86',1,'Beam::TopBar']]],
+  ['onplayrequested_9',['onPlayRequested',['../class_beam_1_1_top_bar.html#a83dc6b9a4e8c9b9328bb0266ee2df6f6',1,'Beam::TopBar']]],
+  ['onrewindrequested_10',['onRewindRequested',['../class_beam_1_1_top_bar.html#a21063e55ca6ba9c9f7c9391750f26571',1,'Beam::TopBar']]],
+  ['onsaverequested_11',['onSaveRequested',['../class_beam_1_1_top_bar.html#ae6da30fe543f4a6a0f54cf2ef1663238',1,'Beam::TopBar']]],
+  ['onvaluechanged_12',['onValueChanged',['../class_beam_1_1_knob.html#a48cab0ed660cc222279a8b4694f44be4',1,'Beam::Knob']]],
+  ['outgoingroutes_13',['outgoingRoutes',['../struct_beam_1_1_node_execution.html#aa9c5585184b096cfdc64dad13064f453',1,'Beam::NodeExecution']]],
+  ['output_14',['output',['../struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f',1,'Beam::Cable']]],
+  ['outputchannels_15',['outputChannels',['../struct_beam_1_1_audio_device_setup.html#ac452465d89be8dea339f95edee0f9a00',1,'Beam::AudioDeviceSetup']]],
+  ['outputdeviceid_16',['outputDeviceId',['../struct_beam_1_1_audio_device_setup.html#a385ddcb28e546f205f5c1d16881c8982',1,'Beam::AudioDeviceSetup']]],
+  ['outputdevicename_17',['outputDeviceName',['../struct_beam_1_1_audio_device_setup.html#a910039315978037aabf9d2b5719e1b16',1,'Beam::AudioDeviceSetup']]]
 ];

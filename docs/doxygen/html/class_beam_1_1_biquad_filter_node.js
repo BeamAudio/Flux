@@ -2,8 +2,9 @@ var class_beam_1_1_biquad_filter_node =
 [
     [ "BiquadFilterNode", "class_beam_1_1_biquad_filter_node.html#af9d8020ffe968d1c127ea2105209bb26", null ],
     [ "calculateCoefficients", "class_beam_1_1_biquad_filter_node.html#a9c0e833373e0a400667ab1e9f28fca99", null ],
+    [ "getMagnitudeResponse", "class_beam_1_1_biquad_filter_node.html#a0a857df3e78f9f3bb258d0661fbad824", null ],
     [ "getName", "class_beam_1_1_biquad_filter_node.html#a928e2017ed0dacfc547360c6fb982181", null ],
-    [ "process", "class_beam_1_1_biquad_filter_node.html#a25b38544644148f7ed0f435e1c94020f", null ],
+    [ "process", "class_beam_1_1_biquad_filter_node.html#a9ca4ea9dffee4a78f9c25457c2303142", null ],
     [ "setCutoff", "class_beam_1_1_biquad_filter_node.html#ad291d833705c4629e1b1016426f85bf8", null ],
     [ "setQ", "class_beam_1_1_biquad_filter_node.html#a239d00981422f9f84dd8c6694bf35f94", null ],
     [ "m_a0", "class_beam_1_1_biquad_filter_node.html#a540ecacb972cb9ffaf89b7a1b590db23", null ],
@@ -16,8 +17,8 @@ var class_beam_1_1_biquad_filter_node =
     [ "m_q", "class_beam_1_1_biquad_filter_node.html#a6fd09afdc0987fd14b036640808ebe32", null ],
     [ "m_sampleRate", "class_beam_1_1_biquad_filter_node.html#a286bb954a110d6aca89e5538efcd048f", null ],
     [ "m_type", "class_beam_1_1_biquad_filter_node.html#af192ad68fc1a2e246e0a262f143829bd", null ],
-    [ "m_x1", "class_beam_1_1_biquad_filter_node.html#aafaec2766968cc20ac42c5a7142ca737", null ],
-    [ "m_x2", "class_beam_1_1_biquad_filter_node.html#a4712230456164bde4074d32bf34ca1c1", null ],
-    [ "m_y1", "class_beam_1_1_biquad_filter_node.html#a6c478067c07061f1fd92ad03d48cf96d", null ],
-    [ "m_y2", "class_beam_1_1_biquad_filter_node.html#aa7b05e2ed89ab3ecc3a1e86c1d1d8b34", null ]
+    [ "m_x1", "class_beam_1_1_biquad_filter_node.html#a03c950f82a534c8a03288b26c36d46a0", null ],
+    [ "m_x2", "class_beam_1_1_biquad_filter_node.html#ab51d7636914b505a233bfe06610c9cba", null ],
+    [ "m_y1", "class_beam_1_1_biquad_filter_node.html#a628729d1e9a421749eb4d92601ff9bb0", null ],
+    [ "m_y2", "class_beam_1_1_biquad_filter_node.html#a1608507a8153863f66811e35d0a640ad", null ]
 ];

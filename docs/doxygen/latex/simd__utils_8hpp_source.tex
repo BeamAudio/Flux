@@ -1,0 +1,49 @@
+\doxysection{simd\+\_\+utils.\+hpp}
+\hypertarget{simd__utils_8hpp_source}{}\label{simd__utils_8hpp_source}\index{src/engine/simd\_utils.hpp@{src/engine/simd\_utils.hpp}}
+\doxymbox{\hyperlink{simd__utils_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SIMD\_UTILS\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SIMD\_UTILS\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <immintrin.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam_1_1_s_i_m_d}{SIMD}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespace_beam_1_1_s_i_m_d_ade8c1c6b1b45abf8d66ee11c8fb936a1}{add}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ src,\ \textcolor{keywordtype}{float}*\ dst,\ \textcolor{keywordtype}{int}\ count)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Process\ 4\ floats\ at\ a\ time}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <=\ count\ -\/\ 4;\ i\ +=\ 4)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \_\_m128\ vsrc\ =\ \_mm\_loadu\_ps(\&src[i]);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \_\_m128\ vdst\ =\ \_mm\_loadu\_ps(\&dst[i]);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ vdst\ =\ \_mm\_add\_ps(vdst,\ vsrc);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \_mm\_storeu\_ps(\&dst[i],\ vdst);}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Handle\ remaining\ samples}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ count;\ ++i)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ dst[i]\ +=\ src[i];}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespace_beam_1_1_s_i_m_d_acda0a1ac1a531cf8e16b2d9b4f3b77df}{copy}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ src,\ \textcolor{keywordtype}{float}*\ dst,\ \textcolor{keywordtype}{int}\ count)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <=\ count\ -\/\ 4;\ i\ +=\ 4)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \_mm\_storeu\_ps(\&dst[i],\ \_mm\_loadu\_ps(\&src[i]));}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ count;\ ++i)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ dst[i]\ =\ src[i];}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \}\ \textcolor{comment}{//\ namespace\ SIMD}}
+\DoxyCodeLine{00044\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SIMD\_UTILS\_HPP}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+
+\end{DoxyCode}

@@ -1,0 +1,95 @@
+\doxysection{offline\+\_\+renderer.\+hpp}
+\hypertarget{offline__renderer_8hpp_source}{}\label{offline__renderer_8hpp_source}\index{src/engine/offline\_renderer.hpp@{src/engine/offline\_renderer.hpp}}
+\doxymbox{\hyperlink{offline__renderer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OFFLINE\_RENDERER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OFFLINE\_RENDERER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__graph_8hpp}{flux\_graph.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../../third\_party/dr\_wav.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_offline_renderer}{OfflineRenderer}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_offline_renderer_a1818153c92b4aa390933cc7a3d8ed51b}{renderToWav}}(\textcolor{keyword}{const}\ std::string\&\ filePath,\ std::shared\_ptr<FluxGraph>\ graph,\ \textcolor{keywordtype}{size\_t}\ totalFrames,\ \textcolor{keywordtype}{int}\ sampleRate\ =\ 44100)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!graph)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ drwav\_data\_format\ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.container\ =\ drwav\_container\_riff;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.format\ =\ DR\_WAVE\_FORMAT\_PCM;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.channels\ =\ 2;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.sampleRate\ =\ (drwav\_uint32)sampleRate;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.bitsPerSample\ =\ 16;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ drwav\ wav;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!drwav\_init\_file\_write(\&wav,\ filePath.c\_str(),\ \&\doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}},\ \textcolor{keyword}{nullptr}))\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ plan\ =\ graph-\/>compile(1024,\ 2);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::vector<float>\ renderBuf(1024\ *\ 2);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ framesRemaining\ =\ totalFrames;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ currentFrame\ =\ 0;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Starting\ Offline\ Render:\ "{}}\ <<\ totalFrames\ <<\ \textcolor{stringliteral}{"{}\ frames..."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (framesRemaining\ >\ 0)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ blockFrames\ =\ (int)(std::min)((size\_t)1024,\ framesRemaining);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Clear\ inputs}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ op\ :\ plan-\/>clearOps)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::fill(op.node-\/>getInputBuffer(op.portIdx),\ op.node-\/>getInputBuffer(op.portIdx)\ +\ blockFrames\ *\ 2,\ 0.0f);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Process\ Nodes}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ exec\ :\ plan-\/>sequence)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exec.node-\/>setCurrentFrame(currentFrame);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exec.node-\/>process(blockFrames);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ route\ :\ exec.outgoingRoutes)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ src\ =\ route.sourceNode-\/>getOutputBuffer(route.sourcePort);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ dst\ =\ route.destNode-\/>getInputBuffer(route.destPort);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ blockFrames\ *\ 2;\ ++i)\ dst[i]\ +=\ src[i];}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3.\ Extract\ Master\ Output\ (Assuming\ Master\ is\ the\ last\ node\ or\ find\ it)}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ assume\ we\ find\ the\ MasterNode\ in\ the\ plan}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<MasterNode>\ master;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}\&\ exec\ :\ plan-\/>sequence)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{auto}\ m\ =\ std::dynamic\_pointer\_cast<MasterNode>(exec.node))\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ master\ =\ m;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (master)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ masterOut\ =\ master-\/>getInputBuffer(0);\ \textcolor{comment}{//\ Master\ sums\ into\ its\ input}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<int16\_t>\ pcm(blockFrames\ *\ 2);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ blockFrames\ *\ 2;\ ++i)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ masterOut[i];}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ >\ 1.0f)\ s\ =\ 1.0f;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ <\ -\/1.0f)\ s\ =\ -\/1.0f;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcm[i]\ =\ (int16\_t)(s\ *\ 32767.0f);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ drwav\_write\_pcm\_frames(\&wav,\ (drwav\_uint64)blockFrames,\ pcm.data());}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ framesRemaining\ -\/=\ blockFrames;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ currentFrame\ +=\ blockFrames;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ drwav\_uninit(\&wav);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Offline\ Render\ Complete:\ "{}}\ <<\ filePath\ <<\ std::endl;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ OFFLINE\_RENDERER\_HPP}}
+
+\end{DoxyCode}

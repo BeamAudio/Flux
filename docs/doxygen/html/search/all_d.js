@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['parameter_0',['Parameter',['../class_beam_1_1_parameter.html',1,'Beam::Parameter'],['../class_beam_1_1_parameter.html#a87627221006382b93ff04ebee9ff2f07',1,'Beam::Parameter::Parameter()']]],
-  ['parameter_2ehpp_1',['parameter.hpp',['../parameter_8hpp.html',1,'']]],
-  ['performlayout_2',['performLayout',['../class_beam_1_1_beam_host.html#af7bba52e0b33db552233c3197a8b39c7',1,'Beam::BeamHost']]],
-  ['playing_3',['Playing',['../namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428',1,'Beam']]],
-  ['port_4',['Port',['../struct_beam_1_1_flux_node_1_1_port.html',1,'Beam::FluxNode::Port'],['../class_beam_1_1_port.html',1,'Beam::Port'],['../class_beam_1_1_port.html#a8a1f189383117d4772c37cc8b81f938b',1,'Beam::Port::Port()']]],
-  ['port_2ehpp_5',['port.hpp',['../port_8hpp.html',1,'']]],
-  ['porttype_6',['PortType',['../namespace_beam.html#ae4c392a66fa6e2b6c86c6d5356ffe846',1,'Beam']]],
-  ['position_7',['position',['../struct_beam_1_1_vertex.html#aee7d2780bc5f94c3d4e4fde33caf883f',1,'Beam::Vertex']]],
-  ['process_8',['process',['../class_beam_1_1_audio_engine.html#a40648762866403dc71e99b9d63fb6947',1,'Beam::AudioEngine::process()'],['../class_beam_1_1_audio_node.html#a6954940f3822298db5c2224e921432f6',1,'Beam::AudioNode::process()'],['../class_beam_1_1_biquad_filter_node.html#a25b38544644148f7ed0f435e1c94020f',1,'Beam::BiquadFilterNode::process()'],['../class_beam_1_1_delay_node.html#a1f946e80326aaaf6dc87e6ec4e4b1858',1,'Beam::DelayNode::process()'],['../class_beam_1_1_flux_gain_node.html#adeb55f996d1f48c22b674d62c27f2b8e',1,'Beam::FluxGainNode::process()'],['../class_beam_1_1_flux_filter_node.html#aa06a586b7ba994ed77ebfceff2570549',1,'Beam::FluxFilterNode::process()'],['../class_beam_1_1_flux_delay_node.html#a1ff56dfcb9d8d2780d855b5e545e2552',1,'Beam::FluxDelayNode::process()'],['../class_beam_1_1_flux_graph.html#a4370ffd95810ee9eb325149a0fd604bb',1,'Beam::FluxGraph::process()'],['../class_beam_1_1_flux_node.html#a3c263446753fa7ae5ff6928ee57bcd4d',1,'Beam::FluxNode::process()'],['../class_beam_1_1_flux_plugin.html#a181430e1cbf129891fe3ed72f3905a61',1,'Beam::FluxPlugin::process()'],['../class_beam_1_1_flux_track_node.html#ab29facb24a749834aff2aa3de3be437a',1,'Beam::FluxTrackNode::process()'],['../class_beam_1_1_gain_node.html#a900eac063663551b97802e29e5768e25',1,'Beam::GainNode::process()'],['../class_beam_1_1_master_node.html#a4d78fec9962d8b9fd8a34142d0a129f7',1,'Beam::MasterNode::process()'],['../class_beam_1_1_sine_oscillator.html#a3ee669cf30b4b71304975dd6c953dadd',1,'Beam::SineOscillator::process()'],['../class_beam_1_1_track_node.html#a2e2bffa8b286946f8e32db31e672727e',1,'Beam::TrackNode::process()']]],
-  ['processblock_9',['processBlock',['../class_beam_1_1_custom_filter.html#ae561b7a4fb99126dda6d9adb7c12c80a',1,'Beam::CustomFilter::processBlock()'],['../class_beam_1_1_flux_plugin.html#ab10324716cec75feee93b6a3159c7912',1,'Beam::FluxPlugin::processBlock()']]],
-  ['project_5fmanager_2ehpp_10',['project_manager.hpp',['../project__manager_8hpp.html',1,'']]],
-  ['projectmanager_11',['ProjectManager',['../class_beam_1_1_project_manager.html',1,'Beam']]]
+  ['name_0',['name',['../struct_beam_1_1_audio_device_info.html#aad650253fa12979446b87320f5c96ccc',1,'Beam::AudioDeviceInfo::name'],['../struct_beam_1_1_flux_node_1_1_port.html#a12305258fc537605704c363c82066950',1,'Beam::FluxNode::Port::name'],['../struct_beam_1_1_region.html#a4f363f9d4f297363dc9a00932f01b191',1,'Beam::Region::name']]],
+  ['next_1',['next',['../class_beam_1_1_analog_base_1_1_wow_flutter_generator.html#ac2f900604d5757f79382940da5448765',1,'Beam::AnalogBase::WowFlutterGenerator']]],
+  ['node_2',['node',['../struct_beam_1_1_node_execution.html#a88f4b898b8ccd5ac9afb44306d78c93b',1,'Beam::NodeExecution::node'],['../struct_beam_1_1_render_plan_1_1_buffer_clear_op.html#a86757a99d31ed231e1011800922b49f6',1,'Beam::RenderPlan::BufferClearOp::node'],['../struct_beam_1_1_track_data.html#a0fe815f1f9877e2a29a039dca1a65e75',1,'Beam::TrackData::node']]],
+  ['nodeexecution_3',['NodeExecution',['../struct_beam_1_1_node_execution.html',1,'Beam']]],
+  ['nodeid_4',['nodeId',['../struct_beam_1_1_track_data.html#a1a2ccea5bb7f8839502f360ea58e03fb',1,'Beam::TrackData']]],
+  ['noteoff_5',['NoteOff',['../namespace_beam.html#a9056445ad5e2d982b3dfd743c3f2af0ca6138748b0dea7e54d0ab77709ab74ba1',1,'Beam']]],
+  ['noteon_6',['NoteOn',['../namespace_beam.html#a9056445ad5e2d982b3dfd743c3f2af0ca392b06517dc40739343a9ef9533cad46',1,'Beam']]]
 ];

@@ -97,7 +97,7 @@ $(function(){initNavTree('struct_beam_1_1_cable.html','','struct_beam_1_1_cable-
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a84adeb1426f567be118fbcfec2cf73f5" id="r_a84adeb1426f567be118fbcfec2cf73f5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a84adeb1426f567be118fbcfec2cf73f5">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher)</td></tr>
+<tr class="memitem:a948b7835cf76e0b645849832897e4f28" id="r_a948b7835cf76e0b645849832897e4f28"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a948b7835cf76e0b645849832897e4f28">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher, float dt, float screenW, float screenH)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -105,8 +105,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1d97b8c95a75addc1ec772f6328fdc43" id="r_a1d97b8c95a75addc1ec772f6328fdc43"><td class="memItemLeft"><a class="el" href="class_beam_1_1_port.html">Port</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a1d97b8c95a75addc1ec772f6328fdc43">input</a></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a84adeb1426f567be118fbcfec2cf73f5" name="a84adeb1426f567be118fbcfec2cf73f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84adeb1426f567be118fbcfec2cf73f5">&#9670;&#160;</a></span>render()</h2>
+<a id="a948b7835cf76e0b645849832897e4f28" name="a948b7835cf76e0b645849832897e4f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a948b7835cf76e0b645849832897e4f28">&#9670;&#160;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,8 +117,22 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Beam::Cable::render </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>dt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenW</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenH</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -160,7 +174,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/ui/<a class="el" href="cable_8hpp_source.html">cable.hpp</a></li>
+<li>src/interface/<a class="el" href="cable_8hpp_source.html">cable.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

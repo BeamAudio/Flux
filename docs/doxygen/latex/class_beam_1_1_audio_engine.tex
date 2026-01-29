@@ -11,11 +11,13 @@
 \item 
 \doxymbox{\hyperlink{class_beam_1_1_audio_engine_ae6cd4742fe2edcfaea839dc12e0cd2c7}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Engine}} ()
 \item 
-bool \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a0c408623b61971329e72ad37f6bf903c}{init}} (int sample\+Rate, int channels)
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a40bd3aa14641b3b4a876385143363331}{init}} (int sample\+Rate, int channels, const std::\+string \&output\+Device="{}"{}, const std::\+string \&input\+Device="{}"{})
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a40648762866403dc71e99b9d63fb6947}{process}} (float \texorpdfstring{$\ast$}{*}output, int frames)
+void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_ad642b2c703847dc3fd52a4d203083a9a}{process}} (float \texorpdfstring{$\ast$}{*}output, int frames, const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi=\doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}}())
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_aedbcbbb422a975217cfafc22cfd17b0c}{set\+Graph}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ graph)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a187ee5fe9db7ee32b9389bba38231721}{update\+Plan}} ()
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a96a0cdd7ef2b6d89fbae82122caa849d}{get\+Graph}} ()
 \item 
@@ -26,9 +28,21 @@ void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a7b40e0830210096ecb44349c5
 bool \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a456e847f34fbc934900413639850f924}{is\+Playing}} () const
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a34e5112ab4743e510754758353a66a9f}{rewind}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a6ce1614fcfed84b35531339021bae331}{seek}} (size\+\_\+t frame)
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a2dd6515d6063f135b8982c8df5243f40}{get\+Current\+Frame}} () const
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a039d3080ee997f1fcf7ea4e102188a52}{add\+Automation\+Lane}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_automation_lane}{Automation\+Lane}} $>$ lane)
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_input_node}{Input\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a9437a6b4e21e3a59aa4410b51e5c7009}{get\+Input\+Node}} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a675a3c69d2b72f1d78e4801003671bb3}{m\+\_\+current\+Frame}} = 0
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_automation_lane}{Automation\+Lane}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_ac960845317ae55dbffbf2e7c1f4176ce}{m\+\_\+automation\+Lanes}}
 \item 
 int \doxymbox{\hyperlink{class_beam_1_1_audio_engine_abeb2228b0d0a09fac76834dda57ad5ab}{m\+\_\+sample\+Rate}}
 \item 
@@ -40,9 +54,13 @@ size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a86ed2fef95c106eaa6
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_master_node}{Master\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a8831b1803efa6ae4ae6a060b3de0e30a}{m\+\_\+master\+Node}}
 \item 
-std::\+mutex \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a5ea52e9dc365eb2869a1d4b417f6bc18}{m\+\_\+engine\+Mutex}}
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_input_node}{Input\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a746bbf6112555cda830730f476c804a8}{m\+\_\+input\+Node}}
+\item 
+std::\+atomic$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{struct_beam_1_1_render_plan}{Render\+Plan}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_af72266c72bc4ad57a1bb0213d6eb385e}{m\+\_\+active\+Plan}}
 \item 
 SDL\+\_\+\+Audio\+Stream \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a1792387f3723d0e1683aba783aef5fe4}{m\+\_\+stream}}
+\item 
+SDL\+\_\+\+Audio\+Stream \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_engine_ab15ab6e72be8471f4ac53b3493e15cc4}{m\+\_\+capture\+Stream}}
 \item 
 std::\+atomic$<$ bool $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_engine_a5ace65ddbdaf0088334c2f48acd17655}{m\+\_\+is\+Playing}} \{false\}
 \end{DoxyCompactItemize}
@@ -68,11 +86,29 @@ Beam::\+\+Audio\+Engine::\+\texorpdfstring{$\sim$}{\string~}\+Audio\+Engine (\be
 \label{doc-func-members}
 \Hypertarget{class_beam_1_1_audio_engine_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_engine_a039d3080ee997f1fcf7ea4e102188a52}\index{Beam::AudioEngine@{Beam::AudioEngine}!addAutomationLane@{addAutomationLane}}
+\index{addAutomationLane@{addAutomationLane}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{addAutomationLane()}{addAutomationLane()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a039d3080ee997f1fcf7ea4e102188a52} 
+void Beam::\+\+Audio\+Engine::\+add\+Automation\+Lane (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_automation_lane}{Automation\+Lane}} $>$}]{lane}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_engine_a2dd6515d6063f135b8982c8df5243f40}\index{Beam::AudioEngine@{Beam::AudioEngine}!getCurrentFrame@{getCurrentFrame}}
+\index{getCurrentFrame@{getCurrentFrame}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{getCurrentFrame()}{getCurrentFrame()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a2dd6515d6063f135b8982c8df5243f40} 
+size\+\_\+t Beam::\+\+Audio\+Engine::\+get\+Current\+Frame (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{class_beam_1_1_audio_engine_a96a0cdd7ef2b6d89fbae82122caa849d}\index{Beam::AudioEngine@{Beam::AudioEngine}!getGraph@{getGraph}}
 \index{getGraph@{getGraph}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a96a0cdd7ef2b6d89fbae82122caa849d} 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ Beam::\+\+Audio\+Engine::\+get\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_audio_engine_a9437a6b4e21e3a59aa4410b51e5c7009}\index{Beam::AudioEngine@{Beam::AudioEngine}!getInputNode@{getInputNode}}
+\index{getInputNode@{getInputNode}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{getInputNode()}{getInputNode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a9437a6b4e21e3a59aa4410b51e5c7009} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_input_node}{Input\+Node}} $>$ Beam::\+\+Audio\+Engine::\+get\+Input\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_beam_1_1_audio_engine_af89b35f3399cb0780e8a7d7755e13888}\index{Beam::AudioEngine@{Beam::AudioEngine}!getMasterNode@{getMasterNode}}
 \index{getMasterNode@{getMasterNode}!Beam::AudioEngine@{Beam::AudioEngine}}
@@ -80,11 +116,11 @@ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_af89b35f3399cb0780e8a7d7755e13888} 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_master_node}{Master\+Node}} $>$ Beam::\+\+Audio\+Engine::\+get\+Master\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_beam_1_1_audio_engine_a0c408623b61971329e72ad37f6bf903c}\index{Beam::AudioEngine@{Beam::AudioEngine}!init@{init}}
+\Hypertarget{class_beam_1_1_audio_engine_a40bd3aa14641b3b4a876385143363331}\index{Beam::AudioEngine@{Beam::AudioEngine}!init@{init}}
 \index{init@{init}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{init()}{init()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a0c408623b61971329e72ad37f6bf903c} 
-bool Beam::\+\+Audio\+Engine::\+init (\begin{DoxyParamCaption}\item[{int}]{sample\+Rate}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a40bd3aa14641b3b4a876385143363331} 
+bool Beam::\+\+Audio\+Engine::\+init (\begin{DoxyParamCaption}\item[{int}]{sample\+Rate}{, }\item[{int}]{channels}{, }\item[{const std::\+string \&}]{output\+Device}{ = {\ttfamily "{}"{}}, }\item[{const std::\+string \&}]{input\+Device}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 \Hypertarget{class_beam_1_1_audio_engine_a456e847f34fbc934900413639850f924}\index{Beam::AudioEngine@{Beam::AudioEngine}!isPlaying@{isPlaying}}
 \index{isPlaying@{isPlaying}!Beam::AudioEngine@{Beam::AudioEngine}}
@@ -92,17 +128,23 @@ bool Beam::\+\+Audio\+Engine::\+init (\begin{DoxyParamCaption}\item[{int}]{sampl
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a456e847f34fbc934900413639850f924} 
 bool Beam::\+\+Audio\+Engine::\+is\+Playing (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_beam_1_1_audio_engine_a40648762866403dc71e99b9d63fb6947}\index{Beam::AudioEngine@{Beam::AudioEngine}!process@{process}}
+\Hypertarget{class_beam_1_1_audio_engine_ad642b2c703847dc3fd52a4d203083a9a}\index{Beam::AudioEngine@{Beam::AudioEngine}!process@{process}}
 \index{process@{process}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a40648762866403dc71e99b9d63fb6947} 
-void Beam::\+\+Audio\+Engine::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{output}{, }\item[{int}]{frames}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_ad642b2c703847dc3fd52a4d203083a9a} 
+void Beam::\+\+Audio\+Engine::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{output}{, }\item[{int}]{frames}{, }\item[{const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&}]{midi}{ = {\ttfamily \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}}()}}\end{DoxyParamCaption})}
 
 \Hypertarget{class_beam_1_1_audio_engine_a34e5112ab4743e510754758353a66a9f}\index{Beam::AudioEngine@{Beam::AudioEngine}!rewind@{rewind}}
 \index{rewind@{rewind}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{rewind()}{rewind()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a34e5112ab4743e510754758353a66a9f} 
 void Beam::\+\+Audio\+Engine::\+rewind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_audio_engine_a6ce1614fcfed84b35531339021bae331}\index{Beam::AudioEngine@{Beam::AudioEngine}!seek@{seek}}
+\index{seek@{seek}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a6ce1614fcfed84b35531339021bae331} 
+void Beam::\+\+Audio\+Engine::\+seek (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{frame}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_beam_1_1_audio_engine_aedbcbbb422a975217cfafc22cfd17b0c}\index{Beam::AudioEngine@{Beam::AudioEngine}!setGraph@{setGraph}}
 \index{setGraph@{setGraph}!Beam::AudioEngine@{Beam::AudioEngine}}
@@ -114,30 +156,60 @@ void Beam::\+\+Audio\+Engine::\+set\+Graph (\begin{DoxyParamCaption}\item[{std::
 \index{setPlaying@{setPlaying}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{setPlaying()}{setPlaying()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a7b40e0830210096ecb44349c5e27a18c} 
-void Beam::\+\+Audio\+Engine::\+set\+Playing (\begin{DoxyParamCaption}\item[{bool}]{playing}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void Beam::\+\+Audio\+Engine::\+set\+Playing (\begin{DoxyParamCaption}\item[{bool}]{playing}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_audio_engine_a187ee5fe9db7ee32b9389bba38231721}\index{Beam::AudioEngine@{Beam::AudioEngine}!updatePlan@{updatePlan}}
+\index{updatePlan@{updatePlan}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{updatePlan()}{updatePlan()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a187ee5fe9db7ee32b9389bba38231721} 
+void Beam::\+\+Audio\+Engine::\+update\+Plan (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 \label{doc-variable-members}
 \Hypertarget{class_beam_1_1_audio_engine_doc-variable-members}
 \doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_engine_af72266c72bc4ad57a1bb0213d6eb385e}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_activePlan@{m\_activePlan}}
+\index{m\_activePlan@{m\_activePlan}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{m\_activePlan}{m\_activePlan}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_af72266c72bc4ad57a1bb0213d6eb385e} 
+std::\+atomic$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{struct_beam_1_1_render_plan}{Render\+Plan}}$>$ $>$ Beam::\+\+Audio\+Engine::\+m\+\_\+active\+Plan\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_engine_ac960845317ae55dbffbf2e7c1f4176ce}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_automationLanes@{m\_automationLanes}}
+\index{m\_automationLanes@{m\_automationLanes}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{m\_automationLanes}{m\_automationLanes}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_ac960845317ae55dbffbf2e7c1f4176ce} 
+std::\+vector$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_automation_lane}{Automation\+Lane}}$>$ $>$ Beam::\+\+Audio\+Engine::\+m\+\_\+automation\+Lanes\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_engine_ab15ab6e72be8471f4ac53b3493e15cc4}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_captureStream@{m\_captureStream}}
+\index{m\_captureStream@{m\_captureStream}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{m\_captureStream}{m\_captureStream}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_ab15ab6e72be8471f4ac53b3493e15cc4} 
+SDL\+\_\+\+Audio\+Stream\texorpdfstring{$\ast$}{*} Beam::\+\+Audio\+Engine::\+m\+\_\+capture\+Stream\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{class_beam_1_1_audio_engine_a28eb68f5efd3038d4da2a65da3bb5181}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_channels@{m\_channels}}
 \index{m\_channels@{m\_channels}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{m\_channels}{m\_channels}}
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a28eb68f5efd3038d4da2a65da3bb5181} 
 int Beam::\+\+Audio\+Engine::\+m\+\_\+channels\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_audio_engine_a5ea52e9dc365eb2869a1d4b417f6bc18}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_engineMutex@{m\_engineMutex}}
-\index{m\_engineMutex@{m\_engineMutex}!Beam::AudioEngine@{Beam::AudioEngine}}
-\doxysubsubsection{\texorpdfstring{m\_engineMutex}{m\_engineMutex}}
-{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a5ea52e9dc365eb2869a1d4b417f6bc18} 
-std::\+mutex Beam::\+\+Audio\+Engine::\+m\+\_\+engine\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+\Hypertarget{class_beam_1_1_audio_engine_a675a3c69d2b72f1d78e4801003671bb3}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_currentFrame@{m\_currentFrame}}
+\index{m\_currentFrame@{m\_currentFrame}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{m\_currentFrame}{m\_currentFrame}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a675a3c69d2b72f1d78e4801003671bb3} 
+size\+\_\+t Beam::\+\+Audio\+Engine::\+m\+\_\+current\+Frame = 0\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{class_beam_1_1_audio_engine_ac35c02a04d9c946a264c735485bfa611}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_graph@{m\_graph}}
 \index{m\_graph@{m\_graph}!Beam::AudioEngine@{Beam::AudioEngine}}
 \doxysubsubsection{\texorpdfstring{m\_graph}{m\_graph}}
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_ac35c02a04d9c946a264c735485bfa611} 
 std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}}$>$ Beam::\+\+Audio\+Engine::\+m\+\_\+graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_engine_a746bbf6112555cda830730f476c804a8}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_inputNode@{m\_inputNode}}
+\index{m\_inputNode@{m\_inputNode}!Beam::AudioEngine@{Beam::AudioEngine}}
+\doxysubsubsection{\texorpdfstring{m\_inputNode}{m\_inputNode}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_engine_a746bbf6112555cda830730f476c804a8} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_input_node}{Input\+Node}}$>$ Beam::\+\+Audio\+Engine::\+m\+\_\+input\+Node\hspace{0.3cm}{\ttfamily [private]}}
 
 \Hypertarget{class_beam_1_1_audio_engine_a5ace65ddbdaf0088334c2f48acd17655}\index{Beam::AudioEngine@{Beam::AudioEngine}!m\_isPlaying@{m\_isPlaying}}
 \index{m\_isPlaying@{m\_isPlaying}!Beam::AudioEngine@{Beam::AudioEngine}}
@@ -173,5 +245,5 @@ SDL\+\_\+\+Audio\+Stream\texorpdfstring{$\ast$}{*} Beam::\+\+Audio\+Engine::\+m\
 
 The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{audio__engine_8hpp}{audio\+\_\+engine.\+hpp}}\item 
-src/\+dsp/\+\doxymbox{\hyperlink{audio__engine_8cpp}{audio\+\_\+engine.\+cpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{audio__engine_8hpp}{audio\+\_\+engine.\+hpp}}\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__engine_8cpp}{audio\+\_\+engine.\+cpp}}\end{DoxyCompactItemize}

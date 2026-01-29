@@ -1,5 +1,5 @@
 \doxysection{ui\+\_\+shaders.\+hpp}
-\hypertarget{ui__shaders_8hpp_source}{}\label{ui__shaders_8hpp_source}\index{src/graphics/ui\_shaders.hpp@{src/graphics/ui\_shaders.hpp}}
+\hypertarget{ui__shaders_8hpp_source}{}\label{ui__shaders_8hpp_source}\index{src/render/ui\_shaders.hpp@{src/render/ui\_shaders.hpp}}
 \doxymbox{\hyperlink{ui__shaders_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UI\_SHADERS\_HPP}}
@@ -17,59 +17,85 @@
 \DoxyCodeLine{00013\ \textcolor{stringliteral}{out\ vec4\ Color;}}
 \DoxyCodeLine{00014\ \textcolor{stringliteral}{}}
 \DoxyCodeLine{00015\ \textcolor{stringliteral}{uniform\ mat4\ projection;}}
-\DoxyCodeLine{00016\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00017\ \textcolor{stringliteral}{void\ main()\ \{}}
-\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ gl\_Position\ =\ projection\ *\ vec4(aPos,\ 0.0,\ 1.0);}}
-\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ TexCoord\ =\ aTexCoord;}}
-\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ Color\ =\ aColor;}}
-\DoxyCodeLine{00021\ \textcolor{stringliteral}{\}}}
-\DoxyCodeLine{00022\ \textcolor{stringliteral}{)"{};}}
-\DoxyCodeLine{00023\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00024\ \textcolor{stringliteral}{}\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{namespace_beam_a4f7be035693c2c29ba4dfa3150e8fc20}{UI\_FRAGMENT\_SHADER}}\ =\ R\textcolor{stringliteral}{"{}(}}
-\DoxyCodeLine{00025\ \textcolor{stringliteral}{\#version\ 330\ core}}
-\DoxyCodeLine{00026\ \textcolor{stringliteral}{out\ vec4\ FragColor;}}
-\DoxyCodeLine{00027\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00028\ \textcolor{stringliteral}{in\ vec2\ TexCoord;}}
-\DoxyCodeLine{00029\ \textcolor{stringliteral}{in\ vec4\ Color;}}
-\DoxyCodeLine{00030\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00031\ \textcolor{stringliteral}{uniform\ sampler2D\ uiTexture;}}
-\DoxyCodeLine{00032\ \textcolor{stringliteral}{uniform\ int\ mode;\ //\ 0:\ Solid/Gradient,\ 1:\ Textured/Font,\ 2:\ Rounded\ Rect}}
-\DoxyCodeLine{00033\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00034\ \textcolor{stringliteral}{uniform\ float\ uSizeX;}}
-\DoxyCodeLine{00035\ \textcolor{stringliteral}{uniform\ float\ uSizeY;}}
-\DoxyCodeLine{00036\ \textcolor{stringliteral}{uniform\ float\ uRadius;}}
-\DoxyCodeLine{00037\ \textcolor{stringliteral}{uniform\ float\ uEdgeSoftness;}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{uniform\ float\ uPanX;}}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{uniform\ float\ uPanY;}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{uniform\ float\ uZoom;}}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{void\ main()\ \{}}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ TexCoord\ =\ aTexCoord;}}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ Color\ =\ aColor;}}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ vec2\ pos\ =\ aPos;}}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ //\ Apply\ Pan\ and\ Zoom}}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ pos\ =\ (pos\ *\ uZoom)\ +\ vec2(uPanX,\ uPanY);}}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ gl\_Position\ =\ projection\ *\ vec4(pos,\ 0.0,\ 1.0);}}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{)"{};}}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{}\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{namespace_beam_a4f7be035693c2c29ba4dfa3150e8fc20}{UI\_FRAGMENT\_SHADER}}\ =\ R\textcolor{stringliteral}{"{}(}}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\#version\ 330\ core}}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{out\ vec4\ FragColor;}}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{in\ vec2\ TexCoord;}}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{in\ vec4\ Color;}}
 \DoxyCodeLine{00038\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00039\ \textcolor{stringliteral}{float\ roundedRectSDF(vec2\ p,\ vec2\ b,\ float\ r)\ \{}}
-\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ vec2\ q\ =\ abs(p)\ -\/\ b\ +\ r;}}
-\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ return\ length(max(q,\ 0.0))\ +\ min(max(q.x,\ q.y),\ 0.0)\ -\/\ r;}}
-\DoxyCodeLine{00042\ \textcolor{stringliteral}{\}}}
-\DoxyCodeLine{00043\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00044\ \textcolor{stringliteral}{void\ main()\ \{}}
-\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ if\ (mode\ ==\ 1)\ \{}}
-\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Font\ /\ Texture\ Mode}}
-\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec4\ texColor\ =\ texture(uiTexture,\ TexCoord);}}
-\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ vec4(Color.rgb,\ Color.a\ *\ texColor.r);}}
-\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ \}\ }}
-\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ else\ if\ (mode\ ==\ 2)\ \{}}
-\DoxyCodeLine{00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ High-\/fidelity\ Rounded\ Rect\ with\ SDF}}
-\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ uSize\ =\ vec2(uSizeX,\ uSizeY);}}
-\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ center\ =\ uSize\ *\ 0.5;}}
-\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ p\ =\ TexCoord\ *\ uSize\ -\/\ center;}}
-\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ dist\ =\ roundedRectSDF(p,\ center,\ uRadius);}}
-\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ alpha\ =\ 1.0\ -\/\ smoothstep(-\/uEdgeSoftness,\ uEdgeSoftness,\ dist);}}
-\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ vec4(Color.rgb,\ Color.a\ *\ alpha);}}
-\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \}}}
-\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ else\ \{}}
-\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Basic\ Mode\ (supports\ simple\ gradients\ via\ vertex\ color)}}
-\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ Color;}}
-\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ \}}}
-\DoxyCodeLine{00064\ \textcolor{stringliteral}{\}}}
-\DoxyCodeLine{00065\ \textcolor{stringliteral}{)"{};}}
-\DoxyCodeLine{00066\ \textcolor{stringliteral}{}}
-\DoxyCodeLine{00067\ \textcolor{stringliteral}{\}\ }\textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UI\_SHADERS\_HPP}}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{uniform\ sampler2D\ uiTexture;}}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{uniform\ int\ mode;\ //\ 0:\ Solid/Gradient,\ 1:\ Textured/Font,\ 2:\ Rounded\ Rect}}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{uniform\ float\ uSizeX;}}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{uniform\ float\ uSizeY;}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{uniform\ float\ uRadius;}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{uniform\ float\ uEdgeSoftness;}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{uniform\ float\ uThickness;\ //\ New\ for\ lines}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{float\ roundedRectSDF(vec2\ p,\ vec2\ b,\ float\ r)\ \{}}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ vec2\ q\ =\ abs(p)\ -\/\ b\ +\ r;}}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ return\ length(max(q,\ 0.0))\ +\ min(max(q.x,\ q.y),\ 0.0)\ -\/\ r;}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{void\ main()\ \{}}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ if\ (mode\ ==\ 1)\ \{}}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Font\ /\ Texture\ Mode}}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec4\ texColor\ =\ texture(uiTexture,\ TexCoord);}}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ If\ R\ channel\ is\ 0\ (as\ in\ font),\ use\ Alpha.\ If\ it's\ a\ full\ color\ texture,\ we\ might\ need\ a\ different\ flag.}}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ For\ now,\ assume\ mode\ 1\ is\ for\ alpha-\/masking\ (fonts)\ OR\ simple\ textures.}}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Let's\ make\ it\ smarter:\ if\ mode\ is\ exactly\ for\ font,\ use\ r.}}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ vec4(Color.rgb,\ Color.a\ *\ texColor.r);}}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \}\ }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ else\ if\ (mode\ ==\ 2)\ \{}}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ High-\/fidelity\ Rounded\ Rect\ with\ SDF}}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ uSize\ =\ vec2(uSizeX,\ uSizeY);}}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ center\ =\ uSize\ *\ 0.5;}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ vec2\ p\ =\ TexCoord\ *\ uSize\ -\/\ center;}}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ dist\ =\ roundedRectSDF(p,\ center,\ uRadius);}}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ alpha\ =\ 1.0\ -\/\ smoothstep(-\/uEdgeSoftness,\ uEdgeSoftness,\ dist);}}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ vec4(Color.rgb,\ Color.a\ *\ alpha);}}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ else\ if\ (mode\ ==\ 3)\ \{}}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ SDF\ Smooth\ Line\ mode}}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ TexCoord.y\ goes\ from\ 0\ to\ 1\ across\ the\ thickness\ of\ the\ line.}}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Distance\ from\ center\ (0.5)}}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ d\ =\ abs(TexCoord.y\ -\/\ 0.5)\ *\ 2.0;\ }}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ float\ alpha\ =\ 1.0\ -\/\ smoothstep(1.0\ -\/\ uEdgeSoftness,\ 1.0,\ d);}}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ vec4(Color.rgb,\ Color.a\ *\ alpha);}}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ else\ \{}}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ //\ Basic\ Mode\ (supports\ simple\ gradients\ via\ vertex\ color)}}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ FragColor\ =\ Color;}}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \}}}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{)"{};}}
+\DoxyCodeLine{00086\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\}\ }\textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UI\_SHADERS\_HPP}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
 
 \end{DoxyCode}

@@ -1,0 +1,97 @@
+\doxysection{gui\+\_\+component.\+hpp}
+\hypertarget{gui__component_8hpp_source}{}\label{gui__component_8hpp_source}\index{src/interface/gui\_component.hpp@{src/interface/gui\_component.hpp}}
+\doxymbox{\hyperlink{gui__component_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GUI\_COMPONENT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GUI\_COMPONENT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{quad__batcher_8hpp}{../render/quad\_batcher.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{../interface/component.hpp}}"{}}\ \ \textcolor{comment}{//\ Include\ the\ existing\ component\ header\ that\ has\ Rect}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_mouse_event_a2357c0cf0cb23d8e8eb9e096868e8a20}{MouseEvent}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_ac992c524932d4138e691c9dc6c54d993}{x}},\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_abdf88fe0f48b090fa74563f8b171a834}{y}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_a1fab365659dbda0e7233ca3f2044ac85}{eventNumber}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_ad9f9be2218a68836d9b23ef384bf6f2e}{mouseWasDragged}};}
+\DoxyCodeLine{00018\ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_a2357c0cf0cb23d8e8eb9e096868e8a20}{MouseEvent}}(\textcolor{keywordtype}{float}\ x\_pos,\ \textcolor{keywordtype}{float}\ y\_pos,\ \textcolor{keywordtype}{int}\ event\_num,\ \textcolor{keywordtype}{bool}\ dragged\ =\ \textcolor{keyword}{false})\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_ac992c524932d4138e691c9dc6c54d993}{x}}(x\_pos),\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_abdf88fe0f48b090fa74563f8b171a834}{y}}(y\_pos),\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_a1fab365659dbda0e7233ca3f2044ac85}{eventNumber}}(event\_num),\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event_ad9f9be2218a68836d9b23ef384bf6f2e}{mouseWasDragged}}(dragged)\ \{\}}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_key_press_a38e55e4227edd5bdb5eb6765d329424d}{KeyPress}}\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_key_press_a279fdfe0ca146e7078ad59fc035b5265}{keyCode}};}
+\DoxyCodeLine{00026\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_key_press_afe78946cf7350b5028dbfbd517605406}{keyText}};}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_key_press_a38e55e4227edd5bdb5eb6765d329424d}{KeyPress}}(\textcolor{keywordtype}{int}\ code,\ \textcolor{keyword}{const}\ std::string\&\ text)\ :\ \doxymbox{\hyperlink{class_beam_1_1_key_press_a279fdfe0ca146e7078ad59fc035b5265}{keyCode}}(code),\ \doxymbox{\hyperlink{class_beam_1_1_key_press_afe78946cf7350b5028dbfbd517605406}{keyText}}(text)\ \{\}}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_gui_component_a3a2d448a1f30616384f16a41102c613a}{GuiComponent}}\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a3a2d448a1f30616384f16a41102c613a}{GuiComponent}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a255a25fc9e1a2abdfdfcb7c11da1e66e}{\string~GuiComponent}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a6ecaca5ca83fc45c232093a1012191d2}{setBounds}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{texture_8cpp_a8710f3c5c66c09e158c8619b3fca614a}{width}},\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{texture_8cpp_a1055637f17e35a0ca82b396bb94914e5}{height}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\&\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a2de58576d7e55fd82acbdb2f18207982}{getBounds}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ad3c42f55d6a7e47f65bd1d0f3ffb5291}{m\_bounds}};\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_abc37535b6bef8b996c41849df8c95e96}{setVisible}}(\textcolor{keywordtype}{bool}\ shouldBeVisible);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ae4752b8375293063779e88a83c1a799a}{isVisible}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_afbfe066e00bfffc064d80082c839ebe6}{m\_visible}};\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_afd0b01a0cf776f3e5746622e7a4e7c5c}{paint}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ g);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a683989837c3ab83ffb1148e0b473e573}{resized}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a357d8829f546299e6fda6ff119c582c1}{mouseEnter}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a9c580600fa3396a3085b2c7ca9bd6869}{mouseExit}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a3f1bac930389048f3ab5217ece24e032}{mouseDown}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_aeaa0f5b76f80ee669de3a9bf06158a04}{mouseUp}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_abb1547968352dd7ed45ec761e4ceac07}{mouseMove}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a5f9e28ec7aea30422982fcb748bd54c2}{mouseDrag}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_mouse_event}{MouseEvent}}\&\ event);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a2459c6228fcbc914614e6252a43b016f}{keyPressed}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_key_press}{KeyPress}}\&\ key);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_af85677b7e220a2b1bf69659d4167bce5}{addChildComponent}}(std::shared\_ptr<GuiComponent>\ child);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a2b68395b5a1ebdfe673053b2aa83122b}{removeChildComponent}}(std::shared\_ptr<GuiComponent>\ child);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a7dbd4e5e0b8955748fe0962bcb476089}{paintEntireComponent}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ g);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_abad300b88267731a68afd9a94e5225c4}{contains}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ae7e5d9dde8c3bae347fdaaac29b5d96a}{setName}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a5e462cb9a299d364cb53b1a768369246}{m\_name}}\ =\ name;\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ac21fae6abb5616da7b0882c924961ae9}{getName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a5e462cb9a299d364cb53b1a768369246}{m\_name}};\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00136\ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ad3c42f55d6a7e47f65bd1d0f3ffb5291}{m\_bounds}}\{0,\ 0,\ 0,\ 0\};}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_afbfe066e00bfffc064d80082c839ebe6}{m\_visible}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00138\ \ \ \ \ std::vector<std::shared\_ptr<GuiComponent>>\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_ada191fb579394c85ec4fa977b1b108b0}{m\_children}};}
+\DoxyCodeLine{00139\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a5e462cb9a299d364cb53b1a768369246}{m\_name}};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ std::function<void()>\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a46e1692a3cd91b4464cce1680c759a1e}{m\_paintCallback}};}
+\DoxyCodeLine{00142\ \ \ \ \ std::function<void()>\ \doxymbox{\hyperlink{class_beam_1_1_gui_component_a5ea91ef234ce12ce8dc7fcc143178072}{m\_resizedCallback}};}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GUI\_COMPONENT\_HPP}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ }
+
+\end{DoxyCode}

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['channels_0',['channels',['../struct_beam_1_1_flux_node_1_1_port.html#abd4bf86ac483a7ef33991aa1e402dc29',1,'Beam::FluxNode::Port']]],
-  ['color_1',['color',['../struct_beam_1_1_vertex.html#ad2bae330663b26bfd422f9d0b0361399',1,'Beam::Vertex']]]
+  ['blocksize_0',['blockSize',['../struct_beam_1_1_audio_device_setup.html#af93cb616e91a168437c7029dde2cca48',1,'Beam::AudioDeviceSetup']]],
+  ['border_1',['border',['../texture_8cpp.html#a4aa3eaf5a240f1edb13aad4f1bf8c73f',1,'texture.cpp']]],
+  ['buffersizes_2',['bufferSizes',['../struct_beam_1_1_audio_device_info.html#a2bba9e6fc7df2635fb42ce12f479853e',1,'Beam::AudioDeviceInfo']]]
 ];

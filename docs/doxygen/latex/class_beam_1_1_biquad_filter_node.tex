@@ -13,16 +13,18 @@ Inheritance diagram for Beam::\+Biquad\+Filter\+Node:\+\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{Biquad\+Filter\+Node}} (\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} type, float frequency, float q, float sample\+Rate)
+\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{Biquad\+Filter\+Node}} (\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} \doxymbox{\hyperlink{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa}{type}}, float frequency, float q, float sample\+Rate)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels) override
+void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9ca4ea9dffee4a78f9c25457c2303142}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels, size\+\_\+t start\+Frame=0) override
 \item 
 std::\+string \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{get\+Name}} () const override
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}{set\+Cutoff}} (float freq)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94}{setQ}} (float q)
-\end{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a0a857df3e78f9f3bb258d0661fbad824}{get\+Magnitude\+Response}} (float normalized\+Freq)
+\begin{DoxyCompactList}\small\item\em Calculates the magnitude response at a given normalized frequency (0..1, where 1 is Nyquist). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -60,13 +62,13 @@ float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256
 \item 
 float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\+\_\+a2}}
 \item 
-float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\+\_\+x1}} \+[2]\+ = \{0,0\}
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\+\_\+x1}}
 \item 
-float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}{m\+\_\+x2}} \+[2]\+ = \{0,0\}
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}{m\+\_\+x2}}
 \item 
-float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\+\_\+y1}} \+[2]\+ = \{0,0\}
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\+\_\+y1}}
 \item 
-float \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}{m\+\_\+y2}} \+[2]\+ = \{0,0\}
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}{m\+\_\+y2}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
@@ -96,6 +98,16 @@ Beam::\+\+Biquad\+Filter\+Node::\+\+Biquad\+Filter\+Node (\begin{DoxyParamCaptio
 {\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99} 
 void Beam::\+\+Biquad\+Filter\+Node::\+calculate\+Coefficients (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_biquad_filter_node_a0a857df3e78f9f3bb258d0661fbad824}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!getMagnitudeResponse@{getMagnitudeResponse}}
+\index{getMagnitudeResponse@{getMagnitudeResponse}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
+\doxysubsubsection{\texorpdfstring{getMagnitudeResponse()}{getMagnitudeResponse()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a0a857df3e78f9f3bb258d0661fbad824} 
+float Beam::\+\+Biquad\+Filter\+Node::\+get\+Magnitude\+Response (\begin{DoxyParamCaption}\item[{float}]{normalized\+Freq}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the magnitude response at a given normalized frequency (0..1, where 1 is Nyquist). 
+
 \Hypertarget{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!getName@{getName}}
 \index{getName@{getName}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{getName()}{getName()}}
@@ -106,15 +118,15 @@ std::\+string Beam::\+\+Biquad\+Filter\+Node::\+get\+Name (\begin{DoxyParamCapti
 
 Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{Beam::\+\+Audio\+Node}}.
 
-\Hypertarget{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!process@{process}}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a9ca4ea9dffee4a78f9c25457c2303142}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!process@{process}}
 \index{process@{process}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f} 
-void Beam::\+\+Biquad\+Filter\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a9ca4ea9dffee4a78f9c25457c2303142} 
+void Beam::\+\+Biquad\+Filter\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{, }\item[{size\+\_\+t}]{start\+Frame}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{Beam::\+\+Audio\+Node}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7}{Beam::\+\+Audio\+Node}}.
 
 \Hypertarget{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!setCutoff@{setCutoff}}
 \index{setCutoff@{setCutoff}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
@@ -193,32 +205,32 @@ float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfam
 {\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd} 
 \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{Filter\+Type}} Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x1@{m\_x1}}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x1@{m\_x1}}
 \index{m\_x1@{m\_x1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{m\_x1}{m\_x1}}
-{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737} 
-float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x1\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0} 
+std::\+vector$<$float$>$ Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x1\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x2@{m\_x2}}
+\Hypertarget{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_x2@{m\_x2}}
 \index{m\_x2@{m\_x2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{m\_x2}{m\_x2}}
-{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1} 
-float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x2\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba} 
+std::\+vector$<$float$>$ Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+x2\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y1@{m\_y1}}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y1@{m\_y1}}
 \index{m\_y1@{m\_y1}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{m\_y1}{m\_y1}}
-{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d} 
-float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y1\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0} 
+std::\+vector$<$float$>$ Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y2@{m\_y2}}
+\Hypertarget{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}\index{Beam::BiquadFilterNode@{Beam::BiquadFilterNode}!m\_y2@{m\_y2}}
 \index{m\_y2@{m\_y2}!Beam::BiquadFilterNode@{Beam::BiquadFilterNode}}
 \doxysubsubsection{\texorpdfstring{m\_y2}{m\_y2}}
-{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34} 
-float Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y2\+[2]\+ = \{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad} 
+std::\+vector$<$float$>$ Beam::\+\+Biquad\+Filter\+Node::\+m\+\_\+y2\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{biquad__filter__node_8hpp}{biquad\+\_\+filter\+\_\+node.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{biquad__filter__node_8hpp}{biquad\+\_\+filter\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

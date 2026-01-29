@@ -1,5 +1,5 @@
 \doxysection{track\+\_\+node.\+hpp}
-\hypertarget{track__node_8hpp_source}{}\label{track__node_8hpp_source}\index{src/dsp/track\_node.hpp@{src/dsp/track\_node.hpp}}
+\hypertarget{track__node_8hpp_source}{}\label{track__node_8hpp_source}\index{src/engine/track\_node.hpp@{src/engine/track\_node.hpp}}
 \doxymbox{\hyperlink{track__node_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TRACK\_NODE\_HPP}}
@@ -7,52 +7,147 @@
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__node_8hpp}{audio\_node.hpp}}"{}}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{disk__streamer_8hpp}{disk\_streamer.hpp}}"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \{}
-\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}},}
-\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{Playing}},}
-\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{Recording}}}
-\DoxyCodeLine{00015\ \};}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
-\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}(\textcolor{keyword}{const}\ std::string\&\ name)\ :\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}}(name),\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}::\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}})\ \{\}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{analog__base_8hpp}{analog\_base.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../../third\_party/dr\_wav.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}},}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{Playing}},}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{Recording}}}
+\DoxyCodeLine{00019\ \};}
 \DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95}{load}}(\textcolor{keyword}{const}\ std::string\&\ filePath)\ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}\ =\ std::make\_unique<DiskStreamer>();}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>open(filePath);}
-\DoxyCodeLine{00024\ \ \ \ \ \}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>read(buffer,\ frames,\ channels);}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{TrackState::Recording}})\ \{}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ a\ real\ scenario,\ we'd\ capture\ from\ pInput\ and\ write\ to\ disk}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ we'll\ just\ clear\ the\ buffer\ to\ represent\ monitoring}}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00033\ \ \ \ \ \}}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a973d30146b430d0680b526740364a45c}{setState}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ state)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ =\ state;\ \}}
-\DoxyCodeLine{00036\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8}{getState}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};\ \}}
-\DoxyCodeLine{00037\ \ \ \ \ }
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_acdff1b83754ab94892dc1c1d6ffe5255}{seek}}(\textcolor{keywordtype}{size\_t}\ frame)\ \{}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>seek(frame);}
-\DoxyCodeLine{00040\ \ \ \ \ \}}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};\ \}}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00045\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};}
-\DoxyCodeLine{00046\ \ \ \ \ std::unique\_ptr<DiskStreamer>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}};}
-\DoxyCodeLine{00047\ \ \ \ \ std::atomic<TrackState>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};}
-\DoxyCodeLine{00048\ \};}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRACK\_NODE\_HPP}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{TrackNode}}(\textcolor{keyword}{const}\ std::string\&\ name)\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}}(name),\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}::\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{Idle}}),\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}}(false),\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\_wowFlutter}}(44100.0f)\ }
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\_wowFlutter}}.setIntensity(0.001f,\ 0.0005f);}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_af9665ab17e5551b617a4cb4bd1d9b43e}{\string~TrackNode}}()\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a087918f50fcde846beb63a77a6632da3}{stopRecording}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a4c490876e9e00d85530178fa22571397}{setTapeParams}}(\textcolor{keywordtype}{float}\ drive,\ \textcolor{keywordtype}{float}\ age)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16}{m\_tapeDrive}}\ =\ drive;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}{m\_tapeAge}}\ =\ age;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\_wowFlutter}}.setIntensity(0.001f\ *\ age,\ 0.002f\ *\ age);}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95}{load}}(\textcolor{keyword}{const}\ std::string\&\ filePath)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}\ =\ std::make\_unique<DiskStreamer>();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>open(filePath);}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a0df2b32330877bad5608e7d0b93877e6}{startRecording}}(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \textcolor{keywordtype}{int}\ sampleRate,\ \textcolor{keywordtype}{int}\ channels)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ drwav\_data\_format\ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.container\ =\ drwav\_container\_riff;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.format\ =\ DR\_WAVE\_FORMAT\_PCM;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.channels\ =\ (drwav\_uint32)channels;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.sampleRate\ =\ (drwav\_uint32)sampleRate;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}.bitsPerSample\ =\ 16;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (drwav\_init\_file\_write(\&\doxymbox{\hyperlink{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}{m\_wavWriter}},\ filePath.c\_str(),\ \&\doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}},\ NULL))\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ =\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{TrackState::Recording}};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a087918f50fcde846beb63a77a6632da3}{stopRecording}}()\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}})\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ drwav\_uninit(\&\doxymbox{\hyperlink{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}{m\_wavWriter}});}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ =\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{TrackState::Idle}};}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a41898cb4d3b6b3f09c5c144a66dc4a5d}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels,\ \textcolor{keywordtype}{size\_t}\ startFrame\ =\ 0)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Capture/Read\ raw\ signal}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac9dbb2b7c84159b632d71e512eba8428}{TrackState::Playing}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (startFrame\ !=\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\_lastProcessedFrame}})\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>seek(startFrame);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>read(buffer,\ frames,\ channels);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\_lastProcessedFrame}}\ =\ startFrame\ +\ frames;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Apply\ Tape\ Physics}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frames;\ ++i)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ speedMod\ =\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\_wowFlutter}}.next();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Saturation\ and\ high-\/end\ roll-\/off}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ 0;\ c\ <\ channels;\ ++c)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\&\ s\ =\ buffer[i\ *\ channels\ +\ c];}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\ =\ \doxymbox{\hyperlink{class_beam_1_1_analog_base_a8eed4bd2205e1ff9dd9ab036ea7cfe95}{AnalogBase::saturateLangevin}}(s,\ 1.0f\ +\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16}{m\_tapeDrive}});}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}{m\_tapeAge}}\ >\ 0.01f)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30}{m\_ageFilters}}[c].setCutoff(20000.0f\ -\/\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}{m\_tapeAge}}\ *\ 15000.0f),\ 44100.0f);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\ =\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30}{m\_ageFilters}}[c].process(s);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3.\ Write\ if\ recording}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fac5564d2e8b8e0ae08bf4363f2b947166}{TrackState::Recording}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}})\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<int16\_t>\ pcm(frames\ *\ channels);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frames\ *\ channels;\ ++i)\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ buffer[i];}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ >\ 1.0f)\ s\ =\ 1.0f;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ <\ -\/1.0f)\ s\ =\ -\/1.0f;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcm[i]\ =\ (int16\_t)(s\ *\ 32767.0f);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ drwav\_write\_pcm\_frames(\&\doxymbox{\hyperlink{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}{m\_wavWriter}},\ (drwav\_uint64)frames,\ pcm.data());}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a973d30146b430d0680b526740364a45c}{setState}}(\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ state)\ \{\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}}\ =\ state;\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (state\ ==\ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c}{TrackState::Idle}})\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\_lastProcessedFrame}}\ =\ (size\_t)-\/1;}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{TrackState}}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8}{getState}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};\ \}}
+\DoxyCodeLine{00110\ \ \ \ \ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_acdff1b83754ab94892dc1c1d6ffe5255}{seek}}(\textcolor{keywordtype}{size\_t}\ frame)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\_lastProcessedFrame}}\ =\ frame;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>seek(frame);}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ std::vector<std::vector<float>>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abe7c47ca6cf089ac71e97969c6d9e7f5}{getPeakData}}(\textcolor{keywordtype}{int}\ numPoints)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>getPeakData(numPoints);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00119\ \ \ \ \ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_ae7e6189008664fe997e33a5b6042095e}{getTotalFrames}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}})\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}}-\/>getTotalFrames();}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00129\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}{m\_name}};}
+\DoxyCodeLine{00130\ \ \ \ \ std::unique\_ptr<DiskStreamer>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\_streamer}};}
+\DoxyCodeLine{00131\ \ \ \ \ std::atomic<TrackState>\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\_state}};}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\_lastProcessedFrame}}\ =\ (size\_t)-\/1;}
+\DoxyCodeLine{00133\ \ \ \ \ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//\ Tape\ Physics}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16}{m\_tapeDrive}}\ =\ 0.0f;}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}{m\_tapeAge}}\ =\ 0.0f;}
+\DoxyCodeLine{00137\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator}{AnalogBase::WowFlutterGenerator}}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\_wowFlutter}};}
+\DoxyCodeLine{00138\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{AnalogBase::OnePoleFilter}}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30}{m\_ageFilters}}[2];\ \textcolor{comment}{//\ Stereo\ age\ filtering}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ drwav\ \doxymbox{\hyperlink{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}{m\_wavWriter}};}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\_isWriterOpen}};}
+\DoxyCodeLine{00142\ \};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRACK\_NODE\_HPP}}
+\DoxyCodeLine{00147\ }
 
 \end{DoxyCode}

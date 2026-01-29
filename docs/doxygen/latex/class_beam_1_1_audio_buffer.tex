@@ -1,0 +1,277 @@
+\doxysection{Beam::\+Audio\+Buffer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_beam_1_1_audio_buffer}{}\label{class_beam_1_1_audio_buffer}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+
+
+Container for multi-\/channel audio data, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_buffer}{Audio\+Buffer}.  
+
+
+
+
+{\ttfamily \+\#include $<$audio\+\_\+buffer.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Constructor -\/ creates an empty buffer. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a42f6257ae229921c31561e8d546b0dfb}{Audio\+Buffer}} (int num\+Channels, int num\+Samples)
+\begin{DoxyCompactList}\small\item\em Constructor -\/ creates a buffer with specified channels and samples. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a13dae890c82b0414120d1afd298b97bf}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d}{set\+Size}} (int num\+Channels, int num\+Samples, bool keep\+Existing\+Content=false, bool clear\+Extra\+Space=false, bool avoid\+Reallocating=false)
+\begin{DoxyCompactList}\small\item\em Sets the size of the buffer. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_af7325c4466887942607fd6960c86cf5c}{get\+Num\+Channels}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of channels. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad01215e6138cba40a8e3d813481fb263}{get\+Num\+Samples}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of samples per channel. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4378ccd20308acf3bbcc4bf37aa061a3}{get\+Write\+Pointer}} (int channel)
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the samples in one of the channels. \end{DoxyCompactList}\item 
+const T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a7eda29f4b0b43bab3aeba400c163dc17}{get\+Read\+Pointer}} (int channel) const
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only pointer to the samples in one of the channels. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all the samples in all channels. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a06f7df144e2eeb313e9172bc724d4682}{clear}} (int start\+Sample, int num\+Samples)
+\begin{DoxyCompactList}\small\item\em Clears a specified region in all channels. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a816402cf170a0d8dc20adc5647828caf}{add\+From}} (int dest\+Channel, int dest\+Start\+Sample, const \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}}$<$ T $>$ \&source, int source\+Channel, int source\+Start\+Sample, int num\+Samples, T gain=static\+\_\+cast$<$ T $>$(1))
+\begin{DoxyCompactList}\small\item\em Adds samples from another buffer to this one. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aaa4a7663a86843155ad42202561568be}{copy\+From}} (int dest\+Channel, int dest\+Start\+Sample, const \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}}$<$ T $>$ \&source, int source\+Channel, int source\+Start\+Sample, int num\+Samples)
+\begin{DoxyCompactList}\small\item\em Copies data from another buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}{apply\+Gain}} (int channel, int start\+Sample, int num\+Samples, T gain)
+\begin{DoxyCompactList}\small\item\em Applies gain to a range of samples in a channel. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4d97c0664737f80daade25dfa6f8789d}{apply\+Gain}} (int channel, T gain)
+\begin{DoxyCompactList}\small\item\em Applies gain to all samples in a channel. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ac58b58ad1ea4a33b74a6c9b633395763}{get\+Magnitude}} (int channel, int start\+Sample, int num\+Samples) const
+\begin{DoxyCompactList}\small\item\em Finds the highest absolute value in a channel. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}{get\+Magnitude}} () const
+\begin{DoxyCompactList}\small\item\em Finds the highest absolute value in the entire buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ std::\+vector$<$ T $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\+\_\+data}}
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\+\_\+num\+Channels}} = 0
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\+\_\+num\+Samples}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Beam::\+\+Audio\+Buffer$<$ T $>$}
+Container for multi-\/channel audio data, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_buffer}{Audio\+Buffer}. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_audio_buffer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!AudioBuffer@{AudioBuffer}}
+\index{AudioBuffer@{AudioBuffer}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{AudioBuffer()}{AudioBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+\+Audio\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor -\/ creates an empty buffer. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a42f6257ae229921c31561e8d546b0dfb}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!AudioBuffer@{AudioBuffer}}
+\index{AudioBuffer@{AudioBuffer}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{AudioBuffer()}{AudioBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a42f6257ae229921c31561e8d546b0dfb} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+\+Audio\+Buffer (\begin{DoxyParamCaption}\item[{int}]{num\+Channels}{, }\item[{int}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Constructor -\/ creates a buffer with specified channels and samples. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a13dae890c82b0414120d1afd298b97bf}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!````~AudioBuffer@{\texorpdfstring{$\sim$}{\string~}AudioBuffer}}
+\index{````~AudioBuffer@{\texorpdfstring{$\sim$}{\string~}AudioBuffer}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AudioBuffer()}{\string~AudioBuffer()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a13dae890c82b0414120d1afd298b97bf} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_audio_buffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_buffer_a816402cf170a0d8dc20adc5647828caf}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!addFrom@{addFrom}}
+\index{addFrom@{addFrom}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addFrom()}{addFrom()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a816402cf170a0d8dc20adc5647828caf} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+add\+From (\begin{DoxyParamCaption}\item[{int}]{dest\+Channel}{, }\item[{int}]{dest\+Start\+Sample}{, }\item[{const \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}}$<$ T $>$ \&}]{source}{, }\item[{int}]{source\+Channel}{, }\item[{int}]{source\+Start\+Sample}{, }\item[{int}]{num\+Samples}{, }\item[{T}]{gain}{ = {\ttfamily static\+\_\+cast$<$T$>$(1)}}\end{DoxyParamCaption})}
+
+
+
+Adds samples from another buffer to this one. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!applyGain@{applyGain}}
+\index{applyGain@{applyGain}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{applyGain()}{applyGain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+apply\+Gain (\begin{DoxyParamCaption}\item[{int}]{channel}{, }\item[{int}]{start\+Sample}{, }\item[{int}]{num\+Samples}{, }\item[{T}]{gain}{}\end{DoxyParamCaption})}
+
+
+
+Applies gain to a range of samples in a channel. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a4d97c0664737f80daade25dfa6f8789d}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!applyGain@{applyGain}}
+\index{applyGain@{applyGain}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{applyGain()}{applyGain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a4d97c0664737f80daade25dfa6f8789d} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+apply\+Gain (\begin{DoxyParamCaption}\item[{int}]{channel}{, }\item[{T}]{gain}{}\end{DoxyParamCaption})}
+
+
+
+Applies gain to all samples in a channel. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all the samples in all channels. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a06f7df144e2eeb313e9172bc724d4682}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a06f7df144e2eeb313e9172bc724d4682} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+clear (\begin{DoxyParamCaption}\item[{int}]{start\+Sample}{, }\item[{int}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Clears a specified region in all channels. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_aaa4a7663a86843155ad42202561568be}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!copyFrom@{copyFrom}}
+\index{copyFrom@{copyFrom}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{copyFrom()}{copyFrom()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_aaa4a7663a86843155ad42202561568be} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+copy\+From (\begin{DoxyParamCaption}\item[{int}]{dest\+Channel}{, }\item[{int}]{dest\+Start\+Sample}{, }\item[{const \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{Audio\+Buffer}}$<$ T $>$ \&}]{source}{, }\item[{int}]{source\+Channel}{, }\item[{int}]{source\+Start\+Sample}{, }\item[{int}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Copies data from another buffer. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getMagnitude@{getMagnitude}}
+\index{getMagnitude@{getMagnitude}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getMagnitude()}{getMagnitude()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Magnitude (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Finds the highest absolute value in the entire buffer. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_ac58b58ad1ea4a33b74a6c9b633395763}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getMagnitude@{getMagnitude}}
+\index{getMagnitude@{getMagnitude}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getMagnitude()}{getMagnitude()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_ac58b58ad1ea4a33b74a6c9b633395763} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Magnitude (\begin{DoxyParamCaption}\item[{int}]{channel}{, }\item[{int}]{start\+Sample}{, }\item[{int}]{num\+Samples}{}\end{DoxyParamCaption}) const}
+
+
+
+Finds the highest absolute value in a channel. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_af7325c4466887942607fd6960c86cf5c}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getNumChannels@{getNumChannels}}
+\index{getNumChannels@{getNumChannels}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getNumChannels()}{getNumChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_af7325c4466887942607fd6960c86cf5c} 
+template$<$typename T$>$ \\
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Num\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of channels. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_ad01215e6138cba40a8e3d813481fb263}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getNumSamples@{getNumSamples}}
+\index{getNumSamples@{getNumSamples}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getNumSamples()}{getNumSamples()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_ad01215e6138cba40a8e3d813481fb263} 
+template$<$typename T$>$ \\
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Num\+Samples (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of samples per channel. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a7eda29f4b0b43bab3aeba400c163dc17}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getReadPointer@{getReadPointer}}
+\index{getReadPointer@{getReadPointer}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getReadPointer()}{getReadPointer()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a7eda29f4b0b43bab3aeba400c163dc17} 
+template$<$typename T$>$ \\
+const T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Read\+Pointer (\begin{DoxyParamCaption}\item[{int}]{channel}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a read-\/only pointer to the samples in one of the channels. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_a4378ccd20308acf3bbcc4bf37aa061a3}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!getWritePointer@{getWritePointer}}
+\index{getWritePointer@{getWritePointer}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getWritePointer()}{getWritePointer()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a4378ccd20308acf3bbcc4bf37aa061a3} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+get\+Write\+Pointer (\begin{DoxyParamCaption}\item[{int}]{channel}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the samples in one of the channels. 
+
+\Hypertarget{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!setSize@{setSize}}
+\index{setSize@{setSize}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{setSize()}{setSize()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d} 
+template$<$typename T$>$ \\
+void \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+set\+Size (\begin{DoxyParamCaption}\item[{int}]{num\+Channels}{, }\item[{int}]{num\+Samples}{, }\item[{bool}]{keep\+Existing\+Content}{ = {\ttfamily false}, }\item[{bool}]{clear\+Extra\+Space}{ = {\ttfamily false}, }\item[{bool}]{avoid\+Reallocating}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Sets the size of the buffer. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_audio_buffer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!m\_data@{m\_data}}
+\index{m\_data@{m\_data}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{m\_data}{m\_data}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448} 
+template$<$typename T$>$ \\
+std::\+vector$<$std::\+vector$<$T$>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+m\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!m\_numChannels@{m\_numChannels}}
+\index{m\_numChannels@{m\_numChannels}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{m\_numChannels}{m\_numChannels}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b} 
+template$<$typename T$>$ \\
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+m\+\_\+num\+Channels = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}\index{Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}!m\_numSamples@{m\_numSamples}}
+\index{m\_numSamples@{m\_numSamples}!Beam::AudioBuffer$<$ T $>$@{Beam::AudioBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{m\_numSamples}{m\_numSamples}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf} 
+template$<$typename T$>$ \\
+int \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{Beam::\+\+Audio\+Buffer}}$<$ T $>$::\+m\+\_\+num\+Samples = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__buffer_8hpp}{audio\+\_\+buffer.\+hpp}}\end{DoxyCompactItemize}

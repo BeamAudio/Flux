@@ -37,18 +37,29 @@ void InputHandler::handleMouseMove(float x, float y) {
     }
 }
 
+void InputHandler::handleMouseWheel(float x, float y, float delta) {
+    for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
+        if ((*it)->getBounds().contains(x, y)) {
+            if ((*it)->onMouseWheel(x, y, delta)) break;
+        }
+    }
+}
+
 void InputHandler::update(float dt) {
     for (auto& comp : m_components) {
         comp->update(dt);
     }
 }
 
-void InputHandler::render(QuadBatcher& batcher, float dt) {
+void InputHandler::render(QuadBatcher& batcher, float dt, float screenW, float screenH) {
     for (auto& comp : m_components) {
-        comp->render(batcher, dt);
+        comp->render(batcher, dt, screenW, screenH);
     }
 }
 
 } // namespace Beam
+
+
+
 
 

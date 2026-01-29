@@ -21,7 +21,7 @@ public:
     virtual ~Component() = default;
 
     virtual void update(float dt) {}
-    virtual void render(QuadBatcher& batcher, float dt) = 0;
+    virtual void render(QuadBatcher& batcher, float dt, float screenW, float screenH) = 0;
 
     virtual bool onMouseDown(float x, float y, int button) { return false; }
     virtual bool onMouseUp(float x, float y, int button) { 
@@ -39,6 +39,7 @@ public:
         }
         return false; 
     }
+    virtual bool onMouseWheel(float x, float y, float delta) { return false; }
 
     virtual void setBounds(float x, float y, float w, float h) { m_bounds = {x, y, w, h}; }
     const Rect& getBounds() const { return m_bounds; }
@@ -62,6 +63,9 @@ protected:
 } // namespace Beam
 
 #endif // COMPONENT_HPP
+
+
+
 
 
 

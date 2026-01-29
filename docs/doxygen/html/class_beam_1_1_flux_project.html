@@ -99,6 +99,8 @@ $(function(){initNavTree('class_beam_1_1_flux_project.html','','class_beam_1_1_f
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab062e3ebed4944516b8e31d547d2241b" id="r_ab062e3ebed4944516b8e31d547d2241b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab062e3ebed4944516b8e31d547d2241b">FluxProject</a> ()</td></tr>
 <tr class="memitem:a0b32e6b040ba09486e7a5a5110866186" id="r_a0b32e6b040ba09486e7a5a5110866186"><td class="memItemLeft">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_graph.html">FluxGraph</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0b32e6b040ba09486e7a5a5110866186">getGraph</a> ()</td></tr>
+<tr class="memitem:a1999a9b5e6df6714b52065c697d6d344" id="r_a1999a9b5e6df6714b52065c697d6d344"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1999a9b5e6df6714b52065c697d6d344">addTrack</a> (<a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> td)</td></tr>
+<tr class="memitem:ac467fd8ce5f1a101fdd23634a7b8b990" id="r_ac467fd8ce5f1a101fdd23634a7b8b990"><td class="memItemLeft">std::vector&lt; <a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac467fd8ce5f1a101fdd23634a7b8b990">getTracks</a> ()</td></tr>
 <tr class="memitem:af0a110ba7c7ce45506fb9e243b6784b5" id="r_af0a110ba7c7ce45506fb9e243b6784b5"><td class="memItemLeft">nlohmann::json&#160;</td><td class="memItemRight"><a class="el" href="#af0a110ba7c7ce45506fb9e243b6784b5">serialize</a> () const</td></tr>
 <tr class="memitem:aa4a811a39323d92c97654ccc34c09379" id="r_aa4a811a39323d92c97654ccc34c09379"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa4a811a39323d92c97654ccc34c09379">deserialize</a> (const nlohmann::json &amp;data)</td></tr>
 </table><table class="memberdecls">
@@ -106,6 +108,7 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a8ce6b8f232de62bb34f903f04acc8506" id="r_a8ce6b8f232de62bb34f903f04acc8506"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a8ce6b8f232de62bb34f903f04acc8506">m_name</a> = &quot;Untitled Flux&quot;</td></tr>
 <tr class="memitem:a24511ed71344a5e3028b204376aab334" id="r_a24511ed71344a5e3028b204376aab334"><td class="memItemLeft">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_graph.html">FluxGraph</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a24511ed71344a5e3028b204376aab334">m_graph</a></td></tr>
+<tr class="memitem:a99e25b294a814550c79e1d037983094b" id="r_a99e25b294a814550c79e1d037983094b"><td class="memItemLeft">std::vector&lt; <a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a99e25b294a814550c79e1d037983094b">m_tracks</a></td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab062e3ebed4944516b8e31d547d2241b" name="ab062e3ebed4944516b8e31d547d2241b"></a>
@@ -134,6 +137,31 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a1999a9b5e6df6714b52065c697d6d344" name="a1999a9b5e6df6714b52065c697d6d344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1999a9b5e6df6714b52065c697d6d344">&#9670;&#160;</a></span>addTrack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::FluxProject::addTrack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_beam_1_1_track_data.html">TrackData</a></td>          <td class="paramname"><span class="paramname"><em>td</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa4a811a39323d92c97654ccc34c09379" name="aa4a811a39323d92c97654ccc34c09379"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4a811a39323d92c97654ccc34c09379">&#9670;&#160;</a></span>deserialize()</h2>
 
@@ -170,6 +198,31 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_graph.html">FluxGraph</a> &gt; Beam::FluxProject::getGraph </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac467fd8ce5f1a101fdd23634a7b8b990" name="ac467fd8ce5f1a101fdd23634a7b8b990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac467fd8ce5f1a101fdd23634a7b8b990">&#9670;&#160;</a></span>getTracks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> &gt; &amp; Beam::FluxProject::getTracks </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -254,8 +307,30 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a99e25b294a814550c79e1d037983094b" name="a99e25b294a814550c79e1d037983094b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e25b294a814550c79e1d037983094b">&#9670;&#160;</a></span>m_tracks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_beam_1_1_track_data.html">TrackData</a>&gt; Beam::FluxProject::m_tracks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/core/<a class="el" href="flux__project_8hpp_source.html">flux_project.hpp</a></li>
+<li>src/session/<a class="el" href="flux__project_8hpp_source.html">flux_project.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

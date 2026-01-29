@@ -1,0 +1,72 @@
+\doxysection{audio\+\_\+processor.\+hpp}
+\hypertarget{audio__processor_8hpp_source}{}\label{audio__processor_8hpp_source}\index{src/engine/audio\_processor.hpp@{src/engine/audio\_processor.hpp}}
+\doxymbox{\hyperlink{audio__processor_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUDIO\_PROCESSOR\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUDIO\_PROCESSOR\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{parameter_8hpp}{../session/parameter.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{midi__event_8hpp}{../engine/midi\_event.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd}{AudioProcessor}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd}{AudioProcessor}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_aa760c6d60a8045dc32aa1578b9c74afe}{\string~AudioProcessor}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0ef7279db2dc6cef108efcad0c6edb8a}{prepareToPlay}}(\textcolor{keywordtype}{double}\ sampleRate,\ \textcolor{keywordtype}{int}\ samplesPerBlock)\ =\ 0;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_adf8005d9b36d70188aa1379a61f7f5a9}{releaseResources}}()\ =\ 0;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a831818fed7ed10115cd3983addf21936}{processBlock}}(\textcolor{keywordtype}{float}**\ audioInputOutput,\ \textcolor{keywordtype}{int}\ numInputChannels,\ \textcolor{keywordtype}{int}\ numOutputChannels,\ \textcolor{keywordtype}{int}\ numSamples,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}}\&\ midiMessages)\ =\ 0;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_af4f88f01a436dba1fd3db520503b68c7}{getName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a13c1f31b340d69fce391411402082211}{getNumInputChannels}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a403c0cf559133347ee2753ef11766f21}{getNumOutputChannels}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0e0668105ca3844b5d0947a3fcf25b7b}{getNumParameters}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8dd4277153a28700b0b043ef218a4d15}{getParameterName}}(\textcolor{keywordtype}{int}\ parameterIndex)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a456045a6f38f955db222bfdbb1e54be0}{getParameter}}(\textcolor{keywordtype}{int}\ parameterIndex)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3e9a8c5b7470f9a957d85b84efff64b1}{setParameter}}(\textcolor{keywordtype}{int}\ parameterIndex,\ \textcolor{keywordtype}{float}\ newValue);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_ad0c8e5cece50693d131dc9476f5a7835}{getParameterText}}(\textcolor{keywordtype}{int}\ parameterIndex,\ \textcolor{keywordtype}{float}\ value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7e9f840858284252d4a288f4e89e0c8e}{addParameter}}(std::shared\_ptr<Parameter>\ parameter);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \ \ std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7298dde8e5844676fea306d579ae1b5c}{getParameterByIndex}}(\textcolor{keywordtype}{int}\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3b570dc9bcbeb3208e026e436c1fe9e7}{getParameterByName}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7da84e7885fe1660401485dd1f46c8f9}{setCurrentPlaybackState}}(\textcolor{keywordtype}{bool}\ isPlaying,\ \textcolor{keywordtype}{double}\ currentTimeSeconds,\ \textcolor{keywordtype}{double}\ tempo);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a480e589f13d2a2046d7d46896c17daaa}{getSampleRate}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840}{m\_sampleRate}};\ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a49a5218a84064deb3c05aad0087be7a3}{getBlockSize}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466}{m\_blockSize}};\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840}{m\_sampleRate}}\ =\ 44100.0;}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466}{m\_blockSize}}\ =\ 512;}
+\DoxyCodeLine{00110\ \ \ \ \ std::vector<std::shared\_ptr<Parameter>>\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a89bb21df73830e6b14b8bf69d3ba68a1}{m\_parameters}};}
+\DoxyCodeLine{00111\ \ \ \ \ std::map<std::string,\ std::shared\_ptr<Parameter>>\ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0430f0f07132e944c8af000cae93f321}{m\_namedParameters}};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUDIO\_PROCESSOR\_HPP}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ }
+
+\end{DoxyCode}

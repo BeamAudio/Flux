@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Beam Audio Flux: src/core/project_manager.hpp Source File</title>
+<title>Beam Audio Flux: src/session/project_manager.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,11 +106,11 @@ $(function(){initNavTree('project__manager_8hpp_source.html','',''); });
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_beam_1_1_project_manager.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_beam_1_1_project_manager.html">ProjectManager</a> {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_beam_1_1_project_manager.html#ae52fa9c9c84c5f7219792acf4622ec59">   13</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_beam_1_1_project_manager.html#ae52fa9c9c84c5f7219792acf4622ec59">saveProject</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keyword">const</span> nlohmann::json&amp; projectData) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_beam_1_1_project_manager.html#a4edae2bd477512f4925e60b2e1bdcd37">   13</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_project_manager.html#a4edae2bd477512f4925e60b2e1bdcd37">saveProject</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keyword">const</span> nlohmann::json&amp; data) {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        std::ofstream file(filename);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">if</span> (!file.is_open()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        file &lt;&lt; projectData.dump(4);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">if</span> (file.is_open()) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            file &lt;&lt; data.dump(4);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        }</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    }</div>
 </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
@@ -119,27 +119,35 @@ $(function(){initNavTree('project__manager_8hpp_source.html','',''); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::ifstream file(filename);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> (!file.is_open()) <span class="keywordflow">return</span> nlohmann::json();</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        nlohmann::json data;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        file &gt;&gt; data;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">return</span> data;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            file &gt;&gt; data;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        } <span class="keywordflow">catch</span>(...) { <span class="keywordflow">return</span> nlohmann::json(); }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span> data;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <span class="comment">// namespace Beam</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// PROJECT_MANAGER_HPP</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>} <span class="comment">// namespace Beam</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif </span><span class="comment">// PROJECT_MANAGER_HPP</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="ttc" id="aclass_beam_1_1_project_manager_html"><div class="ttname"><a href="class_beam_1_1_project_manager.html">Beam::ProjectManager</a></div><div class="ttdef"><b>Definition</b> project_manager.hpp:11</div></div>
 <div class="ttc" id="aclass_beam_1_1_project_manager_html_a18a6ab5b5e7f725aaed19ddc652b9206"><div class="ttname"><a href="class_beam_1_1_project_manager.html#a18a6ab5b5e7f725aaed19ddc652b9206">Beam::ProjectManager::loadProject</a></div><div class="ttdeci">static nlohmann::json loadProject(const std::string &amp;filename)</div><div class="ttdef"><b>Definition</b> project_manager.hpp:20</div></div>
-<div class="ttc" id="aclass_beam_1_1_project_manager_html_ae52fa9c9c84c5f7219792acf4622ec59"><div class="ttname"><a href="class_beam_1_1_project_manager.html#ae52fa9c9c84c5f7219792acf4622ec59">Beam::ProjectManager::saveProject</a></div><div class="ttdeci">static bool saveProject(const std::string &amp;filename, const nlohmann::json &amp;projectData)</div><div class="ttdef"><b>Definition</b> project_manager.hpp:13</div></div>
-<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> beam_host.cpp:14</div></div>
+<div class="ttc" id="aclass_beam_1_1_project_manager_html_a4edae2bd477512f4925e60b2e1bdcd37"><div class="ttname"><a href="class_beam_1_1_project_manager.html#a4edae2bd477512f4925e60b2e1bdcd37">Beam::ProjectManager::saveProject</a></div><div class="ttdeci">static void saveProject(const std::string &amp;filename, const nlohmann::json &amp;data)</div><div class="ttdef"><b>Definition</b> project_manager.hpp:13</div></div>
+<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> application_base.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li><li class="navelem"><a href="project__manager_8hpp.html">project_manager.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_53e88f7fa585331171beac223e0e5b81.html">session</a></li><li class="navelem"><a href="project__manager_8hpp.html">project_manager.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

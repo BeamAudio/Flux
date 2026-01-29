@@ -10,18 +10,20 @@ namespace Beam {
 
 class ProjectManager {
 public:
-    static bool saveProject(const std::string& filename, const nlohmann::json& projectData) {
+    static void saveProject(const std::string& filename, const nlohmann::json& data) {
         std::ofstream file(filename);
-        if (!file.is_open()) return false;
-        file << projectData.dump(4);
-        return true;
+        if (file.is_open()) {
+            file << data.dump(4);
+        }
     }
 
     static nlohmann::json loadProject(const std::string& filename) {
         std::ifstream file(filename);
         if (!file.is_open()) return nlohmann::json();
         nlohmann::json data;
-        file >> data;
+        try {
+            file >> data;
+        } catch(...) { return nlohmann::json(); }
         return data;
     }
 };
@@ -29,6 +31,9 @@ public:
 } // namespace Beam
 
 #endif // PROJECT_MANAGER_HPP
+
+
+
 
 
 

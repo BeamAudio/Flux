@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['left_0',['Left',['../class_beam_1_1_sidebar.html#a156ccc2325cb05049f4ed58d21667c75a945d5e233cf7d6240f6b783b36a374ff',1,'Beam::Sidebar']]],
-  ['lowpass_1',['LowPass',['../namespace_beam.html#aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63',1,'Beam']]]
+  ['idle_0',['Idle',['../namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9fae599161956d626eda4cb0a5ffb85271c',1,'Beam']]],
+  ['input_1',['Input',['../namespace_beam.html#ae4c392a66fa6e2b6c86c6d5356ffe846a324118a6721dd6b8a9b9f4e327df2bf5',1,'Beam']]]
 ];

@@ -15,7 +15,7 @@ Inheritance diagram for Beam::\+Delay\+Node:\+\begin{figure}[H]
 \item 
 \doxymbox{\hyperlink{class_beam_1_1_delay_node_af4f9dc6cc6e26c7bb963f17c85c3858c}{Delay\+Node}} (float delay\+Seconds, float feedback, float sample\+Rate)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels) override
+void \doxymbox{\hyperlink{class_beam_1_1_delay_node_a44fdc2abfe4112bf5e89f97d1c9ebe20}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels, size\+\_\+t start\+Frame=0) override
 \item 
 std::\+string \doxymbox{\hyperlink{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e}{get\+Name}} () const override
 \end{DoxyCompactItemize}
@@ -71,15 +71,15 @@ std::\+string Beam::\+\+Delay\+Node::\+get\+Name (\begin{DoxyParamCaption}{}{}\e
 
 Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{Beam::\+\+Audio\+Node}}.
 
-\Hypertarget{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858}\index{Beam::DelayNode@{Beam::DelayNode}!process@{process}}
+\Hypertarget{class_beam_1_1_delay_node_a44fdc2abfe4112bf5e89f97d1c9ebe20}\index{Beam::DelayNode@{Beam::DelayNode}!process@{process}}
 \index{process@{process}!Beam::DelayNode@{Beam::DelayNode}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858} 
-void Beam::\+\+Delay\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_delay_node_a44fdc2abfe4112bf5e89f97d1c9ebe20} 
+void Beam::\+\+Delay\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{, }\item[{size\+\_\+t}]{start\+Frame}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{Beam::\+\+Audio\+Node}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7}{Beam::\+\+Audio\+Node}}.
 
 
 
@@ -114,4 +114,4 @@ size\+\_\+t Beam::\+\+Delay\+Node::\+m\+\_\+write\+Ptr\hspace{0.3cm}{\ttfamily [
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{delay__node_8hpp}{delay\+\_\+node.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{delay__node_8hpp}{delay\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

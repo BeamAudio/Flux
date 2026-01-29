@@ -2,6 +2,11 @@
 \hypertarget{class_beam_1_1_quad_batcher}{}\label{class_beam_1_1_quad_batcher}\index{Beam::QuadBatcher@{Beam::QuadBatcher}}
 
 
+High-\/performance Open\+GL renderer for 2D primitives and text.  
+
+
+
+
 {\ttfamily \+\#include $<$quad\+\_\+batcher.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
@@ -12,18 +17,32 @@
 \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2db51466ed3ace6c5d3876e04a35044}{\texorpdfstring{$\sim$}{\string~}\+Quad\+Batcher}} ()
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_aab5d3d705e6dcd91f650264129380d31}{begin}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Prepares the batcher for a new frame. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{draw\+Quad}} (float x, float y, float w, float h, float r, float g, float b, float a)
-\item 
+\begin{DoxyCompactList}\small\item\em Draws a solid colored quad. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{draw\+Rounded\+Rect}} (float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a)
-\item 
+\begin{DoxyCompactList}\small\item\em Draws a rounded rectangle with customizable softness (SDF-\/based). \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{draw\+Text}} (const std::\+string \&text, float x, float y, float size, float r, float g, float b, float a)
-\item 
+\begin{DoxyCompactList}\small\item\em Draws bitmap text using the internal font. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a102ad0e0922bacd0af5e2e1f0da50243}{draw\+Texture}} (unsigned int texture\+Id, float x, float y, float w, float h, float u0=0.\+0f, float v0=0.\+0f, float u1=1.\+0f, float v1=1.\+0f, float r=1.\+0f, float g=1.\+0f, float b=1.\+0f, float a=1.\+0f)
+\begin{DoxyCompactList}\small\item\em Draws a textured quad with specific UV coordinates. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac2752da0502368d91bf4ae417de61a27}{draw\+Smooth\+Line}} (float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a)
+\begin{DoxyCompactList}\small\item\em Draws an anti-\/aliased line segment using SDF. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a296da7f546a2d405ec7e09b3cb1f725e}{draw\+Curve}} (const std::\+vector$<$ std::\+pair$<$ float, float $>$ $>$ \&points, float thickness, float r, float g, float b, float a)
+\begin{DoxyCompactList}\small\item\em Draws a continuous anti-\/aliased curve from a set of points. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{draw\+Line}} (float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2f4ad2e5231b76d8b58f33f9afae7e0}{draw\+Rect}} (float x, float y, float w, float h, float thickness, float r, float g, float b, float a)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a7d04ae84e0638e4531264ff5e8de383f}{flush}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a737a582ce7ce4919160d0f3193462d93}{set\+Scissor}} (float x, float y, float w, float h, float screen\+Height)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a312063d401dc0f09f67f31182d55e4f5}{clear\+Scissor}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a9e0325c2bcab2008c8f38a24e480b1c5}{set\+View\+Transform}} (float tx, float ty, float zoom)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac958f72e3fc168a11fecba1f5a5a00b7}{reset\+View\+Transform}} (float screenW, float screenH)
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a838b935a69a5041d714b4895c5f737dd}{set\+Shader}} (class \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}} \texorpdfstring{$\ast$}{*}shader)
 \end{DoxyCompactItemize}
@@ -50,8 +69,17 @@ unsigned int \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0b453e3a8d0b7b673
 std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_vertex}{Vertex}} $>$ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac47e3f9be44ce389aaa15a44c9f3bd94}{m\+\_\+vertices}}
 \item 
 class \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0bf56fdf73e935879113849de645fb63}{m\+\_\+shader}} = nullptr
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a68ff331ea5dc013c591ba66c14b69506}{m\+\_\+view\+Tx}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a88c3320e0bd09f1eb468e9745e13d699}{m\+\_\+view\+Ty}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_affdb6b9f0d32f95a7752b1c4a38311cd}{m\+\_\+view\+Zoom}} = 1.\+0f
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+High-\/performance Open\+GL renderer for 2D primitives and text. 
 
 \label{doc-constructors}
 \Hypertarget{class_beam_1_1_quad_batcher_doc-constructors}
@@ -79,11 +107,31 @@ Beam::\+\+Quad\+Batcher::\+\texorpdfstring{$\sim$}{\string~}\+Quad\+Batcher (\be
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_aab5d3d705e6dcd91f650264129380d31} 
 void Beam::\+\+Quad\+Batcher::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Prepares the batcher for a new frame. 
+
+\Hypertarget{class_beam_1_1_quad_batcher_a312063d401dc0f09f67f31182d55e4f5}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!clearScissor@{clearScissor}}
+\index{clearScissor@{clearScissor}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{clearScissor()}{clearScissor()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a312063d401dc0f09f67f31182d55e4f5} 
+void Beam::\+\+Quad\+Batcher::\+clear\+Scissor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
 \Hypertarget{class_beam_1_1_quad_batcher_a3f0b54c6cfd0ba9e85bd6c7c239eb928}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!createFontTexture@{createFontTexture}}
 \index{createFontTexture@{createFontTexture}!Beam::QuadBatcher@{Beam::QuadBatcher}}
 \doxysubsubsection{\texorpdfstring{createFontTexture()}{createFontTexture()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a3f0b54c6cfd0ba9e85bd6c7c239eb928} 
 void Beam::\+\+Quad\+Batcher::\+create\+Font\+Texture (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_quad_batcher_a296da7f546a2d405ec7e09b3cb1f725e}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawCurve@{drawCurve}}
+\index{drawCurve@{drawCurve}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{drawCurve()}{drawCurve()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a296da7f546a2d405ec7e09b3cb1f725e} 
+void Beam::\+\+Quad\+Batcher::\+draw\+Curve (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+pair$<$ float, float $>$ $>$ \&}]{points}{, }\item[{float}]{thickness}{, }\item[{float}]{r}{, }\item[{float}]{g}{, }\item[{float}]{b}{, }\item[{float}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Draws a continuous anti-\/aliased curve from a set of points. 
 
 \Hypertarget{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawLine@{drawLine}}
 \index{drawLine@{drawLine}!Beam::QuadBatcher@{Beam::QuadBatcher}}
@@ -97,6 +145,10 @@ void Beam::\+\+Quad\+Batcher::\+draw\+Line (\begin{DoxyParamCaption}\item[{float
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503} 
 void Beam::\+\+Quad\+Batcher::\+draw\+Quad (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{w}{, }\item[{float}]{h}{, }\item[{float}]{r}{, }\item[{float}]{g}{, }\item[{float}]{b}{, }\item[{float}]{a}{}\end{DoxyParamCaption})}
 
+
+
+Draws a solid colored quad. 
+
 \Hypertarget{class_beam_1_1_quad_batcher_ad2f4ad2e5231b76d8b58f33f9afae7e0}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawRect@{drawRect}}
 \index{drawRect@{drawRect}!Beam::QuadBatcher@{Beam::QuadBatcher}}
 \doxysubsubsection{\texorpdfstring{drawRect()}{drawRect()}}
@@ -109,11 +161,39 @@ void Beam::\+\+Quad\+Batcher::\+draw\+Rect (\begin{DoxyParamCaption}\item[{float
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb} 
 void Beam::\+\+Quad\+Batcher::\+draw\+Rounded\+Rect (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{w}{, }\item[{float}]{h}{, }\item[{float}]{radius}{, }\item[{float}]{softness}{, }\item[{float}]{r}{, }\item[{float}]{g}{, }\item[{float}]{b}{, }\item[{float}]{a}{}\end{DoxyParamCaption})}
 
+
+
+Draws a rounded rectangle with customizable softness (SDF-\/based). 
+
+\Hypertarget{class_beam_1_1_quad_batcher_ac2752da0502368d91bf4ae417de61a27}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawSmoothLine@{drawSmoothLine}}
+\index{drawSmoothLine@{drawSmoothLine}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{drawSmoothLine()}{drawSmoothLine()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_ac2752da0502368d91bf4ae417de61a27} 
+void Beam::\+\+Quad\+Batcher::\+draw\+Smooth\+Line (\begin{DoxyParamCaption}\item[{float}]{x1}{, }\item[{float}]{y1}{, }\item[{float}]{x2}{, }\item[{float}]{y2}{, }\item[{float}]{thickness}{, }\item[{float}]{r}{, }\item[{float}]{g}{, }\item[{float}]{b}{, }\item[{float}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Draws an anti-\/aliased line segment using SDF. 
+
 \Hypertarget{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawText@{drawText}}
 \index{drawText@{drawText}!Beam::QuadBatcher@{Beam::QuadBatcher}}
 \doxysubsubsection{\texorpdfstring{drawText()}{drawText()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a} 
 void Beam::\+\+Quad\+Batcher::\+draw\+Text (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{text}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{size}{, }\item[{float}]{r}{, }\item[{float}]{g}{, }\item[{float}]{b}{, }\item[{float}]{a}{}\end{DoxyParamCaption})}
+
+
+
+Draws bitmap text using the internal font. 
+
+\Hypertarget{class_beam_1_1_quad_batcher_a102ad0e0922bacd0af5e2e1f0da50243}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!drawTexture@{drawTexture}}
+\index{drawTexture@{drawTexture}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{drawTexture()}{drawTexture()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a102ad0e0922bacd0af5e2e1f0da50243} 
+void Beam::\+\+Quad\+Batcher::\+draw\+Texture (\begin{DoxyParamCaption}\item[{unsigned int}]{texture\+Id}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{w}{, }\item[{float}]{h}{, }\item[{float}]{u0}{ = {\ttfamily 0.0f}, }\item[{float}]{v0}{ = {\ttfamily 0.0f}, }\item[{float}]{u1}{ = {\ttfamily 1.0f}, }\item[{float}]{v1}{ = {\ttfamily 1.0f}, }\item[{float}]{r}{ = {\ttfamily 1.0f}, }\item[{float}]{g}{ = {\ttfamily 1.0f}, }\item[{float}]{b}{ = {\ttfamily 1.0f}, }\item[{float}]{a}{ = {\ttfamily 1.0f}}\end{DoxyParamCaption})}
+
+
+
+Draws a textured quad with specific UV coordinates. 
 
 \Hypertarget{class_beam_1_1_quad_batcher_a7d04ae84e0638e4531264ff5e8de383f}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!flush@{flush}}
 \index{flush@{flush}!Beam::QuadBatcher@{Beam::QuadBatcher}}
@@ -121,11 +201,29 @@ void Beam::\+\+Quad\+Batcher::\+draw\+Text (\begin{DoxyParamCaption}\item[{const
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a7d04ae84e0638e4531264ff5e8de383f} 
 void Beam::\+\+Quad\+Batcher::\+flush (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\Hypertarget{class_beam_1_1_quad_batcher_ac958f72e3fc168a11fecba1f5a5a00b7}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!resetViewTransform@{resetViewTransform}}
+\index{resetViewTransform@{resetViewTransform}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{resetViewTransform()}{resetViewTransform()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_ac958f72e3fc168a11fecba1f5a5a00b7} 
+void Beam::\+\+Quad\+Batcher::\+reset\+View\+Transform (\begin{DoxyParamCaption}\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_quad_batcher_a737a582ce7ce4919160d0f3193462d93}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!setScissor@{setScissor}}
+\index{setScissor@{setScissor}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{setScissor()}{setScissor()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a737a582ce7ce4919160d0f3193462d93} 
+void Beam::\+\+Quad\+Batcher::\+set\+Scissor (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{w}{, }\item[{float}]{h}{, }\item[{float}]{screen\+Height}{}\end{DoxyParamCaption})}
+
 \Hypertarget{class_beam_1_1_quad_batcher_a838b935a69a5041d714b4895c5f737dd}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!setShader@{setShader}}
 \index{setShader@{setShader}!Beam::QuadBatcher@{Beam::QuadBatcher}}
 \doxysubsubsection{\texorpdfstring{setShader()}{setShader()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a838b935a69a5041d714b4895c5f737dd} 
 void Beam::\+\+Quad\+Batcher::\+set\+Shader (\begin{DoxyParamCaption}\item[{class \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}} \texorpdfstring{$\ast$}{*}}]{shader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_quad_batcher_a9e0325c2bcab2008c8f38a24e480b1c5}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!setViewTransform@{setViewTransform}}
+\index{setViewTransform@{setViewTransform}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{setViewTransform()}{setViewTransform()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a9e0325c2bcab2008c8f38a24e480b1c5} 
+void Beam::\+\+Quad\+Batcher::\+set\+View\+Transform (\begin{DoxyParamCaption}\item[{float}]{tx}{, }\item[{float}]{ty}{, }\item[{float}]{zoom}{}\end{DoxyParamCaption})}
 
 
 
@@ -180,9 +278,27 @@ unsigned int Beam::\+\+Quad\+Batcher::\+m\+\_\+vbo\hspace{0.3cm}{\ttfamily [priv
 {\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_ac47e3f9be44ce389aaa15a44c9f3bd94} 
 std::\+vector$<$\doxymbox{\hyperlink{struct_beam_1_1_vertex}{Vertex}}$>$ Beam::\+\+Quad\+Batcher::\+m\+\_\+vertices\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_quad_batcher_a68ff331ea5dc013c591ba66c14b69506}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!m\_viewTx@{m\_viewTx}}
+\index{m\_viewTx@{m\_viewTx}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{m\_viewTx}{m\_viewTx}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a68ff331ea5dc013c591ba66c14b69506} 
+float Beam::\+\+Quad\+Batcher::\+m\+\_\+view\+Tx = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_quad_batcher_a88c3320e0bd09f1eb468e9745e13d699}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!m\_viewTy@{m\_viewTy}}
+\index{m\_viewTy@{m\_viewTy}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{m\_viewTy}{m\_viewTy}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_a88c3320e0bd09f1eb468e9745e13d699} 
+float Beam::\+\+Quad\+Batcher::\+m\+\_\+view\+Ty = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_quad_batcher_affdb6b9f0d32f95a7752b1c4a38311cd}\index{Beam::QuadBatcher@{Beam::QuadBatcher}!m\_viewZoom@{m\_viewZoom}}
+\index{m\_viewZoom@{m\_viewZoom}!Beam::QuadBatcher@{Beam::QuadBatcher}}
+\doxysubsubsection{\texorpdfstring{m\_viewZoom}{m\_viewZoom}}
+{\footnotesize\ttfamily \label{class_beam_1_1_quad_batcher_affdb6b9f0d32f95a7752b1c4a38311cd} 
+float Beam::\+\+Quad\+Batcher::\+m\+\_\+view\+Zoom = 1.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
 \item 
-src/\+graphics/\+\doxymbox{\hyperlink{quad__batcher_8hpp}{quad\+\_\+batcher.\+hpp}}\item 
-src/\+graphics/\+\doxymbox{\hyperlink{quad__batcher_8cpp}{quad\+\_\+batcher.\+cpp}}\end{DoxyCompactItemize}
+src/\+render/\+\doxymbox{\hyperlink{quad__batcher_8hpp}{quad\+\_\+batcher.\+hpp}}\item 
+src/\+render/\+\doxymbox{\hyperlink{quad__batcher_8cpp}{quad\+\_\+batcher.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,33 @@
+\doxysection{dsp\+\_\+utils.\+hpp}
+\hypertarget{dsp__utils_8hpp_source}{}\label{dsp__utils_8hpp_source}\index{src/engine/dsp\_utils.hpp@{src/engine/dsp\_utils.hpp}}
+\doxymbox{\hyperlink{dsp__utils_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DSP\_UTILS\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DSP\_UTILS\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{namespace_beam_aa7334dd3aa681f0530ad4fdc9b379103}{flush\_denormal}}(\textcolor{keywordtype}{float}\ value)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ threshold\ =\ 1e-\/15f;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::abs(value)\ <\ threshold)\ \textcolor{keywordflow}{return}\ 0.0f;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{namespace_beam_a341c0372319f0ae0e71027ff179eb64c}{clip}}(\textcolor{keywordtype}{float}\ val,\ \textcolor{keywordtype}{float}\ min,\ \textcolor{keywordtype}{float}\ max)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ (std::max)(min,\ (std::min)(max,\ val));}
+\DoxyCodeLine{00026\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DSP\_UTILS\_HPP}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+
+\end{DoxyCode}

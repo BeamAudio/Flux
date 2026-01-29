@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Beam Audio Flux: src/dsp/wav_writer.hpp Source File</title>
+<title>Beam Audio Flux: src/engine/wav_writer.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -117,8 +117,8 @@ $(function(){initNavTree('wav__writer_8hpp_source.html','',''); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        file.write(<span class="stringliteral">&quot;fmt &quot;</span>, 4);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        int32_t fmtSize = 16;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        file.write(<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(&amp;fmtSize), 4);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        int16_t format = 1; <span class="comment">// PCM</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        file.write(<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(&amp;format), 2);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        int16_t <a class="code hl_variable" href="texture_8cpp.html#af32a7948195084e10cd10c29f1053480">format</a> = 1; <span class="comment">// PCM</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        file.write(<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(&amp;<a class="code hl_variable" href="texture_8cpp.html#af32a7948195084e10cd10c29f1053480">format</a>), 2);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        int16_t numChannels = <span class="keyword">static_cast&lt;</span>int16_t<span class="keyword">&gt;</span>(channels);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        file.write(<span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(&amp;numChannels), 2);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        int32_t sRate = sampleRate;</div>
@@ -150,16 +150,23 @@ $(function(){initNavTree('wav__writer_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <span class="comment">// namespace Beam</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="ttc" id="aclass_beam_1_1_wav_writer_html"><div class="ttname"><a href="class_beam_1_1_wav_writer.html">Beam::WavWriter</a></div><div class="ttdef"><b>Definition</b> wav_writer.hpp:8</div></div>
 <div class="ttc" id="aclass_beam_1_1_wav_writer_html_a907da59c59b79311cbe891d78c12ce6e"><div class="ttname"><a href="class_beam_1_1_wav_writer.html#a907da59c59b79311cbe891d78c12ce6e">Beam::WavWriter::write</a></div><div class="ttdeci">static bool write(const std::string &amp;filename, const float *buffer, size_t numSamples, int sampleRate, int channels)</div><div class="ttdef"><b>Definition</b> wav_writer.hpp:10</div></div>
-<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> beam_host.cpp:14</div></div>
+<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> application_base.cpp:3</div></div>
+<div class="ttc" id="atexture_8cpp_html_af32a7948195084e10cd10c29f1053480"><div class="ttname"><a href="texture_8cpp.html#af32a7948195084e10cd10c29f1053480">format</a></div><div class="ttdeci">GLint GLint GLsizei GLsizei GLint GLenum format</div><div class="ttdef"><b>Definition</b> texture.cpp:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_01d2cdbd82b1e18dc073ab3ebd5ada7e.html">dsp</a></li><li class="navelem"><a href="wav__writer_8hpp.html">wav_writer.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a href="wav__writer_8hpp.html">wav_writer.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

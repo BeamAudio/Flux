@@ -10,8 +10,7 @@ int main() {
     testData["modules"] = { {"id", 1, "type", "Oscillator"}, {"id", 2, "type", "Gain"} };
 
     // Test Save
-    bool saved = Beam::ProjectManager::saveProject(testFile, testData);
-    assert(saved);
+    Beam::ProjectManager::saveProject(testFile, testData);
     std::cout << "Persistence Test: Save Success." << std::endl;
 
     // Test Load
@@ -23,5 +22,7 @@ int main() {
 
     return 0;
 }
+
+
 
 

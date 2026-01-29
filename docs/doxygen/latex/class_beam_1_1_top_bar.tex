@@ -13,9 +13,9 @@ Inheritance diagram for Beam::\+Top\+Bar:\+\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\doxymbox{\hyperlink{class_beam_1_1_top_bar_a264f67bfc7519f1538c6728d8cd1e11e}{Top\+Bar}} (int width)
+\doxymbox{\hyperlink{class_beam_1_1_top_bar_a264f67bfc7519f1538c6728d8cd1e11e}{Top\+Bar}} (int \doxymbox{\hyperlink{texture_8cpp_a8710f3c5c66c09e158c8619b3fca614a}{width}})
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_top_bar_afea870bc1388aee09948c8d5b0dd014f}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher) override
+void \doxymbox{\hyperlink{class_beam_1_1_top_bar_af303c78b8a62b18bd91cb4cc31d2f7f9}{render}} (\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&batcher, float dt, float screenW, float screenH) override
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_top_bar_a00fbc22478eb3256b0e11a75cf78cec9}{on\+Mouse\+Down}} (float x, float y, int button) override
 \item 
@@ -32,6 +32,8 @@ virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba
 \item 
 virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{on\+Mouse\+Move}} (float x, float y)
 \item 
+virtual bool \doxymbox{\hyperlink{class_beam_1_1_component_ab92e884903f8a621fcd57bc00a24b041}{on\+Mouse\+Wheel}} (float x, float y, float delta)
+\item 
 virtual void \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{set\+Bounds}} (float x, float y, float w, float h)
 \item 
 const \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}} \& \doxymbox{\hyperlink{class_beam_1_1_component_a5746dbc69d5b0adb4cffbcf920936d00}{get\+Bounds}} () const
@@ -44,6 +46,8 @@ void \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242
 \begin{DoxyCompactItemize}
 \item 
 std::\+function$<$ void(int)$>$ \doxymbox{\hyperlink{class_beam_1_1_top_bar_a49378791fe51f2dff50e1124024ca73d}{on\+Mode\+Changed}}
+\item 
+std::\+function$<$ void()$>$ \doxymbox{\hyperlink{class_beam_1_1_top_bar_a72107ce678efdd73c6fd326b5e881ae0}{on\+Config\+Requested}}
 \item 
 std::\+function$<$ void()$>$ \doxymbox{\hyperlink{class_beam_1_1_top_bar_ae6da30fe543f4a6a0f54cf2ef1663238}{on\+Save\+Requested}}
 \item 
@@ -104,15 +108,15 @@ bool Beam::\+\+Top\+Bar::\+on\+Mouse\+Down (\begin{DoxyParamCaption}\item[{float
 
 Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_component_aec1da33d2d6e3d4e7dd6708309264e76}{Beam::\+\+Component}}.
 
-\Hypertarget{class_beam_1_1_top_bar_afea870bc1388aee09948c8d5b0dd014f}\index{Beam::TopBar@{Beam::TopBar}!render@{render}}
+\Hypertarget{class_beam_1_1_top_bar_af303c78b8a62b18bd91cb4cc31d2f7f9}\index{Beam::TopBar@{Beam::TopBar}!render@{render}}
 \index{render@{render}!Beam::TopBar@{Beam::TopBar}}
 \doxysubsubsection{\texorpdfstring{render()}{render()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_top_bar_afea870bc1388aee09948c8d5b0dd014f} 
-void Beam::\+\+Top\+Bar::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_top_bar_af303c78b8a62b18bd91cb4cc31d2f7f9} 
+void Beam::\+\+Top\+Bar::\+render (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{Quad\+Batcher}} \&}]{batcher}{, }\item[{float}]{dt}{, }\item[{float}]{screenW}{, }\item[{float}]{screenH}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_component_a2ed6b7841a25bd992bd46b822311ef1d}{Beam::\+\+Component}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_component_acef3496a55f0d94c8678f6049dbaa7cd}{Beam::\+\+Component}}.
 
 \Hypertarget{class_beam_1_1_top_bar_a6d2bf867d1ee7d413b377cda942beb58}\index{Beam::TopBar@{Beam::TopBar}!setPlaying@{setPlaying}}
 \index{setPlaying@{setPlaying}!Beam::TopBar@{Beam::TopBar}}
@@ -130,6 +134,12 @@ void Beam::\+\+Top\+Bar::\+set\+Playing (\begin{DoxyParamCaption}\item[{bool}]{p
 \doxysubsubsection{\texorpdfstring{m\_isPlaying}{m\_isPlaying}}
 {\footnotesize\ttfamily \label{class_beam_1_1_top_bar_aacfd7a81b28a1cdcf7d9cfef3278a937} 
 bool Beam::\+\+Top\+Bar::\+m\+\_\+is\+Playing = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_top_bar_a72107ce678efdd73c6fd326b5e881ae0}\index{Beam::TopBar@{Beam::TopBar}!onConfigRequested@{onConfigRequested}}
+\index{onConfigRequested@{onConfigRequested}!Beam::TopBar@{Beam::TopBar}}
+\doxysubsubsection{\texorpdfstring{onConfigRequested}{onConfigRequested}}
+{\footnotesize\ttfamily \label{class_beam_1_1_top_bar_a72107ce678efdd73c6fd326b5e881ae0} 
+std::\+function$<$void()$>$ Beam::\+\+Top\+Bar::\+on\+Config\+Requested}
 
 \Hypertarget{class_beam_1_1_top_bar_aaa84af8dc8b326e0460006cf8364e41c}\index{Beam::TopBar@{Beam::TopBar}!onLoadRequested@{onLoadRequested}}
 \index{onLoadRequested@{onLoadRequested}!Beam::TopBar@{Beam::TopBar}}
@@ -171,4 +181,4 @@ std::\+function$<$void()$>$ Beam::\+\+Top\+Bar::\+on\+Save\+Requested}
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+ui/\+\doxymbox{\hyperlink{top__bar_8hpp}{top\+\_\+bar.\+hpp}}\end{DoxyCompactItemize}
+src/\+interface/\+\doxymbox{\hyperlink{top__bar_8hpp}{top\+\_\+bar.\+hpp}}\end{DoxyCompactItemize}

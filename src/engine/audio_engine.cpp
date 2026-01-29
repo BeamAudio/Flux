@@ -129,7 +129,7 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
             std::fill(buf, buf + frames * m_channels, 0.0f);
         }
 
-        for (const auto& exec : plan->sequence) {
+        for (auto& exec : plan->sequence) {
             exec.node->setCurrentFrame(m_currentFrame);
             
             if (!midi.getEvents().empty()) {
@@ -145,7 +145,7 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
                 }
             }
 
-            for (const auto& route : exec.outgoingRoutes) {
+            for (auto& route : exec.outgoingRoutes) {
                 float* src = route.sourceNode->getOutputBuffer(route.sourcePort);
                 float* dst = route.destNode->getInputBuffer(route.destPort);
                 SIMD::add(src, dst, frames * m_channels);
@@ -162,5 +162,8 @@ void AudioEngine::process(float* output, int frames, const MIDIBuffer& midi) {
 }
 
 } // namespace Beam
+
+
+
 
 

@@ -7,7 +7,7 @@
 Inheritance diagram for Beam::\+Flux\+Plugin:\+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{class_beam_1_1_flux_plugin}
+\includegraphics[height=12.000000cm]{class_beam_1_1_flux_plugin}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -17,8 +17,12 @@ Inheritance diagram for Beam::\+Flux\+Plugin:\+\begin{figure}[H]
 \item 
 virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912}{process\+Block}} (const float \texorpdfstring{$\ast$}{*}input, float \texorpdfstring{$\ast$}{*}output, int total\+Samples)=0
 \item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a87fb076475f20b062493efa7ca00e045}{process\+Events}} (const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi)
+\begin{DoxyCompactList}\small\item\em Handle MIDI events in your plugin. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_aa1f9c569002ec23eeb5db0af686abea7}{process\+MIDI}} (const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi) override
+\begin{DoxyCompactList}\small\item\em Optional MIDI processing. Called before \doxylink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process()} in the engine loop. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process}} (int frames) override
-\item 
+\begin{DoxyCompactList}\small\item\em Main audio processing method. Must be implemented by subclasses. \end{DoxyCompactList}\item 
 std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a450563af4d65a25b8a8e896dab77a3c6}{get\+Name}} () const override
 \item 
 std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ad231db67f900e8e7dd853936ad2e866a}{get\+Input\+Ports}} () const override
@@ -30,6 +34,12 @@ std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}}
 \item 
 virtual \doxymbox{\hyperlink{class_beam_1_1_flux_node_a708c135cdb61e8838469998cd8a84e65}{\texorpdfstring{$\sim$}{\string~}\+Flux\+Node}} ()=default
 \item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ace8cc49479d8924d44bca5fd4cd955e2}{on\+Transport\+State\+Changed}} (bool playing)
+\begin{DoxyCompactList}\small\item\em Responds to global transport changes (Play/\+\+Pause). \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_node_adc7c4e979bf27de5bfca66815ae97a67}{on\+Transport\+Seek}} (size\+\_\+t frame)
+\begin{DoxyCompactList}\small\item\em Responds to timeline seeking. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_aa579ec06608fd776987bbb089f27fd94}{set\+Current\+Frame}} (size\+\_\+t frame)
+\begin{DoxyCompactList}\small\item\em Sets the current playhead position for this block. \end{DoxyCompactList}\item 
 float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac90bd1a05b5bed3d68978f532386ed29}{get\+Input\+Buffer}} (int port\+Idx)
 \item 
 float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_abf11cfd4f2346ee0cd46d4345f1ed7d4}{get\+Output\+Buffer}} (int port\+Idx)
@@ -38,7 +48,7 @@ void \doxymbox{\hyperlink{class_beam_1_1_flux_node_af37f8c1b6b825da2ce7e35011d6f
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_flux_node_a4bd30f3c8d311afdcd5c0d208e3bbf0f}{is\+Bypassed}} () const
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ param)
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}})
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a59a32442eec144010741b9f2086c516e}{get\+Parameter}} (const std::\+string \&name)
 \item 
@@ -57,7 +67,7 @@ float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a96
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae3bafc1c5a1aa545167256172b3d3688}{setup\+Buffers}} (int num\+Inputs, int num\+Outputs, int buffer\+Size, int channels)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pre-\/allocates buffers for inputs and outputs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -76,6 +86,8 @@ std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_beam_
 std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\+\_\+parameters}}
 \item 
 std::\+atomic$<$ bool $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\+\_\+bypassed}} \{false\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_flux_node_a7d8556ddb1482f997cda7749d737668b}{m\+\_\+current\+Frame}} = 0
 \end{DoxyCompactItemize}
 
 
@@ -152,6 +164,15 @@ void Beam::\+\+Flux\+Plugin::\+process (\begin{DoxyParamCaption}\item[{int}]{fra
 
 
 
+Main audio processing method. Must be implemented by subclasses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frames} & Number of frames to process in the current block. \\
+\hline
+\end{DoxyParams}
+
+
 Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a3c263446753fa7ae5ff6928ee57bcd4d}{Beam::\+\+Flux\+Node}}.
 
 \Hypertarget{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!processBlock@{processBlock}}
@@ -162,7 +183,36 @@ virtual void Beam::\+\+Flux\+Plugin::\+process\+Block (\begin{DoxyParamCaption}\
 
 
 
-Implemented in \doxymbox{\hyperlink{class_beam_1_1_custom_filter_ae561b7a4fb99126dda6d9adb7c12c80a}{Beam::\+\+Custom\+Filter}}.
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_console_e___e_q_a957a65f7ecdbe08cd5f6ae9c5c8796da}{Beam::\+\+Console\+E\+\_\+\+EQ}}, \doxymbox{\hyperlink{class_beam_1_1_custom_filter_ae561b7a4fb99126dda6d9adb7c12c80a}{Beam::\+\+Custom\+Filter}}, \doxymbox{\hyperlink{class_beam_1_1_echo_plex_a26d16b6feed01873e169f83083873c61}{Beam::\+\+Echo\+Plex}}, \doxymbox{\hyperlink{class_beam_1_1_f_e_t76_a592f2490ae49223add9dbdd1d7ce23d5}{Beam::\+\+FET76}}, \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_a1edabd22ff7b188d62d46aac298fd2d0}{Beam::\+\+Flux\+Delay\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_flux_filter_node_a075b9fc4a15a1b51c5d948bd6ac27432}{Beam::\+\+Flux\+Filter\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_flux_gain_node_af9e67f1fc2cfc0772405be5d8b820776}{Beam::\+\+Flux\+Gain\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_opto2_a_a6b73dd169be22f140859578aa0f7ed40}{Beam::\+\+Opto2A}}, \doxymbox{\hyperlink{class_beam_1_1_steel_plate_a5b1b681074dbcb4f3307c235fdbe914d}{Beam::\+\+Steel\+Plate}}, \doxymbox{\hyperlink{class_beam_1_1_tube_compressor_node_a45c3b4af658365cf72b55a961abd479a}{Beam::\+\+Tube\+Compressor\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_tube_limiter_a3e25de329299557cdeb25a7d03a2afdc}{Beam::\+\+Tube\+Limiter}}, and \doxymbox{\hyperlink{class_beam_1_1_tube_p___e_q_a8adbb2e60d4a51d203a942d722643b4b}{Beam::\+\+Tube\+P\+\_\+\+EQ}}.
+
+\Hypertarget{class_beam_1_1_flux_plugin_a87fb076475f20b062493efa7ca00e045}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!processEvents@{processEvents}}
+\index{processEvents@{processEvents}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{processEvents()}{processEvents()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_a87fb076475f20b062493efa7ca00e045} 
+virtual void Beam::\+\+Flux\+Plugin::\+process\+Events (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&}]{midi}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handle MIDI events in your plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em midi} & The buffer containing all MIDI events for the current block. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_beam_1_1_flux_plugin_aa1f9c569002ec23eeb5db0af686abea7}\index{Beam::FluxPlugin@{Beam::FluxPlugin}!processMIDI@{processMIDI}}
+\index{processMIDI@{processMIDI}!Beam::FluxPlugin@{Beam::FluxPlugin}}
+\doxysubsubsection{\texorpdfstring{processMIDI()}{processMIDI()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_plugin_aa1f9c569002ec23eeb5db0af686abea7} 
+void Beam::\+\+Flux\+Plugin::\+process\+MIDI (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&}]{midi}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Optional MIDI processing. Called before \doxylink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process()} in the engine loop. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae9d1e151eff5166de969f45de06d5596}{Beam::\+\+Flux\+Node}}.
 
 
 
@@ -185,4 +235,4 @@ float Beam::\+\+Flux\+Plugin::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [pri
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{flux__plugin_8hpp}{flux\+\_\+plugin.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{flux__plugin_8hpp}{flux\+\_\+plugin.\+hpp}}\end{DoxyCompactItemize}

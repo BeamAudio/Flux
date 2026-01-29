@@ -1,0 +1,58 @@
+\doxysection{Beam::\+Analog\+Base Class Reference}
+\hypertarget{class_beam_1_1_analog_base}{}\label{class_beam_1_1_analog_base}\index{Beam::AnalogBase@{Beam::AnalogBase}}
+
+
+Provides reusable physics-\/based algorithms for analog emulation.  
+
+
+
+
+{\ttfamily \+\#include $<$analog\+\_\+base.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{One\+Pole\+Filter}}
+\begin{DoxyCompactList}\small\item\em Simple 6d\+B/\+oct filter for simulating cable capacitance or basic tone shaping. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator}{Wow\+Flutter\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generates physical tape speed fluctuations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \doxymbox{\hyperlink{class_beam_1_1_analog_base_a8eed4bd2205e1ff9dd9ab036ea7cfe95}{saturate\+Langevin}} (float x, float drive)
+\begin{DoxyCompactList}\small\item\em Langevin function approximation for magnetic hysteresis simulation. High-\/level saturation that mimics how iron-\/oxide particles on tape respond to flux. \end{DoxyCompactList}\item 
+static float \doxymbox{\hyperlink{class_beam_1_1_analog_base_a2ee8b06f1d7ce4b8cc4e30b44685b959}{saturate\+Transformer}} (float x, float iron)
+\begin{DoxyCompactList}\small\item\em Simulates odd-\/harmonic distortion typical of transformer cores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides reusable physics-\/based algorithms for analog emulation. 
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_analog_base_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_analog_base_a8eed4bd2205e1ff9dd9ab036ea7cfe95}\index{Beam::AnalogBase@{Beam::AnalogBase}!saturateLangevin@{saturateLangevin}}
+\index{saturateLangevin@{saturateLangevin}!Beam::AnalogBase@{Beam::AnalogBase}}
+\doxysubsubsection{\texorpdfstring{saturateLangevin()}{saturateLangevin()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_a8eed4bd2205e1ff9dd9ab036ea7cfe95} 
+float Beam::\+\+Analog\+Base::\+saturate\+Langevin (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{drive}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Langevin function approximation for magnetic hysteresis simulation. High-\/level saturation that mimics how iron-\/oxide particles on tape respond to flux. 
+
+\Hypertarget{class_beam_1_1_analog_base_a2ee8b06f1d7ce4b8cc4e30b44685b959}\index{Beam::AnalogBase@{Beam::AnalogBase}!saturateTransformer@{saturateTransformer}}
+\index{saturateTransformer@{saturateTransformer}!Beam::AnalogBase@{Beam::AnalogBase}}
+\doxysubsubsection{\texorpdfstring{saturateTransformer()}{saturateTransformer()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_a2ee8b06f1d7ce4b8cc4e30b44685b959} 
+float Beam::\+\+Analog\+Base::\+saturate\+Transformer (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{iron}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Simulates odd-\/harmonic distortion typical of transformer cores. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{analog__base_8hpp}{analog\+\_\+base.\+hpp}}\end{DoxyCompactItemize}

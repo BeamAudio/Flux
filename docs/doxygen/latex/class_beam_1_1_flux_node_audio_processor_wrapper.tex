@@ -1,0 +1,207 @@
+\doxysection{Beam::\+Flux\+Node\+Audio\+Processor\+Wrapper Class Reference}
+\hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper}{}\label{class_beam_1_1_flux_node_audio_processor_wrapper}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+
+
+Wrapper to expose \doxylink{class_beam_1_1_flux_node}{Flux\+Node} as an \doxylink{class_beam_1_1_audio_processor}{Audio\+Processor} for JUCE-\/like API compatibility.  
+
+
+
+
+{\ttfamily \+\#include $<$flux\+\_\+node\+\_\+audio\+\_\+processor\+\_\+wrapper.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Flux\+Node\+Audio\+Processor\+Wrapper:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_flux_node_audio_processor_wrapper}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_ab76d80d3acccaf5adb860dd57af02292}{Flux\+Node\+Audio\+Processor\+Wrapper}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ node)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a26b885175501fb2cad51c69ef85489c1}{prepare\+To\+Play}} (double sample\+Rate, int samples\+Per\+Block) override
+\begin{DoxyCompactList}\small\item\em Called before audio processing begins. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a124968314929cbbf897db8a23ef5ed3b}{release\+Resources}} () override
+\begin{DoxyCompactList}\small\item\em Called after audio stops. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_ad4916adf7b3423d1407a4058e43d3a8f}{process\+Block}} (float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}audio\+Input\+Output, int num\+Input\+Channels, int num\+Output\+Channels, int num\+Samples, const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi\+Messages) override
+\begin{DoxyCompactList}\small\item\em Main processing function. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_aa2b20d72dcf9a64018cfa617ee29df8c}{get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the name of this processor. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_af5f7eb577be8e860cd7e15126a05d285}{get\+Num\+Input\+Channels}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the number of input channels. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a2e3a9d06433fc35e14071301544125df}{get\+Num\+Output\+Channels}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the number of output channels. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_afd958da23f8ba0df72dd915402d2128d}{get\+Flux\+Node}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_processor}{Beam::\+\+Audio\+Processor}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd}{Audio\+Processor}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_audio_processor_aa760c6d60a8045dc32aa1578b9c74afe}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Processor}} ()
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0e0668105ca3844b5d0947a3fcf25b7b}{get\+Num\+Parameters}} () const
+\begin{DoxyCompactList}\small\item\em Returns the total number of parameters. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8dd4277153a28700b0b043ef218a4d15}{get\+Parameter\+Name}} (int parameter\+Index) const
+\begin{DoxyCompactList}\small\item\em Returns the name of a parameter. \end{DoxyCompactList}\item 
+virtual float \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a456045a6f38f955db222bfdbb1e54be0}{get\+Parameter}} (int parameter\+Index) const
+\begin{DoxyCompactList}\small\item\em Returns the value of a parameter. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3e9a8c5b7470f9a957d85b84efff64b1}{set\+Parameter}} (int parameter\+Index, float new\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a parameter. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_processor_ad0c8e5cece50693d131dc9476f5a7835}{get\+Parameter\+Text}} (int parameter\+Index, float value) const
+\begin{DoxyCompactList}\small\item\em Returns the text representation of a parameter\textquotesingle{}s value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7e9f840858284252d4a288f4e89e0c8e}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ parameter)
+\begin{DoxyCompactList}\small\item\em Adds a parameter to this processor. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7298dde8e5844676fea306d579ae1b5c}{get\+Parameter\+By\+Index}} (int index) const
+\begin{DoxyCompactList}\small\item\em Gets a parameter by index. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3b570dc9bcbeb3208e026e436c1fe9e7}{get\+Parameter\+By\+Name}} (const std::\+string \&name) const
+\begin{DoxyCompactList}\small\item\em Gets a parameter by name. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7da84e7885fe1660401485dd1f46c8f9}{set\+Current\+Playback\+State}} (bool is\+Playing, double current\+Time\+Seconds, double tempo)
+\begin{DoxyCompactList}\small\item\em Called when the play head state changes. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a480e589f13d2a2046d7d46896c17daaa}{get\+Sample\+Rate}} () const
+\begin{DoxyCompactList}\small\item\em Returns the current sample rate. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a49a5218a84064deb3c05aad0087be7a3}{get\+Block\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Returns the current block size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a5733b304d9589c0bf2a6a61b42775572}{m\+\_\+flux\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_processor}{Beam::\+\+Audio\+Processor}}}
+\begin{DoxyCompactItemize}
+\item 
+double \doxymbox{\hyperlink{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840}{m\+\_\+sample\+Rate}} = 44100.\+0
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466}{m\+\_\+block\+Size}} = 512
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a89bb21df73830e6b14b8bf69d3ba68a1}{m\+\_\+parameters}}
+\item 
+std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0430f0f07132e944c8af000cae93f321}{m\+\_\+named\+Parameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wrapper to expose \doxylink{class_beam_1_1_flux_node}{Flux\+Node} as an \doxylink{class_beam_1_1_audio_processor}{Audio\+Processor} for JUCE-\/like API compatibility. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_ab76d80d3acccaf5adb860dd57af02292}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!FluxNodeAudioProcessorWrapper@{FluxNodeAudioProcessorWrapper}}
+\index{FluxNodeAudioProcessorWrapper@{FluxNodeAudioProcessorWrapper}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{FluxNodeAudioProcessorWrapper()}{FluxNodeAudioProcessorWrapper()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_ab76d80d3acccaf5adb860dd57af02292} 
+Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+\+Flux\+Node\+Audio\+Processor\+Wrapper (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_afd958da23f8ba0df72dd915402d2128d}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!getFluxNode@{getFluxNode}}
+\index{getFluxNode@{getFluxNode}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{getFluxNode()}{getFluxNode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_afd958da23f8ba0df72dd915402d2128d} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}} $>$ Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+get\+Flux\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_aa2b20d72dcf9a64018cfa617ee29df8c}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!getName@{getName}}
+\index{getName@{getName}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_aa2b20d72dcf9a64018cfa617ee29df8c} 
+std::\+string Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the name of this processor. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_af4f88f01a436dba1fd3db520503b68c7}{Beam::\+\+Audio\+Processor}}.
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_af5f7eb577be8e860cd7e15126a05d285}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!getNumInputChannels@{getNumInputChannels}}
+\index{getNumInputChannels@{getNumInputChannels}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{getNumInputChannels()}{getNumInputChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_af5f7eb577be8e860cd7e15126a05d285} 
+int Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+get\+Num\+Input\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of input channels. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a13c1f31b340d69fce391411402082211}{Beam::\+\+Audio\+Processor}}.
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_a2e3a9d06433fc35e14071301544125df}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!getNumOutputChannels@{getNumOutputChannels}}
+\index{getNumOutputChannels@{getNumOutputChannels}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{getNumOutputChannels()}{getNumOutputChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_a2e3a9d06433fc35e14071301544125df} 
+int Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+get\+Num\+Output\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of output channels. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a403c0cf559133347ee2753ef11766f21}{Beam::\+\+Audio\+Processor}}.
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_a26b885175501fb2cad51c69ef85489c1}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!prepareToPlay@{prepareToPlay}}
+\index{prepareToPlay@{prepareToPlay}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{prepareToPlay()}{prepareToPlay()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_a26b885175501fb2cad51c69ef85489c1} 
+void Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+prepare\+To\+Play (\begin{DoxyParamCaption}\item[{double}]{sample\+Rate}{, }\item[{int}]{samples\+Per\+Block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Called before audio processing begins. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0ef7279db2dc6cef108efcad0c6edb8a}{Beam::\+\+Audio\+Processor}}.
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_ad4916adf7b3423d1407a4058e43d3a8f}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!processBlock@{processBlock}}
+\index{processBlock@{processBlock}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{processBlock()}{processBlock()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_ad4916adf7b3423d1407a4058e43d3a8f} 
+void Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+process\+Block (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{audio\+Input\+Output}{, }\item[{int}]{num\+Input\+Channels}{, }\item[{int}]{num\+Output\+Channels}{, }\item[{int}]{num\+Samples}{, }\item[{const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&}]{midi\+Messages}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Main processing function. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a831818fed7ed10115cd3983addf21936}{Beam::\+\+Audio\+Processor}}.
+
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_a124968314929cbbf897db8a23ef5ed3b}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!releaseResources@{releaseResources}}
+\index{releaseResources@{releaseResources}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{releaseResources()}{releaseResources()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_a124968314929cbbf897db8a23ef5ed3b} 
+void Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+release\+Resources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Called after audio stops. 
+
+
+
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_processor_adf8005d9b36d70188aa1379a61f7f5a9}{Beam::\+\+Audio\+Processor}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_flux_node_audio_processor_wrapper_a5733b304d9589c0bf2a6a61b42775572}\index{Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}!m\_fluxNode@{m\_fluxNode}}
+\index{m\_fluxNode@{m\_fluxNode}!Beam::FluxNodeAudioProcessorWrapper@{Beam::FluxNodeAudioProcessorWrapper}}
+\doxysubsubsection{\texorpdfstring{m\_fluxNode}{m\_fluxNode}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_node_audio_processor_wrapper_a5733b304d9589c0bf2a6a61b42775572} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_node}{Flux\+Node}}$>$ Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper::\+m\+\_\+flux\+Node\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{flux__node__audio__processor__wrapper_8hpp}{flux\+\_\+node\+\_\+audio\+\_\+processor\+\_\+wrapper.\+hpp}}\end{DoxyCompactItemize}

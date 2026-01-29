@@ -1,0 +1,28 @@
+var dir_650ee533936399e683a30afb9473a469 =
+[
+    [ "audio_config_view.hpp", "audio__config__view_8hpp.html", "audio__config__view_8hpp" ],
+    [ "audio_module.hpp", "audio__module_8hpp.html", "audio__module_8hpp" ],
+    [ "button.cpp", "button_8cpp.html", null ],
+    [ "button.hpp", "button_8hpp.html", "button_8hpp" ],
+    [ "cable.hpp", "cable_8hpp.html", "cable_8hpp" ],
+    [ "component.hpp", "component_8hpp.html", "component_8hpp" ],
+    [ "dynamics_module.hpp", "dynamics__module_8hpp.html", "dynamics__module_8hpp" ],
+    [ "filter_graph.hpp", "filter__graph_8hpp.html", "filter__graph_8hpp" ],
+    [ "filter_module.hpp", "filter__module_8hpp.html", "filter__module_8hpp" ],
+    [ "gui_component.cpp", "gui__component_8cpp.html", null ],
+    [ "gui_component.hpp", "gui__component_8hpp.html", "gui__component_8hpp" ],
+    [ "input_handler.cpp", "input__handler_8cpp.html", null ],
+    [ "input_handler.hpp", "input__handler_8hpp.html", "input__handler_8hpp" ],
+    [ "knob.hpp", "knob_8hpp.html", "knob_8hpp" ],
+    [ "master_strip.hpp", "master__strip_8hpp.html", "master__strip_8hpp" ],
+    [ "port.hpp", "port_8hpp.html", "port_8hpp" ],
+    [ "sidebar.hpp", "sidebar_8hpp.html", "sidebar_8hpp" ],
+    [ "slider.cpp", "slider_8cpp.html", null ],
+    [ "slider.hpp", "slider_8hpp.html", "slider_8hpp" ],
+    [ "tape_reel.hpp", "tape__reel_8hpp.html", "tape__reel_8hpp" ],
+    [ "timeline.hpp", "timeline_8hpp.html", "timeline_8hpp" ],
+    [ "top_bar.hpp", "top__bar_8hpp.html", "top__bar_8hpp" ],
+    [ "tube_compressor_ui.hpp", "tube__compressor__ui_8hpp.html", "tube__compressor__ui_8hpp" ],
+    [ "vu_meter.hpp", "vu__meter_8hpp.html", "vu__meter_8hpp" ],
+    [ "workspace.hpp", "workspace_8hpp.html", "workspace_8hpp" ]
+];

@@ -1,0 +1,199 @@
+\doxysection{Beam::\+Application\+Base Class Reference}
+\hypertarget{class_beam_1_1_application_base}{}\label{class_beam_1_1_application_base}\index{Beam::ApplicationBase@{Beam::ApplicationBase}}
+
+
+Base class for Flux applications, similar to JUCE\textquotesingle{}s JUCEApplication.  
+
+
+
+
+{\ttfamily \+\#include $<$application\+\_\+base.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}{Application\+Base}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_application_base_aea7046fc8c47ff5db72750a000686f66}{\texorpdfstring{$\sim$}{\string~}\+Application\+Base}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_application_base_a31475b2c194ffdbd46799cfc28ffc3ed}{initialise}} (const std::\+string \&command\+Line)=0
+\begin{DoxyCompactList}\small\item\em Called when the application starts up. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_application_base_a64149122524540008c756daf8cfce857}{shutdown}} ()=0
+\begin{DoxyCompactList}\small\item\em Called when the application is shutting down. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_application_base_ac2fa9347ec6cd98e26b9119629a82dc1}{suspended}} ()
+\begin{DoxyCompactList}\small\item\em Called periodically when there are no messages in the queue. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_application_base_a2fb598634b8402fe7dc9e755bfd28904}{resumed}} ()
+\begin{DoxyCompactList}\small\item\em Called when the application is brought back from suspended state. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_application_base_af1cf378bee6c721e9105533ca6063707}{system\+Requested\+Quit}} ()
+\begin{DoxyCompactList}\small\item\em Called when the OS wants to shut down the application. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_application_base_a5728a4d77317835d55cd378ca2cd7be6}{get\+Application\+Name}} () const =0
+\begin{DoxyCompactList}\small\item\em Returns the application name. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_application_base_aa9edeed40d6bbcca5f1f9fb1dd50d912}{get\+Application\+Version}} () const =0
+\begin{DoxyCompactList}\small\item\em Returns the application version. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_application_base_a960949eecb74d22ba121398faa46e5a9}{should\+Quit}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the application should quit. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_application_base_a50c7a47a0874c1bedaaf5320f4914a33}{quit}} ()
+\begin{DoxyCompactList}\small\item\em Quits the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}{Application\+Base}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_application_base_a958af7667fd187ee864076a2e97401b9}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_application_base_a9ae9cb9b20ac4eab13025c31461b1b7b}{m\+\_\+should\+Quit}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}{Application\+Base}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_application_base_ad1889d82fcc6d34583fb1ae2b958dc4e}{s\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for Flux applications, similar to JUCE\textquotesingle{}s JUCEApplication. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_application_base_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!ApplicationBase@{ApplicationBase}}
+\index{ApplicationBase@{ApplicationBase}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{ApplicationBase()}{ApplicationBase()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518} 
+Beam::\+\+Application\+Base::\+\+Application\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_application_base_aea7046fc8c47ff5db72750a000686f66}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!````~ApplicationBase@{\texorpdfstring{$\sim$}{\string~}ApplicationBase}}
+\index{````~ApplicationBase@{\texorpdfstring{$\sim$}{\string~}ApplicationBase}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ApplicationBase()}{\string~ApplicationBase()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_aea7046fc8c47ff5db72750a000686f66} 
+Beam::\+\+Application\+Base::\+\texorpdfstring{$\sim$}{\string~}\+Application\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_application_base_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_application_base_a5728a4d77317835d55cd378ca2cd7be6}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!getApplicationName@{getApplicationName}}
+\index{getApplicationName@{getApplicationName}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{getApplicationName()}{getApplicationName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a5728a4d77317835d55cd378ca2cd7be6} 
+virtual std::\+string Beam::\+\+Application\+Base::\+get\+Application\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns the application name. 
+
+\Hypertarget{class_beam_1_1_application_base_aa9edeed40d6bbcca5f1f9fb1dd50d912}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!getApplicationVersion@{getApplicationVersion}}
+\index{getApplicationVersion@{getApplicationVersion}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{getApplicationVersion()}{getApplicationVersion()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_aa9edeed40d6bbcca5f1f9fb1dd50d912} 
+virtual std::\+string Beam::\+\+Application\+Base::\+get\+Application\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns the application version. 
+
+\Hypertarget{class_beam_1_1_application_base_a958af7667fd187ee864076a2e97401b9}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a958af7667fd187ee864076a2e97401b9} 
+\doxymbox{\hyperlink{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}{Application\+Base}} \texorpdfstring{$\ast$}{*} Beam::\+\+Application\+Base::\+get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the application. 
+
+\Hypertarget{class_beam_1_1_application_base_a31475b2c194ffdbd46799cfc28ffc3ed}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!initialise@{initialise}}
+\index{initialise@{initialise}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a31475b2c194ffdbd46799cfc28ffc3ed} 
+virtual void Beam::\+\+Application\+Base::\+initialise (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{command\+Line}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Called when the application starts up. 
+
+\Hypertarget{class_beam_1_1_application_base_a50c7a47a0874c1bedaaf5320f4914a33}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!quit@{quit}}
+\index{quit@{quit}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{quit()}{quit()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a50c7a47a0874c1bedaaf5320f4914a33} 
+void Beam::\+\+Application\+Base::\+quit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Quits the application. 
+
+\Hypertarget{class_beam_1_1_application_base_a2fb598634b8402fe7dc9e755bfd28904}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!resumed@{resumed}}
+\index{resumed@{resumed}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{resumed()}{resumed()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a2fb598634b8402fe7dc9e755bfd28904} 
+void Beam::\+\+Application\+Base::\+resumed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the application is brought back from suspended state. 
+
+\Hypertarget{class_beam_1_1_application_base_a960949eecb74d22ba121398faa46e5a9}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!shouldQuit@{shouldQuit}}
+\index{shouldQuit@{shouldQuit}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{shouldQuit()}{shouldQuit()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a960949eecb74d22ba121398faa46e5a9} 
+bool Beam::\+\+Application\+Base::\+should\+Quit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the application should quit. 
+
+\Hypertarget{class_beam_1_1_application_base_a64149122524540008c756daf8cfce857}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!shutdown@{shutdown}}
+\index{shutdown@{shutdown}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{shutdown()}{shutdown()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a64149122524540008c756daf8cfce857} 
+virtual void Beam::\+\+Application\+Base::\+shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Called when the application is shutting down. 
+
+\Hypertarget{class_beam_1_1_application_base_ac2fa9347ec6cd98e26b9119629a82dc1}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!suspended@{suspended}}
+\index{suspended@{suspended}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{suspended()}{suspended()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_ac2fa9347ec6cd98e26b9119629a82dc1} 
+void Beam::\+\+Application\+Base::\+suspended (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called periodically when there are no messages in the queue. 
+
+\Hypertarget{class_beam_1_1_application_base_af1cf378bee6c721e9105533ca6063707}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!systemRequestedQuit@{systemRequestedQuit}}
+\index{systemRequestedQuit@{systemRequestedQuit}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{systemRequestedQuit()}{systemRequestedQuit()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_af1cf378bee6c721e9105533ca6063707} 
+void Beam::\+\+Application\+Base::\+system\+Requested\+Quit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the OS wants to shut down the application. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_application_base_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_application_base_a9ae9cb9b20ac4eab13025c31461b1b7b}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!m\_shouldQuit@{m\_shouldQuit}}
+\index{m\_shouldQuit@{m\_shouldQuit}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{m\_shouldQuit}{m\_shouldQuit}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_a9ae9cb9b20ac4eab13025c31461b1b7b} 
+bool Beam::\+\+Application\+Base::\+m\+\_\+should\+Quit = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_application_base_ad1889d82fcc6d34583fb1ae2b958dc4e}\index{Beam::ApplicationBase@{Beam::ApplicationBase}!s\_instance@{s\_instance}}
+\index{s\_instance@{s\_instance}!Beam::ApplicationBase@{Beam::ApplicationBase}}
+\doxysubsubsection{\texorpdfstring{s\_instance}{s\_instance}}
+{\footnotesize\ttfamily \label{class_beam_1_1_application_base_ad1889d82fcc6d34583fb1ae2b958dc4e} 
+\doxymbox{\hyperlink{class_beam_1_1_application_base_a0ddc71fdea733a70eabeb6874e349518}{Application\+Base}} \texorpdfstring{$\ast$}{*} Beam::\+\+Application\+Base::\+s\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+application/\+\doxymbox{\hyperlink{application__base_8hpp}{application\+\_\+base.\+hpp}}\item 
+src/\+application/\+\doxymbox{\hyperlink{application__base_8cpp}{application\+\_\+base.\+cpp}}\end{DoxyCompactItemize}

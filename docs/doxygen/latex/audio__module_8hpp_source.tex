@@ -1,5 +1,5 @@
 \doxysection{audio\+\_\+module.\+hpp}
-\hypertarget{audio__module_8hpp_source}{}\label{audio__module_8hpp_source}\index{src/ui/audio\_module.hpp@{src/ui/audio\_module.hpp}}
+\hypertarget{audio__module_8hpp_source}{}\label{audio__module_8hpp_source}\index{src/interface/audio\_module.hpp@{src/interface/audio\_module.hpp}}
 \doxymbox{\hyperlink{audio__module_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUDIO\_MODULE\_HPP}}
@@ -8,129 +8,154 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{component.hpp}}"{}}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{knob_8hpp}{knob.hpp}}"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{port_8hpp}{port.hpp}}"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__node_8hpp}{../dsp/flux\_node.hpp}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__node_8hpp}{../engine/flux\_node.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__audio__utils_8hpp}{../utilities/flux\_audio\_utils.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <functional>}}
 \DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{AudioModule}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
-\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00015\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a047e124f39e7c112d1162d9a98a1b0aa}{AudioModule}}(std::shared\_ptr<FluxNode>\ node,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ }
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}}(node),\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}}(node-\/>getName())\ \{}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}\ =\ std::make\_shared<Port>(\doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a324118a6721dd6b8a9b9f4e327df2bf5}{PortType::Input}},\ \textcolor{keyword}{this});}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}\ =\ std::make\_shared<Port>(\doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a29c2c02a361c9d7028472e5d92cd4a54}{PortType::Output}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{AudioModule}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{AudioModule}}(std::shared\_ptr<FluxNode>\ node,\ \textcolor{keywordtype}{size\_t}\ nodeId,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}}(node),\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a9b8bb7bd8aaa48881475de44550013ad}{m\_nodeId}}(nodeId),\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}}(node-\/>getName())\ \{}
 \DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(x,\ y,\ 150,\ 200);}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{setDraggable}}(\textcolor{keyword}{true});}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{autoGenerateUI}}();}
-\DoxyCodeLine{00024\ \ \ \ \ \}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{autoGenerateUI}}()\ \{}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}})\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ 40;}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ spacing\ =\ 60;}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ [name,\ param]\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}}-\/>getParameters())\ \{}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ knob\ =\ std::make\_shared<Knob>(name,\ param-\/>getMin(),\ param-\/>getMax(),\ param-\/>getValue());}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ knob-\/>bindParameter(param);}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ knob-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 25,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ startY\ +\ (count\ *\ spacing),\ 100,\ 40);}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}{addChild}}(knob);}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ count++;}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Adjust\ module\ height\ based\ on\ number\ of\ knobs}}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ 0)\ \{}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ newHeight\ =\ startY\ +\ (count\ *\ spacing)\ +\ 20;}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newHeight\ >\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h)\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ newHeight);}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00048\ \ \ \ \ \}}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dx\ =\ x\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x;}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dy\ =\ y\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{Component::setBounds}}(x,\ y,\ w,\ h);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ port\ positions\ relative\ to\ module}}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>setBounds(x\ -\/\ 6,\ y\ +\ 50,\ 12,\ 12);}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>setBounds(x\ +\ w\ -\/\ 6,\ y\ +\ 50,\ 12,\ 12);}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ children\ positions}}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ b\ =\ child-\/>getBounds();}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ child-\/>setBounds(b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ +\ dx,\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ dy,\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a69b99db01aa296ad7964be8fc0365a10}{w}},\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}});}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00065\ \ \ \ \ \}}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ad135753a43c33ae78c1d60980e208868}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Module\ Body\ (Slightly\ metallic/brushed\ dark\ look)}}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 10.0f,\ 1.0f,\ 0.18f,\ 0.19f,\ 0.2f,\ 1.0f);}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Header\ (Highlighted\ strip)}}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ 30,\ 10.0f,\ 0.5f,\ 0.25f,\ 0.26f,\ 0.28f,\ 1.0f);}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}},\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 8,\ 14,\ 0.9f,\ 0.9f,\ 0.9f,\ 1.0f);}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Internal\ panel\ shadow}}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 40,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 20,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 50,\ 5.0f,\ 2.0f,\ 0.12f,\ 0.13f,\ 0.14f,\ 1.0f);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>getInputPorts().size()\ >\ 0)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}\ =\ std::make\_shared<Port>(\doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a324118a6721dd6b8a9b9f4e327df2bf5}{PortType::Input}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ if\ (node-\/>getOutputPorts().size()\ >\ 0)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}\ =\ std::make\_shared<Port>(\doxymbox{\hyperlink{namespace_beam_ae4c392a66fa6e2b6c86c6d5356ffe846a29c2c02a361c9d7028472e5d92cd4a54}{PortType::Output}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(x,\ y,\ 150,\ 200);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a00d4e2dfa7703e59d6486852321dbdf1}{setDraggable}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{autoGenerateUI}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a7fc32b3bfadec2badbfd067d2f37da96}{getNodeId}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a9b8bb7bd8aaa48881475de44550013ad}{m\_nodeId}};\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a655aa14548b3d4e977294a9bdaafa879}{autoGenerateUI}}()\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ startY\ =\ 40;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ spacing\ =\ 60;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ [name,\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}}]\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}}-\/>getParameters())\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}Master\ Gain"{}})\ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Skip\ master\ gain\ in\ module\ auto-\/ui}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ knob\ =\ std::make\_shared<Knob>(name,\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}}-\/>getMin(),\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}}-\/>getMax(),\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}}-\/>getValue());}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ knob-\/>bindParameter(\doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ knob-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 25,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ startY\ +\ (count\ *\ spacing),\ 100,\ 40);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}{addChild}}(knob);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ 0)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ newHeight\ =\ startY\ +\ (count\ *\ spacing)\ +\ 20;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newHeight\ >\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h)\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ newHeight);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dx\ =\ x\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ dy\ =\ y\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_a6865b1f22388af467bf6c789120fac05}{Component::setBounds}}(x,\ y,\ w,\ h);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>setBounds(x\ -\/\ 6,\ y\ +\ 50,\ 12,\ 12);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>setBounds(x\ +\ w\ -\/\ 6,\ y\ +\ 50,\ 12,\ 12);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}\ =\ \{x\ +\ w\ -\/\ 20,\ y\ +\ 5,\ 15,\ 15\};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ b\ =\ child-\/>getBounds();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ child-\/>setBounds(b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a94d1d7f7501ecc84f202b7c4bfd61e08}{x}}\ +\ dx,\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a396c73bfc44165cb8af22d271dbdfae6}{y}}\ +\ dy,\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a69b99db01aa296ad7964be8fc0365a10}{w}},\ b.\doxymbox{\hyperlink{struct_beam_1_1_rect_a17a83604e8b45e52f9fdbcf4289f9851}{h}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0e43bace4dcd9eb159ff2237b0c7c3fd}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher,\ \textcolor{keywordtype}{float}\ dt,\ \textcolor{keywordtype}{float}\ screenW,\ \textcolor{keywordtype}{float}\ screenH)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Module\ Body}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ 10.0f,\ 1.0f,\ 0.18f,\ 0.19f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Header}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ 30,\ 10.0f,\ 0.5f,\ 0.25f,\ 0.26f,\ 0.28f,\ 1.0f);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_utils_a47dc61c21cf5d067b8c584a35d360aa9}{AudioUtils::drawScrollingText}}(batcher,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}},\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 8,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 40,\ 15,\ 14,\ dt,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab93c8ba97f1b2f29113c31a52c0c36eb}{m\_scrollTimer}},\ screenH);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delete\ Button\ (X)}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.h,\ 2.0f,\ 0.5f,\ 0.6f,\ 0.2f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{stringliteral}{"{}x"{}},\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.x\ +\ 4,\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.y\ +\ 2,\ 10,\ 1.0f,\ 1.0f,\ 1.0f,\ 1.0f);}
 \DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>render(batcher);}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>render(batcher);}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ child-\/>render(batcher);}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Internal\ panel}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 40,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 20,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 50,\ 5.0f,\ 2.0f,\ 0.12f,\ 0.13f,\ 0.14f,\ 1.0f);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>render(batcher,\ dt,\ screenW,\ screenH);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>render(batcher,\ dt,\ screenW,\ screenH);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ child-\/>render(batcher,\ dt,\ screenW,\ screenH);}
 \DoxyCodeLine{00084\ \ \ \ \ \}}
 \DoxyCodeLine{00085\ }
 \DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_adddaa58e40512d782c2d902917491499}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>onMouseDown(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>onMouseDown(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child-\/>getBounds().contains(x,\ y))\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ child-\/>onMouseDown(x,\ y,\ button);}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ <\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 25)\ \{\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{startDragging}}(x,\ y);}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00101\ \ \ \ \ \}}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ changed\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Component::onMouseMove}}(x,\ y);}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (changed)\ \{}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ port\ absolute\ positions\ when\ module\ moves}}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ -\/\ 6,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 50,\ 12,\ 12);}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 6,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 50,\ 12,\ 12);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}.contains(x,\ y))\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_af95229e9824037c0c9916cc04bf67e90}{onDeleteRequested}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_af95229e9824037c0c9916cc04bf67e90}{onDeleteRequested}}(\textcolor{keyword}{this});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>onMouseDown(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>onMouseDown(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child-\/>getBounds().contains(x,\ y))\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child-\/>onMouseDown(x,\ y,\ button))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ <\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 25)\ \{\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_aca7b02d1dddf7cd20378db9e3242fb84}{startDragging}}(x,\ y);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a4ac204a52c61e603ae6a51daa610bc19}{onMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ handled\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child-\/>onMouseUp(x,\ y,\ button))\ handled\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ changed;}
-\DoxyCodeLine{00111\ \ \ \ \ \}}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}{addChild}}(std::shared\_ptr<Component>\ child)\ \{}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}}.push\_back(child);}
-\DoxyCodeLine{00115\ \ \ \ \ \}}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0d0da8bdbfb3a2355994bba086e0e721}{getInputPort}}()\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}};\ \}}
-\DoxyCodeLine{00118\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75e91aa2e7da1c9a6d31f4c90915403a}{getOutputPort}}()\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}};\ \}}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00120\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00121\ \ \ \ \ std::shared\_ptr<FluxNode>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}};}
-\DoxyCodeLine{00122\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}};}
-\DoxyCodeLine{00123\ \ \ \ \ std::vector<std::shared\_ptr<Component>>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}};}
-\DoxyCodeLine{00124\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}};}
-\DoxyCodeLine{00125\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}};}
-\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_component_ae36b8e9d70e8f9a1b9ba81c23c54d5c8}{Component::onMouseUp}}(x,\ y,\ button);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ handled;}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aff90c84092de907409b84eed2c46cbe2}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ child\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}})\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (child-\/>onMouseMove(x,\ y))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ changed\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a9d8e5970783d315044277a1228659e6c}{Component::onMouseMove}}(x,\ y);}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (changed)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}}-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ -\/\ 6,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 50,\ 12,\ 12);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}})\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}}-\/>setBounds(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 6,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 50,\ 12,\ 12);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}}\ =\ \{\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 20,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 5,\ 15,\ 15\};}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ changed;}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
 \DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUDIO\_MODULE\_HPP}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a68a3d4bef3787a290f9a313b975f7925}{addChild}}(std::shared\_ptr<Component>\ child)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}}.push\_back(child);\ \}}
+\DoxyCodeLine{00129\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0d0da8bdbfb3a2355994bba086e0e721}{getInputPort}}()\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}};\ \}}
+\DoxyCodeLine{00130\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75e91aa2e7da1c9a6d31f4c90915403a}{getOutputPort}}()\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}};\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ std::function<void(\doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{AudioModule}}*)>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_af95229e9824037c0c9916cc04bf67e90}{onDeleteRequested}};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00135\ \ \ \ \ std::vector<std::shared\_ptr<Component>>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1af200892e351f910e6447a50913a560}{m\_children}};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00138\ \ \ \ \ std::shared\_ptr<FluxNode>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_aafbc58a945b32ba82e3635a6d915f498}{m\_node}};}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a9b8bb7bd8aaa48881475de44550013ad}{m\_nodeId}};}
+\DoxyCodeLine{00140\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a1b3da6406c733f1a4b0e19b6d1cbcfb6}{m\_name}};}
+\DoxyCodeLine{00141\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a2e0f72cba2f16ff63cedee7d2417c0bf}{m\_inputPort}};}
+\DoxyCodeLine{00142\ \ \ \ \ std::shared\_ptr<Port>\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab2959617ad001fc0bb8bc9ed9828a558}{m\_outputPort}};}
+\DoxyCodeLine{00143\ \ \ \ \ \doxymbox{\hyperlink{struct_beam_1_1_rect}{Rect}}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_acec6c6786886fc1b3c1ff8d01428d325}{m\_deleteBtnBounds}};}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_ab93c8ba97f1b2f29113c31a52c0c36eb}{m\_scrollTimer}}\ =\ 0.0f;}
+\DoxyCodeLine{00145\ \};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUDIO\_MODULE\_HPP}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ }
 
 \end{DoxyCode}

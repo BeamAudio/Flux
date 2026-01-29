@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Beam Audio Flux: src/ui/cable.hpp Source File</title>
+<title>Beam Audio Flux: src/interface/cable.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,52 +96,72 @@ $(function(){initNavTree('cable_8hpp_source.html','',''); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CABLE_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="port_8hpp.html">port.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_beam.html">Beam</a> {</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_beam_1_1_cable.html">Cable</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">    9</a></span>    <a class="code hl_class" href="class_beam_1_1_port.html">Port</a>* <a class="code hl_variable" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">output</a>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">   10</a></span>    <a class="code hl_class" href="class_beam_1_1_port.html">Port</a>* <a class="code hl_variable" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">input</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a84adeb1426f567be118fbcfec2cf73f5">   12</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="struct_beam_1_1_cable.html#a84adeb1426f567be118fbcfec2cf73f5">render</a>(<a class="code hl_class" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a>&amp; batcher) {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <a class="code hl_struct" href="struct_beam_1_1_rect.html">Rect</a> outPos = <a class="code hl_variable" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">output</a>-&gt;getBounds();</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <a class="code hl_struct" href="struct_beam_1_1_rect.html">Rect</a> inPos = <a class="code hl_variable" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">input</a>-&gt;getBounds();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">float</span> x1 = outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a94d1d7f7501ecc84f202b7c4bfd61e08">x</a> + outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a69b99db01aa296ad7964be8fc0365a10">w</a> / 2;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordtype">float</span> y1 = outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a396c73bfc44165cb8af22d271dbdfae6">y</a> + outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a17a83604e8b45e52f9fdbcf4289f9851">h</a> / 2;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">float</span> x2 = inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a94d1d7f7501ecc84f202b7c4bfd61e08">x</a> + inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a69b99db01aa296ad7964be8fc0365a10">w</a> / 2;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">float</span> y2 = inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a396c73bfc44165cb8af22d271dbdfae6">y</a> + inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a17a83604e8b45e52f9fdbcf4289f9851">h</a> / 2;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="comment">// Draw segments to simulate a curve (Proper Bezier shader coming next)</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">int</span> segments = 10;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; segments; ++i) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordtype">float</span> t = (float)i / segments;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordtype">float</span> nt = (float)(i + 1) / segments;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordtype">float</span> px = x1 + (x2 - x1) * t;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="keywordtype">float</span> py = y1 + (y2 - y1) * t;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            batcher.<a class="code hl_function" href="class_beam_1_1_quad_batcher.html#afeda7287047f1ee0db8203306f408503">drawQuad</a>(px, py, 4, 4, 0.25f, 0.5f, 1.0f, 0.8f);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_beam.html">Beam</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html">   10</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_beam_1_1_cable.html">Cable</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">   11</a></span>    <a class="code hl_class" href="class_beam_1_1_port.html">Port</a>* <a class="code hl_variable" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">output</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">   12</a></span>    <a class="code hl_class" href="class_beam_1_1_port.html">Port</a>* <a class="code hl_variable" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">input</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_beam_1_1_cable.html#a948b7835cf76e0b645849832897e4f28">   14</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="struct_beam_1_1_cable.html#a948b7835cf76e0b645849832897e4f28">render</a>(<a class="code hl_class" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a>&amp; batcher, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span> screenW, <span class="keywordtype">float</span> screenH) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <a class="code hl_struct" href="struct_beam_1_1_rect.html">Rect</a> outPos = <a class="code hl_variable" href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">output</a>-&gt;getBounds();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_struct" href="struct_beam_1_1_rect.html">Rect</a> inPos = <a class="code hl_variable" href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">input</a>-&gt;getBounds();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">float</span> x1 = outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a94d1d7f7501ecc84f202b7c4bfd61e08">x</a> + outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a69b99db01aa296ad7964be8fc0365a10">w</a> / 2;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">float</span> y1 = outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a396c73bfc44165cb8af22d271dbdfae6">y</a> + outPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a17a83604e8b45e52f9fdbcf4289f9851">h</a> / 2;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">float</span> x2 = inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a94d1d7f7501ecc84f202b7c4bfd61e08">x</a> + inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a69b99db01aa296ad7964be8fc0365a10">w</a> / 2;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">float</span> y2 = inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a396c73bfc44165cb8af22d271dbdfae6">y</a> + inPos.<a class="code hl_variable" href="struct_beam_1_1_rect.html#a17a83604e8b45e52f9fdbcf4289f9851">h</a> / 2;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="comment">// Use Quadratic Bezier for more &quot;sagging&quot; physical cable look</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="comment">// Control point is the midpoint shifted down</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordtype">float</span> cx = (x1 + x2) * 0.5f;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">float</span> cy = (y1 + y2) * 0.5f + std::abs(x2 - x1) * 0.2f + 20.0f;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        std::vector&lt;std::pair&lt;float, float&gt;&gt; curvePoints;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">const</span> <span class="keywordtype">int</span> segments = 24;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt;= segments; ++i) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordtype">float</span> t = (float)i / segments;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordtype">float</span> invT = 1.0f - t;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="comment">// Bezier formula: P = (1-t)^2*P1 + 2(1-t)t*C + t^2*P2</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordtype">float</span> px = invT * invT * x1 + 2.0f * invT * t * cx + t * t * x2;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordtype">float</span> py = invT * invT * y1 + 2.0f * invT * t * cy + t * t * y2;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            curvePoints.push_back({px, py});</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="comment">// Draw shadow/depth</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        batcher.<a class="code hl_function" href="class_beam_1_1_quad_batcher.html#a296da7f546a2d405ec7e09b3cb1f725e">drawCurve</a>(curvePoints, 6.0f, 0.05f, 0.05f, 0.05f, 0.4f);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="comment">// Draw cable core</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        batcher.<a class="code hl_function" href="class_beam_1_1_quad_batcher.html#a296da7f546a2d405ec7e09b3cb1f725e">drawCurve</a>(curvePoints, 3.0f, 0.25f, 0.55f, 1.0f, 1.0f);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="comment">// Draw highlights</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        batcher.<a class="code hl_function" href="class_beam_1_1_quad_batcher.html#a296da7f546a2d405ec7e09b3cb1f725e">drawCurve</a>(curvePoints, 1.0f, 0.5f, 0.8f, 1.0f, 0.7f);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
 </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>} <span class="comment">// namespace Beam</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// CABLE_HPP</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>} <span class="comment">// namespace Beam</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// CABLE_HPP</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="ttc" id="aclass_beam_1_1_port_html"><div class="ttname"><a href="class_beam_1_1_port.html">Beam::Port</a></div><div class="ttdef"><b>Definition</b> port.hpp:11</div></div>
-<div class="ttc" id="aclass_beam_1_1_quad_batcher_html"><div class="ttname"><a href="class_beam_1_1_quad_batcher.html">Beam::QuadBatcher</a></div><div class="ttdef"><b>Definition</b> quad_batcher.hpp:16</div></div>
-<div class="ttc" id="aclass_beam_1_1_quad_batcher_html_afeda7287047f1ee0db8203306f408503"><div class="ttname"><a href="class_beam_1_1_quad_batcher.html#afeda7287047f1ee0db8203306f408503">Beam::QuadBatcher::drawQuad</a></div><div class="ttdeci">void drawQuad(float x, float y, float w, float h, float r, float g, float b, float a)</div><div class="ttdef"><b>Definition</b> quad_batcher.cpp:188</div></div>
-<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> beam_host.cpp:14</div></div>
+<div class="ttc" id="aclass_beam_1_1_quad_batcher_html"><div class="ttname"><a href="class_beam_1_1_quad_batcher.html">Beam::QuadBatcher</a></div><div class="ttdoc">High-performance OpenGL renderer for 2D primitives and text.</div><div class="ttdef"><b>Definition</b> quad_batcher.hpp:20</div></div>
+<div class="ttc" id="aclass_beam_1_1_quad_batcher_html_a296da7f546a2d405ec7e09b3cb1f725e"><div class="ttname"><a href="class_beam_1_1_quad_batcher.html#a296da7f546a2d405ec7e09b3cb1f725e">Beam::QuadBatcher::drawCurve</a></div><div class="ttdeci">void drawCurve(const std::vector&lt; std::pair&lt; float, float &gt; &gt; &amp;points, float thickness, float r, float g, float b, float a)</div><div class="ttdoc">Draws a continuous anti-aliased curve from a set of points.</div><div class="ttdef"><b>Definition</b> quad_batcher.cpp:280</div></div>
+<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> application_base.cpp:3</div></div>
 <div class="ttc" id="aport_8hpp_html"><div class="ttname"><a href="port_8hpp.html">port.hpp</a></div></div>
-<div class="ttc" id="astruct_beam_1_1_cable_html"><div class="ttname"><a href="struct_beam_1_1_cable.html">Beam::Cable</a></div><div class="ttdef"><b>Definition</b> cable.hpp:8</div></div>
-<div class="ttc" id="astruct_beam_1_1_cable_html_a053fa9bcaca869bbe55a6e969a5d191f"><div class="ttname"><a href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">Beam::Cable::output</a></div><div class="ttdeci">Port * output</div><div class="ttdef"><b>Definition</b> cable.hpp:9</div></div>
-<div class="ttc" id="astruct_beam_1_1_cable_html_a1d97b8c95a75addc1ec772f6328fdc43"><div class="ttname"><a href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">Beam::Cable::input</a></div><div class="ttdeci">Port * input</div><div class="ttdef"><b>Definition</b> cable.hpp:10</div></div>
-<div class="ttc" id="astruct_beam_1_1_cable_html_a84adeb1426f567be118fbcfec2cf73f5"><div class="ttname"><a href="struct_beam_1_1_cable.html#a84adeb1426f567be118fbcfec2cf73f5">Beam::Cable::render</a></div><div class="ttdeci">void render(QuadBatcher &amp;batcher)</div><div class="ttdef"><b>Definition</b> cable.hpp:12</div></div>
+<div class="ttc" id="astruct_beam_1_1_cable_html"><div class="ttname"><a href="struct_beam_1_1_cable.html">Beam::Cable</a></div><div class="ttdef"><b>Definition</b> cable.hpp:10</div></div>
+<div class="ttc" id="astruct_beam_1_1_cable_html_a053fa9bcaca869bbe55a6e969a5d191f"><div class="ttname"><a href="struct_beam_1_1_cable.html#a053fa9bcaca869bbe55a6e969a5d191f">Beam::Cable::output</a></div><div class="ttdeci">Port * output</div><div class="ttdef"><b>Definition</b> cable.hpp:11</div></div>
+<div class="ttc" id="astruct_beam_1_1_cable_html_a1d97b8c95a75addc1ec772f6328fdc43"><div class="ttname"><a href="struct_beam_1_1_cable.html#a1d97b8c95a75addc1ec772f6328fdc43">Beam::Cable::input</a></div><div class="ttdeci">Port * input</div><div class="ttdef"><b>Definition</b> cable.hpp:12</div></div>
+<div class="ttc" id="astruct_beam_1_1_cable_html_a948b7835cf76e0b645849832897e4f28"><div class="ttname"><a href="struct_beam_1_1_cable.html#a948b7835cf76e0b645849832897e4f28">Beam::Cable::render</a></div><div class="ttdeci">void render(QuadBatcher &amp;batcher, float dt, float screenW, float screenH)</div><div class="ttdef"><b>Definition</b> cable.hpp:14</div></div>
 <div class="ttc" id="astruct_beam_1_1_rect_html"><div class="ttname"><a href="struct_beam_1_1_rect.html">Beam::Rect</a></div><div class="ttdef"><b>Definition</b> component.hpp:12</div></div>
 <div class="ttc" id="astruct_beam_1_1_rect_html_a17a83604e8b45e52f9fdbcf4289f9851"><div class="ttname"><a href="struct_beam_1_1_rect.html#a17a83604e8b45e52f9fdbcf4289f9851">Beam::Rect::h</a></div><div class="ttdeci">float h</div><div class="ttdef"><b>Definition</b> component.hpp:13</div></div>
 <div class="ttc" id="astruct_beam_1_1_rect_html_a396c73bfc44165cb8af22d271dbdfae6"><div class="ttname"><a href="struct_beam_1_1_rect.html#a396c73bfc44165cb8af22d271dbdfae6">Beam::Rect::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition</b> component.hpp:13</div></div>
@@ -153,7 +173,7 @@ $(function(){initNavTree('cable_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li><li class="navelem"><a href="cable_8hpp.html">cable.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_650ee533936399e683a30afb9473a469.html">interface</a></li><li class="navelem"><a href="cable_8hpp.html">cable.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

@@ -1,5 +1,5 @@
 \doxysection{wav\+\_\+writer.\+hpp}
-\hypertarget{wav__writer_8hpp_source}{}\label{wav__writer_8hpp_source}\index{src/dsp/wav\_writer.hpp@{src/dsp/wav\_writer.hpp}}
+\hypertarget{wav__writer_8hpp_source}{}\label{wav__writer_8hpp_source}\index{src/engine/wav\_writer.hpp@{src/engine/wav\_writer.hpp}}
 \doxymbox{\hyperlink{wav__writer_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <iostream>}}
@@ -25,8 +25,8 @@
 \DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ file.write(\textcolor{stringliteral}{"{}fmt\ "{}},\ 4);}
 \DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ int32\_t\ fmtSize\ =\ 16;}
 \DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&fmtSize),\ 4);}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ int16\_t\ format\ =\ 1;\ \textcolor{comment}{//\ PCM}}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&format),\ 2);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ int16\_t\ \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}\ =\ 1;\ \textcolor{comment}{//\ PCM}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&\doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}),\ 2);}
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ int16\_t\ numChannels\ =\ \textcolor{keyword}{static\_cast<}int16\_t\textcolor{keyword}{>}(channels);}
 \DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&numChannels),\ 2);}
 \DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ int32\_t\ sRate\ =\ sampleRate;}
@@ -56,5 +56,11 @@
 \DoxyCodeLine{00052\ \};}
 \DoxyCodeLine{00053\ }
 \DoxyCodeLine{00054\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
 
 \end{DoxyCode}

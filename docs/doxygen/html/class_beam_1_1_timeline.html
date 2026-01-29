@@ -106,23 +106,41 @@ Inheritance diagram for Beam::Timeline:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab24201fb4781455aa0496eea0f173aa6" id="r_ab24201fb4781455aa0496eea0f173aa6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab24201fb4781455aa0496eea0f173aa6">Timeline</a> ()</td></tr>
-<tr class="memitem:a10a7b70340a61dcfb1ebead1a02d6b5a" id="r_a10a7b70340a61dcfb1ebead1a02d6b5a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a10a7b70340a61dcfb1ebead1a02d6b5a">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher) override</td></tr>
+<tr class="memitem:aa67b2440349a3c70f22b7959cd463332" id="r_aa67b2440349a3c70f22b7959cd463332"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa67b2440349a3c70f22b7959cd463332">Timeline</a> (std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_project.html">FluxProject</a> &gt; project, <a class="el" href="class_beam_1_1_audio_engine.html">AudioEngine</a> *engine)</td></tr>
+<tr class="memitem:a09b6cbbbe5b464156d1eccf34ddf69fc" id="r_a09b6cbbbe5b464156d1eccf34ddf69fc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a09b6cbbbe5b464156d1eccf34ddf69fc">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher, float dt, float screenW, float screenH) override</td></tr>
+<tr class="memitem:a8a354eb52071e540c36bb5ce5ca8c1c9" id="r_a8a354eb52071e540c36bb5ce5ca8c1c9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8a354eb52071e540c36bb5ce5ca8c1c9">onMouseDown</a> (float x, float y, int button) override</td></tr>
+<tr class="memitem:ae384bac3ed2b187b58caae88b8a2c35d" id="r_ae384bac3ed2b187b58caae88b8a2c35d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae384bac3ed2b187b58caae88b8a2c35d">onMouseMove</a> (float x, float y) override</td></tr>
+<tr class="memitem:a16723f90295b79d5e37d7758ec722acd" id="r_a16723f90295b79d5e37d7758ec722acd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a16723f90295b79d5e37d7758ec722acd">onMouseUp</a> (float x, float y, int button) override</td></tr>
+<tr class="memitem:a57167d59b6907f773bdcde23e845c8a8" id="r_a57167d59b6907f773bdcde23e845c8a8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a57167d59b6907f773bdcde23e845c8a8">onMouseWheel</a> (float x, float y, float delta) override</td></tr>
 <tr class="memitem:ad21aa847e01f197a5b6eecdc4cb7f2f4" id="r_ad21aa847e01f197a5b6eecdc4cb7f2f4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad21aa847e01f197a5b6eecdc4cb7f2f4">setVisible</a> (bool visible)</td></tr>
 <tr class="inherit_header pub_methods_class_beam_1_1_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_beam_1_1_component')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_beam_1_1_component.html">Beam::Component</a></td></tr>
 <tr class="memitem:af9d734d649978e027412a87bc54362cd inherit pub_methods_class_beam_1_1_component" id="r_af9d734d649978e027412a87bc54362cd"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#af9d734d649978e027412a87bc54362cd">~Component</a> ()=default</td></tr>
 <tr class="memitem:ad3d3fb19d25b4371d07620567970a158 inherit pub_methods_class_beam_1_1_component" id="r_ad3d3fb19d25b4371d07620567970a158"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#ad3d3fb19d25b4371d07620567970a158">update</a> (float dt)</td></tr>
-<tr class="memitem:aec1da33d2d6e3d4e7dd6708309264e76 inherit pub_methods_class_beam_1_1_component" id="r_aec1da33d2d6e3d4e7dd6708309264e76"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#aec1da33d2d6e3d4e7dd6708309264e76">onMouseDown</a> (float x, float y, int button)</td></tr>
-<tr class="memitem:ae36b8e9d70e8f9a1b9ba81c23c54d5c8 inherit pub_methods_class_beam_1_1_component" id="r_ae36b8e9d70e8f9a1b9ba81c23c54d5c8"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#ae36b8e9d70e8f9a1b9ba81c23c54d5c8">onMouseUp</a> (float x, float y, int button)</td></tr>
-<tr class="memitem:a9d8e5970783d315044277a1228659e6c inherit pub_methods_class_beam_1_1_component" id="r_a9d8e5970783d315044277a1228659e6c"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a9d8e5970783d315044277a1228659e6c">onMouseMove</a> (float x, float y)</td></tr>
 <tr class="memitem:a6865b1f22388af467bf6c789120fac05 inherit pub_methods_class_beam_1_1_component" id="r_a6865b1f22388af467bf6c789120fac05"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a6865b1f22388af467bf6c789120fac05">setBounds</a> (float x, float y, float w, float h)</td></tr>
 <tr class="memitem:a5746dbc69d5b0adb4cffbcf920936d00 inherit pub_methods_class_beam_1_1_component" id="r_a5746dbc69d5b0adb4cffbcf920936d00"><td class="memItemLeft">const <a class="el" href="struct_beam_1_1_rect.html">Rect</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a5746dbc69d5b0adb4cffbcf920936d00">getBounds</a> () const</td></tr>
 <tr class="memitem:a00d4e2dfa7703e59d6486852321dbdf1 inherit pub_methods_class_beam_1_1_component" id="r_a00d4e2dfa7703e59d6486852321dbdf1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a00d4e2dfa7703e59d6486852321dbdf1">setDraggable</a> (bool draggable)</td></tr>
 <tr class="memitem:aca7b02d1dddf7cd20378db9e3242fb84 inherit pub_methods_class_beam_1_1_component" id="r_aca7b02d1dddf7cd20378db9e3242fb84"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#aca7b02d1dddf7cd20378db9e3242fb84">startDragging</a> (float x, float y)</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8027a4a90c56651c9bde0e5315bb71e3" id="r_a8027a4a90c56651c9bde0e5315bb71e3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8027a4a90c56651c9bde0e5315bb71e3">sliceRegion</a> (<a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> &amp;track, size_t index, size_t offsetInFrames)</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:af8a3307bf582dd1b1b7d22d2b8a9b14b" id="r_af8a3307bf582dd1b1b7d22d2b8a9b14b"><td class="memItemLeft">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_project.html">FluxProject</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af8a3307bf582dd1b1b7d22d2b8a9b14b">m_project</a></td></tr>
+<tr class="memitem:aaabfcef9ca41f31fc70009405dafb67f" id="r_aaabfcef9ca41f31fc70009405dafb67f"><td class="memItemLeft"><a class="el" href="class_beam_1_1_audio_engine.html">AudioEngine</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aaabfcef9ca41f31fc70009405dafb67f">m_engine</a></td></tr>
 <tr class="memitem:a0021e8c656305015e2ad30a791338c09" id="r_a0021e8c656305015e2ad30a791338c09"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0021e8c656305015e2ad30a791338c09">m_isVisible</a> = false</td></tr>
+<tr class="memitem:a7fc4a961b6399ffc0514f9c47c6bab5b" id="r_a7fc4a961b6399ffc0514f9c47c6bab5b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7fc4a961b6399ffc0514f9c47c6bab5b">m_isDraggingRegion</a> = false</td></tr>
+<tr class="memitem:a38bdec7cfb1b81f532295955efbc6dec" id="r_a38bdec7cfb1b81f532295955efbc6dec"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a38bdec7cfb1b81f532295955efbc6dec">m_isScrubbing</a> = false</td></tr>
+<tr class="memitem:aad53cb5c7b902b1592e1cadfd09a0064" id="r_aad53cb5c7b902b1592e1cadfd09a0064"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aad53cb5c7b902b1592e1cadfd09a0064">m_isPanning</a> = false</td></tr>
+<tr class="memitem:a11eed32b492417dfac0e2986208de78f" id="r_a11eed32b492417dfac0e2986208de78f"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a11eed32b492417dfac0e2986208de78f">m_offsetX</a> = 0</td></tr>
+<tr class="memitem:aa5d464919a125da894c1d6dfeb0989e7" id="r_aa5d464919a125da894c1d6dfeb0989e7"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#aa5d464919a125da894c1d6dfeb0989e7">m_offsetY</a> = 0</td></tr>
+<tr class="memitem:a09d327486c2182e805e9a9afb2896340" id="r_a09d327486c2182e805e9a9afb2896340"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a09d327486c2182e805e9a9afb2896340">m_zoom</a> = 1.0f</td></tr>
+<tr class="memitem:a19789a38965cb80642dc87c4e248e334" id="r_a19789a38965cb80642dc87c4e248e334"><td class="memItemLeft"><a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a19789a38965cb80642dc87c4e248e334">m_dragTrackPtr</a> = nullptr</td></tr>
+<tr class="memitem:ac162bb2a26665fbfabdbc0d0cc8900d2" id="r_ac162bb2a26665fbfabdbc0d0cc8900d2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac162bb2a26665fbfabdbc0d0cc8900d2">m_dragRegionIndex</a> = -1</td></tr>
+<tr class="memitem:ae93899c6ea7c8b36f53688ee0ebe028f" id="r_ae93899c6ea7c8b36f53688ee0ebe028f"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ae93899c6ea7c8b36f53688ee0ebe028f">m_dragOffsetX</a> = 0</td></tr>
+<tr class="memitem:a69dd37c73f893cf949b52f814598d5df" id="r_a69dd37c73f893cf949b52f814598d5df"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a69dd37c73f893cf949b52f814598d5df">m_lastMouseX</a> = 0</td></tr>
+<tr class="memitem:a46aaa4386fa2c74b3a97880a18a570e8" id="r_a46aaa4386fa2c74b3a97880a18a570e8"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a46aaa4386fa2c74b3a97880a18a570e8">m_lastMouseY</a> = 0</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -136,8 +154,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a768931a0f51394bf011f821f6ed2efe9 inherit pro_attribs_class_beam_1_1_component" id="r_a768931a0f51394bf011f821f6ed2efe9"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a768931a0f51394bf011f821f6ed2efe9">m_lastMouseY</a> = 0</td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab24201fb4781455aa0496eea0f173aa6" name="ab24201fb4781455aa0496eea0f173aa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab24201fb4781455aa0496eea0f173aa6">&#9670;&#160;</a></span>Timeline()</h2>
+<a id="aa67b2440349a3c70f22b7959cd463332" name="aa67b2440349a3c70f22b7959cd463332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67b2440349a3c70f22b7959cd463332">&#9670;&#160;</a></span>Timeline()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,8 +166,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">Beam::Timeline::Timeline </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_flux_project.html">FluxProject</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>project</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_beam_1_1_audio_engine.html">AudioEngine</a> *</td>          <td class="paramname"><span class="paramname"><em>engine</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -162,8 +184,147 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a10a7b70340a61dcfb1ebead1a02d6b5a" name="a10a7b70340a61dcfb1ebead1a02d6b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a7b70340a61dcfb1ebead1a02d6b5a">&#9670;&#160;</a></span>render()</h2>
+<a id="a8a354eb52071e540c36bb5ce5ca8c1c9" name="a8a354eb52071e540c36bb5ce5ca8c1c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a354eb52071e540c36bb5ce5ca8c1c9">&#9670;&#160;</a></span>onMouseDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::onMouseDown </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>button</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_beam_1_1_component.html#aec1da33d2d6e3d4e7dd6708309264e76">Beam::Component</a>.</p>
+
+</div>
+</div>
+<a id="ae384bac3ed2b187b58caae88b8a2c35d" name="ae384bac3ed2b187b58caae88b8a2c35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae384bac3ed2b187b58caae88b8a2c35d">&#9670;&#160;</a></span>onMouseMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::onMouseMove </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_beam_1_1_component.html#a9d8e5970783d315044277a1228659e6c">Beam::Component</a>.</p>
+
+</div>
+</div>
+<a id="a16723f90295b79d5e37d7758ec722acd" name="a16723f90295b79d5e37d7758ec722acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16723f90295b79d5e37d7758ec722acd">&#9670;&#160;</a></span>onMouseUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::onMouseUp </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>button</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_beam_1_1_component.html#ae36b8e9d70e8f9a1b9ba81c23c54d5c8">Beam::Component</a>.</p>
+
+</div>
+</div>
+<a id="a57167d59b6907f773bdcde23e845c8a8" name="a57167d59b6907f773bdcde23e845c8a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57167d59b6907f773bdcde23e845c8a8">&#9670;&#160;</a></span>onMouseWheel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::onMouseWheel </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>delta</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_beam_1_1_component.html#ab92e884903f8a621fcd57bc00a24b041">Beam::Component</a>.</p>
+
+</div>
+</div>
+<a id="a09b6cbbbe5b464156d1eccf34ddf69fc" name="a09b6cbbbe5b464156d1eccf34ddf69fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b6cbbbe5b464156d1eccf34ddf69fc">&#9670;&#160;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,8 +335,22 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Beam::Timeline::render </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>dt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenW</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenH</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -185,7 +360,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_beam_1_1_component.html#a2ed6b7841a25bd992bd46b822311ef1d">Beam::Component</a>.</p>
+<p>Implements <a class="el" href="class_beam_1_1_component.html#acef3496a55f0d94c8678f6049dbaa7cd">Beam::Component</a>.</p>
 
 </div>
 </div>
@@ -214,7 +389,195 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a8027a4a90c56651c9bde0e5315bb71e3" name="a8027a4a90c56651c9bde0e5315bb71e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8027a4a90c56651c9bde0e5315bb71e3">&#9670;&#160;</a></span>sliceRegion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::Timeline::sliceRegion </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_beam_1_1_track_data.html">TrackData</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>track</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>offsetInFrames</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="ae93899c6ea7c8b36f53688ee0ebe028f" name="ae93899c6ea7c8b36f53688ee0ebe028f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae93899c6ea7c8b36f53688ee0ebe028f">&#9670;&#160;</a></span>m_dragOffsetX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_dragOffsetX = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac162bb2a26665fbfabdbc0d0cc8900d2" name="ac162bb2a26665fbfabdbc0d0cc8900d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac162bb2a26665fbfabdbc0d0cc8900d2">&#9670;&#160;</a></span>m_dragRegionIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Beam::Timeline::m_dragRegionIndex = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19789a38965cb80642dc87c4e248e334" name="a19789a38965cb80642dc87c4e248e334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19789a38965cb80642dc87c4e248e334">&#9670;&#160;</a></span>m_dragTrackPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_beam_1_1_track_data.html">TrackData</a>* Beam::Timeline::m_dragTrackPtr = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaabfcef9ca41f31fc70009405dafb67f" name="aaabfcef9ca41f31fc70009405dafb67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaabfcef9ca41f31fc70009405dafb67f">&#9670;&#160;</a></span>m_engine</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_beam_1_1_audio_engine.html">AudioEngine</a>* Beam::Timeline::m_engine</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fc4a961b6399ffc0514f9c47c6bab5b" name="a7fc4a961b6399ffc0514f9c47c6bab5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc4a961b6399ffc0514f9c47c6bab5b">&#9670;&#160;</a></span>m_isDraggingRegion</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::m_isDraggingRegion = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad53cb5c7b902b1592e1cadfd09a0064" name="aad53cb5c7b902b1592e1cadfd09a0064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad53cb5c7b902b1592e1cadfd09a0064">&#9670;&#160;</a></span>m_isPanning</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::m_isPanning = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38bdec7cfb1b81f532295955efbc6dec" name="a38bdec7cfb1b81f532295955efbc6dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38bdec7cfb1b81f532295955efbc6dec">&#9670;&#160;</a></span>m_isScrubbing</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Beam::Timeline::m_isScrubbing = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0021e8c656305015e2ad30a791338c09" name="a0021e8c656305015e2ad30a791338c09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0021e8c656305015e2ad30a791338c09">&#9670;&#160;</a></span>m_isVisible</h2>
 
@@ -237,8 +600,140 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a69dd37c73f893cf949b52f814598d5df" name="a69dd37c73f893cf949b52f814598d5df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69dd37c73f893cf949b52f814598d5df">&#9670;&#160;</a></span>m_lastMouseX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_lastMouseX = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46aaa4386fa2c74b3a97880a18a570e8" name="a46aaa4386fa2c74b3a97880a18a570e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46aaa4386fa2c74b3a97880a18a570e8">&#9670;&#160;</a></span>m_lastMouseY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_lastMouseY = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11eed32b492417dfac0e2986208de78f" name="a11eed32b492417dfac0e2986208de78f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11eed32b492417dfac0e2986208de78f">&#9670;&#160;</a></span>m_offsetX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_offsetX = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5d464919a125da894c1d6dfeb0989e7" name="aa5d464919a125da894c1d6dfeb0989e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d464919a125da894c1d6dfeb0989e7">&#9670;&#160;</a></span>m_offsetY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_offsetY = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8a3307bf582dd1b1b7d22d2b8a9b14b" name="af8a3307bf582dd1b1b7d22d2b8a9b14b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8a3307bf582dd1b1b7d22d2b8a9b14b">&#9670;&#160;</a></span>m_project</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_beam_1_1_flux_project.html">FluxProject</a>&gt; Beam::Timeline::m_project</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09d327486c2182e805e9a9afb2896340" name="a09d327486c2182e805e9a9afb2896340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09d327486c2182e805e9a9afb2896340">&#9670;&#160;</a></span>m_zoom</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::Timeline::m_zoom = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/ui/<a class="el" href="timeline_8hpp_source.html">timeline.hpp</a></li>
+<li>src/interface/<a class="el" href="timeline_8hpp_source.html">timeline.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

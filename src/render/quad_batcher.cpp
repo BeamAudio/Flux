@@ -325,13 +325,23 @@ void QuadBatcher::drawText(const std::string& text, float x, float y, float size
 }
 
 void QuadBatcher::drawLine(float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a) {
+    if (m_quadCount >= m_maxQuads) flush();
+
     float dx = x2 - x1;
     float dy = y2 - y1;
-    if (std::abs(dx) > std::abs(dy)) {
-        drawQuad(x1, y1 - thickness * 0.5f, dx, thickness, r, g, b, a);
-    } else {
-        drawQuad(x1 - thickness * 0.5f, y1, thickness, dy, r, g, b, a);
-    }
+    float len = std::sqrt(dx * dx + dy * dy);
+    if (len < 0.0001f) return;
+
+    // Normal vector for thickness
+    float nx = -dy / len * thickness * 0.5f;
+    float ny = dx / len * thickness * 0.5f;
+
+    m_vertices.push_back({{x1 + nx, y1 + ny}, {0, 0}, {r, g, b, a}});
+    m_vertices.push_back({{x2 + nx, y2 + ny}, {1, 0}, {r, g, b, a}});
+    m_vertices.push_back({{x2 - nx, y2 - ny}, {1, 1}, {r, g, b, a}});
+    m_vertices.push_back({{x1 - nx, y1 - ny}, {0, 1}, {r, g, b, a}});
+
+    m_quadCount++;
 }
 
 void QuadBatcher::drawRect(float x, float y, float w, float h, float thickness, float r, float g, float b, float a) {
@@ -341,8 +351,56 @@ void QuadBatcher::drawRect(float x, float y, float w, float h, float thickness, 
     drawQuad(x + w - thickness, y, thickness, h, r, g, b, a); // Right
 }
 
+void QuadBatcher::setScissor(float x, float y, float w, float h, float screenHeight) {
+    flush();
+    glEnable(GL_SCISSOR_TEST);
+
+    // Transform from Virtual Space to Screen Space
+    float sx = x * m_viewZoom + m_viewTx;
+    float sy = y * m_viewZoom + m_viewTy;
+    float sw = w * m_viewZoom;
+    float sh = h * m_viewZoom;
+
+    // glScissor expects lower-left x, y
+    // Our sy is top-left in screen coordinates.
+    // So lower-left y = screenHeight - (sy + sh)
+    int scissorY = (int)(screenHeight - (sy + sh));
+    
+    // Clamp to valid range to prevent GL errors
+    if (sx < 0) sx = 0;
+    if (scissorY < 0) scissorY = 0;
+    
+    glScissor((int)sx, scissorY, (int)sw, (int)sh);
+}
+
+void QuadBatcher::clearScissor() {
+    flush();
+    glDisable(GL_SCISSOR_TEST);
+}
+
+void QuadBatcher::setViewTransform(float tx, float ty, float zoom) {
+    flush();
+    // Simple 2D transform matrix: [ zoom 0 tx ] [ 0 zoom ty ] [ 0 0 1 ]
+    // We will pass this to the shader or apply to vertices.
+    // For now, let's store it and use it in flush() to update uniform.
+    m_viewTx = tx;
+    m_viewTy = ty;
+    m_viewZoom = zoom;
+}
+
+void QuadBatcher::resetViewTransform(float screenW, float screenH) {
+    setViewTransform(0, 0, 1.0f);
+}
+
 void QuadBatcher::flush() {
     if (m_quadCount == 0) return;
+
+    if (m_shader) {
+        m_shader->use();
+        m_shader->setFloat("uPanX", m_viewTx);
+        m_shader->setFloat("uPanY", m_viewTy);
+        m_shader->setFloat("uZoom", m_viewZoom);
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(Vertex), m_vertices.data());
@@ -356,5 +414,8 @@ void QuadBatcher::flush() {
 }
 
 } // namespace Beam
+
+
+
 
 

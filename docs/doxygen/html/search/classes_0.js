@@ -1,6 +1,20 @@
 var searchData=
 [
-  ['audioengine_0',['AudioEngine',['../class_beam_1_1_audio_engine.html',1,'Beam']]],
-  ['audiomodule_1',['AudioModule',['../class_beam_1_1_audio_module.html',1,'Beam']]],
-  ['audionode_2',['AudioNode',['../class_beam_1_1_audio_node.html',1,'Beam']]]
+  ['analogbase_0',['AnalogBase',['../class_beam_1_1_analog_base.html',1,'Beam']]],
+  ['applicationbase_1',['ApplicationBase',['../class_beam_1_1_application_base.html',1,'Beam']]],
+  ['assetmanager_2',['AssetManager',['../class_beam_1_1_asset_manager.html',1,'Beam']]],
+  ['audiobuffer_3',['AudioBuffer',['../class_beam_1_1_audio_buffer.html',1,'Beam']]],
+  ['audioconfigview_4',['AudioConfigView',['../class_beam_1_1_audio_config_view.html',1,'Beam']]],
+  ['audiodeviceinfo_5',['AudioDeviceInfo',['../struct_beam_1_1_audio_device_info.html',1,'Beam']]],
+  ['audiodevicemanager_6',['AudioDeviceManager',['../class_beam_1_1_audio_device_manager.html',1,'Beam']]],
+  ['audiodevicesetup_7',['AudioDeviceSetup',['../struct_beam_1_1_audio_device_setup.html',1,'Beam']]],
+  ['audioengine_8',['AudioEngine',['../class_beam_1_1_audio_engine.html',1,'Beam']]],
+  ['audiomodule_9',['AudioModule',['../class_beam_1_1_audio_module.html',1,'Beam']]],
+  ['audionode_10',['AudioNode',['../class_beam_1_1_audio_node.html',1,'Beam']]],
+  ['audioprocessor_11',['AudioProcessor',['../class_beam_1_1_audio_processor.html',1,'Beam']]],
+  ['audioprocessorvaluetreestate_12',['AudioProcessorValueTreeState',['../class_beam_1_1_audio_processor_value_tree_state.html',1,'Beam']]],
+  ['audioreader_13',['AudioReader',['../class_beam_1_1_audio_reader.html',1,'Beam']]],
+  ['audioutils_14',['AudioUtils',['../class_beam_1_1_audio_utils.html',1,'Beam']]],
+  ['automationlane_15',['AutomationLane',['../class_beam_1_1_automation_lane.html',1,'Beam']]],
+  ['automationpoint_16',['AutomationPoint',['../struct_beam_1_1_automation_point.html',1,'Beam']]]
 ];

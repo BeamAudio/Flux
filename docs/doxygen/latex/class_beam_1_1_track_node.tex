@@ -15,15 +15,27 @@ Inheritance diagram for Beam::\+Track\+Node:\+\begin{figure}[H]
 \item 
 \doxymbox{\hyperlink{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c}{Track\+Node}} (const std::\+string \&name)
 \item 
+\doxymbox{\hyperlink{class_beam_1_1_track_node_af9665ab17e5551b617a4cb4bd1d9b43e}{\texorpdfstring{$\sim$}{\string~}\+Track\+Node}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_track_node_a4c490876e9e00d85530178fa22571397}{set\+Tape\+Params}} (float drive, float age)
+\item 
 bool \doxymbox{\hyperlink{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95}{load}} (const std::\+string \&file\+Path)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels) override
+bool \doxymbox{\hyperlink{class_beam_1_1_track_node_a0df2b32330877bad5608e7d0b93877e6}{start\+Recording}} (const std::\+string \&file\+Path, int sample\+Rate, int channels)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_track_node_a087918f50fcde846beb63a77a6632da3}{stop\+Recording}} ()
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_track_node_a41898cb4d3b6b3f09c5c144a66dc4a5d}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels, size\+\_\+t start\+Frame=0) override
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_track_node_a973d30146b430d0680b526740364a45c}{set\+State}} (\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{Track\+State}} state)
 \item 
 \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{Track\+State}} \doxymbox{\hyperlink{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8}{get\+State}} () const
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_track_node_acdff1b83754ab94892dc1c1d6ffe5255}{seek}} (size\+\_\+t frame)
+\item 
+std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_track_node_abe7c47ca6cf089ac71e97969c6d9e7f5}{get\+Peak\+Data}} (int num\+Points)
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_track_node_ae7e6189008664fe997e33a5b6042095e}{get\+Total\+Frames}} () const
 \item 
 std::\+string \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{get\+Name}} () const override
 \end{DoxyCompactItemize}
@@ -44,6 +56,20 @@ std::\+string \doxymbox{\hyperlink{class_beam_1_1_track_node_a6ac8f5d6a13f367ac5
 std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_disk_streamer}{Disk\+Streamer}} $>$ \doxymbox{\hyperlink{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d}{m\+\_\+streamer}}
 \item 
 std::\+atomic$<$ \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{Track\+State}} $>$ \doxymbox{\hyperlink{class_beam_1_1_track_node_a2d4f72820d3d3d7dc00f1ec2320613a3}{m\+\_\+state}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}{m\+\_\+last\+Processed\+Frame}} = (size\+\_\+t)-\/1
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16}{m\+\_\+tape\+Drive}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}{m\+\_\+tape\+Age}} = 0.\+0f
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator}{Analog\+Base::\+\+Wow\+Flutter\+Generator}} \doxymbox{\hyperlink{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}{m\+\_\+wow\+Flutter}}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{Analog\+Base::\+\+One\+Pole\+Filter}} \doxymbox{\hyperlink{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30}{m\+\_\+age\+Filters}} \+[2]\+
+\item 
+drwav \doxymbox{\hyperlink{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}{m\+\_\+wav\+Writer}}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}{m\+\_\+is\+Writer\+Open}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_audio_node}{Beam::\+\+Audio\+Node}}}
@@ -62,6 +88,12 @@ bool \doxymbox{\hyperlink{class_beam_1_1_audio_node_ac5ad81de4a5d0abe555fe9f0621
 {\footnotesize\ttfamily \label{class_beam_1_1_track_node_a300b73669c49d022a1dd10f7bedb546c} 
 Beam::\+\+Track\+Node::\+\+Track\+Node (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\Hypertarget{class_beam_1_1_track_node_af9665ab17e5551b617a4cb4bd1d9b43e}\index{Beam::TrackNode@{Beam::TrackNode}!````~TrackNode@{\texorpdfstring{$\sim$}{\string~}TrackNode}}
+\index{````~TrackNode@{\texorpdfstring{$\sim$}{\string~}TrackNode}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrackNode()}{\string~TrackNode()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_af9665ab17e5551b617a4cb4bd1d9b43e} 
+Beam::\+\+Track\+Node::\+\texorpdfstring{$\sim$}{\string~}\+Track\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 \label{doc-func-members}
@@ -77,11 +109,23 @@ std::\+string Beam::\+\+Track\+Node::\+get\+Name (\begin{DoxyParamCaption}{}{}\e
 
 Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{Beam::\+\+Audio\+Node}}.
 
+\Hypertarget{class_beam_1_1_track_node_abe7c47ca6cf089ac71e97969c6d9e7f5}\index{Beam::TrackNode@{Beam::TrackNode}!getPeakData@{getPeakData}}
+\index{getPeakData@{getPeakData}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{getPeakData()}{getPeakData()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_abe7c47ca6cf089ac71e97969c6d9e7f5} 
+std::\+vector$<$ std::\+vector$<$ float $>$ $>$ Beam::\+\+Track\+Node::\+get\+Peak\+Data (\begin{DoxyParamCaption}\item[{int}]{num\+Points}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8}\index{Beam::TrackNode@{Beam::TrackNode}!getState@{getState}}
 \index{getState@{getState}!Beam::TrackNode@{Beam::TrackNode}}
 \doxysubsubsection{\texorpdfstring{getState()}{getState()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_track_node_a8bc557d0c5fe519e79fa335c695b1cf8} 
 \doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{Track\+State}} Beam::\+\+Track\+Node::\+get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_track_node_ae7e6189008664fe997e33a5b6042095e}\index{Beam::TrackNode@{Beam::TrackNode}!getTotalFrames@{getTotalFrames}}
+\index{getTotalFrames@{getTotalFrames}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{getTotalFrames()}{getTotalFrames()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_ae7e6189008664fe997e33a5b6042095e} 
+size\+\_\+t Beam::\+\+Track\+Node::\+get\+Total\+Frames (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95}\index{Beam::TrackNode@{Beam::TrackNode}!load@{load}}
 \index{load@{load}!Beam::TrackNode@{Beam::TrackNode}}
@@ -89,15 +133,15 @@ Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad33
 {\footnotesize\ttfamily \label{class_beam_1_1_track_node_aacfc7312076b50be2cf6d4403df4ca95} 
 bool Beam::\+\+Track\+Node::\+load (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e}\index{Beam::TrackNode@{Beam::TrackNode}!process@{process}}
+\Hypertarget{class_beam_1_1_track_node_a41898cb4d3b6b3f09c5c144a66dc4a5d}\index{Beam::TrackNode@{Beam::TrackNode}!process@{process}}
 \index{process@{process}!Beam::TrackNode@{Beam::TrackNode}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e} 
-void Beam::\+\+Track\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a41898cb4d3b6b3f09c5c144a66dc4a5d} 
+void Beam::\+\+Track\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{, }\item[{size\+\_\+t}]{start\+Frame}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{Beam::\+\+Audio\+Node}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7}{Beam::\+\+Audio\+Node}}.
 
 \Hypertarget{class_beam_1_1_track_node_acdff1b83754ab94892dc1c1d6ffe5255}\index{Beam::TrackNode@{Beam::TrackNode}!seek@{seek}}
 \index{seek@{seek}!Beam::TrackNode@{Beam::TrackNode}}
@@ -111,11 +155,47 @@ void Beam::\+\+Track\+Node::\+seek (\begin{DoxyParamCaption}\item[{size\+\_\+t}]
 {\footnotesize\ttfamily \label{class_beam_1_1_track_node_a973d30146b430d0680b526740364a45c} 
 void Beam::\+\+Track\+Node::\+set\+State (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daaf7e9f}{Track\+State}}}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\Hypertarget{class_beam_1_1_track_node_a4c490876e9e00d85530178fa22571397}\index{Beam::TrackNode@{Beam::TrackNode}!setTapeParams@{setTapeParams}}
+\index{setTapeParams@{setTapeParams}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{setTapeParams()}{setTapeParams()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a4c490876e9e00d85530178fa22571397} 
+void Beam::\+\+Track\+Node::\+set\+Tape\+Params (\begin{DoxyParamCaption}\item[{float}]{drive}{, }\item[{float}]{age}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_track_node_a0df2b32330877bad5608e7d0b93877e6}\index{Beam::TrackNode@{Beam::TrackNode}!startRecording@{startRecording}}
+\index{startRecording@{startRecording}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{startRecording()}{startRecording()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a0df2b32330877bad5608e7d0b93877e6} 
+bool Beam::\+\+Track\+Node::\+start\+Recording (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+Path}{, }\item[{int}]{sample\+Rate}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_track_node_a087918f50fcde846beb63a77a6632da3}\index{Beam::TrackNode@{Beam::TrackNode}!stopRecording@{stopRecording}}
+\index{stopRecording@{stopRecording}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{stopRecording()}{stopRecording()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a087918f50fcde846beb63a77a6632da3} 
+void Beam::\+\+Track\+Node::\+stop\+Recording (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 \label{doc-variable-members}
 \Hypertarget{class_beam_1_1_track_node_doc-variable-members}
 \doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30}\index{Beam::TrackNode@{Beam::TrackNode}!m\_ageFilters@{m\_ageFilters}}
+\index{m\_ageFilters@{m\_ageFilters}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_ageFilters}{m\_ageFilters}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a69f6c2aec093b6e84d84d3e3fd2c6c30} 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{Analog\+Base::\+\+One\+Pole\+Filter}} Beam::\+\+Track\+Node::\+m\+\_\+age\+Filters\+[2]\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183}\index{Beam::TrackNode@{Beam::TrackNode}!m\_isWriterOpen@{m\_isWriterOpen}}
+\index{m\_isWriterOpen@{m\_isWriterOpen}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_isWriterOpen}{m\_isWriterOpen}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a40e6d50a007d435c90d0a10b2443e183} 
+bool Beam::\+\+Track\+Node::\+m\+\_\+is\+Writer\+Open\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c}\index{Beam::TrackNode@{Beam::TrackNode}!m\_lastProcessedFrame@{m\_lastProcessedFrame}}
+\index{m\_lastProcessedFrame@{m\_lastProcessedFrame}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_lastProcessedFrame}{m\_lastProcessedFrame}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a085e6353ffd49a048809587ddc919e7c} 
+size\+\_\+t Beam::\+\+Track\+Node::\+m\+\_\+last\+Processed\+Frame = (size\+\_\+t)-\/1\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{class_beam_1_1_track_node_a6ac8f5d6a13f367ac52c01b8c933679f}\index{Beam::TrackNode@{Beam::TrackNode}!m\_name@{m\_name}}
 \index{m\_name@{m\_name}!Beam::TrackNode@{Beam::TrackNode}}
 \doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
@@ -134,8 +214,32 @@ std::\+atomic$<$\doxymbox{\hyperlink{namespace_beam_aaab526c0becfd931c9f29361daa
 {\footnotesize\ttfamily \label{class_beam_1_1_track_node_abb11e4728816724f604713a672ad841d} 
 std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_disk_streamer}{Disk\+Streamer}}$>$ Beam::\+\+Track\+Node::\+m\+\_\+streamer\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826}\index{Beam::TrackNode@{Beam::TrackNode}!m\_tapeAge@{m\_tapeAge}}
+\index{m\_tapeAge@{m\_tapeAge}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_tapeAge}{m\_tapeAge}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a66f963a00fd9b980ca2599a5b71f1826} 
+float Beam::\+\+Track\+Node::\+m\+\_\+tape\+Age = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16}\index{Beam::TrackNode@{Beam::TrackNode}!m\_tapeDrive@{m\_tapeDrive}}
+\index{m\_tapeDrive@{m\_tapeDrive}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_tapeDrive}{m\_tapeDrive}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a4ce5423d613e322ed2ddaaa6430a4d16} 
+float Beam::\+\+Track\+Node::\+m\+\_\+tape\+Drive = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f}\index{Beam::TrackNode@{Beam::TrackNode}!m\_wavWriter@{m\_wavWriter}}
+\index{m\_wavWriter@{m\_wavWriter}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_wavWriter}{m\_wavWriter}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_ad3a9406a86daaa3935f920e6dcac3c5f} 
+drwav Beam::\+\+Track\+Node::\+m\+\_\+wav\+Writer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353}\index{Beam::TrackNode@{Beam::TrackNode}!m\_wowFlutter@{m\_wowFlutter}}
+\index{m\_wowFlutter@{m\_wowFlutter}!Beam::TrackNode@{Beam::TrackNode}}
+\doxysubsubsection{\texorpdfstring{m\_wowFlutter}{m\_wowFlutter}}
+{\footnotesize\ttfamily \label{class_beam_1_1_track_node_a042dc47115529f92e8e89cf548161353} 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator}{Analog\+Base::\+\+Wow\+Flutter\+Generator}} Beam::\+\+Track\+Node::\+m\+\_\+wow\+Flutter\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{track__node_8hpp}{track\+\_\+node.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{track__node_8hpp}{track\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

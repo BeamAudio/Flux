@@ -1,0 +1,62 @@
+\doxysection{input\+\_\+node.\+hpp}
+\hypertarget{input__node_8hpp_source}{}\label{input__node_8hpp_source}\index{src/engine/input\_node.hpp@{src/engine/input\_node.hpp}}
+\doxymbox{\hyperlink{input__node_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INPUT\_NODE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INPUT\_NODE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{flux__node_8hpp}{flux\_node.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_input_node_a86ab1c7bdda3f4cf03c36425f1d80148}{InputNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_flux_node}{FluxNode}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_input_node_a86ab1c7bdda3f4cf03c36425f1d80148}{InputNode}}(\textcolor{keywordtype}{int}\ bufferSize)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae3bafc1c5a1aa545167256172b3d3688}{setupBuffers}}(0,\ 1,\ bufferSize,\ 2);\ \textcolor{comment}{//\ 0\ inputs,\ 1\ output\ (stereo)}}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_node_a132e1ea5e27d21645ef371a45f377dd3}{process}}(\textcolor{keywordtype}{int}\ frames)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ out\ =\ \doxymbox{\hyperlink{class_beam_1_1_flux_node_abf11cfd4f2346ee0cd46d4345f1ed7d4}{getOutputBuffer}}(0);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\doxymbox{\hyperlink{class_beam_1_1_input_node_a2245d4f438413452c3569373721342cb}{m\_bufferMutex}});}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.size()\ >=\ (\textcolor{keywordtype}{size\_t})(frames\ *\ 2))\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin(),\ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin()\ +\ frames\ *\ 2,\ out);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.erase(\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin(),\ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin()\ +\ frames\ *\ 2);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Underflow:\ clear\ output\ or\ use\ what\ we\ have}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ std::fill(out,\ out\ +\ frames\ *\ 2,\ 0.0f);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_input_node_ac72e154f19216f9a348a0b7a2cabefff}{pushData}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ data,\ \textcolor{keywordtype}{int}\ samples)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\doxymbox{\hyperlink{class_beam_1_1_input_node_a2245d4f438413452c3569373721342cb}{m\_bufferMutex}});}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.insert(\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.end(),\ data,\ data\ +\ samples);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cap\ size\ to\ prevent\ infinite\ growth\ if\ not\ processing}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ maxSamples\ =\ 44100\ *\ 2;\ \textcolor{comment}{//\ 1\ second\ buffer}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.size()\ >\ maxSamples)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.erase(\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin(),\ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.begin()\ +\ (\doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}}.size()\ -\/\ maxSamples));}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_input_node_aeef98292e43008c4e69525146f6e4050}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Audio\ Input"{}};\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ std::vector<Port>\ \doxymbox{\hyperlink{class_beam_1_1_input_node_a9f91b9b33f0c719360f57e012cbb1250}{getInputPorts}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{\};\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ std::vector<Port>\ \doxymbox{\hyperlink{class_beam_1_1_input_node_a7a11ca9c74a2e08d3200feb375aa57bf}{getOutputPorts}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{\{\textcolor{stringliteral}{"{}Stereo\ Out"{}},\ 2\}\};\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ std::mutex\ \doxymbox{\hyperlink{class_beam_1_1_input_node_a2245d4f438413452c3569373721342cb}{m\_bufferMutex}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<float>\ \doxymbox{\hyperlink{class_beam_1_1_input_node_ae8c1b8ca2f4168ec8e043ee31c3bdeb2}{m\_capturedData}};}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INPUT\_NODE\_HPP}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+
+\end{DoxyCode}

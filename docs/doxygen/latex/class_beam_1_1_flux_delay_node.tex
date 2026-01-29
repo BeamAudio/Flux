@@ -7,7 +7,7 @@
 Inheritance diagram for Beam::\+Flux\+Delay\+Node:\+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{class_beam_1_1_flux_delay_node}
+\includegraphics[height=3.000000cm]{class_beam_1_1_flux_delay_node}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -15,19 +15,36 @@ Inheritance diagram for Beam::\+Flux\+Delay\+Node:\+\begin{figure}[H]
 \item 
 \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_ac25de6a616be31281a6303b24785125e}{Flux\+Delay\+Node}} (int buffer\+Size, float sample\+Rate)
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_a1ff56dfcb9d8d2780d855b5e545e2552}{process}} (int frames) override
+void \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_a1edabd22ff7b188d62d46aac298fd2d0}{process\+Block}} (const float \texorpdfstring{$\ast$}{*}input, float \texorpdfstring{$\ast$}{*}output, int total\+Samples) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_plugin}{Beam::\+\+Flux\+Plugin}}}
+\begin{DoxyCompactItemize}
 \item 
-std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_a603094c5e37cdcca6213eb1f243520f7}{get\+Name}} () const override
+\doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a9d91b56960799fdbfc4575e2fcfa6689}{Flux\+Plugin}} (const std::\+string \&name, int buffer\+Size, float sample\+Rate)
 \item 
-std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_a2fe1caad4bba89af6aa8994d8bdd0130}{get\+Input\+Ports}} () const override
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a87fb076475f20b062493efa7ca00e045}{process\+Events}} (const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi)
+\begin{DoxyCompactList}\small\item\em Handle MIDI events in your plugin. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_aa1f9c569002ec23eeb5db0af686abea7}{process\+MIDI}} (const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi) override
+\begin{DoxyCompactList}\small\item\em Optional MIDI processing. Called before \doxylink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process()} in the engine loop. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a181430e1cbf129891fe3ed72f3905a61}{process}} (int frames) override
+\begin{DoxyCompactList}\small\item\em Main audio processing method. Must be implemented by subclasses. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a450563af4d65a25b8a8e896dab77a3c6}{get\+Name}} () const override
 \item 
-std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_aa50c030fa23cfd17e3bf82380e0aecf3}{get\+Output\+Ports}} () const override
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ad231db67f900e8e7dd853936ad2e866a}{get\+Input\+Ports}} () const override
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a4ea312de74047e127e818a26e715d8bb}{get\+Output\+Ports}} () const override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
 \begin{DoxyCompactItemize}
 \item 
 virtual \doxymbox{\hyperlink{class_beam_1_1_flux_node_a708c135cdb61e8838469998cd8a84e65}{\texorpdfstring{$\sim$}{\string~}\+Flux\+Node}} ()=default
 \item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ace8cc49479d8924d44bca5fd4cd955e2}{on\+Transport\+State\+Changed}} (bool playing)
+\begin{DoxyCompactList}\small\item\em Responds to global transport changes (Play/\+\+Pause). \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_flux_node_adc7c4e979bf27de5bfca66815ae97a67}{on\+Transport\+Seek}} (size\+\_\+t frame)
+\begin{DoxyCompactList}\small\item\em Responds to timeline seeking. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_aa579ec06608fd776987bbb089f27fd94}{set\+Current\+Frame}} (size\+\_\+t frame)
+\begin{DoxyCompactList}\small\item\em Sets the current playhead position for this block. \end{DoxyCompactList}\item 
 float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac90bd1a05b5bed3d68978f532386ed29}{get\+Input\+Buffer}} (int port\+Idx)
 \item 
 float \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_beam_1_1_flux_node_abf11cfd4f2346ee0cd46d4345f1ed7d4}{get\+Output\+Buffer}} (int port\+Idx)
@@ -36,7 +53,7 @@ void \doxymbox{\hyperlink{class_beam_1_1_flux_node_af37f8c1b6b825da2ce7e35011d6f
 \item 
 bool \doxymbox{\hyperlink{class_beam_1_1_flux_node_a4bd30f3c8d311afdcd5c0d208e3bbf0f}{is\+Bypassed}} () const
 \item 
-void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ param)
+void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ad53f3fcaa5737f46d88530f40dbfbe32}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}})
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a59a32442eec144010741b9f2086c516e}{get\+Parameter}} (const std::\+string \&name)
 \item 
@@ -45,14 +62,23 @@ const std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlin
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_delay_node}{Delay\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_aba0f0712321df607e37fbcd4cb6c0387}{m\+\_\+delay}}
+std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_delay_node}{Delay\+Node}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_delay_node_ab2191ff5a0ab1a37cbc3e5d1e73a9a9c}{m\+\_\+delay}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_plugin}{Beam::\+\+Flux\+Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1768cc84018f8de19bcbf781e9b7ac3f}{add\+Param}} (const std::\+string \&name, float min, float max, float initial)
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a1b292b033caaaf9ec67154dfee2e577b}{get\+Param}} (const std::\+string \&name)
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_a3e65f35944360e4e6ac370a967cf5eb3}{get\+Sample\+Rate}} () const
+\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_flux_node_ae3bafc1c5a1aa545167256172b3d3688}{setup\+Buffers}} (int num\+Inputs, int num\+Outputs, int buffer\+Size, int channels)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pre-\/allocates buffers for inputs and outputs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_beam_1_1_flux_node}{Beam::\+\+Flux\+Node}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -63,6 +89,8 @@ std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_beam_
 std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a65628a37cd2dd2832eda60e74ec1aed3}{m\+\_\+parameters}}
 \item 
 std::\+atomic$<$ bool $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_node_a6116dcdcfa20998fe90dc75a74f25d9b}{m\+\_\+bypassed}} \{false\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_flux_node_a7d8556ddb1482f997cda7749d737668b}{m\+\_\+current\+Frame}} = 0
 \end{DoxyCompactItemize}
 
 
@@ -80,59 +108,29 @@ Beam::\+\+Flux\+Delay\+Node::\+\+Flux\+Delay\+Node (\begin{DoxyParamCaption}\ite
 \label{doc-func-members}
 \Hypertarget{class_beam_1_1_flux_delay_node_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_beam_1_1_flux_delay_node_a2fe1caad4bba89af6aa8994d8bdd0130}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!getInputPorts@{getInputPorts}}
-\index{getInputPorts@{getInputPorts}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
-\doxysubsubsection{\texorpdfstring{getInputPorts()}{getInputPorts()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_a2fe1caad4bba89af6aa8994d8bdd0130} 
-std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ Beam::\+\+Flux\+Delay\+Node::\+get\+Input\+Ports (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+\Hypertarget{class_beam_1_1_flux_delay_node_a1edabd22ff7b188d62d46aac298fd2d0}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!processBlock@{processBlock}}
+\index{processBlock@{processBlock}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
+\doxysubsubsection{\texorpdfstring{processBlock()}{processBlock()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_a1edabd22ff7b188d62d46aac298fd2d0} 
+void Beam::\+\+Flux\+Delay\+Node::\+process\+Block (\begin{DoxyParamCaption}\item[{const float \texorpdfstring{$\ast$}{*}}]{input}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{output}{, }\item[{int}]{total\+Samples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a17eb02187925b52bf8e53fa3ebe3da66}{Beam::\+\+Flux\+Node}}.
-
-\Hypertarget{class_beam_1_1_flux_delay_node_a603094c5e37cdcca6213eb1f243520f7}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!getName@{getName}}
-\index{getName@{getName}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
-\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_a603094c5e37cdcca6213eb1f243520f7} 
-std::\+string Beam::\+\+Flux\+Delay\+Node::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_ac638d3d9bb1050d658294bc5470abeba}{Beam::\+\+Flux\+Node}}.
-
-\Hypertarget{class_beam_1_1_flux_delay_node_aa50c030fa23cfd17e3bf82380e0aecf3}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!getOutputPorts@{getOutputPorts}}
-\index{getOutputPorts@{getOutputPorts}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
-\doxysubsubsection{\texorpdfstring{getOutputPorts()}{getOutputPorts()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_aa50c030fa23cfd17e3bf82380e0aecf3} 
-std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_flux_node_1_1_port}{Port}} $>$ Beam::\+\+Flux\+Delay\+Node::\+get\+Output\+Ports (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a034f59d236afd7901ed84090422e3279}{Beam::\+\+Flux\+Node}}.
-
-\Hypertarget{class_beam_1_1_flux_delay_node_a1ff56dfcb9d8d2780d855b5e545e2552}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!process@{process}}
-\index{process@{process}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
-\doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_a1ff56dfcb9d8d2780d855b5e545e2552} 
-void Beam::\+\+Flux\+Delay\+Node::\+process (\begin{DoxyParamCaption}\item[{int}]{frames}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \doxymbox{\hyperlink{class_beam_1_1_flux_node_a3c263446753fa7ae5ff6928ee57bcd4d}{Beam::\+\+Flux\+Node}}.
+Implements \doxymbox{\hyperlink{class_beam_1_1_flux_plugin_ab10324716cec75feee93b6a3159c7912}{Beam::\+\+Flux\+Plugin}}.
 
 
 
 \label{doc-variable-members}
 \Hypertarget{class_beam_1_1_flux_delay_node_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{class_beam_1_1_flux_delay_node_aba0f0712321df607e37fbcd4cb6c0387}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!m\_delay@{m\_delay}}
+\Hypertarget{class_beam_1_1_flux_delay_node_ab2191ff5a0ab1a37cbc3e5d1e73a9a9c}\index{Beam::FluxDelayNode@{Beam::FluxDelayNode}!m\_delay@{m\_delay}}
 \index{m\_delay@{m\_delay}!Beam::FluxDelayNode@{Beam::FluxDelayNode}}
 \doxysubsubsection{\texorpdfstring{m\_delay}{m\_delay}}
-{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_aba0f0712321df607e37fbcd4cb6c0387} 
-std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_delay_node}{Delay\+Node}}$>$ Beam::\+\+Flux\+Delay\+Node::\+m\+\_\+delay\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_delay_node_ab2191ff5a0ab1a37cbc3e5d1e73a9a9c} 
+std::\+unique\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_delay_node}{Delay\+Node}}$>$ Beam::\+\+Flux\+Delay\+Node::\+m\+\_\+delay\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{flux__fx__nodes_8hpp}{flux\+\_\+fx\+\_\+nodes.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{flux__fx__nodes_8hpp}{flux\+\_\+fx\+\_\+nodes.\+hpp}}\end{DoxyCompactItemize}

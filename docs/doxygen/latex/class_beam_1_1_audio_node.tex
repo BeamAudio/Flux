@@ -7,7 +7,7 @@
 Inheritance diagram for Beam::\+Audio\+Node:\+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.454545cm]{class_beam_1_1_audio_node}
+\includegraphics[height=2.000000cm]{class_beam_1_1_audio_node}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -15,7 +15,7 @@ Inheritance diagram for Beam::\+Audio\+Node:\+\begin{figure}[H]
 \item 
 virtual \doxymbox{\hyperlink{class_beam_1_1_audio_node_afbea31954b50918131d31fc0d1f6de8c}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Node}} ()=default
 \item 
-virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels)=0
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7}{process}} (float \texorpdfstring{$\ast$}{*}buffer, int frames, int channels, size\+\_\+t start\+Frame=0)=0
 \item 
 virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_node_a864b3bf9095638e43ad334b7b3706bec}{get\+Name}} () const =0
 \item 
@@ -52,7 +52,7 @@ virtual std::\+string Beam::\+\+Audio\+Node::\+get\+Name (\begin{DoxyParamCaptio
 
 
 
-Implemented in \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{Beam::\+\+Biquad\+Filter\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e}{Beam::\+\+Delay\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_gain_node_a726efb0ba9a5f23e1eaa51a96fe1e5ba}{Beam::\+\+Gain\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a716e3f51751e07ed0718d4d786e3da12}{Beam::\+\+Sine\+Oscillator}}, and \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{Beam::\+\+Track\+Node}}.
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{Beam::\+\+Biquad\+Filter\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_delay_node_aac469a6ff6f2ea95f5ffbb06f60dbf2e}{Beam::\+\+Delay\+Node}}, and \doxymbox{\hyperlink{class_beam_1_1_track_node_a8c233bb481da69fd335c86c286ae9606}{Beam::\+\+Track\+Node}}.
 
 \Hypertarget{class_beam_1_1_audio_node_a6ba1724cff34b5bc0f811ee2537caae5}\index{Beam::AudioNode@{Beam::AudioNode}!isBypassed@{isBypassed}}
 \index{isBypassed@{isBypassed}!Beam::AudioNode@{Beam::AudioNode}}
@@ -60,15 +60,15 @@ Implemented in \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017e
 {\footnotesize\ttfamily \label{class_beam_1_1_audio_node_a6ba1724cff34b5bc0f811ee2537caae5} 
 bool Beam::\+\+Audio\+Node::\+is\+Bypassed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6}\index{Beam::AudioNode@{Beam::AudioNode}!process@{process}}
+\Hypertarget{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7}\index{Beam::AudioNode@{Beam::AudioNode}!process@{process}}
 \index{process@{process}!Beam::AudioNode@{Beam::AudioNode}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily \label{class_beam_1_1_audio_node_a6954940f3822298db5c2224e921432f6} 
-virtual void Beam::\+\+Audio\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_node_ab0cb6fa1aba031e703be16be26e0d6b7} 
+virtual void Beam::\+\+Audio\+Node::\+process (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{frames}{, }\item[{int}]{channels}{, }\item[{size\+\_\+t}]{start\+Frame}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Implemented in \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}{Beam::\+\+Biquad\+Filter\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_delay_node_a1f946e80326aaaf6dc87e6ec4e4b1858}{Beam::\+\+Delay\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_gain_node_a900eac063663551b97802e29e5768e25}{Beam::\+\+Gain\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_sine_oscillator_a3ee669cf30b4b71304975dd6c953dadd}{Beam::\+\+Sine\+Oscillator}}, and \doxymbox{\hyperlink{class_beam_1_1_track_node_a2e2bffa8b286946f8e32db31e672727e}{Beam::\+\+Track\+Node}}.
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9ca4ea9dffee4a78f9c25457c2303142}{Beam::\+\+Biquad\+Filter\+Node}}, \doxymbox{\hyperlink{class_beam_1_1_delay_node_a44fdc2abfe4112bf5e89f97d1c9ebe20}{Beam::\+\+Delay\+Node}}, and \doxymbox{\hyperlink{class_beam_1_1_track_node_a41898cb4d3b6b3f09c5c144a66dc4a5d}{Beam::\+\+Track\+Node}}.
 
 \Hypertarget{class_beam_1_1_audio_node_a3fcc68eab5b1adf547a4205f258b212c}\index{Beam::AudioNode@{Beam::AudioNode}!setBypass@{setBypass}}
 \index{setBypass@{setBypass}!Beam::AudioNode@{Beam::AudioNode}}
@@ -91,4 +91,4 @@ bool Beam::\+\+Audio\+Node::\+m\+\_\+is\+Bypassed = false\hspace{0.3cm}{\ttfamil
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{audio__node_8hpp}{audio\+\_\+node.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{audio__node_8hpp}{audio\+\_\+node.\+hpp}}\end{DoxyCompactItemize}

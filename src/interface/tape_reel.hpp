@@ -3,6 +3,7 @@
 
 #include "audio_module.hpp"
 #include "../engine/flux_track_node.hpp"
+#include "../utilities/flux_audio_utils.hpp"
 
 namespace Beam {
 
@@ -20,7 +21,7 @@ public:
         }
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 12.0f, 1.0f, 0.22f, 0.22f, 0.23f, 1.0f);
         auto track = m_trackNode->getInternalNode();
         float reelSize = 65.0f;
@@ -39,7 +40,8 @@ public:
 
         drawReel(m_bounds.x + 20, reelY);
         drawReel(m_bounds.x + 115, reelY);
-        batcher.drawText(m_trackNode->getName(), m_bounds.x + 15, m_bounds.y + 10, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+        
+        AudioUtils::drawScrollingText(batcher, m_trackNode->getName(), m_bounds.x + 15, m_bounds.y + 10, 150, 15, 12, dt, m_scrollTimer, screenH);
 
         // Record Button UI
         Rect recBounds = { m_bounds.x + m_bounds.w - 30, m_bounds.y + 8, 20, 20 };
@@ -51,8 +53,8 @@ public:
         }
 
         // Parent's ports
-        getInputPort()->render(batcher, dt);
-        getOutputPort()->render(batcher, dt);
+        if (getInputPort()) getInputPort()->render(batcher, dt, screenW, screenH);
+        if (getOutputPort()) getOutputPort()->render(batcher, dt, screenW, screenH);
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -71,17 +73,16 @@ public:
             return true;
         }
 
-        // Removed the play/pause toggle here to maintain global sync
         return false;
     }
 
 private:
     std::shared_ptr<FluxTrackNode> m_trackNode;
     float m_rotation = 0.0f;
+    float m_scrollTimer = 0.0f;
 };
 
 } // namespace Beam
 
 #endif // TAPE_REEL_HPP
-
 

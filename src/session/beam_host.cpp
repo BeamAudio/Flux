@@ -25,6 +25,32 @@ void BeamHost::onFileSelected(void* userdata, const char* const* filelist, int f
     }
 }
 
+void BeamHost::onSaveDialogCallback(void* userdata, const char* const* filelist, int filter) {
+    if (filelist && filelist[0]) {
+        BeamHost* host = static_cast<BeamHost*>(userdata);
+        if (host && host->m_project) {
+            std::string path = filelist[0];
+            // Basic extension check
+            if (path.length() < 5 || path.substr(path.length() - 5) != ".flux") {
+                path += ".flux";
+            }
+            ProjectManager::saveProject(path, host->m_project->serialize());
+            std::cout << "Project saved to: " << path << std::endl;
+        }
+    }
+}
+
+void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist, int filter) {
+    if (filelist && filelist[0]) {
+        BeamHost* host = static_cast<BeamHost*>(userdata);
+        auto data = ProjectManager::loadProject(filelist[0]);
+        if (!data.empty() && host && host->m_project) {
+             host->m_project->deserialize(data);
+             std::cout << "Project loaded from: " << filelist[0] << std::endl;
+        }
+    }
+}
+
 BeamHost::BeamHost(const std::string& title, int width, int height)
     : m_title(title), m_width(width), m_height(height), m_isRunning(false), 
       m_window(nullptr), m_glContext(nullptr) {
@@ -75,7 +101,8 @@ bool BeamHost::init() {
         m_project->getGraph()->addNode(m_audioEngine->getInputNode());
     }
 
-    m_audioEngine->setPlaying(true);
+    m_audioEngine->setPlaying(false); // Start paused
+    m_audioEngine->seek(0);           // Start at time 0
 
     m_workspace = std::make_shared<Workspace>(m_project, m_audioEngine.get());
     m_timeline = std::make_shared<Timeline>(m_project, m_audioEngine.get());
@@ -112,12 +139,37 @@ bool BeamHost::init() {
     m_topBar->onPlayRequested = [this]() { m_audioEngine->setPlaying(true); };
     m_topBar->onPauseRequested = [this]() { m_audioEngine->setPlaying(false); };
     m_topBar->onRewindRequested = [this]() { m_audioEngine->rewind(); };
+    m_topBar->onRecordRequested = [this](bool recording) {
+        if (recording) {
+            auto nodes = m_project->getGraph()->getNodes();
+            for (auto& [id, node] : nodes) {
+                auto track = std::dynamic_pointer_cast<FluxTrackNode>(node);
+                if (track) {
+                    std::string filename = "recording_" + std::to_string(id) + ".wav";
+                    track->startRecording(filename, 44100);
+                }
+            }
+        } else {
+            auto nodes = m_project->getGraph()->getNodes();
+            for (auto& [id, node] : nodes) {
+                auto track = std::dynamic_pointer_cast<FluxTrackNode>(node);
+                if (track) track->stopRecording();
+            }
+        }
+    };
     m_topBar->onSaveRequested = [this]() {
-        if (m_project) ProjectManager::saveProject("project.flux", m_project->serialize());
+        static const SDL_DialogFileFilter filters[] = {
+            { "Flux Project", "flux" },
+            { "All files", "*" }
+        };
+        SDL_ShowSaveFileDialog(onSaveDialogCallback, this, m_window, filters, 2, "project.flux");
     };
     m_topBar->onLoadRequested = [this]() {
-        auto data = ProjectManager::loadProject("project.flux");
-        if (!data.empty() && m_project) m_project->deserialize(data);
+        static const SDL_DialogFileFilter filters[] = {
+            { "Flux Project", "flux" },
+            { "All files", "*" }
+        };
+        SDL_ShowOpenFileDialog(onLoadDialogCallback, this, m_window, filters, 2, NULL, false);
     };
 
     setMode(DAWMode::Flux);
@@ -138,6 +190,7 @@ void BeamHost::setMode(DAWMode mode) {
         m_timeline->setVisible(true);
         if (m_browser) m_browser->setVisible(false);
     }
+    performLayout();
 }
 
 void BeamHost::performLayout() {
@@ -165,6 +218,9 @@ void BeamHost::handleEvents() {
                 m_audioEngine->setPlaying(playing);
                 if (m_topBar) m_topBar->setPlaying(playing);
             }
+            if (m_mode == DAWMode::Splicing && m_timeline) {
+                m_timeline->handleKeyDown(event.key.key);
+            }
         }
         else if (event.type == SDL_EVENT_DROP_FILE) {
             if (m_workspace && event.drop.data) {
@@ -183,6 +239,11 @@ void BeamHost::handleEvents() {
         } 
         else if (event.type == SDL_EVENT_MOUSE_MOTION) {
             m_uiHandler->handleMouseMove(event.motion.x, event.motion.y);
+        }
+        else if (event.type == SDL_EVENT_MOUSE_WHEEL) {
+            float mx, my;
+            SDL_GetMouseState(&mx, &my);
+            m_uiHandler->handleMouseWheel(mx, my, event.wheel.y);
         }
         else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
             m_width = event.window.data1;
@@ -206,7 +267,7 @@ void BeamHost::render(float dt) {
     };
     m_uiShader->setMat4("projection", projection);
     m_batcher->begin();
-    m_uiHandler->render(*m_batcher, dt);
+    m_uiHandler->render(*m_batcher, dt, (float)m_width, (float)m_height);
     m_batcher->flush();
     SDL_GL_SwapWindow(m_window);
 }
@@ -234,5 +295,8 @@ void BeamHost::run() {
 void BeamHost::stop() { m_isRunning = false; }
 
 } // namespace Beam
+
+
+
 
 

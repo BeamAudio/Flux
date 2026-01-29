@@ -4,7 +4,8 @@ var class_beam_1_1_input_handler =
     [ "handleMouseDown", "class_beam_1_1_input_handler.html#a89d5254f25fa9d103a8b1a05332d5a5f", null ],
     [ "handleMouseMove", "class_beam_1_1_input_handler.html#ab6ae366e86174358931c66a97f002f96", null ],
     [ "handleMouseUp", "class_beam_1_1_input_handler.html#a200720149cc210bc1b2fae9f02872e86", null ],
-    [ "render", "class_beam_1_1_input_handler.html#a2d82861b1db962c08f7bf011fe6bc8ef", null ],
+    [ "handleMouseWheel", "class_beam_1_1_input_handler.html#a13cc6aa32a46b209a89f12db76236200", null ],
+    [ "render", "class_beam_1_1_input_handler.html#a59aa6d328f5c20ab523d5201302007b0", null ],
     [ "update", "class_beam_1_1_input_handler.html#acd93a9973f465ad5a6d9f0ccdc72636a", null ],
     [ "m_components", "class_beam_1_1_input_handler.html#a28f180063d61a104843c23ac24baadc3", null ],
     [ "m_focusedComponent", "class_beam_1_1_input_handler.html#a78adda91495720c5f10106ce98cad1aa", null ]

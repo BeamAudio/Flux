@@ -1,118 +1,154 @@
 \doxysection{knob.\+hpp}
-\hypertarget{knob_8hpp_source}{}\label{knob_8hpp_source}\index{src/ui/knob.hpp@{src/ui/knob.hpp}}
+\hypertarget{knob_8hpp_source}{}\label{knob_8hpp_source}\index{src/interface/knob.hpp@{src/interface/knob.hpp}}
 \doxymbox{\hyperlink{knob_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ KNOB\_HPP}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ KNOB\_HPP}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{component_8hpp}{component.hpp}}"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{quad__batcher_8hpp}{../graphics/quad\_batcher.hpp}}"{}}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{parameter_8hpp}{../core/parameter.hpp}}"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{quad__batcher_8hpp}{../render/quad\_batcher.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{texture_8hpp}{../render/texture.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{parameter_8hpp}{../session/parameter.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
 \DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}{Knob}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
-\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}{Knob}}(\textcolor{keyword}{const}\ std::string\&\ label,\ \textcolor{keywordtype}{float}\ minVal,\ \textcolor{keywordtype}{float}\ maxVal,\ \textcolor{keywordtype}{float}\ initialVal)}
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}}(label),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}}(minVal),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}(maxVal),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}(initialVal)\ \{\}}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_af53ea4ce8f7892c67225eb37955149d1}{bindParameter}}(std::shared\_ptr<Parameter>\ param)\ \{}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}\ =\ param;}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getMin();}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getMax();}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getValue();}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getName();}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00025\ \ \ \ \ \}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a67bf95ba1b02ad84e9a080530aa2e090}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getValue();}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ *\ 0.5f;}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ *\ 0.5f;}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ radius\ =\ (std::min)(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h)\ *\ 0.4f;}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Label}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}},\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ -\/\ 12,\ 10,\ 0.7f,\ 0.7f,\ 0.7f,\ 1.0f);}
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}{Knob}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_component}{Component}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_adf590b7511811e22abb0a1c9478fe512}{Knob}}(\textcolor{keyword}{const}\ std::string\&\ label,\ \textcolor{keywordtype}{float}\ minVal,\ \textcolor{keywordtype}{float}\ maxVal,\ \textcolor{keywordtype}{float}\ initialVal)}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}}(label),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}}(minVal),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}(maxVal),\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}(initialVal)\ \{\}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_af53ea4ce8f7892c67225eb37955149d1}{bindParameter}}(std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}})\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}\ =\ \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getMin();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getMax();}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getValue();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getName();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_aaf28f9b129c4c9a35b5161b8cf6ca77c}{setTexture}}(std::shared\_ptr<Texture>\ \doxymbox{\hyperlink{texture_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}{texture}},\ \textcolor{keywordtype}{int}\ numFrames)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_ab14166db224ccf366bf58d0eb58d2856}{m\_texture}}\ =\ \doxymbox{\hyperlink{texture_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}{texture}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}}\ =\ numFrames;}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae0021c156924e66247674396412657aa}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher,\ \textcolor{keywordtype}{float}\ dt,\ \textcolor{keywordtype}{float}\ screenW,\ \textcolor{keywordtype}{float}\ screenH)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>getValue();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Knob\ Outer\ Circle\ (Body)}}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 10,\ radius,\ 1.5f,\ 0.1f,\ 0.1f,\ 0.11f,\ 1.0f);}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Value\ Indicator\ Line}}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ normalized\ =\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}})\ /\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}});}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ -\/2.356f\ +\ normalized\ *\ 4.712f;\ \textcolor{comment}{//\ -\/135\ to\ +135\ degrees}}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ lx\ =\ cx\ +\ std::sin(angle)\ *\ radius;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ly\ =\ cy\ -\/\ std::cos(angle)\ *\ radius;}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(cx,\ cy,\ lx,\ ly,\ 3.0f,\ 1.0f,\ 0.5f,\ 0.0f,\ 1.0f);\ \textcolor{comment}{//\ Orange\ needle}}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Center\ Cap}}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(cx\ -\/\ 4,\ cy\ -\/\ 4,\ 8,\ 8,\ 4.0f,\ 0.5f,\ 0.2f,\ 0.2f,\ 0.22f,\ 1.0f);}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Value\ text}}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ valStr[16];}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ snprintf(valStr,\ 16,\ \textcolor{stringliteral}{"{}\%.2f"{}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(valStr,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ +\ 2,\ 9,\ 0.5f,\ 0.5f,\ 0.5f,\ 1.0f);}
-\DoxyCodeLine{00058\ \ \ \ \ \}}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a85b8ee99461b9e8c1a86c5f2d9eba4e2}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ y;}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ normalized\ =\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}})\ /\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ab14166db224ccf366bf58d0eb58d2856}{m\_texture}}\ \&\&\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}}\ >\ 0)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Filmstrip\ rendering}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ frame\ =\ (int)(normalized\ *\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}}\ -\/\ 1));}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ frame\ =\ std::clamp(frame,\ 0,\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}}\ -\/\ 1);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Assume\ vertical\ filmstrip}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ frameHeight\ =\ (float)\doxymbox{\hyperlink{class_beam_1_1_knob_ab14166db224ccf366bf58d0eb58d2856}{m\_texture}}-\/>getHeight()\ /\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ u0\ =\ 0.0f;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ u1\ =\ 1.0f;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ v0\ =\ (float)frame\ /\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ v1\ =\ (float)(frame\ +\ 1)\ /\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maintain\ aspect\ ratio\ or\ fill\ bounds?\ }}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ now,\ center\ in\ bounds}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a102ad0e0922bacd0af5e2e1f0da50243}{drawTexture}}(\doxymbox{\hyperlink{class_beam_1_1_knob_ab14166db224ccf366bf58d0eb58d2856}{m\_texture}}-\/>getID(),\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h,\ u0,\ v0,\ u1,\ v1);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fallback\ Vector\ Rendering}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cx\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ *\ 0.5f;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cy\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ *\ 0.5f;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ radius\ =\ (std::min)(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h)\ *\ 0.4f;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Label}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}},\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ -\/\ 12,\ 10,\ 0.7f,\ 0.7f,\ 0.7f,\ 1.0f);}
 \DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a266e448c4403e85f68a581fb81922fdd}{onMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00069\ \ \ \ \ \}}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a6e918f86ad28e14eb470e00938d1b212}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}})\ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ deltaY\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ -\/\ y;}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ range\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}};}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sensitivity\ =\ 0.005f;}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ +=\ deltaY\ *\ range\ *\ sensitivity;}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ std::clamp(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}});}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>setValue(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}})\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}}(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ y;}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00092\ \ \ \ \ \}}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a9f4c4eb1be070db3e89e3c3c7f6eba94}{getValue}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}};\ \}}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_abd452cb9e12d4ade468f1f989c7cb173}{setValue}}(\textcolor{keywordtype}{float}\ v)\ \{\ }
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ std::clamp(v,\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}});\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>setValue(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
-\DoxyCodeLine{00098\ \ \ \ \ \}}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \ \ \ \ std::function<void(\textcolor{keywordtype}{float})>\ \doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}};}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00103\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}};}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}};}
-\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ 0;}
-\DoxyCodeLine{00107\ \ \ \ \ std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}};}
-\DoxyCodeLine{00108\ \};}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ KNOB\_HPP}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Knob\ Outer\ Circle\ (Body)}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.w\ -\/\ 10,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ -\/\ 10,\ radius,\ 1.5f,\ 0.1f,\ 0.1f,\ 0.11f,\ 1.0f);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Value\ Indicator\ Line}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ =\ -\/2.356f\ +\ normalized\ *\ 4.712f;\ \textcolor{comment}{//\ -\/135\ to\ +135\ degrees}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ lx\ =\ cx\ +\ std::sin(angle)\ *\ radius;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ly\ =\ cy\ -\/\ std::cos(angle)\ *\ radius;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(cx,\ cy,\ lx,\ ly,\ 3.0f,\ 1.0f,\ 0.5f,\ 0.0f,\ 1.0f);\ \textcolor{comment}{//\ Orange\ needle}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Center\ Cap}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(cx\ -\/\ 4,\ cy\ -\/\ 4,\ 8,\ 8,\ 4.0f,\ 0.5f,\ 0.2f,\ 0.2f,\ 0.22f,\ 1.0f);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Value\ text}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ valStr[16];}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ snprintf(valStr,\ 16,\ \textcolor{stringliteral}{"{}\%.2f"{}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(valStr,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 5,\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.h\ +\ 2,\ 9,\ 0.5f,\ 0.5f,\ 0.5f,\ 1.0f);}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a85b8ee99461b9e8c1a86c5f2d9eba4e2}{onMouseDown}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ y;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a266e448c4403e85f68a581fb81922fdd}{onMouseUp}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ button)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a6e918f86ad28e14eb470e00938d1b212}{onMouseMove}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}})\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ deltaY\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ -\/\ y;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ range\ =\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}}\ -\/\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}};}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sensitivity\ =\ 0.005f;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ +=\ deltaY\ *\ range\ *\ sensitivity;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ std::clamp(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}});}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>setValue(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}})\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}}(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ y;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00119\ \ \ \ \ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a9f4c4eb1be070db3e89e3c3c7f6eba94}{getValue}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}};\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_knob_abd452cb9e12d4ade468f1f989c7cb173}{setValue}}(\textcolor{keywordtype}{float}\ v)\ \{\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}}\ =\ std::clamp(v,\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}});\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}})\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}}-\/>setValue(\doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}});}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ std::function<void(\textcolor{keywordtype}{float})>\ \doxymbox{\hyperlink{class_beam_1_1_knob_a48cab0ed660cc222279a8b4694f44be4}{onValueChanged}};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00130\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_knob_a88c46e1bd78283c6c56202736f7cb42c}{m\_label}};}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a73e94bcd1b1c898fda1842664d6736c8}{m\_min}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a3bc74a959b98e95859a49662422d3d00}{m\_max}},\ \doxymbox{\hyperlink{class_beam_1_1_knob_a74c5d8690c1a01eab43c84e310613600}{m\_value}};}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a57b169ca15b4575bc3f0106ef02c62b9}{m\_isDragging}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a847d67ee3d10f7d52433183029be6c83}{m\_lastY}}\ =\ 0;}
+\DoxyCodeLine{00134\ \ \ \ \ std::shared\_ptr<Parameter>\ \doxymbox{\hyperlink{class_beam_1_1_knob_ae21386067542a5f216e45371ac9382a7}{m\_parameter}};}
+\DoxyCodeLine{00135\ \ \ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ std::shared\_ptr<Texture>\ \doxymbox{\hyperlink{class_beam_1_1_knob_ab14166db224ccf366bf58d0eb58d2856}{m\_texture}};}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_knob_a8129838d229fe6c1ae6d7e4810f819d7}{m\_numFrames}}\ =\ 0;}
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ KNOB\_HPP}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ }
 
 \end{DoxyCode}

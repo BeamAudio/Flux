@@ -102,16 +102,14 @@ Inheritance diagram for Beam::AudioNode:</div>
   <map id="Beam_3A_3AAudioNode_map" name="Beam_3A_3AAudioNode_map">
 <area href="class_beam_1_1_biquad_filter_node.html" alt="Beam::BiquadFilterNode" shape="rect" coords="0,56,146,80"/>
 <area href="class_beam_1_1_delay_node.html" alt="Beam::DelayNode" shape="rect" coords="156,56,302,80"/>
-<area href="class_beam_1_1_gain_node.html" alt="Beam::GainNode" shape="rect" coords="312,56,458,80"/>
-<area href="class_beam_1_1_sine_oscillator.html" alt="Beam::SineOscillator" shape="rect" coords="468,56,614,80"/>
-<area href="class_beam_1_1_track_node.html" alt="Beam::TrackNode" shape="rect" coords="624,56,770,80"/>
+<area href="class_beam_1_1_track_node.html" alt="Beam::TrackNode" shape="rect" coords="312,56,458,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afbea31954b50918131d31fc0d1f6de8c" id="r_afbea31954b50918131d31fc0d1f6de8c"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#afbea31954b50918131d31fc0d1f6de8c">~AudioNode</a> ()=default</td></tr>
-<tr class="memitem:a6954940f3822298db5c2224e921432f6" id="r_a6954940f3822298db5c2224e921432f6"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a6954940f3822298db5c2224e921432f6">process</a> (float *buffer, int frames, int channels)=0</td></tr>
+<tr class="memitem:ab0cb6fa1aba031e703be16be26e0d6b7" id="r_ab0cb6fa1aba031e703be16be26e0d6b7"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ab0cb6fa1aba031e703be16be26e0d6b7">process</a> (float *buffer, int frames, int channels, size_t startFrame=0)=0</td></tr>
 <tr class="memitem:a864b3bf9095638e43ad334b7b3706bec" id="r_a864b3bf9095638e43ad334b7b3706bec"><td class="memItemLeft">virtual std::string&#160;</td><td class="memItemRight"><a class="el" href="#a864b3bf9095638e43ad334b7b3706bec">getName</a> () const =0</td></tr>
 <tr class="memitem:a3fcc68eab5b1adf547a4205f258b212c" id="r_a3fcc68eab5b1adf547a4205f258b212c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3fcc68eab5b1adf547a4205f258b212c">setBypass</a> (bool bypass)</td></tr>
 <tr class="memitem:a6ba1724cff34b5bc0f811ee2537caae5" id="r_a6ba1724cff34b5bc0f811ee2537caae5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6ba1724cff34b5bc0f811ee2537caae5">isBypassed</a> () const</td></tr>
@@ -170,7 +168,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_beam_1_1_biquad_filter_node.html#a928e2017ed0dacfc547360c6fb982181">Beam::BiquadFilterNode</a>, <a class="el" href="class_beam_1_1_delay_node.html#aac469a6ff6f2ea95f5ffbb06f60dbf2e">Beam::DelayNode</a>, <a class="el" href="class_beam_1_1_gain_node.html#a726efb0ba9a5f23e1eaa51a96fe1e5ba">Beam::GainNode</a>, <a class="el" href="class_beam_1_1_sine_oscillator.html#a716e3f51751e07ed0718d4d786e3da12">Beam::SineOscillator</a>, and <a class="el" href="class_beam_1_1_track_node.html#a8c233bb481da69fd335c86c286ae9606">Beam::TrackNode</a>.</p>
+<p>Implemented in <a class="el" href="class_beam_1_1_biquad_filter_node.html#a928e2017ed0dacfc547360c6fb982181">Beam::BiquadFilterNode</a>, <a class="el" href="class_beam_1_1_delay_node.html#aac469a6ff6f2ea95f5ffbb06f60dbf2e">Beam::DelayNode</a>, and <a class="el" href="class_beam_1_1_track_node.html#a8c233bb481da69fd335c86c286ae9606">Beam::TrackNode</a>.</p>
 
 </div>
 </div>
@@ -199,8 +197,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6954940f3822298db5c2224e921432f6" name="a6954940f3822298db5c2224e921432f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6954940f3822298db5c2224e921432f6">&#9670;&#160;</a></span>process()</h2>
+<a id="ab0cb6fa1aba031e703be16be26e0d6b7" name="ab0cb6fa1aba031e703be16be26e0d6b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0cb6fa1aba031e703be16be26e0d6b7">&#9670;&#160;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +219,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channels</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>startFrame</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -231,7 +234,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_beam_1_1_biquad_filter_node.html#a25b38544644148f7ed0f435e1c94020f">Beam::BiquadFilterNode</a>, <a class="el" href="class_beam_1_1_delay_node.html#a1f946e80326aaaf6dc87e6ec4e4b1858">Beam::DelayNode</a>, <a class="el" href="class_beam_1_1_gain_node.html#a900eac063663551b97802e29e5768e25">Beam::GainNode</a>, <a class="el" href="class_beam_1_1_sine_oscillator.html#a3ee669cf30b4b71304975dd6c953dadd">Beam::SineOscillator</a>, and <a class="el" href="class_beam_1_1_track_node.html#a2e2bffa8b286946f8e32db31e672727e">Beam::TrackNode</a>.</p>
+<p>Implemented in <a class="el" href="class_beam_1_1_biquad_filter_node.html#a9ca4ea9dffee4a78f9c25457c2303142">Beam::BiquadFilterNode</a>, <a class="el" href="class_beam_1_1_delay_node.html#a44fdc2abfe4112bf5e89f97d1c9ebe20">Beam::DelayNode</a>, and <a class="el" href="class_beam_1_1_track_node.html#a41898cb4d3b6b3f09c5c144a66dc4a5d">Beam::TrackNode</a>.</p>
 
 </div>
 </div>
@@ -284,7 +287,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/dsp/<a class="el" href="audio__node_8hpp_source.html">audio_node.hpp</a></li>
+<li>src/engine/<a class="el" href="audio__node_8hpp_source.html">audio_node.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

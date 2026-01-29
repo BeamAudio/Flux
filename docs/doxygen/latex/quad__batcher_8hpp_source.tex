@@ -1,5 +1,5 @@
 \doxysection{quad\+\_\+batcher.\+hpp}
-\hypertarget{quad__batcher_8hpp_source}{}\label{quad__batcher_8hpp_source}\index{src/graphics/quad\_batcher.hpp@{src/graphics/quad\_batcher.hpp}}
+\hypertarget{quad__batcher_8hpp_source}{}\label{quad__batcher_8hpp_source}\index{src/render/quad\_batcher.hpp@{src/render/quad\_batcher.hpp}}
 \doxymbox{\hyperlink{quad__batcher_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ QUAD\_BATCHER\_HPP}}
@@ -17,33 +17,57 @@
 \DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_beam_1_1_vertex_ad2bae330663b26bfd422f9d0b0361399}{color}}[4];}
 \DoxyCodeLine{00014\ \};}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_acb37c49599337128ac40efe6832cb714}{QuadBatcher}}\ \{}
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_acb37c49599337128ac40efe6832cb714}{QuadBatcher}}(\textcolor{keywordtype}{size\_t}\ maxQuads\ =\ 1000);}
-\DoxyCodeLine{00019\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2db51466ed3ace6c5d3876e04a35044}{\string~QuadBatcher}}();}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_aab5d3d705e6dcd91f650264129380d31}{begin}}();}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ radius,\ \textcolor{keywordtype}{float}\ softness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{keyword}{const}\ std::string\&\ text,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ size,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(\textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ \textcolor{keywordtype}{float}\ x2,\ \textcolor{keywordtype}{float}\ y2,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2f4ad2e5231b76d8b58f33f9afae7e0}{drawRect}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a7d04ae84e0638e4531264ff5e8de383f}{flush}}();}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a838b935a69a5041d714b4895c5f737dd}{setShader}}(\textcolor{keyword}{class}\ \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}}*\ shader)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0bf56fdf73e935879113849de645fb63}{m\_shader}}\ =\ shader;\ \}}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a3f0b54c6cfd0ba9e85bd6c7c239eb928}{createFontTexture}}();}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a34e92273d14f3b91a1fc3b77ad770d97}{m\_maxQuads}};}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a39fbaab8381cfd108021c6dff7110370}{m\_quadCount}};}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a463cd5ae7fca431940a89ff413e522f1}{m\_vao}},\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a92cad15aca7b10792225fb67cbb7e322}{m\_vbo}},\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a6d49aeb9d17eec78b2f6acdb4615ea32}{m\_ibo}};}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0b453e3a8d0b7b673a180afbbca46f29}{m\_fontTexture}};}
-\DoxyCodeLine{00037\ \ \ \ \ std::vector<Vertex>\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac47e3f9be44ce389aaa15a44c9f3bd94}{m\_vertices}};}
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}}*\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0bf56fdf73e935879113849de645fb63}{m\_shader}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00039\ \};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QUAD\_BATCHER\_HPP}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_acb37c49599337128ac40efe6832cb714}{QuadBatcher}}\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_acb37c49599337128ac40efe6832cb714}{QuadBatcher}}(\textcolor{keywordtype}{size\_t}\ maxQuads\ =\ 1000);}
+\DoxyCodeLine{00023\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2db51466ed3ace6c5d3876e04a35044}{\string~QuadBatcher}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_aab5d3d705e6dcd91f650264129380d31}{begin}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_afeda7287047f1ee0db8203306f408503}{drawQuad}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ radius,\ \textcolor{keywordtype}{float}\ softness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{keyword}{const}\ std::string\&\ text,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ size,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00044\ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a102ad0e0922bacd0af5e2e1f0da50243}{drawTexture}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ textureId,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ u0\ =\ 0.0f,\ \textcolor{keywordtype}{float}\ v0\ =\ 0.0f,\ \textcolor{keywordtype}{float}\ u1\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ v1\ =\ 1.0f,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ r\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ g\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ b\ =\ 1.0f,\ \textcolor{keywordtype}{float}\ a\ =\ 1.0f);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac2752da0502368d91bf4ae417de61a27}{drawSmoothLine}}(\textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ \textcolor{keywordtype}{float}\ x2,\ \textcolor{keywordtype}{float}\ y2,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a296da7f546a2d405ec7e09b3cb1f725e}{drawCurve}}(\textcolor{keyword}{const}\ std::vector<std::pair<float,\ float>>\&\ points,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ae24a0b2b697e7870bebf358ac4776d81}{drawLine}}(\textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ \textcolor{keywordtype}{float}\ x2,\ \textcolor{keywordtype}{float}\ y2,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ad2f4ad2e5231b76d8b58f33f9afae7e0}{drawRect}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ a);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a7d04ae84e0638e4531264ff5e8de383f}{flush}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a737a582ce7ce4919160d0f3193462d93}{setScissor}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ screenHeight);}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a312063d401dc0f09f67f31182d55e4f5}{clearScissor}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a9e0325c2bcab2008c8f38a24e480b1c5}{setViewTransform}}(\textcolor{keywordtype}{float}\ tx,\ \textcolor{keywordtype}{float}\ ty,\ \textcolor{keywordtype}{float}\ zoom);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac958f72e3fc168a11fecba1f5a5a00b7}{resetViewTransform}}(\textcolor{keywordtype}{float}\ screenW,\ \textcolor{keywordtype}{float}\ screenH);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a838b935a69a5041d714b4895c5f737dd}{setShader}}(\textcolor{keyword}{class}\ \doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}}*\ shader)\ \{\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0bf56fdf73e935879113849de645fb63}{m\_shader}}\ =\ shader;\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a3f0b54c6cfd0ba9e85bd6c7c239eb928}{createFontTexture}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a34e92273d14f3b91a1fc3b77ad770d97}{m\_maxQuads}};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a39fbaab8381cfd108021c6dff7110370}{m\_quadCount}};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a463cd5ae7fca431940a89ff413e522f1}{m\_vao}},\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a92cad15aca7b10792225fb67cbb7e322}{m\_vbo}},\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a6d49aeb9d17eec78b2f6acdb4615ea32}{m\_ibo}};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0b453e3a8d0b7b673a180afbbca46f29}{m\_fontTexture}};}
+\DoxyCodeLine{00080\ \ \ \ \ std::vector<Vertex>\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_ac47e3f9be44ce389aaa15a44c9f3bd94}{m\_vertices}};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_shader}{Shader}}*\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a0bf56fdf73e935879113849de645fb63}{m\_shader}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a68ff331ea5dc013c591ba66c14b69506}{m\_viewTx}}\ =\ 0.0f,\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a88c3320e0bd09f1eb468e9745e13d699}{m\_viewTy}}\ =\ 0.0f,\ \doxymbox{\hyperlink{class_beam_1_1_quad_batcher_affdb6b9f0d32f95a7752b1c4a38311cd}{m\_viewZoom}}\ =\ 1.0f;}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QUAD\_BATCHER\_HPP}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ }
 
 \end{DoxyCode}

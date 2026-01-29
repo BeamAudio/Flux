@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Beam Audio Flux: src/dsp/disk_streamer.hpp Source File</title>
+<title>Beam Audio Flux: src/engine/disk_streamer.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,61 +97,65 @@ $(function(){initNavTree('disk__streamer_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_beam.html">Beam</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">class </span><a class="code hl_class" href="class_beam_1_1_wav_reader.html">WavReader</a>; <span class="comment">// Forward decl</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html">   15</a></span><span class="keyword">class </span><a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a93d68a5758f8220ce8c7da332493d6db">DiskStreamer</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a93d68a5758f8220ce8c7da332493d6db">DiskStreamer</a>(<span class="keywordtype">size_t</span> bufferSize = 4096 * 4);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a93a8d7b377c73d317edac3a4d6f1b32b">~DiskStreamer</a>();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a71d0fbf4718a1e5aad5053ce758581e2">open</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a122892dcfb53b85476db17ed3b5b1682">close</a>();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// To be called by Audio Thread</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="audio__reader_8hpp.html">audio_reader.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_beam.html">Beam</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html">   16</a></span><span class="keyword">class </span><a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a34383f71cfebe7a69dcebc71f04cd041">DiskStreamer</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a34383f71cfebe7a69dcebc71f04cd041">DiskStreamer</a>(<span class="keywordtype">size_t</span> bufferSize = 44100 * 2);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a93a8d7b377c73d317edac3a4d6f1b32b">~DiskStreamer</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#aa885fee6fca7379ec8f898abab65c96f">open</a>(<span class="keyword">const</span> std::string&amp; filePath, <span class="keywordtype">int</span> channels = 2);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a122892dcfb53b85476db17ed3b5b1682">close</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#aafe6893c5cc132d4f09a298c6b833b0e">read</a>(<span class="keywordtype">float</span>* output, <span class="keywordtype">size_t</span> frames, <span class="keywordtype">int</span> channels);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a27a3c695476c10762819099d858aba0a">seek</a>(<span class="keywordtype">size_t</span> frame);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#aa0ee671fa3e819b9cf4a85a76a0e3af7">streamLoop</a>();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">   30</a></span>    std::string <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">m_filePath</a>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a0449260006d5de515f80bbf5fef28354">   31</a></span>    std::atomic&lt;bool&gt; <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a0449260006d5de515f80bbf5fef28354">m_keepStreaming</a>{<span class="keyword">false</span>};</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#aaefa6abf914cceb4efe0859a4ea462c2">   32</a></span>    std::unique_ptr&lt;WavReader&gt; <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#aaefa6abf914cceb4efe0859a4ea462c2">m_reader</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">   33</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">m_bufferSize</a>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a27a3c695476c10762819099d858aba0a">seek</a>(<span class="keywordtype">size_t</span> frame);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::vector&lt;std::vector&lt;float&gt;&gt; <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#a9316e596d1eaf2e7c5d4274fa5500e21">getPeakData</a>(<span class="keywordtype">int</span> numPoints);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#adce8bfdcba660886e0b7b5d587ffb1cb">   33</a></span>    uint64_t <a class="code hl_function" href="class_beam_1_1_disk_streamer.html#adce8bfdcba660886e0b7b5d587ffb1cb">getTotalFrames</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a27ca5067c25454cdab1f393fc0cb1d31">m_reader</a> ? <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a27ca5067c25454cdab1f393fc0cb1d31">m_reader</a>-&gt;getTotalFrames() : 0; }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">   36</a></span>    std::string <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">m_filePath</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a27ca5067c25454cdab1f393fc0cb1d31">   37</a></span>    std::unique_ptr&lt;AudioReader&gt; <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a27ca5067c25454cdab1f393fc0cb1d31">m_reader</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">   38</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">m_bufferSize</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>} <span class="comment">// namespace Beam</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">// DISK_STREAMER_HPP</span></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a0449260006d5de515f80bbf5fef28354"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a0449260006d5de515f80bbf5fef28354">Beam::DiskStreamer::m_keepStreaming</a></div><div class="ttdeci">std::atomic&lt; bool &gt; m_keepStreaming</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:31</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a122892dcfb53b85476db17ed3b5b1682"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a122892dcfb53b85476db17ed3b5b1682">Beam::DiskStreamer::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:25</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a27a3c695476c10762819099d858aba0a"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a27a3c695476c10762819099d858aba0a">Beam::DiskStreamer::seek</a></div><div class="ttdeci">void seek(size_t frame)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:35</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a2bfdd24e98745a5b8cc74863d2c04d38"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">Beam::DiskStreamer::m_bufferSize</a></div><div class="ttdeci">size_t m_bufferSize</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:33</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a5e2c3ec0da0e5b6559309cb10c23c2b6"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">Beam::DiskStreamer::m_filePath</a></div><div class="ttdeci">std::string m_filePath</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:30</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a71d0fbf4718a1e5aad5053ce758581e2"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a71d0fbf4718a1e5aad5053ce758581e2">Beam::DiskStreamer::open</a></div><div class="ttdeci">bool open(const std::string &amp;filePath)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:15</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a93a8d7b377c73d317edac3a4d6f1b32b"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a93a8d7b377c73d317edac3a4d6f1b32b">Beam::DiskStreamer::~DiskStreamer</a></div><div class="ttdeci">~DiskStreamer()</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:11</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a93d68a5758f8220ce8c7da332493d6db"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a93d68a5758f8220ce8c7da332493d6db">Beam::DiskStreamer::DiskStreamer</a></div><div class="ttdeci">DiskStreamer(size_t bufferSize=4096 *4)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:7</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_aa0ee671fa3e819b9cf4a85a76a0e3af7"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#aa0ee671fa3e819b9cf4a85a76a0e3af7">Beam::DiskStreamer::streamLoop</a></div><div class="ttdeci">void streamLoop()</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:41</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_aaefa6abf914cceb4efe0859a4ea462c2"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#aaefa6abf914cceb4efe0859a4ea462c2">Beam::DiskStreamer::m_reader</a></div><div class="ttdeci">std::unique_ptr&lt; WavReader &gt; m_reader</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:32</div></div>
-<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_aafe6893c5cc132d4f09a298c6b833b0e"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#aafe6893c5cc132d4f09a298c6b833b0e">Beam::DiskStreamer::read</a></div><div class="ttdeci">size_t read(float *output, size_t frames, int channels)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:30</div></div>
-<div class="ttc" id="aclass_beam_1_1_wav_reader_html"><div class="ttname"><a href="class_beam_1_1_wav_reader.html">Beam::WavReader</a></div><div class="ttdef"><b>Definition</b> wav_reader.hpp:13</div></div>
-<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> beam_host.cpp:14</div></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>} <span class="comment">// namespace Beam</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif </span><span class="comment">// DISK_STREAMER_HPP</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="ttc" id="aaudio__reader_8hpp_html"><div class="ttname"><a href="audio__reader_8hpp.html">audio_reader.hpp</a></div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a122892dcfb53b85476db17ed3b5b1682"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a122892dcfb53b85476db17ed3b5b1682">Beam::DiskStreamer::close</a></div><div class="ttdeci">void close()</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:18</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a27a3c695476c10762819099d858aba0a"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a27a3c695476c10762819099d858aba0a">Beam::DiskStreamer::seek</a></div><div class="ttdeci">void seek(size_t frame)</div><div class="ttdoc">Seeks to an absolute frame position in the source file.</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:27</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a27ca5067c25454cdab1f393fc0cb1d31"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a27ca5067c25454cdab1f393fc0cb1d31">Beam::DiskStreamer::m_reader</a></div><div class="ttdeci">std::unique_ptr&lt; AudioReader &gt; m_reader</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:37</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a2bfdd24e98745a5b8cc74863d2c04d38"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a2bfdd24e98745a5b8cc74863d2c04d38">Beam::DiskStreamer::m_bufferSize</a></div><div class="ttdeci">size_t m_bufferSize</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:38</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a34383f71cfebe7a69dcebc71f04cd041"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a34383f71cfebe7a69dcebc71f04cd041">Beam::DiskStreamer::DiskStreamer</a></div><div class="ttdeci">DiskStreamer(size_t bufferSize=44100 *2)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:6</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a5e2c3ec0da0e5b6559309cb10c23c2b6"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a5e2c3ec0da0e5b6559309cb10c23c2b6">Beam::DiskStreamer::m_filePath</a></div><div class="ttdeci">std::string m_filePath</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:36</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a9316e596d1eaf2e7c5d4274fa5500e21"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a9316e596d1eaf2e7c5d4274fa5500e21">Beam::DiskStreamer::getPeakData</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; float &gt; &gt; getPeakData(int numPoints)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:31</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_a93a8d7b377c73d317edac3a4d6f1b32b"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#a93a8d7b377c73d317edac3a4d6f1b32b">Beam::DiskStreamer::~DiskStreamer</a></div><div class="ttdeci">~DiskStreamer()</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:9</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_aa885fee6fca7379ec8f898abab65c96f"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#aa885fee6fca7379ec8f898abab65c96f">Beam::DiskStreamer::open</a></div><div class="ttdeci">bool open(const std::string &amp;filePath, int channels=2)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:13</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_aafe6893c5cc132d4f09a298c6b833b0e"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#aafe6893c5cc132d4f09a298c6b833b0e">Beam::DiskStreamer::read</a></div><div class="ttdeci">size_t read(float *output, size_t frames, int channels)</div><div class="ttdef"><b>Definition</b> disk_streamer.cpp:22</div></div>
+<div class="ttc" id="aclass_beam_1_1_disk_streamer_html_adce8bfdcba660886e0b7b5d587ffb1cb"><div class="ttname"><a href="class_beam_1_1_disk_streamer.html#adce8bfdcba660886e0b7b5d587ffb1cb">Beam::DiskStreamer::getTotalFrames</a></div><div class="ttdeci">uint64_t getTotalFrames() const</div><div class="ttdef"><b>Definition</b> disk_streamer.hpp:33</div></div>
+<div class="ttc" id="anamespace_beam_html"><div class="ttname"><a href="namespace_beam.html">Beam</a></div><div class="ttdef"><b>Definition</b> application_base.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_01d2cdbd82b1e18dc073ab3ebd5ada7e.html">dsp</a></li><li class="navelem"><a href="disk__streamer_8hpp.html">disk_streamer.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a href="disk__streamer_8hpp.html">disk_streamer.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

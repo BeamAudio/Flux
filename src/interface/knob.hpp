@@ -31,7 +31,7 @@ public:
         m_numFrames = numFrames;
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         if (m_parameter) {
             m_value = m_parameter->getValue();
         }
@@ -140,6 +140,9 @@ private:
 } // namespace Beam
 
 #endif // KNOB_HPP
+
+
+
 
 
 

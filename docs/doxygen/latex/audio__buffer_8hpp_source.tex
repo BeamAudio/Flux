@@ -1,0 +1,232 @@
+\doxysection{audio\+\_\+buffer.\+hpp}
+\hypertarget{audio__buffer_8hpp_source}{}\label{audio__buffer_8hpp_source}\index{src/engine/audio\_buffer.hpp@{src/engine/audio\_buffer.hpp}}
+\doxymbox{\hyperlink{audio__buffer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AUDIO\_BUFFER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AUDIO\_BUFFER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer}}(\textcolor{keywordtype}{int}\ numChannels,\ \textcolor{keywordtype}{int}\ numSamples);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a13dae890c82b0414120d1afd298b97bf}{\string~AudioBuffer}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d}{setSize}}(\textcolor{keywordtype}{int}\ numChannels,\ \textcolor{keywordtype}{int}\ numSamples,\ \textcolor{keywordtype}{bool}\ keepExistingContent\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ clearExtraSpace\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ avoidReallocating\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_af7325c4466887942607fd6960c86cf5c}{getNumChannels}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}};\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad01215e6138cba40a8e3d813481fb263}{getNumSamples}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}};\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ T*\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4378ccd20308acf3bbcc4bf37aa061a3}{getWritePointer}}(\textcolor{keywordtype}{int}\ channel)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ >=\ 0\ \&\&\ channel\ <\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}})\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[channel].data();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ T*\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a7eda29f4b0b43bab3aeba400c163dc17}{getReadPointer}}(\textcolor{keywordtype}{int}\ channel)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ >=\ 0\ \&\&\ channel\ <\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}})\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[channel].data();}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}{clear}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}{clear}}(\textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a816402cf170a0d8dc20adc5647828caf}{addFrom}}(\textcolor{keywordtype}{int}\ destChannel,\ \textcolor{keywordtype}{int}\ destStartSample,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{AudioBuffer<T>}}\&\ source,\ \textcolor{keywordtype}{int}\ sourceChannel,\ \textcolor{keywordtype}{int}\ sourceStartSample,\ \textcolor{keywordtype}{int}\ numSamples,\ T\ gain\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(1));}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aaa4a7663a86843155ad42202561568be}{copyFrom}}(\textcolor{keywordtype}{int}\ destChannel,\ \textcolor{keywordtype}{int}\ destStartSample,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer}{AudioBuffer<T>}}\&\ source,\ \textcolor{keywordtype}{int}\ sourceChannel,\ \textcolor{keywordtype}{int}\ sourceStartSample,\ \textcolor{keywordtype}{int}\ numSamples);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}{applyGain}}(\textcolor{keywordtype}{int}\ channel,\ \textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples,\ T\ gain);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}{applyGain}}(\textcolor{keywordtype}{int}\ channel,\ T\ gain);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00100\ \ \ \ \ T\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}{getMagnitude}}(\textcolor{keywordtype}{int}\ channel,\ \textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \ \ \ \ T\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}{getMagnitude}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00108\ \ \ \ \ std::vector<std::vector<T>>\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}};}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ =\ 0;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ =\ 0;}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ Template\ implementations}}
+\DoxyCodeLine{00114\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00115\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer<T>::AudioBuffer}}()\ \{}
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00119\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer<T>::AudioBuffer}}(\textcolor{keywordtype}{int}\ numChannels,\ \textcolor{keywordtype}{int}\ numSamples)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d}{setSize}}(numChannels,\ numSamples);}
+\DoxyCodeLine{00121\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00124\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a13dae890c82b0414120d1afd298b97bf}{AudioBuffer<T>::\string~AudioBuffer}}()\ \{}
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00128\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ae63c0109aad9d7c8bb282af793eb5d6d}{AudioBuffer<T>::setSize}}(\textcolor{keywordtype}{int}\ numChannels,\ \textcolor{keywordtype}{int}\ numSamples,\ \textcolor{keywordtype}{bool}\ keepExistingContent,\ \textcolor{keywordtype}{bool}\ clearExtraSpace,\ \textcolor{keywordtype}{bool}\ avoidReallocating)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (numChannels\ ==\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ \&\&\ numSamples\ ==\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}})\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{if}\ (!keepExistingContent)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}.clear();}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}.resize(numChannels,\ std::vector<T>(numSamples,\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0)));}
+\DoxyCodeLine{00136\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ existing\ content\ -\/\ this\ is\ a\ simplified\ implementation}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ newData(numChannels,\ std::vector<T>(numSamples,\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0)));}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ channelsToCopy\ =\ (std::min)(numChannels,\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}});}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ samplesToCopy\ =\ (std::min)(numSamples,\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}});}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ ch\ =\ 0;\ ch\ <\ channelsToCopy;\ ++ch)\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ samplesToCopy;\ ++i)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ newData[ch][i]\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[ch][i];}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}\ =\ std::move(newData);}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ }
+\DoxyCodeLine{00152\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ =\ numChannels;}
+\DoxyCodeLine{00153\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ =\ numSamples;}
+\DoxyCodeLine{00154\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00157\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}{AudioBuffer<T>::clear}}()\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ channel\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}})\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ std::fill(channel.begin(),\ channel.end(),\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0));}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a20ec61008ce4c79ecb36ab05b5ba35e2}{AudioBuffer<T>::clear}}(\textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples)\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{int}\ endSample\ =\ (std::min)(startSample\ +\ numSamples,\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}});}
+\DoxyCodeLine{00166\ \ \ \ \ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ channel\ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}})\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ std::fill(channel.begin()\ +\ startSample,\ channel.begin()\ +\ endSample,\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0));}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00173\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a816402cf170a0d8dc20adc5647828caf}{AudioBuffer<T>::addFrom}}(\textcolor{keywordtype}{int}\ destChannel,\ \textcolor{keywordtype}{int}\ destStartSample,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer<T>}}\&\ source,\ \textcolor{keywordtype}{int}\ sourceChannel,\ \textcolor{keywordtype}{int}\ sourceStartSample,\ \textcolor{keywordtype}{int}\ numSamples,\ T\ gain)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{if}\ (destChannel\ <\ 0\ ||\ destChannel\ >=\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ sourceChannel\ <\ 0\ ||\ sourceChannel\ >=\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ destStartSample\ <\ 0\ ||\ sourceStartSample\ <\ 0)\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDestSamples\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ destStartSample;}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{int}\ maxSourceSamples\ =\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ sourceStartSample;}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{int}\ samplesToDo\ =\ (std::min)(\{numSamples,\ maxDestSamples,\ maxSourceSamples\});}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ T*\ dest\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[destChannel].data()\ +\ destStartSample;}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{const}\ T*\ src\ =\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[sourceChannel].data()\ +\ sourceStartSample;}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ samplesToDo;\ ++i)\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ dest[i]\ +=\ src[i]\ *\ gain;}
+\DoxyCodeLine{00189\ \ \ \ \ \}}
+\DoxyCodeLine{00190\ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00193\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aaa4a7663a86843155ad42202561568be}{AudioBuffer<T>::copyFrom}}(\textcolor{keywordtype}{int}\ destChannel,\ \textcolor{keywordtype}{int}\ destStartSample,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0f248fe3e687d32f730a34f9acdb1549}{AudioBuffer<T>}}\&\ source,\ \textcolor{keywordtype}{int}\ sourceChannel,\ \textcolor{keywordtype}{int}\ sourceStartSample,\ \textcolor{keywordtype}{int}\ numSamples)\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (destChannel\ <\ 0\ ||\ destChannel\ >=\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ sourceChannel\ <\ 0\ ||\ sourceChannel\ >=\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ destStartSample\ <\ 0\ ||\ sourceStartSample\ <\ 0)\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00198\ \ \ \ \ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDestSamples\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ destStartSample;}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{int}\ maxSourceSamples\ =\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ sourceStartSample;}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{int}\ samplesToDo\ =\ (std::min)(\{numSamples,\ maxDestSamples,\ maxSourceSamples\});}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ T*\ dest\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[destChannel].data()\ +\ destStartSample;}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keyword}{const}\ T*\ src\ =\ source.\doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[sourceChannel].data()\ +\ sourceStartSample;}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ std::copy(src,\ src\ +\ samplesToDo,\ dest);}
+\DoxyCodeLine{00208\ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00211\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}{AudioBuffer<T>::applyGain}}(\textcolor{keywordtype}{int}\ channel,\ \textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples,\ T\ gain)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ <\ 0\ ||\ channel\ >=\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||\ startSample\ <\ 0)\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00214\ \ \ \ \ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{int}\ maxSamples\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ startSample;}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{int}\ samplesToDo\ =\ (std::min)(numSamples,\ maxSamples);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ T*\ data\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[channel].data()\ +\ startSample;}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ samplesToDo;\ ++i)\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ data[i]\ *=\ gain;}
+\DoxyCodeLine{00222\ \ \ \ \ \}}
+\DoxyCodeLine{00223\ \}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00226\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a3eb7f6c54881a58dcbfdc3dc73042e67}{AudioBuffer<T>::applyGain}}(\textcolor{keywordtype}{int}\ channel,\ T\ gain)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ <\ 0\ ||\ channel\ >=\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}})\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00229\ \ \ \ \ \}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ T*\ data\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[channel].data();}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}};\ ++i)\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ data[i]\ *=\ gain;}
+\DoxyCodeLine{00234\ \ \ \ \ \}}
+\DoxyCodeLine{00235\ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00238\ T\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}{AudioBuffer<T>::getMagnitude}}(\textcolor{keywordtype}{int}\ channel,\ \textcolor{keywordtype}{int}\ startSample,\ \textcolor{keywordtype}{int}\ numSamples)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ <\ 0\ ||\ channel\ >=\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}}\ ||\ startSample\ <\ 0)\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0);}
+\DoxyCodeLine{00241\ \ \ \ \ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{int}\ maxSamples\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}}\ -\/\ startSample;}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{int}\ samplesToDo\ =\ (std::min)(numSamples,\ maxSamples);}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{const}\ T*\ data\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a4df4309eb88acf14bc88079c5a71f448}{m\_data}}[channel].data()\ +\ startSample;}
+\DoxyCodeLine{00247\ \ \ \ \ T\ maxVal\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0);}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ samplesToDo;\ ++i)\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ T\ absVal\ =\ (data[i]\ <\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0))\ ?\ -\/data[i]\ :\ data[i];}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (absVal\ >\ maxVal)\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ maxVal\ =\ absVal;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00254\ \ \ \ \ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{return}\ maxVal;}
+\DoxyCodeLine{00257\ \}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00260\ T\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_aca9fcdbc6e425179714230182cfdde00}{AudioBuffer<T>::getMagnitude}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00261\ \ \ \ \ T\ maxVal\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0);}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ ch\ =\ 0;\ ch\ <\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_a0d70b1b71af4dc940a64130dc82b0e7b}{m\_numChannels}};\ ++ch)\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ T\ channelMax\ =\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ac58b58ad1ea4a33b74a6c9b633395763}{getMagnitude}}(ch,\ 0,\ \doxymbox{\hyperlink{class_beam_1_1_audio_buffer_ad50ee6e795c4721395773e9bcac934bf}{m\_numSamples}});}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (channelMax\ >\ maxVal)\ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ maxVal\ =\ channelMax;}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordflow}{return}\ maxVal;}
+\DoxyCodeLine{00269\ \}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AUDIO\_BUFFER\_HPP}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ }
+
+\end{DoxyCode}

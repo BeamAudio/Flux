@@ -1,0 +1,50 @@
+\doxysection{dynamics\+\_\+module.\+hpp}
+\hypertarget{dynamics__module_8hpp_source}{}\label{dynamics__module_8hpp_source}\index{src/interface/dynamics\_module.hpp@{src/interface/dynamics\_module.hpp}}
+\doxymbox{\hyperlink{dynamics__module_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DYNAMICS\_MODULE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DYNAMICS\_MODULE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__module_8hpp}{audio\_module.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{analog__suite_8hpp}{../engine/analog\_suite.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_dynamics_module_aa1e2f593c39aa728286b5c7ec1a761ef}{DynamicsModule}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{AudioModule}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_dynamics_module_aa1e2f593c39aa728286b5c7ec1a761ef}{DynamicsModule}}(std::shared\_ptr<T>\ node,\ \textcolor{keywordtype}{size\_t}\ nodeId,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a409c75189798146d7f556b1d50f4ba98}{AudioModule}}(node,\ nodeId,\ x,\ y),\ \doxymbox{\hyperlink{class_beam_1_1_dynamics_module_a4babff57b02a496485b48dd7b9a5977a}{m\_dynamicsNode}}(node)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a75c0758091a1cec0871134babb541135}{setBounds}}(x,\ y,\ 150,\ 240);}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_dynamics_module_a89e85fb3938bb6e5f1c764c52e5e6033}{render}}(\doxymbox{\hyperlink{class_beam_1_1_quad_batcher}{QuadBatcher}}\&\ batcher,\ \textcolor{keywordtype}{float}\ dt,\ \textcolor{keywordtype}{float}\ screenW,\ \textcolor{keywordtype}{float}\ screenH)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_audio_module_a0e43bace4dcd9eb159ff2237b0c7c3fd}{AudioModule::render}}(batcher,\ dt,\ screenW,\ screenH);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ GR\ Meter}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ gr\ =\ \doxymbox{\hyperlink{class_beam_1_1_dynamics_module_a4babff57b02a496485b48dd7b9a5977a}{m\_dynamicsNode}}-\/>getLatestGR();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ meterW\ =\ 100;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ meterH\ =\ 15;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ mx\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.x\ +\ 25;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ my\ =\ \doxymbox{\hyperlink{class_beam_1_1_component_a4f1ec4a5fb168c39a6c18f958b2b1495}{m\_bounds}}.y\ +\ 45;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Background}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(mx,\ my,\ meterW,\ meterH,\ 2.0f,\ 0.5f,\ 0.05f,\ 0.05f,\ 0.05f,\ 1.0f);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ GR\ active\ area\ (from\ right\ to\ left)}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ grNorm\ =\ std::clamp(gr\ *\ 0.1f,\ 0.0f,\ 1.0f);\ \textcolor{comment}{//\ Map\ roughly\ to\ 0..1}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ activeW\ =\ meterW\ *\ grNorm;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a16d867a50f08e83bc2b2242ea7c00acb}{drawRoundedRect}}(mx\ +\ meterW\ -\/\ activeW,\ my,\ activeW,\ meterH,\ 2.0f,\ 0.5f,\ 1.0f,\ 0.2f,\ 0.2f,\ 1.0f);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ batcher.\doxymbox{\hyperlink{class_beam_1_1_quad_batcher_a54b57a1fa94c48b9778c2fe1109e761a}{drawText}}(\textcolor{stringliteral}{"{}GR"{}},\ mx\ -\/\ 15,\ my\ +\ 2,\ 9,\ 0.6f,\ 0.6f,\ 0.6f,\ 1.0f);}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \ \ std::shared\_ptr<T>\ \doxymbox{\hyperlink{class_beam_1_1_dynamics_module_a4babff57b02a496485b48dd7b9a5977a}{m\_dynamicsNode}};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DYNAMICS\_MODULE\_HPP}}
+
+\end{DoxyCode}

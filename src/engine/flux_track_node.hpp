@@ -11,6 +11,9 @@ public:
     FluxTrackNode(const std::string& name, int bufferSize) : m_name(name) {
         m_track = std::make_shared<TrackNode>(name);
         setupBuffers(1, 1, bufferSize, 2); // 1 Stereo Input, 1 Stereo Output
+        
+        addParameter(std::make_shared<Parameter>("Tape Drive", 0.0f, 2.0f, 0.0f));
+        addParameter(std::make_shared<Parameter>("Tape Age", 0.0f, 1.0f, 0.0f));
     }
 
     bool load(const std::string& filePath) {
@@ -28,6 +31,10 @@ public:
     void process(int frames) override {
         float* in = getInputBuffer(0);
         float* out = getOutputBuffer(0);
+
+        // Update tape params from UI
+        m_track->setTapeParams(getParameter("Tape Drive")->getValue(), 
+                               getParameter("Tape Age")->getValue());
 
         if (m_track->getState() == TrackState::Recording) {
             // Process recording: write 'in' to disk, and pass through to 'out' for monitoring
@@ -87,6 +94,9 @@ private:
 } // namespace Beam
 
 #endif // FLUX_TRACK_NODE_HPP
+
+
+
 
 
 

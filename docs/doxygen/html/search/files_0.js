@@ -1,7 +1,23 @@
 var searchData=
 [
-  ['audio_5fengine_2ecpp_0',['audio_engine.cpp',['../audio__engine_8cpp.html',1,'']]],
-  ['audio_5fengine_2ehpp_1',['audio_engine.hpp',['../audio__engine_8hpp.html',1,'']]],
-  ['audio_5fmodule_2ehpp_2',['audio_module.hpp',['../audio__module_8hpp.html',1,'']]],
-  ['audio_5fnode_2ehpp_3',['audio_node.hpp',['../audio__node_8hpp.html',1,'']]]
+  ['analog_5fbase_2ehpp_0',['analog_base.hpp',['../analog__base_8hpp.html',1,'']]],
+  ['analog_5fsuite_2ehpp_1',['analog_suite.hpp',['../analog__suite_8hpp.html',1,'']]],
+  ['application_5fbase_2ecpp_2',['application_base.cpp',['../application__base_8cpp.html',1,'']]],
+  ['application_5fbase_2ehpp_3',['application_base.hpp',['../application__base_8hpp.html',1,'']]],
+  ['asset_5fmanager_2ecpp_4',['asset_manager.cpp',['../asset__manager_8cpp.html',1,'']]],
+  ['asset_5fmanager_2ehpp_5',['asset_manager.hpp',['../asset__manager_8hpp.html',1,'']]],
+  ['audio_5fbuffer_2ehpp_6',['audio_buffer.hpp',['../audio__buffer_8hpp.html',1,'']]],
+  ['audio_5fconfig_5fview_2ehpp_7',['audio_config_view.hpp',['../audio__config__view_8hpp.html',1,'']]],
+  ['audio_5fdevice_5fmanager_2ecpp_8',['audio_device_manager.cpp',['../audio__device__manager_8cpp.html',1,'']]],
+  ['audio_5fdevice_5fmanager_2ehpp_9',['audio_device_manager.hpp',['../audio__device__manager_8hpp.html',1,'']]],
+  ['audio_5fengine_2ecpp_10',['audio_engine.cpp',['../audio__engine_8cpp.html',1,'']]],
+  ['audio_5fengine_2ehpp_11',['audio_engine.hpp',['../audio__engine_8hpp.html',1,'']]],
+  ['audio_5fmodule_2ehpp_12',['audio_module.hpp',['../audio__module_8hpp.html',1,'']]],
+  ['audio_5fnode_2ehpp_13',['audio_node.hpp',['../audio__node_8hpp.html',1,'']]],
+  ['audio_5fprocessor_2ecpp_14',['audio_processor.cpp',['../audio__processor_8cpp.html',1,'']]],
+  ['audio_5fprocessor_2ehpp_15',['audio_processor.hpp',['../audio__processor_8hpp.html',1,'']]],
+  ['audio_5fprocessor_5fvalue_5ftree_5fstate_2ecpp_16',['audio_processor_value_tree_state.cpp',['../audio__processor__value__tree__state_8cpp.html',1,'']]],
+  ['audio_5fprocessor_5fvalue_5ftree_5fstate_2ehpp_17',['audio_processor_value_tree_state.hpp',['../audio__processor__value__tree__state_8hpp.html',1,'']]],
+  ['audio_5freader_2ehpp_18',['audio_reader.hpp',['../audio__reader_8hpp.html',1,'']]],
+  ['automation_2ehpp_19',['automation.hpp',['../automation_8hpp.html',1,'']]]
 ];

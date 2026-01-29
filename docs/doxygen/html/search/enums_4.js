@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['trackstate_0',['TrackState',['../namespace_beam.html#aaab526c0becfd931c9f29361daaf7e9f',1,'Beam']]]
+  ['side_0',['Side',['../class_beam_1_1_sidebar.html#a156ccc2325cb05049f4ed58d21667c75',1,'Beam::Sidebar']]],
+  ['sliderstyle_1',['SliderStyle',['../namespace_beam.html#a0f94fc63f922f04ab49fd1f60f79ef54',1,'Beam']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['shader_2ecpp_0',['shader.cpp',['../shader_8cpp.html',1,'']]],
-  ['shader_2ehpp_1',['shader.hpp',['../shader_8hpp.html',1,'']]],
-  ['sidebar_2ehpp_2',['sidebar.hpp',['../sidebar_8hpp.html',1,'']]],
-  ['sine_5foscillator_2ehpp_3',['sine_oscillator.hpp',['../sine__oscillator_8hpp.html',1,'']]]
+  ['quad_5fbatcher_2ecpp_0',['quad_batcher.cpp',['../quad__batcher_8cpp.html',1,'']]],
+  ['quad_5fbatcher_2ehpp_1',['quad_batcher.hpp',['../quad__batcher_8hpp.html',1,'']]]
 ];

@@ -107,8 +107,9 @@ Inheritance diagram for Beam::Knob:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adf590b7511811e22abb0a1c9478fe512" id="r_adf590b7511811e22abb0a1c9478fe512"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#adf590b7511811e22abb0a1c9478fe512">Knob</a> (const std::string &amp;label, float minVal, float maxVal, float initialVal)</td></tr>
-<tr class="memitem:af53ea4ce8f7892c67225eb37955149d1" id="r_af53ea4ce8f7892c67225eb37955149d1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af53ea4ce8f7892c67225eb37955149d1">bindParameter</a> (std::shared_ptr&lt; <a class="el" href="class_beam_1_1_parameter.html">Parameter</a> &gt; param)</td></tr>
-<tr class="memitem:a67bf95ba1b02ad84e9a080530aa2e090" id="r_a67bf95ba1b02ad84e9a080530aa2e090"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a67bf95ba1b02ad84e9a080530aa2e090">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher) override</td></tr>
+<tr class="memitem:af53ea4ce8f7892c67225eb37955149d1" id="r_af53ea4ce8f7892c67225eb37955149d1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af53ea4ce8f7892c67225eb37955149d1">bindParameter</a> (std::shared_ptr&lt; <a class="el" href="class_beam_1_1_parameter.html">Parameter</a> &gt; <a class="el" href="texture_8cpp.html#aaded45152436a99bb4f9bda081df9f69">param</a>)</td></tr>
+<tr class="memitem:aaf28f9b129c4c9a35b5161b8cf6ca77c" id="r_aaf28f9b129c4c9a35b5161b8cf6ca77c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaf28f9b129c4c9a35b5161b8cf6ca77c">setTexture</a> (std::shared_ptr&lt; <a class="el" href="class_beam_1_1_texture.html">Texture</a> &gt; <a class="el" href="texture_8cpp.html#a0704dfe56dec926cb35f7bdc0834ecd0">texture</a>, int numFrames)</td></tr>
+<tr class="memitem:ae0021c156924e66247674396412657aa" id="r_ae0021c156924e66247674396412657aa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae0021c156924e66247674396412657aa">render</a> (<a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;batcher, float dt, float screenW, float screenH) override</td></tr>
 <tr class="memitem:a85b8ee99461b9e8c1a86c5f2d9eba4e2" id="r_a85b8ee99461b9e8c1a86c5f2d9eba4e2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a85b8ee99461b9e8c1a86c5f2d9eba4e2">onMouseDown</a> (float x, float y, int button) override</td></tr>
 <tr class="memitem:a266e448c4403e85f68a581fb81922fdd" id="r_a266e448c4403e85f68a581fb81922fdd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a266e448c4403e85f68a581fb81922fdd">onMouseUp</a> (float x, float y, int button) override</td></tr>
 <tr class="memitem:a6e918f86ad28e14eb470e00938d1b212" id="r_a6e918f86ad28e14eb470e00938d1b212"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6e918f86ad28e14eb470e00938d1b212">onMouseMove</a> (float x, float y) override</td></tr>
@@ -117,6 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_beam_1_1_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_beam_1_1_component')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_beam_1_1_component.html">Beam::Component</a></td></tr>
 <tr class="memitem:af9d734d649978e027412a87bc54362cd inherit pub_methods_class_beam_1_1_component" id="r_af9d734d649978e027412a87bc54362cd"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#af9d734d649978e027412a87bc54362cd">~Component</a> ()=default</td></tr>
 <tr class="memitem:ad3d3fb19d25b4371d07620567970a158 inherit pub_methods_class_beam_1_1_component" id="r_ad3d3fb19d25b4371d07620567970a158"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#ad3d3fb19d25b4371d07620567970a158">update</a> (float dt)</td></tr>
+<tr class="memitem:ab92e884903f8a621fcd57bc00a24b041 inherit pub_methods_class_beam_1_1_component" id="r_ab92e884903f8a621fcd57bc00a24b041"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#ab92e884903f8a621fcd57bc00a24b041">onMouseWheel</a> (float x, float y, float delta)</td></tr>
 <tr class="memitem:a6865b1f22388af467bf6c789120fac05 inherit pub_methods_class_beam_1_1_component" id="r_a6865b1f22388af467bf6c789120fac05"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a6865b1f22388af467bf6c789120fac05">setBounds</a> (float x, float y, float w, float h)</td></tr>
 <tr class="memitem:a5746dbc69d5b0adb4cffbcf920936d00 inherit pub_methods_class_beam_1_1_component" id="r_a5746dbc69d5b0adb4cffbcf920936d00"><td class="memItemLeft">const <a class="el" href="struct_beam_1_1_rect.html">Rect</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a5746dbc69d5b0adb4cffbcf920936d00">getBounds</a> () const</td></tr>
 <tr class="memitem:a00d4e2dfa7703e59d6486852321dbdf1 inherit pub_methods_class_beam_1_1_component" id="r_a00d4e2dfa7703e59d6486852321dbdf1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="class_beam_1_1_component.html#a00d4e2dfa7703e59d6486852321dbdf1">setDraggable</a> (bool draggable)</td></tr>
@@ -135,6 +137,8 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a57b169ca15b4575bc3f0106ef02c62b9" id="r_a57b169ca15b4575bc3f0106ef02c62b9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a57b169ca15b4575bc3f0106ef02c62b9">m_isDragging</a> = false</td></tr>
 <tr class="memitem:a847d67ee3d10f7d52433183029be6c83" id="r_a847d67ee3d10f7d52433183029be6c83"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a847d67ee3d10f7d52433183029be6c83">m_lastY</a> = 0</td></tr>
 <tr class="memitem:ae21386067542a5f216e45371ac9382a7" id="r_ae21386067542a5f216e45371ac9382a7"><td class="memItemLeft">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_parameter.html">Parameter</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae21386067542a5f216e45371ac9382a7">m_parameter</a></td></tr>
+<tr class="memitem:ab14166db224ccf366bf58d0eb58d2856" id="r_ab14166db224ccf366bf58d0eb58d2856"><td class="memItemLeft">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_texture.html">Texture</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab14166db224ccf366bf58d0eb58d2856">m_texture</a></td></tr>
+<tr class="memitem:a8129838d229fe6c1ae6d7e4810f819d7" id="r_a8129838d229fe6c1ae6d7e4810f819d7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a8129838d229fe6c1ae6d7e4810f819d7">m_numFrames</a> = 0</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -341,8 +345,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a67bf95ba1b02ad84e9a080530aa2e090" name="a67bf95ba1b02ad84e9a080530aa2e090"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67bf95ba1b02ad84e9a080530aa2e090">&#9670;&#160;</a></span>render()</h2>
+<a id="ae0021c156924e66247674396412657aa" name="ae0021c156924e66247674396412657aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0021c156924e66247674396412657aa">&#9670;&#160;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,8 +357,22 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Beam::Knob::render </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_beam_1_1_quad_batcher.html">QuadBatcher</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>batcher</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>dt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenW</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenH</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -364,7 +382,36 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_beam_1_1_component.html#a2ed6b7841a25bd992bd46b822311ef1d">Beam::Component</a>.</p>
+<p>Implements <a class="el" href="class_beam_1_1_component.html#acef3496a55f0d94c8678f6049dbaa7cd">Beam::Component</a>.</p>
+
+</div>
+</div>
+<a id="aaf28f9b129c4c9a35b5161b8cf6ca77c" name="aaf28f9b129c4c9a35b5161b8cf6ca77c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf28f9b129c4c9a35b5161b8cf6ca77c">&#9670;&#160;</a></span>setTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::Knob::setTexture </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_beam_1_1_texture.html">Texture</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>texture</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numFrames</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -504,6 +551,28 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a8129838d229fe6c1ae6d7e4810f819d7" name="a8129838d229fe6c1ae6d7e4810f819d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8129838d229fe6c1ae6d7e4810f819d7">&#9670;&#160;</a></span>m_numFrames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Beam::Knob::m_numFrames = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae21386067542a5f216e45371ac9382a7" name="ae21386067542a5f216e45371ac9382a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae21386067542a5f216e45371ac9382a7">&#9670;&#160;</a></span>m_parameter</h2>
 
@@ -515,6 +584,28 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::shared_ptr&lt;<a class="el" href="class_beam_1_1_parameter.html">Parameter</a>&gt; Beam::Knob::m_parameter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab14166db224ccf366bf58d0eb58d2856" name="ab14166db224ccf366bf58d0eb58d2856"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab14166db224ccf366bf58d0eb58d2856">&#9670;&#160;</a></span>m_texture</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_beam_1_1_texture.html">Texture</a>&gt; Beam::Knob::m_texture</td>
         </tr>
       </table>
   </td>
@@ -563,7 +654,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/ui/<a class="el" href="knob_8hpp_source.html">knob.hpp</a></li>
+<li>src/interface/<a class="el" href="knob_8hpp_source.html">knob.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

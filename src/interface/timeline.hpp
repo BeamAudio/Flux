@@ -15,24 +15,53 @@ public:
     Timeline(std::shared_ptr<FluxProject> project, AudioEngine* engine) 
         : m_project(project), m_engine(engine) {
         m_isVisible = false;
+        m_zoom = 1.0f;
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         if (!m_isVisible) return;
 
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.05f, 0.05f, 0.06f, 1.0f);
 
         float trackHeight = 100.0f;
-        float pixelsPerSecond = 50.0f;
+        float pixelsPerSecond = 50.0f * m_zoom;
         float framesPerPixel = 44100.0f / pixelsPerSecond;
 
         // Ruler
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, 30, 0.12f, 0.12f, 0.14f, 1.0f);
-        for(float s=0; s < 10000; s += 1.0f) {
+        
+        // Improved Adaptive Interval
+        float targetSpacing = 100.0f; 
+        float minInterval = targetSpacing / pixelsPerSecond;
+        float magnitude = std::pow(10.0f, std::floor(std::log10(minInterval)));
+        float residual = minInterval / magnitude;
+        float interval;
+        if (residual > 5.0f) interval = 10.0f * magnitude;
+        else if (residual > 2.0f) interval = 5.0f * magnitude;
+        else if (residual > 1.0f) interval = 2.0f * magnitude;
+        else interval = magnitude;
+
+        for(float s=0; s < 10000; s += interval) {
             float sx = m_bounds.x + (s * pixelsPerSecond) - m_offsetX;
             if (sx < m_bounds.x) continue;
             if (sx > m_bounds.x + m_bounds.w) break;
-            batcher.drawQuad(sx, m_bounds.y + 15, 1, 15, 0.4f, 0.4f, 0.4f, 1.0f);
+            
+            // Major ticks based on interval
+            batcher.drawQuad(sx, m_bounds.y + 15, 1, 15, 0.5f, 0.5f, 0.5f, 1.0f);
+            
+            char timeStr[16]; 
+            if (interval < 1.0f) snprintf(timeStr, 16, "%.2fs", s);
+            else snprintf(timeStr, 16, "%.0fs", s);
+            
+            batcher.drawText(timeStr, sx + 4, m_bounds.y + 5, 10, 0.7f, 0.7f, 0.7f, 1.0f);
+
+            // Minor ticks
+            float subInterval = interval / 5.0f;
+            for(int k=1; k<5; ++k) {
+                float subX = sx + k * subInterval * pixelsPerSecond;
+                if (subX > m_bounds.x && subX < m_bounds.x + m_bounds.w)
+                    batcher.drawQuad(subX, m_bounds.y + 22, 1, 8, 0.3f, 0.3f, 0.3f, 1.0f);
+            }
         }
 
         // Lanes
@@ -46,7 +75,8 @@ public:
         // Regions & Waveforms
         if (m_project) {
             for (auto& track : m_project->getTracks()) {
-                for (auto& reg : track.regions) {
+                for (size_t i = 0; i < track.regions.size(); ++i) {
+                    auto& reg = track.regions[i];
                     float rx = m_bounds.x + (float)reg.startFrame / framesPerPixel - m_offsetX;
                     float ry = m_bounds.y + 30 + (track.trackIndex * trackHeight) + 5 - m_offsetY;
                     float rw = (float)reg.duration / framesPerPixel;
@@ -56,7 +86,13 @@ public:
                     if (rx + rw < m_bounds.x || rx > m_bounds.x + m_bounds.w || 
                         ry + rh < m_bounds.y + 30 || ry > m_bounds.y + m_bounds.h) continue;
 
-                    batcher.drawRoundedRect(rx, ry, rw, rh, 4.0f, 0.5f, 0.2f, 0.35f, 0.5f, 1.0f);
+                    // Highlight if selected
+                    bool isSelected = (m_selectedTrackPtr == &track && m_selectedRegionIndex == (int)i);
+                    float rCol = isSelected ? 0.3f : 0.2f;
+                    float gCol = isSelected ? 0.45f : 0.35f;
+                    float bCol = isSelected ? 0.7f : 0.5f;
+
+                    batcher.drawRoundedRect(rx, ry, rw, rh, 4.0f, 0.5f, rCol, gCol, bCol, 1.0f);
                     
                     if (!reg.channelPeaks.empty()) {
                         float channelHeight = rh / (float)reg.channelPeaks.size();
@@ -99,9 +135,37 @@ public:
         }
     }
 
+    void handleKeyDown(int key) {
+        if (!m_isVisible) return;
+        
+        if (m_selectedTrackPtr && m_selectedRegionIndex != -1) {
+            // Nudge Selection
+            float framesPerPixel = 44100.0f / (50.0f * m_zoom);
+            size_t nudge = (size_t)(framesPerPixel * 10.0f); // Move 10 visual pixels worth
+            
+            // SDL Keycodes
+            if (key == 1073741904) { // LEFT Arrow
+                if (m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame > nudge)
+                    m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame -= nudge;
+                else 
+                    m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame = 0;
+            } else if (key == 1073741903) { // RIGHT Arrow
+                m_selectedTrackPtr->regions[m_selectedRegionIndex].startFrame += nudge;
+            }
+        } else {
+            // Pan View
+            if (key == 1073741904) m_offsetX = (std::max)(0.0f, m_offsetX - 50.0f); // LEFT
+            if (key == 1073741903) m_offsetX += 50.0f; // RIGHT
+        }
+    }
+
     bool onMouseDown(float x, float y, int button) override {
         if (!m_isVisible) return false;
-        float pixelsPerSecond = 50.0f;
+        
+        // Clear selection if clicking background
+        bool clickedRegion = false;
+
+        float pixelsPerSecond = 50.0f * m_zoom; // Use correct zoom
         float framesPerPixel = 44100.0f / pixelsPerSecond;
 
         if (button == 3) { // Right Click Panning
@@ -132,7 +196,16 @@ public:
 
                     if (x >= rx && x <= rx + rw && y >= ry && y <= ry + rh) {
                         if (button == 1) { 
-                            m_isDraggingRegion = true; m_dragTrackPtr = &track; m_dragRegionIndex = (int)i; m_dragOffsetX = x - rx;
+                            m_isDraggingRegion = true; 
+                            m_dragTrackPtr = &track; 
+                            m_dragRegionIndex = (int)i; 
+                            m_dragOffsetX = x - rx;
+                            
+                            // Select
+                            m_selectedTrackPtr = &track;
+                            m_selectedRegionIndex = (int)i;
+                            clickedRegion = true;
+
                             return true;
                         } else if (button == 2) { // Middle click slice
                             sliceRegion(track, i, (size_t)((x - rx) * framesPerPixel));
@@ -142,6 +215,12 @@ public:
                 }
             }
         }
+        
+        if (!clickedRegion) {
+            m_selectedTrackPtr = nullptr;
+            m_selectedRegionIndex = -1;
+        }
+        
         return false;
     }
 
@@ -184,6 +263,22 @@ public:
         return true;
     }
 
+    bool onMouseWheel(float x, float y, float delta) override {
+        if (!m_isVisible) return false;
+        
+        float zoomFactor = (delta > 0) ? 1.1f : 0.9f;
+        float oldZoom = m_zoom;
+        m_zoom *= zoomFactor;
+        m_zoom = (std::clamp)(m_zoom, 0.01f, 100.0f);
+
+        // Keep mouse position pinned during zoom
+        float localX = x - m_bounds.x + m_offsetX;
+        m_offsetX = localX * (m_zoom / oldZoom) - (x - m_bounds.x);
+        m_offsetX = (std::max)(0.0f, m_offsetX);
+
+        return true;
+    }
+
     void setVisible(bool visible) { m_isVisible = visible; }
 
 private:
@@ -212,14 +307,20 @@ private:
     bool m_isScrubbing = false;
     bool m_isPanning = false;
     float m_offsetX = 0, m_offsetY = 0;
+    float m_zoom = 1.0f;
     TrackData* m_dragTrackPtr = nullptr;
     int m_dragRegionIndex = -1;
     float m_dragOffsetX = 0;
     float m_lastMouseX = 0, m_lastMouseY = 0;
+    TrackData* m_selectedTrackPtr = nullptr;
+    int m_selectedRegionIndex = -1;
 };
 
 } // namespace Beam
 
 #endif // TIMELINE_HPP
+
+
+
 
 

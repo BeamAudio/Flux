@@ -27,7 +27,7 @@ public:
 
     bool isVisible() const { return m_isVisible; }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         if (!m_isVisible) return;
 
         // 1. Dim the background
@@ -212,3 +212,5 @@ private:
 } // namespace Beam
 
 #endif // AUDIO_CONFIG_VIEW_HPP
+
+

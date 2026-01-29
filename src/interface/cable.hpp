@@ -11,7 +11,7 @@ struct Cable {
     Port* output;
     Port* input;
 
-    void render(QuadBatcher& batcher, float dt) {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) {
         Rect outPos = output->getBounds();
         Rect inPos = input->getBounds();
 
@@ -49,6 +49,9 @@ struct Cable {
 } // namespace Beam
 
 #endif // CABLE_HPP
+
+
+
 
 
 

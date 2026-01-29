@@ -2,6 +2,11 @@
 \hypertarget{class_beam_1_1_wav_reader}{}\label{class_beam_1_1_wav_reader}\index{Beam::WavReader@{Beam::WavReader}}
 
 
+Thread-\/safe reader for WAVE files with peak extraction support.  
+
+
+
+
 {\ttfamily \+\#include $<$wav\+\_\+reader.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
@@ -15,6 +20,8 @@ size\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a48fbbce631692e26e952
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a86c1c481afc06a74ee5e24613b420e7d}{seek}} (size\+\_\+t frame)
 \item 
+std::\+vector$<$ float $>$ \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a6c885b6f00f5f2fef4f6afefb2c9bc08}{get\+Peak\+Data}} (int num\+Points)
+\item 
 uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a4e25dd9b2efd3e0a047ede3e7a5ae980}{get\+Sample\+Rate}} () const
 \item 
 uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f25dd728103ef8c}{get\+Channels}} () const
@@ -23,6 +30,8 @@ uint16\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f
 \begin{DoxyCompactItemize}
 \item 
 std::\+ifstream \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a907cb2f0a02cb35404b64c83bc255af1}{m\+\_\+file}}
+\item 
+std::\+recursive\+\_\+mutex \doxymbox{\hyperlink{class_beam_1_1_wav_reader_a43930dc66a520a8576743927d2baaf0b}{m\+\_\+file\+Mutex}}
 \item 
 uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ad6b1bf507beb872bc88d8653f5e97fc7}{m\+\_\+sample\+Rate}}
 \item 
@@ -37,6 +46,9 @@ uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ab412037c65d5e7c1a2
 uint32\+\_\+t \doxymbox{\hyperlink{class_beam_1_1_wav_reader_ae11c806f1f18bb1b151294d158124596}{m\+\_\+data\+Offset}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Thread-\/safe reader for WAVE files with peak extraction support. 
 
 \label{doc-constructors}
 \Hypertarget{class_beam_1_1_wav_reader_doc-constructors}
@@ -57,6 +69,12 @@ Beam::\+\+Wav\+Reader::\+\+Wav\+Reader (\begin{DoxyParamCaption}{}{}\end{DoxyPar
 \doxysubsubsection{\texorpdfstring{getChannels()}{getChannels()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a7d216a1914a2c3d94f25dd728103ef8c} 
 uint16\+\_\+t Beam::\+\+Wav\+Reader::\+get\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_wav_reader_a6c885b6f00f5f2fef4f6afefb2c9bc08}\index{Beam::WavReader@{Beam::WavReader}!getPeakData@{getPeakData}}
+\index{getPeakData@{getPeakData}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{getPeakData()}{getPeakData()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a6c885b6f00f5f2fef4f6afefb2c9bc08} 
+std::\+vector$<$ float $>$ Beam::\+\+Wav\+Reader::\+get\+Peak\+Data (\begin{DoxyParamCaption}\item[{int}]{num\+Points}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_beam_1_1_wav_reader_a4e25dd9b2efd3e0a047ede3e7a5ae980}\index{Beam::WavReader@{Beam::WavReader}!getSampleRate@{getSampleRate}}
 \index{getSampleRate@{getSampleRate}!Beam::WavReader@{Beam::WavReader}}
@@ -117,6 +135,12 @@ uint32\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+data\+Size\hspace{0.3cm}{\ttfamily
 {\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a907cb2f0a02cb35404b64c83bc255af1} 
 std::\+ifstream Beam::\+\+Wav\+Reader::\+m\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_wav_reader_a43930dc66a520a8576743927d2baaf0b}\index{Beam::WavReader@{Beam::WavReader}!m\_fileMutex@{m\_fileMutex}}
+\index{m\_fileMutex@{m\_fileMutex}!Beam::WavReader@{Beam::WavReader}}
+\doxysubsubsection{\texorpdfstring{m\_fileMutex}{m\_fileMutex}}
+{\footnotesize\ttfamily \label{class_beam_1_1_wav_reader_a43930dc66a520a8576743927d2baaf0b} 
+std::\+recursive\+\_\+mutex Beam::\+\+Wav\+Reader::\+m\+\_\+file\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{class_beam_1_1_wav_reader_a1ef1515c74e66c5a9ff543639f9ed11e}\index{Beam::WavReader@{Beam::WavReader}!m\_formatTag@{m\_formatTag}}
 \index{m\_formatTag@{m\_formatTag}!Beam::WavReader@{Beam::WavReader}}
 \doxysubsubsection{\texorpdfstring{m\_formatTag}{m\_formatTag}}
@@ -133,4 +157,4 @@ uint32\+\_\+t Beam::\+\+Wav\+Reader::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfami
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+dsp/\+\doxymbox{\hyperlink{wav__reader_8hpp}{wav\+\_\+reader.\+hpp}}\end{DoxyCompactItemize}
+src/\+engine/\+\doxymbox{\hyperlink{wav__reader_8hpp}{wav\+\_\+reader.\+hpp}}\end{DoxyCompactItemize}

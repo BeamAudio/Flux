@@ -93,6 +93,9 @@ $(function(){initNavTree('class_beam_1_1_quad_batcher.html','','class_beam_1_1_q
 </div><!--header-->
 <div class="contents">
 
+<p>High-performance OpenGL renderer for 2D primitives and text.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="quad__batcher_8hpp_source.html">quad_batcher.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -100,12 +103,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acb37c49599337128ac40efe6832cb714" id="r_acb37c49599337128ac40efe6832cb714"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acb37c49599337128ac40efe6832cb714">QuadBatcher</a> (size_t maxQuads=1000)</td></tr>
 <tr class="memitem:ad2db51466ed3ace6c5d3876e04a35044" id="r_ad2db51466ed3ace6c5d3876e04a35044"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad2db51466ed3ace6c5d3876e04a35044">~QuadBatcher</a> ()</td></tr>
 <tr class="memitem:aab5d3d705e6dcd91f650264129380d31" id="r_aab5d3d705e6dcd91f650264129380d31"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aab5d3d705e6dcd91f650264129380d31">begin</a> ()</td></tr>
+<tr class="memdesc:aab5d3d705e6dcd91f650264129380d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares the batcher for a new frame.  <br /></td></tr>
 <tr class="memitem:afeda7287047f1ee0db8203306f408503" id="r_afeda7287047f1ee0db8203306f408503"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afeda7287047f1ee0db8203306f408503">drawQuad</a> (float x, float y, float w, float h, float r, float g, float b, float a)</td></tr>
+<tr class="memdesc:afeda7287047f1ee0db8203306f408503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a solid colored quad.  <br /></td></tr>
 <tr class="memitem:a16d867a50f08e83bc2b2242ea7c00acb" id="r_a16d867a50f08e83bc2b2242ea7c00acb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a16d867a50f08e83bc2b2242ea7c00acb">drawRoundedRect</a> (float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a)</td></tr>
+<tr class="memdesc:a16d867a50f08e83bc2b2242ea7c00acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a rounded rectangle with customizable softness (SDF-based).  <br /></td></tr>
 <tr class="memitem:a54b57a1fa94c48b9778c2fe1109e761a" id="r_a54b57a1fa94c48b9778c2fe1109e761a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a54b57a1fa94c48b9778c2fe1109e761a">drawText</a> (const std::string &amp;text, float x, float y, float size, float r, float g, float b, float a)</td></tr>
+<tr class="memdesc:a54b57a1fa94c48b9778c2fe1109e761a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws bitmap text using the internal font.  <br /></td></tr>
+<tr class="memitem:a102ad0e0922bacd0af5e2e1f0da50243" id="r_a102ad0e0922bacd0af5e2e1f0da50243"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a102ad0e0922bacd0af5e2e1f0da50243">drawTexture</a> (unsigned int textureId, float x, float y, float w, float h, float u0=0.0f, float v0=0.0f, float u1=1.0f, float v1=1.0f, float r=1.0f, float g=1.0f, float b=1.0f, float a=1.0f)</td></tr>
+<tr class="memdesc:a102ad0e0922bacd0af5e2e1f0da50243"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a textured quad with specific UV coordinates.  <br /></td></tr>
+<tr class="memitem:ac2752da0502368d91bf4ae417de61a27" id="r_ac2752da0502368d91bf4ae417de61a27"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac2752da0502368d91bf4ae417de61a27">drawSmoothLine</a> (float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a)</td></tr>
+<tr class="memdesc:ac2752da0502368d91bf4ae417de61a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws an anti-aliased line segment using SDF.  <br /></td></tr>
+<tr class="memitem:a296da7f546a2d405ec7e09b3cb1f725e" id="r_a296da7f546a2d405ec7e09b3cb1f725e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a296da7f546a2d405ec7e09b3cb1f725e">drawCurve</a> (const std::vector&lt; std::pair&lt; float, float &gt; &gt; &amp;points, float thickness, float r, float g, float b, float a)</td></tr>
+<tr class="memdesc:a296da7f546a2d405ec7e09b3cb1f725e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a continuous anti-aliased curve from a set of points.  <br /></td></tr>
 <tr class="memitem:ae24a0b2b697e7870bebf358ac4776d81" id="r_ae24a0b2b697e7870bebf358ac4776d81"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae24a0b2b697e7870bebf358ac4776d81">drawLine</a> (float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a)</td></tr>
 <tr class="memitem:ad2f4ad2e5231b76d8b58f33f9afae7e0" id="r_ad2f4ad2e5231b76d8b58f33f9afae7e0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad2f4ad2e5231b76d8b58f33f9afae7e0">drawRect</a> (float x, float y, float w, float h, float thickness, float r, float g, float b, float a)</td></tr>
 <tr class="memitem:a7d04ae84e0638e4531264ff5e8de383f" id="r_a7d04ae84e0638e4531264ff5e8de383f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7d04ae84e0638e4531264ff5e8de383f">flush</a> ()</td></tr>
+<tr class="memitem:a737a582ce7ce4919160d0f3193462d93" id="r_a737a582ce7ce4919160d0f3193462d93"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a737a582ce7ce4919160d0f3193462d93">setScissor</a> (float x, float y, float w, float h, float screenHeight)</td></tr>
+<tr class="memitem:a312063d401dc0f09f67f31182d55e4f5" id="r_a312063d401dc0f09f67f31182d55e4f5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a312063d401dc0f09f67f31182d55e4f5">clearScissor</a> ()</td></tr>
+<tr class="memitem:a9e0325c2bcab2008c8f38a24e480b1c5" id="r_a9e0325c2bcab2008c8f38a24e480b1c5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9e0325c2bcab2008c8f38a24e480b1c5">setViewTransform</a> (float tx, float ty, float zoom)</td></tr>
+<tr class="memitem:ac958f72e3fc168a11fecba1f5a5a00b7" id="r_ac958f72e3fc168a11fecba1f5a5a00b7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac958f72e3fc168a11fecba1f5a5a00b7">resetViewTransform</a> (float screenW, float screenH)</td></tr>
 <tr class="memitem:a838b935a69a5041d714b4895c5f737dd" id="r_a838b935a69a5041d714b4895c5f737dd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a838b935a69a5041d714b4895c5f737dd">setShader</a> (class <a class="el" href="class_beam_1_1_shader.html">Shader</a> *shader)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
@@ -122,8 +139,13 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a0b453e3a8d0b7b673a180afbbca46f29" id="r_a0b453e3a8d0b7b673a180afbbca46f29"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="#a0b453e3a8d0b7b673a180afbbca46f29">m_fontTexture</a></td></tr>
 <tr class="memitem:ac47e3f9be44ce389aaa15a44c9f3bd94" id="r_ac47e3f9be44ce389aaa15a44c9f3bd94"><td class="memItemLeft">std::vector&lt; <a class="el" href="struct_beam_1_1_vertex.html">Vertex</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac47e3f9be44ce389aaa15a44c9f3bd94">m_vertices</a></td></tr>
 <tr class="memitem:a0bf56fdf73e935879113849de645fb63" id="r_a0bf56fdf73e935879113849de645fb63"><td class="memItemLeft">class <a class="el" href="class_beam_1_1_shader.html">Shader</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a0bf56fdf73e935879113849de645fb63">m_shader</a> = nullptr</td></tr>
+<tr class="memitem:a68ff331ea5dc013c591ba66c14b69506" id="r_a68ff331ea5dc013c591ba66c14b69506"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a68ff331ea5dc013c591ba66c14b69506">m_viewTx</a> = 0.0f</td></tr>
+<tr class="memitem:a88c3320e0bd09f1eb468e9745e13d699" id="r_a88c3320e0bd09f1eb468e9745e13d699"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a88c3320e0bd09f1eb468e9745e13d699">m_viewTy</a> = 0.0f</td></tr>
+<tr class="memitem:affdb6b9f0d32f95a7752b1c4a38311cd" id="r_affdb6b9f0d32f95a7752b1c4a38311cd"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#affdb6b9f0d32f95a7752b1c4a38311cd">m_viewZoom</a> = 1.0f</td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>High-performance OpenGL renderer for 2D primitives and text. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acb37c49599337128ac40efe6832cb714" name="acb37c49599337128ac40efe6832cb714"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb37c49599337128ac40efe6832cb714">&#9670;&#160;</a></span>QuadBatcher()</h2>
 
@@ -174,6 +196,25 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Prepares the batcher for a new frame. </p>
+
+</div>
+</div>
+<a id="a312063d401dc0f09f67f31182d55e4f5" name="a312063d401dc0f09f67f31182d55e4f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a312063d401dc0f09f67f31182d55e4f5">&#9670;&#160;</a></span>clearScissor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::clearScissor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a3f0b54c6cfd0ba9e85bd6c7c239eb928" name="a3f0b54c6cfd0ba9e85bd6c7c239eb928"></a>
@@ -198,6 +239,49 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a296da7f546a2d405ec7e09b3cb1f725e" name="a296da7f546a2d405ec7e09b3cb1f725e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296da7f546a2d405ec7e09b3cb1f725e">&#9670;&#160;</a></span>drawCurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::drawCurve </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::pair&lt; float, float &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>points</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>thickness</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>r</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>g</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>a</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a continuous anti-aliased curve from a set of points. </p>
 
 </div>
 </div>
@@ -305,6 +389,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Draws a solid colored quad. </p>
 
 </div>
 </div>
@@ -423,6 +509,66 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Draws a rounded rectangle with customizable softness (SDF-based). </p>
+
+</div>
+</div>
+<a id="ac2752da0502368d91bf4ae417de61a27" name="ac2752da0502368d91bf4ae417de61a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2752da0502368d91bf4ae417de61a27">&#9670;&#160;</a></span>drawSmoothLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::drawSmoothLine </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>thickness</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>r</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>g</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>a</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws an anti-aliased line segment using SDF. </p>
+
 </div>
 </div>
 <a id="a54b57a1fa94c48b9778c2fe1109e761a" name="a54b57a1fa94c48b9778c2fe1109e761a"></a>
@@ -474,6 +620,86 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Draws bitmap text using the internal font. </p>
+
+</div>
+</div>
+<a id="a102ad0e0922bacd0af5e2e1f0da50243" name="a102ad0e0922bacd0af5e2e1f0da50243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a102ad0e0922bacd0af5e2e1f0da50243">&#9670;&#160;</a></span>drawTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::drawTexture </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>textureId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>u0</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>v0</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>u1</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>v1</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>r</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>g</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>b</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>a</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0f</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a textured quad with specific UV coordinates. </p>
+
 </div>
 </div>
 <a id="a7d04ae84e0638e4531264ff5e8de383f" name="a7d04ae84e0638e4531264ff5e8de383f"></a>
@@ -487,6 +713,63 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac958f72e3fc168a11fecba1f5a5a00b7" name="ac958f72e3fc168a11fecba1f5a5a00b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac958f72e3fc168a11fecba1f5a5a00b7">&#9670;&#160;</a></span>resetViewTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::resetViewTransform </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenW</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenH</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a737a582ce7ce4919160d0f3193462d93" name="a737a582ce7ce4919160d0f3193462d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a737a582ce7ce4919160d0f3193462d93">&#9670;&#160;</a></span>setScissor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::setScissor </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>screenHeight</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -514,6 +797,32 @@ Private Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e0325c2bcab2008c8f38a24e480b1c5" name="a9e0325c2bcab2008c8f38a24e480b1c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e0325c2bcab2008c8f38a24e480b1c5">&#9670;&#160;</a></span>setViewTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beam::QuadBatcher::setViewTransform </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>tx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>ty</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>zoom</em></span>&#160;)</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
@@ -695,9 +1004,75 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a68ff331ea5dc013c591ba66c14b69506" name="a68ff331ea5dc013c591ba66c14b69506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68ff331ea5dc013c591ba66c14b69506">&#9670;&#160;</a></span>m_viewTx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::QuadBatcher::m_viewTx = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88c3320e0bd09f1eb468e9745e13d699" name="a88c3320e0bd09f1eb468e9745e13d699"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88c3320e0bd09f1eb468e9745e13d699">&#9670;&#160;</a></span>m_viewTy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::QuadBatcher::m_viewTy = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="affdb6b9f0d32f95a7752b1c4a38311cd" name="affdb6b9f0d32f95a7752b1c4a38311cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affdb6b9f0d32f95a7752b1c4a38311cd">&#9670;&#160;</a></span>m_viewZoom</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Beam::QuadBatcher::m_viewZoom = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/graphics/<a class="el" href="quad__batcher_8hpp_source.html">quad_batcher.hpp</a></li>
-<li>src/graphics/<a class="el" href="quad__batcher_8cpp.html">quad_batcher.cpp</a></li>
+<li>src/render/<a class="el" href="quad__batcher_8hpp_source.html">quad_batcher.hpp</a></li>
+<li>src/render/<a class="el" href="quad__batcher_8cpp.html">quad_batcher.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

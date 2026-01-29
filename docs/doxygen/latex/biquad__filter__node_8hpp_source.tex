@@ -1,87 +1,113 @@
 \doxysection{biquad\+\_\+filter\+\_\+node.\+hpp}
-\hypertarget{biquad__filter__node_8hpp_source}{}\label{biquad__filter__node_8hpp_source}\index{src/dsp/biquad\_filter\_node.hpp@{src/dsp/biquad\_filter\_node.hpp}}
+\hypertarget{biquad__filter__node_8hpp_source}{}\label{biquad__filter__node_8hpp_source}\index{src/engine/biquad\_filter\_node.hpp@{src/engine/biquad\_filter\_node.hpp}}
 \doxymbox{\hyperlink{biquad__filter__node_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BIQUAD\_FILTER\_NODE\_HPP}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BIQUAD\_FILTER\_NODE\_HPP}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{audio__node_8hpp}{audio\_node.hpp}}"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ \{}
-\DoxyCodeLine{00010\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63}{LowPass}},}
-\DoxyCodeLine{00011\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6ae9456dc865a19e434997ea20bb5373f6}{HighPass}}}
-\DoxyCodeLine{00012\ \};}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{BiquadFilterNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
-\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{BiquadFilterNode}}(\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ type,\ \textcolor{keywordtype}{float}\ frequency,\ \textcolor{keywordtype}{float}\ q,\ \textcolor{keywordtype}{float}\ sampleRate)\ }
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}}(type),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}(frequency),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}}(q),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}}(sampleRate)\ \{}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
-\DoxyCodeLine{00019\ \ \ \ \ \}}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a25b38544644148f7ed0f435e1c94020f}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frames;\ ++i)\ \{}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ 0;\ c\ <\ channels;\ ++c)\ \{}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ buffer[i\ *\ channels\ +\ c];}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ x\ +\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\_x1}}[c]\ +\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}{m\_x2}}[c]}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\_y1}}[c]\ -\/\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}{m\_y2}}[c];}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}{m\_x2}}[c]\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\_x1}}[c];}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\_x1}}[c]\ =\ x;}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}{m\_y2}}[c]\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\_y1}}[c];}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\_y1}}[c]\ =\ y;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[i\ *\ channels\ +\ c]\ =\ y;}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{dsp__utils_8hpp}{dsp\_utils.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_beam}{Beam}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63}{LowPass}},}
+\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6ae9456dc865a19e434997ea20bb5373f6}{HighPass}}}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{BiquadFilterNode}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_beam_1_1_audio_node}{AudioNode}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af9d8020ffe968d1c127ea2105209bb26}{BiquadFilterNode}}(\doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ \doxymbox{\hyperlink{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa}{type}},\ \textcolor{keywordtype}{float}\ frequency,\ \textcolor{keywordtype}{float}\ q,\ \textcolor{keywordtype}{float}\ sampleRate)\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}}(\doxymbox{\hyperlink{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa}{type}}),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}(frequency),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}}(q),\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}}(sampleRate)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9ca4ea9dffee4a78f9c25457c2303142}{process}}(\textcolor{keywordtype}{float}*\ buffer,\ \textcolor{keywordtype}{int}\ frames,\ \textcolor{keywordtype}{int}\ channels,\ \textcolor{keywordtype}{size\_t}\ startFrame\ =\ 0)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}}.size()\ !=\ (\textcolor{keywordtype}{size\_t})channels)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}}.assign(channels,\ 0.0f);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}{m\_x2}}.assign(channels,\ 0.0f);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\_y1}}.assign(channels,\ 0.0f);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}{m\_y2}}.assign(channels,\ 0.0f);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frames;\ ++i)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ 0;\ c\ <\ channels;\ ++c)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x\ =\ buffer[i\ *\ channels\ +\ c];}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ y\ =\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ x\ +\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}}[c]\ +\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}{m\_x2}}[c]}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\_y1}}[c]\ -\/\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}})\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}{m\_y2}}[c];}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ \doxymbox{\hyperlink{namespace_beam_aa7334dd3aa681f0530ad4fdc9b379103}{flush\_denormal}}(y);}
 \DoxyCodeLine{00037\ }
-\DoxyCodeLine{00038\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Biquad\ Filter"{}};\ \}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}{setCutoff}}(\textcolor{keywordtype}{float}\ freq)\ \{}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}\ =\ freq;}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
-\DoxyCodeLine{00043\ \ \ \ \ \}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94}{setQ}}(\textcolor{keywordtype}{float}\ q)\ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}}\ =\ q;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
-\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}{m\_x2}}[c]\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}}[c];}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}}[c]\ =\ x;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}{m\_y2}}[c]\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\_y1}}[c];}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\_y1}}[c]\ =\ y;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer[i\ *\ channels\ +\ c]\ =\ y;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ std::string\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a928e2017ed0dacfc547360c6fb982181}{getName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Biquad\ Filter"{}};\ \}}
 \DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}()\ \{}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ omega\ =\ 2.0f\ *\ 3.1415926535f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}};}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cosOmega\ =\ std::cos(omega);}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ alpha\ =\ std::sin(omega)\ /\ (2.0f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}});}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63}{FilterType::LowPass}})\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ =\ (1.0f\ -\/\ cosOmega)\ /\ 2.0f;}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ =\ 1.0f\ -\/\ cosOmega;}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ =\ (1.0f\ -\/\ cosOmega)\ /\ 2.0f;}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ =\ 1.0f\ +\ alpha;}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ =\ -\/2.0f\ *\ cosOmega;}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ =\ 1.0f\ -\/\ alpha;}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{//\ HighPass}}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ =\ (1.0f\ +\ cosOmega)\ /\ 2.0f;}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ =\ -\/(1.0f\ +\ cosOmega);}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ =\ (1.0f\ +\ cosOmega)\ /\ 2.0f;}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ =\ 1.0f\ +\ alpha;}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ =\ -\/2.0f\ *\ cosOmega;}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ =\ 1.0f\ -\/\ alpha;}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00071\ \ \ \ \ \}}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}};}
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}};}
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}};}
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aafaec2766968cc20ac42c5a7142ca737}{m\_x1}}[2]\ =\ \{0,0\},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4712230456164bde4074d32bf34ca1c1}{m\_x2}}[2]\ =\ \{0,0\},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6c478067c07061f1fd92ad03d48cf96d}{m\_y1}}[2]\ =\ \{0,0\},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_aa7b05e2ed89ab3ecc3a1e86c1d1d8b34}{m\_y2}}[2]\ =\ \{0,0\};}
-\DoxyCodeLine{00077\ \};}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BIQUAD\_FILTER\_NODE\_HPP}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad291d833705c4629e1b1016426f85bf8}{setCutoff}}(\textcolor{keywordtype}{float}\ freq)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}\ =\ freq;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a239d00981422f9f84dd8c6694bf35f94}{setQ}}(\textcolor{keywordtype}{float}\ q)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}}\ =\ q;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a0a857df3e78f9f3bb258d0661fbad824}{getMagnitudeResponse}}(\textcolor{keywordtype}{float}\ normalizedFreq)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ w\ =\ normalizedFreq\ *\ 3.1415926535f;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cosW\ =\ std::cos(w);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cos2W\ =\ std::cos(2.0f\ *\ w);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ num\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ +\ 2.0f\ *\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}})\ *\ cosW\ +\ 2.0f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ *\ cos2W;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ den\ =\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ +\ 2.0f\ *\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ +\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}})\ *\ cosW\ +\ 2.0f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ *\ cos2W;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::sqrt((std::max)(0.0f,\ num\ /\ den));}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a9c0e833373e0a400667ab1e9f28fca99}{calculateCoefficients}}()\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ omega\ =\ 2.0f\ *\ 3.1415926535f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}}\ /\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cosOmega\ =\ std::cos(omega);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ alpha\ =\ std::sin(omega)\ /\ (2.0f\ *\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}});}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}}\ ==\ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6a835f2dc4fd545ddcd275198d9fbadf63}{FilterType::LowPass}})\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ =\ (1.0f\ -\/\ cosOmega)\ /\ 2.0f;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ =\ 1.0f\ -\/\ cosOmega;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ =\ (1.0f\ -\/\ cosOmega)\ /\ 2.0f;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ =\ 1.0f\ +\ alpha;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ =\ -\/2.0f\ *\ cosOmega;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ =\ 1.0f\ -\/\ alpha;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{//\ HighPass}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}}\ =\ (1.0f\ +\ cosOmega)\ /\ 2.0f;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}}\ =\ -\/(1.0f\ +\ cosOmega);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}}\ =\ (1.0f\ +\ cosOmega)\ /\ 2.0f;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}}\ =\ 1.0f\ +\ alpha;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}}\ =\ -\/2.0f\ *\ cosOmega;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}}\ =\ 1.0f\ -\/\ alpha;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \doxymbox{\hyperlink{namespace_beam_aa79c53bfd2295b09750b964fa2a326d6}{FilterType}}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af192ad68fc1a2e246e0a262f143829bd}{m\_type}};}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6e60d0bd884240f8dd68bf329c7f0b02}{m\_frequency}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a6fd09afdc0987fd14b036640808ebe32}{m\_q}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a286bb954a110d6aca89e5538efcd048f}{m\_sampleRate}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a4587479c8ba49ab9a4b2de94a6f0762d}{m\_b0}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_af8fa1d7d77e7c505b91f193b6abbc430}{m\_b1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ad38af20f8589c09d399dda3d67974388}{m\_b2}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a540ecacb972cb9ffaf89b7a1b590db23}{m\_a0}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a591ffbe6ab67f70256077313a73e115b}{m\_a1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ae3562ee8ee5b0aad417518d88ad4ac9b}{m\_a2}};}
+\DoxyCodeLine{00100\ \ \ \ \ std::vector<float>\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a03c950f82a534c8a03288b26c36d46a0}{m\_x1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_ab51d7636914b505a233bfe06610c9cba}{m\_x2}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a628729d1e9a421749eb4d92601ff9bb0}{m\_y1}},\ \doxymbox{\hyperlink{class_beam_1_1_biquad_filter_node_a1608507a8153863f66811e35d0a640ad}{m\_y2}};}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \}\ \textcolor{comment}{//\ namespace\ Beam}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BIQUAD\_FILTER\_NODE\_HPP}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ }
 
 \end{DoxyCode}

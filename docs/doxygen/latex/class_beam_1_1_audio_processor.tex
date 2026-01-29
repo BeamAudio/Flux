@@ -1,0 +1,323 @@
+\doxysection{Beam::\+Audio\+Processor Class Reference}
+\hypertarget{class_beam_1_1_audio_processor}{}\label{class_beam_1_1_audio_processor}\index{Beam::AudioProcessor@{Beam::AudioProcessor}}
+
+
+Base class for audio processing units, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_processor}{Audio\+Processor}.  
+
+
+
+
+{\ttfamily \+\#include $<$audio\+\_\+processor.\+hpp$>$}
+
+Inheritance diagram for Beam::\+Audio\+Processor:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_beam_1_1_audio_processor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd}{Audio\+Processor}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_beam_1_1_audio_processor_aa760c6d60a8045dc32aa1578b9c74afe}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Processor}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0ef7279db2dc6cef108efcad0c6edb8a}{prepare\+To\+Play}} (double sample\+Rate, int samples\+Per\+Block)=0
+\begin{DoxyCompactList}\small\item\em Called before audio processing begins. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_adf8005d9b36d70188aa1379a61f7f5a9}{release\+Resources}} ()=0
+\begin{DoxyCompactList}\small\item\em Called after audio stops. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a831818fed7ed10115cd3983addf21936}{process\+Block}} (float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}audio\+Input\+Output, int num\+Input\+Channels, int num\+Output\+Channels, int num\+Samples, const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&midi\+Messages)=0
+\begin{DoxyCompactList}\small\item\em Main processing function. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_processor_af4f88f01a436dba1fd3db520503b68c7}{get\+Name}} () const =0
+\begin{DoxyCompactList}\small\item\em Returns the name of this processor. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a13c1f31b340d69fce391411402082211}{get\+Num\+Input\+Channels}} () const =0
+\begin{DoxyCompactList}\small\item\em Returns the number of input channels. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a403c0cf559133347ee2753ef11766f21}{get\+Num\+Output\+Channels}} () const =0
+\begin{DoxyCompactList}\small\item\em Returns the number of output channels. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0e0668105ca3844b5d0947a3fcf25b7b}{get\+Num\+Parameters}} () const
+\begin{DoxyCompactList}\small\item\em Returns the total number of parameters. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a8dd4277153a28700b0b043ef218a4d15}{get\+Parameter\+Name}} (int parameter\+Index) const
+\begin{DoxyCompactList}\small\item\em Returns the name of a parameter. \end{DoxyCompactList}\item 
+virtual float \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a456045a6f38f955db222bfdbb1e54be0}{get\+Parameter}} (int parameter\+Index) const
+\begin{DoxyCompactList}\small\item\em Returns the value of a parameter. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3e9a8c5b7470f9a957d85b84efff64b1}{set\+Parameter}} (int parameter\+Index, float new\+Value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a parameter. \end{DoxyCompactList}\item 
+virtual std::\+string \doxymbox{\hyperlink{class_beam_1_1_audio_processor_ad0c8e5cece50693d131dc9476f5a7835}{get\+Parameter\+Text}} (int parameter\+Index, float value) const
+\begin{DoxyCompactList}\small\item\em Returns the text representation of a parameter\textquotesingle{}s value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7e9f840858284252d4a288f4e89e0c8e}{add\+Parameter}} (std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ parameter)
+\begin{DoxyCompactList}\small\item\em Adds a parameter to this processor. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7298dde8e5844676fea306d579ae1b5c}{get\+Parameter\+By\+Index}} (int index) const
+\begin{DoxyCompactList}\small\item\em Gets a parameter by index. \end{DoxyCompactList}\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3b570dc9bcbeb3208e026e436c1fe9e7}{get\+Parameter\+By\+Name}} (const std::\+string \&name) const
+\begin{DoxyCompactList}\small\item\em Gets a parameter by name. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a7da84e7885fe1660401485dd1f46c8f9}{set\+Current\+Playback\+State}} (bool is\+Playing, double current\+Time\+Seconds, double tempo)
+\begin{DoxyCompactList}\small\item\em Called when the play head state changes. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a480e589f13d2a2046d7d46896c17daaa}{get\+Sample\+Rate}} () const
+\begin{DoxyCompactList}\small\item\em Returns the current sample rate. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a49a5218a84064deb3c05aad0087be7a3}{get\+Block\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Returns the current block size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \doxymbox{\hyperlink{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840}{m\+\_\+sample\+Rate}} = 44100.\+0
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466}{m\+\_\+block\+Size}} = 512
+\item 
+std::\+vector$<$ std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a89bb21df73830e6b14b8bf69d3ba68a1}{m\+\_\+parameters}}
+\item 
+std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_processor_a0430f0f07132e944c8af000cae93f321}{m\+\_\+named\+Parameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for audio processing units, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_processor}{Audio\+Processor}. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_audio_processor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!AudioProcessor@{AudioProcessor}}
+\index{AudioProcessor@{AudioProcessor}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{AudioProcessor()}{AudioProcessor()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a8f0f6af900e612f1e95407eb6c8878cd} 
+Beam::\+\+Audio\+Processor::\+\+Audio\+Processor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_audio_processor_aa760c6d60a8045dc32aa1578b9c74afe}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!````~AudioProcessor@{\texorpdfstring{$\sim$}{\string~}AudioProcessor}}
+\index{````~AudioProcessor@{\texorpdfstring{$\sim$}{\string~}AudioProcessor}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AudioProcessor()}{\string~AudioProcessor()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_aa760c6d60a8045dc32aa1578b9c74afe} 
+Beam::\+\+Audio\+Processor::\+\texorpdfstring{$\sim$}{\string~}\+Audio\+Processor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_audio_processor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_a7e9f840858284252d4a288f4e89e0c8e}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!addParameter@{addParameter}}
+\index{addParameter@{addParameter}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{addParameter()}{addParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a7e9f840858284252d4a288f4e89e0c8e} 
+void Beam::\+\+Audio\+Processor::\+add\+Parameter (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$}]{parameter}{}\end{DoxyParamCaption})}
+
+
+
+Adds a parameter to this processor. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a49a5218a84064deb3c05aad0087be7a3}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getBlockSize@{getBlockSize}}
+\index{getBlockSize@{getBlockSize}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getBlockSize()}{getBlockSize()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a49a5218a84064deb3c05aad0087be7a3} 
+int Beam::\+\+Audio\+Processor::\+get\+Block\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the current block size. 
+
+\Hypertarget{class_beam_1_1_audio_processor_af4f88f01a436dba1fd3db520503b68c7}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getName@{getName}}
+\index{getName@{getName}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_af4f88f01a436dba1fd3db520503b68c7} 
+virtual std::\+string Beam::\+\+Audio\+Processor::\+get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns the name of this processor. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_aa2b20d72dcf9a64018cfa617ee29df8c}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_a13c1f31b340d69fce391411402082211}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getNumInputChannels@{getNumInputChannels}}
+\index{getNumInputChannels@{getNumInputChannels}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getNumInputChannels()}{getNumInputChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a13c1f31b340d69fce391411402082211} 
+virtual int Beam::\+\+Audio\+Processor::\+get\+Num\+Input\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns the number of input channels. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_af5f7eb577be8e860cd7e15126a05d285}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_a403c0cf559133347ee2753ef11766f21}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getNumOutputChannels@{getNumOutputChannels}}
+\index{getNumOutputChannels@{getNumOutputChannels}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getNumOutputChannels()}{getNumOutputChannels()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a403c0cf559133347ee2753ef11766f21} 
+virtual int Beam::\+\+Audio\+Processor::\+get\+Num\+Output\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns the number of output channels. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a2e3a9d06433fc35e14071301544125df}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_a0e0668105ca3844b5d0947a3fcf25b7b}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getNumParameters@{getNumParameters}}
+\index{getNumParameters@{getNumParameters}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getNumParameters()}{getNumParameters()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a0e0668105ca3844b5d0947a3fcf25b7b} 
+int Beam::\+\+Audio\+Processor::\+get\+Num\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the total number of parameters. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a456045a6f38f955db222bfdbb1e54be0}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getParameter@{getParameter}}
+\index{getParameter@{getParameter}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getParameter()}{getParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a456045a6f38f955db222bfdbb1e54be0} 
+float Beam::\+\+Audio\+Processor::\+get\+Parameter (\begin{DoxyParamCaption}\item[{int}]{parameter\+Index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the value of a parameter. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a7298dde8e5844676fea306d579ae1b5c}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getParameterByIndex@{getParameterByIndex}}
+\index{getParameterByIndex@{getParameterByIndex}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getParameterByIndex()}{getParameterByIndex()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a7298dde8e5844676fea306d579ae1b5c} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ Beam::\+\+Audio\+Processor::\+get\+Parameter\+By\+Index (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a parameter by index. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a3b570dc9bcbeb3208e026e436c1fe9e7}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getParameterByName@{getParameterByName}}
+\index{getParameterByName@{getParameterByName}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getParameterByName()}{getParameterByName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a3b570dc9bcbeb3208e026e436c1fe9e7} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}} $>$ Beam::\+\+Audio\+Processor::\+get\+Parameter\+By\+Name (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a parameter by name. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a8dd4277153a28700b0b043ef218a4d15}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getParameterName@{getParameterName}}
+\index{getParameterName@{getParameterName}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getParameterName()}{getParameterName()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a8dd4277153a28700b0b043ef218a4d15} 
+std::\+string Beam::\+\+Audio\+Processor::\+get\+Parameter\+Name (\begin{DoxyParamCaption}\item[{int}]{parameter\+Index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the name of a parameter. 
+
+\Hypertarget{class_beam_1_1_audio_processor_ad0c8e5cece50693d131dc9476f5a7835}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getParameterText@{getParameterText}}
+\index{getParameterText@{getParameterText}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getParameterText()}{getParameterText()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_ad0c8e5cece50693d131dc9476f5a7835} 
+std::\+string Beam::\+\+Audio\+Processor::\+get\+Parameter\+Text (\begin{DoxyParamCaption}\item[{int}]{parameter\+Index}{, }\item[{float}]{value}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns the text representation of a parameter\textquotesingle{}s value. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a480e589f13d2a2046d7d46896c17daaa}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!getSampleRate@{getSampleRate}}
+\index{getSampleRate@{getSampleRate}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{getSampleRate()}{getSampleRate()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a480e589f13d2a2046d7d46896c17daaa} 
+double Beam::\+\+Audio\+Processor::\+get\+Sample\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the current sample rate. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a0ef7279db2dc6cef108efcad0c6edb8a}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!prepareToPlay@{prepareToPlay}}
+\index{prepareToPlay@{prepareToPlay}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{prepareToPlay()}{prepareToPlay()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a0ef7279db2dc6cef108efcad0c6edb8a} 
+virtual void Beam::\+\+Audio\+Processor::\+prepare\+To\+Play (\begin{DoxyParamCaption}\item[{double}]{sample\+Rate}{, }\item[{int}]{samples\+Per\+Block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Called before audio processing begins. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a26b885175501fb2cad51c69ef85489c1}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_a831818fed7ed10115cd3983addf21936}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!processBlock@{processBlock}}
+\index{processBlock@{processBlock}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{processBlock()}{processBlock()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a831818fed7ed10115cd3983addf21936} 
+virtual void Beam::\+\+Audio\+Processor::\+process\+Block (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{audio\+Input\+Output}{, }\item[{int}]{num\+Input\+Channels}{, }\item[{int}]{num\+Output\+Channels}{, }\item[{int}]{num\+Samples}{, }\item[{const \doxymbox{\hyperlink{class_beam_1_1_m_i_d_i_buffer}{MIDIBuffer}} \&}]{midi\+Messages}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Main processing function. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_ad4916adf7b3423d1407a4058e43d3a8f}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_adf8005d9b36d70188aa1379a61f7f5a9}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!releaseResources@{releaseResources}}
+\index{releaseResources@{releaseResources}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{releaseResources()}{releaseResources()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_adf8005d9b36d70188aa1379a61f7f5a9} 
+virtual void Beam::\+\+Audio\+Processor::\+release\+Resources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Called after audio stops. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_beam_1_1_flux_node_audio_processor_wrapper_a124968314929cbbf897db8a23ef5ed3b}{Beam::\+\+Flux\+Node\+Audio\+Processor\+Wrapper}}.
+
+\Hypertarget{class_beam_1_1_audio_processor_a7da84e7885fe1660401485dd1f46c8f9}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!setCurrentPlaybackState@{setCurrentPlaybackState}}
+\index{setCurrentPlaybackState@{setCurrentPlaybackState}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{setCurrentPlaybackState()}{setCurrentPlaybackState()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a7da84e7885fe1660401485dd1f46c8f9} 
+void Beam::\+\+Audio\+Processor::\+set\+Current\+Playback\+State (\begin{DoxyParamCaption}\item[{bool}]{is\+Playing}{, }\item[{double}]{current\+Time\+Seconds}{, }\item[{double}]{tempo}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the play head state changes. 
+
+\Hypertarget{class_beam_1_1_audio_processor_a3e9a8c5b7470f9a957d85b84efff64b1}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!setParameter@{setParameter}}
+\index{setParameter@{setParameter}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{setParameter()}{setParameter()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a3e9a8c5b7470f9a957d85b84efff64b1} 
+void Beam::\+\+Audio\+Processor::\+set\+Parameter (\begin{DoxyParamCaption}\item[{int}]{parameter\+Index}{, }\item[{float}]{new\+Value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Sets the value of a parameter. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_audio_processor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!m\_blockSize@{m\_blockSize}}
+\index{m\_blockSize@{m\_blockSize}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{m\_blockSize}{m\_blockSize}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a3d2ab6b1f0c86689d55c8e72ce428466} 
+int Beam::\+\+Audio\+Processor::\+m\+\_\+block\+Size = 512\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_audio_processor_a0430f0f07132e944c8af000cae93f321}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!m\_namedParameters@{m\_namedParameters}}
+\index{m\_namedParameters@{m\_namedParameters}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{m\_namedParameters}{m\_namedParameters}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a0430f0f07132e944c8af000cae93f321} 
+std::\+map$<$std::\+string, std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}}$>$ $>$ Beam::\+\+Audio\+Processor::\+m\+\_\+named\+Parameters\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_audio_processor_a89bb21df73830e6b14b8bf69d3ba68a1}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!m\_parameters@{m\_parameters}}
+\index{m\_parameters@{m\_parameters}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{m\_parameters}{m\_parameters}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_a89bb21df73830e6b14b8bf69d3ba68a1} 
+std::\+vector$<$std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_parameter}{Parameter}}$>$ $>$ Beam::\+\+Audio\+Processor::\+m\+\_\+parameters\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840}\index{Beam::AudioProcessor@{Beam::AudioProcessor}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::AudioProcessor@{Beam::AudioProcessor}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_processor_add21a9644aaa71b9457b4f508e1e0840} 
+double Beam::\+\+Audio\+Processor::\+m\+\_\+sample\+Rate = 44100.\+0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__processor_8hpp}{audio\+\_\+processor.\+hpp}}\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__processor_8cpp}{audio\+\_\+processor.\+cpp}}\end{DoxyCompactItemize}

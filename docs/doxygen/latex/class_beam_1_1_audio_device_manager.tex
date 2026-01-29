@@ -1,0 +1,213 @@
+\doxysection{Beam::\+Audio\+Device\+Manager Class Reference}
+\hypertarget{class_beam_1_1_audio_device_manager}{}\label{class_beam_1_1_audio_device_manager}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+
+
+Manages audio devices, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_device_manager}{Audio\+Device\+Manager}.  
+
+
+
+
+{\ttfamily \+\#include $<$audio\+\_\+device\+\_\+manager.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a9a04a7a0ffc1320123152d9b62c31a66}{Audio\+Device\+Manager}} ()
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a9b897b43315c9639a308175a2a031d61}{\texorpdfstring{$\sim$}{\string~}\+Audio\+Device\+Manager}} ()
+\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ac2f1820ef1c285f957a22c01c309ce47}{initialise}} (int num\+Input\+Channels\+Needed, int num\+Output\+Channels\+Needed, const \doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} \texorpdfstring{$\ast$}{*}preferred\+Setup=nullptr, bool select\+Default\+Device\+On\+Failure=true)
+\begin{DoxyCompactList}\small\item\em Initializes the audio device manager. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_abbb9b08f8cf14312ae4c97805037fa26}{set\+Audio\+Callback}} (std::\+function$<$ void(float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, int, int, int, double)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the audio callback. \end{DoxyCompactList}\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_audio_device_info}{Audio\+Device\+Info}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a5c9a75f931952a669030f2f857ec7ad4}{get\+Available\+Output\+Devices}} () const
+\begin{DoxyCompactList}\small\item\em Gets a list of available output devices. \end{DoxyCompactList}\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_audio_device_info}{Audio\+Device\+Info}} $>$ \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_adb352085db8d068ce1f9377b5b45cf41}{get\+Available\+Input\+Devices}} () const
+\begin{DoxyCompactList}\small\item\em Gets a list of available input devices. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ae48b8b030b046121a00f66d451b53c2c}{set\+Current\+Audio\+Device}} (const std::\+string \&output\+Device\+Name, const std::\+string \&output\+Device\+Id, const std::\+string \&input\+Device\+Name, const std::\+string \&input\+Device\+Id, double sample\+Rate, int buffer\+Size)
+\begin{DoxyCompactList}\small\item\em Sets the current audio device. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a63164a22008735b5b36a2dc9c6c5d521}{get\+Current\+Device\+Setup}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current device setup. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a0bb774a182b11b77fee7252be4070eae}{start\+Audio}} ()
+\begin{DoxyCompactList}\small\item\em Starts the audio stream. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a7acb3781fec8511e5aab3dc042c78c64}{stop\+Audio}} ()
+\begin{DoxyCompactList}\small\item\em Stops the audio stream. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ad6dd75b4831e8122a4dea3973d870ec3}{is\+Audio\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if audio is currently running. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a73e3a8cea55888afb28ae26bee4bb097}{get\+Current\+Sample\+Rate}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current sample rate. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ac0fe3ed1cb2a41923d9a425a698e5cf6}{get\+Current\+Buffer\+Size\+Samples}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ac6fd1663b68d22105f5a18ac01b11c7d}{m\+\_\+device\+Setup}}
+\item 
+bool \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_ae560d602be900a9725278496efb94453}{m\+\_\+is\+Running}} = false
+\item 
+std::\+function$<$ void(float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, int, int, int, double)$>$ \doxymbox{\hyperlink{class_beam_1_1_audio_device_manager_a51b4a88bb21309c8e830310064672cfd}{m\+\_\+audio\+Callback}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages audio devices, similar to JUCE\textquotesingle{}s \doxylink{class_beam_1_1_audio_device_manager}{Audio\+Device\+Manager}. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_audio_device_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_audio_device_manager_a9a04a7a0ffc1320123152d9b62c31a66}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!AudioDeviceManager@{AudioDeviceManager}}
+\index{AudioDeviceManager@{AudioDeviceManager}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{AudioDeviceManager()}{AudioDeviceManager()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a9a04a7a0ffc1320123152d9b62c31a66} 
+Beam::\+\+Audio\+Device\+Manager::\+\+Audio\+Device\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a9b897b43315c9639a308175a2a031d61}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!````~AudioDeviceManager@{\texorpdfstring{$\sim$}{\string~}AudioDeviceManager}}
+\index{````~AudioDeviceManager@{\texorpdfstring{$\sim$}{\string~}AudioDeviceManager}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AudioDeviceManager()}{\string~AudioDeviceManager()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a9b897b43315c9639a308175a2a031d61} 
+Beam::\+\+Audio\+Device\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Audio\+Device\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_audio_device_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_audio_device_manager_adb352085db8d068ce1f9377b5b45cf41}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!getAvailableInputDevices@{getAvailableInputDevices}}
+\index{getAvailableInputDevices@{getAvailableInputDevices}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{getAvailableInputDevices()}{getAvailableInputDevices()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_adb352085db8d068ce1f9377b5b45cf41} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_audio_device_info}{Audio\+Device\+Info}} $>$ Beam::\+\+Audio\+Device\+Manager::\+get\+Available\+Input\+Devices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a list of available input devices. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a5c9a75f931952a669030f2f857ec7ad4}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!getAvailableOutputDevices@{getAvailableOutputDevices}}
+\index{getAvailableOutputDevices@{getAvailableOutputDevices}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{getAvailableOutputDevices()}{getAvailableOutputDevices()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a5c9a75f931952a669030f2f857ec7ad4} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_audio_device_info}{Audio\+Device\+Info}} $>$ Beam::\+\+Audio\+Device\+Manager::\+get\+Available\+Output\+Devices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a list of available output devices. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ac0fe3ed1cb2a41923d9a425a698e5cf6}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!getCurrentBufferSizeSamples@{getCurrentBufferSizeSamples}}
+\index{getCurrentBufferSizeSamples@{getCurrentBufferSizeSamples}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentBufferSizeSamples()}{getCurrentBufferSizeSamples()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ac0fe3ed1cb2a41923d9a425a698e5cf6} 
+int Beam::\+\+Audio\+Device\+Manager::\+get\+Current\+Buffer\+Size\+Samples (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block size. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a63164a22008735b5b36a2dc9c6c5d521}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!getCurrentDeviceSetup@{getCurrentDeviceSetup}}
+\index{getCurrentDeviceSetup@{getCurrentDeviceSetup}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentDeviceSetup()}{getCurrentDeviceSetup()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a63164a22008735b5b36a2dc9c6c5d521} 
+\doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} Beam::\+\+Audio\+Device\+Manager::\+get\+Current\+Device\+Setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current device setup. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a73e3a8cea55888afb28ae26bee4bb097}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!getCurrentSampleRate@{getCurrentSampleRate}}
+\index{getCurrentSampleRate@{getCurrentSampleRate}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentSampleRate()}{getCurrentSampleRate()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a73e3a8cea55888afb28ae26bee4bb097} 
+double Beam::\+\+Audio\+Device\+Manager::\+get\+Current\+Sample\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current sample rate. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ac2f1820ef1c285f957a22c01c309ce47}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!initialise@{initialise}}
+\index{initialise@{initialise}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ac2f1820ef1c285f957a22c01c309ce47} 
+int Beam::\+\+Audio\+Device\+Manager::\+initialise (\begin{DoxyParamCaption}\item[{int}]{num\+Input\+Channels\+Needed}{, }\item[{int}]{num\+Output\+Channels\+Needed}{, }\item[{const \doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} \texorpdfstring{$\ast$}{*}}]{preferred\+Setup}{ = {\ttfamily nullptr}, }\item[{bool}]{select\+Default\+Device\+On\+Failure}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Initializes the audio device manager. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ad6dd75b4831e8122a4dea3973d870ec3}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!isAudioRunning@{isAudioRunning}}
+\index{isAudioRunning@{isAudioRunning}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{isAudioRunning()}{isAudioRunning()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ad6dd75b4831e8122a4dea3973d870ec3} 
+bool Beam::\+\+Audio\+Device\+Manager::\+is\+Audio\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if audio is currently running. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_abbb9b08f8cf14312ae4c97805037fa26}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!setAudioCallback@{setAudioCallback}}
+\index{setAudioCallback@{setAudioCallback}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{setAudioCallback()}{setAudioCallback()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_abbb9b08f8cf14312ae4c97805037fa26} 
+void Beam::\+\+Audio\+Device\+Manager::\+set\+Audio\+Callback (\begin{DoxyParamCaption}\item[{std::\+function$<$ void(float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, int, int, int, double)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the audio callback. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ae48b8b030b046121a00f66d451b53c2c}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!setCurrentAudioDevice@{setCurrentAudioDevice}}
+\index{setCurrentAudioDevice@{setCurrentAudioDevice}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{setCurrentAudioDevice()}{setCurrentAudioDevice()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ae48b8b030b046121a00f66d451b53c2c} 
+int Beam::\+\+Audio\+Device\+Manager::\+set\+Current\+Audio\+Device (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{output\+Device\+Name}{, }\item[{const std::\+string \&}]{output\+Device\+Id}{, }\item[{const std::\+string \&}]{input\+Device\+Name}{, }\item[{const std::\+string \&}]{input\+Device\+Id}{, }\item[{double}]{sample\+Rate}{, }\item[{int}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Sets the current audio device. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a0bb774a182b11b77fee7252be4070eae}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!startAudio@{startAudio}}
+\index{startAudio@{startAudio}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{startAudio()}{startAudio()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a0bb774a182b11b77fee7252be4070eae} 
+int Beam::\+\+Audio\+Device\+Manager::\+start\+Audio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the audio stream. 
+
+\Hypertarget{class_beam_1_1_audio_device_manager_a7acb3781fec8511e5aab3dc042c78c64}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!stopAudio@{stopAudio}}
+\index{stopAudio@{stopAudio}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{stopAudio()}{stopAudio()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a7acb3781fec8511e5aab3dc042c78c64} 
+void Beam::\+\+Audio\+Device\+Manager::\+stop\+Audio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the audio stream. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_audio_device_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_audio_device_manager_a51b4a88bb21309c8e830310064672cfd}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!m\_audioCallback@{m\_audioCallback}}
+\index{m\_audioCallback@{m\_audioCallback}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{m\_audioCallback}{m\_audioCallback}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_a51b4a88bb21309c8e830310064672cfd} 
+std::\+function$<$void(float\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, int, int, int, double)$>$ Beam::\+\+Audio\+Device\+Manager::\+m\+\_\+audio\+Callback\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ac6fd1663b68d22105f5a18ac01b11c7d}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!m\_deviceSetup@{m\_deviceSetup}}
+\index{m\_deviceSetup@{m\_deviceSetup}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{m\_deviceSetup}{m\_deviceSetup}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ac6fd1663b68d22105f5a18ac01b11c7d} 
+\doxymbox{\hyperlink{struct_beam_1_1_audio_device_setup}{Audio\+Device\+Setup}} Beam::\+\+Audio\+Device\+Manager::\+m\+\_\+device\+Setup\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_audio_device_manager_ae560d602be900a9725278496efb94453}\index{Beam::AudioDeviceManager@{Beam::AudioDeviceManager}!m\_isRunning@{m\_isRunning}}
+\index{m\_isRunning@{m\_isRunning}!Beam::AudioDeviceManager@{Beam::AudioDeviceManager}}
+\doxysubsubsection{\texorpdfstring{m\_isRunning}{m\_isRunning}}
+{\footnotesize\ttfamily \label{class_beam_1_1_audio_device_manager_ae560d602be900a9725278496efb94453} 
+bool Beam::\+\+Audio\+Device\+Manager::\+m\+\_\+is\+Running = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__device__manager_8hpp}{audio\+\_\+device\+\_\+manager.\+hpp}}\item 
+src/\+engine/\+\doxymbox{\hyperlink{audio__device__manager_8cpp}{audio\+\_\+device\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

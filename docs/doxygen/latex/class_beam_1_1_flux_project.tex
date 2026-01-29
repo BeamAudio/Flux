@@ -11,6 +11,10 @@
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a0b32e6b040ba09486e7a5a5110866186}{get\+Graph}} ()
 \item 
+void \doxymbox{\hyperlink{class_beam_1_1_flux_project_a1999a9b5e6df6714b52065c697d6d344}{add\+Track}} (\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} td)
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} $>$ \& \doxymbox{\hyperlink{class_beam_1_1_flux_project_ac467fd8ce5f1a101fdd23634a7b8b990}{get\+Tracks}} ()
+\item 
 nlohmann::\+json \doxymbox{\hyperlink{class_beam_1_1_flux_project_af0a110ba7c7ce45506fb9e243b6784b5}{serialize}} () const
 \item 
 void \doxymbox{\hyperlink{class_beam_1_1_flux_project_aa4a811a39323d92c97654ccc34c09379}{deserialize}} (const nlohmann::\+json \&data)
@@ -21,6 +25,8 @@ void \doxymbox{\hyperlink{class_beam_1_1_flux_project_aa4a811a39323d92c97654ccc3
 std::\+string \doxymbox{\hyperlink{class_beam_1_1_flux_project_a8ce6b8f232de62bb34f903f04acc8506}{m\+\_\+name}} = "{}Untitled Flux"{}
 \item 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a24511ed71344a5e3028b204376aab334}{m\+\_\+graph}}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} $>$ \doxymbox{\hyperlink{class_beam_1_1_flux_project_a99e25b294a814550c79e1d037983094b}{m\+\_\+tracks}}
 \end{DoxyCompactItemize}
 
 
@@ -38,6 +44,12 @@ Beam::\+\+Flux\+Project::\+\+Flux\+Project (\begin{DoxyParamCaption}{}{}\end{Dox
 \label{doc-func-members}
 \Hypertarget{class_beam_1_1_flux_project_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_flux_project_a1999a9b5e6df6714b52065c697d6d344}\index{Beam::FluxProject@{Beam::FluxProject}!addTrack@{addTrack}}
+\index{addTrack@{addTrack}!Beam::FluxProject@{Beam::FluxProject}}
+\doxysubsubsection{\texorpdfstring{addTrack()}{addTrack()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_project_a1999a9b5e6df6714b52065c697d6d344} 
+void Beam::\+\+Flux\+Project::\+add\+Track (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}}}]{td}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{class_beam_1_1_flux_project_aa4a811a39323d92c97654ccc34c09379}\index{Beam::FluxProject@{Beam::FluxProject}!deserialize@{deserialize}}
 \index{deserialize@{deserialize}!Beam::FluxProject@{Beam::FluxProject}}
 \doxysubsubsection{\texorpdfstring{deserialize()}{deserialize()}}
@@ -49,6 +61,12 @@ void Beam::\+\+Flux\+Project::\+deserialize (\begin{DoxyParamCaption}\item[{cons
 \doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_project_a0b32e6b040ba09486e7a5a5110866186} 
 std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+Graph}} $>$ Beam::\+\+Flux\+Project::\+get\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_flux_project_ac467fd8ce5f1a101fdd23634a7b8b990}\index{Beam::FluxProject@{Beam::FluxProject}!getTracks@{getTracks}}
+\index{getTracks@{getTracks}!Beam::FluxProject@{Beam::FluxProject}}
+\doxysubsubsection{\texorpdfstring{getTracks()}{getTracks()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_project_ac467fd8ce5f1a101fdd23634a7b8b990} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}} $>$ \& Beam::\+\+Flux\+Project::\+get\+Tracks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_beam_1_1_flux_project_af0a110ba7c7ce45506fb9e243b6784b5}\index{Beam::FluxProject@{Beam::FluxProject}!serialize@{serialize}}
 \index{serialize@{serialize}!Beam::FluxProject@{Beam::FluxProject}}
@@ -73,8 +91,14 @@ std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_flux_graph}{Flux\+G
 {\footnotesize\ttfamily \label{class_beam_1_1_flux_project_a8ce6b8f232de62bb34f903f04acc8506} 
 std::\+string Beam::\+\+Flux\+Project::\+m\+\_\+name = "{}Untitled Flux"{}\hspace{0.3cm}{\ttfamily [private]}}
 
+\Hypertarget{class_beam_1_1_flux_project_a99e25b294a814550c79e1d037983094b}\index{Beam::FluxProject@{Beam::FluxProject}!m\_tracks@{m\_tracks}}
+\index{m\_tracks@{m\_tracks}!Beam::FluxProject@{Beam::FluxProject}}
+\doxysubsubsection{\texorpdfstring{m\_tracks}{m\_tracks}}
+{\footnotesize\ttfamily \label{class_beam_1_1_flux_project_a99e25b294a814550c79e1d037983094b} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_beam_1_1_track_data}{Track\+Data}}$>$ Beam::\+\+Flux\+Project::\+m\+\_\+tracks\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-src/\+core/\+\doxymbox{\hyperlink{flux__project_8hpp}{flux\+\_\+project.\+hpp}}\end{DoxyCompactItemize}
+src/\+session/\+\doxymbox{\hyperlink{flux__project_8hpp}{flux\+\_\+project.\+hpp}}\end{DoxyCompactItemize}

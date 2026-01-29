@@ -1,0 +1,112 @@
+\doxysection{Beam::\+Analog\+Base::\+Wow\+Flutter\+Generator Class Reference}
+\hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator}{}\label{class_beam_1_1_analog_base_1_1_wow_flutter_generator}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+
+
+Generates physical tape speed fluctuations.  
+
+
+
+
+{\ttfamily \+\#include $<$analog\+\_\+base.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a21a4ea7345e590bd5ec7ff859d4098e5}{Wow\+Flutter\+Generator}} (float sample\+Rate)
+\item 
+void \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a4466d9a5a8b28e0710a2d1243b2d4cdd}{set\+Intensity}} (float wow, float flutter)
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ac2f900604d5757f79382940da5448765}{next}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a70eea959271d10f748eba7cba326fb75}{m\+\_\+sample\+Rate}}
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a27e7ed8f25a051a95d6bbcf5e183706e}{m\+\_\+wow\+Depth}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a3261a050317fd9ff64b63f0070f3c739}{m\+\_\+flutter\+Depth}} = 0.\+0f
+\item 
+float \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a8a795c38bb2b81427fe4d7b29ffa054e}{m\+\_\+wow\+Phase}} = 0.\+0f
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{One\+Pole\+Filter}} \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ab99ec737da74f383a2c1d3b65f24d85b}{m\+\_\+flutter\+LP}}
+\item 
+std::\+mt19937 \doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ad7381452afa60d0c5f2707fa7580c707}{m\+\_\+rng}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generates physical tape speed fluctuations. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a21a4ea7345e590bd5ec7ff859d4098e5}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!WowFlutterGenerator@{WowFlutterGenerator}}
+\index{WowFlutterGenerator@{WowFlutterGenerator}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{WowFlutterGenerator()}{WowFlutterGenerator()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a21a4ea7345e590bd5ec7ff859d4098e5} 
+Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+\+Wow\+Flutter\+Generator (\begin{DoxyParamCaption}\item[{float}]{sample\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ac2f900604d5757f79382940da5448765}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!next@{next}}
+\index{next@{next}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ac2f900604d5757f79382940da5448765} 
+float Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a4466d9a5a8b28e0710a2d1243b2d4cdd}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!setIntensity@{setIntensity}}
+\index{setIntensity@{setIntensity}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{setIntensity()}{setIntensity()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a4466d9a5a8b28e0710a2d1243b2d4cdd} 
+void Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+set\+Intensity (\begin{DoxyParamCaption}\item[{float}]{wow}{, }\item[{float}]{flutter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a3261a050317fd9ff64b63f0070f3c739}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_flutterDepth@{m\_flutterDepth}}
+\index{m\_flutterDepth@{m\_flutterDepth}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_flutterDepth}{m\_flutterDepth}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a3261a050317fd9ff64b63f0070f3c739} 
+float Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+flutter\+Depth = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ab99ec737da74f383a2c1d3b65f24d85b}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_flutterLP@{m\_flutterLP}}
+\index{m\_flutterLP@{m\_flutterLP}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_flutterLP}{m\_flutterLP}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ab99ec737da74f383a2c1d3b65f24d85b} 
+\doxymbox{\hyperlink{class_beam_1_1_analog_base_1_1_one_pole_filter}{One\+Pole\+Filter}} Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+flutter\+LP\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ad7381452afa60d0c5f2707fa7580c707}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_rng@{m\_rng}}
+\index{m\_rng@{m\_rng}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_rng}{m\_rng}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_ad7381452afa60d0c5f2707fa7580c707} 
+std::\+mt19937 Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+rng\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a70eea959271d10f748eba7cba326fb75}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_sampleRate@{m\_sampleRate}}
+\index{m\_sampleRate@{m\_sampleRate}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_sampleRate}{m\_sampleRate}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a70eea959271d10f748eba7cba326fb75} 
+float Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+sample\+Rate\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a27e7ed8f25a051a95d6bbcf5e183706e}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_wowDepth@{m\_wowDepth}}
+\index{m\_wowDepth@{m\_wowDepth}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_wowDepth}{m\_wowDepth}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a27e7ed8f25a051a95d6bbcf5e183706e} 
+float Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+wow\+Depth = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a8a795c38bb2b81427fe4d7b29ffa054e}\index{Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}!m\_wowPhase@{m\_wowPhase}}
+\index{m\_wowPhase@{m\_wowPhase}!Beam::AnalogBase::WowFlutterGenerator@{Beam::AnalogBase::WowFlutterGenerator}}
+\doxysubsubsection{\texorpdfstring{m\_wowPhase}{m\_wowPhase}}
+{\footnotesize\ttfamily \label{class_beam_1_1_analog_base_1_1_wow_flutter_generator_a8a795c38bb2b81427fe4d7b29ffa054e} 
+float Beam::\+\+Analog\+Base::\+\+Wow\+Flutter\+Generator::\+m\+\_\+wow\+Phase = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+engine/\+\doxymbox{\hyperlink{analog__base_8hpp}{analog\+\_\+base.\+hpp}}\end{DoxyCompactItemize}

@@ -16,7 +16,7 @@ public:
         if (level > m_level) m_level = level; 
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         // Smooth decay
         m_level -= 1.5f * dt;
         if (m_level < 0.0f) m_level = 0.0f;
@@ -50,6 +50,9 @@ private:
 } // namespace Beam
 
 #endif // VU_METER_HPP
+
+
+
 
 
 

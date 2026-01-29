@@ -1,0 +1,125 @@
+\doxysection{Beam::\+Asset\+Manager Class Reference}
+\hypertarget{class_beam_1_1_asset_manager}{}\label{class_beam_1_1_asset_manager}\index{Beam::AssetManager@{Beam::AssetManager}}
+
+
+Centralized repository for sharing heavy resources like Textures.  
+
+
+
+
+{\ttfamily \+\#include $<$asset\+\_\+manager.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_texture}{Texture}} $>$ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_aaf454d89d7fcbc66b3cc17fb88a255df}{get\+Texture}} (const std::\+string \&path)
+\begin{DoxyCompactList}\small\item\em Retrieves a texture from the cache or loads it if not present. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a58e74758db894a4e67e9dcab535141c8}{purge\+Unused}} ()
+\begin{DoxyCompactList}\small\item\em Removes unused assets from the cache. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a2617c12bc85f81dc36713b8392982042}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the entire asset cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{Asset\+Manager}} \& \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a0f695c5457caab2dc9ae9e605e16cacb}{instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{Asset\+Manager}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+map$<$ std::\+string, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_texture}{Texture}} $>$ $>$ \doxymbox{\hyperlink{class_beam_1_1_asset_manager_af30e6eb2be3d4f729dd496f5032eed3d}{m\+\_\+textures}}
+\item 
+std::\+mutex \doxymbox{\hyperlink{class_beam_1_1_asset_manager_a4d8ecae42f01c83beba10a088f1faeef}{m\+\_\+mutex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Centralized repository for sharing heavy resources like Textures. 
+
+The \doxylink{class_beam_1_1_asset_manager}{Asset\+Manager} ensures that any given file is loaded into memory/\+\+GPU only once. It uses a reference-\/counted approach (std::\+shared\+\_\+ptr) to manage asset lifecycles. 
+
+\label{doc-constructors}
+\Hypertarget{class_beam_1_1_asset_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}\index{Beam::AssetManager@{Beam::AssetManager}!AssetManager@{AssetManager}}
+\index{AssetManager@{AssetManager}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{AssetManager()}{AssetManager()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87} 
+Beam::\+\+Asset\+Manager::\+\+Asset\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_beam_1_1_asset_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_beam_1_1_asset_manager_a2617c12bc85f81dc36713b8392982042}\index{Beam::AssetManager@{Beam::AssetManager}!clear@{clear}}
+\index{clear@{clear}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_a2617c12bc85f81dc36713b8392982042} 
+void Beam::\+\+Asset\+Manager::\+clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the entire asset cache. 
+
+\Hypertarget{class_beam_1_1_asset_manager_aaf454d89d7fcbc66b3cc17fb88a255df}\index{Beam::AssetManager@{Beam::AssetManager}!getTexture@{getTexture}}
+\index{getTexture@{getTexture}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{getTexture()}{getTexture()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_aaf454d89d7fcbc66b3cc17fb88a255df} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_beam_1_1_texture}{Texture}} $>$ Beam::\+\+Asset\+Manager::\+get\+Texture (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves a texture from the cache or loads it if not present. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The filesystem path to the texture file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A shared pointer to the \doxylink{class_beam_1_1_texture}{Texture} object, or nullptr if loading fails. 
+\end{DoxyReturn}
+\Hypertarget{class_beam_1_1_asset_manager_a0f695c5457caab2dc9ae9e605e16cacb}\index{Beam::AssetManager@{Beam::AssetManager}!instance@{instance}}
+\index{instance@{instance}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_a0f695c5457caab2dc9ae9e605e16cacb} 
+\doxymbox{\hyperlink{class_beam_1_1_asset_manager_abb8b8d9b05b34af657919ddafc91ca87}{Asset\+Manager}} \& Beam::\+\+Asset\+Manager::\+instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_beam_1_1_asset_manager_a58e74758db894a4e67e9dcab535141c8}\index{Beam::AssetManager@{Beam::AssetManager}!purgeUnused@{purgeUnused}}
+\index{purgeUnused@{purgeUnused}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{purgeUnused()}{purgeUnused()}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_a58e74758db894a4e67e9dcab535141c8} 
+void Beam::\+\+Asset\+Manager::\+purge\+Unused (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Removes unused assets from the cache. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_beam_1_1_asset_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_beam_1_1_asset_manager_a4d8ecae42f01c83beba10a088f1faeef}\index{Beam::AssetManager@{Beam::AssetManager}!m\_mutex@{m\_mutex}}
+\index{m\_mutex@{m\_mutex}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{m\_mutex}{m\_mutex}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_a4d8ecae42f01c83beba10a088f1faeef} 
+std::\+mutex Beam::\+\+Asset\+Manager::\+m\+\_\+mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_beam_1_1_asset_manager_af30e6eb2be3d4f729dd496f5032eed3d}\index{Beam::AssetManager@{Beam::AssetManager}!m\_textures@{m\_textures}}
+\index{m\_textures@{m\_textures}!Beam::AssetManager@{Beam::AssetManager}}
+\doxysubsubsection{\texorpdfstring{m\_textures}{m\_textures}}
+{\footnotesize\ttfamily \label{class_beam_1_1_asset_manager_af30e6eb2be3d4f729dd496f5032eed3d} 
+std::\+map$<$std::\+string, std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_beam_1_1_texture}{Texture}}$>$ $>$ Beam::\+\+Asset\+Manager::\+m\+\_\+textures\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+session/\+\doxymbox{\hyperlink{asset__manager_8hpp}{asset\+\_\+manager.\+hpp}}\item 
+src/\+session/\+\doxymbox{\hyperlink{asset__manager_8cpp}{asset\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

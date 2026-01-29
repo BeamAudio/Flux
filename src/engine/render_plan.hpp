@@ -2,6 +2,7 @@
 #define RENDER_PLAN_HPP
 
 #include "flux_node.hpp"
+#include "analog_base.hpp"
 #include <vector>
 #include <memory>
 #include <atomic>
@@ -37,6 +38,9 @@ struct RenderPlan {
 } // namespace Beam
 
 #endif // RENDER_PLAN_HPP
+
+
+
 
 
 

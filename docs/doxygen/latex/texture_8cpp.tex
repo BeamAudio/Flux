@@ -1,0 +1,267 @@
+\doxysection{src/\+render/\+texture.cpp File Reference}
+\hypertarget{texture_8cpp}{}\label{texture_8cpp}\index{src/render/texture.cpp@{src/render/texture.cpp}}
+{\ttfamily \+\#include "{}texture.\+hpp"{}}\newline
+{\ttfamily \+\#include $<$SDL3/\+\+SDL.\+h$>$}\newline
+{\ttfamily \+\#include $<$iostream$>$}\newline
+{\ttfamily \+\#include "{}../\+../\+third\+\_\+party/\+glad.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_beam}{Beam}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a9f2854f4a91a0d83d2d54cb8110bfca4}{GL\+\_\+\+RGBA}}~0x1908
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a69f1c49996aca30177171c7b086cfb34}{GL\+\_\+\+RGB}}~0x1907
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a80a33c79f69417372d65d2a65ca36d49}{GL\+\_\+\+UNSIGNED\+\_\+\+BYTE}}~0x1401
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_ad4de17abefa73fa2ef53379f73b734be}{GL\+\_\+\+TEXTURE\+\_\+2D}}~0x0\+DE1
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a23a0bc2909cc2f79fe7287aaa044e880}{GL\+\_\+\+TEXTURE\+\_\+\+WRAP\+\_\+S}}~0x2802
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_ac307a4772e1d3decd5b6f36192113ab6}{GL\+\_\+\+TEXTURE\+\_\+\+WRAP\+\_\+T}}~0x2803
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a173a2b2453322dd8d613df6cf2e72480}{GL\+\_\+\+TEXTURE\+\_\+\+MIN\+\_\+\+FILTER}}~0x2801
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_acb47a41b5963d44826f44b7370bccc26}{GL\+\_\+\+TEXTURE\+\_\+\+MAG\+\_\+\+FILTER}}~0x2800
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a4e682f218130b98b27a1e33fa7325080}{GL\+\_\+\+LINEAR}}~0x2601
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_ae90f81f48642444b4ba7fa5cacf40569}{GL\+\_\+\+CLAMP\+\_\+\+TO\+\_\+\+EDGE}}~0x812F
+\item 
+\+\#define \doxymbox{\hyperlink{texture_8cpp_a16cc91096144fc7048b45e2add14915b}{GL\+\_\+\+TEXTURE0}}~0x84\+C0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}}
+\item 
+typedef unsigned int \doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}}
+\item 
+typedef int \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}}
+\item 
+typedef int \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_ae9ae3913da3118e0d0ecb4d1f83508e4}{\+\_\+\+\_\+declspec}} (dllimport) void \+\_\+\+\_\+stdcall gl\+Gen\+Textures(\doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} n
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{texture_8cpp_a758619ac94a9cf2d7f06037c5fb56b09}{textures}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}} \doxymbox{\hyperlink{texture_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}{texture}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143}{level}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a194b35664fe2dbbe8295e67f5692162c}{internalformat}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a8710f3c5c66c09e158c8619b3fca614a}{width}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a1055637f17e35a0ca82b396bb94914e5}{height}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a4aa3eaf5a240f1edb13aad4f1bf8c73f}{border}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_af32a7948195084e10cd10c29f1053480}{format}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa}{type}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} const void \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{texture_8cpp_ae63d6cfe6626d63100fa779adacb5739}{pixels}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a9288d4df6dff3c799a255196c8c493fb}{pname}}
+\item 
+\doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}{param}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{texture_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{texture_8cpp_ae90f81f48642444b4ba7fa5cacf40569}\index{texture.cpp@{texture.cpp}!GL\_CLAMP\_TO\_EDGE@{GL\_CLAMP\_TO\_EDGE}}
+\index{GL\_CLAMP\_TO\_EDGE@{GL\_CLAMP\_TO\_EDGE}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_CLAMP\_TO\_EDGE}{GL\_CLAMP\_TO\_EDGE}}
+{\footnotesize\ttfamily \label{texture_8cpp_ae90f81f48642444b4ba7fa5cacf40569} 
+\+\#define GL\+\_\+\+CLAMP\+\_\+\+TO\+\_\+\+EDGE~0x812F}
+
+\Hypertarget{texture_8cpp_a4e682f218130b98b27a1e33fa7325080}\index{texture.cpp@{texture.cpp}!GL\_LINEAR@{GL\_LINEAR}}
+\index{GL\_LINEAR@{GL\_LINEAR}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_LINEAR}{GL\_LINEAR}}
+{\footnotesize\ttfamily \label{texture_8cpp_a4e682f218130b98b27a1e33fa7325080} 
+\+\#define GL\+\_\+\+LINEAR~0x2601}
+
+\Hypertarget{texture_8cpp_a69f1c49996aca30177171c7b086cfb34}\index{texture.cpp@{texture.cpp}!GL\_RGB@{GL\_RGB}}
+\index{GL\_RGB@{GL\_RGB}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_RGB}{GL\_RGB}}
+{\footnotesize\ttfamily \label{texture_8cpp_a69f1c49996aca30177171c7b086cfb34} 
+\+\#define GL\+\_\+\+RGB~0x1907}
+
+\Hypertarget{texture_8cpp_a9f2854f4a91a0d83d2d54cb8110bfca4}\index{texture.cpp@{texture.cpp}!GL\_RGBA@{GL\_RGBA}}
+\index{GL\_RGBA@{GL\_RGBA}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_RGBA}{GL\_RGBA}}
+{\footnotesize\ttfamily \label{texture_8cpp_a9f2854f4a91a0d83d2d54cb8110bfca4} 
+\+\#define GL\+\_\+\+RGBA~0x1908}
+
+\Hypertarget{texture_8cpp_a16cc91096144fc7048b45e2add14915b}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE0@{GL\_TEXTURE0}}
+\index{GL\_TEXTURE0@{GL\_TEXTURE0}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE0}{GL\_TEXTURE0}}
+{\footnotesize\ttfamily \label{texture_8cpp_a16cc91096144fc7048b45e2add14915b} 
+\+\#define GL\+\_\+\+TEXTURE0~0x84\+C0}
+
+\Hypertarget{texture_8cpp_ad4de17abefa73fa2ef53379f73b734be}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE\_2D@{GL\_TEXTURE\_2D}}
+\index{GL\_TEXTURE\_2D@{GL\_TEXTURE\_2D}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE\_2D}{GL\_TEXTURE\_2D}}
+{\footnotesize\ttfamily \label{texture_8cpp_ad4de17abefa73fa2ef53379f73b734be} 
+\+\#define GL\+\_\+\+TEXTURE\+\_\+2D~0x0\+DE1}
+
+\Hypertarget{texture_8cpp_acb47a41b5963d44826f44b7370bccc26}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE\_MAG\_FILTER@{GL\_TEXTURE\_MAG\_FILTER}}
+\index{GL\_TEXTURE\_MAG\_FILTER@{GL\_TEXTURE\_MAG\_FILTER}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE\_MAG\_FILTER}{GL\_TEXTURE\_MAG\_FILTER}}
+{\footnotesize\ttfamily \label{texture_8cpp_acb47a41b5963d44826f44b7370bccc26} 
+\+\#define GL\+\_\+\+TEXTURE\+\_\+\+MAG\+\_\+\+FILTER~0x2800}
+
+\Hypertarget{texture_8cpp_a173a2b2453322dd8d613df6cf2e72480}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE\_MIN\_FILTER@{GL\_TEXTURE\_MIN\_FILTER}}
+\index{GL\_TEXTURE\_MIN\_FILTER@{GL\_TEXTURE\_MIN\_FILTER}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE\_MIN\_FILTER}{GL\_TEXTURE\_MIN\_FILTER}}
+{\footnotesize\ttfamily \label{texture_8cpp_a173a2b2453322dd8d613df6cf2e72480} 
+\+\#define GL\+\_\+\+TEXTURE\+\_\+\+MIN\+\_\+\+FILTER~0x2801}
+
+\Hypertarget{texture_8cpp_a23a0bc2909cc2f79fe7287aaa044e880}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE\_WRAP\_S@{GL\_TEXTURE\_WRAP\_S}}
+\index{GL\_TEXTURE\_WRAP\_S@{GL\_TEXTURE\_WRAP\_S}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE\_WRAP\_S}{GL\_TEXTURE\_WRAP\_S}}
+{\footnotesize\ttfamily \label{texture_8cpp_a23a0bc2909cc2f79fe7287aaa044e880} 
+\+\#define GL\+\_\+\+TEXTURE\+\_\+\+WRAP\+\_\+S~0x2802}
+
+\Hypertarget{texture_8cpp_ac307a4772e1d3decd5b6f36192113ab6}\index{texture.cpp@{texture.cpp}!GL\_TEXTURE\_WRAP\_T@{GL\_TEXTURE\_WRAP\_T}}
+\index{GL\_TEXTURE\_WRAP\_T@{GL\_TEXTURE\_WRAP\_T}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_TEXTURE\_WRAP\_T}{GL\_TEXTURE\_WRAP\_T}}
+{\footnotesize\ttfamily \label{texture_8cpp_ac307a4772e1d3decd5b6f36192113ab6} 
+\+\#define GL\+\_\+\+TEXTURE\+\_\+\+WRAP\+\_\+T~0x2803}
+
+\Hypertarget{texture_8cpp_a80a33c79f69417372d65d2a65ca36d49}\index{texture.cpp@{texture.cpp}!GL\_UNSIGNED\_BYTE@{GL\_UNSIGNED\_BYTE}}
+\index{GL\_UNSIGNED\_BYTE@{GL\_UNSIGNED\_BYTE}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GL\_UNSIGNED\_BYTE}{GL\_UNSIGNED\_BYTE}}
+{\footnotesize\ttfamily \label{texture_8cpp_a80a33c79f69417372d65d2a65ca36d49} 
+\+\#define GL\+\_\+\+UNSIGNED\+\_\+\+BYTE~0x1401}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{texture_8cpp_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}\index{texture.cpp@{texture.cpp}!GLenum@{GLenum}}
+\index{GLenum@{GLenum}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GLenum}{GLenum}}
+{\footnotesize\ttfamily \label{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0} 
+typedef unsigned int \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}}}
+
+\Hypertarget{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}\index{texture.cpp@{texture.cpp}!GLint@{GLint}}
+\index{GLint@{GLint}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GLint}{GLint}}
+{\footnotesize\ttfamily \label{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017} 
+typedef int \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}}}
+
+\Hypertarget{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}\index{texture.cpp@{texture.cpp}!GLsizei@{GLsizei}}
+\index{GLsizei@{GLsizei}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GLsizei}{GLsizei}}
+{\footnotesize\ttfamily \label{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0} 
+typedef int \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}}}
+
+\Hypertarget{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}\index{texture.cpp@{texture.cpp}!GLuint@{GLuint}}
+\index{GLuint@{GLuint}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{GLuint}{GLuint}}
+{\footnotesize\ttfamily \label{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b} 
+typedef unsigned int \doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{texture_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{texture_8cpp_ae9ae3913da3118e0d0ecb4d1f83508e4}\index{texture.cpp@{texture.cpp}!\_\_declspec@{\_\_declspec}}
+\index{\_\_declspec@{\_\_declspec}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_declspec()}{\_\_declspec()}}
+{\footnotesize\ttfamily \label{texture_8cpp_ae9ae3913da3118e0d0ecb4d1f83508e4} 
+\+\_\+\+\_\+declspec (\begin{DoxyParamCaption}\item[{dllimport}]{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{texture_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{texture_8cpp_a4aa3eaf5a240f1edb13aad4f1bf8c73f}\index{texture.cpp@{texture.cpp}!border@{border}}
+\index{border@{border}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{border}{border}}
+{\footnotesize\ttfamily \label{texture_8cpp_a4aa3eaf5a240f1edb13aad4f1bf8c73f} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} border}
+
+\Hypertarget{texture_8cpp_af32a7948195084e10cd10c29f1053480}\index{texture.cpp@{texture.cpp}!format@{format}}
+\index{format@{format}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{format}{format}}
+{\footnotesize\ttfamily \label{texture_8cpp_af32a7948195084e10cd10c29f1053480} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} format}
+
+\Hypertarget{texture_8cpp_a1055637f17e35a0ca82b396bb94914e5}\index{texture.cpp@{texture.cpp}!height@{height}}
+\index{height@{height}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily \label{texture_8cpp_a1055637f17e35a0ca82b396bb94914e5} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} height}
+
+\Hypertarget{texture_8cpp_a194b35664fe2dbbe8295e67f5692162c}\index{texture.cpp@{texture.cpp}!internalformat@{internalformat}}
+\index{internalformat@{internalformat}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{internalformat}{internalformat}}
+{\footnotesize\ttfamily \label{texture_8cpp_a194b35664fe2dbbe8295e67f5692162c} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} internalformat}
+
+\Hypertarget{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143}\index{texture.cpp@{texture.cpp}!level@{level}}
+\index{level@{level}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily \label{texture_8cpp_aac6e8d3b3465804e2be1198b2a2a3143} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} level}
+
+\Hypertarget{texture_8cpp_aaded45152436a99bb4f9bda081df9f69}\index{texture.cpp@{texture.cpp}!param@{param}}
+\index{param@{param}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{param}{param}}
+{\footnotesize\ttfamily \label{texture_8cpp_aaded45152436a99bb4f9bda081df9f69} 
+\doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} param}
+
+\Hypertarget{texture_8cpp_ae63d6cfe6626d63100fa779adacb5739}\index{texture.cpp@{texture.cpp}!pixels@{pixels}}
+\index{pixels@{pixels}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{pixels}{pixels}}
+{\footnotesize\ttfamily \label{texture_8cpp_ae63d6cfe6626d63100fa779adacb5739} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} const void\texorpdfstring{$\ast$}{*} pixels}
+
+\Hypertarget{texture_8cpp_a9288d4df6dff3c799a255196c8c493fb}\index{texture.cpp@{texture.cpp}!pname@{pname}}
+\index{pname@{pname}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{pname}{pname}}
+{\footnotesize\ttfamily \label{texture_8cpp_a9288d4df6dff3c799a255196c8c493fb} 
+\doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} pname}
+
+\Hypertarget{texture_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}\index{texture.cpp@{texture.cpp}!texture@{texture}}
+\index{texture@{texture}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily \label{texture_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0} 
+\doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}} texture}
+
+\Hypertarget{texture_8cpp_a758619ac94a9cf2d7f06037c5fb56b09}\index{texture.cpp@{texture.cpp}!textures@{textures}}
+\index{textures@{textures}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{textures}{textures}}
+{\footnotesize\ttfamily \label{texture_8cpp_a758619ac94a9cf2d7f06037c5fb56b09} 
+const \doxymbox{\hyperlink{texture_8cpp_aa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}} \texorpdfstring{$\ast$}{*} textures}
+
+\Hypertarget{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa}\index{texture.cpp@{texture.cpp}!type@{type}}
+\index{type@{type}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{texture_8cpp_ad9d356d2dd3763f53f907d0f196e48fa} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} \doxymbox{\hyperlink{texture_8cpp_a7efd7809e1632cdae75603fd1fee61c0}{GLenum}} type}
+
+\Hypertarget{texture_8cpp_a8710f3c5c66c09e158c8619b3fca614a}\index{texture.cpp@{texture.cpp}!width@{width}}
+\index{width@{width}!texture.cpp@{texture.cpp}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily \label{texture_8cpp_a8710f3c5c66c09e158c8619b3fca614a} 
+\doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a5ac0f3c4d7fafd42b284b5487a791017}{GLint}} \doxymbox{\hyperlink{texture_8cpp_a9289d5b99dc1f27f01480360f2e18ae0}{GLsizei}} width}
+

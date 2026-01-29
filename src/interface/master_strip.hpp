@@ -45,13 +45,13 @@ public:
         return false;
     }
 
-    void render(QuadBatcher& batcher, float dt) override {
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 5.0f, 1.0f, 0.15f, 0.15f, 0.16f, 1.0f);
         
         if (m_masterNode) {
             m_vuMeter->setLevel(m_masterNode->getPeakLevel());
         }
-        m_vuMeter->render(batcher, dt);
+        m_vuMeter->render(batcher, dt, screenW, screenH);
         
         float trackX = m_bounds.x + m_bounds.w * 0.5f - 2;
         float trackY = m_bounds.y + 120;
@@ -82,6 +82,9 @@ private:
 } // namespace Beam
 
 #endif // MASTER_STRIP_HPP
+
+
+
 
 
 

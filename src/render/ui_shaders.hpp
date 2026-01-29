@@ -13,11 +13,19 @@ out vec2 TexCoord;
 out vec4 Color;
 
 uniform mat4 projection;
+uniform float uPanX;
+uniform float uPanY;
+uniform float uZoom;
 
 void main() {
-    gl_Position = projection * vec4(aPos, 0.0, 1.0);
     TexCoord = aTexCoord;
     Color = aColor;
+    vec2 pos = aPos;
+    
+    // Apply Pan and Zoom
+    pos = (pos * uZoom) + vec2(uPanX, uPanY);
+    
+    gl_Position = projection * vec4(pos, 0.0, 1.0);
 }
 )";
 
@@ -79,6 +87,9 @@ void main() {
 } // namespace Beam
 
 #endif // UI_SHADERS_HPP
+
+
+
 
 
 

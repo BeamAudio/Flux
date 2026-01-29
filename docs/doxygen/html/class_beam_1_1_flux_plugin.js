@@ -9,6 +9,8 @@ var class_beam_1_1_flux_plugin =
     [ "getSampleRate", "class_beam_1_1_flux_plugin.html#a3e65f35944360e4e6ac370a967cf5eb3", null ],
     [ "process", "class_beam_1_1_flux_plugin.html#a181430e1cbf129891fe3ed72f3905a61", null ],
     [ "processBlock", "class_beam_1_1_flux_plugin.html#ab10324716cec75feee93b6a3159c7912", null ],
+    [ "processEvents", "class_beam_1_1_flux_plugin.html#a87fb076475f20b062493efa7ca00e045", null ],
+    [ "processMIDI", "class_beam_1_1_flux_plugin.html#aa1f9c569002ec23eeb5db0af686abea7", null ],
     [ "m_pluginName", "class_beam_1_1_flux_plugin.html#abfb4e9e64c4e94f54001247d7de58011", null ],
     [ "m_sampleRate", "class_beam_1_1_flux_plugin.html#a7818db9fafa231a3525e4d4004bdaea9", null ]
 ];
