@@ -3,6 +3,7 @@
 #include "../engine/track_node.hpp"
 #include "../engine/midi_event.hpp"
 #include "../engine/audio_device_manager.hpp"
+#include "../engine/offline_renderer.hpp"
 #include "../interface/workspace.hpp"
 #include "../interface/timeline.hpp"
 #include "../interface/tape_reel.hpp"
@@ -47,6 +48,28 @@ void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist,
         if (!data.empty() && host && host->m_project) {
              host->m_project->deserialize(data);
              std::cout << "Project loaded from: " << filelist[0] << std::endl;
+        }
+    }
+}
+
+void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelist, int filter) {
+    if (filelist && filelist[0]) {
+        BeamHost* host = static_cast<BeamHost*>(userdata);
+        if (host && host->m_project) {
+            std::string path = filelist[0];
+            if (path.length() < 4 || path.substr(path.length() - 4) != ".wav") path += ".wav";
+            
+            size_t maxFrame = 0;
+            for(auto& t : host->m_project->getTracks()) {
+                for(auto& r : t.regions) {
+                    size_t end = r.startFrame + r.duration;
+                    if (end > maxFrame) maxFrame = end;
+                }
+            }
+            if (maxFrame == 0) maxFrame = 44100 * 5; 
+            
+            host->m_audioEngine->setPlaying(false);
+            OfflineRenderer::renderToWav(path, host->m_project->getGraph(), maxFrame, 44100);
         }
     }
 }
@@ -170,6 +193,10 @@ bool BeamHost::init() {
             { "All files", "*" }
         };
         SDL_ShowOpenFileDialog(onLoadDialogCallback, this, m_window, filters, 2, NULL, false);
+    };
+    m_topBar->onRenderRequested = [this]() {
+        static const SDL_DialogFileFilter filters[] = { { "WAV Audio", "wav" } };
+        SDL_ShowSaveFileDialog(onRenderDialogCallback, this, m_window, filters, 1, "output.wav");
     };
 
     setMode(DAWMode::Flux);

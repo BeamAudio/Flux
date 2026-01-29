@@ -6,6 +6,7 @@
 #include "cable.hpp"
 #include "filter_module.hpp"
 #include "dynamics_module.hpp"
+#include "spectrum_module.hpp"
 #include "../engine/flux_track_node.hpp"
 #include "../engine/analog_suite.hpp"
 #include "../engine/flux_fx_nodes.hpp"
@@ -233,7 +234,13 @@ public:
 
         else if (type == "Gain") fxNode = std::make_shared<FluxGainNode>(buf);
         else if (type == "Delay") fxNode = std::make_shared<FluxDelayNode>(buf, sr);
-        else if (type == "Spectrum") fxNode = std::make_shared<FluxSpectrumAnalyzer>(buf, sr);
+        else if (type == "Spectrum") {
+            auto node = std::make_shared<FluxSpectrumAnalyzer>(buf, sr);
+            size_t id = m_project->getGraph()->addNode(node);
+            setupModule(std::make_shared<SpectrumModule>(node, id, x, y));
+            syncReels(); if (m_engine) m_engine->updatePlan();
+            return;
+        }
         else if (type == "Loudness") fxNode = std::make_shared<FluxLoudnessMeter>(buf, sr);
         else if (type == "Empty Tape") {
             auto fluxTrack = std::make_shared<FluxTrackNode>("Empty Tape", buf);

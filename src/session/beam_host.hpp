@@ -27,6 +27,7 @@ public:
     static void onFileSelected(void* userdata, const char* const* filelist, int filter);
     static void onSaveDialogCallback(void* userdata, const char* const* filelist, int filter);
     static void onLoadDialogCallback(void* userdata, const char* const* filelist, int filter);
+    static void onRenderDialogCallback(void* userdata, const char* const* filelist, int filter);
 
 private:
     void handleEvents();

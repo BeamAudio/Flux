@@ -48,11 +48,16 @@ public:
         batcher.drawText("O", cx + 150, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
 
         // Save/Load Buttons (Right side)
-        float rx = m_bounds.w - 160;
+        float rx = m_bounds.w - 240;
         batcher.drawRoundedRect(rx, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.25f, 0.18f, 1.0f); // Save
         batcher.drawText("SAVE", rx + 18, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
         batcher.drawRoundedRect(rx + 75, 8, 70, 24, 4.0f, 0.5f, 0.18f, 0.18f, 0.25f, 1.0f); // Load
         batcher.drawText("LOAD", rx + 93, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
+
+        // Render Button
+        float rBtnX = m_bounds.w - 80;
+        batcher.drawRoundedRect(rBtnX, 8, 70, 24, 4.0f, 0.5f, 0.6f, 0.2f, 0.2f, 1.0f);
+        batcher.drawText("RENDER", rBtnX + 10, 12, 12, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -71,9 +76,12 @@ public:
                 return true; 
             }
 
-            float rx = m_bounds.w - 160;
+            float rx = m_bounds.w - 240;
             if (x > rx && x < rx + 70) { if (onSaveRequested) onSaveRequested(); return true; }
             if (x > rx + 75 && x < rx + 145) { if (onLoadRequested) onLoadRequested(); return true; }
+            
+            float rBtnX = m_bounds.w - 80;
+            if (x > rBtnX && x < rBtnX + 70) { if (onRenderRequested) onRenderRequested(); return true; }
         }
         return false;
     }
@@ -89,6 +97,7 @@ public:
     std::function<void()> onPauseRequested;
     std::function<void()> onRewindRequested;
     std::function<void(bool)> onRecordRequested;
+    std::function<void()> onRenderRequested;
 
 private:
     bool m_isPlaying = false;

@@ -61,16 +61,11 @@ public:
         float tickVals[] = {1.0f, 0.707f, 0.5f, 0.25f, 0.0f}; // Linear approx
         const char* labels[] = {"+10", "0", "-10", "-20", "-inf"};
         for(int i=0; i<5; ++i) {
-            float y = trackY + (1.0f - tickVals[i]) * trackH; // Fader maps 1.0 (top) to 0.0 (bottom) usually? 
-            // Wait, getFaderY uses (1.0 - norm). So 1.0 is Top.
-            // If Master Gain 1.0 = 0dB? Or +10dB? Usually Max is > 0dB.
-            // Let's assume Max = +10dB.
-            // 0 dB is usually around 0.7-0.8 normalized.
-            // Let's stick to simple visual markers.
+            float y = trackY + (1.0f - tickVals[i]) * trackH; 
             
             float ty = trackY + (float)i / 4.0f * trackH;
             batcher.drawQuad(trackX - 8, ty, 4, 1, 0.4f, 0.4f, 0.4f, 1.0f);
-            batcher.drawText(labels[4-i], trackX - 25, ty - 4, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+            batcher.drawText(labels[i], trackX - 25, ty - 4, 9, 0.6f, 0.6f, 0.6f, 1.0f);
         }
 
         batcher.drawRoundedRect(trackX, trackY, 4, trackH, 2.0f, 0.5f, 0.05f, 0.05f, 0.05f, 1.0f);

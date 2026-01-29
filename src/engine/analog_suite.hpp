@@ -581,7 +581,7 @@ public:
         for(int i=0; i<total; ++i) {
             float s = in[i];
             sumSq += s*s;
-            peak = std::max(peak, std::abs(s));
+            peak = (std::max)(peak, std::abs(s));
         }
         float rms = std::sqrt(sumSq / (total + 1));
         float db = (rms > 0.0001f) ? 20.0f * std::log10(rms) : -60.0f;
@@ -592,7 +592,7 @@ public:
         auto pS = getParameter("ShortTerm");
         if(pS) pS->setValue(pS->getValue() * 0.995f + db * 0.005f);
         auto pT = getParameter("True Peak");
-        if(pT) pT->setValue(std::max(pT->getValue() - 0.5f, peakDb)); // Slow decay peak
+        if(pT) pT->setValue((std::max)(pT->getValue() - 0.5f, peakDb)); // Slow decay peak
     }
 };
 
