@@ -94,11 +94,15 @@ std::vector<AudioDeviceInfo> AudioDeviceManager::getAvailableInputDevices() cons
 }
 
 int AudioDeviceManager::setCurrentAudioDevice(const std::string& outputDeviceName,
+                                              const std::string& outputDeviceId,
                                               const std::string& inputDeviceName,
+                                              const std::string& inputDeviceId,
                                               double sampleRate,
                                               int bufferSize) {
     m_deviceSetup.outputDeviceName = outputDeviceName;
+    m_deviceSetup.outputDeviceId = outputDeviceId;
     m_deviceSetup.inputDeviceName = inputDeviceName;
+    m_deviceSetup.inputDeviceId = inputDeviceId;
     m_deviceSetup.sampleRate = sampleRate;
     m_deviceSetup.blockSize = bufferSize;
     

@@ -28,15 +28,18 @@ public:
 
         // Ruler
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, 30, 0.12f, 0.12f, 0.14f, 1.0f);
-        for(float s=0; s < 1000; s += 1.0f) {
-            float sx = m_bounds.x + (s * pixelsPerSecond);
+        for(float s=0; s < 10000; s += 1.0f) {
+            float sx = m_bounds.x + (s * pixelsPerSecond) - m_offsetX;
+            if (sx < m_bounds.x) continue;
             if (sx > m_bounds.x + m_bounds.w) break;
             batcher.drawQuad(sx, m_bounds.y + 15, 1, 15, 0.4f, 0.4f, 0.4f, 1.0f);
         }
 
         // Lanes
-        for (int i = 0; i < 10; ++i) {
-            float y = m_bounds.y + 30 + (i * trackHeight);
+        for (int i = 0; i < 20; ++i) {
+            float y = m_bounds.y + 30 + (i * trackHeight) - m_offsetY;
+            if (y + trackHeight < m_bounds.y + 30) continue;
+            if (y > m_bounds.y + m_bounds.h) break;
             batcher.drawQuad(m_bounds.x, y + trackHeight - 1, m_bounds.w, 1, 0.15f, 0.15f, 0.15f, 1.0f);
         }
 
@@ -44,10 +47,14 @@ public:
         if (m_project) {
             for (auto& track : m_project->getTracks()) {
                 for (auto& reg : track.regions) {
-                    float rx = m_bounds.x + (float)reg.startFrame / framesPerPixel;
-                    float ry = m_bounds.y + 30 + (track.trackIndex * trackHeight) + 5;
+                    float rx = m_bounds.x + (float)reg.startFrame / framesPerPixel - m_offsetX;
+                    float ry = m_bounds.y + 30 + (track.trackIndex * trackHeight) + 5 - m_offsetY;
                     float rw = (float)reg.duration / framesPerPixel;
                     float rh = trackHeight - 10;
+
+                    // Visibility culling
+                    if (rx + rw < m_bounds.x || rx > m_bounds.x + m_bounds.w || 
+                        ry + rh < m_bounds.y + 30 || ry > m_bounds.y + m_bounds.h) continue;
 
                     batcher.drawRoundedRect(rx, ry, rw, rh, 4.0f, 0.5f, 0.2f, 0.35f, 0.5f, 1.0f);
                     
@@ -84,7 +91,7 @@ public:
 
         // Playhead (Drawn on top)
         if (m_engine) {
-            float playheadX = m_bounds.x + (float)m_engine->getCurrentFrame() / framesPerPixel;
+            float playheadX = m_bounds.x + (float)m_engine->getCurrentFrame() / framesPerPixel - m_offsetX;
             if (playheadX >= m_bounds.x && playheadX <= m_bounds.x + m_bounds.w) {
                 batcher.drawQuad(playheadX - 1, m_bounds.y, 3, m_bounds.h, 1.0f, 0.3f, 0.3f, 1.0f);
                 batcher.drawRoundedRect(playheadX - 6, m_bounds.y, 12, 12, 6.0f, 0.5f, 1.0f, 0.3f, 0.3f, 1.0f);
@@ -97,10 +104,17 @@ public:
         float pixelsPerSecond = 50.0f;
         float framesPerPixel = 44100.0f / pixelsPerSecond;
 
+        if (button == 3) { // Right Click Panning
+            m_isPanning = true;
+            m_lastMouseX = x;
+            m_lastMouseY = y;
+            return true;
+        }
+
         // Scrubber / Seek interaction
         if (y < m_bounds.y + 30) {
             m_isScrubbing = true;
-            size_t targetFrame = (size_t)((x - m_bounds.x) * framesPerPixel);
+            size_t targetFrame = (size_t)((x - m_bounds.x + m_offsetX) * framesPerPixel);
             if (m_engine) m_engine->seek(targetFrame);
             return true;
         }
@@ -111,8 +125,8 @@ public:
             for (auto& track : m_project->getTracks()) {
                 for (size_t i=0; i < track.regions.size(); ++i) {
                     auto& reg = track.regions[i];
-                    float rx = m_bounds.x + (float)reg.startFrame / framesPerPixel;
-                    float ry = m_bounds.y + 30 + (track.trackIndex * trackHeight) + 5;
+                    float rx = m_bounds.x + (float)reg.startFrame / framesPerPixel - m_offsetX;
+                    float ry = m_bounds.y + 30 + (track.trackIndex * trackHeight) + 5 - m_offsetY;
                     float rw = (float)reg.duration / framesPerPixel;
                     float rh = trackHeight - 10;
 
@@ -120,7 +134,7 @@ public:
                         if (button == 1) { 
                             m_isDraggingRegion = true; m_dragTrackPtr = &track; m_dragRegionIndex = (int)i; m_dragOffsetX = x - rx;
                             return true;
-                        } else if (button == 3) { 
+                        } else if (button == 2) { // Middle click slice
                             sliceRegion(track, i, (size_t)((x - rx) * framesPerPixel));
                             return true;
                         }
@@ -135,18 +149,28 @@ public:
         float pixelsPerSecond = 50.0f;
         float framesPerPixel = 44100.0f / pixelsPerSecond;
 
+        if (m_isPanning) {
+            m_offsetX -= (x - m_lastMouseX);
+            m_offsetY -= (y - m_lastMouseY);
+            m_offsetX = (std::max)(0.0f, m_offsetX);
+            m_offsetY = (std::max)(0.0f, m_offsetY);
+            m_lastMouseX = x;
+            m_lastMouseY = y;
+            return true;
+        }
+
         if (m_isScrubbing) {
-            size_t targetFrame = (size_t)((x - m_bounds.x) * framesPerPixel);
+            size_t targetFrame = (size_t)((x - m_bounds.x + m_offsetX) * framesPerPixel);
             if (m_engine) m_engine->seek(targetFrame);
             return true;
         }
 
         if (m_isDraggingRegion && m_dragTrackPtr) {
-            float newX = x - m_dragOffsetX - m_bounds.x;
+            float newX = x - m_dragOffsetX - m_bounds.x + m_offsetX;
             m_dragTrackPtr->regions[m_dragRegionIndex].startFrame = (size_t)((std::max)(0.0f, newX) * framesPerPixel);
-            int newTrack = (int)((y - (m_bounds.y + 30)) / 100.0f);
-            m_dragTrackPtr->regions[m_dragRegionIndex].trackIndex = std::clamp(newTrack, 0, 9);
-            m_dragTrackPtr->trackIndex = std::clamp(newTrack, 0, 9); 
+            int newTrack = (int)((y - (m_bounds.y + 30) + m_offsetY) / 100.0f);
+            m_dragTrackPtr->regions[m_dragRegionIndex].trackIndex = std::clamp(newTrack, 0, 19);
+            m_dragTrackPtr->trackIndex = std::clamp(newTrack, 0, 19); 
             return true;
         }
         return false;
@@ -155,6 +179,7 @@ public:
     bool onMouseUp(float x, float y, int button) override {
         m_isDraggingRegion = false;
         m_isScrubbing = false;
+        m_isPanning = false;
         m_dragTrackPtr = nullptr;
         return true;
     }
@@ -185,9 +210,12 @@ private:
     bool m_isVisible = false;
     bool m_isDraggingRegion = false;
     bool m_isScrubbing = false;
+    bool m_isPanning = false;
+    float m_offsetX = 0, m_offsetY = 0;
     TrackData* m_dragTrackPtr = nullptr;
     int m_dragRegionIndex = -1;
     float m_dragOffsetX = 0;
+    float m_lastMouseX = 0, m_lastMouseY = 0;
 };
 
 } // namespace Beam

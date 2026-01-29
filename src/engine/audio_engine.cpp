@@ -15,12 +15,15 @@ AudioEngine::~AudioEngine() {
     if (m_captureStream) SDL_DestroyAudioStream(m_captureStream);
 }
 
-bool AudioEngine::init(int sampleRate, int channels) {
+bool AudioEngine::init(int sampleRate, int channels, const std::string& outputDevice, const std::string& inputDevice) {
+    if (m_stream) SDL_DestroyAudioStream(m_stream);
+    if (m_captureStream) SDL_DestroyAudioStream(m_captureStream);
+
     m_sampleRate = sampleRate;
     m_channels = channels;
 
-    m_masterNode = std::make_shared<MasterNode>(1024 * 4);
-    m_inputNode = std::make_shared<InputNode>(1024 * 4);
+    if (!m_masterNode) m_masterNode = std::make_shared<MasterNode>(1024 * 4);
+    if (!m_inputNode) m_inputNode = std::make_shared<InputNode>(1024 * 4);
     
     SDL_AudioSpec spec;
     spec.format = SDL_AUDIO_F32;
@@ -28,17 +31,27 @@ bool AudioEngine::init(int sampleRate, int channels) {
     spec.freq = sampleRate;
 
     // Output Stream
-    m_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &spec, NULL, NULL);
+    SDL_AudioDeviceID outId = SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK;
+    if (!outputDevice.empty() && outputDevice != "default") {
+        // Find ID by name if possible, or assume it's an ID string
+        try { outId = (SDL_AudioDeviceID)std::stoul(outputDevice); } catch(...) {}
+    }
+
+    m_stream = SDL_OpenAudioDeviceStream(outId, &spec, NULL, NULL);
     if (!m_stream) {
         std::cerr << "CRITICAL: SDL_OpenAudioDeviceStream (Playback) failed: " << SDL_GetError() << std::endl;
         return false;
     }
 
     // Input Stream
-    m_captureStream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_RECORDING, &spec, NULL, NULL);
+    SDL_AudioDeviceID inId = SDL_AUDIO_DEVICE_DEFAULT_RECORDING;
+    if (!inputDevice.empty() && inputDevice != "default") {
+        try { inId = (SDL_AudioDeviceID)std::stoul(inputDevice); } catch(...) {}
+    }
+
+    m_captureStream = SDL_OpenAudioDeviceStream(inId, &spec, NULL, NULL);
     if (!m_captureStream) {
         std::cerr << "WARNING: SDL_OpenAudioDeviceStream (Recording) failed: " << SDL_GetError() << std::endl;
-        // We can continue without recording
     } else {
         SDL_ResumeAudioStreamDevice(m_captureStream);
     }

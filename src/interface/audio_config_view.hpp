@@ -136,6 +136,7 @@ public:
         for (const auto& dev : m_outputDevices) {
             if (x > xOff && x < xOff + 350 && y > currentY && y < currentY + 24) {
                 m_currentSetup.outputDeviceName = dev.name;
+                m_currentSetup.outputDeviceId = dev.deviceId;
                 apply();
                 return true;
             }
@@ -147,6 +148,7 @@ public:
         for (const auto& dev : m_inputDevices) {
             if (x > xOff && x < xOff + 350 && y > currentY && y < currentY + 24) {
                 m_currentSetup.inputDeviceName = dev.name;
+                m_currentSetup.inputDeviceId = dev.deviceId;
                 apply();
                 return true;
             }
@@ -189,7 +191,9 @@ public:
 
     void apply() {
         if (m_manager) {
-            m_manager->setCurrentAudioDevice(m_currentSetup.outputDeviceName, m_currentSetup.inputDeviceName, m_currentSetup.sampleRate, m_currentSetup.blockSize);
+            m_manager->setCurrentAudioDevice(m_currentSetup.outputDeviceName, m_currentSetup.outputDeviceId,
+                                             m_currentSetup.inputDeviceName, m_currentSetup.inputDeviceId,
+                                             m_currentSetup.sampleRate, m_currentSetup.blockSize);
             if (onConfigChanged) onConfigChanged();
         }
     }

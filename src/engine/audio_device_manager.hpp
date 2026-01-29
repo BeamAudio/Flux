@@ -9,7 +9,9 @@ namespace Beam {
 
 struct AudioDeviceSetup {
     std::string outputDeviceName;
+    std::string outputDeviceId;
     std::string inputDeviceName;
+    std::string inputDeviceId;
     double sampleRate = 44100.0;
     int blockSize = 512;
     int inputChannels = 2;
@@ -60,7 +62,9 @@ public:
      * @brief Sets the current audio device
      */
     int setCurrentAudioDevice(const std::string& outputDeviceName,
+                              const std::string& outputDeviceId,
                               const std::string& inputDeviceName,
+                              const std::string& inputDeviceId,
                               double sampleRate,
                               int bufferSize);
 

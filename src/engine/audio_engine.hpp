@@ -19,7 +19,7 @@ public:
     AudioEngine();
     ~AudioEngine();
 
-    bool init(int sampleRate, int channels);
+    bool init(int sampleRate, int channels, const std::string& outputDevice = "", const std::string& inputDevice = "");
     
     // Called from audio thread (or main loop), lock-free
     void process(float* output, int frames, const MIDIBuffer& midi = MIDIBuffer());

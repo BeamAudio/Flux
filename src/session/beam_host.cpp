@@ -106,9 +106,8 @@ bool BeamHost::init() {
     };
     m_configView->onConfigChanged = [this]() {
         auto setup = m_audioDeviceManager->getCurrentDeviceSetup();
-        std::cout << "Audio Config Changed: " << setup.outputDeviceName << " @ " << setup.sampleRate << std::endl;
-        // In a full implementation, we'd restart the AudioEngine stream with new params
-        m_audioEngine->init((int)setup.sampleRate, setup.outputChannels);
+        std::cout << "Audio Config Changed: " << setup.outputDeviceName << " (" << setup.outputDeviceId << ") @ " << setup.sampleRate << std::endl;
+        m_audioEngine->init((int)setup.sampleRate, setup.outputChannels, setup.outputDeviceId, setup.inputDeviceId);
     };
     m_topBar->onPlayRequested = [this]() { m_audioEngine->setPlaying(true); };
     m_topBar->onPauseRequested = [this]() { m_audioEngine->setPlaying(false); };
