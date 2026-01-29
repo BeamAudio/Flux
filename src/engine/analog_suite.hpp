@@ -563,8 +563,8 @@ public:
         }
     }
 
-    std::vector<Port> getInputPorts() const override { return { {"In", 2} }; }
-    std::vector<Port> getOutputPorts() const override { return { {"Out", 2} }; }
+    std::vector<FluxNode::Port> getInputPorts() const override { return { {"In", 2} }; }
+    std::vector<FluxNode::Port> getOutputPorts() const override { return { {"Out", 2} }; }
 
 private:
     std::vector<std::unique_ptr<BiquadFilterNode>> m_filters;
