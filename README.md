@@ -27,6 +27,8 @@
     *   Wire your **Audio Input** node to the Tape's input.
     *   Press the **Record (O)** button in the top bar.
     *   Stop recording to save the file to disk.
+4.  **Rendering**:
+    *   Click the **RENDER** button in the top bar to export the project to WAV.
 
 ### Metering
 *   **Master Strip**: Located on the right. Shows peak levels (VU) and fader gain.
@@ -60,6 +62,30 @@ To add a new DSP effect to Beam Audio Flux:
 2.  **Register the UI**:
     *   Add the name to `Sidebar` categories in `src/interface/sidebar.hpp`.
     *   Add the instantiation logic to `Workspace::addFX` in `src/interface/workspace.hpp`.
+
+### Customizing the Logo
+To add a custom logo that appears in the window title bar, taskbar, and as the executable icon:
+
+1.  **Window/Taskbar Icon**:
+    *   Place your icon image (e.g., `logo.bmp`) in `assets/images/`.
+    *   In `src/session/beam_host.cpp`, inside `init()`:
+        ```cpp
+        SDL_Surface* icon = SDL_LoadBMP("assets/images/logo.bmp");
+        if (icon) {
+            SDL_SetWindowIcon(m_window, icon);
+            SDL_DestroySurface(icon);
+        }
+        ```
+
+2.  **Executable Icon (Windows)**:
+    *   Create an `.rc` file (e.g., `resources.rc`) containing:
+        ```rc
+        IDI_ICON1 ICON "assets/images/logo.ico"
+        ```
+    *   Add this `.rc` file to your `CMakeLists.txt`:
+        ```cmake
+        add_executable(BeamAudioFlux src/main.cpp resources.rc ...)
+        ```
 
 ### Future: Scripting
 We are working on a JIT-compiled scripting language to allow FX creation at runtime without recompiling the engine. Stay tuned for the `FluxScript` update.
