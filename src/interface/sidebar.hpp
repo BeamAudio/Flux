@@ -13,7 +13,10 @@ public:
 
     Sidebar(Side side) : m_side(side) {}
 
-    void render(QuadBatcher& batcher) override {
+    void setVisible(bool visible) { m_isVisible = visible; }
+
+    void render(QuadBatcher& batcher, float dt) override {
+        if (!m_isVisible) return;
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.1f, 0.11f, 0.12f, 1.0f);
         float borderX = (m_side == Side::Left) ? m_bounds.x + m_bounds.w - 1 : m_bounds.x;
         batcher.drawQuad(borderX, m_bounds.y, 1, m_bounds.h, 0.2f, 0.2f, 0.2f, 1.0f);
@@ -52,3 +55,5 @@ private:
 } // namespace Beam
 
 #endif // SIDEBAR_HPP
+
+

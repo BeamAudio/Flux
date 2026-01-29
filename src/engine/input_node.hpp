@@ -53,3 +53,5 @@ private:
 } // namespace Beam
 
 #endif // INPUT_NODE_HPP
+
+

@@ -78,3 +78,5 @@ private:
 } // namespace Beam
 
 #endif // GUI_BUTTON_HPP
+
+

@@ -87,3 +87,5 @@ bool GuiComponent::contains(float x, float y) const {
 }
 
 } // namespace Beam
+
+

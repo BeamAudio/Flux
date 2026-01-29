@@ -116,3 +116,4 @@ private:
 } // namespace Beam
 
 #endif // AUDIO_READER_HPP
+

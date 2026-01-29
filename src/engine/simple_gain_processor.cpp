@@ -50,3 +50,5 @@ std::vector<FluxNode::Port> SimpleGainProcessor::getOutputPorts() const {
 }
 
 } // namespace Beam
+
+

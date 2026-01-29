@@ -356,3 +356,5 @@ void QuadBatcher::flush() {
 }
 
 } // namespace Beam
+
+

@@ -17,7 +17,7 @@ public:
         initMetalTexture();
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         // Faceplate (Brushed Metal)
         if (m_faceplate) {
             batcher.drawTexture(m_faceplate->getID(), m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0, 0, 1, 1, 0.8f, 0.8f, 0.82f, 1.0f);
@@ -40,7 +40,7 @@ public:
         batcher.drawText("VINTAGE TUBE", m_bounds.x + 65, m_bounds.y + 22, 10, 0.8f, 0.6f, 0.2f, 1.0f);
 
         // Internal rendering (knobs, ports)
-        AudioModule::render(batcher);
+        AudioModule::render(batcher, dt);
     }
 
 private:
@@ -68,4 +68,6 @@ private:
 } // namespace Beam
 
 #endif // TUBE_COMPRESSOR_UI_HPP
+
+
 

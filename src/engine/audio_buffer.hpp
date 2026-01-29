@@ -271,3 +271,5 @@ T AudioBuffer<T>::getMagnitude() const {
 } // namespace Beam
 
 #endif // AUDIO_BUFFER_HPP
+
+

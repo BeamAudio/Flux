@@ -89,3 +89,5 @@ private:
 } // namespace Beam
 
 #endif // BIQUAD_FILTER_NODE_HPP
+
+

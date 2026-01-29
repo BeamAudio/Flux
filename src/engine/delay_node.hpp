@@ -44,3 +44,5 @@ private:
 } // namespace Beam
 
 #endif // DELAY_NODE_HPP
+
+

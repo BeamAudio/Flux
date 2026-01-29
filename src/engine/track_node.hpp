@@ -105,7 +105,7 @@ private:
     std::string m_name;
     std::unique_ptr<DiskStreamer> m_streamer;
     std::atomic<TrackState> m_state;
-    size_t m_lastProcessedFrame = 0;
+    size_t m_lastProcessedFrame = (size_t)-1;
     
     drwav m_wavWriter;
     bool m_isWriterOpen;
@@ -114,4 +114,6 @@ private:
 } // namespace Beam
 
 #endif // TRACK_NODE_HPP
+
+
 

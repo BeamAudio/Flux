@@ -103,3 +103,5 @@ private:
 } // namespace Beam
 
 #endif // GUI_SLIDER_HPP
+
+

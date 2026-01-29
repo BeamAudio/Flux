@@ -17,7 +17,7 @@ public:
         m_isVisible = false;
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         if (!m_isVisible) return;
 
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.05f, 0.05f, 0.06f, 1.0f);
@@ -193,3 +193,5 @@ private:
 } // namespace Beam
 
 #endif // TIMELINE_HPP
+
+

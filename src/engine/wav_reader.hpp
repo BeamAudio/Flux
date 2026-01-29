@@ -156,3 +156,5 @@ private:
 } // namespace Beam
 
 #endif // WAV_READER_HPP
+
+

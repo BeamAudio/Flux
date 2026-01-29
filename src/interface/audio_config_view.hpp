@@ -22,7 +22,7 @@ public:
         m_currentSetup = m_manager->getCurrentDeviceSetup();
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         if (!m_isVisible) return;
 
         // Dim background
@@ -175,3 +175,5 @@ private:
 } // namespace Beam
 
 #endif // AUDIO_CONFIG_VIEW_HPP
+
+

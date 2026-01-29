@@ -133,15 +133,17 @@ void BeamHost::setMode(DAWMode mode) {
     if (m_mode == DAWMode::Flux) {
         m_workspace->setVisible(true);
         m_timeline->setVisible(false);
+        if (m_browser) m_browser->setVisible(true);
     } else {
         m_workspace->setVisible(false);
         m_timeline->setVisible(true);
+        if (m_browser) m_browser->setVisible(false);
     }
 }
 
 void BeamHost::performLayout() {
     float topBarHeight = 40.0f;
-    float sidebarWidth = 200.0f;
+    float sidebarWidth = (m_mode == DAWMode::Flux) ? 200.0f : 0.0f;
     float masterStripWidth = 120.0f;
     if (m_topBar) m_topBar->setBounds(0, 0, (float)m_width, topBarHeight);
     if (m_browser) m_browser->setBounds(0, topBarHeight, sidebarWidth, (float)m_height - topBarHeight);
@@ -158,6 +160,13 @@ void BeamHost::handleEvents() {
             std::cout << "Quit Event Received." << std::endl;
             m_isRunning = false;
         } 
+        else if (event.type == SDL_EVENT_KEY_DOWN) {
+            if (event.key.key == SDLK_SPACE) {
+                bool playing = !m_audioEngine->isPlaying();
+                m_audioEngine->setPlaying(playing);
+                if (m_topBar) m_topBar->setPlaying(playing);
+            }
+        }
         else if (event.type == SDL_EVENT_DROP_FILE) {
             if (m_workspace && event.drop.data) {
                 float mx, my; SDL_GetMouseState(&mx, &my);
@@ -184,7 +193,7 @@ void BeamHost::handleEvents() {
     }
 }
 
-void BeamHost::render() {
+void BeamHost::render(float dt) {
     glViewport(0, 0, m_width, m_height);
     glClearColor(0.08f, 0.09f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -198,7 +207,7 @@ void BeamHost::render() {
     };
     m_uiShader->setMat4("projection", projection);
     m_batcher->begin();
-    m_uiHandler->render(*m_batcher);
+    m_uiHandler->render(*m_batcher, dt);
     m_batcher->flush();
     SDL_GL_SwapWindow(m_window);
 }
@@ -215,7 +224,7 @@ void BeamHost::run() {
         if (m_uiHandler) m_uiHandler->update(dt);
         MIDIBuffer emptyMidi;
         m_audioEngine->process(audioBuffer, 1024, emptyMidi);
-        render();
+        render(dt);
         heartbeats++;
         if (heartbeats % 500 == 0) std::cout << "DAW Heartbeat: Still alive." << std::endl;
         SDL_Delay(1);
@@ -226,3 +235,5 @@ void BeamHost::run() {
 void BeamHost::stop() { m_isRunning = false; }
 
 } // namespace Beam
+
+

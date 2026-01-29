@@ -14,7 +14,7 @@ public:
     void handleMouseUp(float x, float y, int button);
     void handleMouseMove(float x, float y);
     void update(float dt);
-    void render(QuadBatcher& batcher);
+    void render(QuadBatcher& batcher, float dt);
 
 private:
     std::vector<std::shared_ptr<Component>> m_components;
@@ -24,4 +24,6 @@ private:
 } // namespace Beam
 
 #endif // INPUT_HANDLER_HPP
+
+
 

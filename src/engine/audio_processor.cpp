@@ -62,3 +62,5 @@ void AudioProcessor::setCurrentPlaybackState(bool isPlaying, double currentTimeS
 }
 
 } // namespace Beam
+
+

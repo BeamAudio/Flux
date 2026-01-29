@@ -21,7 +21,7 @@ public:
     virtual ~Component() = default;
 
     virtual void update(float dt) {}
-    virtual void render(QuadBatcher& batcher) = 0;
+    virtual void render(QuadBatcher& batcher, float dt) = 0;
 
     virtual bool onMouseDown(float x, float y, int button) { return false; }
     virtual bool onMouseUp(float x, float y, int button) { 
@@ -62,4 +62,6 @@ protected:
 } // namespace Beam
 
 #endif // COMPONENT_HPP
+
+
 

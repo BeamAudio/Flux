@@ -55,3 +55,5 @@ private:
 } // namespace Beam
 
 #endif // TEXTURE_HPP
+
+

@@ -20,7 +20,7 @@ public:
         }
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 12.0f, 1.0f, 0.22f, 0.22f, 0.23f, 1.0f);
         auto track = m_trackNode->getInternalNode();
         float reelSize = 65.0f;
@@ -51,8 +51,8 @@ public:
         }
 
         // Parent's ports
-        getInputPort()->render(batcher);
-        getOutputPort()->render(batcher);
+        getInputPort()->render(batcher, dt);
+        getOutputPort()->render(batcher, dt);
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -83,3 +83,5 @@ private:
 } // namespace Beam
 
 #endif // TAPE_REEL_HPP
+
+

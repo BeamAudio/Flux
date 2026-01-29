@@ -29,7 +29,7 @@ public:
 private:
     void handleEvents();
     void update();
-    void render();
+    void render(float dt);
     void performLayout();
 
     std::string m_title;
@@ -58,3 +58,5 @@ private:
 } // namespace Beam
 
 #endif // BEAM_HOST_HPP
+
+

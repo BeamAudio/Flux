@@ -172,3 +172,5 @@ void Slider::setParameter(std::shared_ptr<Parameter> parameter) {
 }
 
 } // namespace Beam
+
+

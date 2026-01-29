@@ -145,3 +145,5 @@ protected:
 } // namespace Beam
 
 #endif // GUI_COMPONENT_HPP
+
+

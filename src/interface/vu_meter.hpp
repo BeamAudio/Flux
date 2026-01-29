@@ -12,9 +12,15 @@ public:
         setBounds(0, 0, 100, 60);
     }
 
-    void setLevel(float level) { m_level = level; }
+    void setLevel(float level) { 
+        if (level > m_level) m_level = level; 
+    }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
+        // Smooth decay
+        m_level -= 1.5f * dt;
+        if (m_level < 0.0f) m_level = 0.0f;
+
         // Outer case (Rounded plastic look)
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 8.0f, 1.0f, 0.1f, 0.1f, 0.1f, 1.0f);
         
@@ -44,4 +50,6 @@ private:
 } // namespace Beam
 
 #endif // VU_METER_HPP
+
+
 

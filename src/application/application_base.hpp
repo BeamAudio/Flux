@@ -73,3 +73,5 @@ protected:
 } // namespace Beam
 
 #endif // APPLICATION_BASE_HPP
+
+

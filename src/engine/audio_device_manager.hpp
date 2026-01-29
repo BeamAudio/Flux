@@ -103,3 +103,5 @@ private:
 } // namespace Beam
 
 #endif // AUDIO_DEVICE_MANAGER_HPP
+
+

@@ -57,3 +57,5 @@ private:
 } // namespace Beam
 
 #endif // MASTER_NODE_HPP
+
+

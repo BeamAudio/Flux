@@ -96,3 +96,5 @@ protected:
 } // namespace Beam
 
 #endif // FLUX_NODE_HPP
+
+

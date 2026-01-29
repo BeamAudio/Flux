@@ -33,3 +33,5 @@ private:
 } // namespace Beam
 
 #endif // SIMPLE_GAIN_PROCESSOR_HPP
+
+

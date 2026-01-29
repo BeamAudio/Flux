@@ -25,14 +25,14 @@ public:
         for (auto& module : m_modules) module->update(dt);
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         if (!m_isVisible) return;
         
         float spacing = 50.0f;
         for (float x = 0; x < 2000; x += spacing) batcher.drawQuad(x + m_panX, 0, 1, 2000, 0.2f, 0.2f, 0.2f, 1.0f);
         for (float y = 0; y < 2000; y += spacing) batcher.drawQuad(0, y + m_panY, 2000, 1, 0.2f, 0.2f, 0.2f, 1.0f);
 
-        for (auto& cable : m_cables) cable.render(batcher);
+        for (auto& cable : m_cables) cable.render(batcher, dt);
 
         if (m_isDraggingCable && m_activePort) {
             float mx, my; SDL_GetMouseState(&mx, &my);
@@ -40,7 +40,7 @@ public:
             batcher.drawLine(pB.x + 6, pB.y + 6, mx, my, 2.0f, 1.0f, 0.8f, 0.2f, 0.8f);
         }
 
-        for (auto& module : m_modules) module->render(batcher);
+        for (auto& module : m_modules) module->render(batcher, dt);
     }
 
     void syncReels() {
@@ -71,6 +71,17 @@ public:
                 }
                 if (!exists) {
                     auto mod = std::make_shared<AudioModule>(node, id, 100.0f, 100.0f);
+                    setupModule(mod);
+                }
+            }
+            else if (node->getName() == "Master") {
+                bool exists = false;
+                for (auto& mod : m_modules) {
+                    auto audioMod = std::dynamic_pointer_cast<AudioModule>(mod);
+                    if (audioMod && audioMod->getNodeId() == id) { exists = true; break; }
+                }
+                if (!exists) {
+                    auto mod = std::make_shared<AudioModule>(node, id, 800.0f, 250.0f);
                     setupModule(mod);
                 }
             }
@@ -219,3 +230,5 @@ private:
 } // namespace Beam
 
 #endif // WORKSPACE_HPP
+
+

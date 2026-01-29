@@ -78,3 +78,5 @@ private:
 } // namespace Beam
 
 #endif // QUAD_BATCHER_HPP
+
+

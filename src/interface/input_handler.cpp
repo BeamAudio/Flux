@@ -43,10 +43,12 @@ void InputHandler::update(float dt) {
     }
 }
 
-void InputHandler::render(QuadBatcher& batcher) {
+void InputHandler::render(QuadBatcher& batcher, float dt) {
     for (auto& comp : m_components) {
-        comp->render(batcher);
+        comp->render(batcher, dt);
     }
 }
 
 } // namespace Beam
+
+

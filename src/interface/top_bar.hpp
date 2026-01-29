@@ -13,7 +13,7 @@ public:
         setBounds(0, 0, (float)width, 40);
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         // Dark background for top bar
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.1f, 0.1f, 0.11f, 1.0f);
         // Soft accent line at bottom
@@ -86,4 +86,6 @@ private:
 } // namespace Beam
 
 #endif // TOP_BAR_HPP
+
+
 

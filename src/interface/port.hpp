@@ -14,7 +14,7 @@ public:
         setBounds(0, 0, 12, 12);
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         float r = (m_type == PortType::Input) ? 0.4f : 0.8f;
         float g = (m_type == PortType::Input) ? 0.8f : 0.4f;
         batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, r, g, 1.0f, 1.0f);
@@ -41,3 +41,5 @@ private:
 } // namespace Beam
 
 #endif // PORT_HPP
+
+

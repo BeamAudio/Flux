@@ -62,7 +62,7 @@ public:
         }
     }
 
-    void render(QuadBatcher& batcher) override {
+    void render(QuadBatcher& batcher, float dt) override {
         // Module Body
         batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 10.0f, 1.0f, 0.18f, 0.19f, 0.2f, 1.0f);
         // Header
@@ -76,9 +76,9 @@ public:
         // Internal panel
         batcher.drawRoundedRect(m_bounds.x + 10, m_bounds.y + 40, m_bounds.w - 20, m_bounds.h - 50, 5.0f, 2.0f, 0.12f, 0.13f, 0.14f, 1.0f);
         
-        if (m_inputPort) m_inputPort->render(batcher);
-        if (m_outputPort) m_outputPort->render(batcher);
-        for (auto& child : m_children) child->render(batcher);
+        if (m_inputPort) m_inputPort->render(batcher, dt);
+        if (m_outputPort) m_outputPort->render(batcher, dt);
+        for (auto& child : m_children) child->render(batcher, dt);
     }
 
     bool onMouseDown(float x, float y, int button) override {
@@ -142,4 +142,6 @@ private:
 } // namespace Beam
 
 #endif // AUDIO_MODULE_HPP
+
+
 
