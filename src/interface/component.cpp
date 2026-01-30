@@ -4,7 +4,7 @@
 
 namespace Beam {
 
-static DefaultLookAndFeel globalDefaultLookAndFeel;
+static ModernLookAndFeel globalDefaultLookAndFeel;
 
 Component::Component() {}
 Component::~Component() {}

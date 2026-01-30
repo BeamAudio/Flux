@@ -303,14 +303,102 @@ void DefaultLookAndFeel::drawModularSlider(QuadBatcher& g, ModularSlider& slider
     g.drawRoundedRect(b.x + val * (b.w - 6), trackY - 4, 6, 12, 2.0f, 0.5f, 0.9f, 0.9f, 0.9f, 1.0f);
 }
 
-void ModernLookAndFeel::drawButtonBackground(QuadBatcher& g, Button& b, bool h, bool d) { DefaultLookAndFeel::drawButtonBackground(g, b, h, d); }
-void ModernLookAndFeel::drawSliderBackground(QuadBatcher& g, Slider& s, float p, float sa, float ea) { DefaultLookAndFeel::drawSliderBackground(g, s, p, sa, ea); }
-void ModernLookAndFeel::drawSliderPointer(QuadBatcher& g, Slider& s, float p, float sa, float ea) { DefaultLookAndFeel::drawSliderPointer(g, s, p, sa, ea); }
-void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& k, float p) { DefaultLookAndFeel::drawKnob(g, k, p); }
-void ModernLookAndFeel::drawLuminousMeter(QuadBatcher& g, LuminousMeter& m, float l, float p) { DefaultLookAndFeel::drawLuminousMeter(g, m, l, p); }
+void ModernLookAndFeel::drawButtonBackground(QuadBatcher& g, Button& button, 
+                                           bool isMouseOver, bool isButtonDown) {
+    auto bounds = button.getBounds();
+    bool toggled = button.getToggleState();
+    
+    // Flat Modern Look
+    float r = 0.12f, gr = 0.12f, b = 0.14f; // Very dark blue-grey
+    if (toggled) { r = 0.0f; gr = 0.6f; b = 0.8f; } // Neon Blue
+    else if (isButtonDown) { r = 0.08f; gr = 0.08f; b = 0.1f; }
+    else if (isMouseOver) { r = 0.18f; gr = 0.18f; b = 0.22f; }
+
+    g.drawRoundedRect(bounds.x, bounds.y, bounds.w, bounds.h, 4.0f, 0.5f, r, gr, b, 1.0f);
+    
+    // Subtle border
+    if (isMouseOver && !toggled)
+        g.drawRoundedRect(bounds.x, bounds.y, bounds.w, bounds.h, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.1f);
+}
+
+void ModernLookAndFeel::drawSliderBackground(QuadBatcher& g, Slider& slider, 
+                                           float sliderPos, float rotaryStartAngle, float rotaryEndAngle) {
+    auto bounds = slider.getBounds();
+    // Dark track
+    g.drawRoundedRect(bounds.x, bounds.y, bounds.w, bounds.h, 2.0f, 0.5f, 0.05f, 0.05f, 0.07f, 1.0f);
+}
+
+void ModernLookAndFeel::drawSliderPointer(QuadBatcher& g, Slider& slider, 
+                                         float sliderPos, float rotaryStartAngle, float rotaryEndAngle) {
+    auto bounds = slider.getBounds();
+    // Neon fill
+    float w = bounds.w * sliderPos;
+    g.drawRoundedRect(bounds.x, bounds.y, w, bounds.h, 2.0f, 0.5f, 0.0f, 0.8f, 1.0f, 1.0f); // Cyan
+}
+
+void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
+    auto bounds = knob.getBounds();
+    float cx = bounds.x + bounds.w * 0.5f;
+    float cy = bounds.y + bounds.h * 0.5f;
+    float radius = (std::min)(bounds.w, bounds.h) * 0.4f;
+
+    // Vector Arc
+    float startAng = -135.0f * 3.14159f / 180.0f;
+    float endAng = 135.0f * 3.14159f / 180.0f;
+    float currentAng = startAng + sliderPos * (endAng - startAng);
+
+    // Track (Grey)
+    // QuadBatcher doesn't support arcs natively yet, simulating with points?
+    // For now, draw simple rects or circle approx if I had circle primitive.
+    // I'll stick to the "Modern" flat style which might just be a circle.
+    
+    // Background Circle
+    g.drawRoundedRect(cx - radius, cy - radius, radius*2, radius*2, radius, 0.5f, 0.1f, 0.1f, 0.12f, 1.0f);
+    
+    // Value Indicator (Line)
+    float ix = cx + std::cos(currentAng) * radius * 0.8f;
+    float iy = cy + std::sin(currentAng) * radius * 0.8f;
+    g.drawLine(cx, cy, ix, iy, 3.0f, 0.0f, 0.8f, 1.0f, 1.0f); // Cyan line
+    
+    // Label
+    g.drawText(knob.getLabel(), bounds.x, bounds.y - 12, 10, 0.6f, 0.6f, 0.7f, 1.0f);
+}
+
+void ModernLookAndFeel::drawLuminousMeter(QuadBatcher& g, LuminousMeter& meter, float level, float peak) {
+    auto b = meter.getBounds();
+    g.drawRoundedRect(b.x, b.y, b.w, b.h, 2.0f, 0.5f, 0.02f, 0.02f, 0.03f, 1.0f);
+    
+    float fillW = b.w * std::clamp(level, 0.0f, 1.0f);
+    // Gradient fill: Green -> Yellow -> Red
+    float r = level > 0.8f ? 1.0f : 0.0f;
+    float gr = level < 0.9f ? 1.0f : 0.0f;
+    
+    g.drawRoundedRect(b.x, b.y, fillW, b.h, 2.0f, 0.5f, r, gr, 0.2f, 0.8f);
+}
+
 void ModernLookAndFeel::drawVUMeter(QuadBatcher& g, VUMeter& m, float l) { DefaultLookAndFeel::drawVUMeter(g, m, l); }
 void ModernLookAndFeel::drawSpectrumAnalyzer(QuadBatcher& g, SpectrumModule& s) { DefaultLookAndFeel::drawSpectrumAnalyzer(g, s); }
-void ModernLookAndFeel::drawAudioModule(QuadBatcher& g, AudioModule& m) { DefaultLookAndFeel::drawAudioModule(g, m); }
-void ModernLookAndFeel::drawModularSlider(QuadBatcher& g, ModularSlider& s) { DefaultLookAndFeel::drawModularSlider(g, s); }
+void ModernLookAndFeel::drawAudioModule(QuadBatcher& g, AudioModule& module) {
+    auto b = module.getBounds();
+    // Modern Dark Card
+    g.drawRoundedRect(b.x, b.y, b.w, b.h, 6.0f, 1.0f, 0.08f, 0.08f, 0.09f, 1.0f);
+    // Header
+    g.drawRoundedRect(b.x, b.y, b.w, 24, 6.0f, 0.5f, 0.15f, 0.15f, 0.18f, 1.0f);
+    g.drawText(module.getName(), b.x + 10, b.y + 6, 11, 0.9f, 0.9f, 0.95f, 1.0f);
+    
+    // Border highlight
+    g.drawRoundedRect(b.x, b.y, b.w, b.h, 6.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.05f);
+}
+
+void ModernLookAndFeel::drawModularSlider(QuadBatcher& g, ModularSlider& slider) {
+    auto b = slider.getBounds();
+    float val = slider.getParameter() ? slider.getParameter()->getNormalizedValue() : 0.5f;
+    
+    g.drawText(slider.getLabel(), b.x, b.y, 9, 0.5f, 0.5f, 0.6f, 1.0f);
+    
+    float trackY = b.y + 14;
+    g.drawRoundedRect(b.x, trackY, b.w, 4, 2.0f, 0.5f, 0.02f, 0.02f, 0.03f, 1.0f);
+    g.drawRoundedRect(b.x, trackY, b.w * val, 4, 2.0f, 0.5f, 0.0f, 0.7f, 0.9f, 1.0f); // Cyan fill
+}
 
 } // namespace Beam

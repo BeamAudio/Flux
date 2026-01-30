@@ -600,6 +600,22 @@ public:
     }
 };
 
+/**
+ * @class Saturation
+ * @brief Example of the simplified BeamEngine FX API.
+ */
+class Saturation : public FluxPlugin {
+public:
+    Saturation(int buf, float sr) : FluxPlugin("Saturation", buf, sr) {
+        addParam("Drive", 0.0f, 10.0f, 1.0f);
+    }
+    
+    float processSample(float input) override {
+        float drive = getParam("Drive");
+        return std::tanh(input * drive);
+    }
+};
+
 } // namespace Beam
 
 #endif // ANALOG_SUITE_HPP
