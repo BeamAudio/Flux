@@ -254,12 +254,30 @@ private:
         Region& r1 = track.regions[index];
         Region& r2 = track.regions[index + 1];
         
-        // Merge if they are from the same source and adjacent
-        r1.duration += r2.duration;
-        r1.channelPeaks.clear(); // Recalculate or combine peaks? Combine for simplicity.
-        for(size_t c=0; c<r1.channelPeaks.size(); ++c) {
-            r1.channelPeaks[c].insert(r1.channelPeaks[c].end(), r2.channelPeaks[c].begin(), r2.channelPeaks[c].end());
+        long gapFrames = (long)r2.startFrame - (long)(r1.startFrame + r1.duration);
+        
+        if (gapFrames > 0) {
+            // Add silence gap
+            r1.duration += gapFrames + r2.duration;
+            for(size_t c=0; c < r1.channelPeaks.size(); ++c) {
+                // Approximate silence in peaks (1 peak per pixel approx)
+                size_t silenceCount = (size_t)((float)gapFrames / 44100.0f * 50.0f); // scale to visual
+                r1.channelPeaks[c].insert(r1.channelPeaks[c].end(), silenceCount, 0.0f);
+                if (c < r2.channelPeaks.size())
+                    r1.channelPeaks[c].insert(r1.channelPeaks[c].end(), r2.channelPeaks[c].begin(), r2.channelPeaks[c].end());
+            }
+        } else {
+            // Overlap or perfect touch
+            size_t newEnd = (std::max)(r1.startFrame + r1.duration, r2.startFrame + r2.duration);
+            r1.duration = newEnd - r1.startFrame;
+            
+            // Simple merge: append remaining part of r2 peaks
+            for(size_t c=0; c < r1.channelPeaks.size(); ++c) {
+                if (c < r2.channelPeaks.size())
+                    r1.channelPeaks[c].insert(r1.channelPeaks[c].end(), r2.channelPeaks[c].begin(), r2.channelPeaks[c].end());
+            }
         }
+        
         track.regions.erase(track.regions.begin() + index + 1);
     }
 

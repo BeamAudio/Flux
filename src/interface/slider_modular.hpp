@@ -22,30 +22,33 @@ public:
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         float val = m_param ? m_param->getNormalizedValue() : 0.5f;
         
-        // Label
-        batcher.drawText(m_label, m_bounds.x, m_bounds.y - 12, 9, 0.7f, 0.7f, 0.7f, 1.0f);
+        // Label (Internal)
+        batcher.drawText(m_label, m_bounds.x, m_bounds.y, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+
+        float contentY = m_bounds.y + 12.0f;
+        float contentH = m_bounds.h - 12.0f;
 
         if (m_style == Style::Knob) {
             float cx = m_bounds.x + m_bounds.w * 0.5f;
-            float cy = m_bounds.y + m_bounds.h * 0.5f;
-            float r = (std::min)(m_bounds.w, m_bounds.h) * 0.4f;
-            
-            // Outer ring
-            batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, m_bounds.w*0.5f, 1.0f, 0.1f, 0.1f, 0.12f, 1.0f);
-            
-            // Value arc (Indicator)
-            float angle = -2.356f + val * 4.712f; // -135 to +135 degrees
+            float cy = contentY + contentH * 0.5f;
+            float r = (std::min)(m_bounds.w, contentH) * 0.45f;
+            batcher.drawRoundedRect(cx - r, cy - r, r*2, r*2, r, 1.0f, 0.15f, 0.15f, 0.18f, 1.0f);
+            float angle = -2.356f + val * 4.712f;
             float ix = cx + std::sin(angle) * r;
             float iy = cy - std::cos(angle) * r;
-            batcher.drawLine(cx, cy, ix, iy, 3.0f, 0.3f, 0.6f, 1.0f, 1.0f);
+            batcher.drawLine(cx, cy, ix, iy, 2.5f, 0.4f, 0.7f, 1.0f, 1.0f);
         } else if (m_style == Style::Vertical) {
-            batcher.drawQuad(m_bounds.x + m_bounds.w*0.4f, m_bounds.y, m_bounds.w*0.2f, m_bounds.h, 0.05f, 0.05f, 0.05f, 1.0f);
-            float handleY = m_bounds.y + (1.0f - val) * (m_bounds.h - 10);
-            batcher.drawRoundedRect(m_bounds.x, handleY, m_bounds.w, 10, 2.0f, 0.5f, 0.7f, 0.2f, 0.2f, 1.0f);
+            batcher.drawQuad(m_bounds.x + m_bounds.w*0.45f, contentY, m_bounds.w*0.1f, contentH, 0.05f, 0.05f, 0.05f, 1.0f);
+            float handleY = contentY + (1.0f - val) * (contentH - 8);
+            batcher.drawRoundedRect(m_bounds.x, handleY, m_bounds.w, 8, 2.0f, 0.5f, 0.3f, 0.6f, 0.9f, 1.0f);
         } else {
-            batcher.drawQuad(m_bounds.x, m_bounds.y + m_bounds.h*0.4f, m_bounds.w, m_bounds.h*0.2f, 0.05f, 0.05f, 0.05f, 1.0f);
-            float handleX = m_bounds.x + val * (m_bounds.w - 10);
-            batcher.drawRoundedRect(handleX, m_bounds.y, 10, m_bounds.h, 2.0f, 0.5f, 0.7f, 0.2f, 0.2f, 1.0f);
+            // Horizontal
+            float barH = 4.0f;
+            float by = contentY + (contentH - barH) * 0.5f;
+            batcher.drawQuad(m_bounds.x, by, m_bounds.w, barH, 0.05f, 0.05f, 0.05f, 1.0f);
+            batcher.drawQuad(m_bounds.x, by, m_bounds.w * val, barH, 0.3f, 0.6f, 0.9f, 1.0f);
+            float hx = m_bounds.x + val * (m_bounds.w - 6);
+            batcher.drawRoundedRect(hx, by - 4, 6, 12, 2.0f, 0.5f, 0.8f, 0.8f, 0.8f, 1.0f);
         }
     }
 

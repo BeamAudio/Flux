@@ -1,13 +1,13 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
+#include "../render/quad_batcher.hpp"
+#include <string>
 #include <vector>
 #include <memory>
-#include <string>
+#include <algorithm>
 
 namespace Beam {
-
-class QuadBatcher; // Forward declaration
 
 struct Rect {
     float x, y, w, h;
@@ -18,54 +18,66 @@ struct Rect {
 
 class Component {
 public:
+    Component() = default;
     virtual ~Component() = default;
 
-    virtual void update(float dt) {}
-    virtual void render(QuadBatcher& batcher, float dt, float screenW, float screenH) = 0;
+    void setName(const std::string& name) { m_name = name; }
+    const std::string& getName() const { return m_name; }
 
-    virtual bool onMouseDown(float x, float y, int button) { return false; }
-    virtual bool onMouseUp(float x, float y, int button) { 
-        m_isDragging = false; 
-        return false; 
-    }
-    virtual bool onMouseMove(float x, float y) { 
-        if (m_isDragging && m_isDraggable) {
-            float dx = x - m_lastMouseX;
-            float dy = y - m_lastMouseY;
-            setBounds(m_bounds.x + dx, m_bounds.y + dy, m_bounds.w, m_bounds.h);
-            m_lastMouseX = x;
-            m_lastMouseY = y;
+    virtual void render(QuadBatcher& batcher, float dt, float screenW, float screenH) {}
+    virtual void update(float dt) {}
+
+    virtual bool onMouseDown(float x, float y, int button) {
+        if (m_isDraggable && m_bounds.contains(x, y)) {
+            startDragging(x, y);
             return true;
         }
-        return false; 
+        return false;
     }
+
+    void startDragging(float x, float y) {
+        m_isDragging = true;
+        m_dragStartX = x - m_bounds.x;
+        m_dragStartY = y - m_bounds.y;
+    }
+
+    virtual bool onMouseUp(float x, float y, int button) {
+        m_isDragging = false;
+        return false;
+    }
+
+    virtual bool onMouseMove(float x, float y) {
+        if (m_isDragging) {
+            setBounds(x - m_dragStartX, y - m_dragStartY, m_bounds.w, m_bounds.h);
+            return true;
+        }
+        m_lastMouseX = x;
+        m_lastMouseY = y;
+        return false;
+    }
+
     virtual bool onMouseWheel(float x, float y, float delta) { return false; }
 
-    virtual void setBounds(float x, float y, float w, float h) { m_bounds = {x, y, w, h}; }
-    const Rect& getBounds() const { return m_bounds; }
-    
-    void setDraggable(bool draggable) { m_isDraggable = draggable; }
-    void startDragging(float x, float y) { 
-        m_isDragging = true; 
-        m_lastMouseX = x; 
-        m_lastMouseY = y; 
+    virtual void setBounds(float x, float y, float w, float h) {
+        m_bounds = {x, y, w, h};
     }
 
+    Rect getBounds() const { return m_bounds; }
+    void setDraggable(bool draggable) { m_isDraggable = draggable; }
+    
+    void setVisible(bool visible) { m_isVisible = visible; }
+    bool isVisible() const { return m_isVisible; }
+
 protected:
-    Rect m_bounds{0, 0, 0, 0};
-    bool m_isVisible = true;
-    bool m_isEnabled = true;
+    Rect m_bounds = {0, 0, 0, 0};
     bool m_isDraggable = false;
     bool m_isDragging = false;
+    bool m_isVisible = true;
+    float m_dragStartX = 0, m_dragStartY = 0;
     float m_lastMouseX = 0, m_lastMouseY = 0;
+    std::string m_name;
 };
 
 } // namespace Beam
 
-#endif // COMPONENT_HPP
-
-
-
-
-
-
+#endif
