@@ -28,16 +28,37 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\simple_gain_processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\audio_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\gui_component.cpp">
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\input_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\knob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\look_and_feel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\meter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\slider_modular.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\spectrum_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\vu_meter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\render\quad_batcher.cpp">

@@ -21,9 +21,21 @@ public:
     }
 
     // --- SDK PROCESS INTERFACE ---
+    
+    /**
+     * @brief Process a single sample (for simple plugins).
+     * Override this for per-sample processing (e.g. simple saturation, gain).
+     * The default implementation of processBlock calls this for every sample.
+     */
+    virtual float processSample(float input) { return input; }
+
     // Implement this to write your DSP logic.
     // 'input' and 'output' are interleaved stereo buffers (L, R, L, R...)
-    virtual void processBlock(const float* input, float* output, int totalSamples) = 0;
+    virtual void processBlock(const float* input, float* output, int totalSamples) {
+        for (int i = 0; i < totalSamples; ++i) {
+            output[i] = processSample(input[i]);
+        }
+    }
 
     /**
      * @brief Handle MIDI events in your plugin.

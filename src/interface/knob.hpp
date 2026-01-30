@@ -11,10 +11,16 @@
 
 namespace Beam {
 
+/**
+ * @class Knob
+ * @brief A rotary knob component
+ */
 class Knob : public Component {
 public:
     Knob(const std::string& label, float minVal, float maxVal, float initialVal)
-        : m_label(label), m_min(minVal), m_max(maxVal), m_value(initialVal) {}
+        : m_label(label), m_min(minVal), m_max(maxVal), m_value(initialVal) {
+        setName("Knob");
+    }
 
     void bindParameter(std::shared_ptr<Parameter> param) {
         m_parameter = param;
@@ -31,73 +37,20 @@ public:
         m_numFrames = numFrames;
     }
 
-    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        if (m_parameter) {
-            m_value = m_parameter->getValue();
-        }
+    void paint(QuadBatcher& batcher) override;
 
-        float normalized = (m_value - m_min) / (m_max - m_min);
-
-        if (m_texture && m_numFrames > 0) {
-            // Filmstrip rendering
-            int frame = (int)(normalized * (m_numFrames - 1));
-            frame = std::clamp(frame, 0, m_numFrames - 1);
-
-            // Assume vertical filmstrip
-            float frameHeight = (float)m_texture->getHeight() / m_numFrames;
-            float u0 = 0.0f;
-            float u1 = 1.0f;
-            float v0 = (float)frame / m_numFrames;
-            float v1 = (float)(frame + 1) / m_numFrames;
-
-            // Maintain aspect ratio or fill bounds? 
-            // For now, center in bounds
-            batcher.drawTexture(m_texture->getID(), m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, u0, v0, u1, v1);
-
-        } else {
-            // Fallback Vector Rendering
-            float cx = m_bounds.x + m_bounds.w * 0.5f;
-            float cy = m_bounds.y + m_bounds.h * 0.5f;
-            float radius = (std::min)(m_bounds.w, m_bounds.h) * 0.4f;
-
-            // Label
-            batcher.drawText(m_label, m_bounds.x, m_bounds.y - 12, 10, 0.7f, 0.7f, 0.7f, 1.0f);
-
-            // Knob Outer Circle (Body)
-            batcher.drawRoundedRect(m_bounds.x + 5, m_bounds.y + 5, m_bounds.w - 10, m_bounds.h - 10, radius, 1.5f, 0.1f, 0.1f, 0.11f, 1.0f);
-            
-            // Value Indicator Line
-            float angle = -2.356f + normalized * 4.712f; // -135 to +135 degrees
-            
-            float lx = cx + std::sin(angle) * radius;
-            float ly = cy - std::cos(angle) * radius;
-            
-            batcher.drawLine(cx, cy, lx, ly, 3.0f, 1.0f, 0.5f, 0.0f, 1.0f); // Orange needle
-
-            // Center Cap
-            batcher.drawRoundedRect(cx - 4, cy - 4, 8, 8, 4.0f, 0.5f, 0.2f, 0.2f, 0.22f, 1.0f);
-        }
-
-        // Value text
-        char valStr[16];
-        snprintf(valStr, 16, "%.2f", m_value);
-        batcher.drawText(valStr, m_bounds.x + 5, m_bounds.y + m_bounds.h + 2, 9, 0.5f, 0.5f, 0.5f, 1.0f);
-    }
-
-    bool onMouseDown(float x, float y, int button) override {
+    void mouseDown(const MouseEvent& event) override {
         m_isDragging = true;
-        m_lastY = y;
-        return true;
+        m_lastY = event.y;
     }
 
-    bool onMouseUp(float x, float y, int button) override {
+    void mouseUp(const MouseEvent& event) override {
         m_isDragging = false;
-        return true;
     }
 
-    bool onMouseMove(float x, float y) override {
+    void mouseDrag(const MouseEvent& event) override {
         if (m_isDragging) {
-            float deltaY = m_lastY - y;
+            float deltaY = m_lastY - event.y;
             float range = m_max - m_min;
             float sensitivity = 0.005f;
             
@@ -112,17 +65,25 @@ public:
                 onValueChanged(m_value);
             }
             
-            m_lastY = y;
-            return true;
+            m_lastY = event.y;
         }
-        return false;
     }
 
-    float getValue() const { return m_value; }
+    float getValue() const { 
+        if (m_parameter) return m_parameter->getValue();
+        return m_value; 
+    }
+    
     void setValue(float v) { 
         m_value = std::clamp(v, m_min, m_max); 
         if (m_parameter) m_parameter->setValue(m_value);
     }
+
+    float getMin() const { return m_min; }
+    float getMax() const { return m_max; }
+    const std::string& getLabel() const { return m_label; }
+    std::shared_ptr<Texture> getTexture() const { return m_texture; }
+    int getNumFrames() const { return m_numFrames; }
 
     std::function<void(float)> onValueChanged;
 
@@ -140,9 +101,3 @@ private:
 } // namespace Beam
 
 #endif // KNOB_HPP
-
-
-
-
-
-

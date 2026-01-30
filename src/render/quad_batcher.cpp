@@ -199,7 +199,29 @@ void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g,
     m_quadCount++;
 }
 
+void QuadBatcher::drawGradientRect(float x, float y, float w, float h, 
+                                  float r1, float g1, float b1, float a1,
+                                  float r2, float g2, float b2, float a2) {
+    if (m_quadCount >= m_maxQuads) {
+        flush();
+    }
+
+    // Vertical gradient (top color r1, bottom color r2)
+    m_vertices.push_back({{x, y}, {0, 0}, {r1, g1, b1, a1}});
+    m_vertices.push_back({{x + w, y}, {1, 0}, {r1, g1, b1, a1}});
+    m_vertices.push_back({{x + w, y + h}, {1, 1}, {r2, g2, b2, a2}});
+    m_vertices.push_back({{x, y + h}, {0, 1}, {r2, g2, b2, a2}});
+
+    m_quadCount++;
+}
+
 void QuadBatcher::drawRoundedRect(float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a) {
+    drawRoundedGradientRect(x, y, w, h, radius, softness, r, g, b, a, r, g, b, a);
+}
+
+void QuadBatcher::drawRoundedGradientRect(float x, float y, float w, float h, float radius, float softness,
+                                         float r1, float g1, float b1, float a1,
+                                         float r2, float g2, float b2, float a2) {
     flush();
     if (m_shader) {
         m_shader->setInt("mode", 2);
@@ -209,11 +231,10 @@ void QuadBatcher::drawRoundedRect(float x, float y, float w, float h, float radi
         m_shader->setFloat("uSizeY", h);
     }
 
-    // Reuse vertex coords for local space 0..1 in shader
-    m_vertices.push_back({{x, y}, {0, 0}, {r, g, b, a}});
-    m_vertices.push_back({{x + w, y}, {1, 0}, {r, g, b, a}});
-    m_vertices.push_back({{x + w, y + h}, {1, 1}, {r, g, b, a}});
-    m_vertices.push_back({{x, y + h}, {0, 1}, {r, g, b, a}});
+    m_vertices.push_back({{x, y}, {0, 0}, {r1, g1, b1, a1}});
+    m_vertices.push_back({{x + w, y}, {1, 0}, {r1, g1, b1, a1}});
+    m_vertices.push_back({{x + w, y + h}, {1, 1}, {r2, g2, b2, a2}});
+    m_vertices.push_back({{x, y + h}, {0, 1}, {r2, g2, b2, a2}});
     m_quadCount++;
 
     flush();
@@ -319,7 +340,7 @@ void QuadBatcher::drawText(const std::string& text, float x, float y, float size
 
     flush();
     if (m_shader) {
-        m_shader->setInt("useTexture", 0);
+        m_shader->setInt("mode", 0);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
@@ -349,6 +370,43 @@ void QuadBatcher::drawRect(float x, float y, float w, float h, float thickness, 
     drawQuad(x, y + h - thickness, w, thickness, r, g, b, a); // Bottom
     drawQuad(x, y, thickness, h, r, g, b, a); // Left
     drawQuad(x + w - thickness, y, thickness, h, r, g, b, a); // Right
+}
+
+void QuadBatcher::pushClip(float x, float y, float w, float h, float screenHeight) {
+    flush();
+
+    ScissorRect newRect = {x, y, w, h};
+
+    // Intersect with current top
+    if (!m_scissorStack.empty()) {
+        const auto& current = m_scissorStack.back();
+        float x1 = (std::max)(current.x, newRect.x);
+        float y1 = (std::max)(current.y, newRect.y);
+        float x2 = (std::min)(current.x + current.w, newRect.x + newRect.w);
+        float y2 = (std::min)(current.y + current.h, newRect.y + newRect.h);
+        
+        newRect.x = x1;
+        newRect.y = y1;
+        newRect.w = (std::max)(0.0f, x2 - x1);
+        newRect.h = (std::max)(0.0f, y2 - y1);
+    }
+
+    m_scissorStack.push_back(newRect);
+    setScissor(newRect.x, newRect.y, newRect.w, newRect.h, screenHeight);
+}
+
+void QuadBatcher::popClip(float screenHeight) {
+    flush();
+    if (!m_scissorStack.empty()) {
+        m_scissorStack.pop_back();
+    }
+
+    if (m_scissorStack.empty()) {
+        glDisable(GL_SCISSOR_TEST);
+    } else {
+        const auto& r = m_scissorStack.back();
+        setScissor(r.x, r.y, r.w, r.h, screenHeight);
+    }
 }
 
 void QuadBatcher::setScissor(float x, float y, float w, float h, float screenHeight) {

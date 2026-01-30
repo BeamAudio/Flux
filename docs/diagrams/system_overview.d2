@@ -7,7 +7,7 @@ Session: {
     label: "Main Controller\n(Event Loop)"
   }
   FluxProject: {
-    description: "Multi-track State\nStereo Peak Cache"
+    description: "Session Data\nJSON Serialization"
   }
 }
 
@@ -15,33 +15,37 @@ Engine: {
   AudioEngine: {
     description: "SDL3 IO & Global Clock"
   }
-  UniversalEngine: {
-    label: "Universal Reader (MP3/WAV)"
-    description: "miniaudio backend"
-  }
   FluxGraph: {
-    label: "Thread-Safe Graph"
-    description: "Mutex-protected routing"
+    label: "DSP Graph"
+    description: "Topological Sort\nKahn's Algorithm"
   }
+}
+
+UI_System: {
+  Component: {
+    description: "Base Class\nAbsolute Hit-Testing"
+  }
+  LookAndFeel: {
+    label: "Brand Identity"
+    description: "Emerald & Red Strategy"
+  }
+  InputHandler: "Z-Order Propagation"
 }
 
 Interface: {
-  Workspace: {
-    description: "Immediate UI Sync\nBezier Cables"
-  }
-  Timeline: {
-    description: "Stereo Waveform Rendering\nSplicing Engine"
-  }
+  Workspace: "Modular Node Editor"
+  Timeline: "Splicing & Waveforms"
+  MasterStrip: "Brand-styled Controls"
 }
 
 Render: {
-  QuadBatcher: "High-speed GL Batching"
-  SDF_Shaders: "Anti-aliased primitives"
+  QuadBatcher: "GL Batcher"
+  SDF_Shaders: "Rounded Rects & AA"
 }
 
 # Relationships
 Session.BeamHost -> Engine.AudioEngine: "Drives Playhead"
-Engine.AudioEngine -> Engine.FluxGraph: "Executes Plan"
-Interface.Workspace -> Engine.FluxGraph: "Safe Concurrent Editing"
-Interface.Timeline -> Session.FluxProject: "Visualizes Multi-channel Peaks"
+Session.BeamHost -> UI_System.InputHandler: "Forwards Events"
+UI_System.Component -> UI_System.LookAndFeel: "Delegates Paint"
+Interface.Workspace -> Engine.FluxGraph: "Modifies Topology"
 Render.QuadBatcher -> Render.SDF_Shaders: "Uses"

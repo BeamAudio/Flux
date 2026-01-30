@@ -43,6 +43,8 @@ C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\events\SDL_win
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\events\imKStoUCS.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\imKStoUCS.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\filesystem\SDL_filesystem.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_filesystem.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\SDL_gpu.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_gpu.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_gpu_openxr.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_openxrdyn.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\haptic\SDL_haptic.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_haptic.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\hidapi\SDL_hidapi.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_hidapi.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\io\SDL_asyncio.c;C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\SDL3-static.dir\Release\SDL_asyncio.obj

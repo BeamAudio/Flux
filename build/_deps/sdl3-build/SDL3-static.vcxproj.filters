@@ -136,6 +136,12 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\SDL_gpu.c">
       <Filter>src\gpu</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.c">
+      <Filter>src\gpu\xr</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.c">
+      <Filter>src\gpu\xr</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\haptic\SDL_haptic.c">
       <Filter>src\haptic</Filter>
     </ClCompile>
@@ -951,6 +957,18 @@
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\SDL_sysgpu.h">
       <Filter>src\gpu</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxr_internal.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrsym.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\haptic\SDL_haptic_c.h">
       <Filter>src\haptic</Filter>
     </ClInclude>
@@ -1620,6 +1638,9 @@
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_opengles2_khrplatform.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_openxr.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_pen.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
@@ -1801,6 +1822,9 @@
     </Filter>
     <Filter Include="src\gpu\vulkan">
       <UniqueIdentifier>{34E08440-5C57-315D-A2E1-5AF7240B7D2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu\xr">
+      <UniqueIdentifier>{B051112A-D7F6-3DB6-8D73-8D5379BACA5B}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\haptic">
       <UniqueIdentifier>{82CEF7E0-5F9E-33DA-A5B9-03DE5A8DE9CF}</UniqueIdentifier>

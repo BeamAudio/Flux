@@ -111,30 +111,51 @@ bool BeamHost::init() {
     SDL_ShowWindow(m_window);
 
     m_glContext = SDL_GL_CreateContext(m_window);
-    if (!m_glContext) return false;
+    if (!m_glContext) {
+        std::cerr << "CRITICAL: SDL_GL_CreateContext failed: " << SDL_GetError() << std::endl;
+        return false;
+    }
 
     // Load Icon
     SDL_Surface* icon = SDL_LoadBMP("assets/images/FLUX_LOGO.bmp");
+    if (!icon) icon = SDL_LoadBMP("../assets/images/FLUX_LOGO.bmp");
+    if (!icon) icon = SDL_LoadBMP("../../assets/images/FLUX_LOGO.bmp");
+
     if (icon) {
         SDL_SetWindowIcon(m_window, icon);
         SDL_DestroySurface(icon);
     } else {
-        std::cout << "Warning: FLUX_LOGO.bmp not found for window icon." << std::endl;
+        std::cout << "Warning: FLUX_LOGO.bmp not found for window icon. Error: " << SDL_GetError() << std::endl;
     }
 
-    if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) return false;
+    if (!gladLoadGLLoader((void*(*)(const char*))SDL_GL_GetProcAddress)) {
+        std::cerr << "CRITICAL: gladLoadGLLoader failed!" << std::endl;
+        return false;
+    }
+    
+    std::cout << "OpenGL Loaded Successfully." << std::endl;
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    std::cout << "Creating QuadBatcher..." << std::endl;
     m_batcher = std::make_unique<QuadBatcher>(10000);
+    std::cout << "Creating UI Shader..." << std::endl;
     m_uiShader = std::make_unique<Shader>(UI_VERTEX_SHADER, UI_FRAGMENT_SHADER);
     m_batcher->setShader(m_uiShader.get());
 
-    if (!SDL_Init(SDL_INIT_AUDIO)) return false;
+    std::cout << "Initializing SDL Audio..." << std::endl;
+    if (!SDL_Init(SDL_INIT_AUDIO)) {
+        std::cerr << "CRITICAL: SDL_Init(AUDIO) failed: " << SDL_GetError() << std::endl;
+        return false;
+    }
+    
+    std::cout << "Initializing Device Manager..." << std::endl;
     m_audioDeviceManager->initialise(2, 2);
+    std::cout << "Initializing Audio Engine..." << std::endl;
     if (!m_audioEngine->init(44100, 2)) return false;
     
+    std::cout << "Loading Project..." << std::endl;
     m_project = std::make_shared<FluxProject>();
     m_audioEngine->setGraph(m_project->getGraph());
 
@@ -146,11 +167,18 @@ bool BeamHost::init() {
     m_audioEngine->setPlaying(false); // Start paused
     m_audioEngine->seek(0);           // Start at time 0
 
-    m_workspace = std::make_shared<Workspace>(m_project, m_audioEngine.get());
+    std::cout << "Creating UI Components..." << std::endl;
+    std::cout << " - Workspace" << std::endl;
+    m_workspace = std::make_shared<Workspace>(m_project, m_audioEngine.get(), m_audioDeviceManager.get());
+    std::cout << " - Timeline" << std::endl;
     m_timeline = std::make_shared<Timeline>(m_project, m_audioEngine.get());
+    std::cout << " - TopBar" << std::endl;
     m_topBar = std::make_shared<TopBar>(m_width);
+    std::cout << " - Sidebar" << std::endl;
     m_browser = std::make_shared<Sidebar>(Sidebar::Side::Left);
+    std::cout << " - MasterStrip" << std::endl;
     m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine->getMasterNode());
+    std::cout << " - ConfigView" << std::endl;
     m_configView = std::make_shared<AudioConfigView>(m_audioDeviceManager.get(), m_audioEngine.get());
 
     m_browser->onAddFX = [this](std::string type) {
@@ -311,7 +339,7 @@ void BeamHost::handleEvents() {
 
 void BeamHost::render(float dt) {
     glViewport(0, 0, m_width, m_height);
-    glClearColor(0.08f, 0.09f, 0.1f, 1.0f);
+    glClearColor(0.05f, 0.05f, 0.06f, 1.0f); // BRAND_BLACK
     glClear(GL_COLOR_BUFFER_BIT);
     m_uiShader->use();
     float left = 0, right = (float)m_width, bottom = (float)m_height, top = 0;

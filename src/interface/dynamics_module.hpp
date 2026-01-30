@@ -23,20 +23,20 @@ public:
         
         // GR Meter
         float gr = m_dynamicsNode->getLatestGR();
-        float meterW = 100;
+        float meterW = m_bounds.w - 40;
         float meterH = 15;
-        float mx = m_bounds.x + 25;
+        float mx = m_bounds.x + 20;
         float my = m_bounds.y + 45;
 
         // Background
         batcher.drawRoundedRect(mx, my, meterW, meterH, 2.0f, 0.5f, 0.05f, 0.05f, 0.05f, 1.0f);
         
         // GR active area (from right to left)
-        float grNorm = std::clamp(gr * 0.1f, 0.0f, 1.0f); // Map roughly to 0..1
+        float grNorm = std::clamp(gr * 0.1f, 0.0f, 1.0f); 
         float activeW = meterW * grNorm;
-        batcher.drawRoundedRect(mx + meterW - activeW, my, activeW, meterH, 2.0f, 0.5f, 1.0f, 0.2f, 0.2f, 1.0f);
+        batcher.drawRoundedRect(mx + meterW - activeW, my, activeW, meterH, 2.0f, 0.5f, 0.56f, 0.03f, 0.03f, 1.0f); // BRAND_RED
         
-        batcher.drawText("GR", mx - 15, my + 2, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+        batcher.drawText("GR", mx, my - 10, 9, 0.6f, 0.6f, 0.6f, 1.0f);
     }
 
 private:

@@ -11,18 +11,22 @@ class TapeReel : public AudioModule {
 public:
     TapeReel(std::shared_ptr<FluxTrackNode> track, size_t nodeId, float x, float y) 
         : AudioModule(track, nodeId, x, y), m_trackNode(track) {
+        setName("TapeReel");
         setBounds(x, y, 200, 120);
     }
 
     void update(float dt) override {
+        AudioModule::update(dt);
         auto track = m_trackNode->getInternalNode();
         if (track->getState() == TrackState::Playing) {
             m_rotation += 2.0f * dt; 
         }
     }
 
-    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 12.0f, 1.0f, 0.22f, 0.22f, 0.23f, 1.0f);
+    void paint(QuadBatcher& batcher) override {
+        // We override paint to draw our custom reel look
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 12.0f, 1.0f, 0.05f, 0.05f, 0.06f, 1.0f); // BRAND_BLACK
+        
         auto track = m_trackNode->getInternalNode();
         float reelSize = 65.0f;
         float reelY = m_bounds.y + 35;
@@ -33,37 +37,42 @@ public:
                 float angle = m_rotation + (i * 2.094f);
                 float sx = x + reelSize * 0.5f + std::sin(angle) * reelSize * 0.35f;
                 float sy = y + reelSize * 0.5f - std::cos(angle) * reelSize * 0.35f;
-                batcher.drawRoundedRect(sx - 4, sy - 4, 8, 8, 4.0f, 0.5f, 0.1f, 0.1f, 0.1f, 1.0f);
+                batcher.drawRoundedRect(sx - 4, sy - 4, 8, 8, 4.0f, 0.5f, 0.05f, 0.05f, 0.06f, 1.0f);
             }
-            batcher.drawRoundedRect(x + reelSize * 0.5f - 5, y + reelSize * 0.5f - 5, 10, 10, 5.0f, 0.5f, 0.15f, 0.15f, 0.16f, 1.0f);
+            batcher.drawRoundedRect(x + reelSize * 0.5f - 5, y + reelSize * 0.5f - 5, 10, 10, 5.0f, 0.5f, 0.13f, 0.62f, 0.42f, 1.0f); // Emerald center
         };
 
         drawReel(m_bounds.x + 20, reelY);
         drawReel(m_bounds.x + 115, reelY);
         
-        AudioUtils::drawScrollingText(batcher, m_trackNode->getName(), m_bounds.x + 15, m_bounds.y + 10, 150, 15, 12, dt, m_scrollTimer, screenH);
+        // Use member scroll timer
+        float dt = 0.016f; // Approximation for static paint
+        // AudioUtils::drawScrollingText needs a persistent timer
+        batcher.drawText(m_trackNode->getName(), m_bounds.x + 15, m_bounds.y + 10, 12, 0.95f, 0.95f, 0.95f, 1.0f);
 
         // Record Button UI
         Rect recBounds = { m_bounds.x + m_bounds.w - 30, m_bounds.y + 8, 20, 20 };
         if (track->getState() == TrackState::Recording) {
-            batcher.drawRoundedRect(recBounds.x, recBounds.y, recBounds.w, recBounds.h, 10.0f, 2.0f, 1.0f, 0.1f, 0.1f, 1.0f); // Glowing red
-            batcher.drawText("REC", m_bounds.x + m_bounds.w - 55, m_bounds.y + 12, 10, 1.0f, 0.2f, 0.2f, 1.0f);
+            batcher.drawRoundedRect(recBounds.x, recBounds.y, recBounds.w, recBounds.h, 10.0f, 2.0f, 0.56f, 0.03f, 0.03f, 1.0f); // BRAND_RED
+            batcher.drawText("REC", m_bounds.x + m_bounds.w - 55, m_bounds.y + 12, 10, 0.56f, 0.03f, 0.03f, 1.0f);
         } else {
-            batcher.drawRoundedRect(recBounds.x, recBounds.y, recBounds.w, recBounds.h, 10.0f, 0.5f, 0.3f, 0.05f, 0.05f, 1.0f); // Dim red
+            batcher.drawRoundedRect(recBounds.x, recBounds.y, recBounds.w, recBounds.h, 10.0f, 0.5f, 0.3f, 0.05f, 0.05f, 1.0f); 
         }
 
         // Parent's ports
-        if (getInputPort()) getInputPort()->render(batcher, dt, screenW, screenH);
-        if (getOutputPort()) getOutputPort()->render(batcher, dt, screenW, screenH);
+        if (m_inputPort) m_inputPort->paint(batcher);
+        if (m_outputPort) m_outputPort->paint(batcher);
+    }
+
+    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
+        Component::render(batcher, dt, screenW, screenH);
     }
 
     bool onMouseDown(float x, float y, int button) override {
-        if (AudioModule::onMouseDown(x, y, button)) return true;
-        auto track = m_trackNode->getInternalNode();
-        
-        // Record Button check
+        // Record Button check first
         Rect recBounds = { m_bounds.x + m_bounds.w - 30, m_bounds.y + 8, 20, 20 };
         if (recBounds.contains(x, y)) {
+            auto track = m_trackNode->getInternalNode();
             if (track->getState() == TrackState::Recording) {
                 m_trackNode->stopRecording();
             } else {
@@ -72,8 +81,7 @@ public:
             }
             return true;
         }
-
-        return false;
+        return AudioModule::onMouseDown(x, y, button);
     }
 
 private:
@@ -84,5 +92,4 @@ private:
 
 } // namespace Beam
 
-#endif // TAPE_REEL_HPP
-
+#endif

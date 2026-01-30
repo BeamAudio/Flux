@@ -33,9 +33,23 @@ public:
     void drawQuad(float x, float y, float w, float h, float r, float g, float b, float a);
 
     /**
+     * @brief Draws a quad with a vertical gradient.
+     */
+    void drawGradientRect(float x, float y, float w, float h, 
+                          float r1, float g1, float b1, float a1,
+                          float r2, float g2, float b2, float a2);
+
+    /**
      * @brief Draws a rounded rectangle with customizable softness (SDF-based).
      */
     void drawRoundedRect(float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a);
+
+    /**
+     * @brief Draws a rounded rectangle with a vertical gradient.
+     */
+    void drawRoundedGradientRect(float x, float y, float w, float h, float radius, float softness,
+                                 float r1, float g1, float b1, float a1,
+                                 float r2, float g2, float b2, float a2);
 
     /**
      * @brief Draws bitmap text using the internal font.
@@ -63,6 +77,20 @@ public:
     void drawRect(float x, float y, float w, float h, float thickness, float r, float g, float b, float a);
     void flush();
 
+    // --- Clipping System ---
+    /**
+     * @brief Pushes a new clipping rectangle (intersection with current).
+     * @param rect The clipping rectangle in world/screen coordinates.
+     * @param screenHeight Needed to flip Y for OpenGL.
+     */
+    void pushClip(float x, float y, float w, float h, float screenHeight);
+    
+    /**
+     * @brief Pops the last clipping rectangle, restoring the previous state.
+     */
+    void popClip(float screenHeight);
+
+    // Deprecated single-level scissor
     void setScissor(float x, float y, float w, float h, float screenHeight);
     void clearScissor();
 
@@ -80,6 +108,11 @@ private:
     std::vector<Vertex> m_vertices;
     class Shader* m_shader = nullptr;
     float m_viewTx = 0.0f, m_viewTy = 0.0f, m_viewZoom = 1.0f;
+
+    struct ScissorRect {
+        float x, y, w, h;
+    };
+    std::vector<ScissorRect> m_scissorStack;
 };
 
 } // namespace Beam

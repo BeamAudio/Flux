@@ -11,17 +11,18 @@ enum class PortType { Input, Output };
 class Port : public Component {
 public:
     Port(PortType type, class AudioModule* parent) : m_type(type), m_parent(parent) {
+        setName("Port");
         setBounds(0, 0, 12, 12);
     }
 
-    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
+    void paint(QuadBatcher& batcher) override {
         float r = (m_type == PortType::Input) ? 0.4f : 0.8f;
         float g = (m_type == PortType::Input) ? 0.8f : 0.4f;
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, r, g, 1.0f, 1.0f);
+        batcher.drawRoundedRect(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, m_bounds.w*0.5f, 0.5f, r, g, 1.0f, 1.0f);
     }
 
     bool onMouseDown(float x, float y, int button) override {
-        Rect hitArea = { m_bounds.x - 10, m_bounds.y - 10, m_bounds.w + 20, m_bounds.h + 20 };
+        Rect hitArea = { m_bounds.x - 5, m_bounds.y - 5, m_bounds.w + 10, m_bounds.h + 10 };
         if (hitArea.contains(x, y)) {
             if (onConnectStarted) onConnectStarted(this);
             return true;

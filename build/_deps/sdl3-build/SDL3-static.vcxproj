@@ -1170,6 +1170,46 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/RelWithDebInfo//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\SDL_sysgpu.h" />
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.c">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Release//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/MinSizeRel//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/RelWithDebInfo//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.h" />
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxr_internal.h" />
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.c">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Release//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/MinSizeRel//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/RelWithDebInfo//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.h" />
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\gpu\xr\SDL_openxrsym.h" />
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\haptic\SDL_haptic.c">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -5357,6 +5397,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_opengles2_gl2ext.h" />
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_opengles2_gl2platform.h" />
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_opengles2_khrplatform.h" />
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_openxr.h" />
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_pen.h" />
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_pixels.h" />
     <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\include\SDL3\SDL_platform.h" />

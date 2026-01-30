@@ -1126,6 +1126,62 @@ if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
 endif()
 
 # both_sources at build/_deps/sdl3-src/cmake/sdlcommands.cmake:29 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/*.c")
+set(OLD_GLOB
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_gpu_openxr.c"
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_openxrdyn.c"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  set(NEW_ONLY ${NEW_GLOB})
+  set(OLD_ONLY ${OLD_GLOB})
+  list(REMOVE_ITEM NEW_ONLY ${OLD_GLOB})
+  list(REMOVE_ITEM OLD_ONLY ${NEW_GLOB})
+  if(NEW_ONLY)
+    message("The following files were added:")
+    foreach(VAR_FILE IN LISTS NEW_ONLY)
+      message("  +${VAR_FILE}")
+    endforeach()
+  endif()
+  if(OLD_ONLY)
+    message("The following files were removed:")
+    foreach(VAR_FILE IN LISTS OLD_ONLY)
+      message("  -${VAR_FILE}")
+    endforeach()
+  endif()
+  file(TOUCH_NOCREATE "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/cmake.verify_globs")
+endif()
+
+# both_sources at build/_deps/sdl3-src/cmake/sdlcommands.cmake:29 (file)
+file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/*.h")
+set(OLD_GLOB
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_gpu_openxr.h"
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_openxr_internal.h"
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_openxrdyn.h"
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/gpu/xr/SDL_openxrsym.h"
+  )
+if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
+  message("-- GLOB mismatch!")
+  set(NEW_ONLY ${NEW_GLOB})
+  set(OLD_ONLY ${OLD_GLOB})
+  list(REMOVE_ITEM NEW_ONLY ${OLD_GLOB})
+  list(REMOVE_ITEM OLD_ONLY ${NEW_GLOB})
+  if(NEW_ONLY)
+    message("The following files were added:")
+    foreach(VAR_FILE IN LISTS NEW_ONLY)
+      message("  +${VAR_FILE}")
+    endforeach()
+  endif()
+  if(OLD_ONLY)
+    message("The following files were removed:")
+    foreach(VAR_FILE IN LISTS OLD_ONLY)
+      message("  -${VAR_FILE}")
+    endforeach()
+  endif()
+  file(TOUCH_NOCREATE "C:/Users/Alexi/Documents/Beam Audio Flux/build/CMakeFiles/cmake.verify_globs")
+endif()
+
+# both_sources at build/_deps/sdl3-src/cmake/sdlcommands.cmake:29 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/haptic/*.c")
 set(OLD_GLOB
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/haptic/SDL_haptic.c"

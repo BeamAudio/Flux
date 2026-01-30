@@ -9,11 +9,9 @@ void InputHandler::addComponent(std::shared_ptr<Component> component) {
 
 void InputHandler::handleMouseDown(float x, float y, int button) {
     for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
-        if ((*it)->getBounds().contains(x, y)) {
-            if ((*it)->onMouseDown(x, y, button)) {
-                m_focusedComponent = *it;
-                break;
-            }
+        if ((*it)->onMouseDown(x, y, button)) {
+            m_focusedComponent = *it;
+            break;
         }
     }
 }
@@ -22,6 +20,10 @@ void InputHandler::handleMouseUp(float x, float y, int button) {
     if (m_focusedComponent) {
         m_focusedComponent->onMouseUp(x, y, button);
         m_focusedComponent = nullptr;
+    } else {
+        for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
+            if ((*it)->onMouseUp(x, y, button)) break;
+        }
     }
 }
 
@@ -30,9 +32,7 @@ void InputHandler::handleMouseMove(float x, float y) {
         m_focusedComponent->onMouseMove(x, y);
     } else {
         for (auto it = m_components.rbegin(); it != m_components.rend(); ++it) {
-            if ((*it)->getBounds().contains(x, y)) {
-                if ((*it)->onMouseMove(x, y)) break;
-            }
+            if ((*it)->onMouseMove(x, y)) break;
         }
     }
 }

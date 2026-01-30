@@ -1,0 +1,10 @@
+^C:\USERS\ALEXI\DOCUMENTS\BEAM AUDIO FLUX\BUILD\CMAKEFILES\E43CB433A7044FC91F47B7349DC14E38\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Alexi/Documents/Beam Audio Flux" "-BC:/Users/Alexi/Documents/Beam Audio Flux/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Alexi/Documents/Beam Audio Flux/build/BeamAudioFlux.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,7 +1,7 @@
 #ifndef GUI_SLIDER_HPP
 #define GUI_SLIDER_HPP
 
-#include "gui_component.hpp"
+#include "component.hpp"
 #include "../session/parameter.hpp"
 #include <memory>
 
@@ -21,7 +21,7 @@ enum class SliderStyle {
  * @class Slider
  * @brief A slider component, similar to JUCE's Slider
  */
-class Slider : public GuiComponent {
+class Slider : public Component {
 public:
     Slider();
     explicit Slider(std::shared_ptr<Parameter> parameter);

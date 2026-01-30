@@ -1,4 +1,5 @@
 #include "button.hpp"
+#include "look_and_feel.hpp"
 #include "../utilities/flux_audio_utils.hpp"
 
 namespace Beam {
@@ -33,32 +34,13 @@ void Button::onClick(std::function<void()> callback) {
 }
 
 void Button::paint(QuadBatcher& g) {
-    auto bounds = getBounds();
+    auto& lf = getLookAndFeel();
     
-    // Determine colors based on state
-    float r = 0.3f, g_color = 0.3f, b = 0.3f; // Default
-    
-    if (!m_enabled) {
-        r = 0.2f; g_color = 0.2f; b = 0.2f; // Disabled
-    } else if (m_isDown) {
-        r = 0.2f; g_color = 0.4f; b = 0.6f; // Pressed
-    } else if (m_isOver) {
-        r = 0.4f; g_color = 0.6f; b = 0.8f; // Hover
-    } else {
-        r = 0.3f; g_color = 0.5f; b = 0.7f; // Normal
-    }
-    
-    // Draw button background
-    g.drawRoundedRect(bounds.x, bounds.y, bounds.w, bounds.h, 4.0f, 0.5f, r, g_color, b, 1.0f);
-
-    // Draw text centered
-    float tw = AudioUtils::calculateTextWidth(m_text, 14.0f);
-    float textX = bounds.x + (bounds.w - tw) / 2.0f;
-    float textY = bounds.y + (bounds.h - 14.0f) / 2.0f;
-    g.drawText(m_text, textX, textY, 14.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    lf.drawButtonBackground(g, *this, m_isOver, m_isDown);
+    lf.drawButtonText(g, *this, m_isOver, m_isDown);
     
     // Call base paint method if there's a callback
-    GuiComponent::paint(g);
+    Component::paint(g);
 }
 
 void Button::mouseDown(const MouseEvent& event) {
@@ -68,14 +50,25 @@ void Button::mouseDown(const MouseEvent& event) {
     }
 }
 
-void Button::mouseUp(const MouseEvent& event) {
-    if (m_enabled && m_isDown) {
-        m_isDown = false;
-        if (m_clickCallback) {
+void Button::setToggleState(bool shouldBeOn, bool sendNotification) {
+    if (m_toggleState != shouldBeOn) {
+        m_toggleState = shouldBeOn;
+        if (sendNotification && m_clickCallback) {
             m_clickCallback();
         }
     }
-    // Would trigger a repaint in a real implementation
+}
+
+void Button::mouseUp(const MouseEvent& event) {
+    if (m_enabled && m_isDown) {
+        m_isDown = false;
+        
+        if (m_isToggle) {
+            setToggleState(!m_toggleState, true);
+        } else if (m_clickCallback) {
+            m_clickCallback();
+        }
+    }
 }
 
 void Button::mouseEnter(const MouseEvent& event) {

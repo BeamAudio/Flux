@@ -13,7 +13,7 @@ public:
         : AudioModule(node, nodeId, x, y), m_filterNode(node) {
         
         m_graph = std::make_shared<FilterGraph>(node->getInternalFilter());
-        addChild(m_graph);
+        addChildComponent(m_graph);
         
         // Resize to fit the graph
         setBounds(x, y, 160, 260);
@@ -25,12 +25,12 @@ public:
             // Position graph below the title bar
             m_graph->setBounds(x + 15, y + 45, w - 30, 80);
             
-            // Re-position knobs below the graph
+            // Re-position sliders below the graph
             float startY = 135;
             float spacing = 55;
             int count = 0;
             for (auto& child : m_children) {
-                if (child != m_graph) {
+                if (child.get() != static_cast<Component*>(m_graph.get())) {
                     child->setBounds(x + 25, y + startY + (count * spacing), 110, 40);
                     count++;
                 }
@@ -45,7 +45,4 @@ private:
 
 } // namespace Beam
 
-#endif // FILTER_MODULE_HPP
-
-
-
+#endif

@@ -7,38 +7,97 @@
 #include "filter_module.hpp"
 #include "dynamics_module.hpp"
 #include "spectrum_module.hpp"
+#include "loudness_module.hpp"
+#include "popup_host.hpp"
 #include "../engine/flux_track_node.hpp"
 #include "../engine/flux_script_node.hpp"
 #include "../engine/analog_suite.hpp"
 #include "../engine/flux_fx_nodes.hpp"
 #include "../engine/audio_engine.hpp"
+#include "../engine/audio_device_manager.hpp"
+#include "../engine/plugin_registry.hpp"
 #include "../session/flux_project.hpp"
 #include "../utilities/flux_audio_utils.hpp"
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <SDL3/SDL.h> // Explicitly include SDL for mouse state
 
 namespace Beam {
 
-class Workspace : public Component {
+class Workspace : public Component, public PopupHost {
 public:
-    Workspace(std::shared_ptr<FluxProject> project, AudioEngine* engine) 
-        : m_project(project), m_engine(engine) {
+    Workspace(std::shared_ptr<FluxProject> project, AudioEngine* engine, AudioDeviceManager* deviceManager = nullptr) 
+        : m_project(project), m_engine(engine), m_deviceManager(deviceManager) {
+        setName("Workspace");
         setBounds(0, 0, 10000, 10000); 
         m_zoom = 1.0f;
+
+        registerBuiltInPlugins();
+    }
+
+    void registerBuiltInPlugins() {
+        auto& reg = PluginRegistry::get();
+        // Dynamics
+        reg.registerPlugin("Opto-2A", [](int b, float s){ return std::make_shared<Opto2A>(b, s); });
+        reg.registerPlugin("FET-76", [](int b, float s){ return std::make_shared<FET76>(b, s); });
+        reg.registerPlugin("Tube Limiter", [](int b, float s){ return std::make_shared<TubeLimiter>(b, s); });
+        reg.registerPlugin("VCA-Bus", [](int b, float s){ return std::make_shared<VCABus>(b, s); });
+        reg.registerPlugin("Vari-Mu", [](int b, float s){ return std::make_shared<VariMu>(b, s); });
+        
+        // EQ
+        reg.registerPlugin("Tube-P EQ", [](int b, float s){ return std::make_shared<TubeP_EQ>(b, s); });
+        reg.registerPlugin("Console-E", [](int b, float s){ return std::make_shared<ConsoleE_EQ>(b, s); });
+        reg.registerPlugin("Vintage-G", [](int b, float s){ return std::make_shared<VintageG_EQ>(b, s); });
+        reg.registerPlugin("Graphic-10", [](int b, float s){ return std::make_shared<Graphic10_EQ>(b, s); });
+        reg.registerPlugin("Air-Lift", [](int b, float s){ return std::make_shared<AirLift_EQ>(b, s); });
+
+        // Reverb
+        reg.registerPlugin("Steel Plate", [](int b, float s){ return std::make_shared<SteelPlate>(b, s); });
+        reg.registerPlugin("Golden Hall", [](int b, float s){ return std::make_shared<GoldenHall>(b, s); });
+        reg.registerPlugin("Copper Spring", [](int b, float s){ return std::make_shared<CopperSpring>(b, s); });
+        reg.registerPlugin("Cathedral", [](int b, float s){ return std::make_shared<Cathedral>(b, s); });
+        reg.registerPlugin("Grain Verb", [](int b, float s){ return std::make_shared<GrainVerb>(b, s); });
+
+        // Delay
+        reg.registerPlugin("Echo-Plex", [](int b, float s){ return std::make_shared<EchoPlex>(b, s); });
+        reg.registerPlugin("BBD-Bucket", [](int b, float s){ return std::make_shared<BBD_Bucket>(b, s); });
+        reg.registerPlugin("Reverse", [](int b, float s){ return std::make_shared<Reverse_Delay>(b, s); });
+        reg.registerPlugin("Ping-Pong", [](int b, float s){ return std::make_shared<PingPong_Delay>(b, s); });
+        reg.registerPlugin("Space Shift", [](int b, float s){ return std::make_shared<SpaceShift>(b, s); });
+
+        // Utility
+        reg.registerPlugin("Gain", [](int b, float s){ return std::make_shared<FluxGainNode>(b); });
+        reg.registerPlugin("Filter", [](int b, float s){ return std::make_shared<FluxFilterNode>(b, s); });
+        reg.registerPlugin("Delay", [](int b, float s){ return std::make_shared<FluxDelayNode>(b, s); });
+        reg.registerPlugin("Spectrum", [](int b, float s){ return std::make_shared<FluxSpectrumAnalyzer>(b, s); });
+        reg.registerPlugin("Loudness", [](int b, float s){ return std::make_shared<FluxLoudnessMeter>(b, s); });
+    }
+
+    void showPopup(std::shared_ptr<Component> popup) override {
+        m_popup = popup;
+        if(m_popup) m_popup->setParent(this);
+    }
+
+    void closePopup() override {
+        m_popup = nullptr;
     }
 
     void update(float dt) override {
         syncReels();
-        for (auto& module : m_modules) module->update(dt);
+        Component::update(dt);
+    }
+
+    void paint(QuadBatcher& batcher) override {
+        // Background Grid (Virtual Space) - Special logic needing zoom
     }
 
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        if (!m_isVisible) return;
+        if (!m_isVisible) return; 
         
         batcher.setViewTransform(m_panX, m_panY, m_zoom);
 
-        // Background Grid (Virtual Space)
+        // Background Grid
         float spacing = 50.0f;
         for (float x = 0; x < 5000; x += spacing) 
             batcher.drawQuad(x, 0, 1, 5000, 0.2f, 0.2f, 0.2f, 0.5f);
@@ -47,13 +106,19 @@ public:
 
         for (auto& cable : m_cables) renderCable(batcher, cable, dt, screenH);
 
-        for (auto& module : m_modules) module->render(batcher, dt, screenW, screenH);
+        Component::render(batcher, dt, screenW, screenH);
+
+        if (m_popup) {
+            // Popups are rendered in screen space (or Workspace root space) on top of everything
+            // Note: Component::render pops the clip, so we are unclipped here relative to Workspace
+            m_popup->render(batcher, dt, screenW, screenH);
+        }
 
         batcher.resetViewTransform(screenW, screenH);
 
         if (m_isDraggingCable && m_activePort) {
-            float mx, my; SDL_GetMouseState(&mx, &my);
-            // Transform mouse to virtual space
+            float mx, my;
+            SDL_GetMouseState(&mx, &my);
             float vmx = (mx - m_panX) / m_zoom;
             float vmy = (my - m_panY) / m_zoom;
             
@@ -84,7 +149,7 @@ public:
                 float angle = m_loadingTimer * 5.0f + (i * 1.57f);
                 float rx = cx + std::cos(angle) * 30.0f;
                 float ry = cy + std::sin(angle) * 30.0f;
-                batcher.drawRoundedRect(rx - 8, ry - 8, 16, 16, 8.0f, 0.5f, 0.2f, 0.6f, 1.0f, 1.0f);
+                batcher.drawRoundedRect(rx - 8, ry - 8, 16, 16, 8.0f, 0.5f, 0.13f, 0.62f, 0.42f, 1.0f); // BRAND_EMERALD
             }
             batcher.drawText("PROCESSING TAPE...", cx - 60, cy + 60, 14, 1.0f, 1.0f, 1.0f, 1.0f);
         }
@@ -94,7 +159,6 @@ public:
         if (!m_project) return;
         auto& tracks = m_project->getTracks();
         
-        // Sync Tracks
         for (auto& track : tracks) {
             bool exists = false;
             for (auto& mod : m_modules) {
@@ -102,14 +166,13 @@ public:
                 if (reel && reel->getNodeId() == track.nodeId) { exists = true; break; }
             }
             if (!exists) {
-                float x = (400.0f + (track.trackIndex * 50.0f) + m_panX) / m_zoom;
-                float y = (100.0f + (track.trackIndex * 150.0f) + m_panY) / m_zoom;
+                float x = 400.0f + (track.trackIndex * 50.0f);
+                float y = 100.0f + (track.trackIndex * 150.0f);
                 auto reel = std::make_shared<TapeReel>(track.node, track.nodeId, x, y);
                 setupModule(reel);
             }
         }
 
-        // Sync Input Node
         auto nodes = m_project->getGraph()->getNodes();
         for (auto const& [id, node] : nodes) {
             if (node->getName() == "Audio Input" || node->getName() == "Master") {
@@ -121,7 +184,7 @@ public:
                 if (!exists) {
                     float x = (node->getName() == "Master" ? 800.0f : 100.0f);
                     float y = (node->getName() == "Master" ? 250.0f : 100.0f);
-                    auto mod = std::make_shared<AudioModule>(node, id, x, y);
+                    auto mod = std::make_shared<AudioModule>(node, id, x, y, m_deviceManager);
                     setupModule(mod);
                 }
             }
@@ -133,6 +196,7 @@ public:
         if (mod->getInputPort()) mod->getInputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
         if (mod->getOutputPort()) mod->getOutputPort()->onConnectStarted = [this](Port* p) { startCableDrag(p); };
         m_modules.push_back(mod);
+        addChildComponent(mod);
     }
 
     void addTrack(const std::string& filePath, float x, float y, AudioEngine& engine) {
@@ -155,7 +219,7 @@ public:
             size_t totalFrames = fluxTrack->getInternalNode()->getTotalFrames();
             Region r = {fileName, 0, totalFrames, 0, td.trackIndex};
             r.channelPeaks = fluxTrack->getPeakData(400); 
-            td.regions.push_back(r);
+            td.regions.push_back(r); 
             
             m_project->addTrack(td);
             syncReels(); 
@@ -164,105 +228,67 @@ public:
     }
 
     void addFX(const std::string& type, float x, float y) {
-        std::shared_ptr<FluxNode> fxNode;
         int buf = 1024 * 4;
         float sr = 44100.0f;
+        float vx = (x - m_panX) / m_zoom;
+        float vy = (y - m_panY) / m_zoom;
 
-        x = (x - m_panX) / m_zoom;
-        y = (y - m_panY) / m_zoom;
-
-        if (type == "Filter") {
-            auto node = std::make_shared<FluxFilterNode>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<FilterModule>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-
-        if (type == "Opto-2A") {
-            auto node = std::make_shared<Opto2A>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<DynamicsModule<Opto2A>>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-        if (type == "FET-76") {
-            auto node = std::make_shared<FET76>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<DynamicsModule<FET76>>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-        if (type == "Tube Limiter") {
-            auto node = std::make_shared<TubeLimiter>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<DynamicsModule<TubeLimiter>>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-        if (type == "VCA-Bus") {
-            auto node = std::make_shared<VCABus>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<DynamicsModule<VCABus>>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-        if (type == "Vari-Mu") {
-            auto node = std::make_shared<VariMu>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<DynamicsModule<VariMu>>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-
-        if (type == "Tube-P EQ") fxNode = std::make_shared<TubeP_EQ>(buf, sr);
-        else if (type == "Console-E") fxNode = std::make_shared<ConsoleE_EQ>(buf, sr);
-        else if (type == "Vintage-G") fxNode = std::make_shared<VintageG_EQ>(buf, sr);
-        else if (type == "Graphic-10") fxNode = std::make_shared<Graphic10_EQ>(buf, sr);
-        else if (type == "Air-Lift") fxNode = std::make_shared<AirLift_EQ>(buf, sr);
-        
-        else if (type == "Steel Plate") fxNode = std::make_shared<SteelPlate>(buf, sr);
-        else if (type == "Golden Hall") fxNode = std::make_shared<GoldenHall>(buf, sr);
-        else if (type == "Copper Spring") fxNode = std::make_shared<CopperSpring>(buf, sr);
-        else if (type == "Cathedral") fxNode = std::make_shared<Cathedral>(buf, sr);
-        else if (type == "Grain Verb") fxNode = std::make_shared<GrainVerb>(buf, sr);
-
-        else if (type == "Echo-Plex") fxNode = std::make_shared<EchoPlex>(buf, sr);
-        else if (type == "BBD-Bucket") fxNode = std::make_shared<BBD_Bucket>(buf, sr);
-        else if (type == "Reverse") fxNode = std::make_shared<Reverse_Delay>(buf, sr);
-        else if (type == "Ping-Pong") fxNode = std::make_shared<PingPong_Delay>(buf, sr);
-        else if (type == "Space Shift") fxNode = std::make_shared<SpaceShift>(buf, sr);
-
-        else if (type == "Gain") fxNode = std::make_shared<FluxGainNode>(buf);
-        else if (type == "Delay") fxNode = std::make_shared<FluxDelayNode>(buf, sr);
-        else if (type == "Spectrum") {
-            auto node = std::make_shared<FluxSpectrumAnalyzer>(buf, sr);
-            size_t id = m_project->getGraph()->addNode(node);
-            setupModule(std::make_shared<SpectrumModule>(node, id, x, y));
-            syncReels(); if (m_engine) m_engine->updatePlan();
-            return;
-        }
-        else if (type == "Loudness") fxNode = std::make_shared<FluxLoudnessMeter>(buf, sr);
-        else if (type == "Empty Tape") {
+        if (type == "Empty Tape") {
             auto fluxTrack = std::make_shared<FluxTrackNode>("Empty Tape", buf);
             size_t nodeId = m_project->getGraph()->addNode(fluxTrack);
-            
-            TrackData td;
-            td.node = fluxTrack;
-            td.nodeId = nodeId;
-            td.trackIndex = (int)m_project->getTracks().size();
-            
-            m_project->addTrack(td);
-            syncReels(); 
-            return;
+            TrackData td; td.node = fluxTrack; td.nodeId = nodeId; td.trackIndex = (int)m_project->getTracks().size();
+            m_project->addTrack(td); syncReels(); return;
         }
 
-        if (fxNode) {
-            size_t id = m_project->getGraph()->addNode(fxNode);
-            auto mod = std::make_shared<AudioModule>(fxNode, id, x, y);
+        // Use Registry
+        auto node = PluginRegistry::get().createPlugin(type, buf, sr);
+        
+        if (node) {
+            size_t id = m_project->getGraph()->addNode(node);
+            std::shared_ptr<AudioModule> mod;
+
+            // Specialized UI mappings
+            if (type == "Filter") {
+                if (auto cast = std::dynamic_pointer_cast<FluxFilterNode>(node)) 
+                    mod = std::make_shared<FilterModule>(cast, id, vx, vy);
+            }
+            else if (type == "Opto-2A") {
+                if (auto cast = std::dynamic_pointer_cast<Opto2A>(node)) 
+                    mod = std::make_shared<DynamicsModule<Opto2A>>(cast, id, vx, vy);
+            }
+            else if (type == "FET-76") {
+                if (auto cast = std::dynamic_pointer_cast<FET76>(node)) 
+                    mod = std::make_shared<DynamicsModule<FET76>>(cast, id, vx, vy);
+            }
+            else if (type == "Tube Limiter") {
+                if (auto cast = std::dynamic_pointer_cast<TubeLimiter>(node)) 
+                    mod = std::make_shared<DynamicsModule<TubeLimiter>>(cast, id, vx, vy);
+            }
+            else if (type == "VCA-Bus") {
+                if (auto cast = std::dynamic_pointer_cast<VCABus>(node)) 
+                    mod = std::make_shared<DynamicsModule<VCABus>>(cast, id, vx, vy);
+            }
+            else if (type == "Vari-Mu") {
+                if (auto cast = std::dynamic_pointer_cast<VariMu>(node)) 
+                    mod = std::make_shared<DynamicsModule<VariMu>>(cast, id, vx, vy);
+            }
+            else if (type == "Spectrum") {
+                if (auto cast = std::dynamic_pointer_cast<FluxSpectrumAnalyzer>(node))
+                    mod = std::make_shared<SpectrumModule>(cast, id, vx, vy);
+            }
+            else if (type == "Loudness") {
+                if (auto cast = std::dynamic_pointer_cast<FluxLoudnessMeter>(node))
+                    mod = std::make_shared<LoudnessModule>(cast, id, vx, vy);
+            }
+            
+            // Fallback to auto-generated
+            if (!mod) mod = std::make_shared<AudioModule>(node, id, vx, vy, m_deviceManager); 
+
             setupModule(mod);
             syncReels();
             if (m_engine) m_engine->updatePlan();
+        } else {
+            std::cout << "Error: Unknown FX type '" << type << "'" << std::endl;
         }
     }
 
@@ -273,7 +299,7 @@ public:
         size_t id = m_project->getGraph()->addNode(node);
         float vx = (x - m_panX) / m_zoom;
         float vy = (y - m_panY) / m_zoom;
-        auto mod = std::make_shared<AudioModule>(node, id, vx, vy);
+        auto mod = std::make_shared<AudioModule>(node, id, vx, vy, m_deviceManager);
         setupModule(mod);
         syncReels();
         if (m_engine) m_engine->updatePlan();
@@ -291,7 +317,11 @@ public:
             else ++it;
         }
         for (auto it = m_modules.begin(); it != m_modules.end(); ++it) {
-            if (it->get() == mod) { m_modules.erase(it); break; }
+            if (it->get() == mod) { 
+                removeChildComponent(it->get());
+                m_modules.erase(it); 
+                break; 
+            }
         }
         if (m_engine) m_engine->updatePlan();
     }
@@ -307,8 +337,7 @@ public:
                 return;
             }
         }
-        m_isDraggingCable = true; 
-        m_activePort = p; 
+        m_isDraggingCable = true; m_activePort = p; 
     }
 
     void connectPorts(Port* p1, Port* p2) {
@@ -323,72 +352,85 @@ public:
     bool onMouseDown(float x, float y, int button) override {
         if (!m_isVisible) return false;
         
+        if (m_popup) {
+            float vmx = (x - m_panX) / m_zoom;
+            float vmy = (y - m_panY) / m_zoom;
+            if (m_popup->getBounds().contains(vmx, vmy)) {
+                return m_popup->onMouseDown(vmx, vmy, button);
+            } else {
+                closePopup();
+                return true; 
+            }
+        }
+
         float vmx = (x - m_panX) / m_zoom;
         float vmy = (y - m_panY) / m_zoom;
+        
+        if (Component::onMouseDown(vmx, vmy, button)) return true;
 
-        for (auto it = m_modules.rbegin(); it != m_modules.rend(); ++it) {
-            if ((*it)->getBounds().contains(vmx, vmy)) return (*it)->onMouseDown(vmx, vmy, button);
-        }
         if (button == 3) { m_isPanning = true; m_lastMouseX = x; m_lastMouseY = y; return true; }
         return false;
     }
 
     bool onMouseUp(float x, float y, int button) override {
-        if (m_isDraggingCable) {
-            float vmx = (x - m_panX) / m_zoom;
-            float vmy = (y - m_panY) / m_zoom;
-
-            for (auto& mod : m_modules) {
-                auto audioMod = std::dynamic_pointer_cast<AudioModule>(mod);
-                if (audioMod) {
-                    auto checkPort = [&](std::shared_ptr<Port> p) {
-                        if (!p) return false;
-                        Rect b = p->getBounds();
-                        float padding = 15.0f / m_zoom; // Scale padding with zoom
-                        return (vmx >= b.x - padding && vmx <= b.x + b.w + padding && vmy >= b.y - padding && vmy <= b.y + b.h + padding);
-                    };
-
-                    if (checkPort(audioMod->getInputPort())) connectPorts(m_activePort, audioMod->getInputPort().get());
-                    else if (checkPort(audioMod->getOutputPort())) connectPorts(m_activePort, audioMod->getOutputPort().get());
-                }
-            }
-            m_isDraggingCable = false; m_activePort = nullptr;
-            return true;
+        if (m_popup) {
+             return true; 
         }
-        if (!m_isVisible) return false;
+
+        float vmx = (x - m_panX) / m_zoom;
+        float vmy = (y - m_panY) / m_zoom;
+
+        if (m_isDraggingCable) {
+            for (auto& mod : m_modules) {
+                auto checkPort = [&](std::shared_ptr<Port> p) {
+                    if (!p) return false;
+                    Rect b = p->getBounds();
+                    float padding = 15.0f / m_zoom;
+                    return (vmx >= b.x - padding && vmx <= b.x + b.w + padding && vmy >= b.y - padding && vmy <= b.y + b.h + padding);
+                };
+                if (checkPort(mod->getInputPort())) connectPorts(m_activePort, mod->getInputPort().get());
+                else if (checkPort(mod->getOutputPort())) connectPorts(m_activePort, mod->getOutputPort().get());
+            }
+            m_isDraggingCable = false; m_activePort = nullptr; return true;
+        }
         m_isPanning = false;
-        for (auto& mod : m_modules) mod->onMouseUp(x, y, button);
+        
+        if (Component::onMouseUp(vmx, vmy, button)) return true;
+        
         return true;
     }
 
     bool onMouseMove(float x, float y) override {
-        if (m_isDraggingCable) return true; 
-        if (!m_isVisible) return false;
-        
         float vmx = (x - m_panX) / m_zoom;
         float vmy = (y - m_panY) / m_zoom;
 
+        if (m_popup) {
+            m_popup->onMouseMove(vmx, vmy);
+            return true;
+        }
+
+        if (m_isDraggingCable) return true; 
+        if (!m_isVisible) return false;
         if (m_isPanning) {
             m_panX += (x - m_lastMouseX); 
             m_panY += (y - m_lastMouseY);
             m_lastMouseX = x; m_lastMouseY = y; return true;
         }
-        for (auto& mod : m_modules) if (mod->onMouseMove(vmx, vmy)) return true;
+        
+        if (Component::onMouseMove(vmx, vmy)) return true;
+        
         return false;
     }
 
     bool onMouseWheel(float x, float y, float delta) override {
         if (!m_isVisible) return false;
         float oldZoom = m_zoom;
-        float factor = (delta > 0) ? 1.1f : 0.9f;
-        m_zoom *= factor;
+        m_zoom *= (delta > 0) ? 1.1f : 0.9f;
         m_zoom = (std::clamp)(m_zoom, 0.1f, 5.0f);
         m_panX = x - (x - m_panX) * (m_zoom / oldZoom);
         m_panY = y - (y - m_panY) * (m_zoom / oldZoom);
         return true;
     }
-
-    void setVisible(bool visible) { m_isVisible = visible; }
 
 private:
     void renderCable(QuadBatcher& batcher, Cable& cable, float dt, float screenH) {
@@ -409,12 +451,12 @@ private:
             curvePoints.push_back({px, py});
         }
         batcher.drawCurve(curvePoints, 6.0f * m_zoom, 0.05f, 0.05f, 0.05f, 0.4f);
-        batcher.drawCurve(curvePoints, 3.0f * m_zoom, 0.25f, 0.55f, 1.0f, 1.0f);
-        batcher.drawCurve(curvePoints, 1.0f * m_zoom, 0.5f, 0.8f, 1.0f, 0.7f);
+        batcher.drawCurve(curvePoints, 3.0f * m_zoom, 0.13f, 0.62f, 0.42f, 1.0f); // Emerald
     }
 
     std::shared_ptr<FluxProject> m_project;
     AudioEngine* m_engine;
+    AudioDeviceManager* m_deviceManager;
     std::vector<std::shared_ptr<AudioModule>> m_modules;
     std::vector<Cable> m_cables;
     float m_panX = 0, m_panY = 0;
@@ -425,8 +467,9 @@ private:
     Port* m_activePort = nullptr;
     bool m_isLoading = false;
     float m_loadingTimer = 0.0f;
+    std::shared_ptr<Component> m_popup;
 };
 
 } // namespace Beam
 
-#endif // WORKSPACE_HPP
+#endif

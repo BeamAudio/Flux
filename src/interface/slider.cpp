@@ -1,4 +1,5 @@
 #include "slider.hpp"
+#include "look_and_feel.hpp"
 #include <algorithm>
 
 namespace Beam {
@@ -57,44 +58,17 @@ void Slider::setTextValueSuffix(const std::string& suffix) {
 }
 
 void Slider::paint(QuadBatcher& g) {
-    auto bounds = getBounds();
+    auto& lf = getLookAndFeel();
     
-    // Draw background
-    g.drawQuad(bounds.x, bounds.y, bounds.w, bounds.h, 0.2f, 0.2f, 0.2f, 1.0f);
-
-    // Draw slider fill based on style
     float valueNorm = static_cast<float>((getValue() - m_min) / (m_max - m_min));
+    float rotaryStartAngle = -135.0f;
+    float rotaryEndAngle = 135.0f;
 
-    switch (m_style) {
-        case SliderStyle::LinearHorizontal:
-            g.drawQuad(bounds.x, bounds.y, bounds.w * valueNorm, bounds.h, 0.3f, 0.5f, 0.8f, 1.0f);
-            break;
-
-        case SliderStyle::LinearVertical:
-            g.drawQuad(bounds.x, bounds.y + bounds.h * (1.0f - valueNorm), bounds.w, bounds.h * valueNorm, 0.3f, 0.5f, 0.8f, 1.0f);
-            break;
-
-        case SliderStyle::Rotary:
-            // Simplified rotary visualization - draw a circle with indicator
-            float centerX = bounds.x + bounds.w / 2.0f;
-            float centerY = bounds.y + bounds.h / 2.0f;
-            float radius = (bounds.w < bounds.h ? bounds.w : bounds.h) / 2.0f - 5.0f;
-
-            // Draw circle
-            g.drawQuad(centerX - radius, centerY - radius, radius * 2, radius * 2, 0.3f, 0.3f, 0.3f, 1.0f);
-
-            // Draw indicator
-            float angle = 270.0f + valueNorm * 270.0f; // From -90° to 180°
-            float radAngle = angle * 3.14159f / 180.0f;
-            float indicatorX = centerX + cosf(radAngle) * radius * 0.7f;
-            float indicatorY = centerY + sinf(radAngle) * radius * 0.7f;
-
-            g.drawQuad(indicatorX - 3, indicatorY - 3, 6, 6, 0.8f, 0.8f, 0.2f, 1.0f);
-            break;
-    }
+    lf.drawSliderBackground(g, *this, valueNorm, rotaryStartAngle, rotaryEndAngle);
+    lf.drawSliderPointer(g, *this, valueNorm, rotaryStartAngle, rotaryEndAngle);
     
     // Call base paint method if there's a callback
-    GuiComponent::paint(g);
+    Component::paint(g);
 }
 
 void Slider::mouseDown(const MouseEvent& event) {

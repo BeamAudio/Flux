@@ -2,6 +2,7 @@
 #define SIDEBAR_HPP
 
 #include "component.hpp"
+#include "../utilities/flux_audio_utils.hpp"
 #include <functional>
 #include <string>
 
@@ -11,37 +12,36 @@ class Sidebar : public Component {
 public:
     enum class Side { Left, Right };
 
-    Sidebar(Side side) : m_side(side), m_category("NONE") {}
+    Sidebar(Side side) : m_side(side), m_category("NONE") {
+        setName("Sidebar");
+    }
 
-    void setVisible(bool visible) { m_isVisible = visible; }
-
-    void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        if (!m_isVisible) return;
-        batcher.drawQuad(m_bounds.x, m_bounds.y, m_bounds.w, m_bounds.h, 0.1f, 0.11f, 0.12f, 1.0f);
-        float borderX = (m_side == Side::Left) ? m_bounds.x + m_bounds.w - 1 : m_bounds.x;
-        batcher.drawQuad(borderX, m_bounds.y, 1, m_bounds.h, 0.2f, 0.2f, 0.2f, 1.0f);
+    void paint(QuadBatcher& batcher) override {
+        float x = m_bounds.x;
+        float y = m_bounds.y;
+        batcher.drawQuad(x, y, m_bounds.w, m_bounds.h, 0.05f, 0.05f, 0.06f, 1.0f); // BRAND_BLACK
+        float borderX = (m_side == Side::Left) ? x + m_bounds.w - 1 : x;
+        batcher.drawQuad(borderX, y, 1, m_bounds.h, 0.13f, 0.62f, 0.42f, 0.5f); // BRAND_EMERALD
 
         if (m_side == Side::Left) {
-            float yOff = m_bounds.y + 20;
-            batcher.drawText(m_category == "NONE" ? "CATEGORIES" : "< " + m_category, m_bounds.x + 15, yOff, 12, 0.5f, 0.5f, 0.5f, 1.0f);
+            float yOff = y + 20;
+            batcher.drawText(m_category == "NONE" ? "CATEGORIES" : "< " + m_category, x + 15, yOff, 12, 0.95f, 0.95f, 0.95f, 1.0f);
             yOff += 30;
 
             auto drawBtn = [&](const std::string& label, bool isSelected = false) {
                 float tw = AudioUtils::calculateTextWidth(label, 12.0f);
                 float btnW = m_bounds.w - 20;
-                // If text is too wide, we'll draw it but warn developer here
-                // For now, let's just make sure the box is at least wide enough for the text if it overflows
-                if (tw + 20 > btnW) {
-                    // Possible future: expand sidebar?
-                }
-                batcher.drawRoundedRect(m_bounds.x + 10, yOff, btnW, 28, 4.0f, 0.5f, isSelected ? 0.2f : 0.15f, isSelected ? 0.4f : 0.16f, isSelected ? 0.8f : 0.17f, 1.0f);
                 
-                // Use scissoring or clipping if text is too long
+                float r = isSelected ? 0.13f : 0.1f;
+                float g = isSelected ? 0.62f : 0.1f;
+                float b = isSelected ? 0.42f : 0.12f;
+
+                batcher.drawRoundedRect(x + 10, yOff, btnW, 28, 4.0f, 0.5f, r, g, b, 1.0f);
+                
                 if (tw > btnW - 10) {
-                    // Scissor to btn width
-                    batcher.drawText(label.substr(0, (int)((btnW - 20) / 12.0f)) + "..", m_bounds.x + 20, yOff + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+                    batcher.drawText(label.substr(0, (int)((btnW - 20) / 12.0f)) + "..", x + 20, yOff + 8, 12, 0.95f, 0.95f, 0.95f, 1.0f);
                 } else {
-                    batcher.drawText(label, m_bounds.x + 20, yOff + 8, 12, 0.9f, 0.9f, 0.9f, 1.0f);
+                    batcher.drawText(label, x + 20, yOff + 8, 12, 0.95f, 0.95f, 0.95f, 1.0f);
                 }
                 yOff += 32;
             };
@@ -80,13 +80,10 @@ public:
                 drawBtn("Gain");
                 drawBtn("Filter");
                 drawBtn("Empty Tape");
-            yOff += 20;
-            batcher.drawText("UTILITY", m_bounds.x + 10, yOff, 12, 0.4f, 0.4f, 0.45f, 1.0f);
-            yOff += 20;
-            drawBtn("Audio Input");
-            drawBtn("MIDI Input");
-            drawBtn("Spectrum");
-            drawBtn("Loudness");
+                drawBtn("Audio Input");
+                drawBtn("MIDI Input");
+                drawBtn("Spectrum");
+                drawBtn("Loudness");
                 drawBtn("Script");
             }
         }
@@ -94,6 +91,7 @@ public:
 
     bool onMouseDown(float x, float y, int button) override {
         if (!m_isVisible || m_side != Side::Left) return false;
+        if (!m_bounds.contains(x, y)) return false;
 
         float yOff = m_bounds.y + 20;
         // Back to categories

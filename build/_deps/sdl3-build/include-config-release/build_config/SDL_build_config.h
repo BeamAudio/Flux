@@ -488,6 +488,7 @@
 #define SDL_GPU_D3D12 1
 #define SDL_GPU_VULKAN 1
 /* #undef SDL_GPU_METAL */
+#define HAVE_GPU_OPENXR 1
 
 /* #undef SDL_GPU_PRIVATE */
 

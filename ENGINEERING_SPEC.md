@@ -19,7 +19,12 @@ Beam Audio Flux is a high-performance, "no-framework" Digital Audio Workstation 
 - **Hybrid View**:
   - **Splicing Mode**: Linear timeline for traditional editing.
   - **Flux Mode**: Modular spatial canvas for routing and FX design.
-- **Custom UI System**: Built from scratch to ensure maximum reactivity and stylized "analog" aesthetics.
+- **Unified UI System**: A custom component architecture (inspired by JUCE) featuring absolute hit-testing, recursive event propagation, and a modular `LookAndFeel` system.
+- **Brand Identity**:
+  - Emerald Green (#219e6c): Primary signal paths and active controls.
+  - Deep Red (#8f0707): Recording status and destructive actions.
+  - Charcoal Black (#0d0d0f): Core foundation and paneling.
+  - Arctic White: Precise text and high-contrast indicators.
 
 ## 3. Development Roadmap
 
