@@ -1,4 +1,4 @@
-#include "../src/session/project_manager.hpp"
+#include "engine/session/project_manager.hpp"
 #include <iostream>
 #include <cassert>
 

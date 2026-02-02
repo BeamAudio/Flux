@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_final\_deps\sdl3-subbuild\CMakeFiles\b750f23371abe6e5ec7d3c709fd18146\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EEB9648D-72B6-37AA-9B22-933465710862}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

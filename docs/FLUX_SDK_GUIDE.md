@@ -1,89 +1,62 @@
-# Flux Abstraction Layer - Developer Guide
+# Flux SDK - Developer Guide (v2.0)
 
 ## 1. Introduction
-The **Flux Abstraction Layer** is designed to let you build powerful audio plugins and custom DSP effects without needing to understand the underlying graphics engine (OpenGL/SDF) or the low-level audio driver (SDL3).
+The **Flux SDK 2.0** uses a decoupled "Model/Processor" architecture. This ensures that your DSP logic runs on the high-priority audio thread without interruptions from the UI, while still providing a flexible and easy-to-use API.
 
-As a developer, your primary workspace is the `Beam::FluxPlugin` class.
+## 2. Core Concepts: The Two Halves
 
-## 2. Core Concepts
+### 2.1 The Processor (`FluxPluginProcessor`)
+This is the real-time worker. It contains your DSP mathematical logic.
+- **Rules**: No allocations, no deletions, no locking.
+- **Interface**: Implements `processBlock(const float* input, float* output, int totalSamples)`.
 
-### 2.1 The FluxPlugin
-Every custom effect you build will inherit from `Beam::FluxPlugin`. This base class handles:
-- **Audio Routing**: Stereo input/output buffering.
-- **Parameter Management**: Thread-safe communication between the UI and Audio threads.
-- **GUI Generation**: Automatically creating a standardized, hardware-accelerated UI for your parameters.
-
-### 2.2 Parameters
-You define parameters in your plugin's constructor. The system supports floating-point values (knobs) by default.
-```cpp
-addParam("Drive", 0.0f, 10.0f, 1.0f); // Name, Min, Max, Default
-```
-
-### 2.3 Audio Processing
-You implement the `processBlock` method. This is where your DSP math lives.
-```cpp
-void processBlock(const float* input, float* output, int totalSamples) {
-    // Your code here
-}
-```
+### 2.2 The Node (`FluxPlugin`)
+This is the persistent model that lives on the main thread.
+- **Responsibility**: Manages parameters and UI.
+- **Factory**: Implements `createProcessor()` to spawn its worker.
 
 ## 3. Step-by-Step: Creating a New Effect
 
-### Step 1: Create the Class
-Create a new header file (e.g., `src/dsp/my_effect.hpp`).
+### Step 1: Define the Processor
+Create your DSP worker. Use `getParam(index)` to read values snapped by the engine for the current frame.
 
 ```cpp
-#include "flux_plugin.hpp"
-
-namespace Beam {
-
-class MyEffect : public FluxPlugin {
+class MyDistortionProcessor : public Beam::FluxPluginProcessor {
 public:
-    MyEffect(int bufferSize, float sampleRate) 
-        : FluxPlugin("My Effect", bufferSize, sampleRate) 
-    {
-        // Define your parameters here
-        addParam("Intensity", 0.0f, 1.0f, 0.5f);
-    }
-
     void processBlock(const float* input, float* output, int totalSamples) override {
-        float intensity = getParam("Intensity");
-        
+        float drive = getParam(0); // "Drive" is our first param
         for (int i = 0; i < totalSamples; ++i) {
-            // Simple example: Scale volume
-            output[i] = input[i] * intensity;
+            output[i] = std::tanh(input[i] * drive);
         }
     }
 };
-
-}
 ```
 
-### Step 2: Register the Effect
-Open `src/ui/workspace.hpp` and add your include:
+### Step 2: Define the Node
+Define the user-facing effect and its parameters.
+
 ```cpp
-#include "../dsp/my_effect.hpp"
+class MyDistortion : public Beam::FluxPlugin {
+public:
+    MyDistortion(int bufSize, float sr) : FluxPlugin("Distortion", bufSize, sr) {
+        // Register params in order (indices 0, 1, 2...)
+        addParam("Drive", 1.0f, 20.0f, 1.0f);
+    }
+    
+    std::unique_ptr<FluxProcessor> createProcessor() override {
+        return std::make_unique<MyDistortionProcessor>();
+    }
+};
 ```
 
-Then, inside the `addFX` method, add a condition for your new effect string:
-```cpp
-else if (type == "MyEffect") fxNode = std::make_shared<MyEffect>(1024 * 4, 44100.0f);
-```
+### Step 3: Registration
+Add your node to the factory in `src/interface/views/workspace.cpp` (or equivalent registry).
 
-### Step 3: Add a UI Button
-Open `src/ui/sidebar.hpp` and add a button to spawn your effect:
-```cpp
-batcher.drawText("MY EFFECT", m_bounds.x + 20, yOff + 8, 14, 0.7f, 0.7f, 0.7f, 1.0f);
-// ... inside onMouseDown ...
-if (onAddFX) onAddFX("MyEffect");
-```
+## 4. Best Practices for Beam 2.0
 
-## 4. Best Practices
-- **Performance**: Avoid allocating memory (new/malloc) inside `processBlock`.
-- **State**: Use member variables to store filter history (e.g., `m_lastSample`).
-- **Thread Safety**: Always use `getParam()` to read control values; never read from UI variables directly.
+- **Parameter Order**: The indices in `getParam(index)` correspond to the order you called `addParam()` in the constructor.
+- **Member State**: Always store filter states (z-1) or delay buffers inside the **Processor**, not the Node.
+- **Interleaving**: By default, `processBlock` provides interleaved stereo samples (`L, R, L, R...`).
 
-## 5. Under the Hood (Optional)
-If you *really* need to know:
-- **Rendering**: Your parameters generate `Knob` components that use SDF shaders for smooth rendering.
-- **Audio**: Your `FluxPlugin` is wrapped in a `FluxNode` which is sorted topologically in the `FluxGraph`.
+## 5. Advanced: Custom UI
+If the auto-generated knobs aren't enough, override `createEditor()` in your `FluxPlugin` class to return a custom `Component`.

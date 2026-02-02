@@ -18,13 +18,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(SDL3)
 
 # Source Files
-file(GLOB_RECURSE SESSION_SOURCES "src/session/*.cpp")
 file(GLOB_RECURSE ENGINE_SOURCES "src/engine/*.cpp")
 file(GLOB_RECURSE INTERFACE_SOURCES "src/interface/*.cpp")
-set(INTERFACE_SOURCES ${INTERFACE_SOURCES} src/interface/component.cpp)
-file(GLOB_RECURSE RENDER_SOURCES "src/render/*.cpp")
-file(GLOB_RECURSE APPLICATION_SOURCES "src/application/*.cpp")
-file(GLOB_RECURSE UTILITIES_SOURCES "src/utilities/*.cpp")
 set(THIRD_PARTY_SOURCES "third_party/glad.c")
 
 # Include Directories
@@ -33,9 +28,9 @@ include_directories(third_party)
 
 # Main Executable
 if(WIN32)
-    add_executable(${PROJECT_NAME} src/main.cpp resources.rc ${SESSION_SOURCES} ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${RENDER_SOURCES} ${APPLICATION_SOURCES} ${UTILITIES_SOURCES} ${THIRD_PARTY_SOURCES})
+    add_executable(${PROJECT_NAME} src/main.cpp resources.rc ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${THIRD_PARTY_SOURCES})
 else()
-    add_executable(${PROJECT_NAME} src/main.cpp ${SESSION_SOURCES} ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${RENDER_SOURCES} ${APPLICATION_SOURCES} ${UTILITIES_SOURCES} ${THIRD_PARTY_SOURCES})
+    add_executable(${PROJECT_NAME} src/main.cpp ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${THIRD_PARTY_SOURCES})
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
@@ -53,14 +48,6 @@ endif()
 
 # Standalone Tests
 add_executable(test_persistence tests/test_persistence.cpp)
-add_executable(test_juce_like_api tests/test_juce_like_api.cpp ${ENGINE_SOURCES} ${APPLICATION_SOURCES} ${UTILITIES_SOURCES})
 
-target_include_directories(test_juce_like_api PRIVATE src)
-
-if(WIN32)
-    target_link_libraries(test_juce_like_api PRIVATE SDL3::SDL3-static)
-else()
-    target_link_libraries(test_juce_like_api PRIVATE SDL3::SDL3-static)
-endif()
 
 # target_link_libraries(test_persistence PRIVATE ${TEST_LIBS})

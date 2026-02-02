@@ -1,0 +1,112 @@
+﻿Versi├│n de MSBuild 17.12.12+1cce77968 para .NET Framework
+
+  Checking File Globs
+  SDL3-static.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\Release\SDL3-static.lib
+  audio_engine.cpp
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(12,51): error C2614: 'Beam::AudioEngine': inicializaci├│n de miembro no v├ílida: 'm_channels' no es una base o miembro [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(12,66): error C2614: 'Beam::AudioEngine': inicializaci├│n de miembro no v├ílida: 'm_stream' no es una base o miembro [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(12,85): error C2614: 'Beam::AudioEngine': inicializaci├│n de miembro no v├ílida: 'm_captureStream' no es una base o miembro [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(39,5): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(60,54): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,28): error C3536: 'newPlan': no se puede usar antes de inicializarse [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,22): error C2664: 'void std::atomic<std::shared_ptr<Beam::RenderPlan>>::store(std::shared_ptr<Beam::RenderPlan>,const std::memory_order) noexcept': el argumento 1 no puede convertirse de 'int' a 'std::shared_ptr<Beam::RenderPlan>' [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,28):
+      'std::shared_ptr<Beam::RenderPlan>::shared_ptr':ninguna funci├│n sobrecargada pudo convertir todos los tipos de argumento
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1573,5):
+          puede ser 'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::nullptr_t) noexcept'
+              C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,28):
+              'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::nullptr_t) noexcept': el argumento 1 no puede convertirse de 'int' a 'std::nullptr_t'
+                  C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,28):
+                  solo una constante de puntero nulo se puede convertir en nullptr_t
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1668,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1644,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1634,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1624,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::shared_ptr<_Ty2> &&,Beam::RenderPlan *) noexcept'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1618,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(const std::shared_ptr<_Ty2> &,Beam::RenderPlan *) noexcept'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1613,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1607,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(std::nullptr_t,_Dx)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1601,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(_Ux *,_Dx,_Alloc)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1593,5):
+          o       'std::shared_ptr<Beam::RenderPlan>::shared_ptr(_Ux *,_Dx)'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,28):
+          al hacer coincidir la lista de argumentos '(int)'
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(4039,10):
+      vea la declaraci├│n de 'std::atomic<std::shared_ptr<Beam::RenderPlan>>::store'
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(61,22):
+      al hacer coincidir la lista de argumentos '(int)'
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(65,46): error C2065: 'm_isPlaying': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(69,19): error C2511: 'void Beam::AudioEngine::process(float *,int,const Beam::MIDIBuffer &)': la funci├│n miembro sobrecargada no se ha encontrado en 'Beam::AudioEngine' [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.hpp(18,7):
+      vea la declaraci├│n de 'Beam::AudioEngine'
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(71,45): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(71,14): error C2672: 'std::fill': no se encontr├│ una funci├│n sobrecargada que coincida [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5208,6):
+      puede ser 'void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(71,14):
+          "void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept": espera 4 argumentos - 2 proporcionado
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5177,19):
+      o       'void std::fill(const _FwdIt,const _FwdIt,const _Ty &)'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(71,14):
+          "void std::fill(const _FwdIt,const _FwdIt,const _Ty &)": espera 3 argumentos - 2 proporcionado
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(79,27): error C2065: 'm_isPlaying': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(80,27): error C2065: 'm_lastPlaying': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(80,27): warning C4805: '!=': combinaci├│n no segura del tipo 'bool' y el tipo 'unknown-type' en la operaci├│n [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(84,9): error C2065: 'm_lastPlaying': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(99,10): error C2065: 'm_isPlaying': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(100,45): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(100,14): error C2672: 'std::fill': no se encontr├│ una funci├│n sobrecargada que coincida [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5208,6):
+      puede ser 'void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(100,14):
+          "void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept": espera 4 argumentos - 2 proporcionado
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5177,19):
+      o       'void std::fill(const _FwdIt,const _FwdIt,const _Ty &)'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(100,14):
+          "void std::fill(const _FwdIt,const _FwdIt,const _Ty &)": espera 3 argumentos - 2 proporcionado
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(141,36): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(139,23): error C2660: 'Beam::SIMD::add': la funci├│n no acepta 2 argumentos [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\dsp\simd_utils.hpp(15,13):
+      vea la declaraci├│n de 'Beam::SIMD::add'
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(139,23):
+      al hacer coincidir la lista de argumentos '(_Ty *, _Ty *)'
+          with
+          [
+              _Ty=float
+          ]
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(150,75): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(150,19): error C2660: 'Beam::SIMD::copy': la funci├│n no acepta 2 argumentos [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\dsp\simd_utils.hpp(33,13):
+      vea la declaraci├│n de 'Beam::SIMD::copy'
+      C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(150,19):
+      al hacer coincidir la lista de argumentos '(_Ty *, float *)'
+          with
+          [
+              _Ty=float
+          ]
+  
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(152,49): error C2065: 'm_channels': identificador no declarado [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(152,18): error C2672: 'std::fill': no se encontr├│ una funci├│n sobrecargada que coincida [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5208,6):
+      puede ser 'void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(152,18):
+          "void std::fill(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept": espera 4 argumentos - 2 proporcionado
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(5177,19):
+      o       'void std::fill(const _FwdIt,const _FwdIt,const _Ty &)'
+          C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp(152,18):
+          "void std::fill(const _FwdIt,const _FwdIt,const _Ty &)": espera 3 argumentos - 2 proporcionado
+  
+  SDL3_test.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\Release\SDL3_test.lib
+  test_persistence.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\Release\test_persistence.exe

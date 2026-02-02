@@ -1,58 +1,50 @@
-# Beam Audio Flux - Context & Guidelines
+# Beam Audio Flux - Project Context & Architecture
 
-## Project Overview
-**Beam Audio Flux** is a high-performance, proprietary Digital Audio Workstation (DAW) and audio engine built from the ground up using C++20. It follows a "no-framework" philosophy, eschewing heavy libraries like JUCE or Qt in favor of direct implementations on top of **SDL3** and **OpenGL 3.3+**.
+## 1. System Overview
+**Beam Audio Flux** is a high-performance C++20 DAW built on the proprietary **BeamEngine**. It eschews heavy frameworks (JUCE, Qt) in favor of a custom, lightweight architecture using SDL3 and OpenGL 3.3+.
 
-The core engine, **BeamEngine**, features a game-loop rendering pattern, a node-based DSP graph with topological sorting, and an optimized quad-batching renderer for high-frequency UI updates and waveform visualization.
+## 2. Core Architecture: Engine & UI Unification
+The system uses a robust "Node-Driven UI" architecture that decouples DSP logic from interface rendering while maintaining tight integration.
 
-## Technical Architecture
-- **`BeamHost` (src/core)**: The central application controller. Manages the SDL3 window, OpenGL context, and the main event/update/render loop.
-- **`FluxGraph` & `FluxNode` (src/dsp)**: A modular DSP architecture. `FluxGraph` uses Kahn's algorithm for topological sorting to ensure correct signal flow order. Nodes process audio in stereo buffers.
-- **`AudioEngine` (src/dsp)**: Bridges the `FluxGraph` with hardware audio I/O using SDL3's audio stream API.
-- **`QuadBatcher` (src/graphics)**: A high-performance OpenGL batch renderer that minimizes draw calls by grouping UI elements and waveforms into single vertex buffer uploads.
-- **`InputHandler` & `Component` (src/ui)**: A custom reactive UI system. `InputHandler` manages event propagation and hit-testing based on Z-order.
-- **`FluxProject` (src/core)**: Handles session state and serialization to JSON using `nlohmann/json`.
+### 2.1 The Bridge: `createEditor`
+*   **Concept**: Every DSP node (`FluxNode`) is responsible for defining its own UI.
+*   **Mechanism**: `FluxNode::createEditor(const NodeEditorContext&)` returns a `std::shared_ptr<Component>`.
+*   **Context Injection**: System services (like `AudioDeviceManager`) are passed via `NodeEditorContext`, keeping the engine decoupled from global state.
 
-## Tech Stack
-- **Language**: C++20
-- **Graphics**: OpenGL 3.3+ (GLAD)
-- **Platform/Events/Audio**: SDL3
-- **Audio Utilities**: miniaudio, dr_libs (WAV/MP3/FLAC)
-- **Serialization**: nlohmann/json
+### 2.2 UI Generation Strategy
+1.  **Automatic (Default)**: If a node does not implement `createEditor`, the base `FluxNode` implementation returns a `GenericNodeEditor`. This editor inspects the node's `Parameter` map and automatically generates a UI with Sliders and Labels using the FlexBox layout engine.
+2.  **Custom (Specialized)**: Complex nodes (e.g., `TubeCompressor`) implement `createEditor` to return a specialized `Component` (e.g., `TubeCompressorUI`) with custom graphics, metering, and layout.
 
-## Building and Running
-The project uses CMake (3.20+) and fetches SDL3 automatically via `FetchContent`.
+### 2.3 `AudioModule` Container
+*   **Role**: Acts as the window/container for any node on the Workspace canvas.
+*   **Responsibility**: Handles common DAW functionality:
+    *   Input/Output Ports (Cable connections)
+    *   Title Bar & Delete functionality
+    *   Hosting the editor component returned by the node.
+*   **Layout**: Uses `FlexBox` to dynamically size itself to fit the hosted editor.
 
-### Build Commands
-```powershell
-# Create build directory
+## 3. Layout Engine: FlexBox
+A modern, CSS-inspired layout engine located in `src/interface/layout.hpp`.
+*   **Features**: Supports `Row`, `Column`, `AlignItems` (Stretch, Center, Start, End), `JustifyContent`.
+*   **Integration**: Used heavily by `GenericNodeEditor` and `AudioModule` to ensure the UI adapts to different window sizes and parameter counts without hardcoded coordinates.
+
+## 4. UI Toolkit (`src/interface/ui_toolkit.hpp`)
+A central hub that consolidates all core UI widgets for easy access by DSP developers:
+*   **Controls**: `Slider`, `Knob`, `Button`, `ComboBox`.
+*   **Visuals**: `Label`, `Meter`, `VUMeter`.
+*   **Layout**: `FlexBox`, `LayoutItem`.
+
+## 5. Key File Structure
+*   `src/engine/flux_node.hpp`: Base class defining the `createEditor` interface.
+*   `src/interface/audio_module.hpp`: The container component for nodes.
+*   `src/interface/generic_node_editor.hpp`: The auto-generated UI implementation.
+*   `src/interface/layout.hpp`: The FlexBox layout engine.
+
+## 6. Build & Run
+The project uses CMake.
+```bash
 mkdir build
 cd build
-
-# Configure (Windows/MSVC)
 cmake ..
-
-# Build
 cmake --build . --config Release
 ```
-
-### Running the Application
-The main executable is located in the `build/Release/` directory (or `build/Debug/` depending on the config).
-```powershell
-./build/Debug/BeamAudioFlux.exe
-```
-
-### Running Tests
-Multiple test targets are available for verification:
-- `test_persistence`: Validates JSON save/load logic.
-- `test_audio_engine`: Validates DSP node processing.
-- `test_ui`: Validates rendering and component logic.
-- `test_integration`: Validates the full UI-to-DSP parameter link.
-
-## Development Conventions
-1. **Memory Management**: Use `std::shared_ptr` and `std::unique_ptr` for lifecycle management. Raw pointers are allowed for non-owning references (e.g., in `InputHandler`).
-2. **DSP Performance**: Avoid memory allocations inside `FluxNode::process()`. Pre-allocate buffers during initialization or `rebuildSchedule()`.
-3. **UI Coordination**: UI changes should update DSP parameters via callbacks (e.g., `onValueChanged`) to maintain decoupling.
-4. **Coordinate System**: UI coordinates are pixel-based with (0,0) at the top-left.
-5. **Stereo Default**: The engine currently assumes stereo (2 channels) interleaved audio for all internal processing.
-6. **No-Framework**: Do not introduce JUCE, Qt, or other large frameworks. Keep the core engine dependencies minimal and lightweight.

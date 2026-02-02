@@ -1,7 +1,7 @@
-#include "../src/engine/audio_engine.hpp"
-#include "../src/engine/flux_fx_nodes.hpp"
-#include "../src/interface/input_handler.hpp"
-#include "../src/interface/knob.hpp"
+#include "engine/core/audio_engine.hpp"
+#include "engine/nodes/flux_fx_nodes.hpp"
+#include "interface/core/input_handler.hpp"
+#include "interface/widgets/knob.hpp"
 #include <iostream>
 #include <cassert>
 

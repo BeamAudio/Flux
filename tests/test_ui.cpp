@@ -1,4 +1,4 @@
-#include "../src/interface/input_handler.hpp"
+#include "interface/core/input_handler.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
