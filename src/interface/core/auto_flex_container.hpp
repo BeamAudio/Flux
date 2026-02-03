@@ -126,8 +126,8 @@ public:
         if (m_flexChildren.empty()) return;
         
         bool isRow = m_config.direction == Direction::Row;
-        float availMain = (isRow ? m_bounds.w : m_bounds.h) - m_config.padding * 2;
-        float availCross = (isRow ? m_bounds.h : m_bounds.w) - m_config.padding * 2;
+        float availMain = (std::max)(0.0f, (isRow ? m_bounds.w : m_bounds.h) - m_config.padding * 2);
+        float availCross = (std::max)(0.0f, (isRow ? m_bounds.h : m_bounds.w) - m_config.padding * 2);
         
         auto lines = computeLines(m_bounds.w, m_bounds.h);
         float currentCrossPos = m_config.padding;
@@ -152,7 +152,7 @@ public:
                 }
             }
             
-            currentMainPos += xOffset;
+            currentMainPos += (std::max)(0.0f, xOffset);
             
             for (int idx : line.itemIndices) {
                 float cw = 0, ch = 0;

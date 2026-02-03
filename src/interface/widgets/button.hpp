@@ -29,7 +29,7 @@ public:
 
     void getPreferredSize(float& w, float& h) const override {
         w = m_text.length() * 8.0f + 20.0f;
-        h = 24.0f;
+        h = 32.0f;
     }
 
     /**

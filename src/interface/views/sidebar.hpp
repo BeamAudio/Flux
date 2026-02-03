@@ -83,14 +83,19 @@ public:
             cfg.padding = 15.0f;
             cfg.gap = 8.0f;
             cfg.wrap = false; 
+            cfg.preferredWidth = 220.0f;
             
             flex->clearFlexChildren();
         }
         
-        m_children.clear();
-        if (m_scrollContainer) addChildComponent(m_scrollContainer);
+        // Ensure scroll container is a child (usually already is, but safety first)
+        bool alreadyChild = false;
+        for (const auto& c : m_children) if (c == m_scrollContainer) { alreadyChild = true; break; }
+        if (!alreadyChild && m_scrollContainer) addChildComponent(m_scrollContainer);
 
         if (m_side != Side::Left) return;
+
+        std::cout << "[Sidebar] Rebuilding UI for category: " << m_category << std::endl;
 
         if (m_mode == Mode::Inspector) {
             auto title = std::make_shared<Label>("INSPECTOR");
@@ -102,7 +107,10 @@ public:
             std::string titleText = (m_category == "NONE") ? "LIBRARY" : "< " + m_category;
             m_backBtn = std::make_shared<TextButton>(titleText);
             m_backBtn->onClick([this]() {
-                if (m_category != "NONE") setCategory("NONE");
+                if (m_category != "NONE") {
+                    std::cout << "[Sidebar] Navigating back to LIBRARY" << std::endl;
+                    setCategory("NONE");
+                }
             });
             if (flex) flex->addFlexChild(m_backBtn);
 
@@ -119,6 +127,7 @@ public:
                 }
                 items = cats;
                 std::sort(items.begin(), items.end());
+                std::cout << "[Sidebar] Found " << items.size() << " categories." << std::endl;
             } else {
                 for (const auto& name : allPlugins) {
                     if (PluginRegistry::get().getPluginCategory(name) == m_category) {
@@ -126,19 +135,27 @@ public:
                     }
                 }
                 std::sort(items.begin(), items.end());
+                std::cout << "[Sidebar] Found " << items.size() << " plugins in category " << m_category << std::endl;
             }
 
             for (const auto& item : items) {
                 auto btn = std::make_shared<TextButton>(item);
                 if (m_category == "NONE") {
-                    btn->onClick([this, item]() { setCategory(item); });
+                    btn->onClick([this, item]() { 
+                        std::cout << "[Sidebar] Category clicked: " << item << std::endl;
+                        setCategory(item); 
+                    });
                 } else {
-                    btn->onClick([this, item]() { if (onAddFX) onAddFX(item); });
+                    btn->onClick([this, item]() { 
+                        std::cout << "[Sidebar] Plugin clicked: " << item << std::endl;
+                        if (onAddFX) onAddFX(item); 
+                    });
                 }
                 if (flex) flex->addFlexChild(btn);
                 m_buttons.push_back(btn);
             }
         }
+        std::cout.flush();
         resized();
     }
 
