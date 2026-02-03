@@ -354,11 +354,6 @@ public:
         }
     }
 
-    void refresh() {
-        syncReels();
-        // syncCables is called by syncReels now
-    }
-
     void saveStateToProject() {
         if (!m_project) return;
         std::cout << "[Workspace] Saving state for " << m_modules.size() << " modules." << std::endl;
@@ -366,6 +361,16 @@ public:
         for (auto& mod : m_modules) {
             m_project->setVisualPos(mod->getNodeId(), mod->getX(), mod->getY());
         }
+        // Save Pan/Zoom
+        m_project->setWorkspaceView(m_panX, m_panY, m_zoom);
+    }
+
+    void refresh() {
+        if (m_project) {
+            auto [px, py, z] = m_project->getWorkspaceView();
+            m_panX = px; m_panY = py; m_zoom = z;
+        }
+        syncReels();
     }
 
     void clear() {
@@ -543,8 +548,8 @@ public:
         if (!m_isVisible || !m_bounds.contains(x, y)) return false;
         
         if (m_popup) {
-            if (m_popup->getBounds().contains(x, y)) {
-                return m_popup->onMouseDown(x - m_popup->getX(), y - m_popup->getY(), button, shift);
+            if (m_popup->getBounds().contains(x - m_bounds.x, y - m_bounds.y)) {
+                return m_popup->onMouseDown(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), button, shift);
             } else {
                 closePopup();
                 return true; 
@@ -554,11 +559,18 @@ public:
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
         
+        // Children first
         for (auto it = m_children.rbegin(); it != m_children.rend(); ++it) {
             if ((*it)->onMouseDown(vmx, vmy, button, shift)) return true;
         }
 
-        if (button == 3) { m_isPanning = true; m_lastMouseX = x; m_lastMouseY = y; return true; }
+        // Panning: Middle mouse (2) or Right click (3)
+        if (button == 2 || button == 3) { 
+            m_isPanning = true; 
+            m_lastMouseX = x; 
+            m_lastMouseY = y; 
+            return true; 
+        }
         
         mouseDown(MouseEvent(vmx, vmy, button, shift));
         return true;
@@ -566,8 +578,8 @@ public:
 
     bool onMouseUp(float x, float y, int button, bool shift) override {
         if (m_popup) {
-            if (m_popup->getBounds().contains(x, y)) {
-                m_popup->onMouseUp(x - m_popup->getX(), y - m_popup->getY(), button, shift);
+            if (m_popup->getBounds().contains(x - m_bounds.x, y - m_bounds.y)) {
+                m_popup->onMouseUp(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), button, shift);
             }
             return true; 
         }
@@ -606,7 +618,7 @@ public:
         if (!m_isVisible) return false;
 
         if (m_popup) {
-            m_popup->onMouseMove(x - m_popup->getX(), y - m_popup->getY(), shift);
+            m_popup->onMouseMove(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), shift);
             return true;
         }
 

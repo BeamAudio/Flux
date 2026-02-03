@@ -209,6 +209,18 @@ public:
         return {100.0f, 100.0f};
     }
 
+    void setWorkspaceView(float panX, float panY, float zoom) {
+        m_visuals["workspace"] = {{"panX", panX}, {"panY", panY}, {"zoom", zoom}};
+    }
+
+    std::tuple<float, float, float> getWorkspaceView() const {
+        if (m_visuals.contains("workspace")) {
+            auto const& v = m_visuals["workspace"];
+            return {v.value("panX", 0.0f), v.value("panY", 0.0f), v.value("zoom", 1.0f)};
+        }
+        return {0.0f, 0.0f, 1.0f};
+    }
+
 private:
     mutable bool m_isDirty = false;
     std::string m_name = "Untitled Flux";
