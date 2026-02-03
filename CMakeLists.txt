@@ -25,6 +25,8 @@ set(THIRD_PARTY_SOURCES "third_party/glad.c")
 # Include Directories
 include_directories(src)
 include_directories(third_party)
+include_directories(third_party/vst3sdk)
+include_directories(third_party/vst3sdk/public.sdk/..) # To allow #include "pluginterfaces/..."
 
 # Main Executable
 if(WIN32)

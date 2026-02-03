@@ -11,6 +11,7 @@
 #include "engine/midi/midi_event.hpp"
 #include "engine/dsp/meter_source.hpp"
 #include "engine/core/flux_processor.hpp"
+#include "json.hpp"
 
 namespace Beam {
 
@@ -19,6 +20,7 @@ class AudioDeviceManager;
 
 struct NodeEditorContext {
     AudioDeviceManager* deviceManager = nullptr;
+    void* nativeWindowHandle = nullptr;
 };
 
 /**
@@ -32,6 +34,11 @@ struct NodeEditorContext {
 class FluxNode {
 public:
     virtual ~FluxNode() = default;
+
+    /**
+     * @brief Safe deallocation across DLL boundaries.
+     */
+    virtual void releaseNode() { delete this; }
 
     virtual std::string getName() const = 0;
 
@@ -57,10 +64,38 @@ public:
      * @brief Factory method to create the real-time processor for this node.
      * Called during graph compilation.
      */
-    virtual std::unique_ptr<FluxProcessor> createProcessor() = 0;
+    virtual std::shared_ptr<FluxProcessor> createProcessor() = 0;
 
     virtual void onTransportStateChanged(bool playing) {}
     virtual void onTransportSeek(size_t frame) {}
+    
+    // Optional hook for visual updates (meters, displays)
+    virtual void updateVisuals() {}
+
+    // Serialization
+    virtual nlohmann::json serialize() const {
+        nlohmann::json data;
+        data["name"] = getName();
+        data["bypassed"] = m_bypassed.load();
+        
+        nlohmann::json params;
+        for (const auto& [name, p] : m_parameters) {
+            params[name] = p->getValue();
+        }
+        data["parameters"] = params;
+        return data;
+    }
+
+    virtual void deserialize(const nlohmann::json& data) {
+        if (data.contains("bypassed")) m_bypassed = data["bypassed"];
+        if (data.contains("parameters")) {
+            for (auto& [key, val] : data["parameters"].items()) {
+                if (auto p = getParameter(key)) {
+                    p->setValue(val);
+                }
+            }
+        }
+    }
 
     // Parameters
     void addParameter(std::shared_ptr<Parameter> p) { 

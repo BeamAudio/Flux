@@ -1,3 +1,4 @@
+#define NOMINMAX
 #define SDL_MAIN_HANDLED
 #include <SDL3/SDL.h>
 #include "engine/session/beam_host.hpp"

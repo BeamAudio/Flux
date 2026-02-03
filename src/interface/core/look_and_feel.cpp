@@ -137,12 +137,17 @@ void DefaultLookAndFeel::drawSliderPointer(QuadBatcher& g, Slider& slider,
 
 void DefaultLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
     auto bounds = knob.getBounds();
-    float cx = bounds.w * 0.5f;
-    float cy = bounds.h * 0.5f;
-    float radius = (std::min)(bounds.w, bounds.h) * 0.4f;
+    float w = bounds.w;
+    float h = bounds.h;
+    
+    // Center knob in top area
+    float knobAreaH = 50.0f; // Match kh from RackUnitUI
+    float cx = w * 0.5f;
+    float cy = knobAreaH * 0.5f;
+    float radius = 20.0f; // Consistent radius
 
     // 1. Knob Shadow (Offset for depth)
-    g.drawRoundedRect(cx - radius - 1, cy - radius + 3, radius * 2 + 2, radius * 2 + 2, radius, 2.0f, 0.0f, 0.0f, 0.0f, 0.5f);
+    g.drawRoundedRect(cx - radius + 1, cy - radius + 2, radius * 2, radius * 2, radius, 0.5f, 0.0f, 0.0f, 0.0f, 0.5f);
 
     // 2. Main Body (Bakelite)
     g.drawRoundedGradientRect(cx - radius, cy - radius, radius * 2, radius * 2, radius, 0.5f,
@@ -171,13 +176,15 @@ void DefaultLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
     g.drawLine(x1, y1, x2, y2, 2.0f, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 1.0f);
     
     // 5. Label (Engraved)
-    g.drawText(knob.getLabel(), 1, -11, 10, 1.0f, 1.0f, 1.0f, 0.2f); // Shadow
-    g.drawText(knob.getLabel(), 0, -12, 10, 0.8f, 0.8f, 0.8f, 1.0f);
+    // Label is now handled by Knob's TextElement child component, but we'll keep this 
+    // for fallback or simple knobs that don't use it.
+    // Actually, DefaultLookAndFeel was drawing it relative to 0,0 which is the component top-left.
+    // That's fine if the knob is at 0,0 locally.
     
     // 6. Value
     char valStr[16];
     snprintf(valStr, 16, "%.2f", knob.getValue());
-    g.drawText(valStr, (bounds.w - AudioUtils::calculateTextWidth(valStr, 9))/2, bounds.h + 2, 9, 0.6f, 0.6f, 0.6f, 1.0f);
+    g.drawText(valStr, (bounds.w - AudioUtils::calculateTextWidth(valStr, 9))/2, knobAreaH + 2, 9, 0.6f, 0.6f, 0.6f, 1.0f);
 }
 
 void DefaultLookAndFeel::drawLuminousMeter(QuadBatcher& g, LuminousMeter& meter, float level, float peak) {
@@ -186,31 +193,46 @@ void DefaultLookAndFeel::drawLuminousMeter(QuadBatcher& g, LuminousMeter& meter,
     g.drawBeveledRect(0, 0, bounds.w, bounds.h, 2.0f, 0.5f, 0.02f, 0.02f, 0.03f, 1.0f);
     
     if (meter.getOrientation() == LuminousMeter::Orientation::Vertical) {
-        int segments = 20; // Fewer segments for a "hardware" look
-        float segHeight = (bounds.h - 10) / segments;
-        int activeSegs = (int)(level * segments);
+        int segments = 48; // Higher resolution
+        float padding = 1.0f;
+        float segHeight = (bounds.h - 4 - (segments - 1) * padding) / segments;
         
+        // Convert linear level to dB for display
+        float db = (level > 0.00001f) ? 20.0f * std::log10(level) : -100.0f;
+        float peakDb = (peak > 0.00001f) ? 20.0f * std::log10(peak) : -100.0f;
+        
+        // Map dB to 0..1 (Range: -60dB to +6dB)
+        float minDb = -60.0f;
+        float maxDb = 6.0f;
+        auto mapDb = [&](float d) { return std::clamp((d - minDb) / (maxDb - minDb), 0.0f, 1.0f); };
+        
+        int activeSegs = (int)(mapDb(db) * segments);
+        int peakSeg = (int)(mapDb(peakDb) * segments);
+        if (peakSeg >= segments) peakSeg = segments - 1;
+
         for (int i = 0; i < segments; ++i) {
-            float y = bounds.h - 5 - (i + 1) * segHeight;
+            float y = bounds.h - 2 - (i + 1) * (segHeight + padding) + padding;
             bool active = i < activeSegs;
-            bool isPeak = (i == (int)(peak * segments) - 1);
+            bool isPeak = (i == peakSeg);
             
+            // Color Scale
+            float t = (float)i / segments;
             Color col = Theme::LEDGreen;
-            if (i > segments * 0.85f) col = Theme::LEDRed;
-            else if (i > segments * 0.7f) col = Theme::LEDYellow;
+            if (t > 0.9f) col = Theme::LEDRed;        // Clip (>0dB approx)
+            else if (t > 0.75f) col = Theme::LEDYellow; // Warning (>-12dB approx)
 
             float intensity = active ? 1.0f : 0.15f;
-            if (isPeak) intensity = 1.0f; // Hold peak
-
-            // LED Glow
-            if (active || isPeak) {
-                g.drawRoundedRect(2, y + 1, bounds.w - 4, segHeight - 2, 1.0f, 2.0f, 
-                                  col.r, col.g, col.b, 0.3f);
-            }
+            if (isPeak) intensity = 1.0f; 
 
             // LED Body
-            g.drawRoundedRect(3, y + 1, bounds.w - 6, segHeight - 2, 1.0f, 0.5f, 
+            g.drawRoundedRect(3, y, bounds.w - 6, segHeight, 1.0f, 0.5f, 
                               col.r * intensity, col.g * intensity, col.b * intensity, 1.0f);
+            
+            // Subtle Glow for active
+            if (active || isPeak) {
+                g.drawRoundedRect(2, y, bounds.w - 4, segHeight, 1.0f, 1.0f, 
+                                  col.r, col.g, col.b, 0.4f);
+            }
         }
     }
 }
@@ -394,20 +416,19 @@ void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
     float h = bounds.h;
     
     // Center knob in top area
-    float knobAreaH = 54.0f;
+    float knobAreaH = 50.0f; // Match kh from RackUnitUI
     float cx = w * 0.5f;
     float cy = knobAreaH * 0.5f;
     float radius = 20.0f;
 
-    // Rotation angle
-    float startAng = -135.0f * 3.14159f / 180.0f;
-    float endAng = 135.0f * 3.14159f / 180.0f;
-    float currentAng = startAng + sliderPos * (endAng - startAng);
+    // Rotation angle (CW from TOP)
+    float angle = -135.0f + sliderPos * 270.0f; 
+    float radAngle = (angle - 90.0f) * 3.14159f / 180.0f;
 
     auto style = knob.getStyle();
     
     // Base Shadow
-    g.drawRoundedRect(cx - radius + 2, cy - radius + 3, radius*2, radius*2, radius, 
+    g.drawRoundedRect(cx - radius + 1, cy - radius + 2, radius*2, radius*2, radius, 
                       0.5f, 0.0f, 0.0f, 0.0f, 0.3f);
 
     if (style == Theme::KnobStyle::ClassicBakelite || style == Theme::KnobStyle::FlutedIndustrial) {
@@ -432,10 +453,10 @@ void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
         
         // White engraved needle
         float notchLen = radius * 0.95f;
-        float ix = cx + std::cos(currentAng) * notchLen;
-        float iy = cy + std::sin(currentAng) * notchLen;
-        float ix2 = cx + std::cos(currentAng) * (radius * 0.3f);
-        float iy2 = cy + std::sin(currentAng) * (radius * 0.3f);
+        float ix = cx + std::cos(radAngle) * notchLen;
+        float iy = cy + std::sin(radAngle) * notchLen;
+        float ix2 = cx + std::cos(radAngle) * (radius * 0.3f);
+        float iy2 = cy + std::sin(radAngle) * (radius * 0.3f);
         g.drawLine(ix2, iy2, ix, iy, 2.5f, 0.95f, 0.95f, 0.95f, 1.0f);
     } 
     else if (style == Theme::KnobStyle::ModernColored) {
@@ -447,15 +468,13 @@ void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
         // Colored Top Cap
         float capRadius = radius * 0.85f;
         Color col = Theme::Emerald; // Default
-        // Logic to cycle colors based on knob name or set explicitly?
-        // For now, use a consistent vibrant color
         g.drawRoundedGradientRect(cx - capRadius, cy - capRadius, capRadius*2, capRadius*2, capRadius, 
                                   0.5f, col.r, col.g, col.b, 1.0f, col.darker(0.3f).r, col.darker(0.3f).g, col.darker(0.3f).b, 1.0f);
         
         // White pointer dot
         float dotR = radius * 0.75f;
-        float px = cx + std::cos(currentAng) * dotR;
-        float py = cy + std::sin(currentAng) * dotR;
+        float px = cx + std::cos(radAngle) * dotR;
+        float py = cy + std::sin(radAngle) * dotR;
         g.drawRoundedRect(px - 2, py - 2, 4, 4, 2.0f, 0.5f, 1.0f, 1.0f, 1.0f, 1.0f);
     }
     else if (style == Theme::KnobStyle::BrushedAluminum) {
@@ -471,8 +490,8 @@ void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
 
         // Cyan accent indicator
         float notchLen = radius * 0.9f;
-        float ix = cx + std::cos(currentAng) * notchLen;
-        float iy = cy + std::sin(currentAng) * notchLen;
+        float ix = cx + std::cos(radAngle) * notchLen;
+        float iy = cy + std::sin(radAngle) * notchLen;
         g.drawLine(cx, cy, ix, iy, 2.0f, 0.2f, 0.9f, 1.0f, 1.0f); 
     }
 
@@ -480,9 +499,10 @@ void ModernLookAndFeel::drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) {
     if (style != Theme::KnobStyle::ClassicBakelite) {
         float arcRadius = radius + 4;
         Color arcCol = (style == Theme::KnobStyle::BrushedAluminum) ? Color(0.2f, 0.9f, 1.0f, 0.5f) : Theme::Emerald.withAlpha(0.5f);
-        for (float a = startAng; a < currentAng; a += 0.15f) {
-            float ax = cx + std::cos(a) * arcRadius;
-            float ay = cy + std::sin(a) * arcRadius;
+        for (float a = -135.0f; a < angle; a += 10.0f) {
+            float rA = (a - 90.0f) * 3.14159f / 180.0f;
+            float ax = cx + std::cos(rA) * arcRadius;
+            float ay = cy + std::sin(rA) * arcRadius;
             g.drawRoundedRect(ax - 1, ay - 1, 2, 2, 1.0f, 0.5f, arcCol.r, arcCol.g, arcCol.b, 0.4f);
         }
     }

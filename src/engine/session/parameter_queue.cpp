@@ -4,14 +4,8 @@
 namespace Beam {
 
 void ParameterQueue::dispatch() {
-    std::vector<ParameterMessage> localMessages;
-    {
-        std::lock_guard<std::mutex> lock(m_mutex);
-        if (m_messages.empty()) return;
-        localMessages.swap(m_messages);
-    }
-
-    for (auto& msg : localMessages) {
+    ParameterMessage msg;
+    while (m_queue.read(&msg, 1) > 0) {
         if (msg.parameter) {
             msg.parameter->triggerCallback(msg.newValue);
         }

@@ -146,7 +146,9 @@ public:
                 float itemCross = isRow ? ch : cw;
                 
                 if (line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
-                    itemMain += freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
+                    float extra = freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
+                    // Prevent total collapse, especially for sliders
+                    itemMain = (std::max)(20.0f, itemMain + extra);
                 }
                 
                 float crossOffset = 0;

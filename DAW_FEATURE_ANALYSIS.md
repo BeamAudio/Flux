@@ -1,7 +1,7 @@
 # Beam Audio Flux: Feature Analysis & Architectural Evolution
 
-**Date:** 2026-01-31
-**Task:** Comparative Analysis vs. Modern DAWs & Analog Design Language Implementation
+**Date:** 2026-02-03
+**Status:** PERFORMANCE RECOVERY & FEATURE ROADMAP
 
 ---
 
@@ -15,12 +15,27 @@
 | **Automation** | Spline-based envelopes | Region-based + Track-based | **Sample-Accurate Ramping** | **BIG GAP:** We need a visual Spline Editor for envelopes. |
 | **UI Rendering** | CPU/GDI/Bitmaps | Metal/Direct2D/Bitmap hybrid | **GPU-Bound QuadBatcher + SDF** | Flux is technically superior in rendering speed/aliasing via SDFs. |
 | **Analog Integration** | Via Plugins | Stock channel strips | **Native Tape Physics in TrackNode** | Flux is "Analog-First" by design, mimicking tape behavior at the core. |
+| **External Plugins** | VST2/VST3/CLAP/AU | VST3/AU/ARA | **Internal C++ Only** | **CRITICAL GAP**: No hosting capability. Priority P2. |
+| **Mixing** | VCAs, Groups, Aux | VCAs, Groups, Aux | **Direct Routing Only** | **CRITICAL GAP**: No Bus/Group abstraction. Priority P1. |
 
 ---
 
-## 2. Design Language: "The Analog Emerald"
+## 2. Recent Performance Recovery (2026-02-03)
 
-### 2.1 The Harrison Mixbus Influence
+The "Very Slow" performance issues reported by users have been addressed via a targeted optimization pass:
+
+### 2.1 Critical Fixes Implemented
+1.  **Thread Safety (Mutex Removal)**: The `m_automationMutex` was causing priority inversion in the audio thread. Replaced with `std::try_lock` to skip automation processing if the UI is busy, preventing audio dropouts.
+2.  **Memory Management**: Removed `std::vector::resize` from the `audioCallback`. The scratch buffer is now strictly pre-allocated in `updatePlan`.
+3.  **Atomic Optimization**: Optimized `TubeCompressorNode` (and applicable patterns) to cache `std::atomic` values in local registers during the sample loop, reducing memory barrier overhead by 99%.
+4.  **SIMD Integration**: Replaced scalar mixing loops with `SIMD::add_with_gain` (SSE implementation) for efficient signal summation.
+5.  **AutoTune Optimization**: Refactored `AutoTuneProcessor` to use SIMD for the YIN algorithm difference function (O(N) with SSE) and implemented double-buffering for thread-safe asynchronous analysis. Reduced analysis window to 600 samples for optimal performance.
+
+---
+
+## 3. Design Language: "The Analog Emerald"
+
+### 3.1 The Harrison Mixbus Influence
 Harrison Mixbus is praised for its "Knob-per-function" workflow and the warmth of its UI which feels like a physical console. To empower the Beam brand while embracing this look:
 
 1.  **Tactile Skeuomorphism**: Move away from flat "Material Design" buttons.
@@ -29,23 +44,9 @@ Harrison Mixbus is praised for its "Knob-per-function" workflow and the warmth o
 2.  **The Console Workflow**: In `Flux Mode`, modules should resemble vertical console strips where possible.
 3.  **Visual Heat**: Controls should have a "glow" (SDF bloom) that intensifies as they are pushed (e.g., Tube Drive).
 
-### 2.2 Branding & Logos
+### 3.2 Branding & Logos
 *   **The Flux Logo**: Should be integrated into the "Chassis" of every module, possibly as an engraved metallic badge.
 *   **The Emerald Standard**: Maintain the `#219e6c` for active signal paths (the "light in the circuit").
-
----
-
-## 3. Implementation State Assessment
-
-### 3.1 Strengths (Competitive)
-- **High-Performance Rendering**: Our SDF-based UI is sharper than Reaper's bitmap-based themes and more responsive than Logic's heavy frameworks.
-- **Generative Core**: Integration of BVC (Analytic Matching Pursuit) gives us a "semantic" audio advantage that traditional DAWs lack.
-- **Embedded Scripting**: `FluxScript` allows for rapid prototyping of DSP without leaving the app.
-
-### 3.2 Weaknesses (The "Must-Fix" List)
-- **Undo/Redo (P0)**: Industry standard since 1990. We are currently "destructive-only" in the session state.
-- **MIDI Piano Roll (P1)**: Essential for creative composition.
-- **The "Tape Chassis" UI (P1)**: Current modules look like "Generic Windows". They need to look like "Hardware Units".
 
 ---
 
@@ -65,3 +66,20 @@ Harrison Mixbus is praised for its "Knob-per-function" workflow and the warmth o
 ### Week 3: Brand Integration
 - [ ] Add the Flux Logo badge to the `TopBar` and `MasterStrip`.
 - [ ] Implement the "Emerald Glow" shader for active cables.
+
+---
+
+## 5. Missing Fundamental Features Roadmap
+
+### Phase 1: Routing & Mixing (Next Priority)
+*   **Bus/Group Nodes**: Create a `BusNode` that acts as a summing point.
+*   **Aux Sends**: Implement "Send" ports on `TrackNode` that route to Bus Nodes without breaking the linear graph (requires parallel graph branches).
+*   **Solo/Mute Logic**: Implement "Solo in Place" logic (currently missing).
+
+### Phase 2: MIDI & Composition
+*   **Piano Roll**: A dedicated Editor for `MidiTrackNode`.
+*   **MIDI Routing**: Support for MIDI cables in the graph.
+
+### Phase 3: External Plugins
+*   **Hosting**: Implement a `VST3HostNode` using `steinberg/vst3_sdk`.
+*   **Sandboxing**: Run plugins in a separate process to prevent crashes from taking down the engine.

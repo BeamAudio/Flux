@@ -2,9 +2,14 @@
 #include "interface/core/theme.hpp"
 #include "engine/session/project_manager.hpp"
 #include "engine/session/parameter_queue.hpp"
+#include "engine/session/undo_manager.hpp"
+#include "engine/plugins/plugin_library.hpp"
 #include "engine/dsp/async_callback_queue.hpp"
+#include "engine/core/flux_compiler.hpp"
 #include "engine/dsp/garbage_collector.hpp"
 #include "engine/nodes/track_node.hpp"
+#include "engine/nodes/midi_track_node.hpp"
+#include "engine/nodes/midi_input_node.hpp"
 #include "engine/midi/midi_event.hpp"
 #include "engine/core/audio_device_manager.hpp"
 #include "engine/core/offline_renderer.hpp"
@@ -14,12 +19,19 @@
 #include "interface/views/top_bar.hpp"
 #include "interface/views/sidebar.hpp"
 #include "interface/views/master_strip.hpp"
+#include "interface/views/mixer_view.hpp"
 #include "interface/views/audio_config_view.hpp"
 #include "interface/render/ui_shaders.hpp"
 #include "interface/core/layout.hpp"
 #include "interface/core/coordinate_system.hpp"
 #include <iostream>
 #include <SDL3/SDL_dialog.h>
+#include <SDL3/SDL_properties.h>
+#include <SDL3/SDL_system.h>
+#include <SDL3/SDL_video.h>
+#include "interface/popups/render_modal.hpp"
+#include "interface/popups/confirmation_modal.hpp"
+
 
 namespace Beam {
 
@@ -37,10 +49,10 @@ void BeamHost::onSaveDialogCallback(void* userdata, const char* const* filelist,
         BeamHost* host = static_cast<BeamHost*>(userdata);
         if (host && host->m_project) {
             std::string path = filelist[0];
-            // Basic extension check
             if (path.length() < 5 || path.substr(path.length() - 5) != ".flux") {
                 path += ".flux";
             }
+            if (host->m_workspace) host->m_workspace->saveStateToProject();
             ProjectManager::saveProject(path, host->m_project->serialize());
             std::cout << "Project saved to: " << path << std::endl;
         }
@@ -53,6 +65,40 @@ void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist,
         auto data = ProjectManager::loadProject(filelist[0]);
         if (!data.empty() && host && host->m_project) {
              host->m_project->deserialize(data);
+             
+             // Update Master ID in Engine
+             if (host->m_project->getGraph()) {
+                 size_t masterId = (size_t)-1;
+                 for(auto& [id, node] : host->m_project->getGraph()->getNodes()) {
+                     if (node->getName() == "Master") {
+                         masterId = id;
+                         break;
+                     }
+                 }
+                 
+                 // Failsafe: If no Master node found (e.g. old project or corruption), create one
+                 if (masterId == (size_t)-1) {
+                     std::cout << "[Load] Warning: No Master Node found in project. Creating one." << std::endl;
+                     auto newMaster = std::make_shared<MasterNode>(4096);
+                     masterId = host->m_project->getGraph()->addNode(newMaster);
+                 }
+
+                 if (masterId != (size_t)-1) {
+                     host->m_audioEngine->setMasterNodeId(masterId);
+                     std::cout << "[Load] Master Node ID updated to: " << masterId << std::endl;
+                 }
+                 
+                 host->m_audioEngine->updatePlan();
+             }
+
+             if (host->m_workspace) {
+                 host->m_workspace->clear();
+                 host->m_workspace->refresh();
+             }
+             if (host->m_masterStrip) {
+                 host->m_masterStrip->refresh();
+                 std::cout << "[Load] MasterStrip refreshed." << std::endl;
+             }
              std::cout << "Project loaded from: " << filelist[0] << std::endl;
         }
     }
@@ -75,7 +121,19 @@ void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelis
             if (maxFrame == 0) maxFrame = 44100 * 5; 
             
             host->m_audioEngine->setPlaying(false);
-            OfflineRenderer::renderToWav(path, host->m_project->getGraph(), maxFrame, 44100);
+            
+            size_t masterId = host->m_audioEngine->getMasterNodeId();
+
+            // Create Modal
+            host->m_renderModal = std::make_shared<RenderModal>(path, host->m_project->getGraph(), maxFrame, masterId);
+            host->m_renderModal->onClose = [host]() { 
+                host->m_renderModal = nullptr; 
+            };
+            
+            // Center it (approximate)
+            float mx = (float)host->m_width / 2.0f - 200.0f;
+            float my = (float)host->m_height / 2.0f - 100.0f;
+            host->m_renderModal->setBounds(mx, my, 400, 200);
         }
     }
 }
@@ -122,6 +180,12 @@ bool BeamHost::init() {
         return false;
     }
 
+    if (!SDL_GL_SetSwapInterval(1)) {
+        std::cout << "Warning: Failed to set VSync: " << SDL_GetError() << std::endl;
+    } else {
+        std::cout << "VSync Enabled." << std::endl;
+    }
+
     // Load Icon
     SDL_Surface* icon = SDL_LoadBMP("assets/images/FLUX_LOGO.bmp");
     if (!icon) icon = SDL_LoadBMP("../assets/images/FLUX_LOGO.bmp");
@@ -157,31 +221,36 @@ bool BeamHost::init() {
     }
     
     std::cout << "Initializing Device Manager..." << std::endl;
-    m_audioDeviceManager->initialise(2, 2);
+    // Removed redundant direct initialise() call, rely on first startAudio if needed 
+    // or just let it use its defaults.
+    
     m_audioDeviceManager->onConfigChanged = [this]() {
         auto setup = m_audioDeviceManager->getCurrentDeviceSetup();
         std::cout << "Global Audio Config Change: " << setup.sampleRate << "Hz, " << setup.blockSize << " samples." << std::endl;
         m_audioEngine->init((int)setup.sampleRate, setup.outputChannels, setup.blockSize, setup.outputDeviceId, setup.inputDeviceId);
     };
 
-    // Ensure default input is available
-    m_audioDeviceManager->openInputStream(""); 
-
-    auto initialSetup = m_audioDeviceManager->getCurrentDeviceSetup();
-    std::cout << "Initializing Audio Engine..." << std::endl;
-    if (!m_audioEngine->init(44100, 2, 512, initialSetup.outputDeviceId, initialSetup.inputDeviceId)) return false;
-
-    // Connect Engine to Device Manager
+    // Connect Engine to Device Manager BEFORE starting
     m_audioDeviceManager->setAudioCallback([this](const std::map<std::string, float*>& in, float** out, int f, int inc, int outc, double sr) {
         m_audioEngine->audioCallback(in, out, f, inc, outc, sr);
     });
 
+    auto initialSetup = m_audioDeviceManager->getCurrentDeviceSetup();
+    std::cout << "Initializing Audio Engine..." << std::endl;
+    m_audioEngine->init((int)initialSetup.sampleRate, initialSetup.outputChannels, initialSetup.blockSize, initialSetup.outputDeviceId, initialSetup.inputDeviceId);
+
     // Start Audio
     std::cout << "Starting Audio Stream..." << std::endl;
     if (m_audioDeviceManager->startAudio() != 0) {
-        std::cerr << "CRITICAL: Failed to start audio stream! Check audio devices." << std::endl;
+        std::cerr << "CRITICAL: Failed to start audio stream!" << std::endl;
     } else {
         std::cout << "Audio Stream Started Successfully." << std::endl;
+    }
+
+    // Scan for Plugins
+    for (const auto& path : PluginLibrary::get().getScanPaths()) {
+        if (path == "plugins") FluxCompiler::scanUserPlugins();
+        else FluxCompiler::scanVST3(path);
     }
     
     std::cout << "Loading Project..." << std::endl;
@@ -198,7 +267,13 @@ bool BeamHost::init() {
 
     std::cout << "Creating UI Components..." << std::endl;
     std::cout << " - Workspace" << std::endl;
-    m_workspace = std::make_shared<Workspace>(m_project, m_audioEngine.get(), m_audioDeviceManager.get());
+    
+    void* nativeHWND = nullptr;
+#ifdef _WIN32
+    nativeHWND = SDL_GetPointerProperty(SDL_GetWindowProperties(m_window), SDL_PROP_WINDOW_WIN32_HWND_POINTER, NULL);
+#endif
+
+    m_workspace = std::make_shared<Workspace>(m_project, m_audioEngine.get(), m_audioDeviceManager.get(), nativeHWND);
     std::cout << " - Timeline" << std::endl;
     m_timeline = std::make_shared<Timeline>(m_project, m_audioEngine.get());
     std::cout << " - TopBar" << std::endl;
@@ -207,6 +282,8 @@ bool BeamHost::init() {
     m_browser = std::make_shared<Sidebar>(this, Sidebar::Side::Left);
     std::cout << " - MasterStrip" << std::endl;
     m_masterStrip = std::make_shared<MasterStrip>(m_audioEngine.get());
+    std::cout << " - MixerView" << std::endl;
+    m_mixerView = std::make_shared<MixerView>(m_project, m_audioEngine.get());
     std::cout << " - ConfigView" << std::endl;
     m_configView = std::make_shared<AudioConfigView>(this, m_audioDeviceManager.get(), m_audioEngine.get());
 
@@ -224,6 +301,7 @@ bool BeamHost::init() {
 
     m_uiHandler->addComponent(m_workspace);
     m_uiHandler->addComponent(m_timeline);
+    m_uiHandler->addComponent(m_mixerView);
     m_uiHandler->addComponent(m_browser);
     m_uiHandler->addComponent(m_masterStrip);
     m_uiHandler->addComponent(m_topBar);
@@ -236,6 +314,8 @@ bool BeamHost::init() {
     m_topBar->onConfigRequested = [this]() {
         m_configView->setVisible(!m_configView->isVisible());
     };
+    m_topBar->onUndoRequested = [this]() { UndoManager::get().undo(); };
+    m_topBar->onRedoRequested = [this]() { UndoManager::get().redo(); };
     m_topBar->onPlayRequested = [this]() { m_audioEngine->setPlaying(true); };
     m_topBar->onPauseRequested = [this]() { m_audioEngine->setPlaying(false); };
     m_topBar->onRewindRequested = [this]() { m_audioEngine->rewind(); };
@@ -243,10 +323,16 @@ bool BeamHost::init() {
         if (recording) {
             auto nodes = m_project->getGraph()->getNodes();
             for (auto& [id, node] : nodes) {
+                // Audio Recording
                 auto track = std::dynamic_pointer_cast<FluxTrackNode>(node);
                 if (track) {
                     std::string filename = "recording_" + std::to_string(id) + ".wav";
                     track->startRecording(filename, 44100);
+                }
+                // MIDI Recording
+                auto midiTrack = std::dynamic_pointer_cast<MIDITrackNode>(node);
+                if (midiTrack) {
+                    midiTrack->startRecording();
                 }
             }
         } else {
@@ -254,6 +340,9 @@ bool BeamHost::init() {
             for (auto& [id, node] : nodes) {
                 auto track = std::dynamic_pointer_cast<FluxTrackNode>(node);
                 if (track) track->stopRecording();
+                
+                auto midiTrack = std::dynamic_pointer_cast<MIDITrackNode>(node);
+                if (midiTrack) midiTrack->stopRecording();
             }
         }
     };
@@ -265,15 +354,34 @@ bool BeamHost::init() {
         SDL_ShowSaveFileDialog(onSaveDialogCallback, this, m_window, filters, 2, "project.flux");
     };
     m_topBar->onLoadRequested = [this]() {
-        static const SDL_DialogFileFilter filters[] = {
-            { "Flux Project", "flux" },
-            { "All files", "*" }
-        };
-        SDL_ShowOpenFileDialog(onLoadDialogCallback, this, m_window, filters, 2, NULL, false);
+        if (m_project && m_project->isDirty()) {
+            m_confirmationModal = std::make_shared<ConfirmationModal>("Discard unsaved changes and load project?");
+            m_confirmationModal->onSave = [this]() {
+                m_topBar->onSaveRequested();
+                m_confirmationModal = nullptr; 
+            };
+            m_confirmationModal->onDiscard = [this]() {
+                m_confirmationModal = nullptr;
+                static const SDL_DialogFileFilter filters[] = { { "Flux Project", "flux" }, { "All files", "*" } };
+                SDL_ShowOpenFileDialog(onLoadDialogCallback, this, m_window, filters, 2, NULL, false);
+            };
+            m_confirmationModal->onCancel = [this]() { m_confirmationModal = nullptr; };
+            
+            float mx = (float)m_width / 2.0f - 200.0f;
+            float my = (float)m_height / 2.0f - 80.0f;
+            m_confirmationModal->setBounds(mx, my, 400, 160);
+        } else {
+            static const SDL_DialogFileFilter filters[] = { { "Flux Project", "flux" }, { "All files", "*" } };
+            SDL_ShowOpenFileDialog(onLoadDialogCallback, this, m_window, filters, 2, NULL, false);
+        }
     };
     m_topBar->onRenderRequested = [this]() {
         static const SDL_DialogFileFilter filters[] = { { "WAV Audio", "wav" } };
         SDL_ShowSaveFileDialog(onRenderDialogCallback, this, m_window, filters, 1, "output.wav");
+    };
+    m_topBar->onScriptRequested = [this]() {
+        static const SDL_DialogFileFilter filters[] = { { "Flux Script", "fluxscript" } };
+        SDL_ShowOpenFileDialog(onScriptLoadCallback, this, m_window, filters, 1, NULL, false);
     };
     m_topBar->onToolSelected = [this](int toolIdx) {
         if (m_timeline) {
@@ -290,24 +398,45 @@ bool BeamHost::init() {
 
 void BeamHost::setMode(DAWMode mode) {
     m_mode = mode;
+    
+    // Update TopBar mode indicator (0=Flux, 1=Slice, 2=Mix)
     if (m_topBar) {
-        m_topBar->setDAWMode(mode == DAWMode::Flux ? 0 : 1);
+        int modeIdx = (mode == DAWMode::Flux) ? 0 : ((mode == DAWMode::Splicing) ? 1 : 2);
+        m_topBar->setDAWMode(modeIdx);
     }
     
-    if (m_mode == DAWMode::Flux) {
-        m_workspace->setVisible(true);
-        m_timeline->setVisible(false);
-        if (m_browser) {
-             m_browser->setVisible(true);
-             m_browser->setMode(Sidebar::Mode::Browser);
-        }
-    } else {
-        m_workspace->setVisible(false);
-        m_timeline->setVisible(true);
-        if (m_browser) {
-             m_browser->setVisible(true); // Keep visible!
-             m_browser->setMode(Sidebar::Mode::Inspector);
-        }
+    // Hide all main views first
+    if (m_workspace) m_workspace->setVisible(false);
+    if (m_timeline) m_timeline->setVisible(false);
+    if (m_mixerView) m_mixerView->setVisible(false);
+    if (m_masterStrip) m_masterStrip->setVisible(false);
+    
+    switch (m_mode) {
+        case DAWMode::Flux:
+            m_workspace->setVisible(true);
+            m_masterStrip->setVisible(true);
+            if (m_browser) {
+                 m_browser->setVisible(true);
+                 m_browser->setMode(Sidebar::Mode::Browser);
+            }
+            break;
+            
+        case DAWMode::Splicing:
+            m_timeline->setVisible(true);
+            m_masterStrip->setVisible(true);
+            if (m_browser) {
+                 m_browser->setVisible(true);
+                 m_browser->setMode(Sidebar::Mode::Inspector);
+            }
+            break;
+            
+        case DAWMode::Mix:
+            m_mixerView->setVisible(true);
+            m_mixerView->refresh(); // Rebuild channel strips
+            if (m_browser) {
+                 m_browser->setVisible(false); // No browser in Mix mode
+            }
+            break;
     }
     performLayout();
 }
@@ -365,21 +494,30 @@ void BeamHost::performLayout() {
     if (m_mode == DAWMode::Flux) {
         activeView = m_workspace.get();
         if (m_timeline) m_timeline->setVisible(false);
+        if (m_mixerView) m_mixerView->setVisible(false);
         if (m_workspace) m_workspace->setVisible(true);
     } else if (m_mode == DAWMode::Splicing) {
         activeView = m_timeline.get();
         if (m_workspace) m_workspace->setVisible(false);
+        if (m_mixerView) m_mixerView->setVisible(false);
         if (m_timeline) m_timeline->setVisible(true);
+    } else if (m_mode == DAWMode::Mix) {
+        activeView = m_mixerView.get();
+        if (m_workspace) m_workspace->setVisible(false);
+        if (m_timeline) m_timeline->setVisible(false);
+        if (m_mixerView) m_mixerView->setVisible(true);
     }
 
     if (activeView) {
         bodyLayout.addItem(LayoutItem(activeView).withFlex(1.0f)); 
     }
 
-    // 3. Right Wing: Master Section (Always Visible)
-    if (m_masterStrip) {
+    // 3. Right Wing: Master Section (NOT shown in Mix mode - it's part of MixerView)
+    if (m_masterStrip && m_mode != DAWMode::Mix) {
         m_masterStrip->setVisible(true);
         bodyLayout.addItem(LayoutItem(m_masterStrip.get()).withWidth(140)); // Slightly wider for meters
+    } else if (m_masterStrip) {
+        m_masterStrip->setVisible(false);
     }
 
     bodyLayout.performLayout(bodyBounds);
@@ -393,10 +531,35 @@ void BeamHost::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {
-            std::cout << "Quit Event Received." << std::endl;
-            m_isRunning = false;
+            if (m_project && m_project->isDirty()) {
+                m_confirmationModal = std::make_shared<ConfirmationModal>("Save changes before exiting?");
+                m_confirmationModal->onSave = [this]() {
+                    m_topBar->onSaveRequested();
+                    m_confirmationModal = nullptr;
+                };
+                m_confirmationModal->onDiscard = [this]() {
+                    m_isRunning = false;
+                };
+                m_confirmationModal->onCancel = [this]() {
+                    m_confirmationModal = nullptr;
+                };
+                float mx = (float)m_width / 2.0f - 200.0f;
+                float my = (float)m_height / 2.0f - 80.0f;
+                m_confirmationModal->setBounds(mx, my, 400, 160);
+            } else {
+                std::cout << "Quit Event Received." << std::endl;
+                m_isRunning = false;
+            }
         } 
         else if (event.type == SDL_EVENT_KEY_DOWN) {
+            bool ctrl = (SDL_GetModState() & SDL_KMOD_CTRL);
+            if (ctrl && event.key.key == SDLK_Z) {
+                UndoManager::get().undo();
+            }
+            if (ctrl && event.key.key == SDLK_Y) {
+                UndoManager::get().redo();
+            }
+
             if (event.key.key == SDLK_SPACE) {
                 bool playing = !m_audioEngine->isPlaying();
                 m_audioEngine->setPlaying(playing);
@@ -459,6 +622,18 @@ void BeamHost::render(float dt) {
         m_batcher->resetViewTransform((float)m_width, (float)m_height);
     
         m_uiHandler->render(*m_batcher, dt, (float)m_width, (float)m_height);
+        
+        if (m_renderModal) {
+            // Draw Dimmer
+            m_batcher->drawQuad(0.0f, 0.0f, (float)m_width, (float)m_height, 0.0f, 0.0f, 0.0f, 0.5f);
+            m_renderModal->render(*m_batcher, dt, (float)m_width, (float)m_height);
+        }
+
+        if (m_confirmationModal) {
+            // Draw Dimmer
+            m_batcher->drawQuad(0.0f, 0.0f, (float)m_width, (float)m_height, 0.0f, 0.0f, 0.0f, 0.5f);
+            m_confirmationModal->render(*m_batcher, dt, (float)m_width, (float)m_height);
+        }
     m_batcher->flush();
     SDL_GL_SwapWindow(m_window);
 }
@@ -475,11 +650,13 @@ void BeamHost::run() {
             AsyncCallbackQueue::get().dispatch();
             GarbageCollector::get().collect();
             handleEvents();
-        if (m_uiHandler) m_uiHandler->update(dt);
+        if (m_renderModal) m_renderModal->update(dt);
+        if (m_confirmationModal) m_confirmationModal->update(dt);
+        if (m_uiHandler && !m_renderModal && !m_confirmationModal) m_uiHandler->update(dt);
         render(dt);
         heartbeats++;
         if (heartbeats % 500 == 0) std::cout << "DAW Heartbeat: Still alive." << std::endl;
-        SDL_Delay(1);
+        SDL_Delay(8); // Cap at ~120 FPS if VSync is disabled
     }
     std::cout << "Main Loop Exited Cleanly." << std::endl;
 }

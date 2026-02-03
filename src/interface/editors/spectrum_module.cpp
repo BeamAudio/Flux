@@ -6,11 +6,11 @@ namespace Beam {
 void SpectrumModule::paint(QuadBatcher& batcher) {
     getLookAndFeel().drawSpectrumAnalyzer(batcher, *this);
     
-    drawSpectrumGraph(batcher);
+    // drawSpectrumGraph(batcher); // Deprecated, using SpectrumDisplay child
 
     // Ports
-    if (m_inputPort) m_inputPort->paint(batcher);
-    if (m_outputPort) m_outputPort->paint(batcher);
+    for (auto& p : m_inputPorts) p->paint(batcher);
+    for (auto& p : m_outputPorts) p->paint(batcher);
     
     Component::paint(batcher);
 }

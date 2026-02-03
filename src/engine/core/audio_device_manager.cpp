@@ -194,13 +194,13 @@ void SDLCALL AudioDeviceManager::sdlAudioCallback(void* userdata, SDL_AudioStrea
     int frameSize = channels * sizeof(float);
     int totalFramesNeeded = additional_amount / frameSize;
 
-    std::vector<float> outBuf(maxBlockSize * channels);
     static std::map<std::string, std::vector<float>> inBuffers;
 
     while (totalFramesNeeded > 0) {
         int frames = (std::min)(totalFramesNeeded, maxBlockSize);
         
         std::map<std::string, float*> inputMap;
+        // ... (input mapping remains same) ...
         for (auto& [id, inStream] : manager->m_inputStreams) {
             auto& buf = inBuffers[id];
             buf.resize(frames * 2); 
@@ -222,10 +222,18 @@ void SDLCALL AudioDeviceManager::sdlAudioCallback(void* userdata, SDL_AudioStrea
             inputMap[id] = buf.data();
         }
 
-        float* outChannels[2] = { outBuf.data(), nullptr };
+        float* outChannels[1] = { nullptr };
         manager->m_audioCallback(inputMap, outChannels, frames, 2, channels, manager->m_deviceSetup.sampleRate);
+        float* ptrOut = outChannels[0];
 
-        SDL_PutAudioStreamData(stream, outBuf.data(), frames * channels * sizeof(float));
+        if (ptrOut) {
+            SDL_PutAudioStreamData(stream, ptrOut, frames * channels * sizeof(float));
+        } else {
+            // Failsafe: Send silence if callback didn't provide a buffer
+            static std::vector<float> silence;
+            if (silence.size() < (size_t)(frames * channels)) silence.resize(frames * channels, 0.0f);
+            SDL_PutAudioStreamData(stream, silence.data(), frames * channels * sizeof(float));
+        }
         totalFramesNeeded -= frames;
     }
 }

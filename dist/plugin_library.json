@@ -1,0 +1,428 @@
+{
+    "entries": [
+        {
+            "category": "VST3",
+            "name": "Analog Lab V",
+            "path": "C:/Program Files/Common Files/VST3\\Arturia\\Analog Lab V.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Diva(x64)",
+            "path": "C:/Program Files/Common Files/VST3\\Diva(x64).vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "helm",
+            "path": "C:/Program Files/Common Files/VST3\\Helm\\helm.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "helm64",
+            "path": "C:/Program Files/Common Files/VST3\\Helm\\helm64.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Dynamic EQ",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Dynamic EQ.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Dynamics",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Dynamics.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Equalizer",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Equalizer.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Exciter",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Exciter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Imager",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Imager.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Impact",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Impact.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Low End Focus",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Low End Focus.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Master Rebalance",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Master Rebalance.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Match EQ",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Match EQ.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Maximizer",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Maximizer.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Spectral Shaper",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Spectral Shaper.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Stabilizer",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Stabilizer.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Vintage Compressor",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Vintage Compressor.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Vintage EQ",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Vintage EQ.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Vintage Limiter",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Vintage Limiter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10 Vintage Tape",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10 Vintage Tape.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Ozone 10",
+            "path": "C:/Program Files/Common Files/VST3\\iZotope\\Ozone 10.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs 3-Band EQ",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs 3-Band EQ.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Bitcrush",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Bitcrush.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Channel Mixer",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Channel Mixer.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Chorus",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Chorus.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Comb Filter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Comb Filter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Compressor",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Compressor.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Delay",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Delay.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Distortion",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Distortion.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Dual Delay",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Dual Delay.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Dynamics",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Dynamics.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Ensemble",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Ensemble.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Filter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Filter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Flanger",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Flanger.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Formant Filter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Formant Filter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Frequency Shifter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Frequency Shifter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Gain",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Gain.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Gate",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Gate.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Haas",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Haas.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Ladder Filter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Ladder Filter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Limiter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Limiter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Nonlinear Filter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Nonlinear Filter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Phase Distortion",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Phase Distortion.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Phaser",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Phaser.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Pitch Shifter",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Pitch Shifter.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Resonator",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Resonator.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Reverb",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Reverb.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Reverser",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Reverser.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Ring Mod",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Ring Mod.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Shaper",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Shaper.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Stereo",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Stereo.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Tape Stop",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Tape Stop.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Trance Gate",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Trance Gate.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "kHs Transient Shaper",
+            "path": "C:/Program Files/Common Files/VST3\\Kilohearts\\kHs Transient Shaper.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Mini V3",
+            "path": "C:/Program Files/Common Files/VST3\\Mini V3.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "Momentum",
+            "path": "C:/Program Files/Common Files/VST3\\Momentum.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "sforzando",
+            "path": "C:/Program Files/Common Files/VST3\\sforzando.vst3/Contents/x86_64-win/sforzando.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "sforzando",
+            "path": "C:/Program Files/Common Files/VST3\\sforzando.vst3\\Contents\\x86_64-win\\sforzando.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native Bus Compressor v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native Bus Compressor v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native Channelstrip v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native Channelstrip v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native Drumstrip v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native Drumstrip v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native FlexVerb",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native FlexVerb.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native Vocalstrip 2",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native Vocalstrip 2.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native X-Comp v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native X-Comp v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native X-EQ 2",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native X-EQ 2.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native X-Phase v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native X-Phase v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native X-Saturator v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native X-Saturator v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "SSL Native X-ValveComp v6",
+            "path": "C:/Program Files/Common Files/VST3\\Solid State Logic\\SSL Native X-ValveComp v6.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "LABS",
+            "path": "C:/Program Files/Common Files/VST3\\Spitfire Audio\\LABS.vst3/Contents/x86_64-win/LABS.vst3",
+            "type": "VST3"
+        },
+        {
+            "category": "VST3",
+            "name": "LABS",
+            "path": "C:/Program Files/Common Files/VST3\\Spitfire Audio\\LABS.vst3\\Contents\\x86_64-win\\LABS.vst3",
+            "type": "VST3"
+        }
+    ],
+    "scanPaths": [
+        "C:/Program Files/Common Files/VST3",
+        "plugins"
+    ]
+}

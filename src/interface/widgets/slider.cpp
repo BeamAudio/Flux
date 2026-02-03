@@ -1,5 +1,7 @@
 #include "interface/widgets/slider.hpp"
 #include "interface/core/look_and_feel.hpp"
+#include "engine/session/undo_manager.hpp"
+#include "engine/session/commands.hpp"
 #include <algorithm>
 
 namespace Beam {
@@ -97,6 +99,7 @@ void Slider::mouseDown(const MouseEvent& event) {
     m_dragStartX = event.x;
     m_dragStartY = event.y;
     m_dragStartValue = getValue();
+    m_undoValue = (float)m_dragStartValue;
     
     auto bounds = getBounds();
     
@@ -147,6 +150,16 @@ void Slider::mouseDrag(const MouseEvent& event) {
 }
 
 void Slider::mouseUp(const MouseEvent& event) {
+    float finalValue = (float)getValue();
+    if (m_parameter && std::abs(finalValue - m_undoValue) > 0.0001f) {
+        // We use UndoManager::get().perform BUT execute has already been done by mouseDrag.
+        // So we just push it to the stack manually? 
+        // No, UndoManager::perform() calls execute().
+        // To avoid double execution (which is harmless but redundant here), we could 
+        // have a method that just pushes. 
+        // Actually, let's just make execute() call setValue(). It's fine.
+        UndoManager::get().perform(std::make_unique<ParameterChangeCommand>(m_parameter, m_undoValue, finalValue));
+    }
 }
 
 void Slider::setParameter(std::shared_ptr<Parameter> parameter) {
@@ -155,6 +168,13 @@ void Slider::setParameter(std::shared_ptr<Parameter> parameter) {
         m_min = m_parameter->getMin();
         m_max = m_parameter->getMax();
         m_value = m_parameter->getValue();
+        
+        // Listen for updates from automation/engine
+        m_parameter->addListener([this](float val) {
+            // This is called from the main thread dispatch (ParameterQueue::dispatch)
+            // m_value update is enough for next render frame.
+            m_value = val;
+        });
     }
 }
 

@@ -1,0 +1,40 @@
+param thresh 0.0 1.0 0.8
+param release 0.001 1.0 0.1
+param ceiling 0.0 2.0 1.0
+var env 0.0
+
+process:
+    cpp {
+        // Read input (Mono processing per sample)
+        float input = in_sample;
+        float abs_in = std::abs(input);
+        
+        // Peak Envelope Follower
+        if (abs_in > v_env) {
+            // Instant Attack
+            v_env = abs_in; 
+        } else {
+            // Exponential Release
+            // Time constant: t = -1 / ln(coeff) * Ts
+            // Coeff = exp(-1 / (time * sr))
+            // We approximate for speed or use std::exp
+            float coeff = std::exp(-1.0f / (p_release * sr));
+            v_env = v_env * coeff + abs_in * (1.0f - coeff);
+        }
+        
+        // Gain Reduction Calculation
+        float gain = 1.0f;
+        float threshold = p_thresh;
+        
+        if (v_env > threshold) {
+            // Ratio is infinite (Limiting)
+            gain = threshold / v_env;
+        }
+        
+        // Apply Gain
+        float processed = input * gain;
+        
+        // Output with soft clipping (Smooth function)
+        // Adjust ceiling
+        out_sample = std::tanh(processed) * p_ceiling;
+    }

@@ -7,7 +7,96 @@
 #include <cmath>
 #include <sstream>
 
+#include <xmmintrin.h>
+#include <emmintrin.h>
+
 namespace Beam {
+
+/**
+ * @class SIMD
+ * @brief High-performance audio arithmetic using SSE.
+ */
+class SIMD {
+public:
+    /**
+     * @brief Adds source buffer into destination buffer: dst = dst + src
+     */
+    static void add(float* dst, const float* src, int count) {
+        int i = 0;
+        // Process blocks of 4 floats
+        for (; i <= count - 4; i += 4) {
+            __m128 vsrc = _mm_loadu_ps(src + i);
+            __m128 vdst = _mm_loadu_ps(dst + i);
+            _mm_storeu_ps(dst + i, _mm_add_ps(vdst, vsrc));
+        }
+        // Remaining elements
+        for (; i < count; ++i) dst[i] += src[i];
+    }
+
+    static void copy(float* dst, const float* src, int count) {
+        memcpy(dst, src, count * sizeof(float));
+    }
+
+    static void set(float* dst, float val, int count) {
+        int i = 0;
+        __m128 vval = _mm_set1_ps(val);
+        for (; i <= count - 4; i += 4) {
+            _mm_storeu_ps(dst + i, vval);
+        }
+        for (; i < count; ++i) dst[i] = val;
+    }
+
+    /**
+     * @brief Adds source to dest with a scalar gain.
+     * dst[i] += src[i] * gain
+     */
+    static void add_with_gain(const float* src, float* dst, float gain, int count) {
+        int i = 0;
+        __m128 vGain = _mm_set1_ps(gain);
+        for (; i <= count - 4; i += 4) {
+            __m128 vsrc = _mm_loadu_ps(src + i);
+            __m128 vdst = _mm_loadu_ps(dst + i);
+            __m128 vScaled = _mm_mul_ps(vsrc, vGain);
+            vdst = _mm_add_ps(vdst, vScaled);
+            _mm_storeu_ps(dst + i, vdst);
+        }
+        for (; i < count; ++i) {
+            dst[i] += src[i] * gain;
+        }
+    }
+
+    /**
+     * @brief Calculates the sum of squared differences for YIN algorithm.
+     * sum((buffer[j] - buffer[j+tau])^2)
+     */
+    static float yin_difference(const float* buffer, int tau, int N) {
+        float diff = 0.0f;
+        __m128 vDiff = _mm_setzero_ps();
+        int j = 0;
+        
+        for (; j <= N - 4; j += 4) {
+            __m128 v1 = _mm_loadu_ps(&buffer[j]);
+            __m128 v2 = _mm_loadu_ps(&buffer[j + tau]);
+            __m128 vD = _mm_sub_ps(v1, v2);
+            __m128 vSq = _mm_mul_ps(vD, vD);
+            vDiff = _mm_add_ps(vDiff, vSq);
+        }
+        
+        // Horizontal sum
+        __m128 vShuf = _mm_shuffle_ps(vDiff, vDiff, _MM_SHUFFLE(2, 3, 0, 1));
+        vDiff = _mm_add_ps(vDiff, vShuf);
+        vShuf = _mm_movehl_ps(vShuf, vDiff);
+        vDiff = _mm_add_ss(vDiff, vShuf);
+        diff = _mm_cvtss_f32(vDiff);
+
+        // Scalar remainder
+        for (; j < N; ++j) {
+            float d = buffer[j] - buffer[j + tau];
+            diff += d * d;
+        }
+        return diff;
+    }
+};
 
 /**
  * @class AudioUtils
@@ -99,10 +188,10 @@ public:
 
     /**
      * @brief Calculates the width of a string in pixels given a font size.
-     * Note: This assumes a fixed-width bitmapped font where each char is 'size' wide.
+     * Note: This matches QuadBatcher::drawText which uses 'size' per character.
      */
     static float calculateTextWidth(const std::string& text, float size) {
-        return (float)text.length() * size * 0.9f; 
+        return (float)text.length() * size; 
     }
 
     /**

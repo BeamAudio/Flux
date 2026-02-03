@@ -1,0 +1,16 @@
+category Distortion
+param drive 1.0 10.0 2.0
+param bits 1.0 16.0 8.0
+var step 0.0
+
+process:
+    // Bitcrushing logic
+    step = pow(2.0, bits)
+    float crushed = floor(in * step) / step
+    
+    // Hard clipping distortion
+    float driven = crushed * drive
+    if driven > 1.0 { driven = 1.0 }
+    if driven < -1.0 { driven = -1.0 }
+    
+    out = driven

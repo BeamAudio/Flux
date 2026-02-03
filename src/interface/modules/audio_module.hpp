@@ -6,6 +6,7 @@
 #include "interface/widgets/button.hpp"
 #include "interface/core/layout.hpp"
 #include "interface/editors/generic_node_editor.hpp"
+#include "interface/editors/vst_external_editor.hpp"
 #include "engine/core/flux_node.hpp"
 #include "engine/core/audio_device_manager.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
@@ -22,33 +23,31 @@ namespace Beam {
  */
 class AudioModule : public Component {
 public:
-    AudioModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y, AudioDeviceManager* deviceManager = nullptr) 
-        : m_node(node), m_nodeId(nodeId), m_deviceManager(deviceManager) {
+    AudioModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y, AudioDeviceManager* deviceManager = nullptr, void* nativeWindowHandle = nullptr) 
+        : m_node(node), m_nodeId(nodeId), m_deviceManager(deviceManager), m_nativeWindowHandle(nativeWindowHandle) {
         
         setName(node->getName());
 
-        if (node->getInputPorts().size() > 0) {
-            m_inputPort = std::make_shared<Port>(PortType::Input, this);
-            addChildComponent(m_inputPort); 
+        for (int i = 0; i < (int)node->getInputPorts().size(); ++i) {
+            auto const& p = node->getInputPorts()[i];
+            auto portType = (p.type == FluxNode::Port::Sidechain) ? PortType::Sidechain : PortType::Input;
+            auto port = std::make_shared<Port>(portType, this, i);
+            m_inputPorts.push_back(port);
+            addChildComponent(port);
         }
             
-        if (node->getOutputPorts().size() > 0 && node->getName() != "Master") {
-            m_outputPort = std::make_shared<Port>(PortType::Output, this);
-            addChildComponent(m_outputPort); 
-        }
-
-        for (const auto& p : node->getInputPorts()) {
-            if (p.type == FluxNode::Port::Sidechain) {
-                m_sidechainPort = std::make_shared<Port>(PortType::Sidechain, this);
-                addChildComponent(m_sidechainPort);
-                break;
+        if (node->getName() != "Master") {
+            for (int i = 0; i < (int)node->getOutputPorts().size(); ++i) {
+                auto port = std::make_shared<Port>(PortType::Output, this, i);
+                m_outputPorts.push_back(port);
+                addChildComponent(port);
             }
         }
         
         setDraggable(true);
-        setClipsChildren(false); // Allow ports to overhang
+        setClipsChildren(false); 
         
-        setBounds(x, y, 160, 100); // Initial size
+        setBounds(x, y, 160, 100); 
         autoGenerateUI(); 
     }
 
@@ -59,13 +58,13 @@ public:
         m_children.clear();
         
         // Restore ports
-        if (m_inputPort) addChildComponent(m_inputPort);
-        if (m_outputPort) addChildComponent(m_outputPort);
-        if (m_sidechainPort) addChildComponent(m_sidechainPort);
+        for (auto& p : m_inputPorts) addChildComponent(p);
+        for (auto& p : m_outputPorts) addChildComponent(p);
 
         // Create Context
         NodeEditorContext ctx;
         ctx.deviceManager = m_deviceManager;
+        ctx.nativeWindowHandle = m_nativeWindowHandle;
 
         m_editorComponent = m_node->createEditor(ctx);
 
@@ -77,6 +76,10 @@ public:
             // Adaptive: Allow editor to grow
             m_editorComponent->setClipsChildren(false); 
             addChildComponent(m_editorComponent);
+            
+            if (auto vstEditor = std::dynamic_pointer_cast<VSTExternalEditor>(m_editorComponent)) {
+                vstEditor->attachToNative((HWND)m_nativeWindowHandle);
+            }
             
             // Auto-size the editor based on its own preferred content
             m_editorComponent->autoSize(true);
@@ -97,7 +100,10 @@ public:
         float totalW = (std::max)(pw + PADDING * 2, 200.0f);
         float totalH = HEADER_H + ph + PADDING * 2;
         
-        if (m_sidechainPort) totalH += 15.0f;
+        float portStartY = 50.0f;
+        float portSpacing = 20.0f;
+        float maxPortY = portStartY + (float)(std::max)(m_inputPorts.size(), m_outputPorts.size()) * portSpacing;
+        totalH = (std::max)(totalH, maxPortY + PADDING);
 
         // Apply new bounds
         setBounds(m_bounds.x, m_bounds.y, totalW, totalH);
@@ -117,17 +123,17 @@ public:
         float localY = y - m_bounds.y;
 
         // Check Ports first (they might overhang)
-        auto check = [&](std::shared_ptr<Port> p) {
-            if (p && p->getBounds().contains(localX, localY)) {
-                // Pass coords relative to PORT
-                return p->onMouseDown(localX - p->getX(), localY - p->getY(), button, shift);
+        auto checkPorts = [&](const std::vector<std::shared_ptr<Port>>& ports) {
+            for (auto& p : ports) {
+                if (p && p->getBounds().contains(localX, localY)) {
+                    return p->onMouseDown(localX - p->getX(), localY - p->getY(), button, shift);
+                }
             }
             return false;
         };
         
-        if (check(m_inputPort)) return true;
-        if (check(m_outputPort)) return true;
-        if (check(m_sidechainPort)) return true;
+        if (checkPorts(m_inputPorts)) return true;
+        if (checkPorts(m_outputPorts)) return true;
         
         if (getName() != "Master" && getName() != "MASTER" && m_deleteBtnBounds.contains(localX, localY)) {
             if (onDeleteRequested) onDeleteRequested(this);
@@ -139,17 +145,19 @@ public:
     }
 
     void resized() override {
-        // Layout using local coordinates with consistent constants
         static constexpr float HEADER_H = 30.0f;
         static constexpr float PADDING = 8.0f;
-        float portOffset = 50.0f;
+        float portStartY = 50.0f;
+        float portSpacing = 20.0f;
 
-        // Ports (Local)
-        if (m_inputPort) m_inputPort->setBounds(-6, portOffset, 12, 12); 
-        if (m_outputPort) m_outputPort->setBounds(m_bounds.w - 6, portOffset, 12, 12);
-        
-        if (m_sidechainPort) {
-            m_sidechainPort->setBounds((m_bounds.w - 12) * 0.5f, m_bounds.h - 6, 12, 12);
+        // Input Ports (Left)
+        for (size_t i = 0; i < m_inputPorts.size(); ++i) {
+            m_inputPorts[i]->setBounds(-6, portStartY + i * portSpacing, 12, 12);
+        }
+
+        // Output Ports (Right)
+        for (size_t i = 0; i < m_outputPorts.size(); ++i) {
+            m_outputPorts[i]->setBounds(m_bounds.w - 6, portStartY + i * portSpacing, 12, 12);
         }
 
         m_deleteBtnBounds = {m_bounds.w - 25, 0, 25, HEADER_H};
@@ -173,24 +181,47 @@ public:
 
     void paint(QuadBatcher& batcher) override;
 
+    void update(float dt) override {
+        if (m_node) m_node->updateVisuals();
+        Component::update(dt);
+    }
+
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         Component::render(batcher, dt, screenW, screenH);
     }
 
-    std::shared_ptr<Port> getInputPort() { return m_inputPort; }
-    std::shared_ptr<Port> getOutputPort() { return m_outputPort; }
-    std::shared_ptr<Port> getSidechainPort() { return m_sidechainPort; }
+    std::shared_ptr<FluxNode> getNode() const { return m_node; }
+
+    void setNode(std::shared_ptr<FluxNode> newNode) {
+        if (m_node != newNode) {
+            m_node = newNode;
+            if (m_node) {
+                setName(m_node->getName());
+                autoGenerateUI();
+            }
+        }
+    }
+
+    std::vector<std::shared_ptr<Port>>& getInputPorts() { return m_inputPorts; }
+    std::vector<std::shared_ptr<Port>>& getOutputPorts() { return m_outputPorts; }
+
+    std::shared_ptr<Port> getSidechainPort() {
+        for (auto& p : m_inputPorts) {
+            if (p->getType() == PortType::Sidechain) return p;
+        }
+        return nullptr;
+    }
 
     std::function<void(AudioModule*)> onDeleteRequested;
 
 protected:
     std::shared_ptr<FluxNode> m_node;
-    std::shared_ptr<Port> m_inputPort;
-    std::shared_ptr<Port> m_outputPort;
-    std::shared_ptr<Port> m_sidechainPort;
+    std::vector<std::shared_ptr<Port>> m_inputPorts;
+    std::vector<std::shared_ptr<Port>> m_outputPorts;
     std::shared_ptr<Component> m_editorComponent;
     Rect m_deleteBtnBounds;
     AudioDeviceManager* m_deviceManager = nullptr;
+    void* m_nativeWindowHandle = nullptr;
 
 private:
     size_t m_nodeId;

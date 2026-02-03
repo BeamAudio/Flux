@@ -3,6 +3,8 @@
 #include "interface/core/layout.hpp"
 #include "interface/analog/analog_ui_templates.hpp"
 #include <iostream>
+#include <chrono>
+#include <string>
 
 namespace Beam {
 
@@ -20,9 +22,15 @@ public:
         // 2. AOT Compile Button
         m_compileBtn = std::make_shared<TextButton>("COMPILE AOT");
         m_compileBtn->onClick([node]() {
-            std::cout << "Compiling script to native plugin..." << std::endl;
-            if (node->compileToNative("MyCompiledPlugin")) {
-                std::cout << "Compilation Success! Plugin 'MyCompiledPlugin' created." << std::endl;
+            auto now = std::chrono::system_clock::now();
+            auto ts = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+            std::string baseName = node->getName();
+            for(auto& c : baseName) if(!isalnum(c)) c = '_';
+            std::string name = baseName + "_" + std::to_string(ts);
+
+            std::cout << "Compiling script to native plugin: " << name << std::endl;
+            if (node->compileToNative(name)) {
+                std::cout << "Compilation Success! Plugin '" << name << "' created." << std::endl;
             } else {
                 std::cout << "Compilation Failed. Check if 'cl.exe' is in PATH." << std::endl;
             }
@@ -43,9 +51,17 @@ public:
         m_compileBtn->setBounds(10, rackH + 5, m_bounds.w - 20, 24);
     }
 
+    void paint(QuadBatcher& g) override {}
+
+    void render(QuadBatcher& g, float dt, float w, float h) override {
+        if (m_node) m_node->updateVisuals();
+        Component::render(g, dt, w, h);
+    }
+
 private:
     std::shared_ptr<RackUnitUI> m_rackUI;
     std::shared_ptr<TextButton> m_compileBtn;
+    FluxScriptNode* m_node;
 };
 
 std::shared_ptr<Component> FluxScriptNode::createEditor(const NodeEditorContext& context) {

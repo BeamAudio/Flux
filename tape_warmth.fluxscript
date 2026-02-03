@@ -1,0 +1,26 @@
+category Distortion
+param drive 1.0 10.0 2.0
+param flutter 0.0 1.0 0.2
+param output -12.0 12.0 0.0
+
+var phase 0.0
+
+process:
+    cpp {
+        // 1. Flutter (Subtle volume modulation)
+        // Note: 'phase' becomes 'v_phase', 'flutter' becomes 'p_flutter'
+        v_phase += (4.0f * 6.2831f) / sr; 
+        if (v_phase > 6.2831f) v_phase -= 6.2831f;
+        
+        float mod = 1.0f + std::sin(v_phase) * p_flutter * 0.1f;
+
+        // 2. Drive and Saturation
+        float x = in_sample * p_drive * mod;
+        
+        // Soft-clipping curve (standard tape-like saturation)
+        float saturated = std::tanh(x);
+
+        // 3. Output Gain (dB to Linear)
+        float gain = std::pow(10.0f, p_output / 20.0f);
+        out_sample = saturated * gain;
+    }

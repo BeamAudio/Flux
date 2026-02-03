@@ -3,6 +3,7 @@ C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_device_manager.cp
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\audio_engine.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\flux_node.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\flux_node.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\dsp\third_party_impl.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\third_party_impl.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\hosting\vst3_host.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\vst3_host.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\io\disk_streamer.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\disk_streamer.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\nodes\input_node.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\input_node.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\nodes\master_node.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\master_node.obj
@@ -15,6 +16,7 @@ C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\input_handler.cpp;C:
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\look_and_feel.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\look_and_feel.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\filter_editor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\filter_editor.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\spectrum_module.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\spectrum_module.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\vst_external_editor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\vst_external_editor.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\modules\audio_module.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\audio_module.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\render\quad_batcher.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\quad_batcher.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\render\shader.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\shader.obj

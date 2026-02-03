@@ -16,6 +16,9 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\dsp\third_party_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\hosting\vst3_host.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\io\disk_streamer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,6 +53,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\spectrum_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\vst_external_editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\modules\audio_module.cpp">
