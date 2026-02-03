@@ -164,6 +164,9 @@ public:
                 if (line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
                     float extra = freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
                     itemMain = (std::max)(20.0f, itemMain + extra);
+                } else if (freeSpace < 0 && !m_config.wrap) {
+                    // In a scrollable non-wrapping container, do not shrink items below preferred size
+                    // itemMain = itemMain; // Keep preferred
                 }
                 
                 float crossOffset = 0;

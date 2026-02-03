@@ -34,6 +34,11 @@ public:
         updateContentBounds();
     }
 
+    void scrollToTop() {
+        m_scrollY = 0.0f;
+        updateContentBounds();
+    }
+
     void resized() override {
         updateContentBounds();
     }

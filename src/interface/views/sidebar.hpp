@@ -60,6 +60,7 @@ public:
 
     void setCategory(const std::string& cat) {
         m_category = cat;
+        if (m_scrollContainer) m_scrollContainer->scrollToTop();
         rebuildUI();
         if (getParent()) getParent()->resized();
         resized();
@@ -68,6 +69,7 @@ public:
     void setMode(Mode mode) {
         if (m_mode == mode) return;
         m_mode = mode;
+        if (m_scrollContainer) m_scrollContainer->scrollToTop();
         rebuildUI();
     }
 
