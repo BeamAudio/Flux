@@ -734,7 +734,6 @@ void BeamHost::run() {
         if (m_uiHandler && !m_renderModal && !m_confirmationModal) m_uiHandler->update(dt);
         render(dt);
         heartbeats++;
-        if (heartbeats % 500 == 0) std::cout << "DAW Heartbeat: Still alive." << std::endl;
         SDL_Delay(8); // Cap at ~120 FPS if VSync is disabled
     }
     std::cout << "Main Loop Exited Cleanly." << std::endl;

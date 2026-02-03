@@ -204,10 +204,8 @@ public:
     std::pair<float, float> getVisualPos(size_t nodeId) const {
         std::string key = std::to_string(nodeId);
         if (m_visuals.contains(key)) {
-            std::cout << "[GetVisualPos] Found ID " << nodeId << " at (" << m_visuals[key]["x"].get<float>() << ", " << m_visuals[key]["y"].get<float>() << ")" << std::endl;
             return {m_visuals[key]["x"].get<float>(), m_visuals[key]["y"].get<float>()};
         }
-        std::cout << "[GetVisualPos] ID " << nodeId << " NOT FOUND in visuals. Returning default." << std::endl;
         return {100.0f, 100.0f};
     }
 

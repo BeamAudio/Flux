@@ -72,14 +72,25 @@ public:
     }
 
     void rebuildUI() {
-        m_children.clear(); 
         m_buttons.clear();
         m_backBtn = nullptr;
 
         auto flex = std::dynamic_pointer_cast<AutoFlexContainer>(m_contentPane);
-        if (flex) flex->clearFlexChildren();
+        if (flex) {
+            auto& cfg = flex->getConfig();
+            cfg.direction = AutoFlexContainer::Direction::Column;
+            cfg.crossAlign = AutoFlexContainer::Alignment::Stretch;
+            cfg.padding = 15.0f;
+            cfg.gap = 8.0f;
+            cfg.wrap = false; // Disable wrapping for sidebar list
+            
+            flex->clearFlexChildren();
+        }
         
-        if (m_scrollContainer) addChildComponent(m_scrollContainer);
+        // Ensure scroll container is a child
+        bool alreadyChild = false;
+        for (const auto& c : m_children) if (c == m_scrollContainer) { alreadyChild = true; break; }
+        if (!alreadyChild && m_scrollContainer) addChildComponent(m_scrollContainer);
 
         if (m_side != Side::Left) return;
 

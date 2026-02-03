@@ -38,6 +38,9 @@ public:
         setName("AutoFlexContainer");
     }
     
+    Config& getConfig() { return m_config; }
+    void setConfig(Config cfg) { m_config = cfg; resized(); }
+
     void addFlexChild(std::shared_ptr<Component> child, float grow = 0.0f) {
         m_flexChildren.push_back({child, {grow}});
         addChildComponent(child);
@@ -62,7 +65,7 @@ public:
         if (m_flexChildren.empty()) return lines;
 
         bool isRow = m_config.direction == Direction::Row;
-        float maxMain = (isRow ? targetW : targetH) - m_config.padding * 2;
+        float maxMain = m_config.wrap ? ((isRow ? targetW : targetH) - m_config.padding * 2) : 1e10f;
         
         lines.push_back(Line());
         float currentMain = 0;
@@ -92,7 +95,10 @@ public:
     void getPreferredSize(float& w, float& h) const override {
         if (m_flexChildren.empty()) { w = 0; h = 0; return; }
         
-        auto lines = computeLines(m_config.preferredWidth, m_config.preferredHeight);
+        float targetW = (m_bounds.w > 0) ? m_bounds.w : m_config.preferredWidth;
+        float targetH = (m_bounds.h > 0) ? m_bounds.h : m_config.preferredHeight;
+
+        auto lines = computeLines(targetW, targetH);
         bool isRow = m_config.direction == Direction::Row;
         
         float totalMainAcrossLines = 0;
@@ -147,7 +153,6 @@ public:
                 
                 if (line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
                     float extra = freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
-                    // Prevent total collapse, especially for sliders
                     itemMain = (std::max)(20.0f, itemMain + extra);
                 }
                 
