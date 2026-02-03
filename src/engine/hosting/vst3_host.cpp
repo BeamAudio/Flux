@@ -127,6 +127,8 @@ bool VST3HostNode::load() {
             m_impl->factory->createInstance(controllerId, Steinberg::Vst::IEditController_iid, (void**)&m_impl->controller);
             if (m_impl->controller) {
                 m_impl->controller->initialize(static_cast<Steinberg::Vst::IHostApplication*>(this));
+                m_impl->controller->setComponentHandler(static_cast<Steinberg::Vst::IComponentHandler*>(this));
+                
                 Steinberg::int32 paramCount = m_impl->controller->getParameterCount();
                 for (Steinberg::int32 i = 0; i < paramCount; ++i) {
                     Steinberg::Vst::ParameterInfo info;
@@ -154,6 +156,31 @@ Steinberg::tresult PLUGIN_API VST3HostNode::getName(Steinberg::Vst::String128 na
     return Steinberg::kResultTrue;
 }
 
+Steinberg::tresult PLUGIN_API VST3HostNode::beginEdit(Steinberg::Vst::ParamID id) {
+    return Steinberg::kResultTrue;
+}
+
+Steinberg::tresult PLUGIN_API VST3HostNode::performEdit(Steinberg::Vst::ParamID id, Steinberg::Vst::ParamValue valueNormalized) {
+    auto params = getParameterOrder();
+    for (size_t i = 0; i < m_impl->paramIds.size(); ++i) {
+        if (m_impl->paramIds[i] == id) {
+            if (i < params.size()) {
+                params[i]->setValue((float)valueNormalized);
+            }
+            break;
+        }
+    }
+    return Steinberg::kResultTrue;
+}
+
+Steinberg::tresult PLUGIN_API VST3HostNode::endEdit(Steinberg::Vst::ParamID id) {
+    return Steinberg::kResultTrue;
+}
+
+Steinberg::tresult PLUGIN_API VST3HostNode::restartComponent(Steinberg::int32 flags) {
+    return Steinberg::kResultTrue;
+}
+
 Steinberg::tresult PLUGIN_API VST3HostNode::createInstance(Steinberg::TUID cid, Steinberg::TUID _iid, void** obj) {
     return Steinberg::kNoInterface;
 }
@@ -162,6 +189,10 @@ Steinberg::tresult PLUGIN_API VST3HostNode::queryInterface(const Steinberg::TUID
     if (memcmp(_iid, Steinberg::Vst::IHostApplication_iid, sizeof(Steinberg::TUID)) == 0 ||
         memcmp(_iid, Steinberg::FUnknown_iid, sizeof(Steinberg::TUID)) == 0) {
         *obj = static_cast<Steinberg::Vst::IHostApplication*>(this);
+        return Steinberg::kResultTrue;
+    }
+    if (memcmp(_iid, Steinberg::Vst::IComponentHandler_iid, sizeof(Steinberg::TUID)) == 0) {
+        *obj = static_cast<Steinberg::Vst::IComponentHandler*>(this);
         return Steinberg::kResultTrue;
     }
     return Steinberg::kNoInterface;
@@ -197,27 +228,63 @@ public:
             Steinberg::int32 ptIdx;
             queue->addPoint(0, m_params[i]->getValue(), ptIdx);
         }
+
+        // --- PLANAR CONVERSION ---
+        // VST3 expects planar buffers (separate pointer per channel).
+        // Our engine uses interleaved buffers (LRLR in one pointer).
+        
+        int framesToProcess = (std::min)(frames, 8192);
+
+        if (inputs[0]) {
+            for (int i = 0; i < framesToProcess; ++i) {
+                m_inL[i] = inputs[0][i * 2];
+                m_inR[i] = inputs[0][i * 2 + 1];
+            }
+        } else {
+            std::fill(m_inL, m_inL + framesToProcess, 0.0f);
+            std::fill(m_inR, m_inR + framesToProcess, 0.0f);
+        }
+
         Steinberg::Vst::ProcessData data;
-        data.numSamples = frames;
+        data.numSamples = framesToProcess;
         data.symbolicSampleSize = Steinberg::Vst::kSample32;
         data.inputParameterChanges = &m_paramChanges;
+        
+        float* inPtrs[2] = { m_inL, m_inR };
         Steinberg::Vst::AudioBusBuffers inBus;
         inBus.numChannels = 2;
-        inBus.channelBuffers32 = (Steinberg::Vst::Sample32**)inputs;
+        inBus.channelBuffers32 = inPtrs;
         data.numInputs = 1;
         data.inputs = &inBus;
+
+        float* outPtrs[2] = { m_outL, m_outR };
         Steinberg::Vst::AudioBusBuffers outBus;
         outBus.numChannels = 2;
-        outBus.channelBuffers32 = (Steinberg::Vst::Sample32**)outputs;
+        outBus.channelBuffers32 = outPtrs;
         data.numOutputs = 1;
         data.outputs = &outBus;
+
         m_proc->process(data);
+
+        // --- INTERLEAVE BACK ---
+        if (outputs[0]) {
+            for (int i = 0; i < framesToProcess; ++i) {
+                outputs[0][i * 2] = m_outL[i];
+                outputs[0][i * 2 + 1] = m_outR[i];
+            }
+        }
     }
 private:
     Steinberg::Vst::IAudioProcessor* m_proc;
     const std::vector<std::shared_ptr<Parameter>>& m_params;
     const std::vector<Steinberg::Vst::ParamID>& m_ids;
     VST3ParameterChanges m_paramChanges;
+
+    // Per-instance buffers for planar conversion (max 8192 frames)
+    float m_inL[8192];
+    float m_inR[8192];
+    float m_outL[8192];
+    float m_outR[8192];
 };
 
 std::shared_ptr<FluxProcessor> VST3HostNode::createProcessor() {

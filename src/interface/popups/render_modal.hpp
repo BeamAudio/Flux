@@ -13,27 +13,52 @@ namespace Beam {
 
 class RenderModal : public Component {
 public:
-    RenderModal(const std::string& path, std::shared_ptr<FluxGraph> graph, size_t totalFrames, size_t masterNodeId = (size_t)-1) 
-        : m_path(path), m_renderer(std::make_shared<OfflineRenderer>()) 
+    RenderModal(const std::string& path, std::shared_ptr<RenderPlan> plan, size_t totalFrames) 
+        : m_path(path) 
     {
-        setName("RenderModal");
-        setBounds(0, 0, 400, 200);
+        std::cout << "[RenderModal] Constructor entry" << std::endl; std::cout.flush();
+        try {
+            m_renderer = std::make_shared<OfflineRenderer>();
+            std::cout << "[RenderModal] Renderer created" << std::endl; std::cout.flush();
 
-        m_cancelBtn = std::make_shared<TextButton>("CANCEL");
-        addChildComponent(m_cancelBtn);
-        
-        m_cancelBtn->onClick([this]() {
-            m_renderer->cancel();
-            if (onClose) onClose();
-        });
+            std::cout << "[RenderModal] Creating TextButton..." << std::endl; std::cout.flush();
+            m_cancelBtn = std::make_shared<TextButton>("CANCEL");
+            std::cout << "[RenderModal] TextButton created" << std::endl; std::cout.flush();
 
-        // Start Rendering
-        if (!m_renderer->start(path, graph, totalFrames, masterNodeId)) {
-            m_status = "Error starting render!";
-            m_progress = 0.0f;
-        } else {
-            m_status = "Rendering...";
-            m_isRendering = true;
+            std::cout << "[RenderModal] Calling setName..." << std::endl; std::cout.flush();
+            setName("RenderModal");
+            std::cout << "[RenderModal] Calling setBounds..." << std::endl; std::cout.flush();
+            setBounds(0, 0, 400, 200);
+            
+            std::cout << "[RenderModal] Adding child component..." << std::endl; std::cout.flush();
+            addChildComponent(m_cancelBtn);
+            std::cout << "[RenderModal] Child component added" << std::endl; std::cout.flush();
+            
+            std::cout << "[RenderModal] Setting onClick callback..." << std::endl; std::cout.flush();
+            m_cancelBtn->onClick([this]() {
+                std::cout << "[RenderModal] Cancel clicked" << std::endl; std::cout.flush();
+                m_renderer->cancel();
+                m_isRendering = false;
+                if (onClose) onClose();
+            });
+
+            // Start Rendering
+            std::cout << "[RenderModal] Starting renderer..." << std::endl; std::cout.flush();
+            if (!m_renderer->start(path, plan, totalFrames)) {
+                std::cout << "[RenderModal] Renderer failed to start" << std::endl; std::cout.flush();
+                m_status = "Error starting render!";
+                m_progress = 0.0f;
+            } else {
+                std::cout << "[RenderModal] Renderer started successfully" << std::endl; std::cout.flush();
+                m_status = "Rendering...";
+                m_isRendering = true;
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "[RenderModal] ERROR in constructor: " << e.what() << std::endl; std::cerr.flush();
+            throw;
+        } catch (...) {
+            std::cerr << "[RenderModal] UNKNOWN ERROR in constructor" << std::endl; std::cerr.flush();
+            throw;
         }
     }
     
@@ -43,13 +68,13 @@ public:
 
     void update(float dt) override {
         if (m_isRendering) {
-            bool done = m_renderer->processChunk(4096); // Reduced for responsiveness
+            bool done = m_renderer->processChunk(4096); 
             m_progress = m_renderer->getProgress();
             
             if (done) {
                 m_isRendering = false;
                 m_status = "Complete!";
-                if (onClose) onClose(); // Auto-close? Or wait?
+                if (m_cancelBtn) m_cancelBtn->setButtonText("CLOSE");
             }
         }
     }
@@ -80,7 +105,8 @@ public:
     }
     
     void resized() override {
-        m_cancelBtn->setBounds(m_bounds.w - 100, m_bounds.h - 40, 80, 24);
+        if (m_cancelBtn)
+            m_cancelBtn->setBounds(m_bounds.w - 100, m_bounds.h - 40, 80, 24);
     }
 
     std::function<void()> onClose;

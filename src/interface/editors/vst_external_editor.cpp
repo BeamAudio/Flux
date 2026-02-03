@@ -51,15 +51,20 @@ void VSTExternalEditor::render(QuadBatcher& batcher, float dt, float screenW, fl
     
     if (!m_view && m_controller) {
         m_view = m_controller->createView(::Steinberg::Vst::ViewType::kEditor);
+        if (m_view && m_parentHwnd) {
+            attachToNative(m_parentHwnd);
+        }
     }
 
     paint(batcher);
 }
 
 void VSTExternalEditor::paint(QuadBatcher& batcher) {
-    batcher.drawRect(0, 0, m_bounds.w, m_bounds.h, 1.0f, 0.3f, 0.3f, 0.3f, 1.0f);
+    batcher.drawRect(0, 0, m_bounds.w, m_bounds.h, 1.0f, 0.1f, 0.1f, 0.1f, 1.0f);
     if (!m_view) {
          batcher.drawText("LOADING VST GUI...", 10, 10, 14, 1, 1, 1, 1);
+    } else if (!m_isAttached) {
+         batcher.drawText("VST VIEW CREATED, NOT ATTACHED", 10, 10, 14, 1, 1, 0, 1);
     }
 }
 
@@ -69,26 +74,32 @@ void VSTExternalEditor::updateNativeWindow() {
     Rect screenBounds = getScreenBounds();
     
     if (!m_hwnd) {
+         // EnumChildWindows is safer but let's try a more direct approach first
          m_hwnd = FindWindowExA(m_parentHwnd, NULL, NULL, NULL); 
     }
 
     if (m_hwnd) {
+        // Show/Hide based on component visibility
+        ShowWindow(m_hwnd, m_isVisible ? SW_SHOW : SW_HIDE);
+        
+        // Match screen position exactly
         SetWindowPos(m_hwnd, HWND_TOP, (int)screenBounds.x, (int)screenBounds.y, (int)screenBounds.w, (int)screenBounds.h, SWP_NOACTIVATE);
+        
+        ::Steinberg::ViewRect rect;
+        rect.left = 0;
+        rect.top = 0;
+        rect.right = (::Steinberg::int32)m_bounds.w;
+        rect.bottom = (::Steinberg::int32)m_bounds.h;
+        m_view->onSize(&rect);
     }
-
-    ::Steinberg::ViewRect rect;
-    rect.left = 0;
-    rect.top = 0;
-    rect.right = (::Steinberg::int32)m_bounds.w;
-    rect.bottom = (::Steinberg::int32)m_bounds.h;
-    m_view->onSize(&rect);
 }
 
 void VSTExternalEditor::attachToNative(HWND parentHWnd) {
     m_parentHwnd = parentHWnd;
-    if (m_view && !m_isAttached) {
-        if (m_view->attached((void*)parentHWnd, ::Steinberg::kPlatformTypeHWND) == ::Steinberg::kResultTrue) {
+    if (m_view && !m_isAttached && m_parentHwnd) {
+        if (m_view->attached((void*)m_parentHwnd, ::Steinberg::kPlatformTypeHWND) == ::Steinberg::kResultTrue) {
             m_isAttached = true;
+            // Force a resize immediately to trigger window creation/discovery
             updateNativeWindow();
         }
     }

@@ -79,8 +79,7 @@ void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist,
                  // Failsafe: If no Master node found (e.g. old project or corruption), create one
                  if (masterId == (size_t)-1) {
                      std::cout << "[Load] Warning: No Master Node found in project. Creating one." << std::endl;
-                     auto newMaster = std::make_shared<MasterNode>(4096);
-                     masterId = host->m_project->getGraph()->addNode(newMaster);
+                     masterId = host->m_project->getGraph()->addNode(host->m_audioEngine->getMasterNode());
                  }
 
                  if (masterId != (size_t)-1) {
@@ -105,13 +104,19 @@ void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist,
 }
 
 void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelist, int filter) {
+    std::cout << "[BeamHost] onRenderDialogCallback triggered." << std::endl;
+    std::cout.flush();
     if (filelist && filelist[0]) {
         BeamHost* host = static_cast<BeamHost*>(userdata);
         if (host && host->m_project) {
             std::string path = filelist[0];
+            std::cout << "[BeamHost] Target path: " << path << std::endl;
+            std::cout.flush();
             if (path.length() < 4 || path.substr(path.length() - 4) != ".wav") path += ".wav";
             
             size_t maxFrame = 0;
+            std::cout << "[BeamHost] Calculating max frame..." << std::endl;
+            std::cout.flush();
             for(auto& t : host->m_project->getTracks()) {
                 for(auto& r : t.regions) {
                     size_t end = r.startFrame + r.duration;
@@ -119,15 +124,42 @@ void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelis
                 }
             }
             if (maxFrame == 0) maxFrame = 44100 * 5; 
+            std::cout << "[BeamHost] Max frame: " << maxFrame << std::endl;
+            std::cout.flush();
             
+            std::cout << "[BeamHost] Suspending Audio Engine..." << std::endl;
+            std::cout.flush();
             host->m_audioEngine->setPlaying(false);
+            host->m_audioEngine->setMuted(true); // SUSPEND REAL-TIME DSP
+            SDL_Delay(50); // Safety wait for thread exit
             
-            size_t masterId = host->m_audioEngine->getMasterNodeId();
+            auto plan = host->m_audioEngine->getActivePlan();
+            if (!plan) {
+                std::cerr << "[BeamHost] No active plan to render!" << std::endl;
+                host->m_audioEngine->setMuted(false);
+                return;
+            }
 
             // Create Modal
-            host->m_renderModal = std::make_shared<RenderModal>(path, host->m_project->getGraph(), maxFrame, masterId);
+            std::cout << "[BeamHost] Creating RenderModal..." << std::endl;
+            std::cout.flush();
+            try {
+                host->m_renderModal = std::make_shared<RenderModal>(path, plan, maxFrame);
+                std::cout << "[BeamHost] RenderModal created and assigned." << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << "[BeamHost] CRASH during RenderModal creation: " << e.what() << std::endl;
+                host->m_audioEngine->setMuted(false);
+            } catch (...) {
+                std::cerr << "[BeamHost] UNKNOWN CRASH during RenderModal creation" << std::endl;
+                host->m_audioEngine->setMuted(false);
+            }
+            std::cout.flush();
+            
             host->m_renderModal->onClose = [host]() { 
+                std::cout << "[BeamHost] RenderModal closing." << std::endl;
+                std::cout.flush();
                 host->m_renderModal = nullptr; 
+                host->m_audioEngine->setMuted(false); // RESUME REAL-TIME DSP
             };
             
             // Center it (approximate)
@@ -135,6 +167,9 @@ void BeamHost::onRenderDialogCallback(void* userdata, const char* const* filelis
             float my = (float)host->m_height / 2.0f - 100.0f;
             host->m_renderModal->setBounds(mx, my, 400, 200);
         }
+    } else {
+        std::cout << "[BeamHost] Render dialog canceled or no file selected." << std::endl;
+        std::cout.flush();
     }
 }
 
@@ -256,6 +291,16 @@ bool BeamHost::init() {
     std::cout << "Loading Project..." << std::endl;
     m_project = std::make_shared<FluxProject>();
     m_audioEngine->setGraph(m_project->getGraph());
+
+    // Register Master in Graph if not present
+    size_t masterId = (size_t)-1;
+    for(auto& [id, node] : m_project->getGraph()->getNodes()) {
+        if (node->getName() == "Master") { masterId = id; break; }
+    }
+    if (masterId == (size_t)-1) {
+        masterId = m_project->getGraph()->addNode(m_audioEngine->getMasterNode());
+        m_audioEngine->setMasterNodeId(masterId);
+    }
 
     // Add Input Node to the graph so it's ready for capture
     if (m_audioEngine->getInputNode()) {
@@ -580,20 +625,40 @@ void BeamHost::handleEvents() {
         }
         else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
             bool shift = (SDL_GetModState() & SDL_KMOD_SHIFT);
-            m_uiHandler->handleMouseDown(event.button.x, event.button.y, event.button.button, shift);
+            bool modalConsumed = false;
+            if (m_renderModal && m_renderModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
+            else if (m_confirmationModal && m_confirmationModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
+            
+            if (!modalConsumed)
+                m_uiHandler->handleMouseDown(event.button.x, event.button.y, event.button.button, shift);
         } 
         else if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
             bool shift = (SDL_GetModState() & SDL_KMOD_SHIFT);
-            m_uiHandler->handleMouseUp(event.button.x, event.button.y, event.button.button, shift);
+            bool modalConsumed = false;
+            if (m_renderModal && m_renderModal->onMouseUp(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
+            else if (m_confirmationModal && m_confirmationModal->onMouseUp(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
+            
+            if (!modalConsumed)
+                m_uiHandler->handleMouseUp(event.button.x, event.button.y, event.button.button, shift);
         } 
         else if (event.type == SDL_EVENT_MOUSE_MOTION) {
             bool shift = (SDL_GetModState() & SDL_KMOD_SHIFT);
-            m_uiHandler->handleMouseMove(event.motion.x, event.motion.y, shift);
+            bool modalConsumed = false;
+            if (m_renderModal && m_renderModal->onMouseMove(event.motion.x, event.motion.y, shift)) modalConsumed = true;
+            else if (m_confirmationModal && m_confirmationModal->onMouseMove(event.motion.x, event.motion.y, shift)) modalConsumed = true;
+            
+            if (!modalConsumed)
+                m_uiHandler->handleMouseMove(event.motion.x, event.motion.y, shift);
         }
         else if (event.type == SDL_EVENT_MOUSE_WHEEL) {
             float mx, my;
             SDL_GetMouseState(&mx, &my);
-            m_uiHandler->handleMouseWheel(mx, my, event.wheel.y);
+            bool modalConsumed = false;
+            if (m_renderModal && m_renderModal->onMouseWheel(mx, my, event.wheel.y, (SDL_GetModState() & SDL_KMOD_SHIFT))) modalConsumed = true;
+            else if (m_confirmationModal && m_confirmationModal->onMouseWheel(mx, my, event.wheel.y, (SDL_GetModState() & SDL_KMOD_SHIFT))) modalConsumed = true;
+            
+            if (!modalConsumed)
+                m_uiHandler->handleMouseWheel(mx, my, event.wheel.y);
         }
         else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
             m_width = event.window.data1;

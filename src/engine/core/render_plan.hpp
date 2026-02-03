@@ -42,6 +42,9 @@ struct ProcessorExecution {
 
 // The complete immutable plan for one audio callback
 struct RenderPlan {
+    int blockSize = 0;
+    int channels = 2;
+
     std::vector<ProcessorExecution> sequence;
     std::vector<std::shared_ptr<FluxProcessor>> processors; // Plan owns the processors
     // Final sink indices for the engine to copy to hardware

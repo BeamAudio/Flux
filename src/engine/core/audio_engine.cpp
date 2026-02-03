@@ -93,15 +93,30 @@ void AudioEngine::setPlaying(bool playing) { m_isPlaying = playing; }
 void AudioEngine::rewind() { seek(0); }
 void AudioEngine::seek(size_t frame) { m_pendingSeek.store((int64_t)frame); }
     
+void AudioEngine::setMuted(bool muted) { 
+    m_isMuted.store(muted); 
+    if (muted) {
+        // Wait for audio thread to exit process() to ensure exclusive access to VSTs
+        int timeout = 100; // 100ms max wait
+        while (m_isProcessing.load() && timeout-- > 0) {
+            SDL_Delay(1);
+        }
+    }
+}
+
 float* AudioEngine::process(int frames) {
+    m_isProcessing.store(true);
+
     if (m_isMuted.load(std::memory_order_relaxed)) {
         SIMD::set(m_scratchBuffer.data(), 0.0f, frames * m_channels);
+        m_isProcessing.store(false);
         return m_scratchBuffer.data();
     }
 
     std::shared_ptr<RenderPlan> plan = m_activePlan.load();
     if (!plan) {
         SIMD::set(m_scratchBuffer.data(), 0.0f, frames * m_channels);
+        m_isProcessing.store(false);
         return m_scratchBuffer.data();
     }
 
@@ -134,16 +149,21 @@ float* AudioEngine::process(int frames) {
 
     if (plan) {
         for (int bIdx : plan->clearBufferIndices) {
-            auto& buf = plan->bufferPool[bIdx];
-            std::fill(buf.begin(), buf.end(), 0.0f);
+            if (bIdx >= 0 && bIdx < (int)plan->bufferPool.size()) {
+                auto& buf = plan->bufferPool[bIdx];
+                std::fill(buf.begin(), buf.end(), 0.0f);
+            }
         }
 
-        float paramCache[64]; 
+        static float paramCache[4096]; // Increased for safety
 
         for (auto& exec : plan->sequence) {
-            int pCount = (int)exec.parameterPointers.size();
-            for (int i = 0; i < pCount && i < 64; ++i) {
-                paramCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
+            size_t pCount = exec.parameterPointers.size();
+            for (size_t i = 0; i < pCount && i < 4096; ++i) {
+                if (exec.parameterPointers[i])
+                    paramCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
+                else
+                    paramCache[i] = 0.0f;
             }
             exec.processor->updateParameters(paramCache);
 
@@ -152,16 +172,23 @@ float* AudioEngine::process(int frames) {
             
             for (int i = 0; i < 8; ++i) {
                 if (i < (int)exec.inputBufferIndices.size()) {
-                    inputs[i] = plan->bufferPool[exec.inputBufferIndices[i]].data();
+                    int idx = exec.inputBufferIndices[i];
+                    inputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
                 } else {
                     inputs[i] = nullptr;
                 }
             }
             
-            for (int i = 0; i < (int)exec.outputBufferIndices.size() && i < 8; ++i)
-                outputs[i] = plan->bufferPool[exec.outputBufferIndices[i]].data();
+            for (int i = 0; i < 8; ++i) {
+                if (i < (int)exec.outputBufferIndices.size()) {
+                    int idx = exec.outputBufferIndices[i];
+                    outputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
+                } else {
+                    outputs[i] = nullptr;
+                }
+            }
 
-            exec.processor->process(inputs, outputs, frames);
+            if (exec.processor) exec.processor->process(inputs, outputs, frames);
 
             for (auto& route : exec.outgoingRoutes) {
                 if (route.mutePtr && route.mutePtr->load(std::memory_order_relaxed)) {
@@ -170,8 +197,14 @@ float* AudioEngine::process(int frames) {
                 }
                 
                 float gain = route.gainPtr ? route.gainPtr->load(std::memory_order_relaxed) : 1.0f;
-                float* src = plan->bufferPool[route.sourceBufferIdx].data();
-                float* dst = plan->bufferPool[route.destBufferIdx].data();
+                int srcIdx = route.sourceBufferIdx;
+                int dstIdx = route.destBufferIdx;
+
+                if (srcIdx < 0 || srcIdx >= (int)plan->bufferPool.size() || 
+                    dstIdx < 0 || dstIdx >= (int)plan->bufferPool.size()) continue;
+
+                float* src = plan->bufferPool[srcIdx].data();
+                float* dst = plan->bufferPool[dstIdx].data();
                 int total = frames * m_channels;
                 
                 if (route.peakPtr) {
@@ -195,11 +228,13 @@ float* AudioEngine::process(int frames) {
 
         if (!plan->masterOutputBufferIndices.empty()) {
             int leftIdx = plan->masterOutputBufferIndices[0];
+            m_isProcessing.store(false);
             return plan->bufferPool[leftIdx].data();
         }
     }
 
     SIMD::set(m_scratchBuffer.data(), 0.0f, frames * m_channels);
+    m_isProcessing.store(false);
     return m_scratchBuffer.data();
 }
 

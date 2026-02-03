@@ -122,6 +122,8 @@ public:
     std::shared_ptr<RenderPlan> compile(int bufferSizeFrames, int channels = 2, size_t masterNodeId = (size_t)-1, MixerState* mixerState = nullptr) {
         std::lock_guard<std::mutex> lock(m_mutex);
         auto plan = std::make_shared<RenderPlan>();
+        plan->blockSize = bufferSizeFrames;
+        plan->channels = channels;
         
         // 1. Topological Sort
         std::vector<size_t> schedule;
@@ -242,6 +244,12 @@ public:
             std::vector<ProcessorExecution> pdcExecs;
             for (const auto& conn : m_connections) {
                 if (conn.srcNodeId == nodeId) {
+                    if (conn.srcPortIdx >= (int)nodeOutputBuffers[nodeId].size() || 
+                        conn.dstPortIdx >= (int)nodeInputBuffers[conn.dstNodeId].size()) {
+                        std::cout << "[Compile] Error: Invalid port connection " << conn.srcPortIdx << " -> " << conn.dstPortIdx << std::endl;
+                        continue;
+                    }
+
                     SignalRoute route;
                     int srcBufIdx = nodeOutputBuffers[nodeId][conn.srcPortIdx];
                     int dstBufIdx = nodeInputBuffers[conn.dstNodeId][conn.dstPortIdx];
