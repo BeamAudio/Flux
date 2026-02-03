@@ -37,6 +37,8 @@ public:
     }
 
     void addEntry(const PluginEntry& entry) {
+        std::cout << "[PluginLibrary] Adding entry: " << entry.name << " Cat: " << entry.category << " Type: " << entry.type << std::endl;
+        std::cout.flush();
         for (auto& existing : m_entries) {
             if (existing.path == entry.path) {
                 existing.name = entry.name;
@@ -64,6 +66,7 @@ public:
     void load() {
         std::ifstream f("plugin_library.json");
         if (!f.is_open()) {
+            std::cout << "[PluginLibrary] Creating new plugin_library.json" << std::endl;
             // Defaults
             #ifdef _WIN32
             addScanPath("C:/Program Files/Common Files/VST3");
@@ -83,7 +86,11 @@ public:
                 m_scanPaths.clear();
                 for (auto& p : data["scanPaths"]) m_scanPaths.insert(p);
             }
-        } catch(...) {}
+            std::cout << "[PluginLibrary] Loaded " << m_entries.size() << " entries from disk." << std::endl;
+            std::cout.flush();
+        } catch(...) {
+            std::cerr << "[PluginLibrary] Failed to parse JSON!" << std::endl;
+        }
     }
 
     void save() {
@@ -97,7 +104,11 @@ public:
         data["scanPaths"] = paths;
 
         std::ofstream f("plugin_library.json");
-        if (f.is_open()) f << data.dump(4);
+        if (f.is_open()) {
+            f << data.dump(4);
+            std::cout << "[PluginLibrary] Saved " << m_entries.size() << " entries to disk." << std::endl;
+            std::cout.flush();
+        }
     }
 
 private:

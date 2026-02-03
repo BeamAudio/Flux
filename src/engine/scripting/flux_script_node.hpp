@@ -79,14 +79,11 @@ public:
             FluxCompiler::transpile(buffer.str(), pluginName, cpp, &category);
         }
 
-        if (FluxCompiler::compileAndLoad(m_scriptPath, pluginName)) {
-            // Register with Registry
-            std::string dllPath = "plugins/" + pluginName + ".dll";
-            PluginRegistry::get().registerPlugin(pluginName, category, [dllPath](int b, float s) {
-                return FluxCompiler::loadPlugin(dllPath, b, s);
-            });
-
+        if (FluxCompiler::compileAndLoad(m_scriptPath, pluginName, category)) {
+            // Register with Registry is now handled by registerInLibrary inside compileAndLoad
+            
             // Load it!
+            std::string dllPath = "plugins/" + pluginName + ".dll";
             auto native = FluxCompiler::loadPlugin(dllPath, m_bufferSize, m_sr);
             if (native) {
                 m_nativeNode = native;

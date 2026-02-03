@@ -14,6 +14,8 @@
 
 #include "engine/plugins/plugin_registry.hpp"
 
+#include "interface/core/auto_flex_container.hpp"
+
 namespace Beam {
 
 class BeamHost;
@@ -27,8 +29,16 @@ public:
         setName("Sidebar");
         
         m_scrollContainer = std::make_shared<ScrollableContainer>();
-        m_contentPane = std::make_shared<Component>();
+        
+        AutoFlexContainer::Config cfg;
+        cfg.direction = AutoFlexContainer::Direction::Column;
+        cfg.crossAlign = AutoFlexContainer::Alignment::Stretch;
+        cfg.padding = 15.0f;
+        cfg.gap = 8.0f;
+        
+        m_contentPane = std::make_shared<AutoFlexContainer>(cfg);
         m_contentPane->setName("SidebarContent");
+        
         m_scrollContainer->setContent(m_contentPane);
         addChildComponent(m_scrollContainer);
 
@@ -66,7 +76,9 @@ public:
         m_buttons.clear();
         m_backBtn = nullptr;
 
-        if (m_contentPane) m_contentPane->clearChildren();
+        auto flex = std::dynamic_pointer_cast<AutoFlexContainer>(m_contentPane);
+        if (flex) flex->clearFlexChildren();
+        
         if (m_scrollContainer) addChildComponent(m_scrollContainer);
 
         if (m_side != Side::Left) return;
@@ -75,7 +87,7 @@ public:
             auto title = std::make_shared<Label>("INSPECTOR");
             title->setFontSize(20);
             title->setColor({0.13f, 0.62f, 0.42f, 1.0f}); 
-            m_contentPane->addChildComponent(title);
+            if (flex) flex->addFlexChild(title);
         } 
         else {
             std::string titleText = (m_category == "NONE") ? "LIBRARY" : "< " + m_category;
@@ -83,7 +95,7 @@ public:
             m_backBtn->onClick([this]() {
                 if (m_category != "NONE") setCategory("NONE");
             });
-            m_contentPane->addChildComponent(m_backBtn);
+            if (flex) flex->addFlexChild(m_backBtn);
 
             const auto& allPlugins = PluginRegistry::get().getAvailablePlugins();
             std::vector<std::string> items;
@@ -114,7 +126,7 @@ public:
                 } else {
                     btn->onClick([this, item]() { if (onAddFX) onAddFX(item); });
                 }
-                m_contentPane->addChildComponent(btn);
+                if (flex) flex->addFlexChild(btn);
                 m_buttons.push_back(btn);
             }
         }
@@ -123,36 +135,11 @@ public:
 
     void resized() override {
         if (m_side != Side::Left) return;
-
         m_scrollContainer->setBounds(0, 50, m_bounds.w, m_bounds.h - 50);
-
-        FlexBox box;
-        box.flexDirection(FlexBox::Direction::Column);
-        box.alignItems(FlexBox::AlignItems::Stretch);
-        box.padding(15); 
-
-        if (m_mode == Mode::Inspector) {
-             for (auto& child : m_contentPane->getChildren()) {
-                 box.addItem(LayoutItem(child.get()).withHeight(30).withMargin(5));
-             }
-        } else {
-            if (m_backBtn) {
-                box.addItem(LayoutItem(m_backBtn.get()).withHeight(35).withMargin(10));
-            }
-            for (auto& btn : m_buttons) {
-                box.addItem(LayoutItem(btn.get()).withHeight(32).withMargin(4));
-            }
-        }
-        
-        float ph = box.calculateHeight(m_bounds.w);
-        m_contentPane->setBounds(0, 0, m_bounds.w, ph);
-        box.performLayout({0, 0, m_bounds.w, ph});
-        
         m_scrollContainer->updateContentBounds();
     }
 
     void paint(QuadBatcher& batcher) override {
-        // ... (existing paint code) ...
         batcher.drawGradientRect(0, 0, m_bounds.w, m_bounds.h, 
                                 Theme::Bakelite.r, Theme::Bakelite.g, Theme::Bakelite.b, 1.0f,
                                 Theme::Bakelite.brighter(0.1f).r, Theme::Bakelite.brighter(0.1f).g, Theme::Bakelite.brighter(0.1f).b, 1.0f);
@@ -166,6 +153,7 @@ public:
     }
 
     bool onMouseWheel(float x, float y, float delta, bool shift) override {
+        if (!m_isVisible || !m_bounds.contains(x, y)) return false;
         if (m_scrollContainer) return m_scrollContainer->onMouseWheel(x, y, delta, shift);
         return false;
     }

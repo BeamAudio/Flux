@@ -27,7 +27,15 @@ public:
     void registerPlugin(const std::string& name, const std::string& category, FactoryFunc factory) {
         m_factories[name] = factory;
         m_categories[name] = category;
-        m_pluginNames.push_back(name);
+        
+        bool alreadyExists = false;
+        for (const auto& n : m_pluginNames) {
+            if (n == name) { alreadyExists = true; break; }
+        }
+        if (!alreadyExists) {
+            m_pluginNames.push_back(name);
+        }
+        
         if (onRegistryChanged) onRegistryChanged();
     }
 

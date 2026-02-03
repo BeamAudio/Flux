@@ -55,6 +55,7 @@ public:
     }
 
     bool onMouseWheel(float x, float y, float delta, bool shift) override {
+        if (!m_isVisible || !m_bounds.contains(x, y)) return false;
         scroll(delta);
         return true;
     }

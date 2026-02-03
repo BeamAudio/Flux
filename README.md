@@ -20,20 +20,16 @@
 *   **Right Click (Hold)**: Pan the view.
 
 ### Routing & FX
-1.  **Add FX**: Open the Sidebar (left) and click on an effect category (e.g., EQUALIZERS). Click an effect to add it to the workspace.
-2.  **Wiring**: Drag from a module's Output Port (Right) to another module's Input Port (Left).
-3.  **Recording**:
-    *   Add an **Empty Tape** from the UTILITY category.
-    *   Wire your **Audio Input** node to the Tape's input.
-    *   Press the **Record (O)** button in the top bar.
-    *   Stop recording to save the file to disk.
-4.  **Rendering**:
-    *   Click the **RENDER** button in the top bar to export the project to WAV.
-
-### Metering
-*   **Master Strip**: Located on the right. Shows peak levels (VU) and fader gain.
-*   **Loudness Meter**: Add from UTILITY. Displays Momentary/ShortTerm LUFS and True Peak.
-*   **Spectrum Analyzer**: Add from UTILITY. Displays a 10-band frequency breakdown.
+1.  **Add FX**: Open the Sidebar (left) and click on an effect category.
+2.  **VST3 Support**: Beam Audio Flux automatically scans `C:/Program Files/Common Files/VST3`. You can add custom scan paths in the Audio Configuration menu (Crank icon).
+3.  **FluxScript**: Create custom DSP using our high-level language. Click "COMPILE AOT" on a script node to turn it into a native high-performance plugin.
+4.  **Wiring**: Drag from a module's Output Port (Right) to another module's Input Port (Left).
+5.  **Recording**:
+    *   Add an **Audio Input** and an **Empty Tape**.
+    *   Wire Input -> Tape.
+    *   Press **Record (O)** in the top bar.
+6.  **Rendering**:
+    *   Click **RENDER** to export your project to high-quality WAV. The engine now uses a shared-plan architecture for 100% fidelity matching between playback and bounce.
 
 ---
 
@@ -41,8 +37,9 @@
 
 ### Architecture
 *   **Engine**: C++20, SDL3, OpenGL 3.3.
-*   **DSP**: Single-sample or Block-based processing via `FluxNode`.
-*   **UI**: Immediate-mode inspired retained structure (`Component` tree).
+*   **Hosting**: Native VST3 bridge with Planar-Interleaved conversion.
+*   **Scripting**: AOT compilation from FluxScript to C++ DLLs.
+*   **UI**: Modular `Component` system with `FlexBox` layout engine.
 
 ### Creating New FX
 To add a new DSP effect to Beam Audio Flux:

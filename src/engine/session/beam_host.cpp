@@ -626,11 +626,25 @@ void BeamHost::handleEvents() {
         else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
             bool shift = (SDL_GetModState() & SDL_KMOD_SHIFT);
             bool modalConsumed = false;
-            if (m_renderModal && m_renderModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
-            else if (m_confirmationModal && m_confirmationModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) modalConsumed = true;
+            
+            if (m_renderModal) {
+                if (m_renderModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) {
+                    std::cout << "[BeamHost] MouseDown consumed by RenderModal" << std::endl;
+                    modalConsumed = true;
+                }
+            }
+            
+            if (!modalConsumed && m_confirmationModal) {
+                if (m_confirmationModal->onMouseDown(event.button.x, event.button.y, event.button.button, shift)) {
+                    std::cout << "[BeamHost] MouseDown consumed by ConfirmationModal" << std::endl;
+                    modalConsumed = true;
+                }
+            }
             
             if (!modalConsumed)
                 m_uiHandler->handleMouseDown(event.button.x, event.button.y, event.button.button, shift);
+            
+            std::cout.flush();
         } 
         else if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
             bool shift = (SDL_GetModState() & SDL_KMOD_SHIFT);

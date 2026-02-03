@@ -68,10 +68,11 @@ public:
 
     void update(float dt) override {
         if (m_isRendering) {
-            bool done = m_renderer->processChunk(4096); 
+            bool done = m_renderer->processChunk(4); 
             m_progress = m_renderer->getProgress();
             
             if (done) {
+                std::cout << "[RenderModal] Rendering complete!" << std::endl; std::cout.flush();
                 m_isRendering = false;
                 m_status = "Complete!";
                 if (m_cancelBtn) m_cancelBtn->setButtonText("CLOSE");
