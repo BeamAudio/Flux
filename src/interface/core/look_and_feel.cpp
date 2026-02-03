@@ -369,6 +369,20 @@ void ModernLookAndFeel::drawButtonBackground(QuadBatcher& g, Button& button,
         g.drawRoundedRect(0, 0, bounds.w, bounds.h, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.1f);
 }
 
+void ModernLookAndFeel::drawButtonText(QuadBatcher& g, Button& button, 
+                                      bool isMouseOver, bool isButtonDown) {
+    auto bounds = button.getBounds();
+    const auto& text = button.getButtonText();
+    float tw = AudioUtils::calculateTextWidth(text, 12.0f);
+    float th = 12.0f;
+    
+    float tx = (bounds.w - tw) * 0.5f;
+    float ty = (bounds.h - th) * 0.5f;
+    if (isButtonDown) ty += 1.0f;
+
+    g.drawText(text, tx, ty, 12.0f, 1.0f, 1.0f, 1.0f, (button.isEnabled() ? 1.0f : 0.4f));
+}
+
 void ModernLookAndFeel::drawSliderBackground(QuadBatcher& g, Slider& slider, 
                                            float sliderPos, float rotaryStartAngle, float rotaryEndAngle) {
     auto bounds = slider.getBounds();

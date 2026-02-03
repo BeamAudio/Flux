@@ -80,11 +80,12 @@ public:
  */
 class ModernLookAndFeel : public DefaultLookAndFeel {
 public:
-    void drawButtonBackground(QuadBatcher& g, Button& button, 
+        void drawButtonBackground(QuadBatcher& g, Button& button, 
+                                  bool isMouseOver, bool isButtonDown) override;
+        void drawButtonText(QuadBatcher& g, Button& button, 
                             bool isMouseOver, bool isButtonDown) override;
-    void drawSliderBackground(QuadBatcher& g, Slider& slider, 
-                            float sliderPos, float rotaryStartAngle, float rotaryEndAngle) override;
-    void drawSliderPointer(QuadBatcher& g, Slider& slider, 
+        void drawSliderBackground(QuadBatcher& g, Slider& slider, 
+                                  float sliderPos, float rotaryStartAngle, float rotaryEndAngle) override;    void drawSliderPointer(QuadBatcher& g, Slider& slider, 
                           float sliderPos, float rotaryStartAngle, float rotaryEndAngle) override;
     
     void drawKnob(QuadBatcher& g, Knob& knob, float sliderPos) override;

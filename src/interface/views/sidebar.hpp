@@ -82,15 +82,13 @@ public:
             cfg.crossAlign = AutoFlexContainer::Alignment::Stretch;
             cfg.padding = 15.0f;
             cfg.gap = 8.0f;
-            cfg.wrap = false; // Disable wrapping for sidebar list
+            cfg.wrap = false; 
             
             flex->clearFlexChildren();
         }
         
-        // Ensure scroll container is a child
-        bool alreadyChild = false;
-        for (const auto& c : m_children) if (c == m_scrollContainer) { alreadyChild = true; break; }
-        if (!alreadyChild && m_scrollContainer) addChildComponent(m_scrollContainer);
+        m_children.clear();
+        if (m_scrollContainer) addChildComponent(m_scrollContainer);
 
         if (m_side != Side::Left) return;
 
@@ -161,12 +159,6 @@ public:
         }
         
         batcher.drawQuad(0, 0, m_bounds.w, 50, 0.0f, 0.0f, 0.0f, 0.2f);
-    }
-
-    bool onMouseWheel(float x, float y, float delta, bool shift) override {
-        if (!m_isVisible || !m_bounds.contains(x, y)) return false;
-        if (m_scrollContainer) return m_scrollContainer->onMouseWheel(x, y, delta, shift);
-        return false;
     }
 
     std::function<void(std::string)> onAddFX;
