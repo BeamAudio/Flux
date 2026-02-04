@@ -153,6 +153,8 @@ public:
         for (auto& child : m_children) child->update(dt);
     }
 
+    virtual std::string getTooltipText() const { return ""; }
+
     void setDraggable(bool draggable) { m_isDraggable = draggable; }
     void setClipsChildren(bool clip) { m_clipsChildren = clip; }
     

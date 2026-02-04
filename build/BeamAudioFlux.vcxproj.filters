@@ -49,6 +49,9 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\look_and_feel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\autotune_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\filter_editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -21,6 +21,7 @@
 #include "engine/session/flux_project.hpp"
 #include "engine/session/commands.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
+#include "engine/dsp/garbage_collector.hpp"
 #include <vector>
 #include <iostream>
 #include <cmath>
@@ -175,6 +176,16 @@ public:
         
         for (auto& child : m_children) {
             child->render(batcher, dt, screenW, screenH);
+        }
+
+        // Marquee Selection Rect
+        if (m_isMarqueeSelecting) {
+            float x1 = (std::min)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y1 = (std::min)(m_marqueeStart.y, m_marqueeEnd.y);
+            float x2 = (std::max)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y2 = (std::max)(m_marqueeStart.y, m_marqueeEnd.y);
+            batcher.drawRect(x1, y1, x2 - x1, y2 - y1, 1.0f / m_zoom, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.4f);
+            batcher.drawQuad(x1, y1, x2 - x1, y2 - y1, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.1f);
         }
 
         if (m_popup) {
@@ -376,7 +387,7 @@ public:
     void clear() {
         std::cout << "[Workspace] Clearing all modules and cables." << std::endl;
         for (auto& mod : m_modules) {
-            removeChildComponent(mod.get());
+            if (mod) removeChildComponent(mod.get());
         }
         m_modules.clear();
         m_cables.clear();
@@ -386,9 +397,14 @@ public:
     }
 
     void setupModule(std::shared_ptr<AudioModule> mod) {
+        if (!mod) return;
         mod->onDeleteRequested = [this](AudioModule* m) { removeModule(m); };
-        for (auto& p : mod->getInputPorts()) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
-        for (auto& p : mod->getOutputPorts()) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        for (auto& p : mod->getInputPorts()) {
+            if (p) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        }
+        for (auto& p : mod->getOutputPorts()) {
+            if (p) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        }
         m_modules.push_back(mod);
         addChildComponent(mod);
     }
@@ -476,33 +492,39 @@ public:
         }
 
         size_t id = mod->getNodeId();
-        UndoManager::get().perform(std::make_unique<RemoveNodeCommand>(m_project->getGraph().get(), id));
-        
-        auto& tracks = m_project->getTracks();
-        for(auto it = tracks.begin(); it != tracks.end(); ++it) {
-            if(it->nodeId == id) { tracks.erase(it); break; }
+        if (m_project && m_project->getGraph()) {
+            UndoManager::get().perform(std::make_unique<RemoveNodeCommand>(m_project->getGraph().get(), id));
+            
+            auto& tracks = m_project->getTracks();
+            for(auto it = tracks.begin(); it != tracks.end(); ++it) {
+                if(it->nodeId == id) { tracks.erase(it); break; }
+            }
         }
 
         for (auto it = m_cables.begin(); it != m_cables.end(); ) {
-            if (it->input->getParent() == mod || it->output->getParent() == mod) {
-                it = m_cables.erase(it);
-            } else {
-                ++it;
+            if (it->input && it->output) {
+                if (it->input->getParent() == mod || it->output->getParent() == mod) {
+                    it = m_cables.erase(it);
+                    continue;
+                }
             }
+            ++it;
         }
 
         for (auto it = m_modules.begin(); it != m_modules.end(); ++it) {
             if (it->get() == mod) { 
                 auto modPtr = *it;
-                removeChildComponent(modPtr.get());
+                if (modPtr) {
+                    removeChildComponent(modPtr.get());
+                    GarbageCollector::get().defer(modPtr);
+                }
                 m_modules.erase(it); 
-                GarbageCollector::get().defer(modPtr);
                 break; 
             }
         }
         
         if (m_engine) m_engine->updatePlan();
-        m_project->setDirty(true);
+        if (m_project) m_project->setDirty(true);
     }
 
     void startCableDrag(Port* p) { 
@@ -560,8 +582,19 @@ public:
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
         
         // Children first
+        bool childHit = false;
         for (auto it = m_children.rbegin(); it != m_children.rend(); ++it) {
-            if ((*it)->onMouseDown(vmx, vmy, button, shift)) return true;
+            if ((*it)->onMouseDown(vmx, vmy, button, shift)) {
+                childHit = true;
+                break;
+            }
+        }
+
+        if (childHit) {
+            // If we hit a module, clear selection unless shift is down? 
+            // For now, let's just clear if it's a left click on a single item.
+            if (button == 1 && !shift) m_selectedNodeIds.clear();
+            return true;
         }
 
         // Panning: Middle mouse (2) or Right click (3)
@@ -570,6 +603,15 @@ public:
             m_lastMouseX = x; 
             m_lastMouseY = y; 
             return true; 
+        }
+
+        // Marquee Selection: Left Click on empty space
+        if (button == 1) {
+            m_isMarqueeSelecting = true;
+            m_marqueeStart = {vmx, vmy};
+            m_marqueeEnd = {vmx, vmy};
+            if (!shift) m_selectedNodeIds.clear();
+            return true;
         }
         
         mouseDown(MouseEvent(vmx, vmy, button, shift));
@@ -586,6 +628,29 @@ public:
         
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
+
+        if (m_isMarqueeSelecting) {
+            m_isMarqueeSelecting = false;
+            // Identify nodes in marquee
+            float x1 = (std::min)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y1 = (std::min)(m_marqueeStart.y, m_marqueeEnd.y);
+            float x2 = (std::max)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y2 = (std::max)(m_marqueeStart.y, m_marqueeEnd.y);
+            Rect marqueeRect = {x1, y1, x2 - x1, y2 - y1};
+
+            for (auto& mod : m_modules) {
+                Rect modRect = {mod->getX(), mod->getY(), mod->getWidth(), mod->getHeight()};
+                if (modRect.x < marqueeRect.x + marqueeRect.w && modRect.x + modRect.w > marqueeRect.x &&
+                    modRect.y < marqueeRect.y + marqueeRect.h && modRect.y + modRect.h > marqueeRect.y) {
+                    
+                    size_t id = mod->getNodeId();
+                    if (std::find(m_selectedNodeIds.begin(), m_selectedNodeIds.end(), id) == m_selectedNodeIds.end()) {
+                         m_selectedNodeIds.push_back(id);
+                    }
+                }
+            }
+            return true;
+        }
 
         if (m_isDraggingCable) {
             for (auto& mod : m_modules) {
@@ -634,6 +699,11 @@ public:
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
 
+        if (m_isMarqueeSelecting) {
+            m_marqueeEnd = {vmx, vmy};
+            return true;
+        }
+
         if (m_isDraggingCable) return true; 
         
         for (auto& child : m_children) child->onMouseMove(vmx, vmy, shift);
@@ -660,6 +730,54 @@ public:
         CoordinateSystem::get().setZoom(m_zoom);
         CoordinateSystem::get().setPan(m_panX, m_panY);
         return true;
+    }
+
+    void duplicateSelectedNodes() {
+        if (m_selectedNodeIds.empty()) return;
+        std::cout << "[Workspace] Duplicating " << m_selectedNodeIds.size() << " nodes." << std::endl;
+        
+        // This is a complex operation requiring serialization of sub-graphs.
+        // For now, we'll implement simple single-node duplication if only one is selected.
+        if (m_selectedNodeIds.size() == 1) {
+            auto node = m_engine->getGraph()->getNode(m_selectedNodeIds[0]);
+            if (node) {
+                float vx, vy;
+                auto [oldX, oldY] = m_project->getVisualPos(m_selectedNodeIds[0]);
+                vx = oldX + 30.0f; vy = oldY + 30.0f;
+                addFX(node->getName(), vx, vy);
+            }
+        }
+    }
+
+    void deleteSelectedNodes() {
+        if (m_selectedNodeIds.empty()) return;
+        std::cout << "[Workspace] Deleting " << m_selectedNodeIds.size() << " nodes." << std::endl;
+        
+        // Use a copy of the ID list to avoid iterator invalidation issues
+        auto idsToDelete = m_selectedNodeIds;
+        m_selectedNodeIds.clear();
+
+        for (size_t id : idsToDelete) {
+            for (auto& mod : m_modules) {
+                if (mod->getNodeId() == id) {
+                    removeModule(mod.get());
+                    break;
+                }
+            }
+        }
+    }
+
+    bool isNodeSelected(size_t id) const {
+        return std::find(m_selectedNodeIds.begin(), m_selectedNodeIds.end(), id) != m_selectedNodeIds.end();
+    }
+
+    void handleKeyDown(int key) {
+        if (key == SDLK_DELETE || key == SDLK_BACKSPACE) {
+            deleteSelectedNodes();
+        }
+        if ((SDL_GetModState() & SDL_KMOD_CTRL) && key == SDLK_D) {
+            duplicateSelectedNodes();
+        }
     }
 
 private:
@@ -706,6 +824,11 @@ private:
     bool m_isLoading = false;
     float m_loadingTimer = 0.0f;
     std::shared_ptr<Component> m_popup;
+
+    // Selection
+    bool m_isMarqueeSelecting = false;
+    struct { float x, y; } m_marqueeStart, m_marqueeEnd;
+    std::vector<size_t> m_selectedNodeIds;
 };
 
 } // namespace Beam

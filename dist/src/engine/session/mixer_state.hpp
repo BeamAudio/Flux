@@ -14,6 +14,7 @@ namespace Beam {
  */
 struct MixChannel {
     std::atomic<float> gain{1.0f};
+    std::atomic<float> pan{0.5f}; // 0.0 = Left, 1.0 = Right
     std::atomic<bool> muted{false};
     std::atomic<bool> solo{false};
     

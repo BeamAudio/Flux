@@ -21,6 +21,7 @@
 #include "engine/session/flux_project.hpp"
 #include "engine/session/commands.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
+#include "engine/dsp/garbage_collector.hpp"
 #include <vector>
 #include <iostream>
 #include <cmath>
@@ -30,10 +31,9 @@ namespace Beam {
 
 class Workspace : public Component, public PopupHost {
 public:
-    Workspace(std::shared_ptr<FluxProject> project, AudioEngine* engine, AudioDeviceManager* deviceManager = nullptr) 
-        : m_project(project), m_engine(engine), m_deviceManager(deviceManager) {
+    Workspace(std::shared_ptr<FluxProject> project, AudioEngine* engine, AudioDeviceManager* deviceManager = nullptr, void* nativeWindowHandle = nullptr) 
+        : m_project(project), m_engine(engine), m_deviceManager(deviceManager), m_nativeWindowHandle(nativeWindowHandle) {
         setName("Workspace");
-        setBounds(0, 0, 10000, 10000); 
         m_zoom = 1.0f;
         setClipsChildren(false); 
 
@@ -152,22 +152,40 @@ public:
         // 2. Set actual workspace pan/zoom transform for content
         batcher.setViewTransform(m_panX, m_panY, m_zoom, m_bounds.x, m_bounds.y);
 
-        // Background Grid (Truly infinite, view-relative)
+        // Background Grid (Infinite-feel, workspace-relative)
         float spacing = 50.0f;
-        float startX = std::floor(-m_panX / (spacing * m_zoom)) * spacing - spacing;
-        float startY = std::floor(-m_panY / (spacing * m_zoom)) * spacing - spacing;
-        float endX = startX + (screenW / m_zoom) + spacing * 2;
-        float endY = startY + (screenH / m_zoom) + spacing * 2;
+        float lineW = 1.0f / m_zoom; // Keep lines 1px on screen
         
-        for (float x = startX; x < endX; x += spacing) 
-            batcher.drawQuad(x, startY, 1, endY - startY, 0.2f, 0.2f, 0.2f, 0.5f);
-        for (float y = startY; y < endY; y += spacing) 
-            batcher.drawQuad(startX, y, endX - startX, 1, 0.2f, 0.2f, 0.2f, 0.5f);
+        // Find visible world bounds
+        float worldLeft = -m_panX / m_zoom;
+        float worldTop = -m_panY / m_zoom;
+        float worldRight = (m_bounds.w - m_panX) / m_zoom;
+        float worldBottom = (m_bounds.h - m_panY) / m_zoom;
+
+        float startX = std::floor(worldLeft / spacing) * spacing;
+        float startY = std::floor(worldTop / spacing) * spacing;
+        
+        for (float x = startX; x < worldRight + spacing; x += spacing) 
+            batcher.drawQuad(x, worldTop, lineW, worldBottom - worldTop, 0.2f, 0.2f, 0.2f, 0.5f);
+        for (float y = startY; y < worldBottom + spacing; y += spacing) 
+            batcher.drawQuad(worldLeft, y, worldRight - worldLeft, lineW, 0.2f, 0.2f, 0.2f, 0.5f);
+        
+        batcher.flush(); // Ensure grid is drawn with workspace transform
 
         for (auto& cable : m_cables) renderCable(batcher, cable, dt, screenH);
         
         for (auto& child : m_children) {
             child->render(batcher, dt, screenW, screenH);
+        }
+
+        // Marquee Selection Rect
+        if (m_isMarqueeSelecting) {
+            float x1 = (std::min)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y1 = (std::min)(m_marqueeStart.y, m_marqueeEnd.y);
+            float x2 = (std::max)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y2 = (std::max)(m_marqueeStart.y, m_marqueeEnd.y);
+            batcher.drawRect(x1, y1, x2 - x1, y2 - y1, 1.0f / m_zoom, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.4f);
+            batcher.drawQuad(x1, y1, x2 - x1, y2 - y1, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.1f);
         }
 
         if (m_popup) {
@@ -229,6 +247,10 @@ public:
             }
             batcher.drawText("PROCESSING TAPE...", cx - 60, cy + 60, 14, 1.0f, 1.0f, 1.0f, 1.0f);
         }
+    }
+
+    void resized() override {
+        Component::resized();
     }
 
     void childBoundsChanged(Component* child) override {
@@ -301,7 +323,7 @@ public:
                      if (node->getName() == "Master") { vx = 800.0f; vy = 250.0f; }
                 }
                 
-                auto mod = std::make_shared<AudioModule>(node, id, vx, vy, m_deviceManager);
+                auto mod = std::make_shared<AudioModule>(node, id, vx, vy, m_deviceManager, m_nativeWindowHandle);
                 mod->setDraggable(true);
                 setupModule(mod);
             }
@@ -343,11 +365,6 @@ public:
         }
     }
 
-    void refresh() {
-        syncReels();
-        // syncCables is called by syncReels now
-    }
-
     void saveStateToProject() {
         if (!m_project) return;
         std::cout << "[Workspace] Saving state for " << m_modules.size() << " modules." << std::endl;
@@ -355,12 +372,22 @@ public:
         for (auto& mod : m_modules) {
             m_project->setVisualPos(mod->getNodeId(), mod->getX(), mod->getY());
         }
+        // Save Pan/Zoom
+        m_project->setWorkspaceView(m_panX, m_panY, m_zoom);
+    }
+
+    void refresh() {
+        if (m_project) {
+            auto [px, py, z] = m_project->getWorkspaceView();
+            m_panX = px; m_panY = py; m_zoom = z;
+        }
+        syncReels();
     }
 
     void clear() {
         std::cout << "[Workspace] Clearing all modules and cables." << std::endl;
         for (auto& mod : m_modules) {
-            removeChildComponent(mod.get());
+            if (mod) removeChildComponent(mod.get());
         }
         m_modules.clear();
         m_cables.clear();
@@ -370,9 +397,14 @@ public:
     }
 
     void setupModule(std::shared_ptr<AudioModule> mod) {
+        if (!mod) return;
         mod->onDeleteRequested = [this](AudioModule* m) { removeModule(m); };
-        for (auto& p : mod->getInputPorts()) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
-        for (auto& p : mod->getOutputPorts()) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        for (auto& p : mod->getInputPorts()) {
+            if (p) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        }
+        for (auto& p : mod->getOutputPorts()) {
+            if (p) p->onConnectStarted = [this](Port* p) { startCableDrag(p); };
+        }
         m_modules.push_back(mod);
         addChildComponent(mod);
     }
@@ -460,33 +492,39 @@ public:
         }
 
         size_t id = mod->getNodeId();
-        UndoManager::get().perform(std::make_unique<RemoveNodeCommand>(m_project->getGraph().get(), id));
-        
-        auto& tracks = m_project->getTracks();
-        for(auto it = tracks.begin(); it != tracks.end(); ++it) {
-            if(it->nodeId == id) { tracks.erase(it); break; }
+        if (m_project && m_project->getGraph()) {
+            UndoManager::get().perform(std::make_unique<RemoveNodeCommand>(m_project->getGraph().get(), id));
+            
+            auto& tracks = m_project->getTracks();
+            for(auto it = tracks.begin(); it != tracks.end(); ++it) {
+                if(it->nodeId == id) { tracks.erase(it); break; }
+            }
         }
 
         for (auto it = m_cables.begin(); it != m_cables.end(); ) {
-            if (it->input->getParent() == mod || it->output->getParent() == mod) {
-                it = m_cables.erase(it);
-            } else {
-                ++it;
+            if (it->input && it->output) {
+                if (it->input->getParent() == mod || it->output->getParent() == mod) {
+                    it = m_cables.erase(it);
+                    continue;
+                }
             }
+            ++it;
         }
 
         for (auto it = m_modules.begin(); it != m_modules.end(); ++it) {
             if (it->get() == mod) { 
                 auto modPtr = *it;
-                removeChildComponent(modPtr.get());
+                if (modPtr) {
+                    removeChildComponent(modPtr.get());
+                    GarbageCollector::get().defer(modPtr);
+                }
                 m_modules.erase(it); 
-                GarbageCollector::get().defer(modPtr);
                 break; 
             }
         }
         
         if (m_engine) m_engine->updatePlan();
-        m_project->setDirty(true);
+        if (m_project) m_project->setDirty(true);
     }
 
     void startCableDrag(Port* p) { 
@@ -532,8 +570,8 @@ public:
         if (!m_isVisible || !m_bounds.contains(x, y)) return false;
         
         if (m_popup) {
-            if (m_popup->getBounds().contains(x, y)) {
-                return m_popup->onMouseDown(x - m_popup->getX(), y - m_popup->getY(), button, shift);
+            if (m_popup->getBounds().contains(x - m_bounds.x, y - m_bounds.y)) {
+                return m_popup->onMouseDown(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), button, shift);
             } else {
                 closePopup();
                 return true; 
@@ -543,11 +581,38 @@ public:
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
         
+        // Children first
+        bool childHit = false;
         for (auto it = m_children.rbegin(); it != m_children.rend(); ++it) {
-            if ((*it)->onMouseDown(vmx, vmy, button, shift)) return true;
+            if ((*it)->onMouseDown(vmx, vmy, button, shift)) {
+                childHit = true;
+                break;
+            }
         }
 
-        if (button == 3) { m_isPanning = true; m_lastMouseX = x; m_lastMouseY = y; return true; }
+        if (childHit) {
+            // If we hit a module, clear selection unless shift is down? 
+            // For now, let's just clear if it's a left click on a single item.
+            if (button == 1 && !shift) m_selectedNodeIds.clear();
+            return true;
+        }
+
+        // Panning: Middle mouse (2) or Right click (3)
+        if (button == 2 || button == 3) { 
+            m_isPanning = true; 
+            m_lastMouseX = x; 
+            m_lastMouseY = y; 
+            return true; 
+        }
+
+        // Marquee Selection: Left Click on empty space
+        if (button == 1) {
+            m_isMarqueeSelecting = true;
+            m_marqueeStart = {vmx, vmy};
+            m_marqueeEnd = {vmx, vmy};
+            if (!shift) m_selectedNodeIds.clear();
+            return true;
+        }
         
         mouseDown(MouseEvent(vmx, vmy, button, shift));
         return true;
@@ -555,14 +620,37 @@ public:
 
     bool onMouseUp(float x, float y, int button, bool shift) override {
         if (m_popup) {
-            if (m_popup->getBounds().contains(x, y)) {
-                m_popup->onMouseUp(x - m_popup->getX(), y - m_popup->getY(), button, shift);
+            if (m_popup->getBounds().contains(x - m_bounds.x, y - m_bounds.y)) {
+                m_popup->onMouseUp(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), button, shift);
             }
             return true; 
         }
         
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
+
+        if (m_isMarqueeSelecting) {
+            m_isMarqueeSelecting = false;
+            // Identify nodes in marquee
+            float x1 = (std::min)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y1 = (std::min)(m_marqueeStart.y, m_marqueeEnd.y);
+            float x2 = (std::max)(m_marqueeStart.x, m_marqueeEnd.x);
+            float y2 = (std::max)(m_marqueeStart.y, m_marqueeEnd.y);
+            Rect marqueeRect = {x1, y1, x2 - x1, y2 - y1};
+
+            for (auto& mod : m_modules) {
+                Rect modRect = {mod->getX(), mod->getY(), mod->getWidth(), mod->getHeight()};
+                if (modRect.x < marqueeRect.x + marqueeRect.w && modRect.x + modRect.w > marqueeRect.x &&
+                    modRect.y < marqueeRect.y + marqueeRect.h && modRect.y + modRect.h > marqueeRect.y) {
+                    
+                    size_t id = mod->getNodeId();
+                    if (std::find(m_selectedNodeIds.begin(), m_selectedNodeIds.end(), id) == m_selectedNodeIds.end()) {
+                         m_selectedNodeIds.push_back(id);
+                    }
+                }
+            }
+            return true;
+        }
 
         if (m_isDraggingCable) {
             for (auto& mod : m_modules) {
@@ -595,7 +683,7 @@ public:
         if (!m_isVisible) return false;
 
         if (m_popup) {
-            m_popup->onMouseMove(x - m_popup->getX(), y - m_popup->getY(), shift);
+            m_popup->onMouseMove(x - m_bounds.x - m_popup->getX(), y - m_bounds.y - m_popup->getY(), shift);
             return true;
         }
 
@@ -610,6 +698,11 @@ public:
 
         float vmx, vmy;
         CoordinateSystem::get().screenToWorld(x, y, vmx, vmy);
+
+        if (m_isMarqueeSelecting) {
+            m_marqueeEnd = {vmx, vmy};
+            return true;
+        }
 
         if (m_isDraggingCable) return true; 
         
@@ -637,6 +730,54 @@ public:
         CoordinateSystem::get().setZoom(m_zoom);
         CoordinateSystem::get().setPan(m_panX, m_panY);
         return true;
+    }
+
+    void duplicateSelectedNodes() {
+        if (m_selectedNodeIds.empty()) return;
+        std::cout << "[Workspace] Duplicating " << m_selectedNodeIds.size() << " nodes." << std::endl;
+        
+        // This is a complex operation requiring serialization of sub-graphs.
+        // For now, we'll implement simple single-node duplication if only one is selected.
+        if (m_selectedNodeIds.size() == 1) {
+            auto node = m_engine->getGraph()->getNode(m_selectedNodeIds[0]);
+            if (node) {
+                float vx, vy;
+                auto [oldX, oldY] = m_project->getVisualPos(m_selectedNodeIds[0]);
+                vx = oldX + 30.0f; vy = oldY + 30.0f;
+                addFX(node->getName(), vx, vy);
+            }
+        }
+    }
+
+    void deleteSelectedNodes() {
+        if (m_selectedNodeIds.empty()) return;
+        std::cout << "[Workspace] Deleting " << m_selectedNodeIds.size() << " nodes." << std::endl;
+        
+        // Use a copy of the ID list to avoid iterator invalidation issues
+        auto idsToDelete = m_selectedNodeIds;
+        m_selectedNodeIds.clear();
+
+        for (size_t id : idsToDelete) {
+            for (auto& mod : m_modules) {
+                if (mod->getNodeId() == id) {
+                    removeModule(mod.get());
+                    break;
+                }
+            }
+        }
+    }
+
+    bool isNodeSelected(size_t id) const {
+        return std::find(m_selectedNodeIds.begin(), m_selectedNodeIds.end(), id) != m_selectedNodeIds.end();
+    }
+
+    void handleKeyDown(int key) {
+        if (key == SDLK_DELETE || key == SDLK_BACKSPACE) {
+            deleteSelectedNodes();
+        }
+        if ((SDL_GetModState() & SDL_KMOD_CTRL) && key == SDLK_D) {
+            duplicateSelectedNodes();
+        }
     }
 
 private:
@@ -671,6 +812,7 @@ private:
     std::shared_ptr<FluxProject> m_project;
     AudioEngine* m_engine;
     AudioDeviceManager* m_deviceManager;
+    void* m_nativeWindowHandle = nullptr;
     std::vector<std::shared_ptr<AudioModule>> m_modules;
     std::vector<Cable> m_cables;
     float m_panX = 0, m_panY = 0;
@@ -682,6 +824,11 @@ private:
     bool m_isLoading = false;
     float m_loadingTimer = 0.0f;
     std::shared_ptr<Component> m_popup;
+
+    // Selection
+    bool m_isMarqueeSelecting = false;
+    struct { float x, y; } m_marqueeStart, m_marqueeEnd;
+    std::vector<size_t> m_selectedNodeIds;
 };
 
 } // namespace Beam

@@ -20,7 +20,9 @@ struct SignalRoute {
     // Optional per-route gain (for mixer functionality)
     // If nullptr, gain is 1.0. Points to atomic for real-time safe control.
     const std::atomic<float>* gainPtr = nullptr;
+    const std::atomic<float>* panPtr = nullptr;
     const std::atomic<bool>* mutePtr = nullptr;
+    const std::atomic<bool>* soloPtr = nullptr;
     
     // Optional peak level output (for metering)
     // Audio thread writes peak level here during routing
@@ -42,6 +44,9 @@ struct ProcessorExecution {
 
 // The complete immutable plan for one audio callback
 struct RenderPlan {
+    int blockSize = 0;
+    int channels = 2;
+
     std::vector<ProcessorExecution> sequence;
     std::vector<std::shared_ptr<FluxProcessor>> processors; // Plan owns the processors
     // Final sink indices for the engine to copy to hardware

@@ -23,7 +23,7 @@ namespace Beam {
  */
 class Knob : public Component {
 public:
-    Knob(const std::string& label, float minVal, float maxVal, float initialVal)
+    Knob(const std::string& label = "Knob", float minVal = 0.0f, float maxVal = 1.0f, float initialVal = 0.0f)
         : m_min(minVal), m_max(maxVal), m_value(initialVal) {
         setName("Knob");
         
@@ -44,17 +44,21 @@ public:
         }
     }
 
+    void setParameter(std::shared_ptr<Parameter> param) { bindParameter(param); }
+    void setLabel(const std::string& label) { m_labelElement->setText(label); }
+
     void getPreferredSize(float& w, float& h) const override {
-        static constexpr float KNOB_W = 80.0f; // Slightly wider base
+        static constexpr float KNOB_W = 80.0f; 
         static constexpr float KNOB_CIRCLE_H = 50.0f; 
         
         float lw = 0, lh = 0;
-        m_labelElement->setWrapWidth(KNOB_W - 4.0f); // Match Knob width
+        m_labelElement->setWrapWidth(KNOB_W - 4.0f); 
         m_labelElement->getPreferredSize(lw, lh);
         
         w = KNOB_W;
-        h = KNOB_CIRCLE_H + (lh > 0 ? lh + 8.0f : 0.0f); // 8px for labels
+        h = KNOB_CIRCLE_H + (lh > 0 ? lh + 8.0f : 0.0f);
     }
+
     void resized() override {
         static constexpr float KNOB_CIRCLE_H = 50.0f;
         float lw = 0, lh = 0;
@@ -69,7 +73,13 @@ public:
         m_numFrames = numFrames;
     }
 
-    void paint(QuadBatcher& batcher) override;
+    void paint(QuadBatcher& g) override;
+
+    std::string getTooltipText() const override {
+        char valStr[64];
+        snprintf(valStr, 64, "%s: %.2f", m_labelElement->getText().c_str(), getValue());
+        return std::string(valStr);
+    }
 
     void mouseDown(const MouseEvent& event) override {
         m_lastY = event.y;
@@ -126,7 +136,6 @@ private:
     float m_lastY = 0;
     float m_undoValue = 0;
     std::shared_ptr<Parameter> m_parameter;
-    
     std::shared_ptr<Texture> m_texture;
     int m_numFrames = 0;
     Theme::KnobStyle m_style = Theme::KnobStyle::ClassicBakelite;

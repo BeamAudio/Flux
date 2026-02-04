@@ -68,6 +68,16 @@ public:
      */
     void paint(QuadBatcher& g) override;
 
+    std::string getTooltipText() const override {
+        char valStr[32];
+        if (m_parameter) {
+            snprintf(valStr, 32, "%s: %.2f %s", m_parameter->getName().c_str(), getValue(), m_textSuffix.c_str());
+        } else {
+            snprintf(valStr, 32, "%.2f %s", getValue(), m_textSuffix.c_str());
+        }
+        return std::string(valStr);
+    }
+
     /**
      * @brief Called when the mouse is pressed
      */
@@ -93,12 +103,19 @@ public:
      */
     std::shared_ptr<Parameter> getParameter() const { return m_parameter; }
 
+    /**
+     * @brief Sets the value to reset to on double click
+     */
+    void setDefaultResetValue(double val) { m_defaultResetValue = val; }
+
 private:
     SliderStyle m_style = SliderStyle::LinearHorizontal;
     double m_min = 0.0;
     double m_max = 1.0;
     double m_interval = 0.0;
     double m_value = 0.0;
+    double m_defaultResetValue = 0.0;
+    uint64_t m_lastClickTime = 0;
     std::string m_textSuffix;
     std::shared_ptr<Parameter> m_parameter;
     float m_dragStartX, m_dragStartY;

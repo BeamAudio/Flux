@@ -86,7 +86,7 @@ public:
         return CompilerType::None;
     }
 
-    static bool compileAndLoad(const std::string& scriptPath, const std::string& pluginName) {
+    static bool compileAndLoad(const std::string& scriptPath, const std::string& pluginName, const std::string& category = "User") {
         // 1. Read script
         std::ifstream f(scriptPath);
         if(!f.is_open()) return false;
@@ -122,12 +122,6 @@ public:
             cmd = compilerCmd + " /LD /EHsc /std:c++20 /I\"src\" /I\"third_party\" \"" + cppPath + "\" /Fe\"" + dllPath + "\"";
         } else {
             // GCC/Clang Command
-            std::string extraPaths = "";
-            if (compilerCmd.find("tools/compiler") != std::string::npos) {
-                // If using our bundled compiler, ensure it sees the system includes it needs
-                // But GCC usually finds its own relative to its bin path. 
-                // We mainly need to ensure it finds OUR src and third_party.
-            }
             cmd = compilerCmd + " -shared -fPIC -std=c++20 -I\"src\" -I\"third_party\" \"" + cppPath + "\" -o \"" + dllPath + "\"";
         }
 
@@ -140,9 +134,8 @@ public:
         }
 
         // 5. Load DLL
-        // For now, we just proved AOT generation works.
         std::cout << "Plugin compiled successfully to: " << dllPath << std::endl;
-        registerInLibrary(pluginName, dllPath, "User", "FluxScript");
+        registerInLibrary(pluginName, dllPath, category, "FluxScript");
         return true; 
     }
 

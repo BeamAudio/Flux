@@ -34,6 +34,35 @@ bool InputHandler::handleMouseUp(float x, float y, int button, bool shift) {
 }
 
 bool InputHandler::handleMouseMove(float x, float y, bool shift) {
+    // 1. Reset hovered component
+    m_hoveredComponent = nullptr;
+
+    auto findHovered = [&](auto& self, Component* parent, float lx, float ly) -> Component* {
+        if (!parent || !parent->isVisible()) return nullptr;
+        
+        // Check children in reverse order (top to bottom)
+        const auto& children = parent->getChildren();
+        for (int i = (int)children.size() - 1; i >= 0; --i) {
+            auto child = children[i].get();
+            if (child->isVisible() && child->getBounds().contains(lx, ly)) {
+                Component* found = self(self, child, lx - child->getX(), ly - child->getY());
+                if (found) return found;
+                return child;
+            }
+        }
+        return nullptr;
+    };
+
+    // Check all top-level components
+    for (int i = (int)m_components.size() - 1; i >= 0; --i) {
+        auto comp = m_components[i].get();
+        if (comp->isVisible() && comp->getBounds().contains(x, y)) {
+            m_hoveredComponent = findHovered(findHovered, comp, x - comp->getX(), y - comp->getY());
+            if (!m_hoveredComponent) m_hoveredComponent = comp;
+            break;
+        }
+    }
+
     if (m_capturedComponent) {
         return m_capturedComponent->onMouseMove(x, y, shift);
     }

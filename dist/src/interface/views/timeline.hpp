@@ -115,6 +115,11 @@ public:
         track.regions[index] = firstHalf;
         track.regions.insert(track.regions.begin() + index + 1, secondHalf);
         
+        if (track.node) {
+            track.node->setRegions(track.regions);
+            if (m_engine) m_engine->updatePlan();
+        }
+
         m_selectedRegionIndex = -1; // Deselect after slice
     }
 
@@ -713,6 +718,11 @@ public:
                         return a.startFrame < b.startFrame;
                     });
                     
+                    // Sync both tracks
+                    if (oldTrack.node) oldTrack.node->setRegions(oldTrack.regions);
+                    if (newTrack.node) newTrack.node->setRegions(newTrack.regions);
+                    if (m_engine) m_engine->updatePlan();
+
                     m_selectedTrackPtr = &newTrack;
                     for (int i=0; i<(int)newTrack.regions.size(); ++i) {
                         if (newTrack.regions[i].startFrame == r.startFrame && newTrack.regions[i].name == r.name) {
@@ -722,6 +732,12 @@ public:
                         }
                     }
                     m_dragTrackIndex = newTrackIdx;
+                } else {
+                    // Just moved within same track
+                    if (m_selectedTrackPtr->node) m_selectedTrackPtr->node->setRegions(m_selectedTrackPtr->regions);
+                    // Don't need to rebuild plan for just position change within same node usually,
+                    // but since processor stores a COPY of regions, we MUST rebuild or update processor.
+                    if (m_engine) m_engine->updatePlan();
                 }
             }
             return true;

@@ -38,6 +38,9 @@ public:
         setName("AutoFlexContainer");
     }
     
+    Config& getConfig() { return m_config; }
+    void setConfig(Config cfg) { m_config = cfg; resized(); }
+
     void addFlexChild(std::shared_ptr<Component> child, float grow = 0.0f) {
         m_flexChildren.push_back({child, {grow}});
         addChildComponent(child);
@@ -62,7 +65,8 @@ public:
         if (m_flexChildren.empty()) return lines;
 
         bool isRow = m_config.direction == Direction::Row;
-        float maxMain = (isRow ? targetW : targetH) - m_config.padding * 2;
+        float targetMain = isRow ? targetW : targetH;
+        float maxMain = m_config.wrap ? (std::max)(100.0f, targetMain - m_config.padding * 2) : 1e10f;
         
         lines.push_back(Line());
         float currentMain = 0;
@@ -92,15 +96,21 @@ public:
     void getPreferredSize(float& w, float& h) const override {
         if (m_flexChildren.empty()) { w = 0; h = 0; return; }
         
-        auto lines = computeLines(m_config.preferredWidth, m_config.preferredHeight);
+        // Use current width if available to determine wrapping/height
+        float targetW = (m_bounds.w > 0) ? m_bounds.w : m_config.preferredWidth;
+        float targetH = (m_bounds.h > 0) ? m_bounds.h : m_config.preferredHeight;
+
+        auto lines = computeLines(targetW, targetH);
         bool isRow = m_config.direction == Direction::Row;
         
         float totalMainAcrossLines = 0;
         float maxLineMain = 0;
+        float maxLineCross = 0;
         
         for (const auto& line : lines) {
             if (line.mainSize > maxLineMain) maxLineMain = line.mainSize;
             totalMainAcrossLines += line.crossSize + m_config.gap;
+            if (line.crossSize > maxLineCross) maxLineCross = line.crossSize;
         }
         if (!lines.empty()) totalMainAcrossLines -= m_config.gap;
         
@@ -117,7 +127,8 @@ public:
         if (m_flexChildren.empty()) return;
         
         bool isRow = m_config.direction == Direction::Row;
-        float availMain = (isRow ? m_bounds.w : m_bounds.h) - m_config.padding * 2;
+        float availMain = (std::max)(0.0f, (isRow ? m_bounds.w : m_bounds.h) - m_config.padding * 2);
+        float availCross = (std::max)(0.0f, (isRow ? m_bounds.h : m_bounds.w) - m_config.padding * 2);
         
         auto lines = computeLines(m_bounds.w, m_bounds.h);
         float currentCrossPos = m_config.padding;
@@ -126,6 +137,12 @@ public:
             float currentMainPos = m_config.padding;
             float freeSpace = availMain - line.mainSize;
             
+            // If stretching and only one line, ensure the line takes full cross space
+            float lineCrossSize = line.crossSize;
+            if (m_config.crossAlign == Alignment::Stretch && lines.size() == 1) {
+                lineCrossSize = (std::max)(lineCrossSize, availCross);
+            }
+
             float xOffset = 0;
             float extraGap = 0;
             if (line.totalGrow <= 0) {
@@ -136,7 +153,7 @@ public:
                 }
             }
             
-            currentMainPos += xOffset;
+            currentMainPos += (std::max)(0.0f, xOffset);
             
             for (int idx : line.itemIndices) {
                 float cw = 0, ch = 0;
@@ -146,14 +163,18 @@ public:
                 float itemCross = isRow ? ch : cw;
                 
                 if (line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
-                    itemMain += freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
+                    float extra = freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
+                    itemMain = (std::max)(20.0f, itemMain + extra);
+                } else if (freeSpace < 0 && !m_config.wrap) {
+                    // In a scrollable non-wrapping container, do not shrink items below preferred size
+                    // itemMain = itemMain; // Keep preferred
                 }
                 
                 float crossOffset = 0;
                 float finalCrossSize = itemCross;
-                if (m_config.crossAlign == Alignment::Center) crossOffset = (line.crossSize - itemCross) / 2;
-                else if (m_config.crossAlign == Alignment::End) crossOffset = line.crossSize - itemCross;
-                else if (m_config.crossAlign == Alignment::Stretch) finalCrossSize = line.crossSize;
+                if (m_config.crossAlign == Alignment::Center) crossOffset = (lineCrossSize - itemCross) / 2;
+                else if (m_config.crossAlign == Alignment::End) crossOffset = lineCrossSize - itemCross;
+                else if (m_config.crossAlign == Alignment::Stretch) finalCrossSize = lineCrossSize;
                 
                 if (isRow) {
                     m_flexChildren[idx].comp->setBounds(currentMainPos, currentCrossPos + crossOffset, itemMain, finalCrossSize);
@@ -163,7 +184,7 @@ public:
                 
                 currentMainPos += itemMain + m_config.gap + extraGap;
             }
-            currentCrossPos += line.crossSize + m_config.gap;
+            currentCrossPos += lineCrossSize + m_config.gap;
         }
     }
     

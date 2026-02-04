@@ -310,7 +310,8 @@ public:
             m_envelope = (1.0f - alpha) * m_envelope + alpha * detector; 
             float gr = 1.0f / (1.0f + m_envelope);
             out[i] = in[i] * inputGain * gr;
-            if (1.0f - gr > maxGR) maxGR = 1.0f - gr;
+            float currentGR = 1.0f - gr;
+            if (currentGR > maxGR) maxGR = currentGR;
         }
         if (m_meterSource) m_meterSource->updateMeter(0, maxGR);
         m_lastGR = maxGR;

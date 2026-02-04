@@ -1,7 +1,7 @@
 # Beam Audio Flux
 ## Proprietary Engine Architecture (No-Framework) v2.0
 
-**Beam Audio Flux** is a next-generation, high-performance Digital Audio Workstation (DAW) built on a completely proprietary, "no-framework" C++20 engine known as **BeamEngine**.
+**Beam Audio Flux** is a next-generation, high-performance Digital Audio Workstation (DAW) built on a completely proprietary, "no-framework" C++20 engine known as **BeamEngine**. It avoids heavy frameworks like JUCE or Qt, opting for a lightweight stack of SDL3 and OpenGL for maximum efficiency and full control over the DSP and UI pipelines.
 
 ### Download & Installation
 1.  Navigate to the [Releases](https://github.com/BeamAudio/Flux/releases) page.
@@ -16,20 +16,21 @@
 *   **Flux Mode (F1)**: The creative playground. Drag cables between nodes to route audio.
 *   **Slice Mode (F2)**: The timeline view. Arrange clips, slice audio, and mix.
 *   **Spacebar**: Play/Pause.
-*   **Mouse Wheel**: Zoom in/out (centered on mouse).
+*   **Mouse Wheel**: Zoom in/out and scroll through the Plugin Library.
 *   **Right Click (Hold)**: Pan the view.
+*   **Marquee Selection**: Left-click and drag on empty space in Flux Mode to select multiple nodes.
+*   **Hover Tooltips**: Hover over any knob or slider to see its real-time value in a floating overlay.
 
 ### Routing & FX
-1.  **Add FX**: Open the Sidebar (left) and click on an effect category.
-2.  **VST3 Support**: Beam Audio Flux automatically scans `C:/Program Files/Common Files/VST3`. You can add custom scan paths in the Audio Configuration menu (Crank icon).
-3.  **FluxScript**: Create custom DSP using our high-level language. Click "COMPILE AOT" on a script node to turn it into a native high-performance plugin.
-4.  **Wiring**: Drag from a module's Output Port (Right) to another module's Input Port (Left).
-5.  **Recording**:
-    *   Add an **Audio Input** and an **Empty Tape**.
-    *   Wire Input -> Tape.
-    *   Press **Record (O)** in the top bar.
-6.  **Rendering**:
-    *   Click **RENDER** to export your project to high-quality WAV. The engine now uses a shared-plan architecture for 100% fidelity matching between playback and bounce.
+1.  **Add FX**: Open the Sidebar (left) and click on an effect category. The library features a robust, hierarchical navigation system.
+2.  **Global Bypass**: Every plugin module has a dedicated **B** button in its header for immediate processing control.
+3.  **Advanced Auto-Tune**: Our specialized Auto-Tune module features a circular chromatic tuner, key/scale selection, and a "Humanize" algorithm for natural pitch correction.
+4.  **Bulk Actions**: With nodes selected, press **Delete** to remove them all, or **Ctrl+D** to duplicate your selection.
+5.  **Professional Sliders**: 
+    *   **Double-Click**: Reset any slider (including mixer faders) to its unity or default position.
+    *   **0dB Marks**: Visual tick marks at 70% height/width indicate the standard unity gain position.
+6.  **VST3 Support**: Automatically scans `C:/Program Files/Common Files/VST3`. Add custom paths in the Audio Configuration menu (Crank icon).
+7.  **FluxScript**: Create custom DSP using our high-level language. Click "COMPILE AOT" on a script node to turn it into a native high-performance plugin.
 
 ---
 
@@ -37,57 +38,12 @@
 
 ### Architecture
 *   **Engine**: C++20, SDL3, OpenGL 3.3.
-*   **Hosting**: Native VST3 bridge with Planar-Interleaved conversion.
-*   **Scripting**: AOT compilation from FluxScript to C++ DLLs.
-*   **UI**: Modular `Component` system with `FlexBox` layout engine.
-
-### Creating New FX
-To add a new DSP effect to Beam Audio Flux:
-
-1.  **Define the Class**: Inherit from `FluxPlugin` in `src/engine/analog_suite.hpp`.
-    ```cpp
-    class MyNewReverb : public FluxPlugin {
-    public:
-        MyNewReverb(int buf, float sr) : FluxPlugin("My Reverb", buf, sr) {
-            addParam("Decay", 0.1f, 5.0f, 2.0f);
-        }
-        void processBlock(const float* in, float* out, int total) override {
-            // Your DSP logic here
-        }
-    };
-    ```
-2.  **Register the UI**:
-    *   Add the name to `Sidebar` categories in `src/interface/sidebar.hpp`.
-    *   Add the instantiation logic to `Workspace::addFX` in `src/interface/workspace.hpp`.
-
-### Customizing the Logo
-To add a custom logo that appears in the window title bar, taskbar, and as the executable icon:
-
-1.  **Window/Taskbar Icon**:
-    *   Place your icon image (e.g., `logo.bmp`) in `assets/images/`.
-    *   In `src/session/beam_host.cpp`, inside `init()`:
-        ```cpp
-        SDL_Surface* icon = SDL_LoadBMP("assets/images/logo.bmp");
-        if (icon) {
-            SDL_SetWindowIcon(m_window, icon);
-            SDL_DestroySurface(icon);
-        }
-        ```
-
-2.  **Executable Icon (Windows)**:
-    *   Create an `.rc` file (e.g., `resources.rc`) containing:
-        ```rc
-        IDI_ICON1 ICON "assets/images/logo.ico"
-        ```
-    *   Add this `.rc` file to your `CMakeLists.txt`:
-        ```cmake
-        add_executable(BeamAudioFlux src/main.cpp resources.rc ...)
-        ```
-
-### Future: Scripting
-We are working on a JIT-compiled scripting language to allow FX creation at runtime without recompiling the engine. Stay tuned for the `FluxScript` update.
-
----
+*   **Dynamics Metering**: New `isGRMeter` flag in `RackStyle` supports hardware-standard top-down metering for compressors like the FET-76.
+*   **Project Stability**: Thread-safe project loading with automatic audio engine suspension during graph reconstruction.
+*   **UI System**: A modular `Component` system built from scratch featuring:
+    *   **AutoFlexContainer**: A CSS-like flexbox layout engine for dynamic, responsive UIs.
+    *   **ScrollableContainer**: High-performance scrolling for large lists.
+    *   **QuadBatcher**: An optimized OpenGL renderer that batches UI draw calls.
 
 ### Building from Source
 **Requirements**: CMake 3.20+, Visual Studio 2022 (Windows).
@@ -96,5 +52,16 @@ We are working on a JIT-compiled scripting language to allow FX creation at runt
 mkdir build
 cd build
 cmake ..
-cmake --build . --config Release
+cmake --build build --config Release
 ```
+
+### Packaging (Windows)
+To create a distribution-ready package, use the provided PowerShell script:
+
+```powershell
+.\package_windows.ps1
+```
+This script now performs a full CMake rebuild before bundling the executable, DLLs, assets, and SDK headers into the `dist` folder.
+
+---
+© 2026 Beam Audio. Built with BeamEngine.

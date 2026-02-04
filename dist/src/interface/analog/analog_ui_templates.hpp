@@ -20,6 +20,7 @@ struct RackStyle {
     bool showScrews = true;
     bool showMeter = false; // Generic GR meter
     bool invertMeter = false; // If true, grows from bottom (for input/level)
+    bool isGRMeter = false;   // If true, lights from TOP down
     std::string title;
     std::string subtitle;
 };
@@ -143,16 +144,25 @@ public:
             float gap = 2.0f;
             float segH = (meterH - (numSegs-1)*gap) / numSegs;
             for (int i = 0; i < numSegs; ++i) {
-                float segPos = (m_style.invertMeter) ? (float)(numSegs - 1 - i) / (float)(numSegs - 1) : (float)i / (float)(numSegs - 1);
+                float segPos = (float)i / (float)(numSegs - 1);
                 
                 // Light up based on value
-                bool lit = (val > 0.005f) && (segPos < val); 
+                bool lit = false;
+                if (m_style.isGRMeter) {
+                    // GR Meter: lights from TOP down. val is reduction (0..1)
+                    lit = (val > 0.005f) && (segPos < val); 
+                } else {
+                    // Level Meter: lights from BOTTOM up
+                    float levelPos = 1.0f - segPos;
+                    lit = (val > 0.005f) && (levelPos < val);
+                }
                 
                 Color col;
-                if (m_style.invertMeter) {
-                    col = (segPos < 0.7f) ? Theme::LEDGreen : (segPos < 0.9f ? Theme::LEDYellow : Theme::LEDRed);
+                if (m_style.isGRMeter) {
+                    col = (segPos < 0.4f) ? Theme::LEDGreen : (segPos < 0.7f ? Theme::LEDYellow : Theme::LEDRed);
                 } else {
-                    col = (segPos < 0.3f) ? Theme::LEDGreen : (segPos < 0.6f ? Theme::LEDYellow : Theme::LEDRed);
+                    float levelPos = 1.0f - segPos;
+                    col = (levelPos < 0.7f) ? Theme::LEDGreen : (levelPos < 0.9f ? Theme::LEDYellow : Theme::LEDRed);
                 }
                 
                 float alpha = lit ? 1.0f : 0.12f;
@@ -192,31 +202,31 @@ public:
 
     // Predefined Styles with granular design tokens
     static RackStyle Pultec() { 
-        return { {0.1f, 0.2f, 0.4f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, Theme::MaterialType::WrinklePaint, Theme::KnobStyle::ClassicBakelite, true, false, false, "TUBE-P", "PROGRAM EQUALIZER" }; 
+        return { {0.1f, 0.2f, 0.4f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, Theme::MaterialType::WrinklePaint, Theme::KnobStyle::ClassicBakelite, true, false, false, false, "TUBE-P", "PROGRAM EQUALIZER" }; 
     } 
     static RackStyle SSL() { 
-        return { {0.3f, 0.3f, 0.3f, 1.0f}, {0.1f, 0.1f, 0.1f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ModernColored, true, false, false, "CONSOLE-E", "CHANNEL STRIP" }; 
+        return { {0.3f, 0.3f, 0.3f, 1.0f}, {0.1f, 0.1f, 0.1f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ModernColored, true, false, false, false, "CONSOLE-E", "CHANNEL STRIP" }; 
     } 
     static RackStyle API() { 
-        return { {0.1f, 0.1f, 0.1f, 1.0f}, {0.3f, 0.6f, 0.9f, 1.0f}, Theme::MaterialType::WrinklePaint, Theme::KnobStyle::ModernColored, true, false, false, "GRAPHIC-10", "DQS SYSTEM" }; 
+        return { {0.1f, 0.1f, 0.1f, 1.0f}, {0.3f, 0.6f, 0.9f, 1.0f}, Theme::MaterialType::WrinklePaint, Theme::KnobStyle::ModernColored, true, false, false, false, "GRAPHIC-10", "DQS SYSTEM" }; 
     } 
     static RackStyle FET() { 
-        return { {0.05f, 0.05f, 0.05f, 1.0f}, {0.9f, 0.9f, 0.9f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::FlutedIndustrial, true, true, false, "FET-76", "LIMITING AMPLIFIER" }; 
+        return { {0.05f, 0.05f, 0.05f, 1.0f}, {0.9f, 0.9f, 0.9f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::FlutedIndustrial, true, true, false, true, "FET-76", "LIMITING AMPLIFIER" }; 
     } 
     static RackStyle Aluminum() {
-        return { {0.7f, 0.72f, 0.75f, 1.0f}, {0.1f, 0.1f, 0.12f, 1.0f}, Theme::MaterialType::BrushedAluminum, Theme::KnobStyle::BrushedAluminum, true, false, false, "MODERN", "ALUMINUM SERIES" };
+        return { {0.7f, 0.72f, 0.75f, 1.0f}, {0.1f, 0.1f, 0.12f, 1.0f}, Theme::MaterialType::BrushedAluminum, Theme::KnobStyle::BrushedAluminum, true, false, false, false, "MODERN", "ALUMINUM SERIES" };
     }
     static RackStyle Reverb(std::string name) { 
-        return { {0.6f, 0.55f, 0.5f, 1.0f}, {0.2f, 0.1f, 0.0f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::BrushedAluminum, true, false, false, name, "DIGITAL REVERB" }; 
+        return { {0.6f, 0.55f, 0.5f, 1.0f}, {0.2f, 0.1f, 0.0f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::BrushedAluminum, true, false, false, false, name, "DIGITAL REVERB" }; 
     } 
     static RackStyle Delay(std::string name) { 
-        return { {0.1f, 0.3f, 0.2f, 1.0f}, {0.8f, 1.0f, 0.8f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ClassicBakelite, true, false, false, name, "TAPE ECHO" }; 
+        return { {0.1f, 0.3f, 0.2f, 1.0f}, {0.8f, 1.0f, 0.8f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ClassicBakelite, true, false, false, false, name, "TAPE ECHO" }; 
     } 
     static RackStyle Utility(std::string name) { 
-        return { {0.8f, 0.8f, 0.8f, 1.0f}, {0.15f, 0.15f, 0.18f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ModernColored, false, false, false, name, "UTILITY" }; 
+        return { {0.8f, 0.8f, 0.8f, 1.0f}, {0.15f, 0.15f, 0.18f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::ModernColored, false, false, false, false, name, "UTILITY" }; 
     }
     static RackStyle Script(std::string name) { 
-        return { {0.15f, 0.15f, 0.18f, 1.0f}, {0.2f, 0.9f, 1.0f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::FlutedIndustrial, true, true, false, name, "FLUX SCRIPT ENGINE" }; 
+        return { {0.15f, 0.15f, 0.18f, 1.0f}, {0.2f, 0.9f, 1.0f, 1.0f}, Theme::MaterialType::Standard, Theme::KnobStyle::FlutedIndustrial, true, true, false, false, name, "FLUX SCRIPT ENGINE" }; 
     }
 
 private:

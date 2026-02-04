@@ -53,9 +53,23 @@ public:
     virtual void updateParameters(const float* paramValues) {}
 
     /**
+     * @brief Sets the bypass state of this processor.
+     */
+    void setBypassed(bool bypassed) { m_bypassed.store(bypassed, std::memory_order_relaxed); }
+    bool isBypassed() const { return m_bypassed.load(std::memory_order_relaxed); }
+
+    /**
      * @brief Optimization: Prepare internal state for a specific sample rate/block size.
      */
     virtual void prepare(float sampleRate, int maxBlockSize) {}
+
+    /**
+     * @brief Informs the processor of the current global timeline frame.
+     */
+    virtual void setCurrentFrame(size_t frame) {}
+
+protected:
+    std::atomic<bool> m_bypassed{false};
 };
 
 } // namespace Beam

@@ -3,6 +3,7 @@
 
 #include "engine/core/flux_node.hpp"
 #include "engine/nodes/track_node.hpp"
+#include "engine/session/region.hpp"
 
 namespace Beam {
 
@@ -14,13 +15,33 @@ public:
         float* out = outputs[0];
         const float* in = inputs[0];
 
+        bool playedAny = false;
+
         if (m_track->getState() == TrackState::Playing) {
-            m_track->process(out, frames, 2, (size_t)-1);
+            // --- Region Based Playback ---
+            // Find if current frame falls into any region
+            for (const auto& reg : m_regions) {
+                if (m_currentFrame >= reg.startFrame && m_currentFrame < reg.startFrame + reg.duration) {
+                    // Calculate frame in source file
+                    size_t offsetInRegion = m_currentFrame - reg.startFrame;
+                    size_t fileFrame = reg.sourceOffset + offsetInRegion;
+                    
+                    m_track->process(out, frames, 2, fileFrame);
+                    playedAny = true;
+                    break;
+                }
+            }
+            
+            if (!playedAny) {
+                std::fill(out, out + frames * 2, 0.0f);
+            }
         } else if (m_track->getState() == TrackState::Recording && in) {
             m_track->processRecording(in, out, frames, 2);
+            playedAny = true;
         } else if (in) {
             std::copy(in, in + frames * 2, out);
             m_track->process(out, frames, 2, (size_t)-1);
+            playedAny = true;
         } else {
             std::fill(out, out + frames * 2, 0.0f);
         }
@@ -38,8 +59,8 @@ public:
     }
 
     void updateParameters(const float* params) override {
-        // Map order: Tape Drive (0), Tape Age (1), Send 1 (2), Send 2 (3), Pan (4)
-        m_track->setTapeParams(params[0], params[1], params[4]);
+        // Map order: Tape Drive (0), Tape Age (1), Send 1 (2), Send 2 (3)
+        m_track->setTapeParams(params[0], params[1]);
         m_sendLevels[0] = params[2];
         m_sendLevels[1] = params[3];
     }
@@ -48,12 +69,17 @@ public:
         // m_track doesn't need prepare currently
     }
 
-    void setCurrentFrame(size_t frame) { m_currentFrame = frame; }
+    void setCurrentFrame(size_t frame) override { m_currentFrame = frame; }
+    
+    void setRegions(const std::vector<Region>& regions) {
+        m_regions = regions;
+    }
 
 private:
     std::shared_ptr<TrackNode> m_track;
     size_t m_currentFrame = 0;
     float m_sendLevels[2] = {0.0f, 0.0f};
+    std::vector<Region> m_regions;
 };
 
 class FluxTrackNode : public FluxNode {
@@ -65,11 +91,18 @@ public:
         addParameter(std::make_shared<Parameter>("Tape Age", 0.0f, 1.0f, 0.0f));
         addParameter(std::make_shared<Parameter>("Send 1 Level", 0.0f, 1.0f, 0.0f));
         addParameter(std::make_shared<Parameter>("Send 2 Level", 0.0f, 1.0f, 0.0f));
-        addParameter(std::make_shared<Parameter>("Pan", 0.0f, 1.0f, 0.5f));
     }
 
     std::shared_ptr<FluxProcessor> createProcessor() override {
-        return std::make_shared<FluxTrackProcessor>(m_track);
+        auto proc = std::make_shared<FluxTrackProcessor>(m_track);
+        proc->setRegions(m_regions);
+        return proc;
+    }
+
+    void setRegions(const std::vector<Region>& regions) {
+        m_regions = regions;
+        // If we have an active processor, it will be recreated on next plan update.
+        // But for now, we just store them.
     }
 
     bool load(const std::string& filePath) {
@@ -144,6 +177,7 @@ private:
     std::string m_name;
     std::string m_audioFilePath;
     std::shared_ptr<TrackNode> m_track;
+    std::vector<Region> m_regions;
 };
 
 

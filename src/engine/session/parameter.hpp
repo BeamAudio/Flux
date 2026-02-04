@@ -22,7 +22,7 @@ enum class MappingType {
 class Parameter : public std::enable_shared_from_this<Parameter> {
 public:
     Parameter(const std::string& name, float min, float max, float initialValue, MappingType mapping = MappingType::Linear, float skew = 1.0f)
-        : m_name(name), m_min(min), m_max(max), m_value(initialValue), m_mapping(mapping), m_skew(skew) 
+        : m_name(name), m_min(min), m_max(max), m_value(initialValue), m_initialValue(initialValue), m_mapping(mapping), m_skew(skew) 
     {
         m_targetValue.store(initialValue);
         m_currentValue = initialValue;
@@ -31,6 +31,8 @@ public:
     float getValue() const {
         return m_value.load(std::memory_order_relaxed);
     }
+
+    float getInitialValue() const { return m_initialValue; }
 
     /**
      * @brief Returns the next sample-accurate value for this parameter.
@@ -99,6 +101,7 @@ private:
     std::string m_name;
     float m_min;
     float m_max;
+    float m_initialValue;
     std::atomic<float> m_value; // "Current" value for UI
     std::atomic<float> m_targetValue; // Target for audio thread
     float m_currentValue; // Audio thread local smoothed value

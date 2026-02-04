@@ -2,7 +2,13 @@
 $distDir = "dist"
 $appName = "BeamAudioFlux"
 
-# 1. Clean and Create Dist folder
+# 1. Compile with CMake
+Write-Host "Configuring and Building with CMake..."
+if (!(Test-Path "build")) { New-Item -ItemType Directory -Path "build" }
+cmake -S . -B build
+cmake --build build --config Release
+
+# 2. Clean and Create Dist folder
 if (Test-Path $distDir) { Remove-Item -Recurse -Force $distDir }
 New-Item -ItemType Directory -Path $distDir
 New-Item -ItemType Directory -Path "$distDir/assets"

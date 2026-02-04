@@ -62,43 +62,72 @@ void BeamHost::onSaveDialogCallback(void* userdata, const char* const* filelist,
 void BeamHost::onLoadDialogCallback(void* userdata, const char* const* filelist, int filter) {
     if (filelist && filelist[0]) {
         BeamHost* host = static_cast<BeamHost*>(userdata);
-        auto data = ProjectManager::loadProject(filelist[0]);
-        if (!data.empty() && host && host->m_project) {
-             host->m_project->deserialize(data);
+        if (!host || !host->m_project || !host->m_audioEngine) {
+            std::cerr << "[Load] Error: Host, project, or engine is null during load callback." << std::endl;
+            return;
+        }
+
+        std::string path = filelist[0];
+        std::cout << "[Load] Starting load from: " << path << std::endl;
+
+        try {
+            auto data = ProjectManager::loadProject(path);
+            if (data.empty()) {
+                std::cerr << "[Load] Error: Project file is empty or invalid: " << path << std::endl;
+                return;
+            }
+
+            // SUSPEND ENGINE while re-wiring the entire project graph
+            host->m_audioEngine->setMuted(true);
+            SDL_Delay(20); // Let last block finish
+
+            if (host->m_workspace) {
+                host->m_workspace->clear();
+            }
+
+            host->m_project->deserialize(data);
              
-             // Update Master ID in Engine
-             if (host->m_project->getGraph()) {
-                 size_t masterId = (size_t)-1;
-                 for(auto& [id, node] : host->m_project->getGraph()->getNodes()) {
-                     if (node->getName() == "Master") {
-                         masterId = id;
-                         break;
-                     }
-                 }
-                 
-                 // Failsafe: If no Master node found (e.g. old project or corruption), create one
-                 if (masterId == (size_t)-1) {
-                     std::cout << "[Load] Warning: No Master Node found in project. Creating one." << std::endl;
-                     masterId = host->m_project->getGraph()->addNode(host->m_audioEngine->getMasterNode());
-                 }
+            // Update Master ID in Engine
+            if (host->m_project->getGraph()) {
+                size_t masterId = (size_t)-1;
+                auto nodes = host->m_project->getGraph()->getNodes();
+                for(auto& [id, node] : nodes) {
+                    if (node && node->getName() == "Master") {
+                        masterId = id;
+                        break;
+                    }
+                }
+                
+                // Failsafe: If no Master node found (e.g. old project or corruption), create one
+                if (masterId == (size_t)-1) {
+                    std::cout << "[Load] Warning: No Master Node found in project. Creating one." << std::endl;
+                    masterId = host->m_project->getGraph()->addNode(host->m_audioEngine->getMasterNode());
+                }
 
-                 if (masterId != (size_t)-1) {
-                     host->m_audioEngine->setMasterNodeId(masterId);
-                     std::cout << "[Load] Master Node ID updated to: " << masterId << std::endl;
-                 }
-                 
-                 host->m_audioEngine->updatePlan();
-             }
+                if (masterId != (size_t)-1) {
+                    host->m_audioEngine->setMasterNodeId(masterId);
+                    std::cout << "[Load] Master Node ID updated to: " << masterId << std::endl;
+                }
+                
+                host->m_audioEngine->updatePlan();
+            }
 
-             if (host->m_workspace) {
-                 host->m_workspace->clear();
-                 host->m_workspace->refresh();
-             }
-             if (host->m_masterStrip) {
-                 host->m_masterStrip->refresh();
-                 std::cout << "[Load] MasterStrip refreshed." << std::endl;
-             }
-             std::cout << "Project loaded from: " << filelist[0] << std::endl;
+            if (host->m_workspace) {
+                host->m_workspace->refresh();
+            }
+            if (host->m_masterStrip) {
+                host->m_masterStrip->refresh();
+            }
+            
+            host->m_audioEngine->setMuted(false);
+            std::cout << "[Load] Project loaded successfully from: " << path << std::endl;
+
+        } catch (const std::exception& e) {
+            std::cerr << "[Load] CRITICAL ERROR during project load: " << e.what() << std::endl;
+            host->m_audioEngine->setMuted(false);
+        } catch (...) {
+            std::cerr << "[Load] UNKNOWN CRITICAL ERROR during project load." << std::endl;
+            host->m_audioEngine->setMuted(false);
         }
     }
 }
@@ -613,6 +642,9 @@ void BeamHost::handleEvents() {
             if (m_mode == DAWMode::Splicing && m_timeline) {
                 m_timeline->handleKeyDown(event.key.key);
             }
+            if (m_mode == DAWMode::Flux && m_workspace) {
+                m_workspace->handleKeyDown(event.key.key);
+            }
         }
         else if (event.type == SDL_EVENT_DROP_FILE) {
             if (m_workspace && event.drop.data) {
@@ -713,6 +745,30 @@ void BeamHost::render(float dt) {
             m_batcher->drawQuad(0.0f, 0.0f, (float)m_width, (float)m_height, 0.0f, 0.0f, 0.0f, 0.5f);
             m_confirmationModal->render(*m_batcher, dt, (float)m_width, (float)m_height);
         }
+
+        // --- Hover Tooltip Overlay ---
+        if (m_uiHandler) {
+            Component* hovered = m_uiHandler->getHoveredComponent();
+            if (hovered) {
+                std::string tip = hovered->getTooltipText();
+                if (!tip.empty()) {
+                    float mx, my; SDL_GetMouseState(&mx, &my);
+                    float tw = (float)tip.length() * 7.0f + 10.0f;
+                    float th = 18.0f;
+                    float tx = mx + 15.0f;
+                    float ty = my + 15.0f;
+                    
+                    // Keep on screen
+                    if (tx + tw > (float)m_width) tx = mx - tw - 5.0f;
+                    if (ty + th > (float)m_height) ty = my - th - 5.0f;
+
+                    m_batcher->drawRoundedRect(tx, ty, tw, th, 4.0f, 0.5f, 0.05f, 0.05f, 0.07f, 0.9f);
+                    m_batcher->drawRect(tx, ty, tw, th, 1.0f, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.4f);
+                    m_batcher->drawText(tip, tx + 5, ty + 3, 10, 1.0f, 1.0f, 1.0f, 1.0f);
+                }
+            }
+        }
+
     m_batcher->flush();
     SDL_GL_SwapWindow(m_window);
 }

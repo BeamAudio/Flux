@@ -20,6 +20,7 @@ class AudioDeviceManager;
 
 struct NodeEditorContext {
     AudioDeviceManager* deviceManager = nullptr;
+    void* nativeWindowHandle = nullptr;
 };
 
 /**

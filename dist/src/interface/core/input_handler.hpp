@@ -17,10 +17,12 @@ public:
     void update(float dt);
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH);
 
+    Component* getHoveredComponent() const { return m_hoveredComponent; }
+
 private:
     std::vector<std::shared_ptr<Component>> m_components;
-    std::shared_ptr<Component> m_focusedComponent;
-    std::shared_ptr<Component> m_capturedComponent;
+    std::shared_ptr<Component> m_capturedComponent = nullptr;
+    Component* m_hoveredComponent = nullptr;
 };
 
 } // namespace Beam

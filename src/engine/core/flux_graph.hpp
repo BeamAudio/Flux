@@ -275,7 +275,9 @@ public:
                             MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
                             if (ch) {
                                 route.gainPtr = &ch->gain;
+                                route.panPtr = &ch->pan;
                                 route.mutePtr = &ch->muted;
+                                route.soloPtr = &ch->solo;
                                 route.peakPtr = &ch->peakL;
                             }
                         }
@@ -297,7 +299,9 @@ public:
                             MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
                             if (ch) {
                                 route.gainPtr = &ch->gain;
+                                route.panPtr = &ch->pan;
                                 route.mutePtr = &ch->muted;
+                                route.soloPtr = &ch->solo;
                                 route.peakPtr = &ch->peakL;
                             }
                         }

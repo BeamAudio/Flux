@@ -65,7 +65,8 @@ public:
         if (m_flexChildren.empty()) return lines;
 
         bool isRow = m_config.direction == Direction::Row;
-        float maxMain = m_config.wrap ? ((isRow ? targetW : targetH) - m_config.padding * 2) : 1e10f;
+        float targetMain = isRow ? targetW : targetH;
+        float maxMain = m_config.wrap ? (std::max)(100.0f, targetMain - m_config.padding * 2) : 1e10f;
         
         lines.push_back(Line());
         float currentMain = 0;

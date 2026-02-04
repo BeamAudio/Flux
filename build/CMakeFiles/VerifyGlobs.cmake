@@ -1576,6 +1576,7 @@ set(OLD_GLOB
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_combined.c"
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_flydigi.c"
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_gamecube.c"
+  "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_gamesir.c"
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_gip.c"
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_lg4ff.c"
   "C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-src/src/joystick/hidapi/SDL_hidapi_luna.c"

@@ -32,6 +32,7 @@ public:
     void setMasterNodeId(size_t id);
     void updatePlan();
     
+    std::shared_ptr<RenderPlan> getActivePlan() { return m_activePlan.load(); }
     std::shared_ptr<FluxGraph> getGraph() { return m_graph; }
     std::shared_ptr<MasterNode> getMasterNode() { 
         if (m_graph) {
@@ -49,7 +50,12 @@ public:
     void rewind();
     void seek(size_t frame);
 
+    void setMuted(bool muted);
+    bool isMuted() const { return m_isMuted.load(); }
+
     size_t getCurrentFrame() const { return m_currentFrame.load(); }
+    
+    bool isProcessing() const { return m_isProcessing.load(); }
 
     void addAutomationLane(std::shared_ptr<AutomationLane> lane) {
         std::lock_guard<std::mutex> lock(m_automationMutex);
@@ -79,6 +85,7 @@ private:
     
     std::atomic<bool> m_isPlaying{false};
     std::atomic<bool> m_isMuted{false};
+    std::atomic<bool> m_isProcessing{false};
     bool m_lastPlaying{false};
     
     MixerState m_mixerState;

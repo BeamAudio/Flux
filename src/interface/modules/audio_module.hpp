@@ -47,6 +47,14 @@ public:
         setDraggable(true);
         setClipsChildren(false); 
         
+        m_bypassButton = std::make_shared<Button>("B");
+        m_bypassButton->setClickingTogglesState(true);
+        m_bypassButton->setToggleState(node->isBypassed());
+        m_bypassButton->onClick([this, node]() {
+            node->setBypassed(m_bypassButton->getToggleState());
+        });
+        addChildComponent(m_bypassButton);
+
         setBounds(x, y, 160, 100); 
         autoGenerateUI(); 
     }
@@ -57,9 +65,10 @@ public:
         if (!m_node) return;
         m_children.clear();
         
-        // Restore ports
+        // Restore ports and static UI
         for (auto& p : m_inputPorts) addChildComponent(p);
         for (auto& p : m_outputPorts) addChildComponent(p);
+        if (m_bypassButton) addChildComponent(m_bypassButton);
 
         // Create Context
         NodeEditorContext ctx;
@@ -139,6 +148,11 @@ public:
             if (onDeleteRequested) onDeleteRequested(this);
             return true;
         }
+
+        if (m_bypassBtnBounds.contains(localX, localY)) {
+            m_bypassButton->setToggleState(!m_bypassButton->getToggleState());
+            return true;
+        }
         
         // Pass original Parent Coords to base, it handles conversion
         return Component::onMouseDown(x, y, button, shift);
@@ -161,6 +175,11 @@ public:
         }
 
         m_deleteBtnBounds = {m_bounds.w - 25, 0, 25, HEADER_H};
+        m_bypassBtnBounds = {m_bounds.w - 50, 0, 25, HEADER_H};
+
+        if (m_bypassButton) {
+            m_bypassButton->setBounds(m_bypassBtnBounds.x + 2, 4, 20, 20);
+        }
 
         // Editor Content - use editor's PREFERRED size, not stretch to fill
         if (m_editorComponent) {
@@ -219,7 +238,9 @@ protected:
     std::vector<std::shared_ptr<Port>> m_inputPorts;
     std::vector<std::shared_ptr<Port>> m_outputPorts;
     std::shared_ptr<Component> m_editorComponent;
+    std::shared_ptr<Button> m_bypassButton;
     Rect m_deleteBtnBounds;
+    Rect m_bypassBtnBounds;
     AudioDeviceManager* m_deviceManager = nullptr;
     void* m_nativeWindowHandle = nullptr;
 

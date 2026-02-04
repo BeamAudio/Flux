@@ -664,6 +664,9 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gamecube.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gamesir.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gip.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>

@@ -65,46 +65,6 @@ public:
         return true;
     }
 
-    // Capture mouse events and offset them for content
-    bool onMouseDown(float x, float y, int button, bool shift) override {
-        if (!m_isVisible || !m_bounds.contains(x, y)) return false;
-        
-        if (m_content) {
-            // x, y are relative to our parent. 
-            // Content is at (0, -scrollY) relative to OUR (0,0).
-            // Our (0,0) is at (m_bounds.x, m_bounds.y) relative to parent.
-            float lx = x - m_bounds.x;
-            float ly = y - m_bounds.y;
-            
-            float cx = lx - m_content->getX();
-            float cy = ly - m_content->getY();
-            return m_content->onMouseDown(cx, cy, button, shift);
-        }
-        return true; 
-    }
-
-    bool onMouseUp(float x, float y, int button, bool shift) override {
-        if (m_content) {
-            float lx = x - m_bounds.x;
-            float ly = y - m_bounds.y;
-            float cx = lx - m_content->getX();
-            float cy = ly - m_content->getY();
-            return m_content->onMouseUp(cx, cy, button, shift);
-        }
-        return false;
-    }
-
-    bool onMouseMove(float x, float y, bool shift) override {
-        if (m_content) {
-            float lx = x - m_bounds.x;
-            float ly = y - m_bounds.y;
-            float cx = lx - m_content->getX();
-            float cy = ly - m_content->getY();
-            return m_content->onMouseMove(cx, cy, shift);
-        }
-        return false;
-    }
-
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
         if (!m_isVisible) return;
 

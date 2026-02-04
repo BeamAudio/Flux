@@ -39,10 +39,9 @@ public:
         stopPlaybackThread();
     }
 
-    void setTapeParams(float drive, float age, float pan = 0.5f) {
+    void setTapeParams(float drive, float age) {
         m_tapeDrive = drive;
         m_tapeAge = age;
-        m_pan = pan;
         m_wowFlutter.setIntensity(0.001f * age, 0.002f * age);
     }
 
@@ -145,10 +144,7 @@ public:
             m_lastProcessedFrame += frames;
         }
 
-        // 2. Apply Tape Physics & Panning
-        float panL = std::cos(m_pan * 1.57079f);
-        float panR = std::sin(m_pan * 1.57079f);
-
+        // 2. Apply Tape Physics
         for (int i = 0; i < frames; ++i) {
             m_wowFlutter.next(); 
             
@@ -160,9 +156,6 @@ public:
                     m_ageFilters[c].setCutoff(20000.0f - (m_tapeAge * 15000.0f), 44100.0f);
                     s = m_ageFilters[c].process(s);
                 }
-
-                // Apply Panning
-                s *= (c == 0) ? panL : panR;
             }
         }
     }
@@ -255,7 +248,6 @@ private:
     // Tape Physics
     float m_tapeDrive = 0.0f;
     float m_tapeAge = 0.0f;
-    float m_pan = 0.5f; // 0.0 = Left, 1.0 = Right
     AnalogBase::WowFlutterGenerator m_wowFlutter;
     AnalogBase::OnePoleFilter m_ageFilters[2]; // Stereo age filtering
 

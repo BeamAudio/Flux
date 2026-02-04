@@ -66,6 +66,28 @@ public:
     }
 
     /**
+     * @brief Adds interleaved stereo source to dest with gain and pan.
+     */
+    static void add_with_gain_pan(const float* src, float* dst, float gain, float panL, float panR, int frames) {
+        int i = 0;
+        __m128 vG = _mm_set1_ps(gain);
+        __m128 vP = _mm_set_ps(panR, panL, panR, panL);
+        __m128 vGP = _mm_mul_ps(vG, vP);
+
+        for (; i <= frames - 2; i += 2) {
+            __m128 vsrc = _mm_loadu_ps(src + i * 2);
+            __m128 vdst = _mm_loadu_ps(dst + i * 2);
+            __m128 vScaled = _mm_mul_ps(vsrc, vGP);
+            vdst = _mm_add_ps(vdst, vScaled);
+            _mm_storeu_ps(dst + i * 2, vdst);
+        }
+        for (; i < frames; ++i) {
+            dst[i * 2] += src[i * 2] * gain * panL;
+            dst[i * 2 + 1] += src[i * 2 + 1] * gain * panR;
+        }
+    }
+
+    /**
      * @brief Calculates the sum of squared differences for YIN algorithm.
      * sum((buffer[j] - buffer[j+tau])^2)
      */

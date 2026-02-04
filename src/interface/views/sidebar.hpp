@@ -4,201 +4,190 @@
 #include "interface/core/component.hpp"
 #include "interface/widgets/button.hpp"
 #include "interface/widgets/label.hpp"
-#include "interface/core/layout.hpp"
 #include "interface/core/theme.hpp"
 #include "interface/core/scrollable_container.hpp"
-#include "engine/dsp/flux_audio_utils.hpp"
-#include <functional>
-#include <string>
-#include <vector>
-
 #include "engine/plugins/plugin_registry.hpp"
-
-#include "interface/core/auto_flex_container.hpp"
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <memory>
 
 namespace Beam {
 
-class BeamHost;
-
+/**
+ * @class Sidebar
+ * @brief A high-reliability Sidebar implementation for Beam Audio Flux.
+ * Uses manual vertical layout and dynamic height calculation to ensure 
+ * visual stability and correct interaction handling.
+ */
 class Sidebar : public Component {
 public:
     enum class Side { Left, Right };
     enum class Mode { Browser, Inspector };
 
-    Sidebar(BeamHost* host, Side side) : m_host(host), m_side(side), m_category("NONE") {
+    Sidebar(class BeamHost* host, Side side) : m_side(side), m_category("NONE") {
         setName("Sidebar");
         
-        m_scrollContainer = std::make_shared<ScrollableContainer>();
+        // 1. Scrollable List Area
+        m_scroll = std::make_shared<ScrollableContainer>();
+        m_scroll->setName("SidebarScroll");
+        addChildComponent(m_scroll);
         
-        AutoFlexContainer::Config cfg;
-        cfg.direction = AutoFlexContainer::Direction::Column;
-        cfg.crossAlign = AutoFlexContainer::Alignment::Stretch;
-        cfg.padding = 15.0f;
-        cfg.gap = 8.0f;
-        
-        m_contentPane = std::make_shared<AutoFlexContainer>(cfg);
-        m_contentPane->setName("SidebarContent");
-        
-        m_scrollContainer->setContent(m_contentPane);
-        addChildComponent(m_scrollContainer);
+        m_content = std::make_shared<ContentPane>();
+        m_content->setName("SidebarContent");
+        m_scroll->setContent(m_content);
+
+        // 2. Header Area (Added last to be on top of list if they overlap)
+        m_header = std::make_shared<Component>();
+        m_header->setName("SidebarHeader");
+        addChildComponent(m_header);
+
+        m_title = std::make_shared<Label>("PLUGIN BROWSER");
+        m_title->setFontSize(12);
+        m_title->setColor(Theme::White);
+        m_header->addChildComponent(m_title);
 
         rebuildUI();
 
-        PluginRegistry::get().onRegistryChanged = [this]() {
-            m_needsRebuild = true; 
-        };
+        PluginRegistry::get().onRegistryChanged = [this]() { m_needsRebuild = true; };
     }
 
     void update(float dt) override {
-        if (m_needsRebuild) {
-            m_needsRebuild = false;
-            rebuildUI();
-            if (getParent()) getParent()->resized();
-        }
+        if (m_needsRebuild) { m_needsRebuild = false; rebuildUI(); }
         Component::update(dt);
     }
 
     void setCategory(const std::string& cat) {
         m_category = cat;
-        if (m_scrollContainer) m_scrollContainer->scrollToTop();
+        if (m_scroll) m_scroll->scrollToTop();
         rebuildUI();
-        if (getParent()) getParent()->resized();
-        resized();
     }
 
     void setMode(Mode mode) {
         if (m_mode == mode) return;
         m_mode = mode;
-        if (m_scrollContainer) m_scrollContainer->scrollToTop();
+        m_category = "NONE";
+        if (m_scroll) m_scroll->scrollToTop();
         rebuildUI();
     }
 
     void rebuildUI() {
-        m_buttons.clear();
-        m_backBtn = nullptr;
-
-        auto flex = std::dynamic_pointer_cast<AutoFlexContainer>(m_contentPane);
-        if (flex) {
-            auto& cfg = flex->getConfig();
-            cfg.direction = AutoFlexContainer::Direction::Column;
-            cfg.crossAlign = AutoFlexContainer::Alignment::Stretch;
-            cfg.padding = 15.0f;
-            cfg.gap = 8.0f;
-            cfg.wrap = false; 
-            cfg.preferredWidth = 220.0f;
-            
-            flex->clearFlexChildren();
-        }
+        m_content->clearChildren();
         
-        // Ensure scroll container is a child (usually already is, but safety first)
-        bool alreadyChild = false;
-        for (const auto& c : m_children) if (c == m_scrollContainer) { alreadyChild = true; break; }
-        if (!alreadyChild && m_scrollContainer) addChildComponent(m_scrollContainer);
-
-        if (m_side != Side::Left) return;
-
-        std::cout << "[Sidebar] Rebuilding UI for category: " << m_category << std::endl;
-
         if (m_mode == Mode::Inspector) {
-            auto title = std::make_shared<Label>("INSPECTOR");
-            title->setFontSize(20);
-            title->setColor({0.13f, 0.62f, 0.42f, 1.0f}); 
-            if (flex) flex->addFlexChild(title);
-        } 
-        else {
-            std::string titleText = (m_category == "NONE") ? "LIBRARY" : "< " + m_category;
-            m_backBtn = std::make_shared<TextButton>(titleText);
-            m_backBtn->onClick([this]() {
-                if (m_category != "NONE") {
-                    std::cout << "[Sidebar] Navigating back to LIBRARY" << std::endl;
-                    setCategory("NONE");
-                }
-            });
-            if (flex) flex->addFlexChild(m_backBtn);
+            m_title->setText("INSPECTOR");
+            auto msg = std::make_shared<Label>("NO SELECTION");
+            msg->setFontSize(10);
+            msg->setColor({0.4f, 0.4f, 0.4f, 1.0f});
+            m_content->addChildComponent(msg);
+        } else {
+            m_title->setText(m_category == "NONE" ? "PLUGIN BROWSER" : m_category);
+            
+            if (m_category != "NONE") {
+                auto back = std::make_shared<TextButton>("< BACK TO LIBRARY");
+                back->onClick([this]() { setCategory("NONE"); });
+                m_content->addChildComponent(back);
+            }
 
             const auto& allPlugins = PluginRegistry::get().getAvailablePlugins();
             std::vector<std::string> items;
-            
             if (m_category == "NONE") {
-                std::vector<std::string> cats;
                 for (const auto& name : allPlugins) {
                     std::string c = PluginRegistry::get().getPluginCategory(name);
-                    bool found = false;
-                    for (const auto& existing : cats) if(existing == c) { found = true; break; }
-                    if (!found) cats.push_back(c);
+                    if (std::find(items.begin(), items.end(), c) == items.end()) items.push_back(c);
                 }
-                items = cats;
-                std::sort(items.begin(), items.end());
-                std::cout << "[Sidebar] Found " << items.size() << " categories." << std::endl;
             } else {
                 for (const auto& name : allPlugins) {
-                    if (PluginRegistry::get().getPluginCategory(name) == m_category) {
-                        items.push_back(name);
-                    }
+                    if (PluginRegistry::get().getPluginCategory(name) == m_category) items.push_back(name);
                 }
-                std::sort(items.begin(), items.end());
-                std::cout << "[Sidebar] Found " << items.size() << " plugins in category " << m_category << std::endl;
             }
+            std::sort(items.begin(), items.end());
 
-            for (const auto& item : items) {
-                auto btn = std::make_shared<TextButton>(item);
+            for (const auto& name : items) {
+                auto btn = std::make_shared<TextButton>(name);
                 if (m_category == "NONE") {
-                    btn->onClick([this, item]() { 
-                        std::cout << "[Sidebar] Category clicked: " << item << std::endl;
-                        setCategory(item); 
-                    });
+                    btn->onClick([this, name]() { setCategory(name); });
                 } else {
-                    btn->onClick([this, item]() { 
-                        std::cout << "[Sidebar] Plugin clicked: " << item << std::endl;
-                        if (onAddFX) onAddFX(item); 
-                    });
+                    btn->onClick([this, name]() { if (onAddFX) onAddFX(name); });
                 }
-                if (flex) flex->addFlexChild(btn);
-                m_buttons.push_back(btn);
+                m_content->addChildComponent(btn);
             }
         }
-        std::cout.flush();
         resized();
     }
 
     void resized() override {
-        if (m_side != Side::Left) return;
-        m_scrollContainer->setBounds(0, 50, m_bounds.w, m_bounds.h - 50);
-        m_scrollContainer->updateContentBounds();
-    }
+        float hH = 42.0f;
+        m_header->setBounds(0, 0, m_bounds.w, hH);
+        m_title->setBounds(15, 13, m_bounds.w - 30, 16);
 
-    void paint(QuadBatcher& batcher) override {
-        batcher.drawGradientRect(0, 0, m_bounds.w, m_bounds.h, 
-                                Theme::Bakelite.r, Theme::Bakelite.g, Theme::Bakelite.b, 1.0f,
-                                Theme::Bakelite.brighter(0.1f).r, Theme::Bakelite.brighter(0.1f).g, Theme::Bakelite.brighter(0.1f).b, 1.0f);
-        
-        if (m_side == Side::Left) {
-             batcher.drawQuad(m_bounds.w - 4, 0, 4, m_bounds.h, 0.0f, 0.0f, 0.0f, 0.3f);
-             batcher.drawQuad(m_bounds.w - 1, 0, 1, m_bounds.h, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.4f);
+        m_scroll->setBounds(0, hH, m_bounds.w, m_bounds.h - hH);
+
+        // Manual Vertical Layout
+        float y = 8.0f;
+        float itemH = 26.0f;
+        float gap = 2.0f;
+
+        for (auto& child : m_content->getChildren()) {
+            if (std::dynamic_pointer_cast<Label>(child)) {
+                child->setBounds(15, y, m_bounds.w - 30, 16);
+                y += 16 + gap;
+            } else {
+                child->setBounds(5, y, m_bounds.w - 15, itemH);
+                y += itemH + gap;
+            }
         }
         
-        batcher.drawQuad(0, 0, m_bounds.w, 50, 0.0f, 0.0f, 0.0f, 0.2f);
+        // Update content bounds and trigger scroll recalculation
+        m_scroll->updateContentBounds();
+    }
+
+    void paint(QuadBatcher& g) override {
+        // Main Background
+        g.drawQuad(0, 0, m_bounds.w, m_bounds.h, 0.07f, 0.07f, 0.08f, 1.0f);
+        
+        // Header Visual Finish
+        g.drawQuad(0, 0, m_bounds.w, 42, 0.03f, 0.03f, 0.04f, 1.0f);
+        g.drawQuad(0, 41, m_bounds.w, 1, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.25f);
+        
+        if (m_side == Side::Left) {
+            // Right-side vertical separator
+            g.drawQuad(m_bounds.w - 1, 0, 1, m_bounds.h, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.12f);
+        }
     }
 
     std::function<void(std::string)> onAddFX;
 
 private:
-    BeamHost* m_host;
+    /**
+     * @class ContentPane
+     * @brief A specialized component that calculates its own preferred height 
+     * based on its children's positions.
+     */
+    class ContentPane : public Component {
+    public:
+        void getPreferredSize(float& w, float& h) const override {
+            w = m_bounds.w;
+            float maxY = 0;
+            for (const auto& child : m_children) {
+                float bottom = child->getY() + child->getHeight();
+                if (bottom > maxY) maxY = bottom;
+            }
+            h = maxY + 12.0f; 
+        }
+    };
+
     Side m_side;
     Mode m_mode = Mode::Browser;
     std::string m_category;
     bool m_needsRebuild = false;
-    std::shared_ptr<ScrollableContainer> m_scrollContainer;
-    std::shared_ptr<Component> m_contentPane;
-    std::shared_ptr<TextButton> m_backBtn;
-    std::vector<std::shared_ptr<TextButton>> m_buttons;
+    
+    std::shared_ptr<Component> m_header;
+    std::shared_ptr<Label> m_title;
+    std::shared_ptr<ScrollableContainer> m_scroll;
+    std::shared_ptr<Component> m_content;
 };
 
 } // namespace Beam
 
-#endif // SIDEBAR_HPP
-
-
-
-
-
+#endif

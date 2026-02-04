@@ -4468,6 +4468,24 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/RelWithDebInfo//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gamesir.c">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Release/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/Release//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/MinSizeRel/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/MinSizeRel//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/RelWithDebInfo/cmake_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/SDL3-static.dir/RelWithDebInfo//cmake_pch.c.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gip.c">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/Alexi/Documents/Beam Audio Flux/build/_deps/sdl3-build/CMakeFiles/SDL3-static.dir/Debug/cmake_pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>

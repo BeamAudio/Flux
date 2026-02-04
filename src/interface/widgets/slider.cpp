@@ -96,6 +96,15 @@ static double getSliderValueFromPos(float x, float y, const Rect& bounds, Slider
 }
 
 void Slider::mouseDown(const MouseEvent& event) {
+    uint64_t now = SDL_GetTicks();
+    if (now - m_lastClickTime < 300) {
+        // Double Click Detected -> Reset
+        setValue(m_defaultResetValue);
+        m_lastClickTime = 0; // Prevent triple-click reset chain
+        return;
+    }
+    m_lastClickTime = now;
+
     m_dragStartX = event.x;
     m_dragStartY = event.y;
     m_dragStartValue = getValue();
@@ -112,6 +121,8 @@ void Slider::mouseDown(const MouseEvent& event) {
 }
 
 void Slider::mouseDrag(const MouseEvent& event) {
+    if (m_lastClickTime == 0) return; // Ignore drag if we just double-clicked to reset
+
     auto bounds = getBounds();
     
     if (!event.shiftDown && m_style != SliderStyle::Rotary) {
@@ -168,6 +179,7 @@ void Slider::setParameter(std::shared_ptr<Parameter> parameter) {
         m_min = m_parameter->getMin();
         m_max = m_parameter->getMax();
         m_value = m_parameter->getValue();
+        m_defaultResetValue = m_parameter->getInitialValue();
         
         // Listen for updates from automation/engine
         m_parameter->addListener([this](float val) {

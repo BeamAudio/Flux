@@ -14,6 +14,7 @@ C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\session\parameter_queue.cpp;
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\component.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\component.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\input_handler.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\input_handler.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\look_and_feel.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\look_and_feel.obj
+C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\autotune_editor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\autotune_editor.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\filter_editor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\filter_editor.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\spectrum_module.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\spectrum_module.obj
 C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\vst_external_editor.cpp;C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.dir\Release\vst_external_editor.obj

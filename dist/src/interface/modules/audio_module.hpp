@@ -6,6 +6,7 @@
 #include "interface/widgets/button.hpp"
 #include "interface/core/layout.hpp"
 #include "interface/editors/generic_node_editor.hpp"
+#include "interface/editors/vst_external_editor.hpp"
 #include "engine/core/flux_node.hpp"
 #include "engine/core/audio_device_manager.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
@@ -22,8 +23,8 @@ namespace Beam {
  */
 class AudioModule : public Component {
 public:
-    AudioModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y, AudioDeviceManager* deviceManager = nullptr) 
-        : m_node(node), m_nodeId(nodeId), m_deviceManager(deviceManager) {
+    AudioModule(std::shared_ptr<FluxNode> node, size_t nodeId, float x, float y, AudioDeviceManager* deviceManager = nullptr, void* nativeWindowHandle = nullptr) 
+        : m_node(node), m_nodeId(nodeId), m_deviceManager(deviceManager), m_nativeWindowHandle(nativeWindowHandle) {
         
         setName(node->getName());
 
@@ -46,6 +47,14 @@ public:
         setDraggable(true);
         setClipsChildren(false); 
         
+        m_bypassButton = std::make_shared<Button>("B");
+        m_bypassButton->setClickingTogglesState(true);
+        m_bypassButton->setToggleState(node->isBypassed());
+        m_bypassButton->onClick([this, node]() {
+            node->setBypassed(m_bypassButton->getToggleState());
+        });
+        addChildComponent(m_bypassButton);
+
         setBounds(x, y, 160, 100); 
         autoGenerateUI(); 
     }
@@ -56,13 +65,15 @@ public:
         if (!m_node) return;
         m_children.clear();
         
-        // Restore ports
+        // Restore ports and static UI
         for (auto& p : m_inputPorts) addChildComponent(p);
         for (auto& p : m_outputPorts) addChildComponent(p);
+        if (m_bypassButton) addChildComponent(m_bypassButton);
 
         // Create Context
         NodeEditorContext ctx;
         ctx.deviceManager = m_deviceManager;
+        ctx.nativeWindowHandle = m_nativeWindowHandle;
 
         m_editorComponent = m_node->createEditor(ctx);
 
@@ -74,6 +85,10 @@ public:
             // Adaptive: Allow editor to grow
             m_editorComponent->setClipsChildren(false); 
             addChildComponent(m_editorComponent);
+            
+            if (auto vstEditor = std::dynamic_pointer_cast<VSTExternalEditor>(m_editorComponent)) {
+                vstEditor->attachToNative((HWND)m_nativeWindowHandle);
+            }
             
             // Auto-size the editor based on its own preferred content
             m_editorComponent->autoSize(true);
@@ -133,6 +148,11 @@ public:
             if (onDeleteRequested) onDeleteRequested(this);
             return true;
         }
+
+        if (m_bypassBtnBounds.contains(localX, localY)) {
+            m_bypassButton->setToggleState(!m_bypassButton->getToggleState());
+            return true;
+        }
         
         // Pass original Parent Coords to base, it handles conversion
         return Component::onMouseDown(x, y, button, shift);
@@ -155,6 +175,11 @@ public:
         }
 
         m_deleteBtnBounds = {m_bounds.w - 25, 0, 25, HEADER_H};
+        m_bypassBtnBounds = {m_bounds.w - 50, 0, 25, HEADER_H};
+
+        if (m_bypassButton) {
+            m_bypassButton->setBounds(m_bypassBtnBounds.x + 2, 4, 20, 20);
+        }
 
         // Editor Content - use editor's PREFERRED size, not stretch to fill
         if (m_editorComponent) {
@@ -213,8 +238,11 @@ protected:
     std::vector<std::shared_ptr<Port>> m_inputPorts;
     std::vector<std::shared_ptr<Port>> m_outputPorts;
     std::shared_ptr<Component> m_editorComponent;
+    std::shared_ptr<Button> m_bypassButton;
     Rect m_deleteBtnBounds;
+    Rect m_bypassBtnBounds;
     AudioDeviceManager* m_deviceManager = nullptr;
+    void* m_nativeWindowHandle = nullptr;
 
 private:
     size_t m_nodeId;

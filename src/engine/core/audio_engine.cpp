@@ -148,6 +148,18 @@ float* AudioEngine::process(int frames) {
     }
 
     if (plan) {
+        // --- Mixer Global Pre-scan ---
+        bool anySolo = false;
+        for (auto const& execScan : plan->sequence) {
+            for (auto const& routeScan : execScan.outgoingRoutes) {
+                if (routeScan.soloPtr && routeScan.soloPtr->load(std::memory_order_relaxed)) {
+                    anySolo = true;
+                    break;
+                }
+            }
+            if (anySolo) break;
+        }
+
         for (int bIdx : plan->clearBufferIndices) {
             if (bIdx >= 0 && bIdx < (int)plan->bufferPool.size()) {
                 auto& buf = plan->bufferPool[bIdx];
@@ -158,6 +170,8 @@ float* AudioEngine::process(int frames) {
         static float paramCache[4096]; // Increased for safety
 
         for (auto& exec : plan->sequence) {
+            if (exec.processor) exec.processor->setCurrentFrame(current);
+
             size_t pCount = exec.parameterPointers.size();
             for (size_t i = 0; i < pCount && i < 4096; ++i) {
                 if (exec.parameterPointers[i])
@@ -191,12 +205,21 @@ float* AudioEngine::process(int frames) {
             if (exec.processor) exec.processor->process(inputs, outputs, frames);
 
             for (auto& route : exec.outgoingRoutes) {
-                if (route.mutePtr && route.mutePtr->load(std::memory_order_relaxed)) {
+                bool isMuted = route.mutePtr && route.mutePtr->load(std::memory_order_relaxed);
+                bool isSoloed = route.soloPtr && route.soloPtr->load(std::memory_order_relaxed);
+                
+                // If any channel is soloed, this channel is audible ONLY if it is also soloed.
+                // Otherwise (no solo active), it is audible if not muted.
+                bool isAudible = anySolo ? isSoloed : !isMuted;
+
+                if (!isAudible) {
                     if (route.peakPtr) route.peakPtr->store(0.0f, std::memory_order_relaxed);
                     continue; 
                 }
                 
                 float gain = route.gainPtr ? route.gainPtr->load(std::memory_order_relaxed) : 1.0f;
+                float pan = route.panPtr ? route.panPtr->load(std::memory_order_relaxed) : 0.5f;
+                
                 int srcIdx = route.sourceBufferIdx;
                 int dstIdx = route.destBufferIdx;
 
@@ -216,11 +239,12 @@ float* AudioEngine::process(int frames) {
                     route.peakPtr->store(peak, std::memory_order_relaxed);
                 }
                 
-                if (gain == 1.0f) {
-                    SIMD::add(dst, src, total);
-                } else if (gain > 0.0f) {
-                    SIMD::add_with_gain(src, dst, gain, total);
-                }
+                // Apply gain and constant-power panning
+                float p = pan * 1.570796f;
+                float panL = std::cos(p);
+                float panR = std::sin(p);
+
+                SIMD::add_with_gain_pan(src, dst, gain, panL, panR, frames);
             }
         }
 

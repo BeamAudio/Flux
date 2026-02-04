@@ -91,106 +91,125 @@ public:
     }
 
     void deserialize(const nlohmann::json& data) {
-        if (data.contains("name")) m_name = data["name"];
+        if (data.empty()) return;
+
+        if (data.contains("name")) m_name = data["name"].get<std::string>();
         m_visuals.clear();
-        if (data.contains("visuals")) m_visuals = data["visuals"]; // Restore map
+        if (data.contains("visuals")) m_visuals = data["visuals"];
 
         // Rebuild Graph
         m_graph->clear();
         m_tracks.clear();
         
-
-        
         if (data.contains("graph")) {
-            auto& gData = data["graph"];
+            auto const& gData = data["graph"];
             
             // 1. Restore Nodes
-            for (const auto& nData : gData["nodes"]) {
-                size_t id = nData["id"];
-                std::string name = nData["name"];
-                std::string type = nData.value("type", "Effect"); 
-                
-                std::shared_ptr<FluxNode> newNode;
-                
-                if (type == "FluxTrackNode") {
-                     std::string path = nData.value("audioFilePath", "");
-                     auto track = std::make_shared<FluxTrackNode>(name, 4096);
-                     if (!path.empty()) track->load(path);
-                     newNode = track;
-                } else if (type == "FluxScriptNode") {
-                     std::string scriptPath = nData.value("scriptPath", "");
-                     if (!scriptPath.empty()) {
-                         newNode = std::make_shared<FluxScriptNode>(scriptPath, 4096, 44100.0f);
-                     }
-                } else if (name == "Master") {
-                     newNode = std::make_shared<MasterNode>(4096);
-                } else {
-                    newNode = PluginRegistry::get().createPlugin(name, 4096, 44100);
-                }
-                
-                if (newNode) {
-                    newNode->deserialize(nData);
-                    m_graph->addNodeWithId(newNode, id);
-                    std::cout << "[Deserialize] Restored Node: " << name << " ID: " << id << std::endl;
-                } else {
-                    std::cout << "[Deserialize] Warning: Could not restore node type: " << name << std::endl;
+            if (gData.contains("nodes")) {
+                for (const auto& nData : gData["nodes"]) {
+                    if (!nData.contains("id") || !nData.contains("name")) continue;
+
+                    size_t id = nData["id"];
+                    std::string name = nData["name"];
+                    std::string type = nData.value("type", "Effect"); 
+                    
+                    std::shared_ptr<FluxNode> newNode;
+                    
+                    try {
+                        if (type == "FluxTrackNode") {
+                             std::string path = nData.value("audioFilePath", "");
+                             auto track = std::make_shared<FluxTrackNode>(name, 4096);
+                             if (!path.empty()) track->load(path);
+                             newNode = track;
+                        } else if (type == "FluxScriptNode") {
+                             std::string scriptPath = nData.value("scriptPath", "");
+                             if (!scriptPath.empty()) {
+                                 newNode = std::make_shared<FluxScriptNode>(scriptPath, 4096, 44100.0f);
+                             }
+                        } else if (name == "Master") {
+                             newNode = std::make_shared<MasterNode>(4096);
+                        } else {
+                            newNode = PluginRegistry::get().createPlugin(name, 4096, 44100);
+                        }
+                        
+                        if (newNode) {
+                            newNode->deserialize(nData);
+                            m_graph->addNodeWithId(newNode, id);
+                            std::cout << "[Deserialize] Restored Node: " << name << " ID: " << id << std::endl;
+                        } else {
+                            std::cerr << "[Deserialize] Warning: Could not restore node type: " << name << std::endl;
+                        }
+                    } catch (const std::exception& e) {
+                        std::cerr << "[Deserialize] Error restoring node " << name << ": " << e.what() << std::endl;
+                    }
                 }
             }
             std::cout << "[Deserialize] Total Nodes Restored: " << m_graph->getNodes().size() << std::endl;
             
-            // 2. Restore Connections (Direct ID usage)
-            for (const auto& cData : gData["connections"]) {
-                m_graph->connect(cData["srcId"], cData["srcPort"], cData["dstId"], cData["dstPort"]);
+            // 2. Restore Connections
+            if (gData.contains("connections")) {
+                for (const auto& cData : gData["connections"]) {
+                    if (cData.contains("srcId") && cData.contains("dstId")) {
+                        m_graph->connect(cData["srcId"], cData["srcPort"], cData["dstId"], cData["dstPort"]);
+                    }
+                }
             }
         }
         
         // Restore Tracks Metadata
         if (data.contains("tracks")) {
             for (const auto& tData : data["tracks"]) {
+                if (!tData.contains("nodeId")) continue;
+
                 size_t nodeId = tData["nodeId"];
-                // Verify node exists
-                if (!m_graph->getNode(nodeId)) continue;
+                auto node = m_graph->getNode(nodeId);
+                if (!node) continue;
 
                 TrackData td;
                 td.nodeId = nodeId;
-                td.node = std::dynamic_pointer_cast<FluxTrackNode>(m_graph->getNode(td.nodeId));
-                td.trackIndex = tData["trackIndex"];
+                td.node = std::dynamic_pointer_cast<FluxTrackNode>(node);
+                td.trackIndex = tData.value("trackIndex", 0);
                 
                 // Regions
-                for (const auto& rData : tData["regions"]) {
-                    Region r;
-                    r.name = rData["name"];
-                    r.startFrame = rData["start"];
-                    r.duration = rData["duration"];
-                    r.sourceOffset = rData["offset"];
-                    r.trackIndex = rData["trackIdx"];
-                    // Peak data generation would happen here (async) or we rely on TrackNode to reload file
-                    // If TrackNode loaded file, it has peaks.
-                    if (td.node) r.channelPeaks = td.node->getPeakData(400); 
-                    td.regions.push_back(r);
+                if (tData.contains("regions")) {
+                    for (const auto& rData : tData["regions"]) {
+                        Region r;
+                        r.name = rData.value("name", "Region");
+                        r.startFrame = rData.value("start", (size_t)0);
+                        r.duration = rData.value("duration", (size_t)0);
+                        r.sourceOffset = rData.value("offset", (size_t)0);
+                        r.trackIndex = rData.value("trackIdx", 0);
+                        
+                        if (td.node) {
+                            r.channelPeaks = td.node->getPeakData(400); 
+                        }
+                        td.regions.push_back(r);
+                    }
                 }
 
                 // Automation
                 if (tData.contains("automation") && td.node) {
                      for (const auto& lData : tData["automation"]) {
+                         if (!lData.contains("paramName")) continue;
                          std::string pName = lData["paramName"];
                          if (auto p = td.node->getParameter(pName)) {
                              auto lane = std::make_shared<AutomationLane>(p);
-                             for (const auto& pt : lData["points"]) {
-                                 lane->addPoint(pt["f"], pt["v"]);
+                             if (lData.contains("points")) {
+                                 for (const auto& pt : lData["points"]) {
+                                     lane->addPoint(pt.value("f", (size_t)0), pt.value("v", 0.0f));
+                                 }
                              }
                              td.automationLanes.push_back(lane);
                          }
                      }
                 }
 
+                if (td.node) {
+                    td.node->setRegions(td.regions);
+                }
+
                 m_tracks.push_back(td);
             }
-        }
-
-        // Remap Visuals
-        if (data.contains("visuals")) {
-             m_visuals = data["visuals"];
         }
     }
 

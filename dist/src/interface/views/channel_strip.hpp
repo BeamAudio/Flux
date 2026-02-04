@@ -28,9 +28,8 @@ public:
         // --- Panning ---
         m_panKnob = std::make_shared<Knob>("PAN", 0.0f, 1.0f, 0.5f);
         m_panKnob->setStyle(Theme::KnobStyle::ModernColored);
-        if (m_node) {
-            if (auto p = m_node->getParameter("Pan")) m_panKnob->bindParameter(p);
-        }
+        // Note: We don't bind to node parameter here anymore, 
+        // we sync manually in render() to the MixChannel state.
         addChildComponent(m_panKnob);
 
         // --- Sends ---
@@ -61,6 +60,7 @@ public:
         m_fader = std::make_shared<Slider>(m_gainParam);
         m_fader->setSliderStyle(SliderStyle::LinearVertical);
         m_fader->setRange(-60.0f, 6.0f);
+        m_fader->setDefaultResetValue(0.0); // Reset to 0dB (unity)
         m_fader->setName("Fader");
         addChildComponent(m_fader);
         
@@ -130,12 +130,18 @@ public:
     }
     
     void render(QuadBatcher& batcher, float dt, float screenW, float screenH) override {
-        // Bidirectional sync between Parameter and atomic
-        if (m_mixChannel && m_gainParam) {
-            // Write parameter value to atomic (user is dragging the fader)
-            float db = m_gainParam->getValue();
-            float linear = (db <= -60.0f) ? 0.0f : std::pow(10.0f, db / 20.0f);
-            m_mixChannel->gain.store(linear, std::memory_order_relaxed);
+        // Bidirectional sync between Parameter/UI and atomic
+        if (m_mixChannel) {
+            if (m_gainParam) {
+                // Write parameter value to atomic (user is dragging the fader)
+                float db = m_gainParam->getValue();
+                float linear = (db <= -60.0f) ? 0.0f : std::pow(10.0f, db / 20.0f);
+                m_mixChannel->gain.store(linear, std::memory_order_relaxed);
+            }
+
+            if (m_panKnob) {
+                m_mixChannel->pan.store(m_panKnob->getValue(), std::memory_order_relaxed);
+            }
             
             // Update button visuals
             m_muteButton->setToggleState(m_mixChannel->muted.load(std::memory_order_relaxed), false);

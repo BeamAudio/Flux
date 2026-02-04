@@ -356,15 +356,30 @@ void ModernLookAndFeel::drawButtonBackground(QuadBatcher& g, Button& button,
     auto bounds = button.getBounds();
     bool toggled = button.getToggleState();
     
-    // Flat Modern Look
-    float r = 0.12f, gr = 0.12f, b = 0.14f; // Very dark blue-grey
-    if (toggled) { r = 0.0f; gr = 0.6f; b = 0.8f; } // Neon Blue
+    // List Item Heuristic: Short height buttons in the sidebar context
+    bool isListItem = (bounds.h < 32.0f);
+
+    if (isListItem) {
+        float alpha = isMouseOver ? 0.12f : 0.0f;
+        if (isButtonDown) alpha = 0.25f;
+        
+        if (alpha > 0) {
+            g.drawQuad(0, 0, bounds.w, bounds.h, 1.0f, 1.0f, 1.0f, alpha);
+        }
+        
+        // Very subtle bottom separator
+        g.drawQuad(0, bounds.h - 1, bounds.w, 1, 1.0f, 1.0f, 1.0f, 0.04f);
+        return;
+    }
+
+    // Standard High-Performance Widget Look
+    float r = 0.12f, gr = 0.12f, b = 0.14f; 
+    if (toggled) { r = 0.0f; gr = 0.6f; b = 0.8f; } 
     else if (isButtonDown) { r = 0.08f; gr = 0.08f; b = 0.1f; }
     else if (isMouseOver) { r = 0.18f; gr = 0.18f; b = 0.22f; }
 
     g.drawRoundedRect(0, 0, bounds.w, bounds.h, 4.0f, 0.5f, r, gr, b, 1.0f);
     
-    // Subtle border
     if (isMouseOver && !toggled)
         g.drawRoundedRect(0, 0, bounds.w, bounds.h, 4.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.1f);
 }
@@ -373,14 +388,16 @@ void ModernLookAndFeel::drawButtonText(QuadBatcher& g, Button& button,
                                       bool isMouseOver, bool isButtonDown) {
     auto bounds = button.getBounds();
     const auto& text = button.getButtonText();
-    float tw = AudioUtils::calculateTextWidth(text, 12.0f);
-    float th = 12.0f;
+    float tw = AudioUtils::calculateTextWidth(text, 11.0f);
+    float th = 11.0f;
     
-    float tx = (bounds.w - tw) * 0.5f;
+    bool isListItem = (bounds.h < 32.0f);
+    float tx = isListItem ? 12.0f : (bounds.w - tw) * 0.5f;
     float ty = (bounds.h - th) * 0.5f;
     if (isButtonDown) ty += 1.0f;
 
-    g.drawText(text, tx, ty, 12.0f, 1.0f, 1.0f, 1.0f, (button.isEnabled() ? 1.0f : 0.4f));
+    float alpha = (button.isEnabled() ? (isMouseOver ? 1.0f : 0.85f) : 0.4f);
+    g.drawText(text, tx, ty, 11.0f, 1.0f, 1.0f, 1.0f, alpha);
 }
 
 void ModernLookAndFeel::drawSliderBackground(QuadBatcher& g, Slider& slider, 
@@ -391,8 +408,16 @@ void ModernLookAndFeel::drawSliderBackground(QuadBatcher& g, Slider& slider,
         float trackW = 4.0f;
         float trackX = (bounds.w - trackW) / 2.0f;
         g.drawRoundedRect(trackX, 0, trackW, bounds.h, 2.0f, 0.5f, 0.05f, 0.05f, 0.07f, 1.0f);
+
+        // 0dB Tick Mark (70% height)
+        float tickY = bounds.h * 0.3f; // 1.0 - 0.7 = 0.3 (from top)
+        g.drawQuad(0, tickY, bounds.w, 1, 1.0f, 1.0f, 1.0f, 0.3f);
     } else {
         g.drawRoundedRect(0, 0, bounds.w, bounds.h, 2.0f, 0.5f, 0.05f, 0.05f, 0.07f, 1.0f);
+
+        // 0dB Tick Mark (70% width)
+        float tickX = bounds.w * 0.7f;
+        g.drawQuad(tickX, 0, 1, bounds.h, 1.0f, 1.0f, 1.0f, 0.3f);
     }
 }
 
@@ -566,16 +591,6 @@ void ModernLookAndFeel::drawLuminousMeter(QuadBatcher& g, LuminousMeter& meter, 
             // Vertical: draw from bottom up
             float yPos = b.h - 2 - segStart - segmentSize;
             g.drawRoundedRect(2, yPos, b.w - 4, segmentSize, 1.5f, 0.5f, r, gr, bl, alpha);
-        }
-    }
-    
-    // Glow overlay for lit segments (subtle)
-    if (level > 0.01f) {
-        float fillSize = mainSize * std::clamp(level, 0.0f, 1.0f);
-        if (isHorizontal) {
-            g.drawRoundedRect(2, 0, fillSize - 4, b.h, 2.0f, 0.5f, 1.0f, 1.0f, 1.0f, 0.05f);
-        } else {
-            g.drawRoundedRect(0, b.h - fillSize, b.w, fillSize - 4, 2.0f, 0.5f, 1.0f, 1.0f, 1.0f, 0.05f);
         }
     }
 }

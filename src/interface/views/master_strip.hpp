@@ -34,6 +34,7 @@ public:
         
         m_gainSlider = std::make_shared<Slider>();
         m_gainSlider->setSliderStyle(SliderStyle::LinearVertical);
+        m_gainSlider->setDefaultResetValue(1.0); // Reset to 0dB (unity)
         // Custom Harrison Fader Cap color
         m_gainSlider->setClipsChildren(false);
 
