@@ -86,9 +86,7 @@ public:
             m_editorComponent->setClipsChildren(false); 
             addChildComponent(m_editorComponent);
             
-            if (auto vstEditor = std::dynamic_pointer_cast<VSTExternalEditor>(m_editorComponent)) {
-                vstEditor->attachToNative((HWND)m_nativeWindowHandle);
-            }
+            // VSTExternalEditor has its own Open/Close button - no auto-open needed
             
             // Auto-size the editor based on its own preferred content
             m_editorComponent->autoSize(true);
@@ -150,12 +148,19 @@ public:
         }
 
         if (m_bypassBtnBounds.contains(localX, localY)) {
-            m_bypassButton->setToggleState(!m_bypassButton->getToggleState());
+            if (m_node) {
+                bool newState = !m_node->isBypassed();  // Read from node (source of truth)
+                m_node->setBypassed(newState);
+                m_bypassButton->setToggleState(newState);  // Sync UI
+            }
             return true;
         }
         
         // Pass original Parent Coords to base, it handles conversion
-        return Component::onMouseDown(x, y, button, shift);
+        std::cout << "[AudioModule] onMouseDown (" << x << "," << y << ") Local(" << localX << "," << localY << ")" << std::endl;
+        bool result = Component::onMouseDown(x, y, button, shift);
+        std::cout << "[AudioModule] Component::onMouseDown returned: " << (result ? "TRUE" : "FALSE") << std::endl;
+        return result;
     }
 
     void resized() override {
@@ -229,6 +234,21 @@ public:
             if (p->getType() == PortType::Sidechain) return p;
         }
         return nullptr;
+    }
+
+    // Cleanup method to close any VST editor windows before destruction
+    void cleanup() {
+        if (auto vstEditor = std::dynamic_pointer_cast<VSTExternalEditor>(m_editorComponent)) {
+            vstEditor->closeWindow();
+        }
+        m_editorComponent.reset();
+    }
+
+    // Hide VST editor windows without destroying them - safe for file dialog scenarios
+    void hideVSTEditor() {
+        if (auto vstEditor = std::dynamic_pointer_cast<VSTExternalEditor>(m_editorComponent)) {
+            vstEditor->hideWindow();
+        }
     }
 
     std::function<void(AudioModule*)> onDeleteRequested;

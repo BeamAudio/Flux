@@ -3,6 +3,7 @@
 #include "engine/nodes/input_node.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
 #include "engine/dsp/garbage_collector.hpp"
+#include "engine/core/thread_pool.hpp"
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -19,10 +20,10 @@ AudioEngine::~AudioEngine() {
 
 // Unified Audio Callback from Device Manager
 void AudioEngine::audioCallback(const std::map<std::string, float*>& inputs, float** outputs, int frames, int inChannels, int outChannels, double sampleRate) {
-    // 1. Distribute Hardware Inputs to InputNodes
-    if (m_graph) {
-        auto nodes = m_graph->getNodes();
-        for (auto& [id, node] : nodes) {
+    // 1. Distribute Hardware Inputs to InputNodes via the active plan (thread-safe)
+    auto plan = m_activePlan.load();
+    if (plan) {
+        for (auto& node : plan->allNodes) {
             auto inputNode = std::dynamic_pointer_cast<InputNode>(node);
             if (inputNode) {
                 auto deviceId = inputNode->getDeviceId();
@@ -44,6 +45,11 @@ bool AudioEngine::init(int sampleRate, int channels, int blockSize, const std::s
     m_sampleRate = sampleRate;
     m_channels = channels;
     m_blockSize = blockSize;
+
+    // Initialize/Resize caches
+    m_paramCache.resize(4096, 0.0f);
+    m_inputPtrCache.resize(64, nullptr); // Support up to 64 I/O for now, dynamic resize in process if needed
+    m_outputPtrCache.resize(64, nullptr);
 
     if (!m_masterNode) m_masterNode = std::make_shared<MasterNode>(blockSize * 4);
     
@@ -76,6 +82,13 @@ void AudioEngine::updatePlan() {
     if (m_graph) {
         auto oldPlan = m_activePlan.load();
         auto newPlan = m_graph->compile(m_blockSize, m_channels, m_masterNodeId, &m_mixerState);
+        
+        // Snapshot active automation lanes into the plan
+        {
+            std::lock_guard<std::mutex> lock(m_automationMutex);
+            newPlan->activeAutomationLanes = m_automationLanes;
+        }
+
         m_activePlan.store(newPlan);
         
         size_t maxRequired = m_blockSize * m_channels;
@@ -95,13 +108,8 @@ void AudioEngine::seek(size_t frame) { m_pendingSeek.store((int64_t)frame); }
     
 void AudioEngine::setMuted(bool muted) { 
     m_isMuted.store(muted); 
-    if (muted) {
-        // Wait for audio thread to exit process() to ensure exclusive access to VSTs
-        int timeout = 100; // 100ms max wait
-        while (m_isProcessing.load() && timeout-- > 0) {
-            SDL_Delay(1);
-        }
-    }
+    // Non-blocking mute. 
+    // We rely on the atomic store and the check in process()
 }
 
 float* AudioEngine::process(int frames) {
@@ -114,7 +122,7 @@ float* AudioEngine::process(int frames) {
     }
 
     std::shared_ptr<RenderPlan> plan = m_activePlan.load();
-    if (!plan) {
+    if (!plan || plan->levels.empty()) {
         SIMD::set(m_scratchBuffer.data(), 0.0f, frames * m_channels);
         m_isProcessing.store(false);
         return m_scratchBuffer.data();
@@ -135,81 +143,105 @@ float* AudioEngine::process(int frames) {
     size_t current = m_currentFrame.load();
 
     if (currentPlaying) {
-        std::unique_lock<std::mutex> lock(m_automationMutex, std::try_to_lock);
-        if (lock.owns_lock()) {
-            for (auto& lane : m_automationLanes) {
-                if (lane->isRecording()) {
-                    if (auto p = lane->getParameter()) lane->recordPoint(current, p->getValue());
-                } else {
-                    lane->applyAt(current);
-                }
+        for (auto& lane : plan->activeAutomationLanes) {
+            if (lane->isRecording()) {
+                if (auto p = lane->getParameter()) lane->recordPoint(current, p->getValue());
+            } else {
+                lane->applyAt(current);
             }
         }
     }
 
-    if (plan) {
-        // --- Mixer Global Pre-scan ---
-        bool anySolo = false;
-        for (auto const& execScan : plan->sequence) {
-            for (auto const& routeScan : execScan.outgoingRoutes) {
-                if (routeScan.soloPtr && routeScan.soloPtr->load(std::memory_order_relaxed)) {
+    // --- Mixer Global Pre-scan (Solo Logic) ---
+    bool anySolo = false;
+    for (auto const& level : plan->levels) {
+        for (auto const& exec : level) {
+            for (auto const& route : exec.outgoingRoutes) {
+                if (route.soloPtr && route.soloPtr->load(std::memory_order_relaxed)) {
                     anySolo = true;
                     break;
                 }
             }
             if (anySolo) break;
         }
+        if (anySolo) break;
+    }
 
-        for (int bIdx : plan->clearBufferIndices) {
-            if (bIdx >= 0 && bIdx < (int)plan->bufferPool.size()) {
-                auto& buf = plan->bufferPool[bIdx];
-                std::fill(buf.begin(), buf.end(), 0.0f);
+    // --- Clear Buffers (Serial) ---
+    for (int bIdx : plan->clearBufferIndices) {
+        if (bIdx >= 0 && bIdx < (int)plan->bufferPool.size()) {
+            auto& buf = plan->bufferPool[bIdx];
+            std::fill(buf.begin(), buf.end(), 0.0f);
+        }
+    }
+
+    // --- Prepare Parameter Ramps (Serial) ---
+    for (auto& level : plan->levels) {
+        for (auto& exec : level) {
+            for (auto* p : exec.parameters) {
+                if (p) p->prepareRamp(frames);
             }
         }
+    }
 
-        static float paramCache[4096]; // Increased for safety
+    // --- Execute Levels in Sequence ---
+    for (auto& level : plan->levels) {
+        // 1. Parallel Processor Execution
+        ThreadPool::get().parallelFor(level, [&](ProcessorExecution& exec) {
+            if (!exec.processor) return;
+            
+            exec.processor->setCurrentFrame(current);
 
-        for (auto& exec : plan->sequence) {
-            if (exec.processor) exec.processor->setCurrentFrame(current);
+            // Stack-allocated caches for thread-safety (limit to 128 for stack safety)
+            float localParamCache[128]; 
+            const float* localInputs[64];
+            float* localOutputs[64];
 
             size_t pCount = exec.parameterPointers.size();
-            for (size_t i = 0; i < pCount && i < 4096; ++i) {
+            for (size_t i = 0; i < pCount && i < 128; ++i) {
                 if (exec.parameterPointers[i])
-                    paramCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
+                    localParamCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
                 else
-                    paramCache[i] = 0.0f;
+                    localParamCache[i] = 0.0f;
             }
-            exec.processor->updateParameters(paramCache);
+            exec.processor->updateParameters(localParamCache);
 
-            const float* inputs[8]; 
-            float* outputs[8];
+            size_t inCount = exec.inputBufferIndices.size();
+            size_t outCount = exec.outputBufferIndices.size();
             
-            for (int i = 0; i < 8; ++i) {
-                if (i < (int)exec.inputBufferIndices.size()) {
-                    int idx = exec.inputBufferIndices[i];
-                    inputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
-                } else {
-                    inputs[i] = nullptr;
-                }
+            for (size_t i = 0; i < inCount && i < 64; ++i) {
+                int idx = exec.inputBufferIndices[i];
+                localInputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
             }
             
-            for (int i = 0; i < 8; ++i) {
-                if (i < (int)exec.outputBufferIndices.size()) {
-                    int idx = exec.outputBufferIndices[i];
-                    outputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
-                } else {
-                    outputs[i] = nullptr;
-                }
+            for (size_t i = 0; i < outCount && i < 64; ++i) {
+                int idx = exec.outputBufferIndices[i];
+                localOutputs[i] = (idx >= 0 && idx < (int)plan->bufferPool.size()) ? plan->bufferPool[idx].data() : nullptr;
             }
 
-            if (exec.processor) exec.processor->process(inputs, outputs, frames);
+            // Check bypass state - if bypassed, just copy input to output (passthrough)
+            bool bypassed = exec.bypassPtr && exec.bypassPtr->load(std::memory_order_relaxed);
+            if (bypassed) {
+                // Bypass: copy first input to all outputs (common mono/stereo passthrough)
+                for (size_t i = 0; i < outCount && i < 64; ++i) {
+                    if (localOutputs[i] && inCount > 0 && localInputs[0]) {
+                        size_t inIdx = i < inCount ? i : 0;  // Use corresponding input if available, else first
+                        if (localInputs[inIdx]) {
+                            memcpy(localOutputs[i], localInputs[inIdx], frames * m_channels * sizeof(float));
+                        }
+                    }
+                }
+            } else {
+                exec.processor->process((const float**)localInputs, localOutputs, frames);
+            }
+        });
 
+        // 2. Serial Routing (Summation)
+        // This MUST be serial because multiple level nodes can write to the same destination buffer
+        for (auto& exec : level) {
             for (auto& route : exec.outgoingRoutes) {
                 bool isMuted = route.mutePtr && route.mutePtr->load(std::memory_order_relaxed);
                 bool isSoloed = route.soloPtr && route.soloPtr->load(std::memory_order_relaxed);
-                
-                // If any channel is soloed, this channel is audible ONLY if it is also soloed.
-                // Otherwise (no solo active), it is audible if not muted.
                 bool isAudible = anySolo ? isSoloed : !isMuted;
 
                 if (!isAudible) {
@@ -228,33 +260,30 @@ float* AudioEngine::process(int frames) {
 
                 float* src = plan->bufferPool[srcIdx].data();
                 float* dst = plan->bufferPool[dstIdx].data();
-                int total = frames * m_channels;
                 
                 if (route.peakPtr) {
                     float peak = 0.0f;
-                    for (int s = 0; s < total; s+=4) {
+                    for (int s = 0; s < frames * m_channels; s+=4) {
                         float absVal = std::abs(src[s] * gain);
                         if (absVal > peak) peak = absVal;
                     }
                     route.peakPtr->store(peak, std::memory_order_relaxed);
                 }
                 
-                // Apply gain and constant-power panning
                 float p = pan * 1.570796f;
                 float panL = std::cos(p);
                 float panR = std::sin(p);
-
                 SIMD::add_with_gain_pan(src, dst, gain, panL, panR, frames);
             }
         }
+    }
 
-        if (currentPlaying) m_currentFrame.fetch_add(frames);
+    if (currentPlaying) m_currentFrame.fetch_add(frames);
 
-        if (!plan->masterOutputBufferIndices.empty()) {
-            int leftIdx = plan->masterOutputBufferIndices[0];
-            m_isProcessing.store(false);
-            return plan->bufferPool[leftIdx].data();
-        }
+    if (!plan->masterOutputBufferIndices.empty()) {
+        int leftIdx = plan->masterOutputBufferIndices[0];
+        m_isProcessing.store(false);
+        return plan->bufferPool[leftIdx].data();
     }
 
     SIMD::set(m_scratchBuffer.data(), 0.0f, frames * m_channels);

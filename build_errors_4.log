@@ -1,0 +1,28 @@
+Versión de MSBuild 17.12.12+1cce77968 para .NET Framework
+
+  Checking File Globs
+  SDL3-static.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\Release\SDL3-static.lib
+  vst_external_editor.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(157,19): error C2371: 'Beam::IRpcChannelBuffer': nueva definición; tipos básicos distintos [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+  (compilando archivo de origen "../src/interface/editors/vst_external_editor.cpp")
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\combaseapi.h(328,41):
+      vea la declaración de 'Beam::IRpcChannelBuffer'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(199,19): error C2371: 'Beam::IRpcStubBuffer': nueva definición; tipos básicos distintos [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+  (compilando archivo de origen "../src/interface/editors/vst_external_editor.cpp")
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\combaseapi.h(327,41):
+      vea la declaración de 'Beam::IRpcStubBuffer'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(2672,5): error C2371: 'Beam::IStream': nueva definición; tipos básicos distintos [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+  (compilando archivo de origen "../src/interface/editors/vst_external_editor.cpp")
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(150,27):
+      vea la declaración de 'Beam::IStream'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(3099,33): error C2504: 'Beam::IRpcChannelBuffer': clase base sin definir [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+  (compilando archivo de origen "../src/interface/editors/vst_external_editor.cpp")
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\objidl.h(8203,32): error C2504: 'IStream': clase base sin definir [C:\Users\Alexi\Documents\Beam Audio Flux\build\BeamAudioFlux.vcxproj]
+  (compilando archivo de origen "../src/interface/editors/vst_external_editor.cpp")
+  
+  SDL3_test.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\_deps\sdl3-build\Release\SDL3_test.lib
+  test_persistence.vcxproj -> C:\Users\Alexi\Documents\Beam Audio Flux\build\Release\test_persistence.exe

@@ -87,7 +87,7 @@ public:
             batcher.drawQuad(x, 0, 1, h, 0.3f, 0.5f, 0.4f, 0.3f);
             
             std::string label = (f >= 1000) ? std::to_string((int)f/1000) + "k" : std::to_string((int)f);
-            batcher.drawText(label, x + 2, h - 12, 9, 0.3f, 0.5f, 0.4f, 0.8f);
+            batcher.drawVectorText(label, x + 2, h - 12, 9, 0.3f, 0.5f, 0.4f, 0.8f);
         }
         
         float dbs[] = {-6.0f, -12.0f, -24.0f, -48.0f};
@@ -101,7 +101,7 @@ public:
             
             std::stringstream ss;
             ss << (int)db;
-            batcher.drawText(ss.str(), 2, y - 8, 9, 0.3f, 0.5f, 0.4f, 0.8f);
+            batcher.drawVectorText(ss.str(), 2, y - 8, 9, 0.3f, 0.5f, 0.4f, 0.8f);
         }
     }
 

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_device_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\audio_engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\core\flux_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\dsp\third_party_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\hosting\vst3_host.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\io\disk_streamer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\midi\midi_device_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\nodes\input_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\nodes\master_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\scripting\flux_script_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\session\asset_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\session\beam_host.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\session\parameter_queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\input_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\core\look_and_feel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\autotune_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\filter_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\spectrum_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\editors\vst_external_editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\modules\audio_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\render\quad_batcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\render\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\render\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\knob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\meter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\vu_meter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\sdk\funknown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\sdk\sdk_registration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\third_party\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\resources.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{37E33F00-0080-31E1-B96D-02BF49E4897A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

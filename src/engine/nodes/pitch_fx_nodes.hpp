@@ -1,7 +1,7 @@
 #ifndef PITCH_FX_NODES_HPP
 #define PITCH_FX_NODES_HPP
 
-#include "engine/plugins/flux_plugin.hpp"
+#include "sdk/beam_sdk.hpp"
 #include "engine/dsp/flux_audio_utils.hpp"
 #include "interface/editors/autotune_editor.hpp"
 #include <vector>
@@ -11,17 +11,25 @@
 #include <atomic>
 #include <condition_variable>
 #include <mutex>
-#include <iostream>
 
 namespace Beam {
 
 /**
- * @class AutoTuneProcessor
+ * @class AutoTuneNode
  * @brief High-performance real-time pitch corrector with scale-aware snapping.
  */
-class AutoTuneProcessor : public FluxPluginProcessor {
+class AutoTuneNode : public SDK::BeamPlugin {
 public:
-    AutoTuneProcessor(float sr, std::shared_ptr<MeterSource> ms) : FluxPluginProcessor(sr, ms), m_sampleRate(sr) {
+    AutoTuneNode(int, float sr) : BeamPlugin("Auto-Tune", "Specialty"), m_sampleRate(sr) {
+        transpose = &addFloatParam("Transpose", 0.5f, 2.0f, 1.0f);
+        retuneSpeed = &addFloatParam("Retune Speed", 0.0f, 1.0f, 0.5f);
+        humanize = &addFloatParam("Humanize", 0.0f, 1.0f, 0.0f);
+        key = &addFloatParam("Key", 0.0f, 11.0f, 0.0f);       
+        scaleType = &addFloatParam("Scale", 0.0f, 2.0f, 0.0f);     
+
+        addMeter("DetectedNote");
+        addMeter("TargetNote");
+
         m_delayBuffer.resize((size_t)(sr * 0.2f), 0.0f);
         m_analysisBufferFront.resize(2048, 0.0f);
         m_analysisBufferBack.resize(2048, 0.0f);
@@ -31,7 +39,7 @@ public:
         m_workerThread = std::thread([this]() { workerLoop(); });
     }
 
-    ~AutoTuneProcessor() {
+    ~AutoTuneNode() {
         m_workerRunning = false;
         {
             std::lock_guard<std::mutex> lock(m_mutex);
@@ -41,22 +49,23 @@ public:
         if (m_workerThread.joinable()) m_workerThread.join();
     }
 
-    void processBlock(const float* in, float* out, int total) override {
-        float userShift = getParam(0); 
-        float retuneSpeed = getParam(1); 
-        float humanize = getParam(2);
-        int key = (int)getParam(3);
-        int scaleType = (int)getParam(4); // 0=Chromatic, 1=Major, 2=Minor
+    void process(float** io, int frames) override {
+        float userShift = transpose->getValue(); 
+        float speed = retuneSpeed->getValue(); 
+        float hum = humanize->getValue();
+        int k = (int)key->getValue();
+        int sType = (int)scaleType->getValue();
         
         float currentFreq = m_detectedFreq.load(std::memory_order_relaxed);
         bool active = m_isVocalActive.load(std::memory_order_relaxed) && currentFreq > 40.0f;
 
-        for (int i = 0; i < total; ++i) {
-            float sample = in[i];
-            m_delayBuffer[m_writePos] = sample;
-            
-            // 1. Snapshot for worker thread
-            m_analysisBufferFront[m_analysisWritePos] = sample;
+        for (int i = 0; i < frames; ++i) {
+            float monoIn = 0.0f;
+            for(int ch=0; ch<2; ++ch) if(io[ch]) monoIn += io[ch][i];
+            monoIn *= 0.5f;
+
+            m_delayBuffer[m_writePos] = monoIn;
+            m_analysisBufferFront[m_analysisWritePos] = monoIn;
             m_analysisWritePos = (m_analysisWritePos + 1) % m_analysisBufferFront.size();
 
             if (++m_analysisCounter >= 512) {
@@ -71,45 +80,43 @@ public:
                 }
             }
 
-            // 2. Determine Pitch Shift
             float finalShift = userShift;
-
-            if (active && retuneSpeed > 0.001f) {
-                float targetFreq = snapToScale(currentFreq, key, scaleType);
+            if (active && speed > 0.001f) {
+                float targetFreq = snapToScale(currentFreq, k, sType);
                 float autoShift = targetFreq / currentFreq;
                 
-                // Retune Speed smoothing
-                float effectiveRetune = retuneSpeed;
-                if (humanize > 0.1f) {
+                float effectiveRetune = speed;
+                if (hum > 0.1f) {
                     float diff = std::abs(1.0f - autoShift);
-                    if (diff < 0.05f) effectiveRetune *= (1.0f - humanize);
+                    if (diff < 0.05f) effectiveRetune *= (1.0f - hum);
                 }
 
                 m_smoothShift = m_smoothShift * (1.0f - effectiveRetune * 0.05f) + autoShift * (effectiveRetune * 0.05f);
                 finalShift = userShift * m_smoothShift;
 
-                if (i % 64 == 0) { // Throttle meter updates
+                if (i % 128 == 0) {
                     float semitones = 12.0f * std::log2(currentFreq / 440.0f) + 69.0f;
                     float targetSemitones = 12.0f * std::log2(targetFreq / 440.0f) + 69.0f;
-                    m_meterSource->updateMeter(0, std::fmod(semitones + 120.0f, 12.0f));
-                    m_meterSource->updateMeter(1, std::fmod(targetSemitones + 120.0f, 12.0f));
+                    updateMeter(0, std::fmod(semitones + 120.0f, 12.0f));
+                    updateMeter(1, std::fmod(targetSemitones + 120.0f, 12.0f));
                 }
             } else {
                 m_smoothShift = 1.0f;
-                if (i % 64 == 0) {
-                    m_meterSource->updateMeter(0, -1.0f);
-                    m_meterSource->updateMeter(1, -1.0f);
+                if (i % 128 == 0) {
+                    updateMeter(0, -1.0f);
+                    updateMeter(1, -1.0f);
                 }
             }
 
-            // 3. Dual-Tap Pitch Shifter
             float phase1 = m_phase;
             float phase2 = std::fmod(m_phase + 0.5f, 1.0f);
             float weight = std::abs(phase1 - 0.5f) * 2.0f;
             
             float out1 = readDelay(phase1 * m_maxDelay);
             float out2 = readDelay(phase2 * m_maxDelay);
-            out[i] = out1 * (1.0f - weight) + out2 * weight;
+            float processed = out1 * (1.0f - weight) + out2 * weight;
+
+            for(int ch=0; ch<2; ++ch) if(io[ch]) io[ch][i] = processed;
 
             if (++m_writePos >= m_delayBuffer.size()) m_writePos = 0;
             m_phase = std::fmod(m_phase + (1.0f - finalShift) / m_maxDelay, 1.0f);
@@ -117,24 +124,40 @@ public:
         }
     }
 
+    void prepareToPlay(float sr, int) override {
+        m_sampleRate = sr;
+        m_delayBuffer.assign(m_delayBuffer.size(), 0.0f);
+    }
+
+    void updateVisuals() override {
+        m_lastDetectedNote = getMeterValue(0);
+        m_lastTargetNote = getMeterValue(1);
+    }
+
+    float getLastDetectedNote() const { return m_lastDetectedNote; }
+    float getLastTargetNote() const { return m_lastTargetNote; }
+
+    std::shared_ptr<Component> createEditor(const NodeEditorContext& ctx) override {
+        return std::make_shared<AutoTuneEditor>(this);
+    }
+
 private:
-    float snapToScale(float freq, int key, int scaleType) {
+    float snapToScale(float freq, int keyNote, int sType) {
         float semitones = 12.0f * std::log2(freq / 440.0f) + 69.0f;
-        float relativeNote = std::fmod(semitones - (float)key + 120.0f, 12.0f);
-        int octave = (int)std::floor((semitones - (float)key + 120.0f) / 12.0f) - 10;
+        float relativeNote = std::fmod(semitones - (float)keyNote + 120.0f, 12.0f);
+        int octave = (int)std::floor((semitones - (float)keyNote + 120.0f) / 12.0f) - 10;
         
         float snappedRelative = 0;
-        if (scaleType == 0) { // Chromatic
-            snappedRelative = std::round(relativeNote);
-        } else if (scaleType == 1) { // Major
+        if (sType == 0) snappedRelative = std::round(relativeNote);
+        else if (sType == 1) {
             int major[] = {0, 2, 4, 5, 7, 9, 11};
             snappedRelative = closestNote(relativeNote, major, 7);
-        } else if (scaleType == 2) { // Minor
+        } else if (sType == 2) {
             int minor[] = {0, 2, 3, 5, 7, 8, 10};
             snappedRelative = closestNote(relativeNote, minor, 7);
         }
 
-        float finalNote = (float)octave * 12.0f + snappedRelative + (float)key;
+        float finalNote = (float)octave * 12.0f + snappedRelative + (float)keyNote;
         return 440.0f * std::pow(2.0f, (finalNote - 69.0f) / 12.0f);
     }
 
@@ -219,41 +242,13 @@ private:
     bool m_hasWork = false; 
     std::condition_variable m_cv;
     std::mutex m_mutex;
-};
-
-class AutoTuneNode : public FluxPlugin {
-public:
-    AutoTuneNode(int buf, float sr) : FluxPlugin("Auto-Tune", buf, sr) {
-        addParam("Transpose", 0.5f, 2.0f, 1.0f);
-        addParam("Retune Speed", 0.0f, 1.0f, 0.5f);
-        addParam("Humanize", 0.0f, 1.0f, 0.0f);
-        addParam("Key", 0.0f, 11.0f, 0.0f);       
-        addParam("Scale", 0.0f, 2.0f, 0.0f);     
-
-        m_meterSource->addMeter("DetectedNote");
-        m_meterSource->addMeter("TargetNote");
-    }
-
-    std::shared_ptr<FluxProcessor> createProcessor() override {
-        return std::make_shared<AutoTuneProcessor>(getSampleRate(), getMeterSource());
-    }
-
-    void updateVisuals() override {
-        m_lastDetectedNote = m_meterSource->getValue(0);
-        m_lastTargetNote = m_meterSource->getValue(1);
-    }
-
-    float getLastDetectedNote() const { return m_lastDetectedNote; }
-    float getLastTargetNote() const { return m_lastTargetNote; }
-
-    std::shared_ptr<Component> createEditor(const NodeEditorContext& ctx) override {
-        return std::make_shared<AutoTuneEditor>(this);
-    }
-
-private:
+    
+    Parameter *transpose, *retuneSpeed, *humanize, *key, *scaleType;
     float m_lastDetectedNote = -1.0f;
     float m_lastTargetNote = -1.0f;
 };
+
+REGISTER_BEAM_PLUGIN(AutoTuneNode)
 
 } // namespace Beam
 

@@ -25,10 +25,11 @@ struct MeterData {
  */
 class MeterSource {
 public:
-    void addMeter(const std::string& name) {
+    int addMeter(const std::string& name) {
         auto m = std::make_unique<MeterData>();
         m->name = name;
         m_meters.push_back(std::move(m));
+        return (int)m_meters.size() - 1;
     }
 
     /**

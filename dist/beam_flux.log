@@ -1,0 +1,173 @@
+Beam Audio Flux Initializing...
+VSync Disabled (Immediate Swap) for Freeze Diagnostics.
+Warning: FLUX_LOGO.bmp not found for window icon. Error: Couldn't open ../../assets/images/FLUX_LOGO.bmp: El sistema no puede encontrar la ruta especificada.
+OpenGL Loaded Successfully.
+Creating QuadBatcher...
+Creating UI Shader...
+Initializing SDL Audio...
+Initializing MIDI...
+[MIDI] Found 0 input devices.
+Initializing Device Manager...
+Initializing Audio Engine...
+Starting Audio Stream...
+[AudioDeviceManager] Opening Output Stream on Device ID: 4294967295 (Default)
+[AudioDeviceManager] Stream opened. Hardware Rate: 44100Hz, Channels: 2
+Audio Stream Started Successfully.
+[PluginLibrary] Loaded 70 entries from disk.
+[PluginLibrary] Adding entry: Analog Lab V Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Diva(x64) Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: helm Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: helm64 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Dynamic EQ Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Dynamics Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Equalizer Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Exciter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Imager Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Impact Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Low End Focus Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Master Rebalance Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Match EQ Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Maximizer Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Spectral Shaper Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Stabilizer Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Vintage Compressor Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Vintage EQ Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Vintage Limiter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Vintage Tape Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Ozone 10 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs 3-Band EQ Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Bitcrush Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Channel Mixer Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Chorus Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Comb Filter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Compressor Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Delay Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Distortion Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Dual Delay Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Dynamics Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Ensemble Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Filter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Flanger Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Formant Filter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Frequency Shifter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Gain Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Gate Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Haas Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Ladder Filter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Limiter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Nonlinear Filter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Phase Distortion Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Phaser Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Pitch Shifter Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Resonator Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Reverb Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Reverser Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Ring Mod Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Shaper Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Stereo Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Tape Stop Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Trance Gate Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: kHs Transient Shaper Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Mini V3 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: Momentum Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: sforzando Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: sforzando Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native Bus Compressor v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native Channelstrip v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native Drumstrip v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native FlexVerb Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native Vocalstrip 2 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native X-Comp v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native X-EQ 2 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native X-Phase v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native X-Saturator v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: SSL Native X-ValveComp v6 Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: LABS Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+[PluginLibrary] Adding entry: LABS Cat: VST3 Type: VST3
+[PluginLibrary] Saved 70 entries to disk.
+Loading Project...
+Creating UI Components...
+ - Workspace
+ - Timeline
+ - TopBar
+ - Sidebar
+ - MasterStrip
+ - MixerView
+ - ConfigView
+Init Successful. Starting Loop.
+[BeamHost] Heartbeat: 0 Time: 0
+Main Loop Exited Cleanly.
+Loop Finished Normally.
+[DEBUG_LOG] [AudioDeviceManager] Destructor called.
+[DEBUG_LOG] [AudioDeviceManager] stopAudio() called.
+[AudioDeviceManager] Stopping Audio.
+[DEBUG_LOG] [AudioDeviceManager] Stopping Audio stream.

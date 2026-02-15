@@ -56,6 +56,9 @@ public:
     size_t getCurrentFrame() const { return m_currentFrame.load(); }
     
     bool isProcessing() const { return m_isProcessing.load(); }
+    
+    // Audio-safe plan clearing: nullifies active plan so audio callback immediately returns silence
+    void clearActivePlan() { m_activePlan.store(nullptr); }
 
     void addAutomationLane(std::shared_ptr<AutomationLane> lane) {
         std::lock_guard<std::mutex> lock(m_automationMutex);
@@ -92,6 +95,11 @@ private:
 
     float* process(int frames);
     std::vector<float> m_scratchBuffer;
+
+    // Caches to avoid allocations/static state in audio thread
+    std::vector<float> m_paramCache;
+    std::vector<float*> m_inputPtrCache;
+    std::vector<float*> m_outputPtrCache;
 };
 
 } // namespace Beam

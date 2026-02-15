@@ -4,6 +4,7 @@
 #include "interface/core/component.hpp"
 #include "engine/session/parameter.hpp"
 #include <memory>
+#include <functional>
 
 namespace Beam {
 
@@ -108,6 +109,8 @@ public:
      */
     void setDefaultResetValue(double val) { m_defaultResetValue = val; }
 
+    std::function<void(float)> onValueChanged;
+
 private:
     SliderStyle m_style = SliderStyle::LinearHorizontal;
     double m_min = 0.0;
@@ -126,8 +129,3 @@ private:
 } // namespace Beam
 
 #endif // GUI_SLIDER_HPP
-
-
-
-
-

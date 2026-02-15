@@ -81,65 +81,81 @@ public:
             
             // 1. Clear inputs
             for (int idx : m_plan->clearBufferIndices) {
-                 if (idx >= 0 && idx < (int)m_plan->bufferPool.size())
-                    std::fill(m_plan->bufferPool[idx].begin(), m_plan->bufferPool[idx].end(), 0.0f);
+                 if (idx >= 0 && idx < (int)m_plan->bufferPool.size()) {
+                    auto& buf = m_plan->bufferPool[idx];
+                    std::fill(buf.begin(), buf.end(), 0.0f);
+                 }
             }
 
-            // 2. Process Nodes
-            for (auto& exec : m_plan->sequence) {
-                 if (!exec.processor) continue;
+            // 2. Prepare Parameter Ramps
+            for (auto& level : m_plan->levels) {
+                for (auto& exec : level) {
+                    for (auto* p : exec.parameters) {
+                        if (p) p->prepareRamp(blockFrames);
+                    }
+                }
+            }
 
-                 // Parameter update from live atomics
-                 size_t numParams = exec.parameterPointers.size();
-                 for(size_t i=0; i<numParams && i<4096; ++i) {
-                     if (exec.parameterPointers[i])
-                        m_paramCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
-                     else
-                        m_paramCache[i] = 0.0f;
-                 }
-                 exec.processor->updateParameters(m_paramCache.data());
-                 
-                 const float* inputs[8]; 
-                 float* outputs[8];
-                 
-                 for (int i = 0; i < 8; ++i) {
-                     if (i < (int)exec.inputBufferIndices.size()) {
-                         int idx = exec.inputBufferIndices[i];
-                         inputs[i] = (idx >= 0 && idx < (int)m_plan->bufferPool.size()) ? m_plan->bufferPool[idx].data() : nullptr;
-                     } else {
-                         inputs[i] = nullptr;
-                     }
-                 }
-                 
-                 for (int i = 0; i < 8; ++i) {
-                     if (i < (int)exec.outputBufferIndices.size()) {
-                         int idx = exec.outputBufferIndices[i];
-                         outputs[i] = (idx >= 0 && idx < (int)m_plan->bufferPool.size()) ? m_plan->bufferPool[idx].data() : nullptr;
-                     } else {
-                         outputs[i] = nullptr;
-                     }
-                 }
+            // 3. Process Levels
+            for (auto& level : m_plan->levels) {
+                for (auto& exec : level) {
+                    if (!exec.processor) continue;
 
-                 exec.processor->process(inputs, outputs, blockFrames);
+                    // Parameter update (using atomic targets as fallback/sync)
+                    size_t numParams = exec.parameterPointers.size();
+                    for(size_t i=0; i<numParams && i<4096; ++i) {
+                        if (exec.parameterPointers[i])
+                            m_paramCache[i] = exec.parameterPointers[i]->load(std::memory_order_relaxed);
+                        else
+                            m_paramCache[i] = 0.0f;
+                    }
+                    exec.processor->updateParameters(m_paramCache.data());
+                    
+                    const float* inputs[64]; 
+                    float* outputs[64];
+                    
+                    size_t inCount = exec.inputBufferIndices.size();
+                    size_t outCount = exec.outputBufferIndices.size();
 
-                 // Routing
-                 for (auto& route : exec.outgoingRoutes) {
-                     if (route.mutePtr && route.mutePtr->load(std::memory_order_relaxed)) continue;
-                     float gain = route.gainPtr ? route.gainPtr->load(std::memory_order_relaxed) : 1.0f;
-                     
-                     if (route.sourceBufferIdx < 0 || route.sourceBufferIdx >= (int)m_plan->bufferPool.size() ||
-                         route.destBufferIdx < 0 || route.destBufferIdx >= (int)m_plan->bufferPool.size()) continue;
+                    for (size_t i = 0; i < inCount && i < 64; ++i) {
+                        int idx = exec.inputBufferIndices[i];
+                        inputs[i] = (idx >= 0 && idx < (int)m_plan->bufferPool.size()) ? m_plan->bufferPool[idx].data() : nullptr;
+                    }
+                    
+                    for (size_t i = 0; i < outCount && i < 64; ++i) {
+                        int idx = exec.outputBufferIndices[i];
+                        outputs[i] = (idx >= 0 && idx < (int)m_plan->bufferPool.size()) ? m_plan->bufferPool[idx].data() : nullptr;
+                    }
 
-                     float* src = m_plan->bufferPool[route.sourceBufferIdx].data();
-                     float* dst = m_plan->bufferPool[route.destBufferIdx].data();
-                     int numSamples = blockFrames * 2;
-                     
-                     if (gain == 1.0f) {
-                         for (int i = 0; i < numSamples; ++i) dst[i] += src[i];
-                     } else if (gain > 0.0f) {
-                         for (int i = 0; i < numSamples; ++i) dst[i] += src[i] * gain;
-                     }
-                 }
+                    exec.processor->process(inputs, outputs, blockFrames);
+
+                    // Routing (Serial within the level loop for offline consistency)
+                    for (auto& route : exec.outgoingRoutes) {
+                        if (route.mutePtr && route.mutePtr->load(std::memory_order_relaxed)) continue;
+                        float gain = route.gainPtr ? route.gainPtr->load(std::memory_order_relaxed) : 1.0f;
+                        float pan = route.panPtr ? route.panPtr->load(std::memory_order_relaxed) : 0.5f;
+                        
+                        int srcIdx = route.sourceBufferIdx;
+                        int dstIdx = route.destBufferIdx;
+
+                        if (srcIdx < 0 || srcIdx >= (int)m_plan->bufferPool.size() ||
+                            dstIdx < 0 || dstIdx >= (int)m_plan->bufferPool.size()) continue;
+
+                        float* src = m_plan->bufferPool[srcIdx].data();
+                        float* dst = m_plan->bufferPool[dstIdx].data();
+                        
+                        // Offline renderer currently uses simple mixing, but we should match pan logic
+                        float p = pan * 1.570796f;
+                        float panL = std::cos(p);
+                        float panR = std::sin(p);
+
+                        // Mono-to-Stereo or Stereo-to-Stereo addition
+                        for (int s = 0; s < blockFrames; ++s) {
+                            dst[s * 2] += src[s * 2] * gain * panL;
+                            dst[s * 2 + 1] += src[s * 2 + 1] * gain * panR;
+                        }
+                    }
+                }
             }
 
             // 3. Write Output

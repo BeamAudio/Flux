@@ -1,0 +1,10 @@
+^C:\USERS\ALEXI\DOCUMENTS\BEAM AUDIO FLUX\BUILD_RELEASE\_DEPS\SDL3-SUBBUILD\CMAKEFILES\955CD7D6DB71E00774363DF3AD43AEA7\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Alexi/Documents/Beam Audio Flux/build_release/_deps/sdl3-subbuild" "-BC:/Users/Alexi/Documents/Beam Audio Flux/build_release/_deps/sdl3-subbuild" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Alexi/Documents/Beam Audio Flux/build_release/_deps/sdl3-subbuild/sdl3-populate.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

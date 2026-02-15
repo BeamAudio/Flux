@@ -27,7 +27,7 @@ public:
         m_fluxBtn = std::make_shared<TextButton>("FLUX");
         m_sliceBtn = std::make_shared<TextButton>("SLICE");
         m_mixBtn = std::make_shared<TextButton>("MIX");
-        m_configBtn = std::make_shared<TextButton>("CONFIG");
+        m_settingsBtn = std::make_shared<TextButton>("SETTINGS"); // Grouped
         
         m_undoBtn = std::make_shared<TextButton>("UNDO");
         m_redoBtn = std::make_shared<TextButton>("REDO");
@@ -49,7 +49,7 @@ public:
         addChildComponent(m_fluxBtn);
         addChildComponent(m_sliceBtn);
         addChildComponent(m_mixBtn);
-        addChildComponent(m_configBtn);
+        addChildComponent(m_settingsBtn);
         addChildComponent(m_undoBtn);
         addChildComponent(m_redoBtn);
         
@@ -69,7 +69,10 @@ public:
         m_fluxBtn->onClick([this]() { setDAWMode(0); });
         m_sliceBtn->onClick([this]() { setDAWMode(1); });
         m_mixBtn->onClick([this]() { setDAWMode(2); });
-        m_configBtn->onClick([this]() { if (onConfigRequested) onConfigRequested(); });
+        
+        // Single button toggles settings modal, which should contain config options too
+        m_settingsBtn->onClick([this]() { if (onSettingsRequested) onSettingsRequested(); });
+        
         m_undoBtn->onClick([this]() { if (onUndoRequested) onUndoRequested(); });
         m_redoBtn->onClick([this]() { if (onRedoRequested) onRedoRequested(); });
         
@@ -149,7 +152,7 @@ public:
         box.addItem(LayoutItem(m_fluxBtn.get()).withFixedSize(getWidth(m_fluxBtn), h).withMargin(margin));
         box.addItem(LayoutItem(m_sliceBtn.get()).withFixedSize(getWidth(m_sliceBtn), h).withMargin(margin));
         box.addItem(LayoutItem(m_mixBtn.get()).withFixedSize(getWidth(m_mixBtn), h).withMargin(margin));
-        box.addItem(LayoutItem(m_configBtn.get()).withFixedSize(getWidth(m_configBtn), h).withMargin(margin));
+        box.addItem(LayoutItem(m_settingsBtn.get()).withFixedSize(getWidth(m_settingsBtn), h).withMargin(margin));
         box.addItem(LayoutItem(m_undoBtn.get()).withFixedSize(getWidth(m_undoBtn), h).withMargin(margin));
         box.addItem(LayoutItem(m_redoBtn.get()).withFixedSize(getWidth(m_redoBtn), h).withMargin(margin));
 
@@ -184,11 +187,11 @@ public:
     }
 
     void paint(QuadBatcher& batcher) override {
-        // "Console Unit" Look
+        // "Console Unit" Look - Darker
         batcher.drawChassisPanel(0, 0, m_bounds.w, m_bounds.h, 0, Theme::Console.r, Theme::Console.g, Theme::Console.b, 1.0f);
         
-        // Green LED Strip at bottom
-        batcher.drawRoundedRect(0, m_bounds.h - 4, m_bounds.w, 4, 2.0f, 0.5f, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.8f);
+        // Green LED Strip at bottom - Darker background
+        batcher.drawRoundedRect(0, m_bounds.h - 4, m_bounds.w, 4, 2.0f, 0.5f, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.6f);
     }
 
     void setPlaying(bool playing) { m_isPlaying = playing; updateButtonStates(); }
@@ -196,6 +199,7 @@ public:
 
     std::function<void(int)> onModeChanged;
     std::function<void()> onConfigRequested;
+    std::function<void()> onSettingsRequested;
     std::function<void()> onUndoRequested;
     std::function<void()> onRedoRequested;
     std::function<void()> onSaveRequested;
@@ -214,7 +218,7 @@ private:
     int m_mode = 0;
     int m_tool = 0;
     
-    std::shared_ptr<TextButton> m_fluxBtn, m_sliceBtn, m_mixBtn, m_configBtn, m_undoBtn, m_redoBtn;
+    std::shared_ptr<TextButton> m_fluxBtn, m_sliceBtn, m_mixBtn, m_settingsBtn, m_undoBtn, m_redoBtn;
     std::shared_ptr<ToggleButton> m_pointerBtn, m_scissorsBtn, m_glueBtn;
     std::shared_ptr<TextButton> m_rewindBtn, m_playBtn, m_pauseBtn;
     std::shared_ptr<ToggleButton> m_recordBtn;

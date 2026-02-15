@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "engine/core/debug_log.hpp"
 
 namespace Beam {
 
@@ -11,6 +12,7 @@ AudioDeviceManager::AudioDeviceManager() {
 }
 
 AudioDeviceManager::~AudioDeviceManager() {
+    DebugLog("[AudioDeviceManager] Destructor called.");
     stopAudio();
 }
 
@@ -145,8 +147,13 @@ int AudioDeviceManager::startAudio() {
 }
 
 void AudioDeviceManager::stopAudio() {
-    if (!m_isRunning) return;
+    DebugLog("[AudioDeviceManager] stopAudio() called.");
+    if (!m_isRunning) {
+        DebugLog("[AudioDeviceManager] Audio wasn't running.");
+        return;
+    }
     std::cout << "[AudioDeviceManager] Stopping Audio." << std::endl;
+    DebugLog("[AudioDeviceManager] Stopping Audio stream.");
     if (m_outputStream) {
         SDL_DestroyAudioStream(m_outputStream);
         m_outputStream = nullptr;

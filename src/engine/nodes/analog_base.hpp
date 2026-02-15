@@ -63,12 +63,20 @@ public:
     class WowFlutterGenerator {
     public:
         WowFlutterGenerator(float sampleRate) : m_sampleRate(sampleRate) {
-            m_rng.seed(std::random_device()());
+            updateFilters();
         }
 
         void setIntensity(float wow, float flutter) {
             m_wowDepth = wow;
             m_flutterDepth = flutter;
+        }
+        
+        // Fast LCG Random Generator
+        // x[n] = (a * x[n-1] + c) % m
+        inline float fastRand() {
+            m_seed = (m_seed * 1664525u + 1013904223u);
+            // Convert to float -1.0 to 1.0
+            return (float)(m_seed & 0xFFFF) / 32768.0f - 1.0f; 
         }
 
         float next() {
@@ -78,21 +86,23 @@ public:
             float w = std::sin(m_wowPhase * 6.283185f) * m_wowDepth;
 
             // Flutter (Faster stochastic noise)
-            std::uniform_real_distribution<float> dist(-1.0f, 1.0f);
-            float noise = dist(m_rng);
-            m_flutterLP.setCutoff(25.0f, m_sampleRate); // Flutter is focused in 10-50Hz range
+            float noise = fastRand();
             float f = m_flutterLP.process(noise) * m_flutterDepth;
 
             return w + f;
         }
 
     private:
+        void updateFilters() {
+            m_flutterLP.setCutoff(25.0f, m_sampleRate); // Flutter is focused in 10-50Hz range
+        }
+
         float m_sampleRate;
         float m_wowDepth = 0.0f;
         float m_flutterDepth = 0.0f;
         float m_wowPhase = 0.0f;
         OnePoleFilter m_flutterLP;
-        std::mt19937 m_rng;
+        uint32_t m_seed = 123456789;
     };
 };
 

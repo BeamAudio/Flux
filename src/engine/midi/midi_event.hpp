@@ -26,6 +26,7 @@ struct MIDIEvent {
     uint8_t status;      ///< MIDI Status byte
     uint8_t data1;       ///< MIDI Data 1 (e.g., Note Number)
     uint8_t data2;       ///< MIDI Data 2 (e.g., Velocity)
+    double timestamp;    ///< Absolute timestamp in seconds
 };
 
 /**

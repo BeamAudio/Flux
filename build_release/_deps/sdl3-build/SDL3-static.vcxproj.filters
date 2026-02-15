@@ -1,0 +1,2007 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\cmake_pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_assert.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_error.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_guid.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_hashtable.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_hints.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_list.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_log.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_properties.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_utils.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\atomic\SDL_atomic.c">
+      <Filter>src\atomic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\atomic\SDL_spinlock.c">
+      <Filter>src\atomic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audio.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audiocvt.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audiodev.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audioqueue.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audioresample.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audiotypecvt.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_mixer.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_wave.c">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\camera\SDL_camera.c">
+      <Filter>src\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\SDL_core_unsupported.c">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\cpuinfo\SDL_cpuinfo.c">
+      <Filter>src\cpuinfo</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dynapi\SDL_dynapi.c">
+      <Filter>src\dynapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_categories.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_clipboardevents.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_displayevents.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_dropevents.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_events.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_eventwatch.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keyboard.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keymap.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keysym_to_keycode.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keysym_to_scancode.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_mouse.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_pen.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_quit.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_scancode_tables.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_touch.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_windowevents.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\imKStoUCS.c">
+      <Filter>src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\filesystem\SDL_filesystem.c">
+      <Filter>src\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\SDL_gpu.c">
+      <Filter>src\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.c">
+      <Filter>src\gpu\xr</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.c">
+      <Filter>src\gpu\xr</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\SDL_haptic.c">
+      <Filter>src\haptic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi.c">
+      <Filter>src\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\SDL_asyncio.c">
+      <Filter>src\io</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\SDL_iostream.c">
+      <Filter>src\io</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\generic\SDL_asyncio_generic.c">
+      <Filter>src\io\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_gamepad.c">
+      <Filter>src\joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_joystick.c">
+      <Filter>src\joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_steam_virtual_gamepad.c">
+      <Filter>src\joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\controller_type.c">
+      <Filter>src\joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\locale\SDL_locale.c">
+      <Filter>src\locale</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\main\SDL_main_callbacks.c">
+      <Filter>src\main</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\main\SDL_runapp.c">
+      <Filter>src\main</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\misc\SDL_libusb.c">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\misc\SDL_url.c">
+      <Filter>src\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\power\SDL_power.c">
+      <Filter>src\power</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_render.c">
+      <Filter>src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_render_unsupported.c">
+      <Filter>src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_yuv_sw.c">
+      <Filter>src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\SDL_render_d3d.c">
+      <Filter>src\render\direct3d</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\SDL_shaders_d3d.c">
+      <Filter>src\render\direct3d</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\SDL_render_d3d11.c">
+      <Filter>src\render\direct3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\SDL_shaders_d3d11.c">
+      <Filter>src\render\direct3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\SDL_render_d3d12.c">
+      <Filter>src\render\direct3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\SDL_shaders_d3d12.c">
+      <Filter>src\render\direct3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_pipeline_gpu.c">
+      <Filter>src\render\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_render_gpu.c">
+      <Filter>src\render\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_shaders_gpu.c">
+      <Filter>src\render\gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\ngage\SDL_render_ngage.c">
+      <Filter>src\render\ngage</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengl\SDL_render_gl.c">
+      <Filter>src\render\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengl\SDL_shaders_gl.c">
+      <Filter>src\render\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengles2\SDL_render_gles2.c">
+      <Filter>src\render\opengles2</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengles2\SDL_shaders_gles2.c">
+      <Filter>src\render\opengles2</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\ps2\SDL_render_ps2.c">
+      <Filter>src\render\ps2</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\psp\SDL_render_psp.c">
+      <Filter>src\render\psp</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendfillrect.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendline.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendpoint.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_drawline.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_drawpoint.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_render_sw.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_triangle.c">
+      <Filter>src\render\software</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm.c">
+      <Filter>src\render\vitagxm</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_memory.c">
+      <Filter>src\render\vitagxm</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_tools.c">
+      <Filter>src\render\vitagxm</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\SDL_render_vulkan.c">
+      <Filter>src\render\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\SDL_shaders_vulkan.c">
+      <Filter>src\render\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\sensor\SDL_sensor.c">
+      <Filter>src\sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_crc16.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_crc32.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_getenv.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_iconv.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_malloc.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_memcpy.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_memmove.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_memset.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_mslibc.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_murmur3.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_qsort.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_random.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_stdlib.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_string.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_strtokr.c">
+      <Filter>src\stdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\storage\SDL_storage.c">
+      <Filter>src\storage</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\SDL_thread.c">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\time\SDL_time.c">
+      <Filter>src\time</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\timer\SDL_timer.c">
+      <Filter>src\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_RLEaccel.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_0.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_1.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_A.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_N.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_auto.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_copy.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_slow.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_bmp.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_clipboard.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_egl.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_fillrect.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_pixels.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_rect.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_rotate.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_stb.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_stretch.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_surface.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_video.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_video_unsupported.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_vulkan_utils.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_yuv.c">
+      <Filter>src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_lsx.c">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_sse.c">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_std.c">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_atan2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_fmod.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_log10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_pow.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_rem_pio2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\e_sqrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\k_cos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\k_rem_pio2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\k_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\k_tan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_atan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_copysign.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_cos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_fabs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_floor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_isinf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_isinff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_isnan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_isnanf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_modf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_scalbn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_sin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\libm\s_tan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\dummy\SDL_dummyaudio.c">
+      <Filter>src\audio\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\disk\SDL_diskaudio.c">
+      <Filter>src\audio\disk</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\camera\dummy\SDL_camera_dummy.c">
+      <Filter>src\camera\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\virtual\SDL_virtualjoystick.c">
+      <Filter>src\joystick\virtual</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullevents.c">
+      <Filter>src\video\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullframebuffer.c">
+      <Filter>src\video\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullvideo.c">
+      <Filter>src\video\dummy</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_gameinput.cpp">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_hid.c">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_immdevice.c">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_windows.c">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_xinput.c">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\pch.c">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\pch_cpp.cpp">
+      <Filter>src\core\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\main\windows\SDL_sysmain_runapp.c">
+      <Filter>src\main\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\windows\SDL_asyncio_windows_ioring.c">
+      <Filter>src\io\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\misc\windows\SDL_sysurl.c">
+      <Filter>src\misc\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\directsound\SDL_directsound.c">
+      <Filter>src\audio\directsound</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\wasapi\SDL_wasapi.c">
+      <Filter>src\audio\wasapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsclipboard.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsevents.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsframebuffer.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsgameinput.cpp">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowskeyboard.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmessagebox.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmodes.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmouse.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsopengl.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsopengles.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsrawinput.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsshape.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsvideo.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsvulkan.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowswindow.c">
+      <Filter>src\video\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\generic\SDL_syscond.c">
+      <Filter>src\thread\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\generic\SDL_sysrwlock.c">
+      <Filter>src\thread\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_syscond_cv.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_sysmutex.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_sysrwlock_srw.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_syssem.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_systhread.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\windows\SDL_systls.c">
+      <Filter>src\thread\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\sensor\windows\SDL_windowssensor.c">
+      <Filter>src\sensor\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\power\windows\SDL_syspower.c">
+      <Filter>src\power\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\locale\windows\SDL_syslocale.c">
+      <Filter>src\locale\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\filesystem\windows\SDL_sysfilesystem.c">
+      <Filter>src\filesystem\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\filesystem\windows\SDL_sysfsops.c">
+      <Filter>src\filesystem\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\storage\generic\SDL_genericstorage.c">
+      <Filter>src\storage\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\storage\steam\SDL_steamstorage.c">
+      <Filter>src\storage\steam</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\time\windows\SDL_systime.c">
+      <Filter>src\time\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\timer\windows\SDL_systimer.c">
+      <Filter>src\timer\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\loadso\windows\SDL_sysloadso.c">
+      <Filter>src\loadso\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\tray\windows\SDL_tray.c">
+      <Filter>src\tray\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_8bitdo.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_combined.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_flydigi.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gamecube.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gamesir.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_gip.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_lg4ff.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_luna.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_ps3.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_ps4.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_ps5.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_rumble.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_shield.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_sinput.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_stadia.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_steam.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_steam_hori.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_steam_triton.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_steamdeck.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_switch.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_switch2.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_wii.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_xbox360.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_xbox360w.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_xboxone.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapi_zuiki.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_hidapijoystick.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\hidapi\SDL_report_descriptor.c">
+      <Filter>src\joystick\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\hidapi\SDL_hidapihaptic.c">
+      <Filter>src\haptic\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\hidapi\SDL_hidapihaptic_lg4ff.c">
+      <Filter>src\haptic\hidapi</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_dinputjoystick.c">
+      <Filter>src\joystick\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_rawinputjoystick.c">
+      <Filter>src\joystick\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_windows_gaming_input.c">
+      <Filter>src\joystick\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_windowsjoystick.c">
+      <Filter>src\joystick\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_xinputjoystick.c">
+      <Filter>src\joystick\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\windows\SDL_dinputhaptic.c">
+      <Filter>src\haptic\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\windows\SDL_windowshaptic.c">
+      <Filter>src\haptic\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\camera\mediafoundation\SDL_camera_mediafoundation.c">
+      <Filter>src\camera\mediafoundation</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dialog\SDL_dialog.c">
+      <Filter>src\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dialog\SDL_dialog_utils.c">
+      <Filter>src\dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dialog\windows\SDL_windowsdialog.c">
+      <Filter>src\dialog\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\process\SDL_process.c">
+      <Filter>src\process</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\process\windows\SDL_windowsprocess.c">
+      <Filter>src\process\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenevents.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenframebuffer.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenopengles.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenvideo.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenvulkan.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenwindow.c">
+      <Filter>src\video\offscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\tray\SDL_tray_utils.c">
+      <Filter>src\tray</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\d3d12\SDL_gpu_d3d12.c">
+      <Filter>src\gpu\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\vulkan\SDL_gpu_vulkan.c">
+      <Filter>src\gpu\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\main\generic\SDL_sysmain_callbacks.c">
+      <Filter>src\main\generic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_assert_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_error_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_hashtable.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_hints_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_internal.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_list.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_log_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_properties_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\SDL_utils_c.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audio_c.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audio_channel_converters.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audiodev_c.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audioqueue.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_audioresample.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_sysaudio.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\SDL_wave.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\camera\SDL_camera_c.h">
+      <Filter>src\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\camera\SDL_syscamera.h">
+      <Filter>src\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\SDL_core_unsupported.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\cpuinfo\SDL_cpuinfo_c.h">
+      <Filter>src\cpuinfo</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dynapi\SDL_dynapi.h">
+      <Filter>src\dynapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dynapi\SDL_dynapi_overrides.h">
+      <Filter>src\dynapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dynapi\SDL_dynapi_procs.h">
+      <Filter>src\dynapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\dynapi\SDL_dynapi_unsupported.h">
+      <Filter>src\dynapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_categories_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_clipboardevents_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_displayevents_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_dropevents_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_events_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_eventwatch_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keyboard_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keymap_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keysym_to_keycode_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_keysym_to_scancode_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_mouse_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_pen_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_scancode_tables_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_touch_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\SDL_windowevents_c.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\blank_cursor.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\default_cursor.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\imKStoUCS.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\scancodes_darwin.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\scancodes_linux.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\scancodes_windows.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\events\scancodes_xfree86.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\filesystem\SDL_filesystem_c.h">
+      <Filter>src\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\filesystem\SDL_sysfilesystem.h">
+      <Filter>src\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\SDL_sysgpu.h">
+      <Filter>src\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_gpu_openxr.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_openxr_internal.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_openxrdyn.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\xr\SDL_openxrsym.h">
+      <Filter>src\gpu\xr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\SDL_haptic_c.h">
+      <Filter>src\haptic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\SDL_syshaptic.h">
+      <Filter>src\haptic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_android.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_c.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_ios.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_libusb.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_linux.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_mac.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_netbsd.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_steamxbox.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\hidapi\SDL_hidapi_windows.h">
+      <Filter>src\hidapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\SDL_asyncio_c.h">
+      <Filter>src\io</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\SDL_iostream_c.h">
+      <Filter>src\io</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\io\SDL_sysasyncio.h">
+      <Filter>src\io</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_gamepad_c.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_gamepad_db.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_joystick_c.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_steam_virtual_gamepad.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\SDL_sysjoystick.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\controller_list.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\controller_type.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\usb_ids.h">
+      <Filter>src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\locale\SDL_syslocale.h">
+      <Filter>src\locale</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\main\SDL_main_callbacks.h">
+      <Filter>src\main</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\misc\SDL_libusb.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\misc\SDL_sysurl.h">
+      <Filter>src\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\power\SDL_syspower.h">
+      <Filter>src\power</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_d3dmath.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_render_debug_font.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_sysrender.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\SDL_yuv_sw_c.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\D3D9_PixelShader_Palette.h">
+      <Filter>src\render\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\D3D9_PixelShader_Palette_Linear.h">
+      <Filter>src\render\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\D3D9_PixelShader_Palette_Nearest.h">
+      <Filter>src\render\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\D3D9_PixelShader_YUV.h">
+      <Filter>src\render\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d\SDL_shaders_d3d.h">
+      <Filter>src\render\direct3d</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\D3D11_PixelShader_Advanced.h">
+      <Filter>src\render\direct3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\D3D11_PixelShader_Colors.h">
+      <Filter>src\render\direct3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\D3D11_PixelShader_Textures.h">
+      <Filter>src\render\direct3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\D3D11_VertexShader.h">
+      <Filter>src\render\direct3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d11\SDL_shaders_d3d11.h">
+      <Filter>src\render\direct3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_PixelShader_Advanced.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_PixelShader_Colors.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_PixelShader_Textures.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_RootSig_Advanced.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_RootSig_Color.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_RootSig_Texture.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_VertexShader_Advanced.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_VertexShader_Color.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\D3D12_VertexShader_Texture.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\SDL_render_d3d12_xbox.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\direct3d12\SDL_shaders_d3d12.h">
+      <Filter>src\render\direct3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_gpu_util.h">
+      <Filter>src\render\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_pipeline_gpu.h">
+      <Filter>src\render\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\gpu\SDL_shaders_gpu.h">
+      <Filter>src\render\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\metal\SDL_shaders_metal_ios.h">
+      <Filter>src\render\metal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\metal\SDL_shaders_metal_iphonesimulator.h">
+      <Filter>src\render\metal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\metal\SDL_shaders_metal_macos.h">
+      <Filter>src\render\metal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\metal\SDL_shaders_metal_tvos.h">
+      <Filter>src\render\metal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\metal\SDL_shaders_metal_tvsimulator.h">
+      <Filter>src\render\metal</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\ngage\SDL_render_ngage_c.h">
+      <Filter>src\render\ngage</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengl\SDL_glfuncs.h">
+      <Filter>src\render\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengl\SDL_shaders_gl.h">
+      <Filter>src\render\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengles2\SDL_gles2funcs.h">
+      <Filter>src\render\opengles2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\opengles2\SDL_shaders_gles2.h">
+      <Filter>src\render\opengles2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\psp\SDL_render_psp_c.h">
+      <Filter>src\render\psp</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendfillrect.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendline.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_blendpoint.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_draw.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_drawline.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_drawpoint.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_render_sw_c.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\software\SDL_triangle.h">
+      <Filter>src\render\software</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_memory.h">
+      <Filter>src\render\vitagxm</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_shaders.h">
+      <Filter>src\render\vitagxm</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_tools.h">
+      <Filter>src\render\vitagxm</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vitagxm\SDL_render_vita_gxm_types.h">
+      <Filter>src\render\vitagxm</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\SDL_shaders_vulkan.h">
+      <Filter>src\render\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\VULKAN_PixelShader_Advanced.h">
+      <Filter>src\render\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\VULKAN_PixelShader_Colors.h">
+      <Filter>src\render\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\VULKAN_PixelShader_Textures.h">
+      <Filter>src\render\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\render\vulkan\VULKAN_VertexShader.h">
+      <Filter>src\render\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\sensor\SDL_sensor_c.h">
+      <Filter>src\sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\sensor\SDL_syssensor.h">
+      <Filter>src\sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_casefolding.h">
+      <Filter>src\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_getenv_c.h">
+      <Filter>src\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_sysstdlib.h">
+      <Filter>src\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\stdlib\SDL_vacopy.h">
+      <Filter>src\stdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\storage\SDL_sysstorage.h">
+      <Filter>src\storage</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\SDL_systhread.h">
+      <Filter>src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\SDL_thread_c.h">
+      <Filter>src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\time\SDL_time_c.h">
+      <Filter>src\time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\timer\SDL_timer_c.h">
+      <Filter>src\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_RLEaccel_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_auto.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_copy.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_blit_slow.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_clipboard_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_egl_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_pixels_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_rect_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_rect_impl.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_rotate.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_stb_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_surface_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_sysvideo.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_video_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_video_unsupported.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_vulkan_internal.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\SDL_yuv_c.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\miniz.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\stb_image.h">
+      <Filter>src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_common.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_internal.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_lsx.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_lsx_func.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_sse.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_sse_func.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_std.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\yuv2rgb\yuv_rgb_std_func.h">
+      <Filter>src\video\yuv2rgb</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\dummy\SDL_dummyaudio.h">
+      <Filter>src\audio\dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\disk\SDL_diskaudio.h">
+      <Filter>src\audio\disk</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\virtual\SDL_virtualjoystick_c.h">
+      <Filter>src\joystick\virtual</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullevents_c.h">
+      <Filter>src\video\dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullframebuffer_c.h">
+      <Filter>src\video\dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\dummy\SDL_nullvideo.h">
+      <Filter>src\video\dummy</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_directx.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_gameinput.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_hid.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_immdevice.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_windows.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\core\windows\SDL_xinput.h">
+      <Filter>src\core\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\directsound\SDL_directsound.h">
+      <Filter>src\audio\directsound</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\audio\wasapi\SDL_wasapi.h">
+      <Filter>src\audio\wasapi</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_msctf.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsclipboard.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsevents.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsframebuffer.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsgameinput.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowskeyboard.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmessagebox.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmodes.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsmouse.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsopengl.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsopengles.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsrawinput.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsshape.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsvideo.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowsvulkan.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\SDL_windowswindow.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\windows\wmmsg.h">
+      <Filter>src\video\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\generic\SDL_syscond_c.h">
+      <Filter>src\thread\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\thread\generic\SDL_sysrwlock_c.h">
+      <Filter>src\thread\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\sensor\windows\SDL_windowssensor.h">
+      <Filter>src\sensor\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\storage\steam\SDL_steamstorage_proc.h">
+      <Filter>src\storage\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_dinputjoystick_c.h">
+      <Filter>src\joystick\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_rawinputjoystick_c.h">
+      <Filter>src\joystick\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_windowsjoystick_c.h">
+      <Filter>src\joystick\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\joystick\windows\SDL_xinputjoystick_c.h">
+      <Filter>src\joystick\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\windows\SDL_dinputhaptic_c.h">
+      <Filter>src\haptic\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\haptic\windows\SDL_windowshaptic_c.h">
+      <Filter>src\haptic\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenevents_c.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenframebuffer_c.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenopengles.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenvideo.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenvulkan.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\video\offscreen\SDL_offscreenwindow.h">
+      <Filter>src\video\offscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\d3d12\D3D12_Blit.h">
+      <Filter>src\gpu\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\src\gpu\vulkan\SDL_gpu_vulkan_vkfuncs.h">
+      <Filter>src\gpu\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_assert.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_asyncio.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_atomic.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_audio.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_begin_code.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_bits.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_blendmode.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_camera.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_clipboard.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_close_code.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_copying.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_cpuinfo.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_dialog.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_dlopennote.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_egl.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_endian.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_error.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_events.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_filesystem.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_gamepad.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_gpu.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_guid.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_haptic.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_hidapi.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_hints.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_init.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_intrin.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_iostream.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_joystick.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_keyboard.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_keycode.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_loadso.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_locale.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_log.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_main.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_main_impl.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_messagebox.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_metal.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_misc.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_mouse.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_mutex.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_oldnames.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengl.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengl_glext.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles2.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles2_gl2.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles2_gl2ext.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles2_gl2platform.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_opengles2_khrplatform.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_openxr.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_pen.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_pixels.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_platform.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_platform_defines.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_power.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_process.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_properties.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_rect.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_render.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_scancode.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_sensor.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_stdinc.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_storage.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_surface.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_system.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_thread.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_time.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_timer.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_touch.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_tray.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_version.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_video.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\include\SDL3\SDL_vulkan.h">
+      <Filter>include\SDL3</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\include-revision\SDL3\SDL_revision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\Debug\cmake_pch.h">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\Release\cmake_pch.h">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\MinSizeRel\cmake_pch.h">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\RelWithDebInfo\cmake_pch.h">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-build\CMakeFiles\SDL3-static.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Alexi\Documents\Beam Audio Flux\build_release\_deps\sdl3-src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{76D68604-7589-38BC-AA94-783D258541D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{D43FF623-C46C-3B33-BC01-481B6F23719B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A1964CBC-8F7A-3D22-AD07-21F0DA370E1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{3C7C9721-6F13-3D3C-AC7F-519F9BA68532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\SDL3">
+      <UniqueIdentifier>{77E9C70A-6F6E-3F8D-A36C-129E7FBC5677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{9188B992-136D-3995-AC45-A3B95B890247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\atomic">
+      <UniqueIdentifier>{D6F114F1-59EE-30BF-8484-F8E4DA180325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio">
+      <UniqueIdentifier>{EBF571A6-8CF3-3BFF-BB0F-EC01079C102C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio\directsound">
+      <UniqueIdentifier>{73B143DA-11DB-30DD-BBF7-F8D7F28690A8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio\disk">
+      <UniqueIdentifier>{DDE260C7-862B-3E14-82F5-431D7B053D1B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio\dummy">
+      <UniqueIdentifier>{6AD42DF8-575F-3847-8B61-AAB29126614F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio\wasapi">
+      <UniqueIdentifier>{49D79BBC-F37C-37F9-8394-C8994597AD7C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\camera">
+      <UniqueIdentifier>{0E7D36AF-7E89-337E-98E6-2AEDAB3DC088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\camera\dummy">
+      <UniqueIdentifier>{8B5186C7-4595-3E6E-83C8-36E44EC75613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\camera\mediafoundation">
+      <UniqueIdentifier>{F8380CD2-CC30-3454-8A3F-A5134156A381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{6D375BF8-8AB5-3341-8ADC-ACFE84226F99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\windows">
+      <UniqueIdentifier>{205B3AAA-4C60-3A44-A0C3-F4F8E3B3F1F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cpuinfo">
+      <UniqueIdentifier>{3680964E-55CF-38CB-A758-077632EC1538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dialog">
+      <UniqueIdentifier>{40967EAD-30C5-3D1D-AF06-0651D144BF19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dialog\windows">
+      <UniqueIdentifier>{272D8A9E-FD43-3DC1-9BB0-37A254C15D28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dynapi">
+      <UniqueIdentifier>{EF66F8A3-F9A7-3713-B976-4A72F2FE0779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\events">
+      <UniqueIdentifier>{4E7C7535-0960-3B23-8783-3CCA3EB115AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\filesystem">
+      <UniqueIdentifier>{368ED014-DC69-394E-97B3-E8A45AAE6F56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\filesystem\windows">
+      <UniqueIdentifier>{EC7FC445-8EBD-3DD9-83F7-EC74E06574D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu">
+      <UniqueIdentifier>{63C36CFA-449C-39EA-A575-241116A81215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu\d3d12">
+      <UniqueIdentifier>{808939FF-68B1-3714-BECB-795B8AE6E9BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu\vulkan">
+      <UniqueIdentifier>{0DCB2C00-A53D-3589-B5C2-D0B40211F87A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu\xr">
+      <UniqueIdentifier>{A772B139-F0E1-3764-97B6-01E0452B6FD1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\haptic">
+      <UniqueIdentifier>{8E41631E-84D9-325A-8A9D-9E94D00BBB3A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\haptic\hidapi">
+      <UniqueIdentifier>{B27AC438-617F-36B4-B065-54C998BD1AB0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\haptic\windows">
+      <UniqueIdentifier>{9FB17559-5B48-3513-BD1B-E84D49D67A70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\hidapi">
+      <UniqueIdentifier>{336917A8-2600-3E98-8BF6-638B00C0A7BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\io">
+      <UniqueIdentifier>{9FA18758-0966-3A67-BEA8-D2C81DC8B921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\io\generic">
+      <UniqueIdentifier>{13971A39-432F-378E-AF37-42D5B00CCA8A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\io\windows">
+      <UniqueIdentifier>{3BC8F791-7235-3A2B-A744-4BBAC5A5D68C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\joystick">
+      <UniqueIdentifier>{9B1EEFEF-3408-3DB4-BA07-726E95B7CF6A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\joystick\hidapi">
+      <UniqueIdentifier>{2C7D970C-A4FE-3F41-9E09-293692FCC773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\joystick\virtual">
+      <UniqueIdentifier>{0E52723C-34F6-3821-8304-82694DED1F54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\joystick\windows">
+      <UniqueIdentifier>{55508A94-CA44-3FEB-AB91-566064A5BB85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\loadso">
+      <UniqueIdentifier>{88D62F4E-EF25-3351-BF00-500A7952B1AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\loadso\windows">
+      <UniqueIdentifier>{B25E7588-C96C-38C2-A031-EB931D206082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\locale">
+      <UniqueIdentifier>{7D45E2F4-6550-3B73-9510-EFA5500699B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\locale\windows">
+      <UniqueIdentifier>{6503069E-FD49-3181-AFE7-2D19F02DDF7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\main">
+      <UniqueIdentifier>{CB96640B-5E8A-35ED-A0BC-2567A9543C07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\main\generic">
+      <UniqueIdentifier>{8AC90E45-F689-3EB7-933F-7B673050377C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\main\windows">
+      <UniqueIdentifier>{13F54DE1-8F8C-3068-9438-337B01701134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\misc">
+      <UniqueIdentifier>{CF8DE4C9-418C-313C-8802-2FECD3AFA175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\misc\windows">
+      <UniqueIdentifier>{7FE3F28A-B979-3D97-BE25-3324F3483A5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\power">
+      <UniqueIdentifier>{0290E9F4-59DE-37E5-BEE3-81F40663EA2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\power\windows">
+      <UniqueIdentifier>{2C7F34DF-EFA8-35F7-B0BE-62BD1D57FD1F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\process">
+      <UniqueIdentifier>{E8EE39EE-4776-3AFE-831A-1B064F64C814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\process\windows">
+      <UniqueIdentifier>{173EF571-53F6-33FF-82CE-BFA680BE112C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render">
+      <UniqueIdentifier>{D6A62906-CBEF-3825-81A4-2BF6CA6CB764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\direct3d">
+      <UniqueIdentifier>{F2B4DCC5-AA15-3DBD-943C-35F0E0141064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\direct3d11">
+      <UniqueIdentifier>{A2525726-E42B-3D90-8214-2C148EAC6D65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\direct3d12">
+      <UniqueIdentifier>{4E48C2A8-456E-3383-964E-5CBB051D5CC9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\gpu">
+      <UniqueIdentifier>{1B868AA4-5DB8-3039-9AFD-AA9E9920B772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\metal">
+      <UniqueIdentifier>{EAC5D14C-836F-3930-BA0D-1D66DDEC916E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\ngage">
+      <UniqueIdentifier>{30D6F3F1-07DD-37A8-A762-934D31F66B0F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\opengl">
+      <UniqueIdentifier>{B1AC4DF2-EDB6-3F17-A327-C8348153D991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\opengles2">
+      <UniqueIdentifier>{39590701-C6E4-3F13-B5F6-3A109955EEEE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\ps2">
+      <UniqueIdentifier>{F02EBA9E-2A56-3E91-9577-2361726616C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\psp">
+      <UniqueIdentifier>{7FFC9A9A-04CD-3A36-960C-BAFEA7CE751D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\software">
+      <UniqueIdentifier>{885B84F3-54FA-3443-925A-6C5B65B1276D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\vitagxm">
+      <UniqueIdentifier>{8B942F52-31EC-3F59-A177-323300963098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\vulkan">
+      <UniqueIdentifier>{81B9C175-FBBA-30EA-B543-EA8474997CF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sensor">
+      <UniqueIdentifier>{AA8F215C-7F8E-3D82-8548-94F522963039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sensor\windows">
+      <UniqueIdentifier>{26B19AB8-11B9-3A63-8AB5-7BAA46D38A97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\stdlib">
+      <UniqueIdentifier>{F9D77B4B-4FDE-3722-8E82-7FD711BD4AEB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\storage">
+      <UniqueIdentifier>{223C997E-D775-3599-B649-CB5E85D3B77D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\storage\generic">
+      <UniqueIdentifier>{85CEDDFB-8BCB-3E4A-AFBB-A0EFF8C92CCA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\storage\steam">
+      <UniqueIdentifier>{2EDD4549-E4BC-314C-8AFE-47933BF24773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread">
+      <UniqueIdentifier>{420C6FD5-3F0E-3DE3-8B55-901D09FE9631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\generic">
+      <UniqueIdentifier>{F593560E-DB0A-3592-A28C-486DEE4FABC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread\windows">
+      <UniqueIdentifier>{B0610B19-2A54-366A-9BF3-7688A3D1BC4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\time">
+      <UniqueIdentifier>{E1BF349B-D02F-3C9D-B4CC-8FBB58588ECD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\time\windows">
+      <UniqueIdentifier>{6E2514A2-F89D-3355-A10E-85D9B227AECF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\timer">
+      <UniqueIdentifier>{937860FA-E72B-33E3-8434-1FE91779C088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\timer\windows">
+      <UniqueIdentifier>{8F23D7A6-0230-3095-98E0-AAD4A0DAC95A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tray">
+      <UniqueIdentifier>{F028BA7C-E867-3B39-BC11-A5B4E7DBB609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tray\windows">
+      <UniqueIdentifier>{E5605DD9-02B7-3C62-A5B8-2A81AB403777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\video">
+      <UniqueIdentifier>{1B214ECC-B4B6-3122-9CCE-A1CF389C3DDF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\video\dummy">
+      <UniqueIdentifier>{4E12B86F-8203-3B5D-B344-F870076311BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\video\offscreen">
+      <UniqueIdentifier>{DC7AF6AA-4413-3AC7-93B9-ECCE482538C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\video\windows">
+      <UniqueIdentifier>{5F5E0BF6-2DA6-3CDC-BB9C-3DD8F3F84844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\video\yuv2rgb">
+      <UniqueIdentifier>{F7081478-0A46-3867-9DED-58826F33144D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

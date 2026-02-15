@@ -38,13 +38,18 @@ struct Color {
 class Theme {
 public:
     // Brand Colors
-    static constexpr Color Black   = {0.05f, 0.05f, 0.06f, 1.0f};
+    static constexpr Color Black   = {0.002f, 0.002f, 0.002f, 1.0f}; // Near Black
     static constexpr Color White   = {0.95f, 0.95f, 0.95f, 1.0f};
-    static constexpr Color Emerald = {0.13f, 0.62f, 0.42f, 1.0f};
-    static constexpr Color Red     = {0.56f, 0.03f, 0.03f, 1.0f};
-    static constexpr Color Grey    = {0.15f, 0.15f, 0.16f, 1.0f};
-    static constexpr Color GreyDark = {0.10f, 0.10f, 0.11f, 1.0f};
-    static constexpr Color GreyLight = {0.25f, 0.25f, 0.26f, 1.0f};
+    static constexpr Color Emerald = {0.02f, 0.95f, 0.40f, 1.0f}; // Very Intense
+    static constexpr Color Red     = {0.95f, 0.01f, 0.01f, 1.0f}; // Very Intense
+    static constexpr Color Grey    = {0.005f, 0.005f, 0.006f, 1.0f}; // Much Darker
+    static constexpr Color GreyDark = {0.002f, 0.002f, 0.003f, 1.0f}; // Near Black
+    static constexpr Color GreyLight = {0.012f, 0.012f, 0.014f, 1.0f}; // Dark Grey
+    
+    // UI Accents
+    static constexpr Color Primary   = {0.0f, 0.48f, 1.0f, 1.0f}; // Beam Blue
+    static constexpr Color Secondary = {0.2f, 0.22f, 0.25f, 1.0f}; // Control Surface Grey
+    static constexpr Color Accent    = {1.0f, 0.65f, 0.0f, 1.0f}; // Orange
 
     // --- Design Library Tokens ---
     
@@ -62,13 +67,13 @@ public:
         FlutedIndustrial
     };
 
-    static constexpr Color Bakelite = {0.07f, 0.07f, 0.08f, 1.0f};
-    static constexpr Color Console  = {0.12f, 0.14f, 0.16f, 1.0f}; // Navy-Grey
-    static constexpr Color Aluminum = {0.70f, 0.72f, 0.75f, 1.0f};
-    static constexpr Color Wood     = {0.35f, 0.20f, 0.12f, 1.0f};
-    static constexpr Color LEDGreen = {0.20f, 0.90f, 0.30f, 1.0f};
-    static constexpr Color LEDRed   = {1.00f, 0.10f, 0.10f, 1.0f};
-    static constexpr Color LEDYellow= {0.90f, 0.85f, 0.10f, 1.0f};
+    static constexpr Color Bakelite = {0.005f, 0.005f, 0.006f, 1.0f}; // Deep Deep Black
+    static constexpr Color Console  = {0.008f, 0.008f, 0.01f, 1.0f}; // Even Darker
+    static constexpr Color Aluminum = {0.50f, 0.52f, 0.55f, 1.0f}; 
+    static constexpr Color Wood     = {0.15f, 0.08f, 0.04f, 1.0f}; 
+    static constexpr Color LEDGreen = {0.00f, 1.00f, 0.05f, 1.0f}; 
+    static constexpr Color LEDRed   = {1.00f, 0.00f, 0.00f, 1.0f}; 
+    static constexpr Color LEDYellow= {1.00f, 1.00f, 0.00f, 1.0f}; 
 };
 
 } // namespace Beam

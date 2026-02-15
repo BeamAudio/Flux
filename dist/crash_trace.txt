@@ -1,0 +1,6 @@
+[AudioDeviceManager] Destructor called.
+[AudioDeviceManager] stopAudio() called.
+[AudioDeviceManager] Stopping Audio stream.
+[AudioDeviceManager] Destructor called.
+[AudioDeviceManager] stopAudio() called.
+[AudioDeviceManager] Stopping Audio stream.

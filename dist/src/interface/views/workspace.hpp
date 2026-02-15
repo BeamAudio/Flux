@@ -54,7 +54,6 @@ public:
         reg.registerPlugin("FET-76", "Dynamics", [](int b, float s){ return std::make_shared<FET76>(b, s); });
         reg.registerPlugin("Tube Limiter", "Dynamics", [](int b, float s){ return std::make_shared<TubeLimiter>(b, s); });
         reg.registerPlugin("Lookahead Limiter", "Dynamics", [](int b, float s){ return std::make_shared<LookaheadLimiter>(b, s); });
-        reg.registerPlugin("VCA-Bus", "Dynamics", [](int b, float s){ return std::make_shared<VCABus>(b, s); });
         reg.registerPlugin("Vari-Mu", "Dynamics", [](int b, float s){ return std::make_shared<VariMu>(b, s); });
         
         // EQ
@@ -67,9 +66,6 @@ public:
         // Reverb
         reg.registerPlugin("Steel Plate", "Reverb", [](int b, float s){ return std::make_shared<SteelPlate>(b, s); });
         reg.registerPlugin("Golden Hall", "Reverb", [](int b, float s){ return std::make_shared<GoldenHall>(b, s); });
-        reg.registerPlugin("Copper Spring", "Reverb", [](int b, float s){ return std::make_shared<CopperSpring>(b, s); });
-        reg.registerPlugin("Cathedral", "Reverb", [](int b, float s){ return std::make_shared<Cathedral>(b, s); });
-        reg.registerPlugin("Grain Verb", "Reverb", [](int b, float s){ return std::make_shared<GrainVerb>(b, s); });
 
         // Delay
         reg.registerPlugin("Echo-Plex", "Delay", [](int b, float s){ return std::make_shared<EchoPlex>(b, s); });
@@ -84,7 +80,7 @@ public:
         // Utilities
         reg.registerPlugin("Spectrum", "Utilities", [](int b, float s){ return std::make_shared<FluxSpectrumAnalyzer>(b, s); });
         reg.registerPlugin("Loudness", "Utilities", [](int b, float s){ return std::make_shared<FluxLoudnessMeter>(b, s); });
-        reg.registerPlugin("Gain", "Utilities", [](int b, float s){ return std::make_shared<FluxGainNode>(b); });
+        reg.registerPlugin("Gain", "Utilities", [](int b, float s){ return std::make_shared<FluxGainNode>(b, s); });
         reg.registerPlugin("Filter", "Utilities", [](int b, float s){ return std::make_shared<FluxFilterNode>(b, s); });
         reg.registerPlugin("Delay", "Utilities", [](int b, float s){ return std::make_shared<FluxDelayNode>(b, s); });
 
@@ -118,10 +114,11 @@ public:
 
     void showPopup(std::shared_ptr<Component> popup) override {
         m_popup = popup;
-        if(m_popup) m_popup->setParent(this);
+        if (m_popup) m_popup->setParent(this);
     }
 
     void closePopup() override {
+        if (m_popup) m_popup->setParent(nullptr);
         m_popup = nullptr;
     }
 
@@ -245,7 +242,7 @@ public:
                 float ry = cy + std::sin(angle) * 30.0f;
                 batcher.drawRoundedRect(rx - 8, ry - 8, 16, 16, 8.0f, 0.5f, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 1.0f);
             }
-            batcher.drawText("PROCESSING TAPE...", cx - 60, cy + 60, 14, 1.0f, 1.0f, 1.0f, 1.0f);
+            batcher.drawVectorText("PROCESSING TAPE...", cx - 60, cy + 60, 14, 1.0f, 1.0f, 1.0f, 1.0f);
         }
     }
 
@@ -386,14 +383,49 @@ public:
 
     void clear() {
         std::cout << "[Workspace] Clearing all modules and cables." << std::endl;
+        
+        // First, cleanup all modules (closes VST windows/threads)
         for (auto& mod : m_modules) {
-            if (mod) removeChildComponent(mod.get());
+            if (mod) {
+                mod->cleanup();
+                removeChildComponent(mod.get());
+            }
         }
         m_modules.clear();
         m_cables.clear();
         m_activePort = nullptr;
         m_isDraggingCable = false;
         closePopup();
+    }
+
+    /**
+     * Closes all VST editor windows without destroying the modules.
+     * This is needed before opening file dialogs because VST plugins
+     * can install Windows hooks that interfere with system dialogs.
+     */
+    void closeAllVSTEditors() {
+        std::cout << "[Workspace] Closing all VST editor windows..." << std::endl;
+        for (auto& mod : m_modules) {
+            if (mod) {
+                mod->cleanup(); // This calls VSTExternalEditor::closeWindow()
+            }
+        }
+        std::cout << "[Workspace] All VST editors closed." << std::endl;
+    }
+
+    /**
+     * Hides all VST editor windows without destroying them.
+     * This is safe to call before file dialogs - unlike closeAllVSTEditors()
+     * which can corrupt COM state and cause crashes.
+     */
+    void hideAllVSTEditors() {
+        std::cout << "[Workspace] Hiding all VST editor windows..." << std::endl;
+        for (auto& mod : m_modules) {
+            if (mod) {
+                mod->hideVSTEditor();
+            }
+        }
+        std::cout << "[Workspace] All VST editors hidden." << std::endl;
     }
 
     void setupModule(std::shared_ptr<AudioModule> mod) {
@@ -486,6 +518,7 @@ public:
     void removeModule(AudioModule* mod) {
         if (!mod) return;
         
+        // Safety: If this port was being dragged, stop it
         if (m_activePort && m_activePort->getParent() == mod) {
             m_activePort = nullptr;
             m_isDraggingCable = false;
@@ -501,6 +534,7 @@ public:
             }
         }
 
+        // Cleanup associated cables first
         for (auto it = m_cables.begin(); it != m_cables.end(); ) {
             if (it->input && it->output) {
                 if (it->input->getParent() == mod || it->output->getParent() == mod) {
@@ -511,10 +545,12 @@ public:
             ++it;
         }
 
+        // Find and remove the module visual component
         for (auto it = m_modules.begin(); it != m_modules.end(); ++it) {
             if (it->get() == mod) { 
                 auto modPtr = *it;
                 if (modPtr) {
+                    modPtr->cleanup(); // Critical: close threads/windows
                     removeChildComponent(modPtr.get());
                     GarbageCollector::get().defer(modPtr);
                 }
@@ -551,17 +587,26 @@ public:
 
     void connectPorts(Port* p1, Port* p2) {
         if (!p1 || !p2 || p1->getType() == p2->getType() || !m_engine) return;
+        if (!m_project || !m_project->getGraph()) return;
+
         Port* out = (p1->getType() == PortType::Output) ? p1 : p2;
         Port* in = (p1->getType() == PortType::Input || p1->getType() == PortType::Sidechain) ? p1 : p2;
+        
+        // Prevent duplicate cables
+        for (const auto& c : m_cables) {
+            if (c.output == out && c.input == in) return;
+        }
+
         m_cables.push_back({out, in});
         
         auto* outMod = dynamic_cast<AudioModule*>(out->getParent());
         auto* inMod = dynamic_cast<AudioModule*>(in->getParent());
 
-        if(outMod && inMod) {
+        if (outMod && inMod) {
             UndoManager::get().perform(std::make_unique<ConnectCommand>(m_project->getGraph().get(),
                 outMod->getNodeId(), out->getIndex(), inMod->getNodeId(), in->getIndex()));
         }
+        
         m_project->setDirty(true);
         m_engine->updatePlan();
     }

@@ -143,15 +143,15 @@ public:
     }
 
     void paint(QuadBatcher& g) override {
-        // Main Background
-        g.drawQuad(0, 0, m_bounds.w, m_bounds.h, 0.07f, 0.07f, 0.08f, 1.0f);
+        // Main Background - Darker
+        g.drawQuad(0, 0, m_bounds.w, m_bounds.h, Theme::Black.r, Theme::Black.g, Theme::Black.b, 1.0f);
         
-        // Header Visual Finish
-        g.drawQuad(0, 0, m_bounds.w, 42, 0.03f, 0.03f, 0.04f, 1.0f);
+        // Header Visual Finish - Darker
+        g.drawChassisPanel(0, 0, m_bounds.w, 42, 0.0f, Theme::GreyDark.r, Theme::GreyDark.g, Theme::GreyDark.b, 1.0f);
         g.drawQuad(0, 41, m_bounds.w, 1, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.25f);
         
         if (m_side == Side::Left) {
-            // Right-side vertical separator
+            // Right-side vertical separator (Sharp Line)
             g.drawQuad(m_bounds.w - 1, 0, 1, m_bounds.h, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b, 0.12f);
         }
     }

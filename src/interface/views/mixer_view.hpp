@@ -170,7 +170,7 @@ public:
         batcher.drawRoundedGradientRect(10, 10, 200, 28, 3.0f, 0.5f,
                                        0.25f, 0.25f, 0.28f, 1.0f,
                                        0.12f, 0.12f, 0.14f, 1.0f);
-        batcher.drawText("ANALOG MIXING CONSOLE", 20, 16, 12.0f, 0.8f, 0.8f, 0.85f, 1.0f);
+        batcher.drawVectorText("ANALOG MIXING CONSOLE", 20, 16, 12.0f, 0.8f, 0.8f, 0.85f, 1.0f);
     }
 
 private:

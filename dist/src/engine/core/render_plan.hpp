@@ -33,6 +33,7 @@ struct SignalRoute {
 struct ProcessorExecution {
     FluxProcessor* processor; 
     std::vector<const std::atomic<float>*> parameterPointers;
+    std::vector<Parameter*> parameters; // Direct pointers for ramp preparation
     
     // Buffer indices into RenderPlan::bufferPool
     std::vector<int> inputBufferIndices;
@@ -40,6 +41,9 @@ struct ProcessorExecution {
     std::vector<int> outputBufferIndices;
 
     std::vector<SignalRoute> outgoingRoutes;
+    
+    // Bypass state pointer - points to FluxNode::m_bypassed for real-time safe bypass check
+    const std::atomic<bool>* bypassPtr = nullptr;
 };
 
 // The complete immutable plan for one audio callback
@@ -47,12 +51,17 @@ struct RenderPlan {
     int blockSize = 0;
     int channels = 2;
 
-    std::vector<ProcessorExecution> sequence;
+    // Groups of processors that can be executed in parallel.
+    // Each outer vector represents a "Level" (Wave) of execution.
+    // All processors within a level are independent.
+    std::vector<std::vector<ProcessorExecution>> levels;
+
     std::vector<std::shared_ptr<FluxProcessor>> processors; // Plan owns the processors
     // Final sink indices for the engine to copy to hardware
     std::vector<int> masterOutputBufferIndices;
 
-    std::vector<size_t> automationLanes; // Placeholder for now
+    // Snapshot of active automation lanes for lock-free processing
+    std::vector<std::shared_ptr<AutomationLane>> activeAutomationLanes;
     
     // Centrally managed buffers to avoid node-local allocations
     std::vector<std::vector<float>> bufferPool;

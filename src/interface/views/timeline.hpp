@@ -203,7 +203,7 @@ public:
                 }
                 
                 batcher.drawQuad(rx, ry, rw, 15, 0.0f, 0.0f, 0.0f, 0.2f);
-                batcher.drawText(reg.name, rx + 6, ry + 2, 9, 0.9f, 0.9f, 0.9f, 1.0f);
+                batcher.drawVectorText(reg.name, rx + 6, ry + 2, 9, 0.9f, 0.9f, 0.9f, 1.0f);
             }
 
             currentY += mainTrackHeight;
@@ -221,7 +221,7 @@ public:
                         // Lane Header/Label
                         std::string paramName = "Unknown";
                         if(auto p = lane->getParameter()) paramName = p->getName();
-                        batcher.drawText(paramName, 10, currentY + 5, 10, 0.6f, 0.6f, 0.65f, 1.0f);
+                        batcher.drawVectorText(paramName, 10, currentY + 5, 10, 0.6f, 0.6f, 0.65f, 1.0f);
                         
                         // --- Arm/Override/Clear Buttons ---
                         float btnX = 150.0f;
@@ -233,19 +233,19 @@ public:
                         bool isRecording = lane->isRecording();
                         Color armColor = isRecording ? Color(0.9f, 0.3f, 0.3f) : Color(0.4f, 0.2f, 0.2f);
                         batcher.drawRoundedRect(btnX, btnY, btnW, btnH, 3.0f, 0.5f, armColor.r, armColor.g, armColor.b, 1.0f);
-                        batcher.drawText("R", btnX + 7, btnY + 2, 10, 1.f, 1.f, 1.f, isRecording ? 1.f : 0.5f);
+                        batcher.drawVectorText("R", btnX + 7, btnY + 2, 10, 1.f, 1.f, 1.f, isRecording ? 1.f : 0.5f);
                         btnX += btnW + 4;
                         
                         // Override Button (Yellow M when overriding)
                         bool isOverride = lane->isOverride();
                         Color ovrColor = isOverride ? Color(0.9f, 0.7f, 0.2f) : Color(0.35f, 0.35f, 0.2f);
                         batcher.drawRoundedRect(btnX, btnY, btnW, btnH, 3.0f, 0.5f, ovrColor.r, ovrColor.g, ovrColor.b, 1.0f);
-                        batcher.drawText("M", btnX + 6, btnY + 2, 10, 1.f, 1.f, 1.f, isOverride ? 1.f : 0.5f);
+                        batcher.drawVectorText("M", btnX + 6, btnY + 2, 10, 1.f, 1.f, 1.f, isOverride ? 1.f : 0.5f);
                         btnX += btnW + 4;
                         
                         // Clear Button (Gray X)
                         batcher.drawRoundedRect(btnX, btnY, btnW, btnH, 3.0f, 0.5f, 0.25f, 0.25f, 0.28f, 1.0f);
-                        batcher.drawText("X", btnX + 7, btnY + 2, 10, 0.9f, 0.4f, 0.4f, 1.0f);
+                        batcher.drawVectorText("X", btnX + 7, btnY + 2, 10, 0.9f, 0.4f, 0.4f, 1.0f);
 
                         // Points & Lines
                         auto& points = lane->getPoints();
@@ -333,7 +333,7 @@ public:
                 int mins = (int)s / 60;
                 int secs = (int)s % 60;
                 snprintf(timeStr, 16, "%d:%02d", mins, secs);
-                batcher.drawText(timeStr, sx + 4, 6, 9, 0.7f, 0.7f, 0.8f, 0.8f);
+                batcher.drawVectorText(timeStr, sx + 4, 6, 9, 0.7f, 0.7f, 0.8f, 0.8f);
             }
         }
 

@@ -22,6 +22,9 @@
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\io\disk_streamer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\midi\midi_device_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\engine\nodes\input_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -86,6 +89,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\interface\widgets\vu_meter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\sdk\funknown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\src\sdk\sdk_registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Alexi\Documents\Beam Audio Flux\third_party\glad.c">

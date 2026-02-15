@@ -67,6 +67,36 @@ public:
     void drawText(const std::string& text, float x, float y, float size, float r, float g, float b, float a);
     
     /**
+     * @brief Draws text using a procedural vector font (lines). Use for scalable, sharp technical text.
+     */
+    void drawVectorText(const std::string& text, float x, float y, float size, float r, float g, float b, float a);
+    
+    /**
+     * @brief Returns the proportional width of a character for the vector font.
+     */
+    float getCharWidth(char c, float size) const;
+
+    /**
+     * @brief Measures the total width of a string using the vector font proportional logic.
+     */
+    float getVectorTextWidth(const std::string& text, float size) const;
+
+    /**
+     * @brief Saves current OpenGL state to prevent VST corruption.
+     */
+    void saveState();
+
+    /**
+     * @brief Restores previously saved OpenGL state.
+     */
+    void restoreState();
+
+    /**
+     * @brief Draws an additive glow (bloom) quad.
+     */
+    void drawGlow(float x, float y, float w, float h, float radius, float r, float g, float b, float a);
+    
+    /**
      * @brief Draws a textured quad with specific UV coordinates.
      */
     void drawTexture(unsigned int textureId, float x, float y, float w, float h, 
@@ -106,6 +136,11 @@ public:
     void pushOffset(float x, float y);
     void popOffset();
 
+    // Accessors for FBO rendering
+    float getOffsetX() const { return m_currentOffsetX; }
+    float getOffsetY() const { return m_currentOffsetY; }
+    void setOffset(float x, float y) { m_currentOffsetX = x; m_currentOffsetY = y; }
+
     struct ViewTransform {
         float tx, ty, zoom, originX, originY;
     };
@@ -144,6 +179,11 @@ private:
     float m_currentOffsetY = 0.0f;
     std::vector<float> m_offsetXStack;
     std::vector<float> m_offsetYStack;
+
+    // Batch State Tracking
+    int m_currentMode = 0;
+    int m_currentBlendMode = 0; // 0 = Alpha, 1 = Additive
+    unsigned int m_currentTextureId = 0;
 };
 
 } // namespace Beam

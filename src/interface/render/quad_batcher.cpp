@@ -105,7 +105,7 @@ static const unsigned char FONT_DATA[95][8] = {
     {0x00,0x00,0x00,0x76,0xdc,0x00,0x00,0x00}  // ~
 };
 
-QuadBatcher::QuadBatcher(size_t maxQuads) : m_maxQuads(maxQuads), m_quadCount(0) {
+QuadBatcher::QuadBatcher(size_t maxQuads) : m_maxQuads(maxQuads), m_quadCount(0), m_currentMode(0), m_currentTextureId(0) {
     m_vertices.reserve(maxQuads * 4);
 
     glGenVertexArrays(1, &m_vao);
@@ -183,9 +183,18 @@ void QuadBatcher::createFontTexture() {
 void QuadBatcher::begin() {
     m_quadCount = 0;
     m_vertices.clear();
+    m_currentMode = -1; 
+    m_currentBlendMode = 0;
+    m_currentTextureId = 0;
 }
 
 void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g, float b, float a) {
+    if (m_currentMode != 0 || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 0;
+        m_currentBlendMode = 0; // Standard Alpha
+        m_currentTextureId = 0;
+    }
     if (m_quadCount >= m_maxQuads) flush();
     
     float ox = x + m_currentOffsetX;
@@ -201,6 +210,12 @@ void QuadBatcher::drawQuad(float x, float y, float w, float h, float r, float g,
 void QuadBatcher::drawGradientRect(float x, float y, float w, float h, 
                                   float r1, float g1, float b1, float a1,
                                   float r2, float g2, float b2, float a2) {
+    if (m_currentMode != 0 || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 0;
+        m_currentBlendMode = 0;
+        m_currentTextureId = 0;
+    }
     if (m_quadCount >= m_maxQuads) flush();
 
     float ox = x + m_currentOffsetX;
@@ -220,8 +235,17 @@ void QuadBatcher::drawRoundedRect(float x, float y, float w, float h, float radi
 void QuadBatcher::drawRoundedGradientRect(float x, float y, float w, float h, float radius, float softness,
                                          float r1, float g1, float b1, float a1,
                                          float r2, float g2, float b2, float a2) {
-    flush();
+    if (m_currentMode != 2 || m_currentBlendMode != 0) {
+        flush(); 
+        m_currentMode = 2;
+        m_currentBlendMode = 0;
+        m_currentTextureId = 0;
+    } else {
+        flush(); // Still flush for mode 2 because uniforms change per-call
+    }
+
     if (m_shader) {
+        m_shader->use();
         m_shader->setInt("mode", 2);
         m_shader->setFloat("uRadius", radius);
         m_shader->setFloat("uEdgeSoftness", softness);
@@ -237,14 +261,16 @@ void QuadBatcher::drawRoundedGradientRect(float x, float y, float w, float h, fl
     m_vertices.push_back({{ox + w, oy + h}, {1, 1}, {r2, g2, b2, a2}});
     m_vertices.push_back({{ox, oy + h}, {0, 1}, {r2, g2, b2, a2}});
     m_quadCount++;
-
-    flush();
-    if (m_shader) m_shader->setInt("mode", 0);
 }
 
 void QuadBatcher::drawBeveledRect(float x, float y, float w, float h, float radius, float softness, float r, float g, float b, float a) {
     flush();
+    m_currentMode = 4;
+    m_currentBlendMode = 0;
+    m_currentTextureId = 0;
+
     if (m_shader) {
+        m_shader->use();
         m_shader->setInt("mode", 4);
         m_shader->setFloat("uRadius", radius);
         m_shader->setFloat("uEdgeSoftness", softness);
@@ -262,12 +288,17 @@ void QuadBatcher::drawBeveledRect(float x, float y, float w, float h, float radi
     m_quadCount++;
 
     flush();
-    if (m_shader) m_shader->setInt("mode", 0);
+    m_currentMode = 0;
 }
 
 void QuadBatcher::drawChassisPanel(float x, float y, float w, float h, float radius, float r, float g, float b, float a) {
     flush();
+    m_currentMode = 5;
+    m_currentBlendMode = 0;
+    m_currentTextureId = 0;
+
     if (m_shader) {
+        m_shader->use();
         m_shader->setInt("mode", 5);
         m_shader->setFloat("uRadius", radius);
         m_shader->setFloat("uEdgeSoftness", 1.0f);
@@ -285,18 +316,21 @@ void QuadBatcher::drawChassisPanel(float x, float y, float w, float h, float rad
     m_quadCount++;
 
     flush();
-    if (m_shader) m_shader->setInt("mode", 0);
+    m_currentMode = 0;
 }
 
 void QuadBatcher::drawTexture(unsigned int textureId, float x, float y, float w, float h, 
                               float u0, float v0, float u1, float v1,
                               float r, float g, float b, float a) 
 {
-    flush(); 
-    if (m_shader) {
-        m_shader->setInt("mode", 1);
-        glBindTexture(GL_TEXTURE_2D, textureId);
+    if (m_currentMode != 1 || m_currentTextureId != textureId || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 1;
+        m_currentBlendMode = 0;
+        m_currentTextureId = textureId;
     }
+
+    if (m_quadCount >= m_maxQuads) flush();
 
     float ox = x + m_currentOffsetX;
     float oy = y + m_currentOffsetY;
@@ -307,16 +341,17 @@ void QuadBatcher::drawTexture(unsigned int textureId, float x, float y, float w,
     m_vertices.push_back({{ox, oy + h}, {u0, v1}, {r, g, b, a}});
 
     m_quadCount++;
-    flush(); 
-    if (m_shader) { m_shader->setInt("mode", 0); glBindTexture(GL_TEXTURE_2D, 0); }
 }
 
 void QuadBatcher::drawSmoothLine(float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a) {
-    flush();
-    if (m_shader) {
-        m_shader->setInt("mode", 3);
-        m_shader->setFloat("uEdgeSoftness", 0.1f);
+    if (m_currentMode != 3 || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 3;
+        m_currentBlendMode = 0;
+        m_currentTextureId = 0;
+        if (m_shader) m_shader->setFloat("uEdgeSoftness", 0.1f);
     }
+    if (m_quadCount >= m_maxQuads) flush();
 
     float ox1 = x1 + m_currentOffsetX; float oy1 = y1 + m_currentOffsetY;
     float ox2 = x2 + m_currentOffsetX; float oy2 = y2 + m_currentOffsetY;
@@ -350,10 +385,11 @@ void QuadBatcher::drawCurve(const std::vector<std::pair<float, float>>& points, 
 }
 
 void QuadBatcher::drawText(const std::string& text, float x, float y, float size, float r, float g, float b, float a) {
-    flush();
-    if (m_shader) {
-        m_shader->setInt("mode", 1);
-        glBindTexture(GL_TEXTURE_2D, m_fontTexture);
+    if (m_currentMode != 1 || m_currentTextureId != m_fontTexture || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 1;
+        m_currentBlendMode = 0;
+        m_currentTextureId = m_fontTexture;
     }
 
     float curX = x + m_currentOffsetX;
@@ -373,15 +409,74 @@ void QuadBatcher::drawText(const std::string& text, float x, float y, float size
         m_vertices.push_back({{curX, curY + size}, {tx, ty + th}, {r, g, b, a}});
 
         m_quadCount++;
-        curX += size;
+        curX += getCharWidth(c, size);
         if (m_quadCount >= m_maxQuads) flush(); 
     }
+}
 
-    flush();
-    if (m_shader) { m_shader->setInt("mode", 0); glBindTexture(GL_TEXTURE_2D, 0); }
+void QuadBatcher::drawVectorText(const std::string& text, float x, float y, float size, float r, float g, float b, float a) {
+    // Revert to pixel-based rendering as per user request ("Vector things are horrible")
+    // Forwarding to drawText uses the internal bitmap font.
+    drawText(text, x, y, size, r, g, b, a);
+}
+
+float QuadBatcher::getCharWidth(char c, float size) const {
+    char up = toupper(c);
+    if (up == 'I' || up == '.' || up == ',' || up == ':' || up == ';') return size * 0.55f;
+    if (up == ' ') return size * 0.8f;
+    if (up == 'L' || up == 'F' || up == 'T' || up == '1') return size * 0.75f;
+    if (up == 'M' || up == 'W') return size * 1.0f;
+    if (up == 'D' || up == 'G' || up == 'O' || up == 'Q' || up == '@') return size * 0.95f;
+    return size * 0.9f; // Generous "Technical" width (monospaced-ish)
+}
+
+float QuadBatcher::getVectorTextWidth(const std::string& text, float size) const {
+    float total = 0;
+    for (char c : text) total += getCharWidth(c, size);
+    return total;
+}
+
+static GLint s_savedBlendSrcRGB, s_savedBlendDstRGB, s_savedBlendSrcAlpha, s_savedBlendDstAlpha;
+static GLboolean s_savedBlend;
+static GLint s_savedScissorBox[4];
+static GLboolean s_savedScissorTest;
+
+void QuadBatcher::saveState() {
+    glGetIntegerv(0x80C9, &s_savedBlendSrcRGB);   // GL_BLEND_SRC_RGB
+    glGetIntegerv(0x80C8, &s_savedBlendDstRGB);   // GL_BLEND_DST_RGB
+    glGetIntegerv(0x80CB, &s_savedBlendSrcAlpha); // GL_BLEND_SRC_ALPHA
+    glGetIntegerv(0x80CA, &s_savedBlendDstAlpha); // GL_BLEND_DST_ALPHA
+    s_savedBlend = glIsEnabled(GL_BLEND);
+    glGetIntegerv(GL_SCISSOR_BOX, s_savedScissorBox);
+    s_savedScissorTest = glIsEnabled(GL_SCISSOR_TEST);
+}
+
+void QuadBatcher::restoreState() {
+    if (s_savedBlend) glEnable(GL_BLEND); else glDisable(GL_BLEND);
+    glBlendFunc(s_savedBlendSrcRGB, s_savedBlendDstRGB);
+    if (s_savedScissorTest) glEnable(GL_SCISSOR_TEST); else glDisable(GL_SCISSOR_TEST);
+    glScissor(s_savedScissorBox[0], s_savedScissorBox[1], s_savedScissorBox[2], s_savedScissorBox[3]);
+}
+
+void QuadBatcher::drawGlow(float x, float y, float w, float h, float radius, float r, float g, float b, float a) {
+    if (m_currentBlendMode != 1) {
+        flush();
+        m_currentBlendMode = 1; // Additive
+    }
+    
+    // Draw using large softness for bloom effect
+    drawRoundedRect(x, y, w, h, radius, h * 0.5f, r, g, b, a);
+    
+    // Note: m_currentBlendMode remains 1 until next draw call resets it.
 }
 
 void QuadBatcher::drawLine(float x1, float y1, float x2, float y2, float thickness, float r, float g, float b, float a) {
+    if (m_currentMode != 0 || m_currentBlendMode != 0) {
+        flush();
+        m_currentMode = 0;
+        m_currentBlendMode = 0;
+        m_currentTextureId = 0;
+    }
     if (m_quadCount >= m_maxQuads) flush();
 
     float ox1 = x1 + m_currentOffsetX; float oy1 = y1 + m_currentOffsetY;
@@ -516,9 +611,24 @@ void QuadBatcher::flush() {
         m_shader->setFloat("uOriginX", m_viewOriginX);
         m_shader->setFloat("uOriginY", m_viewOriginY);
         m_shader->setFloat("uZoom", m_viewZoom);
+
+        m_shader->setInt("mode", m_currentMode);
+        
+        glActiveTexture(0x84C0); // GL_TEXTURE0
+        glBindTexture(GL_TEXTURE_2D, m_currentTextureId);
+    }
+
+    // Ensure BLEND state is correct for this batch
+    glEnable(GL_BLEND);
+    if (m_currentBlendMode == 1) {
+        glBlendFunc(GL_ONE, GL_ONE); // Additive
+    } else {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Standard
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+    // Buffer Orphaning: Tell the driver we don't care about previous content.
+    glBufferData(GL_ARRAY_BUFFER, m_maxQuads * 4 * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(Vertex), m_vertices.data());
 
     glBindVertexArray(m_vao);

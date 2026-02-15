@@ -87,6 +87,16 @@ public:
     float getX() const { return m_bounds.x; }
     float getY() const { return m_bounds.y; }
 
+    void setMinWidth(float w) { m_minWidth = w; }
+    void setMinHeight(float h) { m_minHeight = h; }
+    void setMaxWidth(float w) { m_maxWidth = w; }
+    void setMaxHeight(float h) { m_maxHeight = h; }
+    
+    float getMinWidth() const { return m_minWidth; }
+    float getMinHeight() const { return m_minHeight; }
+    float getMaxWidth() const { return m_maxWidth; }
+    float getMaxHeight() const { return m_maxHeight; }
+
     virtual void resized() {}
     virtual void getPreferredSize(float& w, float& h) const { w = 0; h = 0; }
     
@@ -168,6 +178,10 @@ public:
     void setLookAndFeel(LookAndFeel* lf) { m_lookAndFeel = lf; }
     LookAndFeel& getLookAndFeel() const;
 
+    // --- Caching / Smart Buffering ---
+    void setBufferedToImage(bool buffered);
+    void repaint() { m_needsRepaint = true; } // Mark for FBO redraw
+    
 protected:
     Rect m_bounds = {0, 0, 0, 0};
     bool m_isVisible = true;
@@ -175,9 +189,23 @@ protected:
     bool m_isDragging = false;
     bool m_interceptsMouseClicks = true;
     bool m_clipsChildren = false; 
+    
+    // FBO Caching
+    bool m_bufferedToImage = false;
+    bool m_needsRepaint = true;
+    unsigned int m_fbo = 0;
+    unsigned int m_fboTexture = 0;
+    int m_cachedWidth = 0;
+    int m_cachedHeight = 0;
+    
     float m_dragStartX = 0, m_dragStartY = 0;
     float m_lastMouseX = 0, m_lastMouseY = 0;
     std::string m_name;
+
+    float m_minWidth = -1.0f;
+    float m_minHeight = -1.0f;
+    float m_maxWidth = -1.0f;
+    float m_maxHeight = -1.0f;
 
     std::shared_ptr<Component> m_capturedChild = nullptr;
     std::vector<std::shared_ptr<Component>> m_children;

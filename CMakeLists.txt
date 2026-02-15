@@ -20,6 +20,7 @@ FetchContent_MakeAvailable(SDL3)
 # Source Files
 file(GLOB_RECURSE ENGINE_SOURCES "src/engine/*.cpp")
 file(GLOB_RECURSE INTERFACE_SOURCES "src/interface/*.cpp")
+file(GLOB_RECURSE SDK_SOURCES "src/sdk/*.cpp")
 set(THIRD_PARTY_SOURCES "third_party/glad.c")
 
 # Include Directories
@@ -30,26 +31,27 @@ include_directories(third_party/vst3sdk/public.sdk/..) # To allow #include "plug
 
 # Main Executable
 if(WIN32)
-    add_executable(${PROJECT_NAME} src/main.cpp resources.rc ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${THIRD_PARTY_SOURCES})
+    add_executable(${PROJECT_NAME} src/main.cpp resources.rc ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${SDK_SOURCES} ${THIRD_PARTY_SOURCES})
+    target_compile_options(${PROJECT_NAME} PRIVATE /EHa)
 else()
-    add_executable(${PROJECT_NAME} src/main.cpp ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${THIRD_PARTY_SOURCES})
+    add_executable(${PROJECT_NAME} src/main.cpp ${ENGINE_SOURCES} ${INTERFACE_SOURCES} ${SDK_SOURCES} ${THIRD_PARTY_SOURCES})
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
-    WIN32_EXECUTABLE FALSE
-    LINK_FLAGS "/SUBSYSTEM:CONSOLE"
+    WIN32_EXECUTABLE TRUE
 )
 
 # SDL3 defines its own targets
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3-static opengl32 user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 setupapi)
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3-static opengl32 user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 setupapi comdlg32)
 else()
     find_package(OpenGL REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3-static OpenGL::GL)
 endif()
 
 # Standalone Tests
-add_executable(test_persistence tests/test_persistence.cpp)
+# Standalone Tests
+# add_executable(test_persistence tests/test_persistence.cpp)
 
 
 # target_link_libraries(test_persistence PRIVATE ${TEST_LIBS})

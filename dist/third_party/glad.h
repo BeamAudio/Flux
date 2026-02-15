@@ -91,7 +91,29 @@ extern PFNGLUNIFORM1FPROC glUniform1f;
 extern PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
 extern PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays;
 extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+extern PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays;
+extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 extern PFNGLACTIVETEXTUREPROC glActiveTexture;
+
+// --- FBO Extension ---
+#ifndef GL_FRAMEBUFFER
+#define GL_FRAMEBUFFER 0x8D40
+#define GL_COLOR_ATTACHMENT0 0x8CE0
+#define GL_FRAMEBUFFER_COMPLETE 0x8CD5
+#endif
+
+typedef void (APIENTRY * PFNGLGENFRAMEBUFFERSPROC) (GLsizei n, GLuint *framebuffers);
+typedef void (APIENTRY * PFNGLBINDFRAMEBUFFERPROC) (GLenum target, GLuint framebuffer);
+typedef void (APIENTRY * PFNGLDELETEFRAMEBUFFERSPROC) (GLsizei n, const GLuint *framebuffers);
+typedef void (APIENTRY * PFNGLFRAMEBUFFERTEXTURE2DPROC) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+typedef GLenum (APIENTRY * PFNGLCHECKFRAMEBUFFERSTATUSPROC) (GLenum target);
+
+extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
+extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+extern PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;
+extern PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D;
+extern PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus;
+
 
 int gladLoadGLLoader(void* (*load)(const char* name));
 

@@ -19,7 +19,10 @@ public:
 
     void updateParameters(const float* paramValues) override {
         // Map order: Master Gain, Transformer, Crosstalk
-        m_gain = paramValues[0];
+        float gainDB = paramValues[0];
+        m_gain = std::pow(10.0f, gainDB / 20.0f);
+        if (gainDB <= -60.0f) m_gain = 0.0f; // Silence floor
+
         m_iron = paramValues[1];
         m_xtalk = paramValues[2];
     }
@@ -54,6 +57,15 @@ public:
             L = AnalogBase::saturateTransformer(L * m_gain, m_iron);
             R = AnalogBase::saturateTransformer(R * m_gain, m_iron);
 
+            // 3. Safety Clipper & NaN Check
+            if (!std::isfinite(L)) L = 0.0f;
+            if (!std::isfinite(R)) R = 0.0f;
+            
+            if (L > 1.0f) L = 1.0f;
+            if (L < -1.0f) L = -1.0f;
+            if (R > 1.0f) R = 1.0f;
+            if (R < -1.0f) R = -1.0f;
+
             if (std::abs(L) > peakL) peakL = std::abs(L);
             if (std::abs(R) > peakR) peakR = std::abs(R);
             
@@ -81,7 +93,7 @@ public:
         m_meterSource->addMeter("Output L");
         m_meterSource->addMeter("Output R");
 
-        addParameter(std::make_shared<Parameter>("Master Gain", 0.0f, 1.5f, 1.0f));
+        addParameter(std::make_shared<Parameter>("Master Gain", -60.0f, 12.0f, 0.0f));
         addParameter(std::make_shared<Parameter>("Transformer", 0.0f, 1.0f, 0.2f));
         addParameter(std::make_shared<Parameter>("Crosstalk", 0.0f, 0.1f, 0.01f));
     }

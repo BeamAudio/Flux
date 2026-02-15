@@ -111,6 +111,7 @@ public:
 
     void setBypassed(bool bypass) { m_bypassed = bypass; }
     bool isBypassed() const { return m_bypassed; }
+    const std::atomic<bool>* getBypassAtomic() const { return &m_bypassed; }
 
     std::shared_ptr<MeterSource> getMeterSource() { return m_meterSource; }
 

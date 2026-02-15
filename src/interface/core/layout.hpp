@@ -311,10 +311,18 @@ public:
                 }
 
                 if (isRow) {
-                    if (item.component) item.component->setBounds(currentMainPos + item.marginLeft, currentCrossPos + item.marginTop + crossOffset, itemMainSize, itemCrossSize);
+                    float x = std::round(currentMainPos + item.marginLeft);
+                    float y = std::round(currentCrossPos + item.marginTop + crossOffset);
+                    float w = std::round(itemMainSize);
+                    float h = std::round(itemCrossSize);
+                    if (item.component) item.component->setBounds(x, y, w, h);
                     currentMainPos += itemMainSize + item.marginLeft + item.marginRight + spacing;
                 } else {
-                    if (item.component) item.component->setBounds(currentCrossPos + item.marginLeft + crossOffset, currentMainPos + item.marginTop, itemCrossSize, itemMainSize);
+                    float x = std::round(currentCrossPos + item.marginLeft + crossOffset);
+                    float y = std::round(currentMainPos + item.marginTop);
+                    float w = std::round(itemCrossSize);
+                    float h = std::round(itemMainSize);
+                    if (item.component) item.component->setBounds(x, y, w, h);
                     currentMainPos += itemMainSize + item.marginTop + item.marginBottom + spacing;
                 }
             }

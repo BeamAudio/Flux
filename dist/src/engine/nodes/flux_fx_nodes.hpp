@@ -1,109 +1,109 @@
 #ifndef FLUX_FX_NODES_HPP
 #define FLUX_FX_NODES_HPP
 
-#include "engine/plugins/flux_plugin.hpp"
+#include "sdk/beam_sdk.hpp"
 #include "engine/nodes/biquad_filter_node.hpp"
 #include "engine/nodes/delay_node.hpp"
 #include "interface/editors/filter_editor.hpp"
 
 namespace Beam {
 
-// --- Gain Processor ---
-class FluxGainProcessor : public FluxPluginProcessor {
+// --- Gain Node ---
+class FluxGainNode : public SDK::BeamPlugin {
 public:
-    void processBlock(const float* input, float* output, int totalSamples) override {
-        float gain = getParam(0);
-        for (int i = 0; i < totalSamples; ++i) {
-            output[i] = input[i] * gain;
+    FluxGainNode(int, float) : BeamPlugin("Gain", "Utility") {
+        gain = &addFloatParam("Gain", 0.0f, 2.0f, 1.0f);
+    }
+    
+    void process(float** io, int frames) override {
+        float g = gain->getValue();
+        for(int ch=0; ch<2; ++ch) {
+            if(!io[ch]) continue;
+            for (int i = 0; i < frames; ++i) {
+                io[ch][i] *= g;
+            }
         }
     }
-};
-
-class FluxGainNode : public FluxPlugin {
-public:
-    FluxGainNode(int bufferSize) : FluxPlugin("Gain", bufferSize, 44100.0f) {
-        addParam("Gain", 0.0f, 2.0f, 1.0f);
-    }
-    std::shared_ptr<FluxProcessor> createProcessor() override {
-        return std::make_shared<FluxGainProcessor>();
-    }
-};
-
-// --- Filter Processor ---
-class FluxFilterProcessor : public FluxPluginProcessor {
-public:
-    FluxFilterProcessor(float sampleRate) : m_sampleRate(sampleRate) {
-        m_filter = std::make_unique<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, sampleRate);
-    }
-    void processBlock(const float* input, float* output, int totalSamples) override {
-        m_filter->setCutoff(getParam(0));
-        m_filter->setQ(getParam(1));
-        std::copy(input, input + totalSamples, output);
-        m_filter->process(output, totalSamples / 2, 2);
-    }
-    BiquadFilterNode* getInternalFilter() { return m_filter.get(); }
 private:
-    float m_sampleRate;
-    std::unique_ptr<BiquadFilterNode> m_filter;
+    Parameter* gain;
 };
 
-class FluxFilterNode : public FluxPlugin {
+// --- Filter Node ---
+class FluxFilterNode : public SDK::BeamPlugin {
 public:
-    FluxFilterNode(int bufferSize, float sampleRate) 
-        : FluxPlugin("Filter", bufferSize, sampleRate), m_sampleRate(sampleRate) 
+    FluxFilterNode(int, float sampleRate) 
+        : BeamPlugin("Filter", "Filter"), m_sampleRate(sampleRate) 
     {
-        addParam("Cutoff", 20.0f, 20000.0f, 1000.0f);
-        addParam("Reso", 0.1f, 10.0f, 0.707f);
+        cutoff = &addFloatParam("Cutoff", 20.0f, 20000.0f, 1000.0f);
+        reso = &addFloatParam("Reso", 0.1f, 10.0f, 0.707f);
+        for(int i=0; i<2; ++i) m_filter[i] = std::make_unique<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, sampleRate);
     }
-    std::shared_ptr<FluxProcessor> createProcessor() override {
-        auto proc = std::make_shared<FluxFilterProcessor>(m_sampleRate);
-        m_lastProcessor = proc.get();
-        return proc;
+
+    void process(float** io, int frames) override {
+        float cf = cutoff->getValue();
+        float q = reso->getValue();
+        for(int ch=0; ch<2; ++ch) {
+            if(!io[ch]) continue;
+            m_filter[ch]->setCutoff(cf);
+            m_filter[ch]->setQ(q);
+            m_filter[ch]->process(io[ch], frames, 1);
+        }
     }
-    BiquadFilterNode* getInternalFilter() { 
-        if (m_lastProcessor) return m_lastProcessor->getInternalFilter();
-        if (!m_dummyFilter) m_dummyFilter = std::make_unique<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, m_sampleRate);
-        return m_dummyFilter.get();
+
+    void prepareToPlay(float sr, int) override {
+        m_sampleRate = sr;
+        for(int i=0; i<2; ++i) m_filter[i] = std::make_unique<BiquadFilterNode>(FilterType::LowPass, 1000.0f, 0.707f, sr);
     }
+
+    BiquadFilterNode* getInternalFilter(int ch = 0) { return m_filter[ch].get(); }
+    
     std::shared_ptr<Component> createEditor(const NodeEditorContext& ctx) override {
         return std::make_shared<FilterEditor>(this);
     }
+
 private:
     float m_sampleRate;
-    FluxFilterProcessor* m_lastProcessor = nullptr;
-    std::unique_ptr<BiquadFilterNode> m_dummyFilter;
+    Parameter *cutoff, *reso;
+    std::unique_ptr<BiquadFilterNode> m_filter[2];
 };
 
-// --- Delay Processor ---
-class FluxDelayProcessor : public FluxPluginProcessor {
+// --- Delay Node ---
+class FluxDelayNode : public SDK::BeamPlugin {
 public:
-    FluxDelayProcessor(float sampleRate) {
-        m_delay = std::make_unique<DelayNode>(2.0f, 0.3f, sampleRate);
-    }
-    void processBlock(const float* input, float* output, int totalSamples) override {
-        m_delay->setDelayTime(getParam(0));
-        m_delay->setFeedback(getParam(1));
-        std::copy(input, input + totalSamples, output);
-        m_delay->process(output, totalSamples / 2, 2);
-    }
-private:
-    std::unique_ptr<DelayNode> m_delay;
-};
-
-class FluxDelayNode : public FluxPlugin {
-public:
-    FluxDelayNode(int bufferSize, float sampleRate) 
-        : FluxPlugin("Delay", bufferSize, sampleRate), m_sampleRate(sampleRate) 
+    FluxDelayNode(int, float sampleRate) 
+        : BeamPlugin("Delay", "Delay"), m_sampleRate(sampleRate) 
     {
-        addParam("Time", 0.0f, 2.0f, 0.5f);
-        addParam("Feedback", 0.0f, 0.95f, 0.3f);
+        time = &addFloatParam("Time", 0.0f, 2.0f, 0.5f);
+        feedback = &addFloatParam("Feedback", 0.0f, 0.95f, 0.3f);
+        for(int i=0; i<2; ++i) m_delay[i] = std::make_unique<DelayNode>(2.0f, 0.3f, sampleRate);
     }
-    std::shared_ptr<FluxProcessor> createProcessor() override {
-        return std::make_shared<FluxDelayProcessor>(m_sampleRate);
+
+    void process(float** io, int frames) override {
+        float t = time->getValue();
+        float fb = feedback->getValue();
+        for(int ch=0; ch<2; ++ch) {
+            if(!io[ch]) continue;
+            m_delay[ch]->setDelayTime(t);
+            m_delay[ch]->setFeedback(fb);
+            m_delay[ch]->process(io[ch], frames, 1);
+        }
     }
+
+    void prepareToPlay(float sr, int) override {
+        m_sampleRate = sr;
+        for(int i=0; i<2; ++i) m_delay[i] = std::make_unique<DelayNode>(2.0f, 0.3f, sr);
+    }
+
 private:
     float m_sampleRate;
+    Parameter *time, *feedback;
+    std::unique_ptr<DelayNode> m_delay[2];
 };
+
+// Registration
+REGISTER_BEAM_PLUGIN(FluxGainNode)
+REGISTER_BEAM_PLUGIN(FluxFilterNode)
+REGISTER_BEAM_PLUGIN(FluxDelayNode)
 
 } // namespace Beam
 

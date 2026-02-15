@@ -7,14 +7,13 @@
 #include <cmath>
 #include <sstream>
 
-#include <xmmintrin.h>
-#include <emmintrin.h>
+#include <immintrin.h>
 
 namespace Beam {
 
 /**
  * @class SIMD
- * @brief High-performance audio arithmetic using SSE.
+ * @brief High-performance audio arithmetic using SSE and AVX2.
  */
 class SIMD {
 public:
@@ -23,95 +22,135 @@ public:
      */
     static void add(float* dst, const float* src, int count) {
         int i = 0;
-        // Process blocks of 4 floats
+#ifdef __AVX2__
+        // Process blocks of 8 floats (AVX2)
+        for (; i <= count - 8; i += 8) {
+            __m256 vsrc = _mm256_loadu_ps(src + i);
+            __m256 vdst = _mm256_loadu_ps(dst + i);
+            _mm256_storeu_ps(dst + i, _mm256_add_ps(vdst, vsrc));
+        }
+#endif
+        // Process blocks of 4 floats (SSE)
         for (; i <= count - 4; i += 4) {
             __m128 vsrc = _mm_loadu_ps(src + i);
             __m128 vdst = _mm_loadu_ps(dst + i);
             _mm_storeu_ps(dst + i, _mm_add_ps(vdst, vsrc));
         }
-        // Remaining elements
         for (; i < count; ++i) dst[i] += src[i];
     }
 
     static void copy(float* dst, const float* src, int count) {
+        if (count <= 0) return;
         memcpy(dst, src, count * sizeof(float));
     }
 
     static void set(float* dst, float val, int count) {
         int i = 0;
-        __m128 vval = _mm_set1_ps(val);
+#ifdef __AVX2__
+        __m256 vval256 = _mm256_set1_ps(val);
+        for (; i <= count - 8; i += 8) {
+            _mm256_storeu_ps(dst + i, vval256);
+        }
+#endif
+        __m128 vval128 = _mm_set1_ps(val);
         for (; i <= count - 4; i += 4) {
-            _mm_storeu_ps(dst + i, vval);
+            _mm_storeu_ps(dst + i, vval128);
         }
         for (; i < count; ++i) dst[i] = val;
     }
 
     /**
      * @brief Adds source to dest with a scalar gain.
-     * dst[i] += src[i] * gain
      */
     static void add_with_gain(const float* src, float* dst, float gain, int count) {
         int i = 0;
-        __m128 vGain = _mm_set1_ps(gain);
+#ifdef __AVX2__
+        __m256 vGain256 = _mm256_set1_ps(gain);
+        for (; i <= count - 8; i += 8) {
+            __m256 vsrc = _mm256_loadu_ps(src + i);
+            __m256 vdst = _mm256_loadu_ps(dst + i);
+            _mm256_storeu_ps(dst + i, _mm256_add_ps(vdst, _mm256_mul_ps(vsrc, vGain256)));
+        }
+#endif
+        __m128 vGain128 = _mm_set1_ps(gain);
         for (; i <= count - 4; i += 4) {
             __m128 vsrc = _mm_loadu_ps(src + i);
             __m128 vdst = _mm_loadu_ps(dst + i);
-            __m128 vScaled = _mm_mul_ps(vsrc, vGain);
-            vdst = _mm_add_ps(vdst, vScaled);
-            _mm_storeu_ps(dst + i, vdst);
+            _mm_storeu_ps(dst + i, _mm_add_ps(vdst, _mm_mul_ps(vsrc, vGain128)));
         }
-        for (; i < count; ++i) {
-            dst[i] += src[i] * gain;
+        for (; i < count; ++i) dst[i] += src[i] * gain;
+    }
+
+    /**
+     * @brief High-quality stereo panning with stereo image preservation.
+     * 
+     * Uses "Balance + Crossfeed" approach:
+     * - At center (pan=0.5): Full stereo separation, unity gain
+     * - Panning left: Right channel gradually crossfades into left
+     * - Panning right: Left channel gradually crossfades into right
+     * - Constant power law applied for smooth transitions
+     */
+    static void add_with_gain_pan(const float* src, float* dst, float gain, float panL, float panR, int frames) {
+        // panL/panR are already cos/sin of (pan * pi/2)
+        // pan=0.5 gives panL=panR~=0.707 (center)
+        // pan=0 gives panL=1, panR=0 (hard left)
+        // pan=1 gives panL=0, panR=1 (hard right)
+        
+        for (int i = 0; i < frames; ++i) {
+            float srcL = src[i * 2] * gain;
+            float srcR = src[i * 2 + 1] * gain;
+            
+            // Calculate balance from pan coefficients (0=left, 0.5=center, 1=right)
+            float balance = panR / (panL + panR + 1e-6f);
+            
+            // Crossfeed amount: 0 at center, increases toward extremes
+            float crossfeed = std::abs(balance - 0.5f) * 2.0f;
+            
+            // Mix channels based on pan direction
+            float mixL = srcL + srcR * crossfeed * (1.0f - balance);
+            float mixR = srcR + srcL * crossfeed * balance;
+            
+            // Apply pan coefficients
+            dst[i * 2]     += mixL * panL;
+            dst[i * 2 + 1] += mixR * panR;
         }
     }
 
     /**
-     * @brief Adds interleaved stereo source to dest with gain and pan.
+     * @brief Optimized Direct Form II Transposed Biquad Filter.
+     * Applies the filter in-place to the buffer.
      */
-    static void add_with_gain_pan(const float* src, float* dst, float gain, float panL, float panR, int frames) {
-        int i = 0;
-        __m128 vG = _mm_set1_ps(gain);
-        __m128 vP = _mm_set_ps(panR, panL, panR, panL);
-        __m128 vGP = _mm_mul_ps(vG, vP);
-
-        for (; i <= frames - 2; i += 2) {
-            __m128 vsrc = _mm_loadu_ps(src + i * 2);
-            __m128 vdst = _mm_loadu_ps(dst + i * 2);
-            __m128 vScaled = _mm_mul_ps(vsrc, vGP);
-            vdst = _mm_add_ps(vdst, vScaled);
-            _mm_storeu_ps(dst + i * 2, vdst);
-        }
-        for (; i < frames; ++i) {
-            dst[i * 2] += src[i * 2] * gain * panL;
-            dst[i * 2 + 1] += src[i * 2 + 1] * gain * panR;
+    static void process_biquad(float* buffer, int count, float b0, float b1, float b2, float a1, float a2, float& z1, float& z2) {
+        for (int i = 0; i < count; ++i) {
+            float in = buffer[i];
+            float out = in * b0 + z1;
+            z1 = in * b1 - out * a1 + z2;
+            z2 = in * b2 - out * a2;
+            buffer[i] = out;
         }
     }
 
     /**
      * @brief Calculates the sum of squared differences for YIN algorithm.
-     * sum((buffer[j] - buffer[j+tau])^2)
      */
     static float yin_difference(const float* buffer, int tau, int N) {
         float diff = 0.0f;
-        __m128 vDiff = _mm_setzero_ps();
         int j = 0;
+        __m128 vDiff = _mm_setzero_ps();
         
         for (; j <= N - 4; j += 4) {
             __m128 v1 = _mm_loadu_ps(&buffer[j]);
             __m128 v2 = _mm_loadu_ps(&buffer[j + tau]);
             __m128 vD = _mm_sub_ps(v1, v2);
-            __m128 vSq = _mm_mul_ps(vD, vD);
-            vDiff = _mm_add_ps(vDiff, vSq);
+            vDiff = _mm_add_ps(vDiff, _mm_mul_ps(vD, vD));
         }
         
-        // Horizontal sum
         __m128 vShuf = _mm_shuffle_ps(vDiff, vDiff, _MM_SHUFFLE(2, 3, 0, 1));
         vDiff = _mm_add_ps(vDiff, vShuf);
         vShuf = _mm_movehl_ps(vShuf, vDiff);
         vDiff = _mm_add_ss(vDiff, vShuf);
         diff = _mm_cvtss_f32(vDiff);
 
-        // Scalar remainder
         for (; j < N; ++j) {
             float d = buffer[j] - buffer[j + tau];
             diff += d * d;
@@ -213,7 +252,17 @@ public:
      * Note: This matches QuadBatcher::drawText which uses 'size' per character.
      */
     static float calculateTextWidth(const std::string& text, float size) {
-        return (float)text.length() * size; 
+        float total = 0;
+        for (char c : text) {
+            char up = std::toupper((unsigned char)c);
+            if (up == 'I' || up == '.' || up == ',' || up == ':' || up == ';') total += size * 0.55f;
+            else if (up == ' ') total += size * 0.8f;
+            else if (up == 'L' || up == 'F' || up == 'T' || up == '1') total += size * 0.75f;
+            else if (up == 'M' || up == 'W') total += size * 1.0f;
+            else if (up == 'D' || up == 'G' || up == 'O' || up == 'Q' || up == '@') total += size * 0.95f;
+            else total += size * 0.9f;
+        }
+        return total;
     }
 
     /**

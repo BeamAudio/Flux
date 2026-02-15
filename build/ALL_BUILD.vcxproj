@@ -186,10 +186,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{F1DC531D-B3E8-3414-BC63-2CC34B8432AC}</Project>
       <Name>SDL3_test</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\Alexi\Documents\Beam Audio Flux\build\test_persistence.vcxproj">
-      <Project>{E18EDBB8-E2D9-3742-8302-B2A5433F73AE}</Project>
-      <Name>test_persistence</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

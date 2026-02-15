@@ -79,12 +79,12 @@ void main() {
         
         float alpha = 1.0 - smoothstep(-uEdgeSoftness, uEdgeSoftness, dist);
         
-        // Pseudo-lighting
+        // Pseudo-lighting - Extremely subtle
         float light = dot(normalize(vec2(1.0, -1.0)), normalize(TexCoord - 0.5));
         float bevelWidth = 2.0;
         float edge = smoothstep(-bevelWidth, 0.0, dist);
         
-        vec3 finalColor = Color.rgb + (light * 0.15 * edge);
+        vec3 finalColor = Color.rgb + (light * 0.02 * edge); // Reduced to 0.02
         FragColor = vec4(finalColor, Color.a * alpha);
     }
     else if (mode == 5) { // Chassis Panel (Enhanced Hardware Materials)
@@ -95,26 +95,33 @@ void main() {
         float alpha = 1.0 - smoothstep(-uEdgeSoftness, uEdgeSoftness, dist);
         
         float grain = hash(gl_FragCoord.xy);
-        float noise = (grain - 0.5) * 0.05; 
+        float noise = (grain - 0.5) * 0.03; 
         
         // 1. Brushed Aluminum Texture (Anisotropic)
-        float brush = hash(vec2(floor(TexCoord.y * uSizeY * 2.0), 0.0)) * 0.08;
+        float brush = hash(vec2(floor(TexCoord.y * uSizeY * 2.0), 0.0)) * 0.04; 
         
         // 2. Light / Bevel (Top-down)
         float light = dot(normalize(vec2(0.0, -1.0)), normalize(TexCoord - 0.5));
         float edge = smoothstep(-3.0, 0.0, dist);
 
-        // Mix based on color profile (Simplified selection via color brightness)
-        vec3 finalColor = Color.rgb + noise;
-        if (Color.r > 0.5 && Color.g > 0.5 && Color.b > 0.5) { // Aluminum/Steel profile
+        // 3. Global Polish: Scanlines & Vignette
+        float scanline = sin(gl_FragCoord.y * 1.5) * 0.02;
+        float vignette = 1.0 - length(TexCoord - 0.5) * 0.3;
+        
+        vec3 finalColor = Color.rgb;
+        
+        if (Color.r > 0.4 && Color.g > 0.4 && Color.b > 0.4) { // Aluminum/Steel profile
+            finalColor += noise;
             finalColor += brush;
-            finalColor += (light * 0.2 * edge);
+            finalColor += (light * 0.1 * edge);
         } else { // Dark paint/Bakelite profile
-            finalColor += (light * 0.3 * edge);
-            // Darker Inset Border
+            finalColor *= (1.0 + noise * 3.0); 
             float border = smoothstep(0.0, 1.5, abs(dist + 1.5));
-            finalColor *= (0.8 + 0.2 * border);
+            finalColor *= (0.5 + 0.5 * border);
         }
+
+        finalColor += scanline;
+        finalColor *= vignette;
 
         FragColor = vec4(finalColor, Color.a * alpha);
     }

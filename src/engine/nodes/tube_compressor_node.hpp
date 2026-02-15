@@ -1,7 +1,7 @@
 #ifndef TUBE_COMPRESSOR_NODE_HPP
 #define TUBE_COMPRESSOR_NODE_HPP
 
-#include "engine/plugins/flux_plugin.hpp"
+#include "sdk/beam_sdk.hpp"
 #include "engine/dsp/dsp_utils.hpp"
 #include <cmath>
 
@@ -11,69 +11,69 @@ namespace Beam {
  * @class TubeCompressorNode
  * @brief A compressor with a soft-knee and tube saturation stage.
  */
-class TubeCompressorNode : public FluxPlugin {
+class TubeCompressorNode : public SDK::BeamPlugin {
 public:
-    TubeCompressorNode(int bufferSize, float sampleRate) 
-        : FluxPlugin("Tube Comp", bufferSize, sampleRate) 
-    {
-        addParam("Threshold", -60.0f, 0.0f, -20.0f);
-        addParam("Ratio", 1.0f, 20.0f, 4.0f);
-        addParam("Attack", 1.0f, 100.0f, 10.0f);
-        addParam("Release", 10.0f, 500.0f, 100.0f);
-        addParam("Drive", 0.0f, 12.0f, 0.0f); // Tube Saturation
-        
-        m_envelope.store(0.0f);
+    TubeCompressorNode(int, float sr) : BeamPlugin("Tube Comp", "Dynamics"), m_sampleRate(sr) {
+        threshold = &addFloatParam("Threshold", -60.0f, 0.0f, -20.0f);
+        ratio = &addFloatParam("Ratio", 1.0f, 20.0f, 4.0f);
+        attack = &addFloatParam("Attack", 1.0f, 100.0f, 10.0f);
+        release = &addFloatParam("Release", 10.0f, 500.0f, 100.0f);
+        drive = &addFloatParam("Drive", 0.0f, 12.0f, 0.0f);
     }
 
-    void processBlock(const float* input, float* output, int totalSamples) override {
-        float threshDB = getParam("Threshold");
-        float ratio = getParam("Ratio");
-        float attack = getParam("Attack") * 0.001f;
-        float release = getParam("Release") * 0.001f;
-        float drive = std::pow(10.0f, getParam("Drive") / 20.0f);
+    void process(float** io, int frames) override {
+        float threshDB = threshold->getValue();
+        float rat = ratio->getValue();
+        float att = attack->getValue() * 0.001f;
+        float rel = release->getValue() * 0.001f;
+        float drv = std::pow(10.0f, drive->getValue() / 20.0f);
 
-        float attCoef = std::exp(-1.0f / (getSampleRate() * attack));
-        float relCoef = std::exp(-1.0f / (getSampleRate() * release));
+        float attCoef = (att > 0) ? std::exp(-1.0f / (m_sampleRate * att)) : 0.0f;
+        float relCoef = (rel > 0) ? std::exp(-1.0f / (m_sampleRate * rel)) : 0.0f;
 
-        // Load envelope to local register for performance
-        float env = m_envelope.load(std::memory_order_relaxed);
-
-        for (int i = 0; i < totalSamples; ++i) {
-            float in = input[i];
-            float absIn = std::abs(in);
+        for (int i = 0; i < frames; ++i) {
+            float detector = 0.0f;
+            for(int ch=0; ch<2; ++ch) if(io[ch]) detector += std::abs(io[ch][i]);
+            detector *= 0.5f;
 
             // Ballistics
-            if (absIn > env) env = attCoef * env + (1.0f - attCoef) * absIn;
-            else env = relCoef * env + (1.0f - relCoef) * absIn;
+            if (detector > m_env) m_env = attCoef * m_env + (1.0f - attCoef) * detector;
+            else m_env = relCoef * m_env + (1.0f - relCoef) * detector;
             
             // Gain Reduction
-            float envDB = 20.0f * std::log10(env + 1e-9f);
+            float envDB = 20.0f * std::log10(m_env + 1e-9f);
             float gainDB = 0.0f;
             if (envDB > threshDB) {
-                gainDB = (threshDB - envDB) * (1.0f - 1.0f / ratio);
+                gainDB = (threshDB - envDB) * (1.0f - 1.0f / rat);
             }
             
             float gain = std::pow(10.0f, gainDB / 20.0f);
-            float out = in * gain;
-
-            // Tube Saturation (Soft Clip)
-            out *= drive;
-            out = std::tanh(out); 
             
-            output[i] = flush_denormal(out);
+            for(int ch=0; ch<2; ++ch) {
+                if(!io[ch]) continue;
+                float out = io[ch][i] * gain * drv;
+                out = std::tanh(out); 
+                io[ch][i] = flush_denormal(out);
+            }
         }
+    }
 
-        // Store back to atomic once per block for UI
-        m_envelope.store(env, std::memory_order_relaxed);
+    void prepareToPlay(float sr, int) override {
+        m_sampleRate = sr;
     }
 
 private:
-    std::atomic<float> m_envelope;
+    float m_sampleRate;
+    float m_env = 0.0f;
+    Parameter *threshold, *ratio, *attack, *release, *drive;
 };
+
+REGISTER_BEAM_PLUGIN(TubeCompressorNode)
 
 } // namespace Beam
 
-#endif // TUBE_COMPRESSOR_NODE_HPP
+#endif
+ // TUBE_COMPRESSOR_NODE_HPP
 
 
 

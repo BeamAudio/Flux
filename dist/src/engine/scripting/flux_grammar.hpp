@@ -165,45 +165,39 @@ struct Program {
     
     std::string transpile(const std::string& className) const {
         std::stringstream ss;
-        ss << "#include \"engine/plugins/flux_plugin.hpp\"\n#include <cmath>\n#include <algorithm>\n\nusing namespace Beam;\n\n";
+        ss << "#include \"sdk/beam_sdk.hpp\"\n#include <cmath>\n#include <algorithm>\n\nusing namespace Beam;\n\n";
         
-        // 1. Processor Class
-        ss << "class " << className << "_Processor : public FluxPluginProcessor {\npublic:\n";
-        ss << "    " << className << "_Processor(float sr, std::shared_ptr<MeterSource> ms) : FluxPluginProcessor(sr, ms) {}\n\n";
+        // Unified Node & Processor Class
+        ss << "class " << className << " : public SDK::BeamPlugin {\npublic:\n";
+        ss << "    " << className << "(int b, float s) : BeamPlugin(\"" << className << "\", \"User\") {\n";
+        ss << "        SDK::PanelStyle style = { {0.1f, 0.12f, 0.15f, 1.0f}, {0.8f, 0.8f, 0.9f, 1.0f}, Theme::MaterialType::Standard, true, \"" << className << "\", \"" << subtitle << "\" };\n";
+        ss << "        style.knobStyle = Theme::KnobStyle::" << uiStyle << ";\n";
+        ss << "        setPanelStyle(style);\n\n";
+        
+        for(auto& p : params) ss << "        p_refs[" << (&p - &params[0]) << "] = &addFloatParam(\"" << p.name << "\", " << p.min << "f, " << p.max << "f, " << p.def << "f);\n";
+        ss << "        addMeter(\"Level\");\n";
+        ss << "    }\n\n";
+
         for(auto& v : stateVars) ss << "    float v_" << v.name << " = " << v.val << "f;\n";
-        ss << "\n    void processBlock(const float* in, float* out, int samples) override {\n";
-        for(auto& p : params) ss << "        float p_" << p.name << " = getParam(" << (&p - &params[0]) << ");\n";
+        ss << "    Parameter* p_refs[" << params.size() << "];\n\n";
+
+        ss << "    void process(float** io, int samples) override {\n";
+        for(auto& p : params) ss << "        float p_" << p.name << " = p_refs[" << (&p - &params[0]) << "]->getValue();\n";
         ss << "        float sr = m_sampleRate;\n\n";
         ss << "        for(int i=0; i<samples; ++i) {\n";
-        ss << "            float in_sample = in[i];\n";
-        ss << "            float out_sample = 0.0f;\n";
-        for(auto& stmt : processStmts) ss << "            " << stmt->transpile() << "\n";
-        ss << "            out[i] = out_sample;\n";
+        ss << "            for(int ch=0; ch<2; ++ch) {\n";
+        ss << "                if(!io[ch]) continue;\n";
+        ss << "                float in_sample = io[ch][i];\n";
+        ss << "                float out_sample = 0.0f;\n";
+        for(auto& stmt : processStmts) ss << "                " << stmt->transpile() << "\n";
+        ss << "                io[ch][i] = out_sample;\n";
+        ss << "            }\n";
         ss << "        }\n";
-        ss << "        if (m_meterSource) {\n";
-        ss << "            float peak = 0.0f; for(int i=0; i<samples; ++i) peak = std::max(peak, std::abs(out[i]));\n";
-        ss << "            m_meterSource->updateMeter(0, peak);\n";
-        ss << "        }\n";
-        ss << "    }\n};\n\n";
-
-        // 2. Node Class
-        ss << "class " << className << " : public FluxPlugin {\npublic:\n";
-        ss << "    " << className << "(int b, float s) : FluxPlugin(\"" << className << "\", b, s) {\n";
-        for(auto& p : params) ss << "        addParam(\"" << p.name << "\", " << p.min << "f, " << p.max << "f, " << p.def << "f);\n";
-        ss << "        m_meterSource->addMeter(\"Level\");\n";
-        ss << "    }\n\n";
-        ss << "    void release() override { delete this; }\n\n";
-        ss << "    std::shared_ptr<FluxProcessor> createProcessor() override {\n";
-        ss << "        return std::make_shared<" << className << "_Processor>(getSampleRate(), m_meterSource);\n";
+        ss << "        float peak = 0.0f; for(int ch=0; ch<2; ++ch) if(io[ch]) for(int i=0; i<samples; ++i) peak = std::max(peak, std::abs(io[ch][i]));\n";
+        ss << "        updateMeter(0, peak);\n";
         ss << "    }\n";
         
-        // Custom UI support in transpiled code
-        ss << "    std::shared_ptr<Component> createEditor(const NodeEditorContext& ctx) override {\n";
-        ss << "        auto style = RackUnitUI::Script(getName());\n";
-        ss << "        style.knobStyle = Theme::KnobStyle::" << uiStyle << ";\n";
-        ss << "        style.subtitle = \"" << subtitle << "\";\n";
-        ss << "        return std::make_shared<RackUnitUI>(this, style);\n";
-        ss << "    }\n";
+        ss << "    void releaseNode() override { delete this; }\n";
         ss << "};\n\n";
 
         ss << "extern \"C\" __declspec(dllexport) FluxNode* create_plugin(int b, float s) { return new " << className << "(b, s); }\n";

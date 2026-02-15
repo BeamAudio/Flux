@@ -165,11 +165,11 @@ public:
                                        0.70f, 0.72f, 0.75f, 1.0f);
         
         // Channel name (Black text on light plate)
-        batcher.drawText(m_channelName, 6, plateY + 4, 10.0f, 0.05f, 0.05f, 0.05f, 1.0f);
+        batcher.drawVectorText(m_channelName, 6, plateY + 4, 10.0f, 0.05f, 0.05f, 0.05f, 1.0f);
         
         // Channel Number / ID at top
         std::string idStr = std::to_string(m_nodeId);
-        batcher.drawText(idStr, w/2 - 4, 6, 12.0f, 0.4f, 0.4f, 0.45f, 1.0f);
+        batcher.drawVectorText(idStr, w/2 - 4, 6, 12.0f, 0.4f, 0.4f, 0.45f, 1.0f);
         
         if (!m_fader) return;
         
@@ -195,11 +195,11 @@ public:
                  // Draw Tick
                  if (db == 0) {
                      batcher.drawLine(scaleX, ty, scaleX + lineW, ty, 1.5f, 1.0f, 0.2f, 0.2f, 1.0f);
-                     batcher.drawText("0", scaleX + 8, ty - 4, 9, 1.0f, 0.2f, 0.2f, 1.0f);
+                     batcher.drawVectorText("0", scaleX + 8, ty - 4, 9, 1.0f, 0.2f, 0.2f, 1.0f);
                  } else {
                      batcher.drawLine(scaleX, ty, scaleX + lineW, ty, 1.0f, 0.7f, 0.75f, 0.8f, 0.6f);
                      if (db == 6 || db == -6 || db == -12 || db == -24 || db == -48) {
-                         batcher.drawText(std::to_string(db), scaleX + 6, ty - 3, 8, 0.5f, 0.5f, 0.55f, 1.0f);
+                         batcher.drawVectorText(std::to_string(db), scaleX + 6, ty - 3, 8, 0.5f, 0.5f, 0.55f, 1.0f);
                      }
                  }
              }

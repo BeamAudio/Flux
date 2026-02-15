@@ -146,6 +146,22 @@ public:
             }
         }
 
+        // --- DEPTH CALCULATION (for Parallelism) ---
+        std::map<size_t, int> nodeDepth;
+        int maxDepth = 0;
+        for (size_t nodeId : schedule) {
+            int depth = 0;
+            for (const auto& conn : m_connections) {
+                if (conn.dstNodeId == nodeId) {
+                    depth = (std::max)(depth, nodeDepth[conn.srcNodeId] + 1);
+                }
+            }
+            nodeDepth[nodeId] = depth;
+            maxDepth = (std::max)(maxDepth, depth);
+        }
+        plan->levels.resize(maxDepth + 1);
+        // --------------------------------------------
+
         // --- PDC CALCULATION ---
         std::map<size_t, size_t> nodeTotalLatency;
         std::map<size_t, std::map<int, size_t>> portLatency; // nodeId -> portIdx -> latency
@@ -168,7 +184,7 @@ public:
         }
         // -----------------------
 
-        // 2. Instantiate Processors and Capture Parameters
+        // 2. Instantiate Processors
         std::map<size_t, FluxProcessor*> nodeToProcessor;
         std::map<size_t, std::shared_ptr<FluxNode>> nodeLookup = m_nodes;
 
@@ -182,41 +198,31 @@ public:
             }
         }
 
-        // 3. Buffer Allocation & Routing
-        // We assign a buffer for every output port of every node in the schedule
-        // and every input port.
-        struct PortRef { size_t nodeId; int portIdx; bool isOutput; };
-        std::map<size_t, std::vector<int>> nodeInputBuffers;
+        // 3. Merged Buffer Allocation & Execution Build (NO REUSE for Maximum Stability)
+        std::map<size_t, std::vector<int>> nodeInputBuffers; 
         std::map<size_t, std::vector<int>> nodeOutputBuffers;
 
-        int bufferCount = 0;
-        auto getBuffer = [&]() {
+        auto getBuffer = [&]() -> int {
+            int idx = (int)plan->bufferPool.size();
             plan->bufferPool.push_back(std::vector<float>(bufferSizeFrames * channels, 0.0f));
-            return bufferCount++;
+            plan->clearBufferIndices.push_back(idx); 
+            return idx;
         };
 
         for (size_t nodeId : schedule) {
             auto node = nodeLookup[nodeId];
+            
+            // Assign unique buffers for all inputs
             for (int i = 0; i < (int)node->getInputPorts().size(); ++i) {
-                int bIdx = getBuffer();
-                nodeInputBuffers[nodeId].push_back(bIdx);
-                plan->clearBufferIndices.push_back(bIdx);
-            }
-            for (int i = 0; i < (int)node->getOutputPorts().size(); ++i) {
-                int bIdx = getBuffer();
-                nodeOutputBuffers[nodeId].push_back(bIdx);
-                plan->clearBufferIndices.push_back(bIdx); // Also clear outputs!
+                nodeInputBuffers[nodeId].push_back(getBuffer());
             }
             
-            // If this is the master node, track its input buffers (or output if it has them)
-            if (nodeId == masterNodeId) {
-                // The engine wants the final output after master processing.
-                // Usually this is the output of the master node.
-                plan->masterOutputBufferIndices = nodeOutputBuffers[nodeId];
+            // Assign unique buffers for all outputs
+            for (int i = 0; i < (int)node->getOutputPorts().size(); ++i) {
+                nodeOutputBuffers[nodeId].push_back(getBuffer());
             }
         }
 
-        // 4. Build Execution Sequence
         for (size_t nodeId : schedule) {
             auto node = nodeLookup[nodeId];
             auto processor = nodeToProcessor[nodeId];
@@ -226,7 +232,13 @@ public:
             exec.processor = processor;
             exec.inputBufferIndices = nodeInputBuffers[nodeId];
             exec.outputBufferIndices = nodeOutputBuffers[nodeId];
-            
+
+            // Master Output Tracking
+            if (nodeId == masterNodeId) {
+                plan->masterOutputBufferIndices = exec.outputBufferIndices;
+            }
+
+            // C. Setup Processor Params & Connections
             exec.inputConnected.assign(exec.inputBufferIndices.size(), false);
             for (const auto& conn : m_connections) {
                 if (conn.dstNodeId == nodeId) {
@@ -238,23 +250,22 @@ public:
 
             for (auto const& param : node->getParameterOrder()) {
                 exec.parameterPointers.push_back(param->getTargetValueAtomic());
+                exec.parameters.push_back(param.get()); 
             }
+            
+            // Set bypass pointer for real-time safe bypass checking
+            exec.bypassPtr = node->getBypassAtomic();
 
-            // Routes: Push current node's outputs to downstream inputs
+            // D. Build Routes & PDC
             std::vector<ProcessorExecution> pdcExecs;
             for (const auto& conn : m_connections) {
                 if (conn.srcNodeId == nodeId) {
-                    if (conn.srcPortIdx >= (int)nodeOutputBuffers[nodeId].size() || 
-                        conn.dstPortIdx >= (int)nodeInputBuffers[conn.dstNodeId].size()) {
-                        std::cout << "[Compile] Error: Invalid port connection " << conn.srcPortIdx << " -> " << conn.dstPortIdx << std::endl;
-                        continue;
-                    }
-
-                    SignalRoute route;
+                    if (conn.srcPortIdx >= (int)nodeOutputBuffers[nodeId].size()) continue;
+                    
                     int srcBufIdx = nodeOutputBuffers[nodeId][conn.srcPortIdx];
                     int dstBufIdx = nodeInputBuffers[conn.dstNodeId][conn.dstPortIdx];
 
-                    // PDC Compensation check
+                    SignalRoute route;
                     size_t srcLat = nodeTotalLatency[nodeId];
                     size_t targetLat = maxInLatencyAtNode[conn.dstNodeId];
 
@@ -265,54 +276,53 @@ public:
                         plan->processors.push_back(std::move(pdcProc));
 
                         int intermediateBuf = getBuffer();
-                        plan->clearBufferIndices.push_back(intermediateBuf);
-
-                        // Route: Node Output -> Intermediate
+                        
                         route.sourceBufferIdx = srcBufIdx;
                         route.destBufferIdx = intermediateBuf;
-                        
                         if (conn.dstNodeId == masterNodeId && mixerState) {
-                            MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
-                            if (ch) {
-                                route.gainPtr = &ch->gain;
-                                route.panPtr = &ch->pan;
-                                route.mutePtr = &ch->muted;
-                                route.soloPtr = &ch->solo;
-                                route.peakPtr = &ch->peakL;
-                            }
+                             MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
+                             if (ch) {
+                                 route.gainPtr = &ch->gain;
+                                 route.panPtr = &ch->pan;
+                                 route.mutePtr = &ch->muted;
+                                 route.soloPtr = &ch->solo;
+                                 route.peakPtr = &ch->peakL;
+                             }
                         }
                         exec.outgoingRoutes.push_back(route);
 
-                        // PDC step
                         ProcessorExecution pdcExec;
                         pdcExec.processor = pdcPtr;
                         pdcExec.inputBufferIndices = {intermediateBuf};
-                        pdcExec.outputBufferIndices = {dstBufIdx};
+                        pdcExec.outputBufferIndices = {dstBufIdx}; 
                         pdcExec.inputConnected = {true};
+
                         pdcExecs.push_back(pdcExec);
                     } else {
-                        // Normal Route
                         route.sourceBufferIdx = srcBufIdx;
                         route.destBufferIdx = dstBufIdx;
-                        
                         if (conn.dstNodeId == masterNodeId && mixerState) {
-                            MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
-                            if (ch) {
-                                route.gainPtr = &ch->gain;
-                                route.panPtr = &ch->pan;
-                                route.mutePtr = &ch->muted;
-                                route.soloPtr = &ch->solo;
-                                route.peakPtr = &ch->peakL;
-                            }
+                             MixChannel* ch = mixerState->getOrCreateChannel(nodeId);
+                             if (ch) {
+                                 route.gainPtr = &ch->gain;
+                                 route.panPtr = &ch->pan;
+                                 route.mutePtr = &ch->muted;
+                                 route.soloPtr = &ch->solo;
+                                 route.peakPtr = &ch->peakL;
+                             }
                         }
-                        exec.outgoingRoutes.push_back(route); 
+                        exec.outgoingRoutes.push_back(route);
                     }
                 }
             }
-            // CRITICAL FIX: Push the original node execution ONCE
-            plan->sequence.push_back(exec);
-            // Then push its associated PDC delay steps
-            for (auto& p : pdcExecs) plan->sequence.push_back(p);
+
+            int depth = nodeDepth[nodeId];
+            plan->levels[depth].push_back(exec);
+            
+            if (!pdcExecs.empty()) {
+                if (plan->levels.size() <= (size_t)depth + 1) plan->levels.resize(depth + 2);
+                for (auto& p : pdcExecs) plan->levels[depth + 1].push_back(p);
+            }
         }
 
         // 5. Broadcaster Tracking (for transport events)

@@ -33,10 +33,10 @@ public:
             norm = std::clamp(norm, 0.0f, 1.0f);
             float h = norm * (graphH - 20);
             batcher.drawQuad(x, graphY + graphH - h - 15, w, h, r, g, b, 0.8f);
-            batcher.drawText(label, x, graphY + graphH - 12, 8, 0.7f, 0.7f, 0.7f, 1.0f);
+            batcher.drawVectorText(label, x, graphY + graphH - 12, 8, 0.7f, 0.7f, 0.7f, 1.0f);
             
             std::string valStr = std::to_string((int)db) + " dB";
-            batcher.drawText(valStr, x, graphY + graphH - h - 25, 8, 0.9f, 0.9f, 0.9f, 1.0f);
+            batcher.drawVectorText(valStr, x, graphY + graphH - h - 25, 8, 0.9f, 0.9f, 0.9f, 1.0f);
         };
 
         if (pM) drawBar("M", pM->getValue(), graphX + 10, 30, Theme::Emerald.r, Theme::Emerald.g, Theme::Emerald.b); 

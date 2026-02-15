@@ -3,6 +3,7 @@
 
 #include "engine/core/flux_graph.hpp"
 #include "engine/nodes/flux_track_node.hpp"
+#include "engine/nodes/placeholder_node.hpp"
 #include "engine/scripting/flux_script_node.hpp"
 #include "engine/plugins/plugin_registry.hpp"
 #include "engine/session/region.hpp"
@@ -137,7 +138,9 @@ public:
                             m_graph->addNodeWithId(newNode, id);
                             std::cout << "[Deserialize] Restored Node: " << name << " ID: " << id << std::endl;
                         } else {
-                            std::cerr << "[Deserialize] Warning: Could not restore node type: " << name << std::endl;
+                            std::cerr << "[Deserialize] Warning: Plugin missing: " << name << ". Creating Placeholder." << std::endl;
+                            auto placeholder = std::make_shared<PlaceholderNode>(name, type, nData);
+                            m_graph->addNodeWithId(placeholder, id);
                         }
                     } catch (const std::exception& e) {
                         std::cerr << "[Deserialize] Error restoring node " << name << ": " << e.what() << std::endl;

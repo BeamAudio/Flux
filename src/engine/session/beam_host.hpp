@@ -7,6 +7,10 @@
 #include "interface/core/input_handler.hpp"
 #include "engine/session/flux_project.hpp"
 #include "engine/session/asset_manager.hpp"
+#include "engine/session/asset_manager.hpp"
+#include "engine/session/app_settings.hpp"
+#include <atomic>
+#include <mutex>
 
 namespace Beam {
 
@@ -25,6 +29,9 @@ public:
     DAWMode getMode() const { return m_mode; }
     
     SDL_Window* getWindow() { return m_window; }
+    
+    AppSettings& getSettings() { return m_settings; }
+    void saveSettings() { m_settings.save(); }
 
     static void onFileSelected(void* userdata, const char* const* filelist, int filter);
     static void onSaveDialogCallback(void* userdata, const char* const* filelist, int filter);
@@ -37,6 +44,8 @@ private:
     void update();
     void render(float dt);
     void performLayout();
+    void openProjectLoadDialog();
+    void processPendingLoad();
 
     std::string m_title;
     int m_width;
@@ -47,6 +56,14 @@ private:
     SDL_GLContext m_glContext;
     
     std::shared_ptr<FluxProject> m_project;
+    std::string m_currentProjectPath;
+    std::string m_pendingLoadPath;
+    std::atomic<bool> m_hasPendingLoad{false};
+    std::mutex m_loadMutex;
+    AppSettings m_settings;
+    float m_autosaveTimer = 0.0f;
+    std::atomic<bool> m_loadRequested{false};
+
     std::unique_ptr<AudioEngine> m_audioEngine;
     std::unique_ptr<class AudioDeviceManager> m_audioDeviceManager;
     std::unique_ptr<QuadBatcher> m_batcher;
@@ -62,6 +79,7 @@ private:
     std::shared_ptr<class AudioConfigView> m_configView;
     std::shared_ptr<class RenderModal> m_renderModal;
     std::shared_ptr<class ConfirmationModal> m_confirmationModal;
+    std::shared_ptr<class SettingsModal> m_settingsModal;
 };
 
 } // namespace Beam

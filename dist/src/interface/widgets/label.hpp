@@ -46,7 +46,7 @@ public:
 
     void paint(QuadBatcher& g) override {
         float textY = (m_bounds.h - m_fontSize) * 0.5f;
-        g.drawText(m_text, 2, textY, m_fontSize, m_textColor.r, m_textColor.g, m_textColor.b, m_textColor.a);
+        g.drawVectorText(m_text, 2, textY, m_fontSize, m_textColor.r, m_textColor.g, m_textColor.b, m_textColor.a);
     }
 
 private:

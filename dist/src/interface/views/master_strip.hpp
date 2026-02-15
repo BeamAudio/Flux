@@ -91,16 +91,16 @@ public:
         float w = m_bounds.w;
         float h = m_bounds.h;
 
-        // 1. Harrison Console Material (Wrinkle Paint / Deep Charcoal)
-        batcher.drawChassisPanel(0, 0, w, h, 0.0f, 0.08f, 0.08f, 0.09f, 1.0f);
+        // 1. Harrison Console Material (Wrinkle Paint / Deep Charcoal) - Darker
+        batcher.drawChassisPanel(0, 0, w, h, 0.0f, Theme::Console.r, Theme::Console.g, Theme::Console.b, 1.0f);
         
-        // 2. Head Plate (Aluminum with brand etching)
+        // 2. Head Plate (Aluminum with brand etching) - Darker
         batcher.drawRoundedGradientRect(4, 4, w - 8, 32, 2.0f, 0.5f,
-                                       0.75f, 0.77f, 0.80f, 1.0f, 
-                                       0.50f, 0.52f, 0.55f, 1.0f);
+                                       Theme::Grey.r, Theme::Grey.g, Theme::Grey.b, 1.0f, 
+                                       Theme::GreyDark.r, Theme::GreyDark.g, Theme::GreyDark.b, 1.0f);
         
-        batcher.drawText("MIXBUS MASTER", 15, 10, 14.0f, 0.1f, 0.1f, 0.15f, 1.0f);
-        batcher.drawText("ANALOG CONSOLE", 15, 26, 8.0f, 0.3f, 0.3f, 0.35f, 0.8f);
+        batcher.drawVectorText("MIXBUS MASTER", 15, 10, 14.0f, 0.8f, 0.8f, 0.85f, 1.0f);
+        batcher.drawVectorText("ANALOG CONSOLE", 15, 26, 8.0f, 0.5f, 0.5f, 0.55f, 0.8f);
 
         // 3. Gold Mounting Screws
         auto drawBrassScrew = [&](float sx, float sy) {
@@ -123,7 +123,7 @@ public:
             batcher.drawLine(fx - lineW, ty, fx + lineW, ty, 1.5f, 1.0f, 1.0f, 1.0f, (db == 0) ? 0.8f : 0.4f);
             
             if (db % 12 == 0 || db == 0) {
-                batcher.drawText(std::to_string(db), fx + 18, ty - 5, 10.0f, 0.9f, 0.9f, 0.9f, 0.8f);
+                batcher.drawVectorText(std::to_string(db), fx + 18, ty - 5, 10.0f, 0.9f, 0.9f, 0.9f, 0.8f);
             }
         }
     }

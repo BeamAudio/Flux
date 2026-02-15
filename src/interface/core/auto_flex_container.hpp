@@ -32,6 +32,8 @@ public:
     
     struct FlexParams {
         float grow = 0.0f;
+        float shrink = 1.0f;
+        float basis = -1.0f; // -1 means use preferred size
     };
     
     AutoFlexContainer(Config config = {}) : m_config(config) {
@@ -39,11 +41,12 @@ public:
     }
     
     Config& getConfig() { return m_config; }
-    void setConfig(Config cfg) { m_config = cfg; resized(); }
+    void setConfig(Config cfg) { m_config = cfg; invalidateLayout(); }
 
-    void addFlexChild(std::shared_ptr<Component> child, float grow = 0.0f) {
-        m_flexChildren.push_back({child, {grow}});
+    void addFlexChild(std::shared_ptr<Component> child, float grow = 0.0f, float shrink = 1.0f, float basis = -1.0f) {
+        m_flexChildren.push_back({child, {grow, shrink, basis}});
         addChildComponent(child);
+        invalidateLayout();
     }
     
     void clearFlexChildren() {
@@ -51,22 +54,30 @@ public:
             removeChildComponent(c.comp.get());
         }
         m_flexChildren.clear();
+        invalidateLayout();
     }
+
+    void invalidateLayout() { m_layoutValid = false; }
 
     struct Line {
         std::vector<int> itemIndices;
         float mainSize = 0;
         float crossSize = 0;
         float totalGrow = 0;
+        float totalShrink = 0;
     };
 
     std::vector<Line> computeLines(float targetW, float targetH) const {
+        if (m_layoutValid && std::abs(m_lastTargetW - targetW) < 0.1f && std::abs(m_lastTargetH - targetH) < 0.1f) {
+            return m_cachedLines;
+        }
+
         std::vector<Line> lines;
         if (m_flexChildren.empty()) return lines;
 
         bool isRow = m_config.direction == Direction::Row;
         float targetMain = isRow ? targetW : targetH;
-        float maxMain = m_config.wrap ? (std::max)(100.0f, targetMain - m_config.padding * 2) : 1e10f;
+        float maxMain = m_config.wrap ? (std::max)(1.0f, targetMain - m_config.padding * 2) : 1e10f;
         
         lines.push_back(Line());
         float currentMain = 0;
@@ -76,20 +87,41 @@ public:
             m_flexChildren[i].comp->getPreferredSize(cw, ch);
             
             float itemMain = isRow ? cw : ch;
-            float itemCross = isRow ? ch : cw;
+            if (m_flexChildren[i].params.basis >= 0) itemMain = m_flexChildren[i].params.basis;
+            
+            // Respect component min/max constraints
+            float minM = isRow ? m_flexChildren[i].comp->getMinWidth() : m_flexChildren[i].comp->getMinHeight();
+            if (minM >= 0) itemMain = (std::max)(itemMain, minM);
 
-            if (m_config.wrap && !lines.back().itemIndices.empty() && currentMain + itemMain > maxMain) {
+            float itemCross = isRow ? ch : cw;
+            float minC = isRow ? m_flexChildren[i].comp->getMinHeight() : m_flexChildren[i].comp->getMinWidth();
+            if (minC >= 0) itemCross = (std::max)(itemCross, minC);
+
+            if (m_config.wrap && !lines.back().itemIndices.empty() && currentMain + itemMain + m_config.gap > maxMain) {
                 lines.push_back(Line());
                 currentMain = 0;
             }
 
             lines.back().itemIndices.push_back(i);
-            lines.back().mainSize = currentMain + itemMain;
+            lines.back().mainSize += itemMain;
             if (itemCross > lines.back().crossSize) lines.back().crossSize = itemCross;
             lines.back().totalGrow += m_flexChildren[i].params.grow;
+            lines.back().totalShrink += m_flexChildren[i].params.shrink;
             
             currentMain += itemMain + m_config.gap;
         }
+        
+        // Add gaps to mainSize (except at end)
+        for (auto& line : lines) {
+            if (line.itemIndices.size() > 1) {
+                line.mainSize += m_config.gap * (line.itemIndices.size() - 1);
+            }
+        }
+
+        m_cachedLines = lines;
+        m_lastTargetW = targetW;
+        m_lastTargetH = targetH;
+        m_layoutValid = true;
         return lines;
     }
     
@@ -97,29 +129,29 @@ public:
         if (m_flexChildren.empty()) { w = 0; h = 0; return; }
         
         // Use current width if available to determine wrapping/height
-        float targetW = (m_bounds.w > 0) ? m_bounds.w : m_config.preferredWidth;
-        float targetH = (m_bounds.h > 0) ? m_bounds.h : m_config.preferredHeight;
+        // Fix: Use a very large default if bounds are 0 to simulate 'max-content' or 'unbounded' measurement
+        // This prevents feedback loops where bounds=0 -> small pref size -> small bounds
+        float targetW = (m_bounds.w > 1.0f) ? m_bounds.w : 10000.0f;
+        float targetH = (m_bounds.h > 1.0f) ? m_bounds.h : 10000.0f;
 
         auto lines = computeLines(targetW, targetH);
         bool isRow = m_config.direction == Direction::Row;
         
-        float totalMainAcrossLines = 0;
+        float totalCrossAcrossLines = 0;
         float maxLineMain = 0;
-        float maxLineCross = 0;
         
         for (const auto& line : lines) {
             if (line.mainSize > maxLineMain) maxLineMain = line.mainSize;
-            totalMainAcrossLines += line.crossSize + m_config.gap;
-            if (line.crossSize > maxLineCross) maxLineCross = line.crossSize;
+            totalCrossAcrossLines += line.crossSize + m_config.gap;
         }
-        if (!lines.empty()) totalMainAcrossLines -= m_config.gap;
+        if (!lines.empty()) totalCrossAcrossLines -= m_config.gap;
         
         if (isRow) {
             w = maxLineMain + m_config.padding * 2;
-            h = totalMainAcrossLines + m_config.padding * 2;
+            h = totalCrossAcrossLines + m_config.padding * 2;
         } else {
             h = maxLineMain + m_config.padding * 2;
-            w = totalMainAcrossLines + m_config.padding * 2;
+            w = totalCrossAcrossLines + m_config.padding * 2;
         }
     }
     
@@ -135,7 +167,7 @@ public:
         
         for (const auto& line : lines) {
             float currentMainPos = m_config.padding;
-            float freeSpace = availMain - line.mainSize;
+            float diff = availMain - line.mainSize;
             
             // If stretching and only one line, ensure the line takes full cross space
             float lineCrossSize = line.crossSize;
@@ -145,11 +177,11 @@ public:
 
             float xOffset = 0;
             float extraGap = 0;
-            if (line.totalGrow <= 0) {
-                if (m_config.justify == Justify::Center) xOffset = freeSpace / 2;
-                else if (m_config.justify == Justify::End) xOffset = freeSpace;
+            if (diff > 0 && line.totalGrow <= 0) {
+                if (m_config.justify == Justify::Center) xOffset = diff / 2;
+                else if (m_config.justify == Justify::End) xOffset = diff;
                 else if (m_config.justify == Justify::SpaceBetween && line.itemIndices.size() > 1) {
-                    extraGap = freeSpace / (line.itemIndices.size() - 1);
+                    extraGap = diff / (line.itemIndices.size() - 1);
                 }
             }
             
@@ -160,14 +192,21 @@ public:
                 m_flexChildren[idx].comp->getPreferredSize(cw, ch);
                 
                 float itemMain = isRow ? cw : ch;
-                float itemCross = isRow ? ch : cw;
+                if (m_flexChildren[idx].params.basis >= 0) itemMain = m_flexChildren[idx].params.basis;
                 
-                if (line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
-                    float extra = freeSpace * (m_flexChildren[idx].params.grow / line.totalGrow);
-                    itemMain = (std::max)(20.0f, itemMain + extra);
-                } else if (freeSpace < 0 && !m_config.wrap) {
-                    // In a scrollable non-wrapping container, do not shrink items below preferred size
-                    // itemMain = itemMain; // Keep preferred
+                float minM = isRow ? m_flexChildren[idx].comp->getMinWidth() : m_flexChildren[idx].comp->getMinHeight();
+                if (minM >= 0) itemMain = (std::max)(itemMain, minM);
+
+                float itemCross = isRow ? ch : cw;
+                float minC = isRow ? m_flexChildren[idx].comp->getMinHeight() : m_flexChildren[idx].comp->getMinWidth();
+                if (minC >= 0) itemCross = (std::max)(itemCross, minC);
+
+                if (diff > 0 && line.totalGrow > 0 && m_flexChildren[idx].params.grow > 0) {
+                    float extra = diff * (m_flexChildren[idx].params.grow / line.totalGrow);
+                    itemMain += extra;
+                } else if (diff < 0 && line.totalShrink > 0 && m_flexChildren[idx].params.shrink > 0) {
+                    float shrink = diff * (m_flexChildren[idx].params.shrink / line.totalShrink);
+                    itemMain = (std::max)(minM >= 0 ? minM : 20.0f, itemMain + shrink); // Don't shrink below minM or 20.0f
                 }
                 
                 float crossOffset = 0;
@@ -177,9 +216,15 @@ public:
                 else if (m_config.crossAlign == Alignment::Stretch) finalCrossSize = lineCrossSize;
                 
                 if (isRow) {
-                    m_flexChildren[idx].comp->setBounds(currentMainPos, currentCrossPos + crossOffset, itemMain, finalCrossSize);
+                    m_flexChildren[idx].comp->setBounds(std::floor(currentMainPos + 0.5f), 
+                                                        std::floor(currentCrossPos + crossOffset + 0.5f), 
+                                                        std::floor(itemMain + 0.5f), 
+                                                        std::floor(finalCrossSize + 0.5f));
                 } else {
-                    m_flexChildren[idx].comp->setBounds(currentCrossPos + crossOffset, currentMainPos, finalCrossSize, itemMain);
+                    m_flexChildren[idx].comp->setBounds(std::floor(currentCrossPos + crossOffset + 0.5f), 
+                                                        std::floor(currentMainPos + 0.5f), 
+                                                        std::floor(finalCrossSize + 0.5f), 
+                                                        std::floor(itemMain + 0.5f));
                 }
                 
                 currentMainPos += itemMain + m_config.gap + extraGap;
@@ -197,6 +242,11 @@ private:
     };
     Config m_config;
     std::vector<ChildEntry> m_flexChildren;
+    
+    mutable std::vector<Line> m_cachedLines;
+    mutable float m_lastTargetW = -1;
+    mutable float m_lastTargetH = -1;
+    mutable bool m_layoutValid = false;
 };
 
 } // namespace Beam

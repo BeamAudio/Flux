@@ -1,0 +1,10 @@
+{
+    "audio": {
+        "bufferSize": 512,
+        "inputDeviceId": "",
+        "outputDeviceId": "",
+        "sampleRate": 44100.0
+    },
+    "autosaveEnabled": true,
+    "autosaveInterval": 5.0
+}

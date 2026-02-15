@@ -33,6 +33,13 @@ PFNGLDELETEVERTEXARRAYSPROC glDeleteVertexArrays = NULL;
 PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
 PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
+// FBO
+PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers = NULL;
+PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer = NULL;
+PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D = NULL;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus = NULL;
+
 int gladLoadGLLoader(void* (*load)(const char* name)) {
     glGenVertexArrays = (PFNGLGENVERTEXARRAYSPROC)load("glGenVertexArrays");
     glBindVertexArray = (PFNGLBINDVERTEXARRAYPROC)load("glBindVertexArray");
@@ -61,7 +68,16 @@ int gladLoadGLLoader(void* (*load)(const char* name)) {
     glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC)load("glUniformMatrix4fv");
     glDeleteVertexArrays = (PFNGLDELETEVERTEXARRAYSPROC)load("glDeleteVertexArrays");
     glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)load("glDeleteBuffers");
+    glDeleteVertexArrays = (PFNGLDELETEVERTEXARRAYSPROC)load("glDeleteVertexArrays");
+    glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)load("glDeleteBuffers");
     glActiveTexture = (PFNGLACTIVETEXTUREPROC)load("glActiveTexture");
+
+    // FBO
+    glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC)load("glGenFramebuffers");
+    glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC)load("glBindFramebuffer");
+    glDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSPROC)load("glDeleteFramebuffers");
+    glFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DPROC)load("glFramebufferTexture2D");
+    glCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSPROC)load("glCheckFramebufferStatus");
 
     return 1;
 }

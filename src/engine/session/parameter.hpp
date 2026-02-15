@@ -35,13 +35,22 @@ public:
     float getInitialValue() const { return m_initialValue; }
 
     /**
-     * @brief Returns the next sample-accurate value for this parameter.
-     * Call this inside the sample loop of your process method.
+     * @brief Prepares a linear ramp for the next processing block.
+     * Called by the engine at the start of each audio block.
+     */
+    void prepareRamp(int frames) {
+        m_startValue = m_currentValue;
+        m_targetValueInternal = m_targetValue.load(std::memory_order_relaxed);
+        m_rampDelta = (m_targetValueInternal - m_startValue) / (float)(frames > 0 ? frames : 1);
+        m_rampProgress = 0;
+    }
+
+    /**
+     * @brief Returns the next sample-accurate value for this parameter using linear interpolation.
      */
     float getNextValue() {
-        float target = m_targetValue.load(std::memory_order_relaxed);
-        // Simple one-pole smoothing
-        m_currentValue = m_currentValue * 0.999f + target * 0.001f;
+        m_currentValue = m_startValue + m_rampDelta * (float)m_rampProgress;
+        m_rampProgress++;
         return m_currentValue;
     }
 
@@ -49,6 +58,8 @@ public:
         float clamped = std::clamp(newValue, m_min, m_max);
         m_value.store(clamped, std::memory_order_relaxed);
         m_targetValue.store(clamped, std::memory_order_relaxed);
+        // If we set value manually (UI), jump immediately or wait for next prepareRamp?
+        // UI changes usually benefit from a quick ramp too, so we just update target.
         ParameterQueue::get().push(this, clamped);
     }
 
@@ -92,8 +103,6 @@ public:
     float getMin() const { return m_min; }
     float getMax() const { return m_max; }
 
-    // Removed direct public access to listeners to enforce safety
-    
     // Low-level access for FluxGraph optimization
     const std::atomic<float>* getTargetValueAtomic() const { return &m_targetValue; }
 
@@ -104,7 +113,14 @@ private:
     float m_initialValue;
     std::atomic<float> m_value; // "Current" value for UI
     std::atomic<float> m_targetValue; // Target for audio thread
-    float m_currentValue; // Audio thread local smoothed value
+    
+    // Ramping state (audio thread only, except via prepareRamp)
+    float m_currentValue; 
+    float m_startValue = 0;
+    float m_targetValueInternal = 0;
+    float m_rampDelta = 0;
+    int m_rampProgress = 0;
+
     MappingType m_mapping;
     float m_skew;
     

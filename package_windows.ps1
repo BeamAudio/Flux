@@ -7,6 +7,10 @@ Write-Host "Configuring and Building with CMake..."
 if (!(Test-Path "build")) { New-Item -ItemType Directory -Path "build" }
 cmake -S . -B build
 cmake --build build --config Release
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Build failed! Exiting."
+    exit $LASTEXITCODE
+}
 
 # 2. Clean and Create Dist folder
 if (Test-Path $distDir) { Remove-Item -Recurse -Force $distDir }
@@ -55,8 +59,8 @@ Write-Host "Packaging compiler..."
 if (Test-Path "tools/compiler/bin") {
     # Ensure destination parent exists
     if (!(Test-Path "$distDir/tools/compiler")) { New-Item -ItemType Directory -Path "$distDir/tools/compiler" }
-    # Copy contents
-    Copy-Item -Recurse "tools/compiler/*" "$distDir/tools/compiler/"
+    # Copy contents with Force to overwrite
+    Copy-Item -Recurse -Force "tools/compiler/*" "$distDir/tools/compiler/"
     Write-Host "Compiler bundled successfully."
 } else {
     Write-Warning "Compiler not found in tools/compiler/bin. Distribution will require manual compiler setup."
